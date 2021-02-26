@@ -24,8 +24,8 @@
 #include "os.h"
 #include "core.h"
 #include "buffer.h"
-#include "routes.h"
-#include "permissions.h"
+#include "route.h"
+#include "permission.h"
 
 /* TIL interfaces */
 #include "TIL_core.h"
@@ -265,7 +265,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
         CosmOS_OsVariableType * osVar;
         CosmOS_CoreVariableType * coreVar;
         CosmOS_BufferVariableType * bufferVar;
-        CosmOS_RoutesConfigurationType * routesVar;
+        CosmOS_RoutesConfigurationType * routeVar;
         CosmOS_PermissionsConfigurationType * readPermission;
 
 
@@ -274,13 +274,13 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
         osVar = os_getOsVar();
         coreVar = TIL_core_getCoreVar();
 
-        routesVar = os_getOsRoutes( osVar );
+        routeVar = os_getOsRoutes( osVar );
 
-        bufferVarIndex = routes_getRoutesEntityId( routesVar, id );
+        bufferVarIndex = route_getRoutesEntityId( routeVar, id );
         bufferVar = os_getOsBufferVar( osVar, bufferVarIndex );
 
         readPermission = buffer_getBufferReadPermission( bufferVar );
-        accessState = permissions_tryAccess( readPermission, coreVar );
+        accessState = permission_tryAccess( readPermission, coreVar );
 
         if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
         {
@@ -359,7 +359,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
         CosmOS_OsVariableType * osVar;
         CosmOS_CoreVariableType * coreVar;
         CosmOS_BufferVariableType * bufferVar;
-        CosmOS_RoutesConfigurationType * routesVar;
+        CosmOS_RoutesConfigurationType * routeVar;
         CosmOS_PermissionsConfigurationType * writePermission;
 
 
@@ -368,13 +368,13 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
         osVar = os_getOsVar();
         coreVar = TIL_core_getCoreVar();
 
-        routesVar = os_getOsRoutes( osVar );
+        routeVar = os_getOsRoutes( osVar );
 
-        bufferVarIndex = routes_getRoutesEntityId( routesVar, id );
+        bufferVarIndex = route_getRoutesEntityId( routeVar, id );
         bufferVar = os_getOsBufferVar( osVar, bufferVarIndex );
 
         writePermission = buffer_getBufferWritePermission( bufferVar );
-        accessState = permissions_tryAccess( writePermission, coreVar );
+        accessState = permission_tryAccess( writePermission, coreVar );
 
         if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
         {

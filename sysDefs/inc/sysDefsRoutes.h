@@ -61,12 +61,12 @@
   * @ingroup Global_sysDefsRoutes  
   * @{    
 ********************************************************************************/
-#define ROUTES_NUM (BitWidthType)0x00000001          /* Number of routes RW */
+#define ROUTES_NUM (BitWidthType)0x00000001          /* Number of route RW */
 
-#define ROUTES_FUNC_NUM (BitWidthType)0x00000005          /* Number of routes RW */
+#define ROUTES_FUNC_NUM (BitWidthType)0x00000005          /* Number of route RW */
 
-#define ROUTES_ID_TO_FUNC_NUM (BitWidthType)0x00000005     /* Number of routes identificators */
-#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)0x00000002     /* Number of routes identificators */
+#define ROUTES_ID_TO_FUNC_NUM (BitWidthType)0x00000005     /* Number of route identificators */
+#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)0x00000002     /* Number of route identificators */
 
 #define READ_BUFFER (BitWidthType)0x00000000            /* Identificator pointing on function pointer in array (Routes) */
 #define WRITE_BUFFER (BitWidthType)0x00000001           /* Identificator pointing on function pointer in array (Routes) */

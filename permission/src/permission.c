@@ -5,53 +5,25 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file switches.h                                      
+** @file permission.c
 *********************************************************************************
-<!--                     switches Module Group Definition                     -->
-*********************************************************************************  
-** @defgroup switches_module switches
-** @brief switches Module
-** @details lorem   	 		
+<!--                  permission Unit Local Group Definition                 -->
 *********************************************************************************	
-<!--                      switches Unit Group Definition                      -->
-********************************************************************************* 
-** @defgroup switches_unit switches Unit 
-** @ingroup switches_module        
-** @brief switches Unit 
-** @details lorem                               
-*********************************************************************************	
-<!--                           Version Information                            -->
-*********************************************************************************
-** @version 1.0.0
-** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
-<!--                          Warnings and License                            -->
-*********************************************************************************
-** @warning Modifying code can lead to unexpected behaviour of the whole system
-** @copyright MIT License       	
-*********************************************************************************
-<!--                  switches Unit Global Group Definition                   -->
-*********************************************************************************	
-** @defgroup Global_switches Global
-** @ingroup switches_unit 
-** @brief switches globals
+** @defgroup Local_permission Local
+** @ingroup permission_unit 
+** @brief permission locals
 ** @details lorem 
 ********************************************************************************/ 
-/********************************************************************************
-**                           START OF THE HEADER FILE                          **
+/********************************************************************************  
+**                           START OF THE SOURCE FILE                          **
 ********************************************************************************/
-#ifndef __SWITCHES_H__
-#define __SWITCHES_H__
-/********************************************************************************
-**                         START OF C++ SUPPORT SECTION                        **
-********************************************************************************/
-#ifdef __cplusplus
- extern "C" {
-#endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
+/* CORE interfaces */
+#include "permission.h"
+#include "core.h"
+#include "CosmOSAssert.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -61,15 +33,35 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_switches_h Macros
-  * @ingroup Global_switches  
+  * @defgroup Macros_permission Macros
+  * @ingroup Local_permission
   * @{    
 ********************************************************************************/
+#define BITLOCK_MASK (BitWidthType)0x1
+
+#define BITLOCK_ID_PLACEMENT_8BIT(id)   id,id,id,id,id,id,id,id,
+
+#define BITLOCK_ID_PLACEMENT_16BIT(id)  id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id,
+
+#define BITLOCK_ID_PLACEMENT_32BIT(id)  id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id,
+
+#define BITLOCK_ID_PLACEMENT_64BIT(id)  id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id,
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_switches_h  
+  * Macros_permission  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -80,15 +72,34 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_switches_h Variables  
-  * @ingroup Global_switches  
+  * @defgroup Variables_permission Variables  
+  * @ingroup Local_permission
   * @{    
 ********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_CONST_SECTION_START)
+/* @endcond*/
+const BitWidthType TaskIdToBitLock[TASK_NUM*sizeof(BitWidthType)*8] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+    BITLOCK_ID_PLACEMENT_32BIT(0)
+    BITLOCK_ID_PLACEMENT_32BIT(1)
+};
+
+const BitWidthType ThreadIdToBitLock[THREAD_NUM*sizeof(BitWidthType)*8] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+    BITLOCK_ID_PLACEMENT_32BIT(0)
+    BITLOCK_ID_PLACEMENT_32BIT(1)
+};
+/* @cond S */
+__SEC_STOP(__OS_CONST_SECTION_STOP)
+/* @endcond*/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Variables_switches_h  
+  * Variables_permission  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -99,47 +110,86 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_switches_h API's 
-  * @ingroup Global_switches
+  * @defgroup Apis_permission_c API's  
+  * @ingroup Local_permission
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_switches_h Getters  
-  * @ingroup Apis_switches_h                                            
+  * @addtogroup Getters_permission_c Getters  
+  * @ingroup Apis_permission_c                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_switches_h
+  * Getters_permission_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_switches_h Setters  
-  * @ingroup Apis_switches_h                                            
+  * @addtogroup Setters_permission_c Setters  
+  * @ingroup Apis_permission_c                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_switches_h   
+  * Setters_permission_c   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_switches_h General  
-  * @ingroup Apis_switches_h                                            
+  * @addtogroup General_permission_c General  
+  * @ingroup Apis_permission_c                                            
   * @{                                                                           
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn permission_tryTaskAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_TaskVariableType * task)
+  * 
+  * @brief Try if task has permitted access.
+  * 
+  * @param[in]  CosmOS_PermissionsConfigurationType * permission
+  * @param[in]  CosmOS_TaskVariableType * task
+  * 
+  * @return CosmOS_AccessStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_AccessStateType permission_tryTaskAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_TaskVariableType * task)
+{
+    CosmOSAssert( IS_NOT( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] & \
+              permission[task->cfg->coreId].bitLocksTasksInversed[TaskIdToBitLock[task->cfg->id]] ) );
+    return ((( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] >> task->cfg->id ) & BITLOCK_MASK ) ? \
+            ACCESS_STATE_ENUM__ALLOWED : ACCESS_STATE_ENUM__DENIED );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn permission_tryThreadAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_ThreadVariableType * thread)
+  * 
+  * @brief Try if thread has permitted access.
+  * 
+  * @param[in]  CosmOS_PermissionsConfigurationType * permission
+  * @param[in]  CosmOS_ThreadVariableType * thread
+  * 
+  * @return CosmOS_AccessStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_AccessStateType permission_tryThreadAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_ThreadVariableType * thread)
+{
+    CosmOSAssert( IS_NOT( permission[thread->cfg->coreId].bitLocksThreads[ThreadIdToBitLock[thread->cfg->id]] & \
+              permission[thread->cfg->coreId].bitLocksThreadsInversed[ThreadIdToBitLock[thread->cfg->id]] ) );
+    return ((( permission[thread->cfg->coreId].bitLocksThreads[ThreadIdToBitLock[thread->cfg->id]] >> thread->cfg->id ) & BITLOCK_MASK ) ? \
+            ACCESS_STATE_ENUM__ALLOWED : ACCESS_STATE_ENUM__DENIED );
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_switches_h  
+  * General_permission_c  
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -148,54 +198,61 @@
 **                        Function Definitions | Start                         **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @addtogroup Getters_switches_h Getters  
-  * @ingroup Apis_switches_h                                            
-  * @{                                                                           
+  * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar)
+  * 
+  * @brief Try access of current running instance DEMO CODE.
+  * 
+  * @param[in]  CosmOS_PermissionsConfigurationType * permission
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * 
+  * @return CosmOS_AccessStateType
 ********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}       
-  * Getters_switches_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_switches_h Setters  
-  * @ingroup Apis_switches_h                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}    
-  * Setters_switches_h   
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_switches_h General  
-  * @ingroup Apis_switches_h                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * General_switches_h  
-********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar)
+{
+    CosmOS_AccessStateType accessState;
+    CosmOS_RunningInstanceType runningInstance;
+
+    CosmOS_TaskVariableType * taskVar;
+    CosmOS_ThreadVariableType * threadVar;
+
+
+    runningInstance = core_getCoreRunningInstance( coreVar );
+
+    switch ( runningInstance )
+    {
+        case RUNNING_INSTANCE_ENUM__TASK :
+        {
+            taskVar = core_getCoreTaskInCurrentContext( coreVar );
+            accessState = permission_tryTaskAccess( permission, taskVar );
+            break;
+        }
+        case RUNNING_INSTANCE_ENUM__THREAD :
+        {
+            threadVar = core_getCoreThreadInCurrentContext( coreVar );
+            accessState = permission_tryThreadAccess( permission, threadVar );
+            break;
+        }
+        default :
+        {
+            /* Kernel Panic */
+            accessState = ACCESS_STATE_ENUM__DENIED;
+            break;
+        }
+    }
+
+    return accessState;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
-#ifdef __cplusplus
-}
-#endif
 /********************************************************************************
-**                         END OF C++ SUPPORT SECTION                          **
-********************************************************************************/
-#endif
-/********************************************************************************
-**                           END OF THE HEADER FILE                            **
+**                           END OF THE SOURCE FILE                            **
 ********************************************************************************/

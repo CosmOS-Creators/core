@@ -101,9 +101,9 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    const CosmOS_GenericVoidType * const routesFunc;
-    const BitWidthType * const routesIdToFunc;
-    const BitWidthType * const routesIdToEntity;
+    const CosmOS_GenericVoidType * const routeFunc;
+    const BitWidthType * const routeIdToFunc;
+    const BitWidthType * const routeIdToEntity;
 
 } CosmOS_RoutesConfigurationType;
 
@@ -230,7 +230,7 @@ typedef struct
     const BitWidthType numberOfCores;
     const CosmOS_BufferConfigurationType * const buffers;
     const BitWidthType numberOfBuffers;
-    const CosmOS_RoutesConfigurationType * const routes;
+    const CosmOS_RoutesConfigurationType * const route;
     
 } CosmOS_OsConfigurationType;
 /********************************************************************************

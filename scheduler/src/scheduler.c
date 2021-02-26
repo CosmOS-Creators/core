@@ -30,8 +30,8 @@
 #include "program.h"
 #include "stackInit.h"
 #include "CosmOSAssert.h"
-#include "switchesSchedulerSync.h"
-#include "switchesMemoryProtection.h"
+#include "switchSchedulerSync.h"
+#include "switchMemoryProtection.h"
 
 /* TIL interfaces */
 #include "TIL_core.h"
@@ -237,12 +237,12 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
         timerTicks = preemptTick;
     }
 
-    schedulersSyncState = switchesSchedulerSync_sync( coreVar, currentTick, 10 );
+    schedulersSyncState = switchSchedulerSync_sync( coreVar, currentTick, 10 );
 
     currentTick = ( ( currentTick + timerTicks ) % hyperTick ); 
     scheduler_setSchedulerCurrentTick( schedulerVar, currentTick );
 
-    switchesMemoryProtection_setStackOverflowProtection( stack );
+    switchMemoryProtection_setStackOverflowProtection( stack );
 
     TIL_sysTimer_setTicks( timerTicks, schedulersSyncState );
 
@@ -343,7 +343,7 @@ __OS_FUNC_SECTION void scheduler_start(void)
     currentTick = ( currentTick + timerTicks ) % hyperTick;
     scheduler_setSchedulerCurrentTick( schedulerVar, currentTick );
 
-    switchesMemoryProtection_setStackOverflowProtection( stack );
+    switchMemoryProtection_setStackOverflowProtection( stack );
 
     coreSync_getBarrier( coreVar, OS_START_ID );
 

@@ -251,7 +251,7 @@ __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfBuffers(CosmOS_OsVariableType 
   * *************************************************************************//**
   * @fn os_getOsRoutes(CosmOS_OsVariableType * osVar) 
   * 
-  * @brief Get os routes pointer.
+  * @brief Get os route pointer.
   * 
   * @param[in]  CosmOS_OsVariableType * osVar
   * 
@@ -259,7 +259,7 @@ __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfBuffers(CosmOS_OsVariableType 
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_RoutesConfigurationType * os_getOsRoutes(CosmOS_OsVariableType * osVar)
 {
-    return (CosmOS_RoutesConfigurationType *)(osVar->cfg->routes);
+    return (CosmOS_RoutesConfigurationType *)(osVar->cfg->route);
 }
 
 /********************************************************************************

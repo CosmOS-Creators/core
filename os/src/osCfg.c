@@ -24,7 +24,7 @@
 #include "osCfg.h"
 #include "coreCfg.h"
 #include "bufferCfg.h"
-#include "routesCfg.h"
+#include "routeCfg.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -67,7 +67,7 @@ IS_INITIALIZED_TO
     CORE_NUM,           /* const BitWidthType numberOfCores             */
     BuffersCfgConst,    /* const CosmOS_BufferConfigurationType * buffers  */
     BUFFER_NUM,         /* const BitWidthType numberOfBuffers           */
-    &RoutesConstCfg,    /* const CosmOS_RoutesConfigurationType routes     */
+    &RoutesConstCfg,    /* const CosmOS_RoutesConfigurationType route     */
 };
 /* @cond S */
 __SEC_STOP(__OS_CONST_SECTION_STOP)
