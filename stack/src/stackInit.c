@@ -26,7 +26,7 @@
 #include "core.h"
 #include "program.h"
 #include "task.h"
-#include "thread.h"
+
 #include "CosmOSAssert.h"
 
 /* CIL interfaces */
@@ -129,45 +129,6 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn stackInit_threadStackInit(CosmOS_ThreadVariableType  * threadVar)
-  * 
-  * @brief Thread stack initialization.
-  * 
-  * @param[in]  CosmOS_ThreadVariableType  * threadVar
-  * 
-  * @return BitWidthType
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION BitWidthType stackInit_threadStackInit(CosmOS_ThreadVariableType  * threadVar)
-{
-    AddressType stackLowAddress,
-                 stackHighAddress;
-
-    CosmOS_StackVariableType * stack;
-    CosmOS_HandlerType handler;
-    StackPointerType stackPointer;
-
-    CosmOSAssert( threadVar IS_NOT_EQUAL_TO NULL );
-
-    stack = thread_getThreadStackVar( threadVar );
-    handler = thread_getThreadHandler( threadVar );
-
-    stackLowAddress = stack_getStackLowAddress( stack );
-    stackHighAddress = stack_getStackHighAddress( stack );
-
-    stackPointer = CIL_stack_stackInit( stackLowAddress, stackHighAddress, (BitWidthType)handler );
-
-    return stackPointer;
-}
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn stackInit_taskStackInit(CosmOS_TaskVariableType  * taskVar)
   * 
   * @brief Task stack initialization.
@@ -208,7 +169,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * *************************************************************************//**
   * @fn stackInit_init(CosmOS_CoreVariableType * coreVar)
   * 
-  * @brief Stack intialization for all threads.
+  * @brief Stack intialization for all tasks.
   * 
   * @param[in] CosmOS_CoreVariableType * coreVar
   * 
@@ -219,28 +180,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void stackInit_init(CosmOS_CoreVariableType * coreVar)
 {
-    BitWidthType numberOfThreads,
-                 numberOfPrograms,
-                 stackPointerRetVal;
 
-    CosmOS_ThreadVariableType * threadVar;
-    CosmOS_ProgramVariableType * programVar;
-
-
-    numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
-
-    for ( BitWidthType programIterator = 0; programIterator < numberOfPrograms; programIterator++ )
-    {
-        programVar = core_getCoreProgramVar( coreVar, programIterator );
-        numberOfThreads = program_getProgramNumberOfThreads( programVar );
-
-        for( BitWidthType threadIterator = 0; threadIterator < numberOfThreads; threadIterator++ )
-        {
-            threadVar = program_getProgramThreadVar( programVar, threadIterator );
-            stackPointerRetVal = stackInit_threadStackInit( threadVar );
-            thread_setThreadStackPointer( threadVar, stackPointerRetVal );
-        }
-    }
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

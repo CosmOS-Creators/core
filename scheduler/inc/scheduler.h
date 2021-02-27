@@ -144,7 +144,7 @@
   * *************************************************************************//**
   * @fn scheduler_scheduleNextInstance(void) 
   * 
-  * @brief Algorithm for scheduling next task/thread DEMO CODE.
+  * @brief Algorithm for scheduling next task DEMO CODE.
   * 
   * @param[in]  BitWidthType stackPointer
   * 
@@ -157,7 +157,7 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
   * *************************************************************************//**
   * @fn scheduler_start(void) 
   * 
-  * @brief Start of scheduler, pick the starting task/thread and execute it DEMO CODE.
+  * @brief Start of scheduler, pick the starting task and execute it DEMO CODE.
   * 
   * @param[in]  none
   * 
@@ -250,22 +250,6 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerScheduleTableElementsNum
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn scheduler_getSchedulerThreadListElementsNum(CosmOS_SchedulerVariableType * scheduler) 
-  * 
-  * @brief Get scheduler threadListElementsNum.
-  * 
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * 
-  * @return BitWidthType
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerThreadListElementsNum(CosmOS_SchedulerVariableType * scheduler)
-{
-    return (scheduler->cfg->threadListElementsNum);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn scheduler_getSchedulerCurrentTick(CosmOS_SchedulerVariableType * scheduler) 
   * 
   * @brief Get scheduler currentTick.
@@ -346,54 +330,6 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerScheduleTableStartTick(C
 }
 
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn scheduler_getSchedulerThreadList(CosmOS_SchedulerVariableType * scheduler) 
-  * 
-  * @brief Get scheduler threadList pointer.
-  * 
-  * @param[in] CosmOS_SchedulerVariableType * scheduler
-  * 
-  * @return CosmOS_SchedulerThreadListVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulerThreadListVariableType * scheduler_getSchedulerThreadList(CosmOS_SchedulerVariableType * scheduler)
-{
-    return (scheduler->threadListVar);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn scheduler_getSchedulerScheduleTableStartTime(CosmOS_SchedulerVariableType * scheduler, BitWidthType threadListIterator) 
-  * 
-  * @brief Get scheduler threadList element thread pointer.
-  * 
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType threadListIterator
-  * 
-  * @return CosmOS_ThreadVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ThreadVariableType * scheduler_getSchedulerThreadListThreadVar(CosmOS_SchedulerVariableType * scheduler, BitWidthType threadListIterator)
-{
-    return (scheduler->threadListVar[threadListIterator].thread);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn scheduler_getSchedulerThreadListIterator(CosmOS_SchedulerVariableType * scheduler) 
-  * 
-  * @brief Get scheduler threadListIterator.
-  * 
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * 
-  * @return BitWidthType
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerThreadListIterator(CosmOS_SchedulerVariableType * scheduler)
-{
-    return (scheduler->threadListIterator);
-}
-/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
@@ -440,22 +376,6 @@ __STATIC_FORCEINLINE void scheduler_setSchedulerScheduleTableIterator(CosmOS_Sch
     scheduler->scheduleTableIterator = scheduleTableIteratorParam;
 }
 
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn scheduler_setSchedulerThreadListIterator(CosmOS_SchedulerVariableType * scheduler, BitWidthType threadListIteratorParam) 
-  * 
-  * @brief Set scheduler threadListIterator.
-  * 
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType threadListIteratorParam
-  * 
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void scheduler_setSchedulerThreadListIterator(CosmOS_SchedulerVariableType * scheduler, BitWidthType threadListIteratorParam)
-{
-    scheduler->threadListIterator = threadListIteratorParam;
-}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

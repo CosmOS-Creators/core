@@ -23,7 +23,6 @@
 /* CORE interfaces */
 #include "schedulerCfg.h"
 #include "schedulerScheduleTableCfg.h"
-#include "schedulerThreadListCfg.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -67,14 +66,12 @@ IS_INITIALIZED_TO
         HYPERTICK_SCHEDULER_0,                          /* const BitWidthType hyperPeriod                                  */
         PREEMPTTICK_SCHEDULER_0,                        /* const BitWidthType preemptPeriod                                */
         SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM,          /* const BitWidthType scheduleTableElementsNum                     */
-        SCHEDULERTHREADLIST_SCHEDULER_0_ELEMENT_NUM     /* const BitWidthType threadListElementsNum                        */
     },
     {                                                   /* SchedulersCfgConst[SCHEDULER_CORE_1_ID]                         */
         ScheduleTableScheduler1CfgConst,                /* const CosmOS_ScheduleTableConfigurationType * scheduleTable        */
         HYPERTICK_SCHEDULER_1,                          /* const BitWidthType hyperPeriod                                  */
         PREEMPTTICK_SCHEDULER_1,                        /* const BitWidthType preemptPeriod                                */
         SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM,          /* const BitWidthType scheduleTableElementsNum                     */
-        SCHEDULERTHREADLIST_SCHEDULER_1_ELEMENT_NUM     /* const BitWidthType threadListElementsNum                        */
     },
 };
 /* @cond S */
@@ -92,16 +89,12 @@ IS_INITIALIZED_TO
         0,                                              /* const BitWidthType curentTime                    */
         0,                                              /* const BitWidthType scheduleTableIterator         */
         ScheduleTableScheduler0Var,                     /* CosmOS_ScheduleTableVariableType * scheduleTableVar */
-        SchedulerThreadListScheduler0Var,               /* CosmOS_SchedulerThreadListVariableType * threadList */
-        0,                                              /* const BitWidthType threadListIterator            */
     },
     {                                                   /* SchedulersCfgConst[SCHEDULER_CORE_1_ID]          */
         &SchedulersCfgConst[SCHEDULER_CORE_1_ID],       /* const CosmOS_SchedulerConfigurationType * cfg       */
         0,                                              /* const BitWidthType curentTime                    */
         0,                                              /* const BitWidthType scheduleTableIterator         */
         ScheduleTableScheduler1Var,                     /* CosmOS_ScheduleTableVariableType * scheduleTableVar */
-        SchedulerThreadListScheduler1Var,               /* CosmOS_SchedulerThreadListVariableType * threadList */
-        0,                                              /* const BitWidthType threadListIterator            */    
     },
 };
 /* @cond S */

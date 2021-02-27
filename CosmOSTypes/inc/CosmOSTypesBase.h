@@ -35,8 +35,8 @@
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __TICTYPESBASE_H__
-#define __TICTYPESBASE_H__
+#ifndef __COSMOSTYPESBASE_H__
+#define __COSMOSTYPESBASE_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -128,19 +128,6 @@ typedef enum {
     PERMISSION_INSTANCE_ENUM__ALL,
 
 } CosmOS_PermissionInstanceType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_RunningInstanceType enum
-********************************************************************************/
-typedef enum {
-
-    RUNNING_INSTANCE_ENUM__NOTHING,     
-    RUNNING_INSTANCE_ENUM__TASK,
-    RUNNING_INSTANCE_ENUM__THREAD,
-
-} CosmOS_RunningInstanceType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **

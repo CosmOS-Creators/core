@@ -85,13 +85,6 @@ IS_INITIALIZED_TO
     BITLOCK_ID_PLACEMENT_32BIT(0)
     BITLOCK_ID_PLACEMENT_32BIT(1)
 };
-
-const BitWidthType ThreadIdToBitLock[THREAD_NUM*sizeof(BitWidthType)*8] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    BITLOCK_ID_PLACEMENT_32BIT(0)
-    BITLOCK_ID_PLACEMENT_32BIT(1)
-};
 /* @cond S */
 __SEC_STOP(__OS_CONST_SECTION_STOP)
 /* @endcond*/
@@ -165,26 +158,6 @@ __STATIC_FORCEINLINE CosmOS_AccessStateType permission_tryTaskAccess(CosmOS_Perm
     return ((( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] >> task->cfg->id ) & BITLOCK_MASK ) ? \
             ACCESS_STATE_ENUM__ALLOWED : ACCESS_STATE_ENUM__DENIED );
 }
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn permission_tryThreadAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_ThreadVariableType * thread)
-  * 
-  * @brief Try if thread has permitted access.
-  * 
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * @param[in]  CosmOS_ThreadVariableType * thread
-  * 
-  * @return CosmOS_AccessStateType
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_AccessStateType permission_tryThreadAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_ThreadVariableType * thread)
-{
-    CosmOSAssert( IS_NOT( permission[thread->cfg->coreId].bitLocksThreads[ThreadIdToBitLock[thread->cfg->id]] & \
-              permission[thread->cfg->coreId].bitLocksThreadsInversed[ThreadIdToBitLock[thread->cfg->id]] ) );
-    return ((( permission[thread->cfg->coreId].bitLocksThreads[ThreadIdToBitLock[thread->cfg->id]] >> thread->cfg->id ) & BITLOCK_MASK ) ? \
-            ACCESS_STATE_ENUM__ALLOWED : ACCESS_STATE_ENUM__DENIED );
-}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -215,35 +188,11 @@ __SEC_START(__OS_FUNC_SECTION_START)
 __OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar)
 {
     CosmOS_AccessStateType accessState;
-    CosmOS_RunningInstanceType runningInstance;
 
     CosmOS_TaskVariableType * taskVar;
-    CosmOS_ThreadVariableType * threadVar;
 
-
-    runningInstance = core_getCoreRunningInstance( coreVar );
-
-    switch ( runningInstance )
-    {
-        case RUNNING_INSTANCE_ENUM__TASK :
-        {
-            taskVar = core_getCoreTaskInCurrentContext( coreVar );
-            accessState = permission_tryTaskAccess( permission, taskVar );
-            break;
-        }
-        case RUNNING_INSTANCE_ENUM__THREAD :
-        {
-            threadVar = core_getCoreThreadInCurrentContext( coreVar );
-            accessState = permission_tryThreadAccess( permission, threadVar );
-            break;
-        }
-        default :
-        {
-            /* Kernel Panic */
-            accessState = ACCESS_STATE_ENUM__DENIED;
-            break;
-        }
-    }
+    taskVar = core_getCoreTaskInCurrentContext( coreVar );
+    accessState = permission_tryTaskAccess( permission, taskVar );
 
     return accessState;
 }

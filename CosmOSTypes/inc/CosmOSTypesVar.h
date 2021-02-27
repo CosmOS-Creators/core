@@ -35,8 +35,8 @@
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __TICTYPESVAR_H__
-#define __TICTYPESVAR_H__
+#ifndef __COSMOSTYPESVAR_H__
+#define __COSMOSTYPESVAR_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -132,28 +132,12 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_ThreadVariableType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_ThreadConfigurationType * const cfg;
-    CosmOS_StackVariableType * const stackVar;
-    StackPointerType stackPointer;
-    
-} CosmOS_ThreadVariableType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @brief  CosmOS_ProgramVariableType struct type
 ********************************************************************************/
 typedef struct
 {
     const CosmOS_ProgramConfigurationType * const cfg;
-    CosmOS_ThreadVariableType * threadInCurrentContext;
     CosmOS_TaskVariableType * taskInCurrentContext;
-    CosmOS_RunningInstanceType runningInstance;
-    CosmOS_ThreadVariableType * const threadVars;
     CosmOS_TaskVariableType * const taskVars;
 
 } CosmOS_ProgramVariableType;
@@ -172,17 +156,6 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_ScheduleTableVariableType struct type
-********************************************************************************/
-typedef struct
-{
-    CosmOS_ThreadVariableType * const thread;
-
-} CosmOS_SchedulerThreadListVariableType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @brief  CosmOS_SchedulerVariableType struct type
 ********************************************************************************/
 typedef struct
@@ -191,8 +164,6 @@ typedef struct
     BitWidthType currentTick;
     BitWidthType scheduleTableIterator;
     CosmOS_ScheduleTableVariableType * const scheduleTableVar;
-    CosmOS_SchedulerThreadListVariableType * const threadListVar;
-    BitWidthType threadListIterator;
 
 } CosmOS_SchedulerVariableType;
 

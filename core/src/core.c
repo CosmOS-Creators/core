@@ -23,7 +23,7 @@
 /* CORE interfaces */
 #include "os.h"
 #include "task.h"
-#include "thread.h"
+
 #include "program.h"
 #include "core.h"
 #include "CosmOSAssert.h"
@@ -171,41 +171,6 @@ __OS_FUNC_SECTION void core_setTaskIntoCurrentContext(CosmOS_CoreVariableType * 
     programVar = core_getCoreProgramVar( coreVar, programId ); 
 
     program_setProgramTaskInCurrentContext( programVar, taskVar );
-    program_setProgramRunningInstance( programVar, RUNNING_INSTANCE_ENUM__TASK );
-
-    core_setCoreProgramInCurrentContext( coreVar, programVar );
-}
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn core_setThreadIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_ThreadVariableType * threadVar)
-  * 
-  * @brief Set core program into current context, set task into program current context.
-  * 
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  CosmOS_ThreadVariableType * threadVar
-  * 
-  * @return none
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION void core_setThreadIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_ThreadVariableType * threadVar)
-{
-    BitWidthType programId;
-
-    CosmOS_ProgramVariableType * programVar;
-
-    programId = thread_getThreadProgramId( threadVar );
-    programVar = core_getCoreProgramVar( coreVar, programId ); 
-
-    program_setProgramThreadInCurrentContext( programVar, threadVar );
-    program_setProgramRunningInstance( programVar, RUNNING_INSTANCE_ENUM__THREAD );
-
     core_setCoreProgramInCurrentContext( coreVar, programVar );
 }
 /* @cond S */

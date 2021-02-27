@@ -151,19 +151,6 @@ __OS_FUNC_SECTION CosmOS_CoreVariableType * core_getCoreVar(void);
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void core_setTaskIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_TaskVariableType * taskVar);
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn core_setThreadIntoCurrentContext(CosmOS_ThreadVariableType * threadVar)
-  * 
-  * @brief Set core program into current context, set task into program current context.
-  * 
-  * @param[in]  CosmOS_ThreadVariableType * threadVar
-  * 
-  * @return none
-********************************************************************************/
-__OS_FUNC_SECTION void core_setThreadIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_ThreadVariableType * threadVar);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -329,22 +316,6 @@ __STATIC_FORCEINLINE CosmOS_BarrierVariableType * core_getBarrierVar(CosmOS_Core
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_getCoreRunningInstance(CosmOS_CoreVariableType * core) 
-  * 
-  * @brief Get core programInCurrentContext runningInstance.
-  * 
-  * @param[in]  CosmOS_CoreVariableType * core
-  * 
-  * @return CosmOS_RunningInstanceType
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_RunningInstanceType core_getCoreRunningInstance(CosmOS_CoreVariableType * core)
-{
-    return (core->programInCurrentContext->runningInstance);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn core_getCoreTaskInCurrentContext(CosmOS_CoreVariableType * core) 
   * 
   * @brief Get core programInCurrentContext taskInCurrentContext pointer.
@@ -356,22 +327,6 @@ __STATIC_FORCEINLINE CosmOS_RunningInstanceType core_getCoreRunningInstance(Cosm
 __STATIC_FORCEINLINE CosmOS_TaskVariableType * core_getCoreTaskInCurrentContext(CosmOS_CoreVariableType * core)
 {
     return (core->programInCurrentContext->taskInCurrentContext);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn core_getCoreThreadInCurrentContext(CosmOS_CoreVariableType * core) 
-  * 
-  * @brief Get core programInCurrentContext threadInCurrentContext pointer.
-  * 
-  * @param[in]  CosmOS_CoreVariableType * core
-  * 
-  * @return CosmOS_ThreadVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ThreadVariableType * core_getCoreThreadInCurrentContext(CosmOS_CoreVariableType * core)
-{
-    return (core->programInCurrentContext->threadInCurrentContext);
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

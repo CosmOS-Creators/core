@@ -35,8 +35,8 @@
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __TICTYPESCFG_H__
-#define __TICTYPESCFG_H__
+#ifndef __COSMOSTYPESCFG_H__
+#define __COSMOSTYPESCFG_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -88,9 +88,7 @@
 typedef struct
 {
     const BitWidthType * const bitLocksTasks;
-    const BitWidthType * const bitLocksThreads;
     const BitWidthType * const bitLocksTasksInversed;
-    const BitWidthType * const bitLocksThreadsInversed;
 
 } CosmOS_PermissionsConfigurationType;
 
@@ -153,30 +151,13 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_ThreadConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_StackConfigurationType * const stack;
-    const CosmOS_HandlerType handler;
-    const BitWidthType id;
-    const BitWidthType programId;
-    const BitWidthType coreId;  
-
-} CosmOS_ThreadConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @brief  CosmOS_ProgramConfigurationType struct type
 ********************************************************************************/
 typedef struct            
 {               
     const CosmOS_TaskConfigurationType * const tasks;
-    const CosmOS_ThreadConfigurationType * const threads;
     const BitWidthType coreId;
     const BitWidthType numberOfTasks;
-    const BitWidthType numberOfThreads;
     
 } CosmOS_ProgramConfigurationType;
 
@@ -202,7 +183,6 @@ typedef struct
     const BitWidthType hyperTick;
     const BitWidthType preemptTick;
     const BitWidthType scheduleTableElementsNum;
-    const BitWidthType threadListElementsNum;
 
 } CosmOS_SchedulerConfigurationType;
 

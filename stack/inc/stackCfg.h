@@ -84,11 +84,9 @@
 ********************************************************************************/
 extern const CosmOS_StackConfigurationType KernelsStacksCfgConst[KERNEL_NUM];
 extern const CosmOS_StackConfigurationType TasksStacksCfgConst[TASK_NUM];
-extern const CosmOS_StackConfigurationType ThreadsStacksCfgConst[THREAD_NUM];
 
 extern CosmOS_StackVariableType KernelsStacksVar[KERNEL_NUM];
 extern CosmOS_StackVariableType TasksStacksVar[TASK_NUM];
-extern CosmOS_StackVariableType ThreadsStacksVar[THREAD_NUM];
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

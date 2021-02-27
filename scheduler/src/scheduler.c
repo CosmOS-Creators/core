@@ -26,7 +26,7 @@
 #include "coreSync.h"
 #include "os.h"
 #include "task.h"
-#include "thread.h"
+
 #include "program.h"
 #include "stackInit.h"
 #include "CosmOSAssert.h"
@@ -137,7 +137,7 @@
   * *************************************************************************//**
   * @fn scheduler_scheduleNextInstance(void) 
   * 
-  * @brief Algorithm for scheduling next task/thread DEMO CODE.
+  * @brief Algorithm for scheduling next task DEMO CODE.
   * 
   * @param[in]  BitWidthType stackPointer
   * 
@@ -157,27 +157,13 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
                  scheduleTableElementsNum;
 
     CosmOS_SchedulerSyncStateType schedulersSyncState;
-    CosmOS_RunningInstanceType priorRunningInstance;
 
     CosmOS_StackVariableType * stack;
     CosmOS_CoreVariableType * coreVar;
-    CosmOS_ProgramVariableType * programVar;
     CosmOS_SchedulerVariableType * schedulerVar;
     
 
     coreVar = core_getCoreVar();
-
-    programVar = core_getCoreProgramInCurrentContext( coreVar );
-
-    priorRunningInstance = program_getProgramRunningInstance( programVar );
-
-    if ( ( priorRunningInstance IS_EQUAL_TO RUNNING_INSTANCE_ENUM__THREAD ) )
-    {
-        CosmOS_ThreadVariableType * threadVar;
-        
-        threadVar = program_getProgramThreadInCurrentContext( programVar );
-        thread_setThreadStackPointer( threadVar, stackPointer );
-    }
 
     schedulerVar = core_getCoreSchedulerVar( coreVar );
 
@@ -212,29 +198,7 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
     }
     else
     {
-        BitWidthType preemptTick,
-                     threadListIterator,
-                     threadListElementsNum;
 
-        CosmOS_ThreadVariableType * threadVar;
-
-        threadListIterator = scheduler_getSchedulerThreadListIterator( schedulerVar );
-        threadListElementsNum = scheduler_getSchedulerThreadListElementsNum( schedulerVar );
-
-        CosmOSAssert( threadListIterator < threadListElementsNum );
-
-        threadVar = scheduler_getSchedulerThreadListThreadVar( schedulerVar, threadListIterator );
-        core_setThreadIntoCurrentContext( coreVar, threadVar );
-
-        stackPointerRetVal = thread_getThreadStackPointer( threadVar );
-
-        stack = thread_getThreadStackVar( threadVar );
-        
-        threadListIterator = ( ( threadListIterator + 1 ) % threadListElementsNum );
-        scheduler_setSchedulerThreadListIterator( schedulerVar, threadListIterator );
-
-        preemptTick = scheduler_getSchedulerPreemptTick( schedulerVar );
-        timerTicks = preemptTick;
     }
 
     schedulersSyncState = switchSchedulerSync_sync( coreVar, currentTick, 10 );
@@ -257,7 +221,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * *************************************************************************//**
   * @fn scheduler_start(void) 
   * 
-  * @brief Start of scheduler, pick the starting task/thread and execute it DEMO CODE.
+  * @brief Start of scheduler, pick the starting task and execute it DEMO CODE.
   * 
   * @param[in]  none
   * 
@@ -315,29 +279,7 @@ __OS_FUNC_SECTION void scheduler_start(void)
     }
     else
     {
-        BitWidthType preemptTick,
-                     threadListIterator,
-                     threadListElementsNum;
 
-        CosmOS_ThreadVariableType * threadVar;
-
-        threadListIterator = scheduler_getSchedulerThreadListIterator( schedulerVar );
-        threadListElementsNum = scheduler_getSchedulerThreadListElementsNum( schedulerVar );
-
-        CosmOSAssert( threadListIterator < threadListElementsNum );
-
-        threadVar = scheduler_getSchedulerThreadListThreadVar( schedulerVar, threadListIterator );
-        core_setThreadIntoCurrentContext( coreVar, threadVar );
-
-        stackPointerRetVal = thread_getThreadStackPointer( threadVar );
-
-        stack = thread_getThreadStackVar( threadVar );
-        
-        threadListIterator = ( ( threadListIterator + 1 ) % threadListElementsNum );
-        scheduler_setSchedulerThreadListIterator( schedulerVar, threadListIterator );
-
-        preemptTick = scheduler_getSchedulerPreemptTick( schedulerVar );
-        timerTicks = preemptTick;
     }
 
     currentTick = ( currentTick + timerTicks ) % hyperTick;

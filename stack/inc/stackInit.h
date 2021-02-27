@@ -137,19 +137,6 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn stackInit_threadStackInit(CosmOS_ThreadVariableType  * threadVar)
-  * 
-  * @brief Thread stack initialization.
-  * 
-  * @param[in]  CosmOS_ThreadVariableType  * threadVar
-  * 
-  * @return BitWidthType
-********************************************************************************/
-__OS_FUNC_SECTION BitWidthType stackInit_threadStackInit(CosmOS_ThreadVariableType  * threadVar);
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn stackInit_taskStackInit(CosmOS_TaskVariableType  * taskVar)
   * 
   * @brief Task stack initialization.
@@ -165,7 +152,7 @@ __OS_FUNC_SECTION BitWidthType stackInit_taskStackInit(CosmOS_TaskVariableType  
   * *************************************************************************//**
   * @fn stackInit_init(CosmOS_CoreVariableType * coreVar)
   * 
-  * @brief Stack intialization for all threads.
+  * @brief Stack intialization for all tasks.
   * 
   * @param[in] CosmOS_CoreVariableType * coreVar
   * 

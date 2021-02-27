@@ -81,30 +81,6 @@ IS_INITIALIZED_TO
     0b00000000000000000000000000000001,
 };
 
-const BitWidthType BitLockBuffer0ThreadsCore0ReadCfgConst[((THREAD_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    0b00000000000000000000000000000000,
-};
-
-const BitWidthType BitLockBuffer0ThreadsCore1ReadCfgConst[((THREAD_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    0b00000000000000000000000000000000,
-};
-
-const BitWidthType BitLockBuffer0ThreadsCore0WriteCfgConst[((THREAD_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    0b00000000000000000000000000000000,
-};
-
-const BitWidthType BitLockBuffer0ThreadsCore1WriteCfgConst[((THREAD_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    0b00000000000000000000000000000000,
-};
-
 const BitWidthType BitLockBuffer0TasksCore0ReadCfgInversedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
@@ -129,44 +105,16 @@ IS_INITIALIZED_TO
     0b11111111111111111111111111111110,
 };
 
-const BitWidthType BitLockBuffer0ThreadsCore0ReadCfgInversedConst[((THREAD_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    0b11111111111111111111111111111111,
-};
-
-const BitWidthType BitLockBuffer0ThreadsCore1ReadCfgInversedConst[((THREAD_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    0b11111111111111111111111111111111,
-};
-
-const BitWidthType BitLockBuffer0ThreadsCore0WriteCfgInversedConst[((THREAD_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    0b11111111111111111111111111111111,
-};
-
-const BitWidthType BitLockBuffer0ThreadsCore1WriteCfgInversedConst[((THREAD_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    0b11111111111111111111111111111111,
-};
-
 const CosmOS_PermissionsConfigurationType PermissionsBuffer0ReadCfgConst[CORE_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
     {   /* CORE_0_ID */
         BitLockBuffer0TasksCore0ReadCfgConst,
-        BitLockBuffer0ThreadsCore0ReadCfgConst,
         BitLockBuffer0TasksCore0ReadCfgInversedConst,
-        BitLockBuffer0ThreadsCore0ReadCfgInversedConst,
     },
     {   /* CORE_1_ID */
         BitLockBuffer0TasksCore1ReadCfgConst,
-        BitLockBuffer0ThreadsCore1ReadCfgConst,
         BitLockBuffer0TasksCore1ReadCfgInversedConst,
-        BitLockBuffer0ThreadsCore1ReadCfgInversedConst,
     },
 };
 
@@ -175,15 +123,11 @@ IS_INITIALIZED_TO
 {
     {   /* CORE_0_ID */
         BitLockBuffer0TasksCore0WriteCfgConst,
-        BitLockBuffer0ThreadsCore0WriteCfgConst,
         BitLockBuffer0TasksCore0WriteCfgInversedConst,
-        BitLockBuffer0ThreadsCore0WriteCfgInversedConst,
     },
     {   /* CORE_1_ID */
         BitLockBuffer0TasksCore1WriteCfgConst,
-        BitLockBuffer0ThreadsCore1WriteCfgConst,
-        BitLockBuffer0TasksCore1WriteCfgInversedConst,
-        BitLockBuffer0ThreadsCore1WriteCfgInversedConst,            
+        BitLockBuffer0TasksCore1WriteCfgInversedConst,          
     },
 };
 /* @cond S */

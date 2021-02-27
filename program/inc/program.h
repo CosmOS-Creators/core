@@ -177,22 +177,6 @@ __STATIC_FORCEINLINE CosmOS_TaskConfigurationType * program_getProgramTasks(Cosm
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn program_getProgramThreads(CosmOS_ProgramVariableType * program) 
-  * 
-  * @brief Get program threads pointer.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * 
-  * @return CosmOS_ThreadConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ThreadConfigurationType * program_getProgramThreads(CosmOS_ProgramVariableType * program)
-{
-    return (CosmOS_ThreadConfigurationType *)(program->cfg->threads);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn program_getProgramCoreId(CosmOS_ProgramVariableType * program) 
   * 
   * @brief Get program coreId.
@@ -225,38 +209,6 @@ __STATIC_FORCEINLINE BitWidthType program_getProgramNumberOfTasks(CosmOS_Program
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn program_getProgramNumberOfThreads(CosmOS_ProgramVariableType * program) 
-  * 
-  * @brief Get program numberOfThreads.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * 
-  * @return BitWidthType
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType program_getProgramNumberOfThreads(CosmOS_ProgramVariableType * program)
-{
-    return (program->cfg->numberOfThreads);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn program_getProgramThreadInCurrentContext(CosmOS_ProgramVariableType * program) 
-  * 
-  * @brief Get program threadInCurrentContext pointer.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * 
-  * @return CosmOS_ThreadVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThreadInCurrentContext(CosmOS_ProgramVariableType * program)
-{
-    return (program->threadInCurrentContext);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn program_getProgramTaskInCurrentContext(CosmOS_ProgramVariableType * program) 
   * 
   * @brief Get program taskInCurrentContext pointer.
@@ -268,55 +220,6 @@ __STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThreadInCurre
 __STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTaskInCurrentContext(CosmOS_ProgramVariableType * program)
 {
     return (program->taskInCurrentContext);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn program_getProgramRunningInstance(CosmOS_ProgramVariableType * program) 
-  * 
-  * @brief Get program runningInstance const.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * 
-  * @return CosmOS_RunningInstanceType
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_RunningInstanceType program_getProgramRunningInstance(CosmOS_ProgramVariableType * program)
-{
-    return (program->runningInstance);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn program_getProgramThreadVars(CosmOS_ProgramVariableType * program) 
-  * 
-  * @brief Get program threadVars.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * 
-  * @return CosmOS_ThreadVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThreadVars(CosmOS_ProgramVariableType * program)
-{
-    return (program->threadVars);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn program_getProgramThreadVar(CosmOS_ProgramVariableType * program, BitWidthType threadIterator) 
-  * 
-  * @brief Get program threadVars element pointer.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * @param[in]  BitWidthType threadIterator
-  * 
-  * @return CosmOS_ThreadVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThreadVar(CosmOS_ProgramVariableType * program, BitWidthType threadIterator)
-{
-    return (&(program->threadVars[threadIterator]));
 }
 
 /********************************************************************************
@@ -367,23 +270,6 @@ __STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTaskVar(CosmOS_
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn program_setProgramThreadInCurrentContext(CosmOS_ProgramVariableType * program, CosmOS_ThreadVariableType * threadInCurrentContextParam) 
-  * 
-  * @brief Set program threadInCurrentContext.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * @param[in]  CosmOS_ThreadVariableType * threadInCurrentContextParam
-  * 
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void program_setProgramThreadInCurrentContext(CosmOS_ProgramVariableType * program, CosmOS_ThreadVariableType * threadInCurrentContextParam)
-{
-    program->threadInCurrentContext = threadInCurrentContextParam;
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn program_setProgramTaskInCurrentContext(CosmOS_ProgramVariableType * program, CosmOS_TaskVariableType *taskInCurrentContextParam) 
   * 
   * @brief Set program taskInCurrentContext pointer.
@@ -396,23 +282,6 @@ __STATIC_FORCEINLINE void program_setProgramThreadInCurrentContext(CosmOS_Progra
 __STATIC_FORCEINLINE void program_setProgramTaskInCurrentContext(CosmOS_ProgramVariableType * program, CosmOS_TaskVariableType *taskInCurrentContextParam)
 {
     program->taskInCurrentContext = taskInCurrentContextParam;
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn program_setProgramRunningInstance(CosmOS_ProgramVariableType * program, CosmOS_RunningInstanceType runningInstanceParam) 
-  * 
-  * @brief Set program runningInstance.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * @param[in]  CosmOS_RunningInstanceType runningInstanceParam
-  * 
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void program_setProgramRunningInstance(CosmOS_ProgramVariableType * program, CosmOS_RunningInstanceType runningInstanceParam)
-{
-    program->runningInstance = runningInstanceParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

@@ -190,22 +190,6 @@ __STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasks(CosmOS_Permissio
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn permission_getBitLocksThreads(CosmOS_PermissionsConfigurationType * permission)
-  * 
-  * @brief Get permission bitLocksThreads.
-  * 
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * 
-  * @return BitWidthType *
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType * permission_getBitLocksThreads(CosmOS_PermissionsConfigurationType * permission)
-{
-    return (BitWidthType *)(permission->bitLocksThreads);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn permission_getBitLocksTasksFlipped(CosmOS_PermissionsConfigurationType * permission)
   * 
   * @brief Get permission bitLocksTasksInversed.
@@ -219,21 +203,6 @@ __STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasksFlipped(CosmOS_Pe
     return (BitWidthType *)(permission->bitLocksTasksInversed);
 }
 
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn permission_getBitLocksThreadsFlipped(CosmOS_PermissionsConfigurationType * permission)
-  * 
-  * @brief Get permission bitLocksThreadsInversed.
-  * 
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * 
-  * @return BitWidthType *
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType * permission_getBitLocksThreadsFlipped(CosmOS_PermissionsConfigurationType * permission)
-{
-    return (BitWidthType *)(permission->bitLocksThreadsInversed);
-}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
