@@ -29,8 +29,8 @@
 #include "thread.h"
 #include "CosmOSAssert.h"
 
-/* TIL interfaces */
-#include "TIL_stack.h"
+/* CIL interfaces */
+#include "CIL_stack.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -157,7 +157,7 @@ __OS_FUNC_SECTION BitWidthType stackInit_threadStackInit(CosmOS_ThreadVariableTy
     stackLowAddress = stack_getStackLowAddress( stack );
     stackHighAddress = stack_getStackHighAddress( stack );
 
-    stackPointer = TIL_stack_stackInit( stackLowAddress, stackHighAddress, (BitWidthType)handler );
+    stackPointer = CIL_stack_stackInit( stackLowAddress, stackHighAddress, (BitWidthType)handler );
 
     return stackPointer;
 }
@@ -195,7 +195,7 @@ __OS_FUNC_SECTION BitWidthType stackInit_taskStackInit(CosmOS_TaskVariableType  
     stackLowAddress = stack_getStackLowAddress( stack );
     stackHighAddress = stack_getStackHighAddress( stack );
 
-    stackPointer = TIL_stack_stackInit( stackLowAddress, stackHighAddress, (BitWidthType)handler );
+    stackPointer = CIL_stack_stackInit( stackLowAddress, stackHighAddress, (BitWidthType)handler );
 
     return stackPointer;
 }

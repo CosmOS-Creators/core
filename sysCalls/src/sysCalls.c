@@ -26,8 +26,8 @@
 #include "osBoot.h"
 #include "sysCalls.h"
 
-/* TIL interfaces */
-#include "TIL_sysCalls.h"
+/* CIL interfaces */
+#include "CIL_sysCalls.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -161,7 +161,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void sysCalls_os(BitWidthType id)
 {
-    TIL_sysCalls_os( id );
+    CIL_sysCalls_os( id );
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -187,7 +187,7 @@ __OS_FUNC_SECTION BitWidthType sysCalls_readWrite(BitWidthType id, void * buffer
 {   
     BitWidthType returnValue;
 
-    returnValue = TIL_sysCalls_readWrite( id, buffer, size );
+    returnValue = CIL_sysCalls_readWrite( id, buffer, size );
 
     return returnValue;
 };

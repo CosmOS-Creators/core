@@ -33,10 +33,10 @@
 #include "switchSchedulerSync.h"
 #include "switchMemoryProtection.h"
 
-/* TIL interfaces */
-#include "TIL_core.h"
-#include "TIL_stack.h"
-#include "TIL_sysTimer.h"
+/* CIL interfaces */
+#include "CIL_core.h"
+#include "CIL_stack.h"
+#include "CIL_sysTimer.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -244,7 +244,7 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
 
     switchMemoryProtection_setStackOverflowProtection( stack );
 
-    TIL_sysTimer_setTicks( timerTicks, schedulersSyncState );
+    CIL_sysTimer_setTicks( timerTicks, schedulersSyncState );
 
     return stackPointerRetVal;
 };
@@ -347,9 +347,9 @@ __OS_FUNC_SECTION void scheduler_start(void)
 
     coreSync_getBarrier( coreVar, OS_START_ID );
 
-    TIL_sysTimer_setTicks( timerTicks, SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC );
+    CIL_sysTimer_setTicks( timerTicks, SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC );
 
-    TIL_stack_setStackPointer( stackPointerRetVal );
+    CIL_stack_setStackPointer( stackPointerRetVal );
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

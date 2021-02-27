@@ -24,8 +24,8 @@
 #include "memoryProtection.h"
 #include "stack.h"
 
-/* TIL interfaces */
-#include "TIL_memoryProtection.h"
+/* CIL interfaces */
+#include "CIL_memoryProtection.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -137,7 +137,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void memoryProtection_init(void)
 {
-    TIL_memoryProtection_init();
+    CIL_memoryProtection_init();
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -165,7 +165,7 @@ __OS_FUNC_SECTION void memoryProtection_setStackOverflowProtection(CosmOS_StackV
     stackLowAddress = stack_getStackLowAddress( stack );
     stackHighAddress = stack_getStackHighAddress( stack );
 
-    TIL_memoryProtection_setStackOverflowProtection( stackLowAddress, stackHighAddress );
+    CIL_memoryProtection_setStackOverflowProtection( stackLowAddress, stackHighAddress );
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

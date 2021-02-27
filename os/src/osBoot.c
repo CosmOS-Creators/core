@@ -23,8 +23,8 @@
 /* CORE interfaces */
 #include "osBoot.h"
 
-/* TIL interfaces */
-#include "TIL_boot.h"
+/* CIL interfaces */
+#include "CIL_boot.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -137,7 +137,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 __OS_FUNC_SECTION void osBoot_boot(void)
 {
 
-    TIL_boot_bootOs();
+    CIL_boot_bootOs();
     
 };
 /* @cond S */

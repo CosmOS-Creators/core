@@ -29,8 +29,8 @@
 #include "CosmOSAssert.h"
 #include "switchMemoryProtection.h"
 
-/* TIL interfaces */
-#include "TIL_core.h"
+/* CIL interfaces */
+#include "CIL_core.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -149,7 +149,7 @@ __OS_FUNC_SECTION void osInit_init(void)
 
     osVar = os_getOsVar();
 
-    TIL_core_setCoreVar(osVar);
+    CIL_core_setCoreVar(osVar);
 
     coreVar = core_getCoreVar();
 
@@ -157,7 +157,7 @@ __OS_FUNC_SECTION void osInit_init(void)
 
     //init MPU 
     //init DMA to buffers
-    //Maybe better have here TIL_microInit()
+    //Maybe better have here CIL_microInit()
 
     coreSync_getBarrier( coreVar, OS_INIT_ID );
     

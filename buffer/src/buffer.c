@@ -27,8 +27,8 @@
 #include "route.h"
 #include "permission.h"
 
-/* TIL interfaces */
-#include "TIL_core.h"
+/* CIL interfaces */
+#include "CIL_core.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -272,7 +272,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
         /* MEMORY BARRIER HAS TO BE IMPLEMENTED */
 
         osVar = os_getOsVar();
-        coreVar = TIL_core_getCoreVar();
+        coreVar = CIL_core_getCoreVar();
 
         routeVar = os_getOsRoutes( osVar );
 
@@ -366,7 +366,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
         /* MEMORY BARRIER HAS TO BE IMPLEMENTED */
 
         osVar = os_getOsVar();
-        coreVar = TIL_core_getCoreVar();
+        coreVar = CIL_core_getCoreVar();
 
         routeVar = os_getOsRoutes( osVar );
 

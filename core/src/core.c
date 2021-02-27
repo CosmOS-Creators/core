@@ -28,8 +28,8 @@
 #include "core.h"
 #include "CosmOSAssert.h"
 
-/* TIL interfaces */
-#include "TIL_core.h"
+/* CIL interfaces */
+#include "CIL_core.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -141,7 +141,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_CoreVariableType * core_getCoreVar(void)
 {
-    return TIL_core_getCoreVar();
+    return CIL_core_getCoreVar();
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
