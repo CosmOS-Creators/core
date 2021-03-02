@@ -71,6 +71,9 @@
 
 #define PREEMPTTICK_SCHEDULER_0     (BitWidthType)0x00000001        /* Preemptperiod for scheduler 0 in ticks */
 #define PREEMPTTICK_SCHEDULER_1     (BitWidthType)0x00000001        /* Preemptperiod for scheduler 1 in ticks */
+
+#define LAST_TO_FIRST_TASK_TICK_SCHEDULER_0     (BitWidthType)5000        /* Last to first task for scheduler 0 in ticks */
+#define LAST_TO_FIRST_TASK_TICK_SCHEDULER_1     (BitWidthType)5000        /* Last to first task for scheduler 1 in ticks */
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

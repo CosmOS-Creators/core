@@ -61,54 +61,30 @@ __SEC_START(__OS_CONST_SECTION_START)
 const CosmOS_ScheduleTableConfigurationType ScheduleTableScheduler0CfgConst[SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM] __OS_CONST_SECTION 
 IS_INITIALIZED_TO 
 {
-    {                                                   /* ScheduleTableScheduler0CfgConst element 0        */
-        TASK_0_SCHEDULER_0_EXECUTION_TICK_0,            /* const bitWidth startTime                         */
+    {                                                           /* ScheduleTableScheduler0CfgConst element 0        */
+        TASK_0_SCHEDULER_0_EXECUTION_TICK_0,                    /* const bitWidth startTime                         */
+        &TasksProgram0Core0Var[TASK_0_PROGRAM_0_CORE_0_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
-    {                                                   /* ScheduleTableScheduler0CfgConst element 1        */
-        TASK_0_SCHEDULER_0_EXECUTION_TICK_1,            /* const bitWidth startTime                         */
+    {                                                           /* ScheduleTableScheduler0CfgConst element 0        */
+        TASK_0_SCHEDULER_0_EXECUTION_TICK_1,                    /* const bitWidth startTime                         */
+        &TasksProgram0Core0Var[TASK_0_PROGRAM_0_CORE_0_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
 };
 
 const CosmOS_ScheduleTableConfigurationType ScheduleTableScheduler1CfgConst[SCHEDULETABLE_SCHEDULER_1_ELEMENT_NUM] __OS_CONST_SECTION 
 IS_INITIALIZED_TO 
 {
-    {                                                   /* ScheduleTableScheduler1CfgConst element 0        */
-        TASK_0_SCHEDULER_1_EXECUTION_TICK_0,            /* const bitWidth startTime                         */
+    {                                                           /* ScheduleTableScheduler1CfgConst element 0        */
+        TASK_0_SCHEDULER_1_EXECUTION_TICK_0,                    /* const bitWidth startTime                         */
+        &TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID],     /* CosmOS_TaskVariableType * taskVar                   */
     },
-    {                                                   /* ScheduleTableScheduler1CfgConst element 1        */
-        TASK_0_SCHEDULER_1_EXECUTION_TICK_1,            /* const bitWidth startTime                         */
+    {                                                           /* ScheduleTableScheduler1CfgConst element 1        */
+        TASK_0_SCHEDULER_1_EXECUTION_TICK_1,                    /* const bitWidth startTime                         */
+        &TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
 };
 /* @cond S */
 __SEC_STOP(__OS_CONST_SECTION_STOP)
-/* @endcond*/
-
-/* @cond S */
-__SEC_START(__OS_VAR_SECTION_START)
-/* @endcond*/
-CosmOS_ScheduleTableVariableType ScheduleTableScheduler0Var[SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM] __OS_VAR_SECTION
-IS_INITIALIZED_TO 
-{
-    {                                                           /* ScheduleTableScheduler0Var element 0         */
-        &TasksProgram0Core0Var[TASK_0_PROGRAM_0_CORE_0_ID],     /* CosmOS_TaskConfigurationType * task             */
-    },
-    {                                                           /* ScheduleTableScheduler0Var element 1         */
-        &TasksProgram0Core0Var[TASK_0_PROGRAM_0_CORE_0_ID],     /* CosmOS_TaskConfigurationType * task             */
-    },
-};
-
-CosmOS_ScheduleTableVariableType ScheduleTableScheduler1Var[SCHEDULETABLE_SCHEDULER_1_ELEMENT_NUM] __OS_VAR_SECTION 
-IS_INITIALIZED_TO 
-{
-    {                                                           /* ScheduleTableScheduler1Var element 0         */
-        &TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID],     /* CosmOS_TaskConfigurationType * task             */
-    },
-    {                                                           /* ScheduleTableScheduler1Var element 1         */
-        &TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID],     /* CosmOS_TaskConfigurationType * task             */
-    },
-};
-/* @cond S */
-__SEC_STOP(__OS_VAR_SECTION_STOP)
 /* @endcond*/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

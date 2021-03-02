@@ -108,8 +108,9 @@ typedef BitWidthType (*CosmOS_GenericBitWidthRWType)(BitWidthType,void *,BitWidt
 ********************************************************************************/
 typedef enum {
 
-    ACCESS_STATE_ENUM__ALLOWED,
-    ACCESS_STATE_ENUM__DENIED,     
+    ACCESS_STATE_ENUM__ALLOWED      = 0x00,
+    ACCESS_STATE_ENUM__DENIED       = SECURE_NUMBER,
+    ACCESS_STATE_ENUM__FORCE        = FORCE_ENUM,
 
 } CosmOS_AccessStateType;
 
@@ -153,8 +154,9 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC,
-    SCHEDULER_SYNC_STATE_ENUM__IN_SYNC,
+    SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC  = 0x00,
+    SCHEDULER_SYNC_STATE_ENUM__IN_SYNC      = SECURE_NUMBER,
+    SCHEDULER_SYNC_STATE_ENUM__FORCE        = FORCE_ENUM,
 
 } CosmOS_SchedulerSyncStateType;
 
@@ -166,10 +168,36 @@ typedef enum {
 typedef enum {
 
     BARRIER_STATE_ENUM__ACTIVATED  = 0x00,
-    BARRIER_STATE_ENUM__REACHED    = REACHED_BARRIER,
+    BARRIER_STATE_ENUM__REACHED    = SECURE_NUMBER,
     BARRIER_STATE_ENUM__FORCE      = FORCE_ENUM,
 
 } CosmOS_BarrierStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_BarrierStateType enum
+********************************************************************************/
+typedef enum {
+
+    TASK_STATE_ENUM__ACTIVATED       = 0x00,
+    TASK_STATE_ENUM__DEACTIVATED     = SECURE_NUMBER,
+    TASK_STATE_ENUM__FORCE           = FORCE_ENUM,
+
+} CosmOS_TaskStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_BarrierStateType enum
+********************************************************************************/
+typedef enum {
+
+    TASK_EXECUTION_STATE_ENUM__RUNNING    = 0x00,
+    TASK_EXECUTION_STATE_ENUM__EXECUTED   = SECURE_NUMBER,
+    TASK_EXECUTION_STATE_ENUM__FORCE      = FORCE_ENUM,
+
+} CosmOS_TaskExecutionStateType;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -285,6 +285,38 @@ __STATIC_FORCEINLINE StackPointerType task_getTaskStackPointer(CosmOS_TaskVariab
 {
     return (task->stackPointer);
 }
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn task_getTaskState(CosmOS_TaskVariableType * task) 
+  * 
+  * @brief Get task taskState.
+  * 
+  * @param[in]  CosmOS_TaskVariableType * task
+  * 
+  * @return CosmOS_TaskStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_TaskStateType task_getTaskState(CosmOS_TaskVariableType * task)
+{
+    return (task->taskState);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn task_getTaskExecutionState(CosmOS_TaskVariableType * task) 
+  * 
+  * @brief Get task executionState.
+  * 
+  * @param[in]  CosmOS_TaskVariableType * task
+  * 
+  * @return CosmOS_TaskExecutionStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_TaskExecutionStateType task_getTaskExecutionState(CosmOS_TaskVariableType * task)
+{
+    return (task->executionState);
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -313,6 +345,40 @@ __STATIC_FORCEINLINE StackPointerType task_getTaskStackPointer(CosmOS_TaskVariab
 __STATIC_FORCEINLINE void task_setTaskStackPointer(CosmOS_TaskVariableType * task, StackPointerType stackPointerParam)
 {
     task->stackPointer = stackPointerParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn task_setTaskState(CosmOS_TaskVariableType * task, CosmOS_TaskStateType taskStateParam) 
+  * 
+  * @brief Set task taskState.
+  * 
+  * @param[in]  CosmOS_TaskVariableType * task
+  * @param[in]  CosmOS_TaskStateType taskStateParam
+  * 
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void task_setTaskState(CosmOS_TaskVariableType * task, CosmOS_TaskStateType taskStateParam)
+{
+    task->taskState = taskStateParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn task_setTaskExecutionState(CosmOS_TaskVariableType * task, CosmOS_TaskExecutionStateType executionStateParam) 
+  * 
+  * @brief Set task executionState.
+  * 
+  * @param[in]  CosmOS_TaskVariableType * task
+  * @param[in]  CosmOS_TaskExecutionStateType executionStateParam
+  * 
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void task_setTaskExecutionState(CosmOS_TaskVariableType * task, CosmOS_TaskExecutionStateType executionStateParam)
+{
+    task->executionState = executionStateParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

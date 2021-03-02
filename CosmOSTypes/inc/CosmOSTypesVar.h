@@ -126,6 +126,8 @@ typedef struct
     const CosmOS_TaskConfigurationType * const cfg;
     CosmOS_StackVariableType * const stackVar;
     StackPointerType stackPointer;
+    CosmOS_TaskStateType taskState;
+    CosmOS_TaskExecutionStateType executionState;
     
 } CosmOS_TaskVariableType;
 
@@ -145,17 +147,6 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_ScheduleTableVariableType struct type
-********************************************************************************/
-typedef struct
-{
-    CosmOS_TaskVariableType * const task;
-
-} CosmOS_ScheduleTableVariableType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @brief  CosmOS_SchedulerVariableType struct type
 ********************************************************************************/
 typedef struct
@@ -163,7 +154,6 @@ typedef struct
     const CosmOS_SchedulerConfigurationType * const cfg;
     BitWidthType currentTick;
     BitWidthType scheduleTableIterator;
-    CosmOS_ScheduleTableVariableType * const scheduleTableVar;
 
 } CosmOS_SchedulerVariableType;
 

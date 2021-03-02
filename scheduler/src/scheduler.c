@@ -26,7 +26,6 @@
 #include "coreSync.h"
 #include "os.h"
 #include "task.h"
-
 #include "program.h"
 #include "stackInit.h"
 #include "CosmOSAssert.h"
@@ -232,8 +231,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void scheduler_start(void)
 {
-    BitWidthType currentTick,
-                 hyperTick,
+    BitWidthType hyperTick,
                  startTick,
                  timerTicks,
                  stackPointerRetVal,
@@ -255,9 +253,8 @@ __OS_FUNC_SECTION void scheduler_start(void)
 
     startTick = scheduler_getSchedulerScheduleTableStartTick( schedulerVar, scheduleTableIterator );
     hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );
-    currentTick = scheduler_getSchedulerCurrentTick( schedulerVar );
     
-    if ( __COSMOS_UNLIKELY(startTick IS_EQUAL_TO currentTick) )
+    if ( IS_NOT(startTick) )
     {   
         BitWidthType wcet;
 
@@ -282,8 +279,8 @@ __OS_FUNC_SECTION void scheduler_start(void)
 
     }
 
-    currentTick = ( currentTick + timerTicks ) % hyperTick;
-    scheduler_setSchedulerCurrentTick( schedulerVar, currentTick );
+    //currentTick = ( currentTick + timerTicks ) % hyperTick;
+    //scheduler_setSchedulerCurrentTick( schedulerVar, currentTick );
 
     switchMemoryProtection_setStackOverflowProtection( stack );
 

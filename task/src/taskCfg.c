@@ -1,6 +1,6 @@
 /********************************************************************************
 **                                                                             **
-**                       GENERATED FILE BY TiCOS CustomBox                     **
+**                       GENERATED FILE BY COSMOS CustomBox                    **
 **                                                                             **
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
@@ -58,24 +58,24 @@
 /* @cond S */
 __SEC_START(__OS_CONST_SECTION_START)
 /* @endcond*/
-const TiC_TaskConfigurationType TasksProgram0Core0CfgConst[TASK_PROGRAM_0_CORE_0_NUM] __OS_CONST_SECTION
+const CosmOS_TaskConfigurationType TasksProgram0Core0CfgConst[TASK_PROGRAM_0_CORE_0_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		{                                                                 /* TasksProgram0Core0CfgConst[TASK_0_PROGRAM_0_CORE_0_ID]   */
-        &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_0_CORE_0_ID],       /* const TiC_StackConfigurationType * stack                 */
-        Task_0_Core_0_Handler,                                        /* const TiC_HandlerType handler                            */
+        &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_0_CORE_0_ID],       /* const CosmOS_StackConfigurationType * stack                 */
+        Task_0_Core_0_Handler,                                        /* const CosmOS_HandlerType handler                            */
         TASK_0_PROGRAM_0_CORE_0_ID,                                   /* const BitWidthType id                                    */
         TASK_0_PROGRAM_0_CORE_0_WCET,                                 /* const BitWidthType wcet                                  */
         PROGRAM_0_CORE_0_ID,                                          /* const BitWidthType programId                             */
         CORE_0_ID,                                                    /* const BitWidthType coreId                                */
     },
 };
-const TiC_TaskConfigurationType TasksProgram0Core1CfgConst[TASK_PROGRAM_0_CORE_1_NUM] __OS_CONST_SECTION
+const CosmOS_TaskConfigurationType TasksProgram0Core1CfgConst[TASK_PROGRAM_0_CORE_1_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		{                                                                 /* TasksProgram0Core1CfgConst[TASK_0_PROGRAM_0_CORE_1_ID]   */
-        &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_0_CORE_1_ID],       /* const TiC_StackConfigurationType * stack                 */
-        Task_0_Core_1_Handler,                                        /* const TiC_HandlerType handler                            */
+        &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_0_CORE_1_ID],       /* const CosmOS_StackConfigurationType * stack                 */
+        Task_0_Core_1_Handler,                                        /* const CosmOS_HandlerType handler                            */
         TASK_0_PROGRAM_0_CORE_1_ID,                                   /* const BitWidthType id                                    */
         TASK_0_PROGRAM_0_CORE_1_WCET,                                 /* const BitWidthType wcet                                  */
         PROGRAM_0_CORE_1_ID,                                          /* const BitWidthType programId                             */
@@ -89,22 +89,26 @@ __SEC_STOP(__OS_CONST_SECTION_STOP)
 /* @cond S */
 __SEC_START(__OS_VAR_SECTION_START)
 /* @endcond*/
-TiC_TaskVariableType TasksProgram0Core0Var[TASK_PROGRAM_0_CORE_0_NUM] __OS_VAR_SECTION
+CosmOS_TaskVariableType TasksProgram0Core0Var[TASK_PROGRAM_0_CORE_0_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO 
 {
 		{                                                                 /* TasksProgram0Core0Var[TASK_0_PROGRAM_0_CORE_0_ID]        */
-        &TasksProgram0Core0CfgConst[TASK_0_PROGRAM_0_CORE_0_ID],      /* const TiC_TaskConfigurationType * cfg                    */
-        &TasksStacksVar[STACK_TASK_0_PROGRAM_0_CORE_0_ID],            /* TiC_StackVariableType * stackVar                         */
+        &TasksProgram0Core0CfgConst[TASK_0_PROGRAM_0_CORE_0_ID],      /* const CosmOS_TaskConfigurationType * cfg                    */
+        &TasksStacksVar[STACK_TASK_0_PROGRAM_0_CORE_0_ID],            /* CosmOS_StackVariableType * stackVar                         */
         STACK_TASK_0_PROGRAM_0_CORE_0_HIGH_ADDRESS,                   /* StackPointerType stackPointer                            */
+        TASK_STATE_ENUM__ACTIVATED,                                   /* CosmOS_TaskStateType taskState                             */
+        TASK_EXECUTION_STATE_ENUM__EXECUTED,                          /* CosmOS_TaskExecutionStateType executionState               */
     },
 };
-TiC_TaskVariableType TasksProgram0Core1Var[TASK_PROGRAM_0_CORE_1_NUM] __OS_VAR_SECTION
+CosmOS_TaskVariableType TasksProgram0Core1Var[TASK_PROGRAM_0_CORE_1_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO 
 {
 		{                                                                 /* TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID]        */
-        &TasksProgram0Core1CfgConst[TASK_0_PROGRAM_0_CORE_1_ID],      /* const TiC_TaskConfigurationType * cfg                    */
-        &TasksStacksVar[STACK_TASK_0_PROGRAM_0_CORE_1_ID],            /* TiC_StackVariableType * stackVar                         */
+        &TasksProgram0Core1CfgConst[TASK_0_PROGRAM_0_CORE_1_ID],      /* const CosmOS_TaskConfigurationType * cfg                    */
+        &TasksStacksVar[STACK_TASK_0_PROGRAM_0_CORE_1_ID],            /* CosmOS_StackVariableType * stackVar                         */
         STACK_TASK_0_PROGRAM_0_CORE_1_HIGH_ADDRESS,                   /* StackPointerType stackPointer                            */
+        TASK_STATE_ENUM__ACTIVATED,                                   /* CosmOS_TaskStateType taskState                             */
+        TASK_EXECUTION_STATE_ENUM__EXECUTED,                          /* CosmOS_TaskExecutionStateType executionState               */
     },
 };
 /* @cond S */

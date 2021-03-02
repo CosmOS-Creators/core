@@ -62,16 +62,18 @@ const CosmOS_SchedulerConfigurationType SchedulersCfgConst[SCHEDULER_NUM] __OS_C
 IS_INITIALIZED_TO
 {
     {                                                   /* SchedulersCfgConst[SCHEDULER_CORE_0_ID]                         */
-        ScheduleTableScheduler0CfgConst,                /* const CosmOS_ScheduleTableConfigurationType * scheduleTable        */
+        ScheduleTableScheduler0CfgConst,                /* const CosmOS_ScheduleTableConfigurationType * scheduleTable     */
         HYPERTICK_SCHEDULER_0,                          /* const BitWidthType hyperPeriod                                  */
         PREEMPTTICK_SCHEDULER_0,                        /* const BitWidthType preemptPeriod                                */
         SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM,          /* const BitWidthType scheduleTableElementsNum                     */
+        LAST_TO_FIRST_TASK_TICK_SCHEDULER_0,            /* const BitWidthType lastToFirstTaskTicks                         */
     },
     {                                                   /* SchedulersCfgConst[SCHEDULER_CORE_1_ID]                         */
-        ScheduleTableScheduler1CfgConst,                /* const CosmOS_ScheduleTableConfigurationType * scheduleTable        */
+        ScheduleTableScheduler1CfgConst,                /* const CosmOS_ScheduleTableConfigurationType * scheduleTable     */
         HYPERTICK_SCHEDULER_1,                          /* const BitWidthType hyperPeriod                                  */
         PREEMPTTICK_SCHEDULER_1,                        /* const BitWidthType preemptPeriod                                */
         SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM,          /* const BitWidthType scheduleTableElementsNum                     */
+        LAST_TO_FIRST_TASK_TICK_SCHEDULER_1,            /* const BitWidthType lastToFirstTaskTicks                         */
     },
 };
 /* @cond S */
@@ -88,13 +90,11 @@ IS_INITIALIZED_TO
         &SchedulersCfgConst[SCHEDULER_CORE_0_ID],       /* const CosmOS_SchedulerConfigurationType * cfg       */
         0,                                              /* const BitWidthType curentTime                    */
         0,                                              /* const BitWidthType scheduleTableIterator         */
-        ScheduleTableScheduler0Var,                     /* CosmOS_ScheduleTableVariableType * scheduleTableVar */
     },
     {                                                   /* SchedulersCfgConst[SCHEDULER_CORE_1_ID]          */
         &SchedulersCfgConst[SCHEDULER_CORE_1_ID],       /* const CosmOS_SchedulerConfigurationType * cfg       */
         0,                                              /* const BitWidthType curentTime                    */
         0,                                              /* const BitWidthType scheduleTableIterator         */
-        ScheduleTableScheduler1Var,                     /* CosmOS_ScheduleTableVariableType * scheduleTableVar */
     },
 };
 /* @cond S */

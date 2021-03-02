@@ -84,9 +84,6 @@
 ********************************************************************************/
 extern const CosmOS_ScheduleTableConfigurationType ScheduleTableScheduler0CfgConst[SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM];
 extern const CosmOS_ScheduleTableConfigurationType ScheduleTableScheduler1CfgConst[SCHEDULETABLE_SCHEDULER_1_ELEMENT_NUM];
-
-extern CosmOS_ScheduleTableVariableType ScheduleTableScheduler0Var[SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM];
-extern CosmOS_ScheduleTableVariableType ScheduleTableScheduler1Var[SCHEDULETABLE_SCHEDULER_1_ELEMENT_NUM];
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

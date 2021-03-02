@@ -1,6 +1,6 @@
 /********************************************************************************
 **                                                                             **
-**                       GENERATED FILE BY TiCOS CustomBox                     **
+**                       GENERATED FILE BY COSMOS CustomBox                    **
 **                                                                             **
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
@@ -60,18 +60,18 @@
 /* @cond S */
 __SEC_START(__OS_CONST_SECTION_START)
 /* @endcond*/
-const TiC_CoreConfigurationType CoresCfgConst[CORE_NUM] __OS_CONST_SECTION
+const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		{                                               /* CoresCfgConst[CORE_0_ID]                         */
-        ProgramsCore0CfgConst,                      /* const TiC_ProgramConfigurationType * programs    */   
+        ProgramsCore0CfgConst,                      /* const CosmOS_ProgramConfigurationType * programs    */   
         PROGRAM_CORE_0_NUM,                         /* const BitWidthType numberOfPrograms              */   
-        &SchedulersCfgConst[SCHEDULER_CORE_0_ID],   /* TiC_SchedulerConfigurationType * scheduler       */
+        &SchedulersCfgConst[SCHEDULER_CORE_0_ID],   /* CosmOS_SchedulerConfigurationType * scheduler       */
     },
 		{                                               /* CoresCfgConst[CORE_1_ID]                         */
-        ProgramsCore1CfgConst,                      /* const TiC_ProgramConfigurationType * programs    */   
+        ProgramsCore1CfgConst,                      /* const CosmOS_ProgramConfigurationType * programs    */   
         PROGRAM_CORE_1_NUM,                         /* const BitWidthType numberOfPrograms              */   
-        &SchedulersCfgConst[SCHEDULER_CORE_1_ID],   /* TiC_SchedulerConfigurationType * scheduler       */
+        &SchedulersCfgConst[SCHEDULER_CORE_1_ID],   /* CosmOS_SchedulerConfigurationType * scheduler       */
     },
 };
 /* @cond S */
@@ -81,22 +81,22 @@ __SEC_STOP(__OS_CONST_SECTION_STOP)
 /* @cond S */
 __SEC_START(__OS_VAR_SECTION_START)
 /* @endcond*/
-TiC_CoreVariableType CoresVar[CORE_NUM] __OS_VAR_SECTION 
+CosmOS_CoreVariableType CoresVar[CORE_NUM] __OS_VAR_SECTION 
 IS_INITIALIZED_TO
 {
 		{                                               /* CoresVar[CORE_0_ID]                                  */
-        &CoresCfgConst[CORE_0_ID],                  /* const TiC_CoreConfigurationType *cfg                 */
-        NULL,                                       /* TiC_ProgramVariableType * programInCurrentContext    */
-        ProgramsCore0Var,                           /* TiC_ProgramVariableType * programVars                */
-        &SchedulersVar[SCHEDULER_CORE_0_ID],        /* TiC_SchedulerVariableType * scheduler                */
-        BarriersCore0Var,                           /* TiC_BarrierVariableType * barrierVars                */
+        &CoresCfgConst[CORE_0_ID],                  /* const CosmOS_CoreConfigurationType *cfg                 */
+        NULL,                                       /* CosmOS_ProgramVariableType * programInCurrentContext    */
+        ProgramsCore0Var,                           /* CosmOS_ProgramVariableType * programVars                */
+        &SchedulersVar[SCHEDULER_CORE_0_ID],        /* CosmOS_SchedulerVariableType * scheduler                */
+        BarriersCore0Var,                           /* CosmOS_BarrierVariableType * barrierVars                */
     },
 		{                                               /* CoresVar[CORE_1_ID]                                  */
-        &CoresCfgConst[CORE_1_ID],                  /* const TiC_CoreConfigurationType *cfg                 */
-        NULL,                                       /* TiC_ProgramVariableType * programInCurrentContext    */
-        ProgramsCore1Var,                           /* TiC_ProgramVariableType * programVars                */
-        &SchedulersVar[SCHEDULER_CORE_1_ID],        /* TiC_SchedulerVariableType * scheduler                */
-        BarriersCore1Var,                           /* TiC_BarrierVariableType * barrierVars                */
+        &CoresCfgConst[CORE_1_ID],                  /* const CosmOS_CoreConfigurationType *cfg                 */
+        NULL,                                       /* CosmOS_ProgramVariableType * programInCurrentContext    */
+        ProgramsCore1Var,                           /* CosmOS_ProgramVariableType * programVars                */
+        &SchedulersVar[SCHEDULER_CORE_1_ID],        /* CosmOS_SchedulerVariableType * scheduler                */
+        BarriersCore1Var,                           /* CosmOS_BarrierVariableType * barrierVars                */
     },
 };
 /* @cond S */

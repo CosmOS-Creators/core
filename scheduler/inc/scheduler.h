@@ -250,6 +250,22 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerScheduleTableElementsNum
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn scheduler_getSchedulerLastToFirstTaskTicks(CosmOS_SchedulerVariableType * scheduler) 
+  * 
+  * @brief Get scheduler lastToFirstTaskTicks.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerLastToFirstTaskTicks(CosmOS_SchedulerVariableType * scheduler)
+{
+    return (scheduler->cfg->lastToFirstTaskTicks);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn scheduler_getSchedulerCurrentTick(CosmOS_SchedulerVariableType * scheduler) 
   * 
   * @brief Get scheduler currentTick.
@@ -282,39 +298,6 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerScheduleTableIterator(Co
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn scheduler_getSchedulerScheduleTableVar(CosmOS_SchedulerVariableType * scheduler) 
-  * 
-  * @brief Get scheduler scheduleTable pointer.
-  * 
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * 
-  * @return CosmOS_ScheduleTableVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ScheduleTableVariableType * scheduler_getSchedulerScheduleTableVar(CosmOS_SchedulerVariableType * scheduler)
-{
-    return (scheduler->scheduleTableVar);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn scheduler_getSchedulerScheduleTableTaskVar(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIterator) 
-  * 
-  * @brief Get scheduler scheduleTable element task pointer.
-  * 
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType scheduleTableIterator
-  * 
-  * @return CosmOS_TaskVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskVariableType * scheduler_getSchedulerScheduleTableTaskVar(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIterator)
-{
-    return (scheduler->scheduleTableVar[scheduleTableIterator].task);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn scheduler_getSchedulerScheduleTableStartTick(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIterator) 
   * 
   * @brief Get scheduler scheduleTable element startTick.
@@ -329,6 +312,22 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerScheduleTableStartTick(C
     return (scheduler->cfg->scheduleTable[scheduleTableIterator].startTick);
 }
 
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_getSchedulerScheduleTableTaskVar(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIterator) 
+  * 
+  * @brief Get scheduler scheduleTable element taskVar.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  BitWidthType scheduleTableIterator
+  * 
+  * @return CosmOS_TaskVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_TaskVariableType * scheduler_getSchedulerScheduleTableTaskVar(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIterator)
+{
+    return (CosmOS_TaskVariableType *)(scheduler->cfg->scheduleTable[scheduleTableIterator].taskVar);
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

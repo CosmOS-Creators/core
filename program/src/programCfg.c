@@ -1,6 +1,6 @@
 /********************************************************************************
 **                                                                             **
-**                       GENERATED FILE BY TiCOS CustomBox                     **
+**                       GENERATED FILE BY COSMOS CustomBox                    **
 **                                                                             **
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
@@ -58,20 +58,20 @@
 /* @cond S */
 __SEC_START(__OS_CONST_SECTION_START)
 /* @endcond*/
-const TiC_ProgramConfigurationType ProgramsCore0CfgConst[PROGRAM_CORE_0_NUM] __OS_CONST_SECTION
+const CosmOS_ProgramConfigurationType ProgramsCore0CfgConst[PROGRAM_CORE_0_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		{                                                   /* ProgramsCore0CfgConst[PROGRAM_0_CORE_0_ID]           */
-        TasksProgram0Core0CfgConst,                     /* const TiC_TaskConfigurationType * tasks              */
+        TasksProgram0Core0CfgConst,                     /* const CosmOS_TaskConfigurationType * tasks              */
         CORE_0_ID,                                      /* const BitWidthType coreId                            */
         TASK_PROGRAM_0_CORE_0_NUM,                      /* const BitWidthType numberOfTasks                     */
     },
 };
-const TiC_ProgramConfigurationType ProgramsCore1CfgConst[PROGRAM_CORE_1_NUM] __OS_CONST_SECTION
+const CosmOS_ProgramConfigurationType ProgramsCore1CfgConst[PROGRAM_CORE_1_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		{                                                   /* ProgramsCore1CfgConst[PROGRAM_0_CORE_1_ID]           */
-        TasksProgram0Core1CfgConst,                     /* const TiC_TaskConfigurationType * tasks              */
+        TasksProgram0Core1CfgConst,                     /* const CosmOS_TaskConfigurationType * tasks              */
         CORE_1_ID,                                      /* const BitWidthType coreId                            */
         TASK_PROGRAM_0_CORE_1_NUM,                      /* const BitWidthType numberOfTasks                     */
     },
@@ -83,22 +83,22 @@ __SEC_STOP(__OS_CONST_SECTION_STOP)
 /* @cond S */
 __SEC_START(__OS_VAR_SECTION_START)
 /* @endcond*/
-TiC_ProgramVariableType ProgramsCore0Var[PROGRAM_CORE_0_NUM] __OS_VAR_SECTION
+CosmOS_ProgramVariableType ProgramsCore0Var[PROGRAM_CORE_0_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO
 {
 		{                                                   /* ProgramsCore0Var[PROGRAM_0_CORE_0_ID]                          */
-        &ProgramsCore0CfgConst[PROGRAM_0_CORE_0_ID],    /* const TiC_ProgramConfigurationType * cfg                       */
-        NULL,                                           /* TiC_TaskVariableType * taskInCurrentContext                    */      
-        TasksProgram0Core0Var,                          /* TiC_TaskVariableType * taskVars                                */                        
+        &ProgramsCore0CfgConst[PROGRAM_0_CORE_0_ID],    /* const CosmOS_ProgramConfigurationType * cfg                       */
+        NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
+        TasksProgram0Core0Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
     },
 };
-TiC_ProgramVariableType ProgramsCore1Var[PROGRAM_CORE_1_NUM] __OS_VAR_SECTION
+CosmOS_ProgramVariableType ProgramsCore1Var[PROGRAM_CORE_1_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO
 {
 		{                                                   /* ProgramsCore0Var[PROGRAM_0_CORE_1_ID]                          */
-        &ProgramsCore1CfgConst[PROGRAM_0_CORE_1_ID],    /* const TiC_ProgramConfigurationType * cfg                       */
-        NULL,                                           /* TiC_TaskVariableType * taskInCurrentContext                    */      
-        TasksProgram0Core1Var,                          /* TiC_TaskVariableType * taskVars                                */                        
+        &ProgramsCore1CfgConst[PROGRAM_0_CORE_1_ID],    /* const CosmOS_ProgramConfigurationType * cfg                       */
+        NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
+        TasksProgram0Core1Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
     },
 };
 /* @cond S */
