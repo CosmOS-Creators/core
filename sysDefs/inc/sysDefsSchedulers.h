@@ -74,6 +74,9 @@
 
 #define LAST_TO_FIRST_TASK_TICK_SCHEDULER_0     (BitWidthType)5000        /* Last to first task for scheduler 0 in ticks */
 #define LAST_TO_FIRST_TASK_TICK_SCHEDULER_1     (BitWidthType)5000        /* Last to first task for scheduler 1 in ticks */
+
+#define SYNCPERIOD_SCHEDULER_0     (BitWidthType)0x00000001        /* Syncperiod for scheduler 0 in ticks */
+#define SYNCPERIOD_SCHEDULER_1     (BitWidthType)0x00000001        /* Syncperiod for scheduler 1 in ticks */
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

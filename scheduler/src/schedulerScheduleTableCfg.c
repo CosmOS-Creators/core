@@ -76,7 +76,7 @@ IS_INITIALIZED_TO
 {
     {                                                           /* ScheduleTableScheduler1CfgConst element 0        */
         TASK_0_SCHEDULER_1_EXECUTION_TICK_0,                    /* const bitWidth startTime                         */
-        &TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID],     /* CosmOS_TaskVariableType * taskVar                   */
+        &TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
     {                                                           /* ScheduleTableScheduler1CfgConst element 1        */
         TASK_0_SCHEDULER_1_EXECUTION_TICK_1,                    /* const bitWidth startTime                         */

@@ -218,22 +218,6 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerHyperTick(CosmOS_Schedul
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn scheduler_getSchedulerPreemptTick(CosmOS_SchedulerVariableType * scheduler) 
-  * 
-  * @brief Get scheduler preemptTick.
-  * 
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * 
-  * @return BitWidthType
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerPreemptTick(CosmOS_SchedulerVariableType * scheduler)
-{
-    return (scheduler->cfg->preemptTick);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn scheduler_getSchedulerScheduleTableElementsNum(CosmOS_SchedulerVariableType * scheduler) 
   * 
   * @brief Get scheduler scheduleTableElementsNum.

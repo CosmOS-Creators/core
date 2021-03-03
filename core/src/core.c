@@ -23,7 +23,6 @@
 /* CORE interfaces */
 #include "os.h"
 #include "task.h"
-
 #include "program.h"
 #include "core.h"
 #include "CosmOSAssert.h"
