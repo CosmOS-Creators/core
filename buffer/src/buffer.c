@@ -269,8 +269,6 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
         CosmOS_PermissionsConfigurationType * readPermission;
 
 
-        /* MEMORY BARRIER HAS TO BE IMPLEMENTED */
-
         osVar = os_getOsVar();
         coreVar = CIL_core_getCoreVar();
 
@@ -284,7 +282,6 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
 
         if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
         {
-            /* trigger user error handler if user wants */
             bufferState = BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED;
         }
         else
@@ -363,8 +360,6 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
         CosmOS_PermissionsConfigurationType * writePermission;
 
 
-        /* MEMORY BARRIER HAS TO BE IMPLEMENTED */
-
         osVar = os_getOsVar();
         coreVar = CIL_core_getCoreVar();
 
@@ -378,7 +373,6 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
 
         if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
         {
-            /* trigger user error handler if user wants */
             bufferState = BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED;
         }
         else

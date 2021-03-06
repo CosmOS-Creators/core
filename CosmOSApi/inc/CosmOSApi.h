@@ -182,12 +182,12 @@
   * @ingroup Apis_CosmOSApi_h                                            
   * @{                                                                           
 ********************************************************************************/
-#define CosmOS_boot() sysCalls_osBoot()
-#define CosmOS_init() sysCalls_os(INIT_COSMOS)
-#define CosmOS_start() sysCalls_os(START_COSMOS)
-#define read_buffer_xcore_1_to_0(buffer, size) (CosmOS_BufferStateType)sysCalls_readWrite(READ_XCORE_1_TO_0_BUFFER_0, buffer, size)
-#define write_buffer_xcore_1_to_0(buffer, size) (CosmOS_BufferStateType)sysCalls_readWrite(WRITE_XCORE_1_TO_0_BUFFER_0, buffer, size)
-#define togglePin(gpio, pin) (void)sysCalls_readWrite(TOGGLE_PIN, gpio, pin)
+#define CosmOSApi_boot() sysCalls_osBoot()
+#define CosmOSApi_init() sysCalls_os(INIT_COSMOS)
+#define CosmOSApi_start() sysCalls_os(START_COSMOS)
+#define CosmOSApi_read_buffer_xcore_1_to_0(buffer, size) (CosmOS_BufferStateType)sysCalls_readWrite(READ_XCORE_1_TO_0_BUFFER_0, buffer, size)
+#define CosmOSApi_write_buffer_xcore_1_to_0(buffer, size) (CosmOS_BufferStateType)sysCalls_readWrite(WRITE_XCORE_1_TO_0_BUFFER_0, buffer, size)
+#define CosmOSApi_togglePin(gpio, pin) (void)sysCalls_readWrite(TOGGLE_PIN, gpio, pin)
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

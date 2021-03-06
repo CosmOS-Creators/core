@@ -88,7 +88,7 @@
 typedef struct
 {
     const BitWidthType * const bitLocksTasks;
-    const BitWidthType * const bitLocksTasksInversed;
+    const BitWidthType * const bitLocksTasksInverted;
 
 } CosmOS_PermissionsConfigurationType;
 

@@ -22,6 +22,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "permission.h"
+#include "permissionCfg.h"
 #include "core.h"
 #include "CosmOSAssert.h"
 /********************************************************************************
@@ -37,32 +38,13 @@
   * @ingroup Local_permission
   * @{    
 ********************************************************************************/
-#define BITLOCK_MASK (BitWidthType)0x1
-
-#define BITLOCK_ID_PLACEMENT_8BIT(id)   id,id,id,id,id,id,id,id,
-
-#define BITLOCK_ID_PLACEMENT_16BIT(id)  id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id,
-
-#define BITLOCK_ID_PLACEMENT_32BIT(id)  id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id,
-
-#define BITLOCK_ID_PLACEMENT_64BIT(id)  id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id, \
-                                        id,id,id,id,id,id,id,id,
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
   * Macros_permission  
 ********************************************************************************/
+#define BITLOCK_MASK (BitWidthType)0x1
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
 ********************************************************************************/
@@ -76,18 +58,6 @@
   * @ingroup Local_permission
   * @{    
 ********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_CONST_SECTION_START)
-/* @endcond*/
-const BitWidthType TaskIdToBitLock[TASK_NUM*sizeof(BitWidthType)*8] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    BITLOCK_ID_PLACEMENT_32BIT(0)
-    BITLOCK_ID_PLACEMENT_32BIT(1)
-};
-/* @cond S */
-__SEC_STOP(__OS_CONST_SECTION_STOP)
-/* @endcond*/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -154,7 +124,8 @@ __SEC_STOP(__OS_CONST_SECTION_STOP)
 __STATIC_FORCEINLINE CosmOS_AccessStateType permission_tryTaskAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_TaskVariableType * task)
 {
     CosmOSAssert( IS_NOT( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] & \
-              permission[task->cfg->coreId].bitLocksTasksInversed[TaskIdToBitLock[task->cfg->id]] ) );
+              permission[task->cfg->coreId].bitLocksTasksInverted[TaskIdToBitLock[task->cfg->id]] ) );
+
     return ((( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] >> task->cfg->id ) & BITLOCK_MASK ) ? \
             ACCESS_STATE_ENUM__ALLOWED : ACCESS_STATE_ENUM__DENIED );
 }

@@ -66,9 +66,9 @@ IS_INITIALIZED_TO
 {
     (CosmOS_GenericVoidType)buffer_readArray,    /* 0 buffer_readArray  */
     (CosmOS_GenericVoidType)buffer_writeArray,   /* 1 buffer_write */
+    (CosmOS_GenericVoidType)deviceIO_togglePin,  /* 3 deviceIO_togglePin     */
     (CosmOS_GenericVoidType)osInit_init,         /* 2 osInit_init     */
     (CosmOS_GenericVoidType)os_start,            /* 3 os_start     */
-    (CosmOS_GenericVoidType)deviceIO_togglePin,  /* 3 deviceIO_togglePin     */
 };
 
 const BitWidthType RoutesIdToFuncConst[ROUTES_ID_TO_FUNC_NUM] __OS_CONST_SECTION
@@ -76,9 +76,9 @@ IS_INITIALIZED_TO
 {
     READ_BUFFER,        /* 0 READ_BUFFER | READ_XCORE_1_TO_0_BUFFER_0 -> READ_BUFFER -> buffer_readArray      */
     WRITE_BUFFER,       /* 1 WRITE_BUFFER | WRITE_XCORE_1_TO_0_BUFFER_0 -> WRITE_BUFFER -> buffer_writeArray  */
+    GPIO_TOGGLE_PIN,    /* 4 GPIO_TOGGLE_PIN | TOGGLE_PIN -> GPIO_TOGGLE_PIN -> deviceIO_togglePin            */
     OS_INIT,            /* 2 OS_INIT | INIT -> OS_INIT -> osInit_init                                         */
     OS_START,           /* 3 OS_START | START -> OS_START -> os_start                                         */
-    GPIO_TOGGLE_PIN,    /* 4 GPIO_TOGGLE_PIN | TOGGLE_PIN -> GPIO_TOGGLE_PIN -> deviceIO_togglePin            */
 };
 
 const BitWidthType RoutesIdToEntityConst[ROUTES_ID_TO_ENTITY_NUM] __OS_CONST_SECTION

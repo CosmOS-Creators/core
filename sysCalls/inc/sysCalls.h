@@ -168,17 +168,17 @@ __OS_FUNC_SECTION void sysCalls_os(BitWidthType id);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_readWrite(void) 
+  * @fn sysCalls_readWrite(BitWidthType id, void * entity, BitWidthType size) 
   * 
   * @brief System call handling read/write from/to buffers or registers.
   * 
   * @param[in]  BitWidthType id
-  * @param[in]  void * buffer
+  * @param[in]  void * entity
   * @param[in]  BitWidthType size
   * 
   * @return BitWidthType
 ********************************************************************************/
-__OS_FUNC_SECTION BitWidthType sysCalls_readWrite(BitWidthType id, void * buffer, BitWidthType size);
+__OS_FUNC_SECTION BitWidthType sysCalls_readWrite(BitWidthType id, void * entity, BitWidthType size);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

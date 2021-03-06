@@ -48,6 +48,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "CosmOSTypesStd.h"
+#include "sysDefsBuffers.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -65,20 +66,26 @@
 
 #define ROUTES_FUNC_NUM (BitWidthType)0x00000005          /* Number of route RW */
 
+
 #define ROUTES_ID_TO_FUNC_NUM (BitWidthType)0x00000005     /* Number of route identificators */
-#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)0x00000002     /* Number of route identificators */
 
 #define READ_BUFFER (BitWidthType)0x00000000            /* Identificator pointing on function pointer in array (Routes) */
 #define WRITE_BUFFER (BitWidthType)0x00000001           /* Identificator pointing on function pointer in array (Routes) */
-#define OS_INIT (BitWidthType)0x00000002                /* Identificator pointing on function pointer in array (Routes) */
-#define OS_START (BitWidthType)0x00000003               /* Identificator pointing on function pointer in array (Routes) */
-#define GPIO_TOGGLE_PIN (BitWidthType)0x00000004               /* Identificator pointing on function pointer in array (Routes) */
+#define GPIO_TOGGLE_PIN (BitWidthType)0x00000002        /* Identificator pointing on function pointer in array (Routes) */
+#define OS_INIT (BitWidthType)0x00000003                /* Identificator pointing on function pointer in array (Routes) */
+#define OS_START (BitWidthType)0x00000004               /* Identificator pointing on function pointer in array (Routes) */
+
 
 #define READ_XCORE_1_TO_0_BUFFER_0 (BitWidthType)0x00000000    /* Identificator pointing on element in func array (RoutesReadConst) */
 #define WRITE_XCORE_1_TO_0_BUFFER_0 (BitWidthType)0x00000001   /* Identificator pointing on element in func array (RoutesWriteConst) */
-#define INIT_COSMOS  (BitWidthType)0x00000002                /* Identificator pointing on function pointer in array (Routes) */
-#define START_COSMOS (BitWidthType)0x00000003                /* Identificator pointing on function pointer in array (Routes) */
-#define TOGGLE_PIN (BitWidthType)0x00000004                /* Identificator pointing on function pointer in array (Routes) */
+#define TOGGLE_PIN (BitWidthType)0x00000002                   /* Identificator pointing on function pointer in array (Routes) */
+#define INIT_COSMOS  (BitWidthType)0x00000003                /* Identificator pointing on function pointer in array (Routes) */
+#define START_COSMOS (BitWidthType)0x00000004                /* Identificator pointing on function pointer in array (Routes) */
+
+
+#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)0x00000002     /* Number of route identificators */
+
+#define BUFFER_XCORE_1_TO_0  BUFFER_0                      /* RoutesIdToEntityConst */
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

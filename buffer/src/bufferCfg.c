@@ -69,7 +69,7 @@ __SEC_START(__OS_CONST_SECTION_START)
 const CosmOS_BufferConfigurationType BuffersCfgConst[BUFFER_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    {
+		{
         buffer0Arr,
         BUFFER_0_SIZE,
         PermissionsBuffer0ReadCfgConst,
@@ -83,7 +83,7 @@ __SEC_STOP(__OS_CONST_SECTION_STOP)
 CosmOS_BufferVariableType BuffersVar[BUFFER_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO
 {
-    {
+		{
         &BuffersCfgConst[BUFFER_0],
         0,
         0,

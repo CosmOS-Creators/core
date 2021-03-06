@@ -35,6 +35,24 @@
   * @ingroup Local_permissionCfg
   * @{    
 ********************************************************************************/
+#define BITLOCK_ID_PLACEMENT_8BIT(id)   id,id,id,id,id,id,id,id,
+
+#define BITLOCK_ID_PLACEMENT_16BIT(id)  id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id,
+
+#define BITLOCK_ID_PLACEMENT_32BIT(id)  id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id,
+
+#define BITLOCK_ID_PLACEMENT_64BIT(id)  id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id, \
+                                        id,id,id,id,id,id,id,id,
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -57,77 +75,79 @@
 /* @cond S */
 __SEC_START(__OS_CONST_SECTION_START)
 /* @endcond*/
+const BitWidthType TaskIdToBitLock[MAX_TASKS_ON_ONE_CORE*sizeof(BitWidthType)*8] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		BITLOCK_ID_PLACEMENT_32BIT(0)
+};
+
 const BitWidthType BitLockBuffer0TasksCore0ReadCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    0b00000000000000000000000000000001,
+		0b00000000000000000000000000000000,
 };
-
 const BitWidthType BitLockBuffer0TasksCore1ReadCfgConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    0b00000000000000000000000000000000,
+		0b00000000000000000000000000000001,
 };
 
 const BitWidthType BitLockBuffer0TasksCore0WriteCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    0b00000000000000000000000000000000,
+		0b00000000000000000000000000000001,
 };
-
 const BitWidthType BitLockBuffer0TasksCore1WriteCfgConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    0b00000000000000000000000000000001,
+		0b00000000000000000000000000000000,
 };
 
-const BitWidthType BitLockBuffer0TasksCore0ReadCfgInversedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0TasksCore0ReadCfgInvertedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    0b11111111111111111111111111111110,
+		0b11111111111111111111111111111111,
+};
+const BitWidthType BitLockBuffer0TasksCore1ReadCfgInvertedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		0b11111111111111111111111111111110,
 };
 
-const BitWidthType BitLockBuffer0TasksCore1ReadCfgInversedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0TasksCore0WriteCfgInvertedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    0b11111111111111111111111111111111,
+		0b11111111111111111111111111111110,
 };
-
-const BitWidthType BitLockBuffer0TasksCore0WriteCfgInversedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0TasksCore1WriteCfgInvertedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    0b11111111111111111111111111111111,
-};
-
-const BitWidthType BitLockBuffer0TasksCore1WriteCfgInversedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
-IS_INITIALIZED_TO
-{
-    0b11111111111111111111111111111110,
+		0b11111111111111111111111111111111,
 };
 
 const CosmOS_PermissionsConfigurationType PermissionsBuffer0ReadCfgConst[CORE_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    {   /* CORE_0_ID */
+		{   /* CORE_0_ID */
         BitLockBuffer0TasksCore0ReadCfgConst,
-        BitLockBuffer0TasksCore0ReadCfgInversedConst,
+        BitLockBuffer0TasksCore0ReadCfgInvertedConst,
     },
-    {   /* CORE_1_ID */
+		{   /* CORE_1_ID */
         BitLockBuffer0TasksCore1ReadCfgConst,
-        BitLockBuffer0TasksCore1ReadCfgInversedConst,
+        BitLockBuffer0TasksCore1ReadCfgInvertedConst,
     },
 };
 
 const CosmOS_PermissionsConfigurationType PermissionsBuffer0WriteCfgConst[CORE_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    {   /* CORE_0_ID */
+		{   /* CORE_0_ID */
         BitLockBuffer0TasksCore0WriteCfgConst,
-        BitLockBuffer0TasksCore0WriteCfgInversedConst,
+        BitLockBuffer0TasksCore0WriteCfgInvertedConst,
     },
-    {   /* CORE_1_ID */
+		{   /* CORE_1_ID */
         BitLockBuffer0TasksCore1WriteCfgConst,
-        BitLockBuffer0TasksCore1WriteCfgInversedConst,          
+        BitLockBuffer0TasksCore1WriteCfgInvertedConst,
     },
 };
 /* @cond S */

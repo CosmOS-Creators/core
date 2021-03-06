@@ -61,31 +61,27 @@ __SEC_START(__OS_CONST_SECTION_START)
 const CosmOS_ScheduleTableConfigurationType ScheduleTableScheduler0CfgConst[SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM] __OS_CONST_SECTION 
 IS_INITIALIZED_TO 
 {
-    {                                                           /* ScheduleTableScheduler0CfgConst element 0        */
+		{                                                           /* ScheduleTableScheduler0CfgConst element 0        */
         TASK_0_SCHEDULER_0_EXECUTION_TICK_0,                    /* const bitWidth startTime                         */
         &TasksProgram0Core0Var[TASK_0_PROGRAM_0_CORE_0_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
-    {                                                           /* ScheduleTableScheduler0CfgConst element 0        */
+		{                                                           /* ScheduleTableScheduler0CfgConst element 1        */
         TASK_0_SCHEDULER_0_EXECUTION_TICK_1,                    /* const bitWidth startTime                         */
         &TasksProgram0Core0Var[TASK_0_PROGRAM_0_CORE_0_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
 };
-
 const CosmOS_ScheduleTableConfigurationType ScheduleTableScheduler1CfgConst[SCHEDULETABLE_SCHEDULER_1_ELEMENT_NUM] __OS_CONST_SECTION 
 IS_INITIALIZED_TO 
 {
-    {                                                           /* ScheduleTableScheduler1CfgConst element 0        */
+		{                                                           /* ScheduleTableScheduler1CfgConst element 0        */
         TASK_0_SCHEDULER_1_EXECUTION_TICK_0,                    /* const bitWidth startTime                         */
         &TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
-    {                                                           /* ScheduleTableScheduler1CfgConst element 1        */
+		{                                                           /* ScheduleTableScheduler1CfgConst element 1        */
         TASK_0_SCHEDULER_1_EXECUTION_TICK_1,                    /* const bitWidth startTime                         */
         &TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
 };
-/* @cond S */
-__SEC_STOP(__OS_CONST_SECTION_STOP)
-/* @endcond*/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -155,4 +151,3 @@ __SEC_STOP(__OS_CONST_SECTION_STOP)
 /********************************************************************************
 **                           END OF THE SOURCE FILE                            **
 ********************************************************************************/
-
