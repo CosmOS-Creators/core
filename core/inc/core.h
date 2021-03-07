@@ -328,6 +328,22 @@ __STATIC_FORCEINLINE CosmOS_TaskVariableType * core_getCoreTaskInCurrentContext(
 {
     return (core->programInCurrentContext->taskInCurrentContext);
 }
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getCoreOsState(CosmOS_CoreVariableType * core) 
+  * 
+  * @brief Get core osState.
+  * 
+  * @param[in]  CosmOS_CoreVariableType * core
+  * 
+  * @return CosmOS_OsState 
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_OsState core_getCoreOsState(CosmOS_CoreVariableType * core)
+{
+    return (core->osState);
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -356,6 +372,23 @@ __STATIC_FORCEINLINE CosmOS_TaskVariableType * core_getCoreTaskInCurrentContext(
 __STATIC_FORCEINLINE void core_setCoreProgramInCurrentContext(CosmOS_CoreVariableType * core, CosmOS_ProgramVariableType * programInCurrentContextParam)
 {
     core->programInCurrentContext = programInCurrentContextParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_setCoreOsState(CosmOS_CoreVariableType * core) 
+  * 
+  * @brief Set core osState.
+  * 
+  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  CosmOS_OsState paramOsState
+  * 
+  * @return none 
+********************************************************************************/
+__STATIC_FORCEINLINE void core_setCoreOsState(CosmOS_CoreVariableType * core, CosmOS_OsState paramOsState)
+{
+    core->osState = paramOsState;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

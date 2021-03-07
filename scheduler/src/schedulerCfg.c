@@ -85,14 +85,18 @@ CosmOS_SchedulerVariableType SchedulersVar[SCHEDULER_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO 
 {
 		{                                                   /* SchedulersCfgConst[SCHEDULER_CORE_0_ID]          */
-        &SchedulersCfgConst[SCHEDULER_CORE_0_ID],       /* const CosmOS_SchedulerConfigurationType * cfg    */
-        0,                                              /* const BitWidthType curentTime                    */
-        0,                                              /* const BitWidthType scheduleTableIterator         */
+        &SchedulersCfgConst[SCHEDULER_CORE_0_ID],       /* CosmOS_SchedulerConfigurationType * cfg    */
+        0,                                              /* BitWidthType curentTick                    */
+        0,                                              /* BitWidthType scheduleTableIterator         */
+        0,                                              /* BitWidthType scheduleTableIteratorPrior    */
+        SCHEDULER_STATE_ENUM__NOT_STARTED,              /* CosmOS_SchedulerStateType schedulerState         */
     },
 		{                                                   /* SchedulersCfgConst[SCHEDULER_CORE_1_ID]          */
-        &SchedulersCfgConst[SCHEDULER_CORE_1_ID],       /* const CosmOS_SchedulerConfigurationType * cfg    */
-        0,                                              /* const BitWidthType curentTime                    */
-        0,                                              /* const BitWidthType scheduleTableIterator         */
+        &SchedulersCfgConst[SCHEDULER_CORE_1_ID],       /* CosmOS_SchedulerConfigurationType * cfg    */
+        0,                                              /* BitWidthType curentTick                    */
+        0,                                              /* BitWidthType scheduleTableIterator         */
+        0,                                              /* BitWidthType scheduleTableIteratorPrior    */
+        SCHEDULER_STATE_ENUM__NOT_STARTED,              /* CosmOS_SchedulerStateType schedulerState         */
     },
 };
 /* @cond S */

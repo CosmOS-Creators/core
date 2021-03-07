@@ -78,7 +78,7 @@ __SEC_START(__OS_VAR_SECTION_START)
 /* @endcond*/
 CosmOS_OsVariableType osVar __OS_VAR_SECTION
 IS_INITIALIZED_TO
-{                       /* osVar                                    */
+{                       /* osVar                                       */
     &osCfg,             /* const CosmOS_OsConfigurationType * cfg      */
     CoresVar,           /* CosmOS_CoreVariableType * coreVars          */   
     BuffersVar,         /* CosmOS_BufferVariableType * bufferVars      */

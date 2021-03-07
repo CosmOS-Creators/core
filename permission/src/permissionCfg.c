@@ -91,6 +91,16 @@ IS_INITIALIZED_TO
 {
 		0b00000000000000000000000000000001,
 };
+const BitWidthType BitLockBuffer1TasksCore0ReadCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		0b00000000000000000000000000000000,
+};
+const BitWidthType BitLockBuffer1TasksCore1ReadCfgConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		0b00000000000000000000000000000001,
+};
 
 const BitWidthType BitLockBuffer0TasksCore0WriteCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
@@ -98,6 +108,16 @@ IS_INITIALIZED_TO
 		0b00000000000000000000000000000001,
 };
 const BitWidthType BitLockBuffer0TasksCore1WriteCfgConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		0b00000000000000000000000000000000,
+};
+const BitWidthType BitLockBuffer1TasksCore0WriteCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		0b00000000000000000000000000000001,
+};
+const BitWidthType BitLockBuffer1TasksCore1WriteCfgConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b00000000000000000000000000000000,
@@ -113,6 +133,16 @@ IS_INITIALIZED_TO
 {
 		0b11111111111111111111111111111110,
 };
+const BitWidthType BitLockBuffer1TasksCore0ReadCfgInvertedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		0b11111111111111111111111111111111,
+};
+const BitWidthType BitLockBuffer1TasksCore1ReadCfgInvertedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		0b11111111111111111111111111111110,
+};
 
 const BitWidthType BitLockBuffer0TasksCore0WriteCfgInvertedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
@@ -120,6 +150,16 @@ IS_INITIALIZED_TO
 		0b11111111111111111111111111111110,
 };
 const BitWidthType BitLockBuffer0TasksCore1WriteCfgInvertedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		0b11111111111111111111111111111111,
+};
+const BitWidthType BitLockBuffer1TasksCore0WriteCfgInvertedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		0b11111111111111111111111111111110,
+};
+const BitWidthType BitLockBuffer1TasksCore1WriteCfgInvertedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b11111111111111111111111111111111,
@@ -137,6 +177,18 @@ IS_INITIALIZED_TO
         BitLockBuffer0TasksCore1ReadCfgInvertedConst,
     },
 };
+const CosmOS_PermissionsConfigurationType PermissionsBuffer1ReadCfgConst[CORE_NUM] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		{   /* CORE_0_ID */
+        BitLockBuffer1TasksCore0ReadCfgConst,
+        BitLockBuffer1TasksCore0ReadCfgInvertedConst,
+    },
+		{   /* CORE_1_ID */
+        BitLockBuffer1TasksCore1ReadCfgConst,
+        BitLockBuffer1TasksCore1ReadCfgInvertedConst,
+    },
+};
 
 const CosmOS_PermissionsConfigurationType PermissionsBuffer0WriteCfgConst[CORE_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
@@ -148,6 +200,18 @@ IS_INITIALIZED_TO
 		{   /* CORE_1_ID */
         BitLockBuffer0TasksCore1WriteCfgConst,
         BitLockBuffer0TasksCore1WriteCfgInvertedConst,
+    },
+};
+const CosmOS_PermissionsConfigurationType PermissionsBuffer1WriteCfgConst[CORE_NUM] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+		{   /* CORE_0_ID */
+        BitLockBuffer1TasksCore0WriteCfgConst,
+        BitLockBuffer1TasksCore0WriteCfgInvertedConst,
+    },
+		{   /* CORE_1_ID */
+        BitLockBuffer1TasksCore1WriteCfgConst,
+        BitLockBuffer1TasksCore1WriteCfgInvertedConst,
     },
 };
 /* @cond S */

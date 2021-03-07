@@ -59,6 +59,7 @@
 __SEC_START(__OS_VAR_SECTION_START)
 /* @endcond*/
 unsigned char buffer0Arr[BUFFER_0_SIZE] __OS_VAR_SECTION;
+unsigned char buffer1Arr[BUFFER_1_SIZE] __OS_VAR_SECTION;
 /* @cond S */
 __SEC_STOP(__OS_VAR_SECTION_STOP)
 /* @endcond*/
@@ -75,6 +76,12 @@ IS_INITIALIZED_TO
         PermissionsBuffer0ReadCfgConst,
         PermissionsBuffer0WriteCfgConst,
     },
+		{
+        buffer1Arr,
+        BUFFER_1_SIZE,
+        PermissionsBuffer1ReadCfgConst,
+        PermissionsBuffer1WriteCfgConst,
+    },
 };
 /* @cond S */
 __SEC_STOP(__OS_CONST_SECTION_STOP)
@@ -85,6 +92,12 @@ IS_INITIALIZED_TO
 {
 		{
         &BuffersCfgConst[BUFFER_0],
+        0,
+        0,
+        0,
+    },
+		{
+        &BuffersCfgConst[BUFFER_1],
         0,
         0,
         0,

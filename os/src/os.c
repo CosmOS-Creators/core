@@ -124,7 +124,7 @@
   * *************************************************************************//**
   * @fn os_start(void) 
   * 
-  * @brief Start operating system.
+  * @brief Start operating system. DEMO / NO RETURN FUNC
   * 
   * @param[in]  none
   * 

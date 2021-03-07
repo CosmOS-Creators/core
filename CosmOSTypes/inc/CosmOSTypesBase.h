@@ -176,7 +176,7 @@ typedef enum {
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_BarrierStateType enum
+  * @brief  CosmOS_TaskStateType enum
 ********************************************************************************/
 typedef enum {
 
@@ -189,7 +189,7 @@ typedef enum {
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_BarrierStateType enum
+  * @brief  CosmOS_TaskExecutionStateType enum
 ********************************************************************************/
 typedef enum {
 
@@ -198,6 +198,32 @@ typedef enum {
     TASK_EXECUTION_STATE_ENUM__FORCE      = FORCE_ENUM,
 
 } CosmOS_TaskExecutionStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_OsState enum
+********************************************************************************/
+typedef enum {
+
+    OS_STATE_ENUM__NOT_STARTED,
+    OS_STATE_ENUM__STARTED,
+    OS_STATE_ENUM__ERROR_HOOK,
+
+} CosmOS_OsState;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_SchedulerStateType enum
+********************************************************************************/
+typedef enum {
+
+    SCHEDULER_STATE_ENUM__NOT_STARTED,
+    SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK,
+    SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME,
+
+} CosmOS_SchedulerStateType;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

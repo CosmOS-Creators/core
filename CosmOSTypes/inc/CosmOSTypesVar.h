@@ -154,6 +154,8 @@ typedef struct
     const CosmOS_SchedulerConfigurationType * const cfg;
     BitWidthType currentTick;
     BitWidthType scheduleTableIterator;
+    BitWidthType scheduleTableIteratorPrior;
+    CosmOS_SchedulerStateType schedulerState;
 
 } CosmOS_SchedulerVariableType;
 
@@ -169,6 +171,7 @@ typedef struct
     CosmOS_ProgramVariableType * const programVars;
     CosmOS_SchedulerVariableType * const schedulerVar;
     CosmOS_BarrierVariableType * const barrierVars;
+    CosmOS_OsState osState;
 
 } CosmOS_CoreVariableType;
 

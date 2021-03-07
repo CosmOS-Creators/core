@@ -147,15 +147,17 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stackPointer)
 {
-    BitWidthType currentTick,
-                 hyperTick,
-                 startTick,
-                 timerTicks,
-                 stackPointerRetVal,
-                 scheduleTableIterator,
-                 scheduleTableElementsNum;
+    BitWidthType  currentTick,
+                  hyperTick,
+                  startTick,
+                  timerTicks,
+                  stackPointerRetVal,
+                  scheduleTableIterator,
+                  scheduleTableElementsNum,
+                  scheduleTableIteratorPrior;
 
     CosmOS_SchedulerSyncStateType schedulersSyncState;
+    CosmOS_SchedulerStateType schedulerState;
 
     CosmOS_StackVariableType * stack;
     CosmOS_CoreVariableType * coreVar;
@@ -165,8 +167,10 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
     coreVar = core_getCoreVar();
 
     schedulerVar = core_getCoreSchedulerVar( coreVar );
+    schedulerState = scheduler_getSchedulerState( schedulerVar );
 
     scheduleTableIterator = scheduler_getSchedulerScheduleTableIterator( schedulerVar );
+    scheduleTableIteratorPrior = scheduler_getSchedulerScheduleTableIteratorPrior( schedulerVar );
     scheduleTableElementsNum = scheduler_getSchedulerScheduleTableElementsNum( schedulerVar );
 
     CosmOSAssert( scheduleTableIterator < scheduleTableElementsNum );
@@ -174,8 +178,23 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
     startTick = scheduler_getSchedulerScheduleTableStartTick( schedulerVar, scheduleTableIterator );
     hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );
     currentTick = scheduler_getSchedulerCurrentTick( schedulerVar );
+
+    if ( schedulerState IS_EQUAL_TO SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK )
+    {
+        CosmOS_TaskExecutionStateType taskExecutionState;
+
+        CosmOS_TaskVariableType * priorTaskVar;
+
+        priorTaskVar = scheduler_getSchedulerScheduleTableTaskVar( schedulerVar, scheduleTableIteratorPrior );
+        taskExecutionState = task_getTaskExecutionState( priorTaskVar );
+
+        if ( taskExecutionState IS_EQUAL_TO TASK_EXECUTION_STATE_ENUM__RUNNING )
+        {
+            /* reaction */
+        }
+    }
     
-    if ( __COSMOS_UNLIKELY( startTick IS_EQUAL_TO currentTick ) )
+    if ( startTick IS_EQUAL_TO currentTick )
     {   
         BitWidthType wcet;
         
@@ -189,17 +208,31 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
 
         stack = task_getTaskStackVar( taskVar );
 
+        scheduler_setSchedulerScheduleTableIteratorPrior( schedulerVar, scheduleTableIterator );
         scheduleTableIterator = ( ( scheduleTableIterator + 1 ) % scheduleTableElementsNum );
         scheduler_setSchedulerScheduleTableIterator( schedulerVar, scheduleTableIterator );
 
         wcet = task_getTaskWcet( taskVar );
         timerTicks = wcet;
+
+        schedulerState = SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK;
     }
     else
     {
+        if ( startTick < currentTick )
+        {
+            timerTicks = scheduler_getSchedulerLastToFirstTaskTicks( schedulerVar );
 
+        }
+        else
+        {
+            timerTicks = currentTick - startTick;
+        }
+
+        schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
     }
 
+    scheduler_setSchedulerState( schedulerVar, schedulerState );
     schedulersSyncState = switchSchedulerSync_sync( coreVar, currentTick, 10 );
 
     currentTick = ( ( currentTick + timerTicks ) % hyperTick ); 
@@ -283,8 +316,6 @@ __OS_FUNC_SECTION void scheduler_start(void)
     //scheduler_setSchedulerCurrentTick( schedulerVar, currentTick );
 
     switchMemoryProtection_setStackOverflowProtection( stack );
-
-    coreSync_getBarrier( coreVar, OS_START_ID );
 
     CIL_sysTimer_setTicks( timerTicks, SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC );
 

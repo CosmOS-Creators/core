@@ -282,6 +282,38 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerScheduleTableIterator(Co
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn scheduler_getSchedulerScheduleTableIteratorPrior(CosmOS_SchedulerVariableType * scheduler) 
+  * 
+  * @brief Get scheduler scheduleTableIteratorPrior.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerScheduleTableIteratorPrior(CosmOS_SchedulerVariableType * scheduler)
+{
+    return (scheduler->scheduleTableIteratorPrior);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_getSchedulerState(CosmOS_SchedulerVariableType * scheduler) 
+  * 
+  * @brief Get scheduler schedulerState.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * 
+  * @return CosmOS_SchedulerStateType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerState(CosmOS_SchedulerVariableType * scheduler)
+{
+    return (scheduler->schedulerState);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn scheduler_getSchedulerScheduleTableStartTick(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIterator) 
   * 
   * @brief Get scheduler scheduleTable element startTick.
@@ -345,7 +377,7 @@ __STATIC_FORCEINLINE void scheduler_setSchedulerCurrentTick(CosmOS_SchedulerVari
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn scheduler_setSchedulerScheduleTableIterator(CosmOS_SchedulerVariableType * scheduler, BitWidthType currentTimeParam) 
+  * @fn scheduler_setSchedulerScheduleTableIterator(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIteratorParam) 
   * 
   * @brief Set scheduler scheduleTableIterator.
   * 
@@ -359,6 +391,39 @@ __STATIC_FORCEINLINE void scheduler_setSchedulerScheduleTableIterator(CosmOS_Sch
     scheduler->scheduleTableIterator = scheduleTableIteratorParam;
 }
 
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_setSchedulerScheduleTableIteratorPrior(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIteratorPriorParam) 
+  * 
+  * @brief Set scheduler scheduleTableIteratorPrior.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  BitWidthType scheduleTableIteratorPriorParam
+  * 
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void scheduler_setSchedulerScheduleTableIteratorPrior(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIteratorPriorParam)
+{
+    scheduler->scheduleTableIteratorPrior = scheduleTableIteratorPriorParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_setSchedulerState(CosmOS_SchedulerVariableType * scheduler, CosmOS_SchedulerStateType schedulerStateParam)
+  * 
+  * @brief Set scheduler schedulerState.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  CosmOS_SchedulerStateType schedulerStateParam
+  * 
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void scheduler_setSchedulerState(CosmOS_SchedulerVariableType * scheduler, CosmOS_SchedulerStateType schedulerStateParam)
+{
+    scheduler->schedulerState = schedulerStateParam;
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

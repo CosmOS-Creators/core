@@ -90,6 +90,7 @@ IS_INITIALIZED_TO
         ProgramsCore0Var,                           /* CosmOS_ProgramVariableType * programVars                */
         &SchedulersVar[SCHEDULER_CORE_0_ID],        /* CosmOS_SchedulerVariableType * scheduler                */
         BarriersCore0Var,                           /* CosmOS_BarrierVariableType * barrierVars                */
+        OS_STATE_ENUM__NOT_STARTED,                 /* CosmOS_OsState osState                                  */
     },
 		{                                               /* CoresVar[CORE_1_ID]                                  */
         &CoresCfgConst[CORE_1_ID],                  /* const CosmOS_CoreConfigurationType *cfg                 */
@@ -97,6 +98,7 @@ IS_INITIALIZED_TO
         ProgramsCore1Var,                           /* CosmOS_ProgramVariableType * programVars                */
         &SchedulersVar[SCHEDULER_CORE_1_ID],        /* CosmOS_SchedulerVariableType * scheduler                */
         BarriersCore1Var,                           /* CosmOS_BarrierVariableType * barrierVars                */
+        OS_STATE_ENUM__NOT_STARTED,                 /* CosmOS_OsState osState                                  */
     },
 };
 /* @cond S */
