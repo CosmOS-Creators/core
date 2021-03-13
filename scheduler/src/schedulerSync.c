@@ -22,6 +22,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "schedulerSync.h"
+#include "scheduler.h"
 #include "coreSync.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
@@ -121,31 +122,80 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulerSync_sync(CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType syncPeriod)
+  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
   * 
   * @brief Algorithm for synchronization during runtime DEMO CODE.
   * 
+  * @param[in] CosmOS_SchedulerVariableType * schedulerVar
   * @param[in] CosmOS_CoreVariableType * coreVar
   * @param[in] BitWidthType currentTick
-  * @param[in] BitWidthType syncPeriod
+  * @param[in] BitWidthType hyperTick
   *  
   * @return CosmOS_SchedulerSyncStateType
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType syncPeriod)
+__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
 {
+    
+    CosmOS_BooleanType syncInitState;
 
     CosmOS_SchedulerSyncStateType schedulerState = SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC;
 
-    if( IS_NOT( currentTick % syncPeriod ) )
-    {
-        coreSync_getBarrier( coreVar, SCHEDULERS_SYNC_ID );
 
-        coreSync_reactivateBarrier( coreVar, SCHEDULERS_SYNC_ID );
-        schedulerState = SCHEDULER_SYNC_STATE_ENUM__IN_SYNC;
+    syncInitState = scheduler_getSchedulerSyncInitState( schedulerVar );
+
+    if ( __COSMOS_UNLIKELY( syncInitState IS_EQUAL_TO false ) )
+    {
+        BitWidthType firstSyncTaskStartTick;
+
+
+        firstSyncTaskStartTick = scheduler_getSchedulerFirstSyncTaskStartTick( schedulerVar );
+
+        if ( firstSyncTaskStartTick IS_EQUAL_TO currentTick )
+        {
+            BitWidthType  syncTicks,
+                          nextTick;
+
+
+            syncTicks = scheduler_getSchedulerSyncTicks( schedulerVar );
+
+            nextTick = ( currentTick + syncTicks ) % hyperTick;
+            scheduler_setSchedulerNextSyncTick( schedulerVar, nextTick );
+
+            scheduler_setSchedulerSyncInitState( schedulerVar, true );
+
+            schedulerState = SCHEDULER_SYNC_STATE_ENUM__IN_SYNC;
+        }
     }
+    else
+    {
+        BitWidthType nextTick;
+
+
+        nextTick = scheduler_getSchedulerNextSyncTick( schedulerVar );
+
+        if ( __COSMOS_UNLIKELY( nextTick IS_EQUAL_TO currentTick ) )
+        {
+            BitWidthType  syncTicks;
+
+
+            syncTicks = scheduler_getSchedulerSyncTicks( schedulerVar );
+
+            nextTick = ( currentTick + syncTicks ) % hyperTick;
+            scheduler_setSchedulerNextSyncTick( schedulerVar, nextTick );
+
+            schedulerState = SCHEDULER_SYNC_STATE_ENUM__IN_SYNC;
+        }
+    }
+
+    if ( schedulerState IS_EQUAL_TO SCHEDULER_SYNC_STATE_ENUM__IN_SYNC )
+    {
+        coreSync_reactivateBarrier( coreVar, SCHEDULERS_SYNC_ID );
+        coreSync_getBarrier( coreVar, SCHEDULERS_SYNC_ID );
+    }
+
 
     return schedulerState;
 };

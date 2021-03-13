@@ -136,17 +136,18 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulerSync_sync(CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType syncPeriod)
+  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
   * 
   * @brief Algorithm for synchronization during runtime DEMO CODE.
   * 
+  * @param[in] CosmOS_SchedulerVariableType * schedulerVar
   * @param[in] CosmOS_CoreVariableType * coreVar
   * @param[in] BitWidthType currentTick
-  * @param[in] BitWidthType syncPeriod
+  * @param[in] BitWidthType hyperTick
   *  
   * @return CosmOS_SchedulerSyncStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType syncPeriod);
+__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

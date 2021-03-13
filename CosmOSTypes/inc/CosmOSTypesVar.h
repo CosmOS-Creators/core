@@ -156,6 +156,8 @@ typedef struct
     BitWidthType scheduleTableIterator;
     BitWidthType scheduleTableIteratorPrior;
     CosmOS_SchedulerStateType schedulerState;
+    BitWidthType nextSyncTick;
+    CosmOS_BooleanType syncInitState;
 
 } CosmOS_SchedulerVariableType;
 

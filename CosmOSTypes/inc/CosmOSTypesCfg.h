@@ -184,6 +184,8 @@ typedef struct
     const BitWidthType hyperTick;
     const BitWidthType scheduleTableElementsNum;
     const BitWidthType lastToFirstTaskTicks;
+    const BitWidthType syncTicks;
+    const BitWidthType firstSyncTaskStartTick;
 
 } CosmOS_SchedulerConfigurationType;
 

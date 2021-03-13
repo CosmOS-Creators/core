@@ -104,6 +104,13 @@ typedef BitWidthType (*CosmOS_GenericBitWidthRWType)(BitWidthType,void *,BitWidt
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_BooleanType enum
+********************************************************************************/
+typedef enum { false, true } CosmOS_BooleanType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_PermissionType enum
 ********************************************************************************/
 typedef enum {
