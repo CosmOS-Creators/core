@@ -50,6 +50,12 @@
 #include "sysDefs.h"
 #include "CosmOSTypesStd.h"
 #include "memoryMapping.h"
+
+/* THIS INCLUDE IS PART OF DEMO CODE FOR TESTING PURPOSES */
+#include "CosmOSApi.h"
+#include "stm32h7xx_hal.h"
+#include "sysCalls.h"
+/* THIS INCLUDE IS PART OF DEMO CODE FOR TESTING PURPOSES */
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -139,6 +145,7 @@ extern CosmOS_TaskVariableType TasksProgram0Core1Var[TASK_PROGRAM_0_CORE_1_NUM];
 ********************************************************************************/
 void Task_0_Core_0_Handler(void);
 void Task_0_Core_1_Handler(void);
+void Idle(void);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -187,10 +194,38 @@ void Task_0_Core_1_Handler(void);
 __WEAK void Task_0_Core_0_Handler(void)
 {
     /* Write your own implementation for the Task_0_Core_0_Handler */
+    CosmOS_BufferStateType bufferState;
+    BitWidthType messageTx;
+
+
+    messageTx = 150;
+
+    CosmOSApi_togglePin(GPIOE, GPIO_PIN_1);
+
+    bufferState = CosmOSApi_write_buffer_xcore_1_to_0( &messageTx, sizeof( messageTx ) );
+
+    for(;;);
 };
 __WEAK void Task_0_Core_1_Handler(void)
 {
     /* Write your own implementation for the Task_0_Core_1_Handler */
+    CosmOS_BufferStateType bufferState;
+    BitWidthType messageRx;
+
+
+    bufferState = CosmOSApi_read_buffer_xcore_1_to_0( &messageRx, sizeof( messageRx ) );
+
+    if ( messageRx IS_EQUAL_TO 150 )
+    {
+        CosmOSApi_togglePin(GPIOB, GPIO_PIN_0);
+    }
+
+    for(;;);
+};
+__WEAK void Idle(void)
+{
+    /* Write your own implementation for the Idle */
+    for(;;);
 };
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

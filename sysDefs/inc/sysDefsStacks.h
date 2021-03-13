@@ -73,17 +73,27 @@
 #define STACK_KERNEL_0_CORE_1_LOW_ADDRESS             (AddressType)0x1001fc00    /* Kernel stack for core M4_CORE low address configuration */    
 #define STACK_KERNEL_0_CORE_1_SIZE                    (BitWidthType)(STACK_KERNEL_0_CORE_1_HIGH_ADDRESS-STACK_KERNEL_0_CORE_1_LOW_ADDRESS)
 
-#define TASK_NUM                                      (BitWidthType)2     /* Number of configurated tasks */
+#define TASK_NUM                                      (BitWidthType)4     /* Number of configurated tasks */
 
 #define STACK_TASK_0_PROGRAM_0_CORE_0_ID              (BitWidthType)0    /* Task Task_0_Core_0_Handler stack identificator */
 #define STACK_TASK_0_PROGRAM_0_CORE_0_HIGH_ADDRESS    (AddressType)0x2001fc00    /* Task Task_0_Core_0_Handler stack high address configuration */
 #define STACK_TASK_0_PROGRAM_0_CORE_0_LOW_ADDRESS     (AddressType)0x2001f800    /* Task Task_0_Core_0_Handler stack low address configuration */
 #define STACK_TASK_0_PROGRAM_0_CORE_0_SIZE            (BitWidthType)(STACK_TASK_0_PROGRAM_0_CORE_0_HIGH_ADDRESS-STACK_TASK_0_PROGRAM_0_CORE_0_LOW_ADDRESS)
 
-#define STACK_TASK_0_PROGRAM_0_CORE_1_ID              (BitWidthType)1    /* Task Task_0_Core_1_Handler stack identificator */
+#define STACK_TASK_1_PROGRAM_0_CORE_0_ID              (BitWidthType)1    /* Task Idle stack identificator */
+#define STACK_TASK_1_PROGRAM_0_CORE_0_HIGH_ADDRESS    (AddressType)0x2001fc00    /* Task Idle stack high address configuration */
+#define STACK_TASK_1_PROGRAM_0_CORE_0_LOW_ADDRESS     (AddressType)0x2001f800    /* Task Idle stack low address configuration */
+#define STACK_TASK_1_PROGRAM_0_CORE_0_SIZE            (BitWidthType)(STACK_TASK_1_PROGRAM_0_CORE_0_HIGH_ADDRESS-STACK_TASK_1_PROGRAM_0_CORE_0_LOW_ADDRESS)
+
+#define STACK_TASK_0_PROGRAM_0_CORE_1_ID              (BitWidthType)2    /* Task Task_0_Core_1_Handler stack identificator */
 #define STACK_TASK_0_PROGRAM_0_CORE_1_HIGH_ADDRESS    (AddressType)0x1001fc00    /* Task Task_0_Core_1_Handler stack high address configuration */
 #define STACK_TASK_0_PROGRAM_0_CORE_1_LOW_ADDRESS     (AddressType)0x1001f800    /* Task Task_0_Core_1_Handler stack low address configuration */
 #define STACK_TASK_0_PROGRAM_0_CORE_1_SIZE            (BitWidthType)(STACK_TASK_0_PROGRAM_0_CORE_1_HIGH_ADDRESS-STACK_TASK_0_PROGRAM_0_CORE_1_LOW_ADDRESS)
+
+#define STACK_TASK_1_PROGRAM_0_CORE_1_ID              (BitWidthType)3    /* Task Idle stack identificator */
+#define STACK_TASK_1_PROGRAM_0_CORE_1_HIGH_ADDRESS    (AddressType)0x1001fc00    /* Task Idle stack high address configuration */
+#define STACK_TASK_1_PROGRAM_0_CORE_1_LOW_ADDRESS     (AddressType)0x1001f800    /* Task Idle stack low address configuration */
+#define STACK_TASK_1_PROGRAM_0_CORE_1_SIZE            (BitWidthType)(STACK_TASK_1_PROGRAM_0_CORE_1_HIGH_ADDRESS-STACK_TASK_1_PROGRAM_0_CORE_1_LOW_ADDRESS)
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

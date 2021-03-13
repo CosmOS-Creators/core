@@ -61,7 +61,7 @@
   * @ingroup Global_switchSchedulerSync  
   * @{    
 ********************************************************************************/
-#define SCHEDULER_SYNC ON
+#define SCHEDULER_SYNC OFF
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -191,9 +191,9 @@
   * @return BitWidthType
 ********************************************************************************/
 #if ( SCHEDULER_SYNC IS_EQUAL_TO ON )
-    #define switchSchedulerSync_sync( schedulerVar, coreVar, currentTick, hyperTick ) schedulerSync_sync( schedulerVar, coreVar, currentTick, hyperTick )
+    #define switchSchedulerSync_sync(schedulerVar, coreVar, currentTick, hyperTick) schedulerSync_sync(schedulerVar, coreVar, currentTick, hyperTick)
 #else
-    #define switchSchedulerSync_sync( schedulerVar, coreVar, currentTick, hyperTick ) SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC
+    #define switchSchedulerSync_sync(schedulerVar, coreVar, currentTick, hyperTick) SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC
 #endif
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

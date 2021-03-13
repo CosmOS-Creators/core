@@ -79,6 +79,7 @@ const BitWidthType TaskIdToBitLock[MAX_TASKS_ON_ONE_CORE*sizeof(BitWidthType)*8]
 IS_INITIALIZED_TO
 {
 		BITLOCK_ID_PLACEMENT_32BIT(0)
+		BITLOCK_ID_PLACEMENT_32BIT(1)
 };
 
 const BitWidthType BitLockBuffer0TasksCore0ReadCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION

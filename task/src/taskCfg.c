@@ -69,6 +69,14 @@ IS_INITIALIZED_TO
         PROGRAM_0_CORE_0_ID,                                          /* const BitWidthType programId                             */
         CORE_0_ID,                                                    /* const BitWidthType coreId                                */
     },
+		{                                                                 /* TasksProgram0Core0CfgConst[TASK_1_PROGRAM_0_CORE_0_ID]   */
+        &TasksStacksCfgConst[STACK_TASK_1_PROGRAM_0_CORE_0_ID],       /* const CosmOS_StackConfigurationType * stack                 */
+        Idle,                                        /* const CosmOS_HandlerType handler                            */
+        TASK_1_PROGRAM_0_CORE_0_ID,                                   /* const BitWidthType id                                    */
+        TASK_1_PROGRAM_0_CORE_0_WCET,                                 /* const BitWidthType wcet                                  */
+        PROGRAM_0_CORE_0_ID,                                          /* const BitWidthType programId                             */
+        CORE_0_ID,                                                    /* const BitWidthType coreId                                */
+    },
 };
 const CosmOS_TaskConfigurationType TasksProgram0Core1CfgConst[TASK_PROGRAM_0_CORE_1_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
@@ -78,6 +86,14 @@ IS_INITIALIZED_TO
         Task_0_Core_1_Handler,                                        /* const CosmOS_HandlerType handler                            */
         TASK_0_PROGRAM_0_CORE_1_ID,                                   /* const BitWidthType id                                    */
         TASK_0_PROGRAM_0_CORE_1_WCET,                                 /* const BitWidthType wcet                                  */
+        PROGRAM_0_CORE_1_ID,                                          /* const BitWidthType programId                             */
+        CORE_1_ID,                                                    /* const BitWidthType coreId                                */
+    },
+		{                                                                 /* TasksProgram0Core1CfgConst[TASK_1_PROGRAM_0_CORE_1_ID]   */
+        &TasksStacksCfgConst[STACK_TASK_1_PROGRAM_0_CORE_1_ID],       /* const CosmOS_StackConfigurationType * stack                 */
+        Idle,                                        /* const CosmOS_HandlerType handler                            */
+        TASK_1_PROGRAM_0_CORE_1_ID,                                   /* const BitWidthType id                                    */
+        TASK_1_PROGRAM_0_CORE_1_WCET,                                 /* const BitWidthType wcet                                  */
         PROGRAM_0_CORE_1_ID,                                          /* const BitWidthType programId                             */
         CORE_1_ID,                                                    /* const BitWidthType coreId                                */
     },
@@ -99,6 +115,13 @@ IS_INITIALIZED_TO
         TASK_STATE_ENUM__ACTIVATED,                                   /* CosmOS_TaskStateType taskState                             */
         TASK_EXECUTION_STATE_ENUM__EXECUTED,                          /* CosmOS_TaskExecutionStateType executionState               */
     },
+		{                                                                 /* TasksProgram0Core0Var[TASK_1_PROGRAM_0_CORE_0_ID]        */
+        &TasksProgram0Core0CfgConst[TASK_1_PROGRAM_0_CORE_0_ID],      /* const CosmOS_TaskConfigurationType * cfg                    */
+        &TasksStacksVar[STACK_TASK_1_PROGRAM_0_CORE_0_ID],            /* CosmOS_StackVariableType * stackVar                         */
+        STACK_TASK_1_PROGRAM_0_CORE_0_HIGH_ADDRESS,                   /* StackPointerType stackPointer                            */
+        TASK_STATE_ENUM__ACTIVATED,                                   /* CosmOS_TaskStateType taskState                             */
+        TASK_EXECUTION_STATE_ENUM__EXECUTED,                          /* CosmOS_TaskExecutionStateType executionState               */
+    },
 };
 CosmOS_TaskVariableType TasksProgram0Core1Var[TASK_PROGRAM_0_CORE_1_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO 
@@ -107,6 +130,13 @@ IS_INITIALIZED_TO
         &TasksProgram0Core1CfgConst[TASK_0_PROGRAM_0_CORE_1_ID],      /* const CosmOS_TaskConfigurationType * cfg                    */
         &TasksStacksVar[STACK_TASK_0_PROGRAM_0_CORE_1_ID],            /* CosmOS_StackVariableType * stackVar                         */
         STACK_TASK_0_PROGRAM_0_CORE_1_HIGH_ADDRESS,                   /* StackPointerType stackPointer                            */
+        TASK_STATE_ENUM__ACTIVATED,                                   /* CosmOS_TaskStateType taskState                             */
+        TASK_EXECUTION_STATE_ENUM__EXECUTED,                          /* CosmOS_TaskExecutionStateType executionState               */
+    },
+		{                                                                 /* TasksProgram0Core1Var[TASK_1_PROGRAM_0_CORE_1_ID]        */
+        &TasksProgram0Core1CfgConst[TASK_1_PROGRAM_0_CORE_1_ID],      /* const CosmOS_TaskConfigurationType * cfg                    */
+        &TasksStacksVar[STACK_TASK_1_PROGRAM_0_CORE_1_ID],            /* CosmOS_StackVariableType * stackVar                         */
+        STACK_TASK_1_PROGRAM_0_CORE_1_HIGH_ADDRESS,                   /* StackPointerType stackPointer                            */
         TASK_STATE_ENUM__ACTIVATED,                                   /* CosmOS_TaskStateType taskState                             */
         TASK_EXECUTION_STATE_ENUM__EXECUTED,                          /* CosmOS_TaskExecutionStateType executionState               */
     },

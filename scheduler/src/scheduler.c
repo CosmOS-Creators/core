@@ -26,6 +26,7 @@
 #include "coreSync.h"
 #include "os.h"
 #include "task.h"
+#include "taskCfg.h"
 #include "program.h"
 #include "stackInit.h"
 #include "CosmOSAssert.h"
@@ -219,13 +220,28 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
     }
     else
     {
+        CosmOS_TaskVariableType * taskVar;
+
+        #ifdef CORE_CM4
+        taskVar = &TasksProgram0Core1Var[1];
+        #else
+        taskVar = &TasksProgram0Core0Var[1];
+        #endif
+        stackPointerRetVal = stackInit_taskStackInit( taskVar );
+
+        task_setTaskStackPointer( taskVar, stackPointerRetVal );
+        core_setTaskIntoCurrentContext( coreVar, taskVar );
+
+        stack = task_getTaskStackVar( taskVar );
+
+
         if ( startTick < currentTick )
         {
             timerTicks = scheduler_getSchedulerLastToFirstTaskTicks( schedulerVar );
         }
         else
         {
-            timerTicks = currentTick - startTick;
+            timerTicks = startTick - currentTick;
         }
 
         schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
@@ -316,7 +332,20 @@ __OS_FUNC_SECTION void scheduler_start(void)
     }
     else
     {
-        timerTicks = currentTick - startTick;
+        CosmOS_TaskVariableType * taskVar;
+        #ifdef CORE_CM4
+        taskVar = &TasksProgram0Core1Var[1];
+        #else
+        taskVar = &TasksProgram0Core0Var[1];
+        #endif
+        stackPointerRetVal = stackInit_taskStackInit( taskVar );
+
+        task_setTaskStackPointer( taskVar, stackPointerRetVal );
+        core_setTaskIntoCurrentContext( coreVar, taskVar );
+
+        stack = task_getTaskStackVar( taskVar );
+
+        timerTicks = startTick - currentTick;
         schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
     }
 
