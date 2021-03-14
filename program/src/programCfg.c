@@ -66,6 +66,11 @@ IS_INITIALIZED_TO
         CORE_0_ID,                                      /* const BitWidthType coreId                            */
         TASK_PROGRAM_0_CORE_0_NUM,                      /* const BitWidthType numberOfTasks                     */
     },
+		{                                                   /* ProgramsCore0CfgConst[PROGRAM_1_CORE_0_ID]           */
+        TasksProgram1Core0CfgConst,                     /* const CosmOS_TaskConfigurationType * tasks              */
+        CORE_0_ID,                                      /* const BitWidthType coreId                            */
+        TASK_PROGRAM_1_CORE_0_NUM,                      /* const BitWidthType numberOfTasks                     */
+    },
 };
 const CosmOS_ProgramConfigurationType ProgramsCore1CfgConst[PROGRAM_CORE_1_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
@@ -74,6 +79,11 @@ IS_INITIALIZED_TO
         TasksProgram0Core1CfgConst,                     /* const CosmOS_TaskConfigurationType * tasks              */
         CORE_1_ID,                                      /* const BitWidthType coreId                            */
         TASK_PROGRAM_0_CORE_1_NUM,                      /* const BitWidthType numberOfTasks                     */
+    },
+		{                                                   /* ProgramsCore1CfgConst[PROGRAM_1_CORE_1_ID]           */
+        TasksProgram1Core1CfgConst,                     /* const CosmOS_TaskConfigurationType * tasks              */
+        CORE_1_ID,                                      /* const BitWidthType coreId                            */
+        TASK_PROGRAM_1_CORE_1_NUM,                      /* const BitWidthType numberOfTasks                     */
     },
 };
 /* @cond S */
@@ -91,6 +101,11 @@ IS_INITIALIZED_TO
         NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
         TasksProgram0Core0Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
     },
+		{                                                   /* ProgramsCore0Var[PROGRAM_1_CORE_0_ID]                          */
+        &ProgramsCore0CfgConst[PROGRAM_1_CORE_0_ID],    /* const CosmOS_ProgramConfigurationType * cfg                       */
+        NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
+        TasksProgram1Core0Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
+    },
 };
 CosmOS_ProgramVariableType ProgramsCore1Var[PROGRAM_CORE_1_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO
@@ -99,6 +114,11 @@ IS_INITIALIZED_TO
         &ProgramsCore1CfgConst[PROGRAM_0_CORE_1_ID],    /* const CosmOS_ProgramConfigurationType * cfg                       */
         NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
         TasksProgram0Core1Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
+    },
+		{                                                   /* ProgramsCore0Var[PROGRAM_1_CORE_1_ID]                          */
+        &ProgramsCore1CfgConst[PROGRAM_1_CORE_1_ID],    /* const CosmOS_ProgramConfigurationType * cfg                       */
+        NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
+        TasksProgram1Core1Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
     },
 };
 /* @cond S */

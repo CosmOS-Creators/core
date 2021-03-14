@@ -222,11 +222,8 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
     {
         CosmOS_TaskVariableType * taskVar;
 
-        #ifdef CORE_CM4
-        taskVar = &TasksProgram0Core1Var[1];
-        #else
-        taskVar = &TasksProgram0Core0Var[1];
-        #endif
+        taskVar = scheduler_getSchedulerIdleTaskVar( schedulerVar );
+
         stackPointerRetVal = stackInit_taskStackInit( taskVar );
 
         task_setTaskStackPointer( taskVar, stackPointerRetVal );
@@ -279,13 +276,13 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void scheduler_start(void)
 {
-    BitWidthType hyperTick,
-                 startTick,
-                 timerTicks,
-                 currentTick,
-                 stackPointerRetVal,
-                 scheduleTableIterator,
-                 scheduleTableElementsNum;
+    BitWidthType  hyperTick,
+                  startTick,
+                  timerTicks,
+                  currentTick,
+                  stackPointerRetVal,
+                  scheduleTableIterator,
+                  scheduleTableElementsNum;
 
     CosmOS_StackVariableType * stack;
     CosmOS_CoreVariableType * coreVar;
@@ -333,11 +330,9 @@ __OS_FUNC_SECTION void scheduler_start(void)
     else
     {
         CosmOS_TaskVariableType * taskVar;
-        #ifdef CORE_CM4
-        taskVar = &TasksProgram0Core1Var[1];
-        #else
-        taskVar = &TasksProgram0Core0Var[1];
-        #endif
+
+        taskVar = scheduler_getSchedulerIdleTaskVar( schedulerVar );
+        
         stackPointerRetVal = stackInit_taskStackInit( taskVar );
 
         task_setTaskStackPointer( taskVar, stackPointerRetVal );

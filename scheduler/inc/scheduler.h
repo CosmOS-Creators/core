@@ -282,6 +282,22 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerFirstSyncTaskStartTick(C
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn scheduler_getSchedulerIdleTaskVar(CosmOS_SchedulerVariableType * scheduler) 
+  * 
+  * @brief Get scheduler idleTaskVar.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * 
+  * @return CosmOS_TaskVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_TaskVariableType * scheduler_getSchedulerIdleTaskVar(CosmOS_SchedulerVariableType * scheduler)
+{
+    return (CosmOS_TaskVariableType *)(scheduler->cfg->idleTaskVar);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn scheduler_getSchedulerCurrentTick(CosmOS_SchedulerVariableType * scheduler) 
   * 
   * @brief Get scheduler currentTick.

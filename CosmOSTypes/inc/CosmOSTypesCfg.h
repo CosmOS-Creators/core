@@ -186,6 +186,7 @@ typedef struct
     const BitWidthType lastToFirstTaskTicks;
     const BitWidthType syncTicks;
     const BitWidthType firstSyncTaskStartTick;
+    void * const idleTaskVar;
 
 } CosmOS_SchedulerConfigurationType;
 

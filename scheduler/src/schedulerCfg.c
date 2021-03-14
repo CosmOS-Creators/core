@@ -21,6 +21,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
+#include "taskCfg.h"
 #include "schedulerCfg.h"
 #include "schedulerScheduleTableCfg.h"
 /********************************************************************************
@@ -68,6 +69,7 @@ IS_INITIALIZED_TO
         LAST_TO_FIRST_TASK_TICK_SCHEDULER_0,            /* const BitWidthType lastToFirstTaskTicks                         */
         SYNCTICKS_SCHEDULER_0,                          /* const BitWidthType syncTicks                                    */
         FIRST_SYNC_TASK_STARTTICK_SCHEDULER_0,          /* const BitWidthType firstSyncTaskStartTick                       */
+        &TasksProgram0Core0Var[TASK_0_PROGRAM_0_CORE_0_ID],                                   /* void * const                                                    */
     },
 		{                                                           /* SchedulersCfgConst[SCHEDULER_CORE_1_ID]           */
         ScheduleTableScheduler1CfgConst,                /* const CosmOS_ScheduleTableConfigurationType * scheduleTable     */
@@ -76,6 +78,7 @@ IS_INITIALIZED_TO
         LAST_TO_FIRST_TASK_TICK_SCHEDULER_1,            /* const BitWidthType lastToFirstTaskTicks                         */
         SYNCTICKS_SCHEDULER_1,                          /* const BitWidthType syncTicks                                    */
         FIRST_SYNC_TASK_STARTTICK_SCHEDULER_1,          /* const BitWidthType firstSyncTaskStartTick                       */
+        &TasksProgram0Core1Var[TASK_0_PROGRAM_0_CORE_1_ID],                                   /* void * const                                                    */
     },
 };
 /* @cond S */
