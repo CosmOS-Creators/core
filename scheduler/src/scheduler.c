@@ -205,6 +205,8 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
         stackPointerRetVal = stackInit_taskStackInit( taskVar );
 
         task_setTaskStackPointer( taskVar, stackPointerRetVal );
+        task_setTaskExecutionState( taskVar, TASK_EXECUTION_STATE_ENUM__RUNNING );
+
         core_setTaskIntoCurrentContext( coreVar, taskVar );
 
         stack = task_getTaskStackVar( taskVar );
@@ -314,6 +316,8 @@ __OS_FUNC_SECTION void scheduler_start(void)
         stackPointerRetVal = stackInit_taskStackInit( taskVar );
 
         task_setTaskStackPointer( taskVar, stackPointerRetVal );
+        task_setTaskExecutionState( taskVar, TASK_EXECUTION_STATE_ENUM__RUNNING );
+
         core_setTaskIntoCurrentContext( coreVar, taskVar );
 
         stack = task_getTaskStackVar( taskVar );
@@ -332,7 +336,7 @@ __OS_FUNC_SECTION void scheduler_start(void)
         CosmOS_TaskVariableType * taskVar;
 
         taskVar = scheduler_getSchedulerIdleTaskVar( schedulerVar );
-        
+
         stackPointerRetVal = stackInit_taskStackInit( taskVar );
 
         task_setTaskStackPointer( taskVar, stackPointerRetVal );

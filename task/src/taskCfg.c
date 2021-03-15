@@ -21,6 +21,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
+#include "sysCalls.h"
 #include "taskCfg.h"
 #include "stackCfg.h"
 /********************************************************************************
@@ -63,7 +64,7 @@ IS_INITIALIZED_TO
 {
 		{                                                                 /* TasksProgram0Core0CfgConst[TASK_0_PROGRAM_0_CORE_0_ID]   */
         &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_0_CORE_0_ID],       /* const CosmOS_StackConfigurationType * stack                 */
-        Idle_CM7,                                        /* const CosmOS_HandlerType handler                            */
+        wrapped_Idle_CM7,                                        /* const CosmOS_HandlerType handler                            */
         TASK_0_PROGRAM_0_CORE_0_ID,                                   /* const BitWidthType id                                    */
         TASK_0_PROGRAM_0_CORE_0_WCET,                                 /* const BitWidthType wcet                                  */
         PROGRAM_0_CORE_0_ID,                                          /* const BitWidthType programId                             */
@@ -75,7 +76,7 @@ IS_INITIALIZED_TO
 {
 		{                                                                 /* TasksProgram1Core0CfgConst[TASK_0_PROGRAM_1_CORE_0_ID]   */
         &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_1_CORE_0_ID],       /* const CosmOS_StackConfigurationType * stack                 */
-        Task_0_Core_0_Handler,                                        /* const CosmOS_HandlerType handler                            */
+        wrapped_Task_0_Core_0_Handler,                                        /* const CosmOS_HandlerType handler                            */
         TASK_0_PROGRAM_1_CORE_0_ID,                                   /* const BitWidthType id                                    */
         TASK_0_PROGRAM_1_CORE_0_WCET,                                 /* const BitWidthType wcet                                  */
         PROGRAM_1_CORE_0_ID,                                          /* const BitWidthType programId                             */
@@ -87,7 +88,7 @@ IS_INITIALIZED_TO
 {
 		{                                                                 /* TasksProgram0Core1CfgConst[TASK_0_PROGRAM_0_CORE_1_ID]   */
         &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_0_CORE_1_ID],       /* const CosmOS_StackConfigurationType * stack                 */
-        Idle_CM4,                                        /* const CosmOS_HandlerType handler                            */
+        wrapped_Idle_CM4,                                        /* const CosmOS_HandlerType handler                            */
         TASK_0_PROGRAM_0_CORE_1_ID,                                   /* const BitWidthType id                                    */
         TASK_0_PROGRAM_0_CORE_1_WCET,                                 /* const BitWidthType wcet                                  */
         PROGRAM_0_CORE_1_ID,                                          /* const BitWidthType programId                             */
@@ -99,7 +100,7 @@ IS_INITIALIZED_TO
 {
 		{                                                                 /* TasksProgram1Core1CfgConst[TASK_0_PROGRAM_1_CORE_1_ID]   */
         &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_1_CORE_1_ID],       /* const CosmOS_StackConfigurationType * stack                 */
-        Task_0_Core_1_Handler,                                        /* const CosmOS_HandlerType handler                            */
+        wrapped_Task_0_Core_1_Handler,                                        /* const CosmOS_HandlerType handler                            */
         TASK_0_PROGRAM_1_CORE_1_ID,                                   /* const BitWidthType id                                    */
         TASK_0_PROGRAM_1_CORE_1_WCET,                                 /* const BitWidthType wcet                                  */
         PROGRAM_1_CORE_1_ID,                                          /* const BitWidthType programId                             */
@@ -223,6 +224,22 @@ __SEC_STOP(__OS_VAR_SECTION_STOP)
 /********************************************************************************
 **                        Function Definitions | Start                         **
 ********************************************************************************/
+void wrapped_Idle_CM7(void)
+{
+    TASK_WRAPPER(Idle_CM7,sysCalls_os(EXEC_FINISHED));
+};
+void wrapped_Task_0_Core_0_Handler(void)
+{
+    TASK_WRAPPER(Task_0_Core_0_Handler,sysCalls_os(EXEC_FINISHED));
+};
+void wrapped_Idle_CM4(void)
+{
+    TASK_WRAPPER(Idle_CM4,sysCalls_os(EXEC_FINISHED));
+};
+void wrapped_Task_0_Core_1_Handler(void)
+{
+    TASK_WRAPPER(Task_0_Core_1_Handler,sysCalls_os(EXEC_FINISHED));
+};
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
