@@ -158,6 +158,9 @@ typedef struct
     const CosmOS_TaskConfigurationType * const tasks;
     const BitWidthType coreId;
     const BitWidthType numberOfTasks;
+    const BitWidthType programMemorySize;
+    const AddressType programMemoryLowAddress;
+    const AddressType programMemoryHighAddress;
     
 } CosmOS_ProgramConfigurationType;
 

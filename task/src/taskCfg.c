@@ -21,8 +21,8 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysCalls.h"
 #include "taskCfg.h"
+#include "sysCalls.h"
 #include "stackCfg.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
