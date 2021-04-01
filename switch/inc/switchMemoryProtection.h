@@ -183,7 +183,7 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn switchMemoryProtection_setStackOverflowProtection(stack)
+  * @fn switchMemoryProtection_setMemoryProtection(stack)
   * 
   * @brief Set memory protection for current execution context.
   * 
@@ -193,9 +193,9 @@
   * @return none
 ********************************************************************************/
 #if ( MEMORY_PROTECTION IS_EQUAL_TO ON )
-    #define switchMemoryProtection_setStackOverflowProtection(stackVarPointer) memoryProtection_setStackOverflowProtection(stackVarPointer)
+    #define switchMemoryProtection_setMemoryProtection(coreVar,taskVar) memoryProtection_setMemoryProtection(coreVar,taskVar)
 #else
-    #define switchMemoryProtection_setStackOverflowProtection(stackVarPointer)
+    #define switchMemoryProtection_setMemoryProtection(coreVar,taskVar)
 #endif
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
