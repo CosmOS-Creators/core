@@ -21,8 +21,11 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "memoryProtection.h"
+#include "core.h"
+#include "task.h"
 #include "stack.h"
+#include "program.h"
+#include "memoryProtection.h"
 
 /* CIL interfaces */
 #include "CIL_memoryProtection.h"
@@ -166,6 +169,74 @@ __OS_FUNC_SECTION void memoryProtection_setStackOverflowProtection(CosmOS_StackV
     stackHighAddress = stack_getStackHighAddress( stack );
 
     CIL_memoryProtection_setStackOverflowProtection( stackLowAddress, stackHighAddress );
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program)
+  * 
+  * @brief Set program memory protection.
+  * 
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * 
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program)
+{
+    BitWidthType size;
+
+    AddressType lowAddress,
+                 highAddress;
+
+    size = program_getProgramMemorySize( program );
+    lowAddress = program_getProgramMemoryLowAddress( program );
+    highAddress = program_getProgramMemoryHighAddress( program );
+
+    if ( size )
+    {
+        CIL_memoryProtection_setProgramMemoryProtection( lowAddress, highAddress );
+    }
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_TaskVariableType * task)
+  * 
+  * @brief Set memory protection for current execution context.
+  * 
+  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  CosmOS_TaskVariableType * task
+  * 
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_TaskVariableType * task)
+{
+    BitWidthType programId;
+
+    CosmOS_StackVariableType * stackVar;
+    CosmOS_ProgramVariableType * programVar;
+
+    programId = task_getTaskProgramId( task );
+    programVar = core_getCoreProgramVar( core, programId ); 
+
+    stackVar = task_getTaskStackVar( task );
+
+    memoryProtection_setStackOverflowProtection( stackVar );
+    memoryProtection_setProgramMemoryProtection( programVar );
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

@@ -132,6 +132,7 @@
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void memoryProtection_init();
+
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
@@ -144,6 +145,33 @@ __OS_FUNC_SECTION void memoryProtection_init();
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void memoryProtection_setStackOverflowProtection(CosmOS_StackVariableType * stack);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program)
+  * 
+  * @brief Set program memory protection.
+  * 
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * 
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn memoryProtection_setMemoryProtection(CosmOS_TaskVariableType * task)
+  * 
+  * @brief Set memory protection for current execution context.
+  * 
+  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  CosmOS_TaskVariableType * task
+  * 
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_TaskVariableType * task);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

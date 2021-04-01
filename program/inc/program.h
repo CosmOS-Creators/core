@@ -209,6 +209,54 @@ __STATIC_FORCEINLINE BitWidthType program_getProgramNumberOfTasks(CosmOS_Program
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn program_getProgramMemorySize(CosmOS_ProgramVariableType * program) 
+  * 
+  * @brief Get program programMemorySize.
+  * 
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramMemorySize(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programMemorySize);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramMemoryLowAddress(CosmOS_ProgramVariableType * program) 
+  * 
+  * @brief Get program programMemoryLowAddress.
+  * 
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramMemoryLowAddress(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programMemoryLowAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramMemoryHighAddress(CosmOS_ProgramVariableType * program) 
+  * 
+  * @brief Get program programMemoryHighAddress.
+  * 
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramMemoryHighAddress(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programMemoryHighAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn program_getProgramTaskInCurrentContext(CosmOS_ProgramVariableType * program) 
   * 
   * @brief Get program taskInCurrentContext pointer.

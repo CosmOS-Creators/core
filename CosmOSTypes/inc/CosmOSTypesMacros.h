@@ -118,19 +118,6 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  TASK_WRAPPER for including executionFinished SysCall
-********************************************************************************/
-#define \
-    TASK_WRAPPER(taskHandler,executionFinishedSysCall) \
-    ({ \
-        taskHandler(); \
-        executionFinishedSysCall; \
-        for(;;);\
-    })
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @brief  __STATIC_FORCEINLINE
 ********************************************************************************/
 #if     defined ( __GNUC__ )

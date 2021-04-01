@@ -226,19 +226,27 @@ __SEC_STOP(__OS_VAR_SECTION_STOP)
 ********************************************************************************/
 void wrapped_Idle_CM7(void)
 {
-    TASK_WRAPPER(Idle_CM7,sysCalls_os(EXEC_FINISHED));
+    Idle_CM7();
+    sysCalls_os(EXEC_FINISHED);
+    for(;;);
 };
 void wrapped_Task_0_Core_0_Handler(void)
 {
-    TASK_WRAPPER(Task_0_Core_0_Handler,sysCalls_os(EXEC_FINISHED));
+    Task_0_Core_0_Handler();
+    sysCalls_os(EXEC_FINISHED);
+    for(;;);
 };
 void wrapped_Idle_CM4(void)
 {
-    TASK_WRAPPER(Idle_CM4,sysCalls_os(EXEC_FINISHED));
+    Idle_CM4();
+    sysCalls_os(EXEC_FINISHED);
+    for(;;);
 };
 void wrapped_Task_0_Core_1_Handler(void)
 {
-    TASK_WRAPPER(Task_0_Core_1_Handler,sysCalls_os(EXEC_FINISHED));
+    Task_0_Core_1_Handler();
+    sysCalls_os(EXEC_FINISHED);
+    for(;;);
 };
 /********************************************************************************
 **                        Function Definitions | Stop                          **
