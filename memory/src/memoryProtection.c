@@ -157,10 +157,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * 
   * @return none
 ********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION void memoryProtection_setStackOverflowProtection(CosmOS_StackVariableType * stack)
+__STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_StackVariableType * stack)
 {
     AddressType stackLowAddress,
                  stackHighAddress;
@@ -170,9 +167,6 @@ __OS_FUNC_SECTION void memoryProtection_setStackOverflowProtection(CosmOS_StackV
 
     CIL_memoryProtection_setStackOverflowProtection( stackLowAddress, stackHighAddress );
 }
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -185,10 +179,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * 
   * @return none
 ********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION void memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program)
+__STATIC_FORCEINLINE void memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program)
 {
     BitWidthType size;
 
@@ -204,9 +195,6 @@ __OS_FUNC_SECTION void memoryProtection_setProgramMemoryProtection(CosmOS_Progra
         CIL_memoryProtection_setProgramMemoryProtection( lowAddress, highAddress );
     }
 }
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **

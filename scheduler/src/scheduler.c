@@ -193,7 +193,7 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
             /* reaction */
         }
     }
-    
+
     if ( startTick IS_EQUAL_TO currentTick )
     {   
         BitWidthType wcet;
