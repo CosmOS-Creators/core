@@ -190,8 +190,11 @@ __OS_FUNC_SECTION void sysJobs(void)
 
     maxTickMultiplicator = sysJobs_getSysJobsMaxTickMultiplicator( sysJobsVar );
 
-    sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % maxTickMultiplicator );
-    sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
+    if ( maxTickMultiplicator )
+    {
+        sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % maxTickMultiplicator );
+        sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
+    }
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
