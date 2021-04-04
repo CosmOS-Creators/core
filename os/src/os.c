@@ -157,7 +157,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_OsVariableType * os_getOsVar(void)
 {
-    return &osVar;
+    return &OsVar;
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

@@ -63,6 +63,8 @@
 #include "sysDefsSchedulers.h"
 #include "sysDefsScheduleTables.h"
 #include "sysDefsCores.h"
+#include "sysDefsOsBoot.h"
+#include "sysDefsSysJobs.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/

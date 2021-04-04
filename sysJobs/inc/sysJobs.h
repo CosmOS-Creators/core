@@ -159,6 +159,120 @@
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysJobs_getSysJobsGroups(CosmOS_SysJobsVariableType * sysJobs)
+  * 
+  * @brief Get sysJobs groups.
+  * 
+  * @param[in]  CosmOS_SysJobsVariableType * sysJobs
+  * 
+  * @return CosmOS_SysJobsGroupConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SysJobsGroupConfigurationType * sysJobs_getSysJobsGroups(CosmOS_SysJobsVariableType * sysJobs)
+{
+    return (CosmOS_SysJobsGroupConfigurationType *)(sysJobs->cfg->groups);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysJobs_getSysJobsNumOfGroups(CosmOS_SysJobsVariableType * sysJobs)
+  * 
+  * @brief Get sysJobs numOfGroups.
+  * 
+  * @param[in]  CosmOS_SysJobsVariableType * sysJobs
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsNumOfGroups(CosmOS_SysJobsVariableType * sysJobs)
+{
+    return (sysJobs->cfg->numOfGroups);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysJobs_getSysJobsMaxTickMultiplicator(CosmOS_SysJobsVariableType * sysJobs)
+  * 
+  * @brief Get sysJobs maxTickMultiplicator.
+  * 
+  * @param[in]  CosmOS_SysJobsVariableType * sysJobs
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsMaxTickMultiplicator(CosmOS_SysJobsVariableType * sysJobs)
+{
+    return (sysJobs->cfg->maxTickMultiplicator);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysJobs_getSysJobsCurrentTick(CosmOS_SysJobsVariableType * sysJobs)
+  * 
+  * @brief Get sysJobs currentTick.
+  * 
+  * @param[in]  CosmOS_SysJobsVariableType * sysJobs
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsCurrentTick(CosmOS_SysJobsVariableType * sysJobs)
+{
+    return (sysJobs->currentTick);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysJobs_getSysJobsGroupHandlers(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
+  * 
+  * @brief Get sysJobs group handlers.
+  * 
+  * @param[in]  CosmOS_SysJobsVariableType * sysJobs
+  * @param[in]  BitWidthType groupId
+  * 
+  * @return CosmOS_GenericVoidType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_GenericVoidType * sysJobs_getSysJobsGroupHandlers(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
+{
+    return (CosmOS_GenericVoidType *)(sysJobs->cfg->groups[groupId].handlers);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysJobs_getSysJobsGroupNumOfHandlers(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
+  * 
+  * @brief Get sysJobs group numOfHandlers.
+  * 
+  * @param[in]  CosmOS_SysJobsVariableType * sysJobs
+  * @param[in]  BitWidthType groupId
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsGroupNumOfHandlers(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
+{
+    return (sysJobs->cfg->groups[groupId].numOfHandlers);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysJobs_getSysJobsGroupTickMultiplicator(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
+  * 
+  * @brief Get sysJobs group tickMultiplicator.
+  * 
+  * @param[in]  CosmOS_SysJobsVariableType * sysJobs
+  * @param[in]  BitWidthType groupId
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsGroupTickMultiplicator(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
+{
+    return (sysJobs->cfg->groups[groupId].tickMultiplicator);
+}
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
@@ -171,6 +285,21 @@
   * @ingroup Apis_sysJobs_h                                            
   * @{                                                                           
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysJobs_setSysJobsCurrentTick(CosmOS_SysJobsVariableType * sysJobs, BitWidthType currentTickParam)
+  * 
+  * @brief Set sysJobs currentTick.
+  * 
+  * @param[in]  CosmOS_SysJobsVariableType * sysJobs
+  * 
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void sysJobs_setSysJobsCurrentTick(CosmOS_SysJobsVariableType * sysJobs, BitWidthType currentTickParam)
+{
+    sysJobs->currentTick = currentTickParam;
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

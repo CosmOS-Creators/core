@@ -24,6 +24,7 @@
 #include "coreCfg.h"
 #include "coreSyncCfg.h"
 #include "programCfg.h"
+#include "sysJobsCfg.h"
 #include "schedulerCfg.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
@@ -91,6 +92,7 @@ IS_INITIALIZED_TO
         &SchedulersVar[SCHEDULER_CORE_0_ID],        /* CosmOS_SchedulerVariableType * scheduler                */
         BarriersCore0Var,                           /* CosmOS_BarrierVariableType * barrierVars                */
         OS_STATE_ENUM__NOT_STARTED,                 /* CosmOS_OsState osState                                  */
+        &SysJobsVar[CORE_0_ID],                 /* CosmOS_SysJobsVariableType * const sysJobs               */
     },
 		{                                               /* CoresVar[CORE_1_ID]                                  */
         &CoresCfgConst[CORE_1_ID],                  /* const CosmOS_CoreConfigurationType *cfg                 */
@@ -99,6 +101,7 @@ IS_INITIALIZED_TO
         &SchedulersVar[SCHEDULER_CORE_1_ID],        /* CosmOS_SchedulerVariableType * scheduler                */
         BarriersCore1Var,                           /* CosmOS_BarrierVariableType * barrierVars                */
         OS_STATE_ENUM__NOT_STARTED,                 /* CosmOS_OsState osState                                  */
+        &SysJobsVar[CORE_1_ID],                 /* CosmOS_SysJobsVariableType * const sysJobs               */
     },
 };
 /* @cond S */

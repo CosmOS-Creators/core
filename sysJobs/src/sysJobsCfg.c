@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file sysJobs.c
+** @file sysJobsCfg.c
 *********************************************************************************
-<!--                    sysJobs Unit Local Group Definition                   -->
+<!--                   sysJobsCfg Unit Local Group Definition                 -->
 *********************************************************************************	
-** @defgroup Local_sysJobs Local
-** @ingroup sysJobs_unit 
-** @brief sysJobs locals
+** @defgroup Local_sysJobsCfg Local
+** @ingroup sysJobsCfg_unit 
+** @brief sysJobsCfg locals
 ** @details lorem 
 ********************************************************************************/ 
 /********************************************************************************  
@@ -21,8 +21,10 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "core.h"
-#include "sysJobs.h"
+#include "sysJobsCfg.h"
+
+/* CIL interfaces */
+#include "CIL_uart.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -32,15 +34,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_sysJobs Macros
-  * @ingroup Local_sysJobs
+  * @defgroup Macros_sysJobsCfg Macros
+  * @ingroup Local_sysJobsCfg
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_sysJobs  
+  * Macros_sysJobsCfg  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -51,15 +53,86 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_sysJobs Variables  
-  * @ingroup Local_sysJobs
+  * @defgroup Variables_sysJobsCfg Variables  
+  * @ingroup Local_sysJobsCfg
   * @{    
 ********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_CONST_SECTION_START)
+/* @endcond*/
+const CosmOS_GenericVoidType SysJobsHandlersGroup0Core0Const[SYSJOBS_HANDLERS_GROUP_0_CORE_0_NUM] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+    (CosmOS_GenericVoidType)CIL_uart_sysJob,          /* 0 uart3SysJob  */
+};
+
+const CosmOS_GenericVoidType SysJobsHandlersGroup0Core1Const[SYSJOBS_HANDLERS_GROUP_0_CORE_1_NUM] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+    (CosmOS_GenericVoidType)CIL_uart_sysJob,          /* 0 uart2SysJob  */
+};
+
+const CosmOS_SysJobsGroupConfigurationType SysJobsGroupsCore0ConstCfg[SYSJOBS_GROUPS_CORE_0_NUM] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+    {
+        SysJobsHandlersGroup0Core0Const,                /* const CosmOS_GenericVoidType * const handlers    */
+        SYSJOBS_HANDLERS_GROUP_0_CORE_0_NUM,            /* const BitWidthType numOfHandlers                 */
+        SYSJOBS_GROUP_0_CORE_0_TICK_MULTIPLICATOR,      /* const BitWidthType tickMultiplicator             */
+    },
+};
+
+const CosmOS_SysJobsGroupConfigurationType SysJobsGroupsCore1ConstCfg[SYSJOBS_GROUPS_CORE_1_NUM] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+    {
+        SysJobsHandlersGroup0Core0Const,                /* const CosmOS_GenericVoidType * const handlers    */
+        SYSJOBS_HANDLERS_GROUP_0_CORE_1_NUM,            /* const BitWidthType numOfHandlers                 */
+        SYSJOBS_GROUP_0_CORE_1_TICK_MULTIPLICATOR,      /* const BitWidthType tickMultiplicator             */
+    },
+};
+
+const CosmOS_SysJobsConfigurationType SysJobsConstCfg[CORE_NUM] __OS_CONST_SECTION
+IS_INITIALIZED_TO
+{
+    {
+        SysJobsGroupsCore0ConstCfg,                   /* const CosmOS_SysJobsGroupConfigurationType * const groups    */
+        SYSJOBS_GROUPS_CORE_0_NUM,                    /* const BitWidthType numOfGroups                               */
+        SYSJOBS_CORE_0_MAX_TICK_MULTIPLICATOR         /* const BitWidthType maxTickMultiplicator                      */
+    },
+    {
+        SysJobsGroupsCore1ConstCfg,                   /* const CosmOS_SysJobsGroupConfigurationType * const groups    */
+        SYSJOBS_GROUPS_CORE_1_NUM,                    /* const BitWidthType numOfGroups                               */
+        SYSJOBS_CORE_1_MAX_TICK_MULTIPLICATOR         /* const BitWidthType maxTickMultiplicator                      */
+    },
+};
+/* @cond S */
+__SEC_STOP(__OS_CONST_SECTION_STOP)
+/* @endcond*/
+
+/* @cond S */
+__SEC_START(__OS_VAR_SECTION_START)
+/* @endcond*/
+CosmOS_SysJobsVariableType SysJobsVar[CORE_NUM] __OS_VAR_SECTION 
+IS_INITIALIZED_TO 
+{
+    {
+        &SysJobsConstCfg[CORE_0_ID],    /* const CosmOS_SysJobsConfigurationType * const cfg  */
+        0,                              /* BitWidthType currentTick                           */
+    },
+    {
+        &SysJobsConstCfg[CORE_1_ID],    /* const CosmOS_SysJobsConfigurationType * const cfg  */
+        0,                              /* BitWidthType currentTick                           */
+    },
+};
+/* @cond S */
+__SEC_STOP(__OS_VAR_SECTION_STOP)
+/* @endcond*/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Variables_sysJobs  
+  * Variables_sysJobsCfg  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -70,47 +143,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_sysJobs_c API's  
-  * @ingroup Local_sysJobs
+  * @defgroup Apis_sysJobsCfg_c API's  
+  * @ingroup Local_sysJobsCfg
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_sysJobs_c Getters  
-  * @ingroup Apis_sysJobs_c                                            
+  * @addtogroup Getters_sysJobsCfg_c Getters  
+  * @ingroup Apis_sysJobsCfg_c                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_sysJobs_c
+  * Getters_sysJobsCfg_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_sysJobs_c Setters  
-  * @ingroup Apis_sysJobs_c                                            
+  * @addtogroup Setters_sysJobsCfg_c Setters  
+  * @ingroup Apis_sysJobsCfg_c                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_sysJobs_c   
+  * Setters_sysJobsCfg_c   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_sysJobs_c General  
-  * @ingroup Apis_sysJobs_c                                            
+  * @addtogroup General_sysJobsCfg_c General  
+  * @ingroup Apis_sysJobsCfg_c                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_sysJobs_c  
+  * General_sysJobsCfg_c  
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -118,84 +191,6 @@
 /********************************************************************************
 **                        Function Definitions | Start                         **
 ********************************************************************************/
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn sysJobs(void) 
-  * 
-  * @brief System jobs DEMO FUNCTION.
-  * 
-  * @param[in]  none
-  * 
-  * @return none
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION void sysJobs(void)
-{
-    BitWidthType  sysJobsCurrentTick,
-                  maxTickMultiplicator,
-                  numOfGroups;
-
-    CosmOS_CoreVariableType * coreVar;
-    CosmOS_SysJobsVariableType * sysJobsVar;
-
-
-    coreVar = core_getCoreVar();
-    sysJobsVar = core_getCoreOsSysJobs( coreVar );
-
-    sysJobsCurrentTick = sysJobs_getSysJobsCurrentTick( sysJobsVar );
-    numOfGroups = sysJobs_getSysJobsNumOfGroups( sysJobsVar );
-
-    for ( BitWidthType groupIterator = 0; groupIterator < numOfGroups; groupIterator++ )
-    { 
-        BitWidthType  groupTickMultiplicator;
-
-
-        groupTickMultiplicator = sysJobs_getSysJobsGroupTickMultiplicator( sysJobsVar, groupIterator );
-
-        if ( IS_NOT( groupTickMultiplicator ) )
-        {   
-            BitWidthType numOfHandlers;
-            CosmOS_GenericVoidType * handlers;
-
-
-            handlers = sysJobs_getSysJobsGroupHandlers( sysJobsVar, groupIterator );
-            numOfHandlers = sysJobs_getSysJobsGroupNumOfHandlers( sysJobsVar, groupIterator );
-
-            for ( BitWidthType handlerIterator = 0; handlerIterator < numOfHandlers; handlerIterator++ )
-            {
-                handlers[handlerIterator]();
-            }
-        }
-        else
-        {
-            if ( IS_NOT( sysJobsCurrentTick % groupTickMultiplicator ) )
-            {
-                BitWidthType numOfHandlers;
-                CosmOS_GenericVoidType * handlers;
-
-
-                handlers = sysJobs_getSysJobsGroupHandlers( sysJobsVar, groupIterator );
-                numOfHandlers = sysJobs_getSysJobsGroupNumOfHandlers( sysJobsVar, groupIterator );
-
-                for ( BitWidthType handlerIterator = 0; handlerIterator < numOfHandlers; handlerIterator++ )
-                {
-                    handlers[handlerIterator]();
-                }
-            }
-        }
-    }
-
-    maxTickMultiplicator = sysJobs_getSysJobsMaxTickMultiplicator( sysJobsVar );
-
-    sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % maxTickMultiplicator );
-    sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
-};
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

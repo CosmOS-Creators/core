@@ -82,9 +82,9 @@
   * @ingroup Global_osCfg  
   * @{    
 ********************************************************************************/
-extern const CosmOS_OsConfigurationType osCfg;
+extern const CosmOS_OsConfigurationType OsCfg;
 
-extern CosmOS_OsVariableType osVar;
+extern CosmOS_OsVariableType OsVar;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

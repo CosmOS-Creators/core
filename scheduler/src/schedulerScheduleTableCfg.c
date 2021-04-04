@@ -66,7 +66,11 @@ IS_INITIALIZED_TO
         &TasksProgram1Core0Var[TASK_0_PROGRAM_1_CORE_0_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
 		{                                                           /* ScheduleTableScheduler0CfgConst element 1        */
-        TASK_0_SCHEDULER_0_EXECUTION_TICK_1,                    /* const bitWidth startTime                         */
+        TASK_1_SCHEDULER_0_EXECUTION_TICK_1,                    /* const bitWidth startTime                         */
+        &TasksProgram0Core0Var[TASK_1_PROGRAM_0_CORE_0_ID],     /* CosmOS_TaskVariableType * taskVar                */
+    },
+		{                                                           /* ScheduleTableScheduler0CfgConst element 2        */
+        TASK_0_SCHEDULER_0_EXECUTION_TICK_2,                    /* const bitWidth startTime                         */
         &TasksProgram1Core0Var[TASK_0_PROGRAM_1_CORE_0_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
 };
@@ -78,7 +82,11 @@ IS_INITIALIZED_TO
         &TasksProgram1Core1Var[TASK_0_PROGRAM_1_CORE_1_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
 		{                                                           /* ScheduleTableScheduler1CfgConst element 1        */
-        TASK_0_SCHEDULER_1_EXECUTION_TICK_1,                    /* const bitWidth startTime                         */
+        TASK_1_SCHEDULER_1_EXECUTION_TICK_1,                    /* const bitWidth startTime                         */
+        &TasksProgram0Core1Var[TASK_1_PROGRAM_0_CORE_1_ID],     /* CosmOS_TaskVariableType * taskVar                */
+    },
+		{                                                           /* ScheduleTableScheduler1CfgConst element 2        */
+        TASK_0_SCHEDULER_1_EXECUTION_TICK_2,                    /* const bitWidth startTime                         */
         &TasksProgram1Core1Var[TASK_0_PROGRAM_1_CORE_1_ID],     /* CosmOS_TaskVariableType * taskVar                */
     },
 };

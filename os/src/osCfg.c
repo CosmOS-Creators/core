@@ -25,6 +25,7 @@
 #include "coreCfg.h"
 #include "bufferCfg.h"
 #include "routeCfg.h"
+#include "sysJobsCfg.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -60,7 +61,7 @@
 /* @cond S */
 __SEC_START(__OS_CONST_SECTION_START)
 /* @endcond*/
-const CosmOS_OsConfigurationType osCfg __OS_CONST_SECTION
+const CosmOS_OsConfigurationType OsCfg __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {                       /* osCfg                                        */
     CoresCfgConst,      /* const CosmOS_CoreConfigurationType * cores      */
@@ -76,10 +77,10 @@ __SEC_STOP(__OS_CONST_SECTION_STOP)
 /* @cond S */
 __SEC_START(__OS_VAR_SECTION_START)
 /* @endcond*/
-CosmOS_OsVariableType osVar __OS_VAR_SECTION
+CosmOS_OsVariableType OsVar __OS_VAR_SECTION
 IS_INITIALIZED_TO
 {                       /* osVar                                       */
-    &osCfg,             /* const CosmOS_OsConfigurationType * cfg      */
+    &OsCfg,             /* const CosmOS_OsConfigurationType * cfg      */
     CoresVar,           /* CosmOS_CoreVariableType * coreVars          */   
     BuffersVar,         /* CosmOS_BufferVariableType * bufferVars      */
 };

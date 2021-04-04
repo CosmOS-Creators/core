@@ -344,6 +344,22 @@ __STATIC_FORCEINLINE CosmOS_OsState core_getCoreOsState(CosmOS_CoreVariableType 
 {
     return (core->osState);
 }
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getCoreOsSysJobs(CosmOS_CoreVariableType * core) 
+  * 
+  * @brief Get core sysJobs.
+  * 
+  * @param[in]  CosmOS_CoreVariableType * core
+  * 
+  * @return CosmOS_SysJobsVariableType 
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SysJobsVariableType * core_getCoreOsSysJobs(CosmOS_CoreVariableType * core)
+{
+    return (core->sysJobs);
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -382,13 +398,13 @@ __STATIC_FORCEINLINE void core_setCoreProgramInCurrentContext(CosmOS_CoreVariabl
   * @brief Set core osState.
   * 
   * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_OsState paramOsState
+  * @param[in]  CosmOS_OsState osStateParam
   * 
   * @return none 
 ********************************************************************************/
-__STATIC_FORCEINLINE void core_setCoreOsState(CosmOS_CoreVariableType * core, CosmOS_OsState paramOsState)
+__STATIC_FORCEINLINE void core_setCoreOsState(CosmOS_CoreVariableType * core, CosmOS_OsState osStateParam)
 {
-    core->osState = paramOsState;
+    core->osState = osStateParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

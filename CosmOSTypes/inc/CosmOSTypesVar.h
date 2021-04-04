@@ -164,6 +164,18 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_SysJobsGroupVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    const CosmOS_SysJobsConfigurationType * const cfg;
+    BitWidthType currentTick;
+
+} CosmOS_SysJobsVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_CoreVariableType struct type
 ********************************************************************************/
 typedef struct
@@ -174,6 +186,7 @@ typedef struct
     CosmOS_SchedulerVariableType * const schedulerVar;
     CosmOS_BarrierVariableType * const barrierVars;
     CosmOS_OsState osState;
+    CosmOS_SysJobsVariableType * const sysJobs;
 
 } CosmOS_CoreVariableType;
 
