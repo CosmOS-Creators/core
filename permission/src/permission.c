@@ -24,7 +24,7 @@
 #include "permission.h"
 #include "permissionCfg.h"
 #include "core.h"
-#include "CosmOSAssert.h"
+#include "cosmosAssert.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -123,7 +123,7 @@
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_AccessStateType permission_tryTaskAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_TaskVariableType * task)
 {
-    CosmOSAssert( IS_NOT( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] & \
+    cosmosAssert( IS_NOT( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] & \
               permission[task->cfg->coreId].bitLocksTasksInverted[TaskIdToBitLock[task->cfg->id]] ) );
 
     return ((( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] >> task->cfg->id ) & BITLOCK_MASK ) ? \

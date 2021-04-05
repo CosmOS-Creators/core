@@ -26,7 +26,7 @@
 #include "coreSync.h"
 #include "os.h"
 #include "core.h"
-#include "CosmOSAssert.h"
+#include "cosmosAssert.h"
 #include "switchMemoryProtection.h"
 
 /* CIL interfaces */

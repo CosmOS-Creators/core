@@ -5,19 +5,19 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file CosmOSAssert.h 
+** @file cosmosAssert.h 
 *********************************************************************************
-<!--                     CosmOSAssert Module Group Definition                    -->
+<!--                   cosmosAssert Module Group Definition                   -->
 *********************************************************************************  
-** @defgroup CosmOSAssert_module CosmOSAssert
-** @brief CosmOSAssert Module
+** @defgroup cosmosAssert_module cosmosAssert
+** @brief cosmosAssert Module
 ** @details lorem   	 		
 *********************************************************************************	
-<!--                      CosmOSAssert Unit Group Definition                     -->
+<!--                      cosmosAssert Unit Group Definition                  -->
 ********************************************************************************* 
-** @defgroup CosmOSAssert_unit CosmOSAssert Unit 
-** @ingroup CosmOSAssert_module        
-** @brief CosmOSAssert Unit 
+** @defgroup cosmosAssert_unit cosmosAssert Unit 
+** @ingroup cosmosAssert_module        
+** @brief cosmosAssert Unit 
 ** @details lorem                               
 *********************************************************************************	
 <!--                           Version Information                            -->
@@ -31,11 +31,11 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                  CosmOSAssert Unit Global Group Definition                  -->
+<!--                 cosmosAssert Unit Global Group Definition                -->
 *********************************************************************************
-** @defgroup Global_CosmOSAssert Global
-** @ingroup CosmOSAssert_unit 
-** @brief CosmOSAssert globals 
+** @defgroup Global_cosmosAssert Global
+** @ingroup cosmosAssert_unit 
+** @brief cosmosAssert globals 
 ** @details lorem 
 ********************************************************************************/
 /********************************************************************************
@@ -53,7 +53,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "CosmOSTypesStd.h"
+#include "cosmosTypesStd.h"
 #include "memoryMapping.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
@@ -64,15 +64,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_CosmOSAssert_h Macros
-  * @ingroup Global_CosmOSAssert  
+  * @defgroup Macros_cosmosAssert_h Macros
+  * @ingroup Global_cosmosAssert  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_CosmOSAssert_h  
+  * Macros_cosmosAssert_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -83,8 +83,8 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_CosmOSAssert_h Variables  
-  * @ingroup Global_CosmOSAssert  
+  * @defgroup Variables_cosmosAssert_h Variables  
+  * @ingroup Global_cosmosAssert  
   * @{    
 ********************************************************************************/
 
@@ -92,7 +92,7 @@
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Variables_CosmOSAssert_h  
+  * Variables_cosmosAssert_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -103,47 +103,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_CosmOSAssert_h API's  
-  * @ingroup Global_CosmOSAssert
+  * @defgroup Apis_cosmosAssert_h API's  
+  * @ingroup Global_cosmosAssert
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_CosmOSAssert_h Getters 
-  * @ingroup Apis_CosmOSAssert_h                                            
+  * @addtogroup Getters_cosmosAssert_h Getters 
+  * @ingroup Apis_cosmosAssert_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_CosmOSAssert_h
+  * Getters_cosmosAssert_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_CosmOSAssert_h Setters  
-  * @ingroup Apis_CosmOSAssert_h                                            
+  * @addtogroup Setters_cosmosAssert_h Setters  
+  * @ingroup Apis_cosmosAssert_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_CosmOSAssert_h   
+  * Setters_cosmosAssert_h   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_CosmOSAssert_h General  
-  * @ingroup Apis_CosmOSAssert_h                                            
+  * @addtogroup General_cosmosAssert_h General  
+  * @ingroup Apis_cosmosAssert_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_CosmOSAssert_h  
+  * General_cosmosAssert_h  
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -154,48 +154,48 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_CosmOSAssert_h Getters 
-  * @ingroup Apis_CosmOSAssert_h                                            
+  * @addtogroup Getters_cosmosAssert_h Getters 
+  * @ingroup Apis_cosmosAssert_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_CosmOSAssert_h
+  * Getters_cosmosAssert_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_CosmOSAssert_h Setters  
-  * @ingroup Apis_CosmOSAssert_h                                            
+  * @addtogroup Setters_cosmosAssert_h Setters  
+  * @ingroup Apis_cosmosAssert_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_CosmOSAssert_h   
+  * Setters_cosmosAssert_h   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_CosmOSAssert_h General  
-  * @ingroup Apis_CosmOSAssert_h                                            
+  * @addtogroup General_cosmosAssert_h General  
+  * @ingroup Apis_cosmosAssert_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn CosmOSAssert(BitWidthType result)
+  * @fn cosmosAssert(BitWidthType result)
   * 
-  * @brief CosmOS assertion.
+  * @brief cosmos assertion.
   * 
   * @param[in]  BitWidthType result
   * 
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void CosmOSAssert(BitWidthType result)
+__STATIC_FORCEINLINE void cosmosAssert(BitWidthType result)
 {
     if ( IS_NOT( result ) ){
         /* Kernel_Panic */
@@ -209,7 +209,7 @@ __STATIC_FORCEINLINE void CosmOSAssert(BitWidthType result)
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_CosmOSAssert_h  
+  * General_cosmosAssert_h  
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file CosmOSTypesStd.h                                      
+** @file cosmosTypesStd.h                                      
 *********************************************************************************	
-<!--                     CosmOSTypesStd Unit Group Definition                    -->
+<!--                   cosmosTypesStd Unit Group Definition                   -->
 ********************************************************************************* 
-** @defgroup CosmOSTypesStd_unit CosmOSTypesStd Unit 
-** @ingroup CosmOSTypes_module        
-** @brief CosmOSTypesStd Unit 
+** @defgroup cosmosTypesStd_unit cosmosTypesStd Unit 
+** @ingroup cosmosTypes_module        
+** @brief cosmosTypesStd Unit 
 ** @details lorem                               
 *********************************************************************************	
 <!--                           Version Information                            -->
@@ -25,18 +25,18 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License       	
 *********************************************************************************
-<!--                CosmOSTypesStd Unit Global Group Definition                  -->
+<!--              cosmosTypesStd Unit Global Group Definition                 -->
 *********************************************************************************	
-** @defgroup Global_CosmOSTypesStd Global
-** @ingroup CosmOSTypesStd_unit 
-** @brief CosmOSTypesStd globals
+** @defgroup Global_cosmosTypesStd Global
+** @ingroup cosmosTypesStd_unit 
+** @brief cosmosTypesStd globals
 ** @details lorem 
 ********************************************************************************/ 
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __COSMOSTYPESSTD_H__
-#define __COSMOSTYPESSTD_H__
+#ifndef __cosmosTypesStd_H__
+#define __cosmosTypesStd_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -47,7 +47,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "CosmOSTypesVar.h"
+#include "cosmosTypesVar.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -57,15 +57,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_CosmOSTypesStd_h Macros
-  * @ingroup Global_CosmOSTypesStd  
+  * @defgroup Macros_cosmosTypesStd_h Macros
+  * @ingroup Global_cosmosTypesStd  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_CosmOSTypesStd_h  
+  * Macros_cosmosTypesStd_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -76,15 +76,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Typedefs_CosmOSTypesStdCfg_h Typedefs
-  * @ingroup Global_CosmOSTypesStd  
+  * @defgroup Typedefs_cosmosTypesStdCfg_h Typedefs
+  * @ingroup Global_cosmosTypesStd  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Typedefs_CosmOSTypesStd_h  
+  * Typedefs_cosmosTypesStd_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Typedefs | Stop                                **

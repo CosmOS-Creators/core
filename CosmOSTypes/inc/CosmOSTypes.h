@@ -5,19 +5,19 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file CosmOSTypes.h                                      
+** @file cosmosTypes.h                                      
 *********************************************************************************
-<!--                     CosmOSTypes Module Group Definition                     -->
+<!--                    cosmosTypes Module Group Definition                   -->
 *********************************************************************************  
-** @defgroup CosmOSTypes_module CosmOSTypes
-** @brief CosmOSTypes Module
+** @defgroup cosmosTypes_module cosmosTypes
+** @brief cosmosTypes Module
 ** @details lorem   	 		
 *********************************************************************************	
-<!--                      CosmOSTypes Unit Group Definition                      -->
+<!--                    cosmosTypes Unit Group Definition                     -->
 ********************************************************************************* 
-** @defgroup CosmOSTypes_unit CosmOSTypes Unit 
-** @ingroup CosmOSTypes_module        
-** @brief CosmOSTypes Unit 
+** @defgroup cosmosTypes_unit cosmosTypes Unit 
+** @ingroup cosmosTypes_module        
+** @brief cosmosTypes Unit 
 ** @details lorem                               
 *********************************************************************************	
 <!--                           Version Information                            -->
@@ -31,11 +31,11 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License       	
 *********************************************************************************
-<!--                  CosmOSTypes Unit Global Group Definition                   -->
+<!--                cosmosTypes Unit Global Group Definition                  -->
 *********************************************************************************	
-** @defgroup Global_CosmOSTypes Global
-** @ingroup CosmOSTypes_unit 
-** @brief CosmOSTypes globals
+** @defgroup Global_cosmosTypes Global
+** @ingroup cosmosTypes_unit 
+** @brief cosmosTypes globals
 ** @details lorem 
 ********************************************************************************/ 
 /********************************************************************************
@@ -61,15 +61,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_CosmOSTypes_h Macros
-  * @ingroup Global_CosmOSTypes  
+  * @defgroup Macros_cosmosTypes_h Macros
+  * @ingroup Global_cosmosTypes  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_CosmOSTypes_h  
+  * Macros_cosmosTypes_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -80,15 +80,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Typedefs_CosmOSTypes_h Typedefs  
-  * @ingroup Global_CosmOSTypes  
+  * @defgroup Typedefs_cosmosTypes_h Typedefs  
+  * @ingroup Global_cosmosTypes  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Typedefs_CosmOSTypes_h  
+  * Typedefs_cosmosTypes_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **

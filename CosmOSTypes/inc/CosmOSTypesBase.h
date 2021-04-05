@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file CosmOSTypesBase.h                                      
+** @file cosmosTypesBase.h                                      
 *********************************************************************************	
-<!--                    CosmOSTypesBase Unit Group Definition                    -->
+<!--                   cosmosTypesBase Unit Group Definition                  -->
 ********************************************************************************* 
-** @defgroup CosmOSTypesBase_unit CosmOSTypesBase Unit 
-** @ingroup CosmOSTypes_module        
-** @brief CosmOSTypesBase Unit 
+** @defgroup cosmosTypesBase_unit cosmosTypesBase Unit 
+** @ingroup cosmosTypes_module        
+** @brief cosmosTypesBase Unit 
 ** @details lorem                               
 *********************************************************************************	
 <!--                           Version Information                            -->
@@ -25,11 +25,11 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License       	
 *********************************************************************************
-<!--               CosmOSTypesBase Unit Global Group Definition                  -->
+<!--               cosmosTypesBase Unit Global Group Definition               -->
 *********************************************************************************	
-** @defgroup Global_CosmOSTypesBase Global
-** @ingroup CosmOSTypesBase_unit 
-** @brief CosmOSTypesBase globals
+** @defgroup Global_cosmosTypesBase Global
+** @ingroup cosmosTypesBase_unit 
+** @brief cosmosTypesBase globals
 ** @details lorem 
 ********************************************************************************/ 
 /********************************************************************************
@@ -57,15 +57,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_CosmOSTypesBase_h Macros
-  * @ingroup Global_CosmOSTypesBase  
+  * @defgroup Macros_cosmosTypesBase_h Macros
+  * @ingroup Global_cosmosTypesBase  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_CosmOSTypesBase_h  
+  * Macros_cosmosTypesBase_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -76,8 +76,8 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Typedefs_CosmOSTypesBaseCfg_h Typedefs
-  * @ingroup Global_CosmOSTypesBase  
+  * @defgroup Typedefs_cosmosTypesBaseCfg_h Typedefs
+  * @ingroup Global_cosmosTypesBase  
   * @{    
 ********************************************************************************/
 /********************************************************************************
@@ -235,7 +235,7 @@ typedef enum {
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Typedefs_CosmOSTypesBase_h  
+  * Typedefs_cosmosTypesBase_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Typedefs | Stop                                **

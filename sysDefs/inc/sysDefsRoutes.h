@@ -47,7 +47,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "CosmOSTypesStd.h"
+#include "cosmosTypesStd.h"
 #include "sysDefsBuffers.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
@@ -62,31 +62,28 @@
   * @ingroup Global_sysDefsRoutes  
   * @{    
 ********************************************************************************/
-#define ROUTES_NUM (BitWidthType)0x00000001          /* Number of route RW */
+#define ROUTES_FUNC_NUM (BitWidthType)6          /* Number of route RW */
+#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)4     /* Number of route identificators */
 
-#define ROUTES_FUNC_NUM (BitWidthType)0x00000006          /* Number of route RW */
-
-
-#define ROUTES_ID_TO_FUNC_NUM (BitWidthType)0x00000006     /* Number of route identificators */
-
-#define READ_BUFFER (BitWidthType)0x00000000            /* Identificator pointing on function pointer in array (Routes) */
-#define WRITE_BUFFER (BitWidthType)0x00000001           /* Identificator pointing on function pointer in array (Routes) */
-#define GPIO_TOGGLE_PIN (BitWidthType)0x00000002        /* Identificator pointing on function pointer in array (Routes) */
-#define OS_INIT (BitWidthType)0x00000003                /* Identificator pointing on function pointer in array (Routes) */
-#define OS_START (BitWidthType)0x00000004               /* Identificator pointing on function pointer in array (Routes) */
-#define OS_EXEC_FINISHED (BitWidthType)0x00000005       /* Identificator pointing on function pointer in array (Routes) */
+#define BUFFER_READARRAY (BitWidthType)0            /* Identificator pointing on function pointer in array (Routes) */
+#define BUFFER_WRITEARRAY (BitWidthType)1            /* Identificator pointing on function pointer in array (Routes) */
+#define DEVICEIO_TOGGLEPIN (BitWidthType)2            /* Identificator pointing on function pointer in array (Routes) */
+#define OSINIT_INIT (BitWidthType)3            /* Identificator pointing on function pointer in array (Routes) */
+#define OS_START (BitWidthType)4            /* Identificator pointing on function pointer in array (Routes) */
+#define TASK_SETEXECUTIONSTATETOFINISHED (BitWidthType)5            /* Identificator pointing on function pointer in array (Routes) */
 
 
-#define READ_XCORE_1_TO_0_BUFFER_0 (BitWidthType)0x00000000   /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
-#define WRITE_XCORE_1_TO_0_BUFFER_0 (BitWidthType)0x00000001  /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
-#define TOGGLE_PIN (BitWidthType)0x00000002                   /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
-#define INIT_COSMOS  (BitWidthType)0x00000003                 /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
-#define START_COSMOS (BitWidthType)0x00000004                 /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
-#define EXEC_FINISHED (BitWidthType)0x00000005                /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
+#define SYSCALL_READ_BUFFER_0 (BitWidthType)0   /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
+#define SYSCALL_WRITE_BUFFER_0 (BitWidthType)1  /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
+#define SYSCALL_READ_BUFFER_1 (BitWidthType)2   /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
+#define SYSCALL_WRITE_BUFFER_1 (BitWidthType)3  /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
+#define SYSCALL_DEVICEIO_TOGGLEPIN (BitWidthType)4            /* Identificator pointing on function pointer in array (Routes) */
+#define SYSCALL_OSINIT_INIT (BitWidthType)5            /* Identificator pointing on function pointer in array (Routes) */
+#define SYSCALL_OS_START (BitWidthType)6            /* Identificator pointing on function pointer in array (Routes) */
+#define SYSCALL_TASK_SETEXECUTIONSTATETOFINISHED (BitWidthType)7            /* Identificator pointing on function pointer in array (Routes) */
 
-#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)0x00000002     /* Number of route identificators */
 
-#define BUFFER_XCORE_1_TO_0  BUFFER_0                      /* RoutesIdToEntityConst */
+#define ROUTES_ID_TO_FUNC_NUM (BitWidthType)8    /* Number of route identificators */
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

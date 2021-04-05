@@ -5,19 +5,19 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file CosmOSApi.h
+** @file cosmosApi.h
 *********************************************************************************
-<!--                       CosmOSApi Module Group Definition                     -->
+<!--                     cosmosApi Module Group Definition                    -->
 *********************************************************************************  
-** @defgroup CosmOSApi_module CosmOSApi
-** @brief CosmOSApi Module
+** @defgroup cosmosApi_module cosmosApi
+** @brief cosmosApi Module
 ** @details lorem   	 		
 *********************************************************************************	
-<!--                        CosmOSApi Unit Group Definition                      -->
+<!--                      cosmosApi Unit Group Definition                     -->
 ********************************************************************************* 
-** @defgroup CosmOSApi_unit CosmOSApi Unit 
-** @ingroup CosmOSApi_module        
-** @brief CosmOSApi Unit 
+** @defgroup cosmosApi_unit cosmosApi Unit 
+** @ingroup cosmosApi_module        
+** @brief cosmosApi Unit 
 ** @details lorem                               
 *********************************************************************************	
 <!--                           Version Information                            -->
@@ -31,11 +31,11 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                     CosmOSApi Unit Global Group Definition                  -->
+<!--                  cosmosApi Unit Global Group Definition                  -->
 *********************************************************************************
-** @defgroup Global_CosmOSApi Global
-** @ingroup CosmOSApi_unit 
-** @brief CosmOSApi globals
+** @defgroup Global_cosmosApi Global
+** @ingroup cosmosApi_unit 
+** @brief cosmosApi globals
 ** @details lorem  
 ********************************************************************************/
 /********************************************************************************
@@ -63,15 +63,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_CosmOSApi_h Macros
-  * @ingroup Global_CosmOSApi  
+  * @defgroup Macros_cosmosApi_h Macros
+  * @ingroup Global_cosmosApi  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_CosmOSApi_h  
+  * Macros_cosmosApi_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -82,15 +82,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_CosmOSApi_h Variables  
-  * @ingroup Global_CosmOSApi  
+  * @defgroup Variables_cosmosApi_h Variables  
+  * @ingroup Global_cosmosApi  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Variables_CosmOSApi_h  
+  * Variables_cosmosApi_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -101,47 +101,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_CosmOSApi_h API's 
-  * @ingroup Global_CosmOSApi
+  * @defgroup Apis_cosmosApi_h API's 
+  * @ingroup Global_cosmosApi
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_CosmOSApi_h Getters  
-  * @ingroup Apis_CosmOSApi_h                                            
+  * @addtogroup Getters_cosmosApi_h Getters  
+  * @ingroup Apis_cosmosApi_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_CosmOSApi_h
+  * Getters_cosmosApi_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_CosmOSApi_h Setters  
-  * @ingroup Apis_CosmOSApi_h                                            
+  * @addtogroup Setters_cosmosApi_h Setters  
+  * @ingroup Apis_cosmosApi_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_CosmOSApi_h   
+  * Setters_cosmosApi_h   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_CosmOSApi_h General  
-  * @ingroup Apis_CosmOSApi_h                                            
+  * @addtogroup General_cosmosApi_h General  
+  * @ingroup Apis_cosmosApi_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_CosmOSApi_h  
+  * General_cosmosApi_h  
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -152,47 +152,50 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_CosmOSApi_h Getters  
-  * @ingroup Apis_CosmOSApi_h                                            
+  * @addtogroup Getters_cosmosApi_h Getters  
+  * @ingroup Apis_cosmosApi_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_CosmOSApi_h
+  * Getters_cosmosApi_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_CosmOSApi_h Setters  
-  * @ingroup Apis_CosmOSApi_h                                            
+  * @addtogroup Setters_cosmosApi_h Setters  
+  * @ingroup Apis_cosmosApi_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_CosmOSApi_h   
+  * Setters_cosmosApi_h   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_CosmOSApi_h General  
-  * @ingroup Apis_CosmOSApi_h                                            
+  * @addtogroup General_cosmosApi_h General  
+  * @ingroup Apis_cosmosApi_h                                            
   * @{                                                                           
 ********************************************************************************/
-#define CosmOSApi_boot() sysCalls_osBoot()
-#define CosmOSApi_init() sysCalls_os(INIT_COSMOS)
-#define CosmOSApi_start() sysCalls_os(START_COSMOS)
-#define CosmOSApi_read_buffer_xcore_1_to_0(buffer, size) (CosmOS_BufferStateType)sysCalls_readWrite(READ_XCORE_1_TO_0_BUFFER_0, buffer, size)
-#define CosmOSApi_write_buffer_xcore_1_to_0(buffer, size) (CosmOS_BufferStateType)sysCalls_readWrite(WRITE_XCORE_1_TO_0_BUFFER_0, buffer, size)
-#define CosmOSApi_togglePin(gpio, pin) (void)sysCalls_readWrite(TOGGLE_PIN, gpio, pin)
+#define cosmosApi_boot() sysCalls_osBoot()
+#define cosmosApi_init() sysCalls_os(SYSCALL_OSINIT_INIT)
+#define cosmosApi_start() sysCalls_os(SYSCALL_OS_START)
+#define cosmosApi_togglePin(gpio, pin) (void)sysCalls_readWrite(SYSCALL_DEVICEIO_TOGGLEPIN, gpio, pin)
+
+#define cosmosApi_read_buffer_x_core_buffer_0(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_READ_BUFFER_0, array, size)
+#define cosmosApi_write_buffer_x_core_buffer_0(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_WRITE_BUFFER_0, array, size)
+#define cosmosApi_read_buffer_x_core_buffer_1(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_READ_BUFFER_1, array, size)
+#define cosmosApi_write_buffer_x_core_buffer_1(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_WRITE_BUFFER_1, array, size)
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_CosmOSApi_h  
+  * General_cosmosApi_h  
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

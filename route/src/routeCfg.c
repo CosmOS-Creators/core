@@ -65,30 +65,34 @@ __SEC_START(__OS_CONST_SECTION_START)
 const CosmOS_GenericVoidType RoutesFuncConst[ROUTES_FUNC_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    (CosmOS_GenericVoidType)buffer_readArray,                   /* 0 buffer_readArray  */
-    (CosmOS_GenericVoidType)buffer_writeArray,                  /* 1 buffer_write */
-    (CosmOS_GenericVoidType)deviceIO_togglePin,                 /* 2 deviceIO_togglePin     */
-    (CosmOS_GenericVoidType)osInit_init,                        /* 3 osInit_init     */
-    (CosmOS_GenericVoidType)os_start,                           /* 4 os_start     */
-    (CosmOS_GenericVoidType)task_setExecutionStateToFinished,   /* 5 set exec finished     */
+		(CosmOS_GenericVoidType)buffer_readArray,
+		(CosmOS_GenericVoidType)buffer_writeArray,
+		(CosmOS_GenericVoidType)deviceIO_togglePin,
+		(CosmOS_GenericVoidType)osInit_init,
+		(CosmOS_GenericVoidType)os_start,
+		(CosmOS_GenericVoidType)task_setExecutionStateToFinished,
 };
 
 const BitWidthType RoutesIdToFuncConst[ROUTES_ID_TO_FUNC_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    READ_BUFFER,        /* 0 READ_BUFFER | READ_XCORE_1_TO_0_BUFFER_0 -> READ_BUFFER -> buffer_readArray                  */
-    WRITE_BUFFER,       /* 1 WRITE_BUFFER | WRITE_XCORE_1_TO_0_BUFFER_0 -> WRITE_BUFFER -> buffer_writeArray              */
-    GPIO_TOGGLE_PIN,    /* 4 GPIO_TOGGLE_PIN | TOGGLE_PIN -> GPIO_TOGGLE_PIN -> deviceIO_togglePin                        */
-    OS_INIT,            /* 2 OS_INIT | INIT -> OS_INIT -> osInit_init                                                     */
-    OS_START,           /* 3 OS_START | START -> OS_START -> os_start                                                     */
-    OS_EXEC_FINISHED,   /* 3 OS_EXEC_FINISHED | EXEC_FINISHED -> OS_EXEC_FINISHED -> task_setExecutionStateToFinished     */
+		BUFFER_READARRAY, 
+		BUFFER_WRITEARRAY,
+		BUFFER_READARRAY, 
+		BUFFER_WRITEARRAY,
+		DEVICEIO_TOGGLEPIN,
+		OSINIT_INIT,
+		OS_START,
+		TASK_SETEXECUTIONSTATETOFINISHED,
 };
 
 const BitWidthType RoutesIdToEntityConst[ROUTES_ID_TO_ENTITY_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    BUFFER_XCORE_1_TO_0,    /* 0 BUFFER_XCORE_1_TO_0 | READ_XCORE_1_TO_0_BUFFER_0 -> BUFFER_XCORE_1_TO_0 -> canbuffer   */
-    BUFFER_XCORE_1_TO_0,    /* 1 BUFFER_XCORE_1_TO_0 | WRITE_XCORE_1_TO_0_BUFFER_0 -> BUFFER_XCORE_1_TO_0 -> canbuffer  */
+		BUFFER_0,
+		BUFFER_0,
+		BUFFER_1,
+		BUFFER_1,
 };
 
 const CosmOS_RoutesConfigurationType RoutesConstCfg __OS_CONST_SECTION

@@ -48,7 +48,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "sysDefs.h"
-#include "CosmOSTypesStd.h"
+#include "cosmosTypesStd.h"
 #include "memoryMapping.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
@@ -84,10 +84,8 @@
 ********************************************************************************/
 extern const CosmOS_GenericVoidType SysJobsHandlersGroup0Core0Const[SYSJOBS_HANDLERS_GROUP_0_CORE_0_NUM];
 extern const CosmOS_GenericVoidType SysJobsHandlersGroup0Core1Const[SYSJOBS_HANDLERS_GROUP_0_CORE_1_NUM];
-
 extern const CosmOS_SysJobsGroupConfigurationType SysJobsGroupsCore0ConstCfg[SYSJOBS_GROUPS_CORE_0_NUM];
 extern const CosmOS_SysJobsGroupConfigurationType SysJobsGroupsCore1ConstCfg[SYSJOBS_GROUPS_CORE_1_NUM];
-
 extern const CosmOS_SysJobsConfigurationType SysJobsConstCfg[CORE_NUM];
 
 extern CosmOS_SysJobsVariableType SysJobsVar[CORE_NUM];

@@ -63,15 +63,13 @@ __SEC_START(__OS_CONST_SECTION_START)
 const CosmOS_GenericVoidType SysJobsHandlersGroup0Core0Const[SYSJOBS_HANDLERS_GROUP_0_CORE_0_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    (CosmOS_GenericVoidType)CIL_uart_sysJob,          /* 0 uart3SysJob  */
+    (CosmOS_GenericVoidType)CIL_uart_sysJob,
 };
-
 const CosmOS_GenericVoidType SysJobsHandlersGroup0Core1Const[SYSJOBS_HANDLERS_GROUP_0_CORE_1_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-    (CosmOS_GenericVoidType)CIL_uart_sysJob,          /* 0 uart2SysJob  */
+    (CosmOS_GenericVoidType)CIL_uart_sysJob,
 };
-
 const CosmOS_SysJobsGroupConfigurationType SysJobsGroupsCore0ConstCfg[SYSJOBS_GROUPS_CORE_0_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
@@ -81,17 +79,15 @@ IS_INITIALIZED_TO
         SYSJOBS_GROUP_0_CORE_0_TICK_MULTIPLICATOR,      /* const BitWidthType tickMultiplicator             */
     },
 };
-
 const CosmOS_SysJobsGroupConfigurationType SysJobsGroupsCore1ConstCfg[SYSJOBS_GROUPS_CORE_1_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
     {
-        SysJobsHandlersGroup0Core0Const,                /* const CosmOS_GenericVoidType * const handlers    */
+        SysJobsHandlersGroup0Core1Const,                /* const CosmOS_GenericVoidType * const handlers    */
         SYSJOBS_HANDLERS_GROUP_0_CORE_1_NUM,            /* const BitWidthType numOfHandlers                 */
         SYSJOBS_GROUP_0_CORE_1_TICK_MULTIPLICATOR,      /* const BitWidthType tickMultiplicator             */
     },
 };
-
 const CosmOS_SysJobsConfigurationType SysJobsConstCfg[CORE_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
@@ -100,7 +96,7 @@ IS_INITIALIZED_TO
         SYSJOBS_GROUPS_CORE_0_NUM,                    /* const BitWidthType numOfGroups                               */
         SYSJOBS_CORE_0_MAX_TICK_MULTIPLICATOR         /* const BitWidthType maxTickMultiplicator                      */
     },
-    {
+{
         SysJobsGroupsCore1ConstCfg,                   /* const CosmOS_SysJobsGroupConfigurationType * const groups    */
         SYSJOBS_GROUPS_CORE_1_NUM,                    /* const BitWidthType numOfGroups                               */
         SYSJOBS_CORE_1_MAX_TICK_MULTIPLICATOR         /* const BitWidthType maxTickMultiplicator                      */
@@ -120,7 +116,7 @@ IS_INITIALIZED_TO
         &SysJobsConstCfg[CORE_0_ID],    /* const CosmOS_SysJobsConfigurationType * const cfg  */
         0,                              /* BitWidthType currentTick                           */
     },
-    {
+{
         &SysJobsConstCfg[CORE_1_ID],    /* const CosmOS_SysJobsConfigurationType * const cfg  */
         0,                              /* BitWidthType currentTick                           */
     },

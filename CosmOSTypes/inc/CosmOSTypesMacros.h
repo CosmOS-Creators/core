@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file CosmOSTypesMacros.h                                      
+** @file cosmosTypesMacros.h                                      
 *********************************************************************************	
-<!--                   CosmOSTypesMacros Unit Group Definition                   -->
+<!--                  cosmosTypesMacros Unit Group Definition                 -->
 ********************************************************************************* 
-** @defgroup CosmOSTypesMacros_unit CosmOSTypesMacros Unit 
-** @ingroup CosmOSTypes_module        
-** @brief CosmOSTypesMacros Unit 
+** @defgroup cosmosTypesMacros_unit cosmosTypesMacros Unit 
+** @ingroup cosmosTypes_module        
+** @brief cosmosTypesMacros Unit 
 ** @details lorem                               
 *********************************************************************************	
 <!--                           Version Information                            -->
@@ -25,11 +25,11 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License       	
 *********************************************************************************
-<!--               CosmOSTypesMacros Unit Global Group Definition                -->
+<!--               cosmosTypesMacros Unit Global Group Definition             -->
 *********************************************************************************	
-** @defgroup Global_CosmOSTypesMacros Global
-** @ingroup CosmOSTypesMacros_unit 
-** @brief CosmOSTypesMacros globals
+** @defgroup Global_cosmosTypesMacros Global
+** @ingroup cosmosTypesMacros_unit 
+** @brief cosmosTypesMacros globals
 ** @details lorem 
 ********************************************************************************/ 
 /********************************************************************************
@@ -55,8 +55,8 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_CosmOSTypesMacros_h Macros
-  * @ingroup Global_CosmOSTypesMacros  
+  * @defgroup Macros_cosmosTypesMacros_h Macros
+  * @ingroup Global_cosmosTypesMacros  
   * @{    
 ********************************************************************************/
 /********************************************************************************
@@ -272,7 +272,7 @@
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_CosmOSTypesMacros_h  
+  * Macros_cosmosTypesMacros_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -283,15 +283,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Typedefs_CosmOSTypesMacrosCfg_h Typedefs
-  * @ingroup Global_CosmOSTypesMacros  
+  * @defgroup Typedefs_cosmosTypesMacrosCfg_h Typedefs
+  * @ingroup Global_cosmosTypesMacros  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Typedefs_CosmOSTypesMacros_h  
+  * Typedefs_cosmosTypesMacros_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Typedefs | Stop                                **

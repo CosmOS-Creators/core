@@ -257,37 +257,37 @@ __SEC_STOP(__OS_VAR_SECTION_STOP)
 void wrapped_Idle_CM7(void)
 {
     Idle_CM7();
-    sysCalls_os(EXEC_FINISHED);
+    sysCalls_os(SYSCALL_TASK_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };
 void wrapped_sysJobs_CM7(void)
 {
     sysJobs_CM7();
-    sysCalls_os(EXEC_FINISHED);
+    sysCalls_os(SYSCALL_TASK_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };
 void wrapped_Task_0_Core_0_Handler(void)
 {
     Task_0_Core_0_Handler();
-    sysCalls_os(EXEC_FINISHED);
+    sysCalls_os(SYSCALL_TASK_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };
 void wrapped_Idle_CM4(void)
 {
     Idle_CM4();
-    sysCalls_os(EXEC_FINISHED);
+    sysCalls_os(SYSCALL_TASK_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };
 void wrapped_sysJobs_CM4(void)
 {
     sysJobs_CM4();
-    sysCalls_os(EXEC_FINISHED);
+    sysCalls_os(SYSCALL_TASK_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };
 void wrapped_Task_0_Core_1_Handler(void)
 {
     Task_0_Core_1_Handler();
-    sysCalls_os(EXEC_FINISHED);
+    sysCalls_os(SYSCALL_TASK_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };
 /********************************************************************************

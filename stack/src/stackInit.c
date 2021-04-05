@@ -27,7 +27,7 @@
 #include "program.h"
 #include "task.h"
 
-#include "CosmOSAssert.h"
+#include "cosmosAssert.h"
 
 /* CIL interfaces */
 #include "CIL_stack.h"
@@ -148,7 +148,7 @@ __OS_FUNC_SECTION BitWidthType stackInit_taskStackInit(CosmOS_TaskVariableType  
     CosmOS_HandlerType handler;
     StackPointerType stackPointer;
 
-    CosmOSAssert( taskVar IS_NOT_EQUAL_TO NULL );
+    cosmosAssert( taskVar IS_NOT_EQUAL_TO NULL );
 
     stack = task_getTaskStackVar( taskVar );
     handler = task_getTaskHandler( taskVar );

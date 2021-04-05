@@ -25,7 +25,7 @@
 #include "task.h"
 #include "program.h"
 #include "core.h"
-#include "CosmOSAssert.h"
+#include "cosmosAssert.h"
 
 /* CIL interfaces */
 #include "CIL_core.h"

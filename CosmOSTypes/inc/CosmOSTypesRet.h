@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file CosmOSTypesRet.h                                      
+** @file cosmosTypesRet.h                                      
 *********************************************************************************	
-<!--                     CosmOSTypesRet Unit Group Definition                    -->
+<!--                   cosmosTypesRet Unit Group Definition                   -->
 ********************************************************************************* 
-** @defgroup CosmOSTypesRet_unit CosmOSTypesRet Unit 
-** @ingroup CosmOSTypes_module        
-** @brief CosmOSTypesRet Unit 
+** @defgroup cosmosTypesRet_unit cosmosTypesRet Unit 
+** @ingroup cosmosTypes_module        
+** @brief cosmosTypesRet Unit 
 ** @details lorem                               
 *********************************************************************************	
 <!--                           Version Information                            -->
@@ -25,11 +25,11 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License       	
 *********************************************************************************
-<!--                CosmOSTypesRet Unit Global Group Definition                  -->
+<!--              cosmosTypesRet Unit Global Group Definition                 -->
 *********************************************************************************	
-** @defgroup Global_CosmOSTypesRet Global
-** @ingroup CosmOSTypesRet_unit 
-** @brief CosmOSTypesRet globals
+** @defgroup Global_cosmosTypesRet Global
+** @ingroup cosmosTypesRet_unit 
+** @brief cosmosTypesRet globals
 ** @details lorem 
 ********************************************************************************/ 
 /********************************************************************************
@@ -55,15 +55,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_CosmOSTypesRet_h Macros
-  * @ingroup Global_CosmOSTypesRet  
+  * @defgroup Macros_cosmosTypesRet_h Macros
+  * @ingroup Global_cosmosTypesRet  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_CosmOSTypesRet_h  
+  * Macros_cosmosTypesRet_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -74,15 +74,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Typedefs_CosmOSTypesRetCfg_h Typedefs
-  * @ingroup Global_CosmOSTypesRet  
+  * @defgroup Typedefs_cosmosTypesRetCfg_h Typedefs
+  * @ingroup Global_cosmosTypesRet  
   * @{    
 ********************************************************************************/;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Typedefs_CosmOSTypesRet_h  
+  * Typedefs_cosmosTypesRet_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Typedefs | Stop                                **

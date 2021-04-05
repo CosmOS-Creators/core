@@ -47,7 +47,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "CosmOSTypesStd.h"
+#include "cosmosTypesStd.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -61,17 +61,16 @@
   * @ingroup Global_sysDefsSysJobs  
   * @{    
 ********************************************************************************/
-#define SYSJOBS_HANDLERS_GROUP_0_CORE_0_NUM    (BitWidthType)1        /* Maximal number of configurated tasks on the one core  */
-#define SYSJOBS_HANDLERS_GROUP_0_CORE_1_NUM    (BitWidthType)1        /* Maximal number of configurated tasks on the one core  */
+#define SYSJOBS_GROUPS_CORE_0_NUM    (BitWidthType)1        /* Number of configurated sysJob groups on the core CM7  */
+#define SYSJOBS_CORE_0_MAX_TICK_MULTIPLICATOR    (BitWidthType)0        /* Maximal tick multiplicator on the CM7  */
 
-#define SYSJOBS_GROUPS_CORE_0_NUM    (BitWidthType)1        /* Maximal number of configurated tasks on the one core  */
-#define SYSJOBS_GROUPS_CORE_1_NUM    (BitWidthType)1        /* Maximal number of configurated tasks on the one core  */
+#define SYSJOBS_HANDLERS_GROUP_0_CORE_0_NUM    (BitWidthType)1        /* Number of configurated handlers in group ID 0  */
+#define SYSJOBS_GROUP_0_CORE_0_TICK_MULTIPLICATOR    (BitWidthType)0        /* Tick multiplicator in group ID 0  */
+#define SYSJOBS_GROUPS_CORE_1_NUM    (BitWidthType)1        /* Number of configurated sysJob groups on the core CM4  */
+#define SYSJOBS_CORE_1_MAX_TICK_MULTIPLICATOR    (BitWidthType)0        /* Maximal tick multiplicator on the CM4  */
 
-#define SYSJOBS_GROUP_0_CORE_0_TICK_MULTIPLICATOR    (BitWidthType)0        /* Maximal number of configurated tasks on the one core  */
-#define SYSJOBS_GROUP_0_CORE_1_TICK_MULTIPLICATOR    (BitWidthType)0        /* Maximal number of configurated tasks on the one core  */
-
-#define SYSJOBS_CORE_0_MAX_TICK_MULTIPLICATOR    (BitWidthType)0        /* Maximal number of configurated tasks on the one core  */
-#define SYSJOBS_CORE_1_MAX_TICK_MULTIPLICATOR    (BitWidthType)0        /* Maximal number of configurated tasks on the one core  */
+#define SYSJOBS_HANDLERS_GROUP_0_CORE_1_NUM    (BitWidthType)1        /* Number of configurated handlers in group ID 0  */
+#define SYSJOBS_GROUP_0_CORE_1_TICK_MULTIPLICATOR    (BitWidthType)0        /* Tick multiplicator in group ID 0  */
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

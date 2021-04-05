@@ -28,7 +28,7 @@
 #include "task.h"
 #include "program.h"
 #include "stackInit.h"
-#include "CosmOSAssert.h"
+#include "cosmosAssert.h"
 #include "switchSchedulerSync.h"
 #include "switchMemoryProtection.h"
 
@@ -173,7 +173,7 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
     scheduleTableIteratorPrior = scheduler_getSchedulerScheduleTableIteratorPrior( schedulerVar );
     scheduleTableElementsNum = scheduler_getSchedulerScheduleTableElementsNum( schedulerVar );
 
-    CosmOSAssert( scheduleTableIterator < scheduleTableElementsNum );
+    cosmosAssert( scheduleTableIterator < scheduleTableElementsNum );
 
     startTick = scheduler_getSchedulerScheduleTableStartTick( schedulerVar, scheduleTableIterator );
     hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );
@@ -290,7 +290,7 @@ __OS_FUNC_SECTION void scheduler_start(void)
     scheduleTableIterator = scheduler_getSchedulerScheduleTableIterator( schedulerVar );
     scheduleTableElementsNum = scheduler_getSchedulerScheduleTableElementsNum( schedulerVar );
 
-    CosmOSAssert( scheduleTableIterator < scheduleTableElementsNum );
+    cosmosAssert( scheduleTableIterator < scheduleTableElementsNum );
 
     startTick = scheduler_getSchedulerScheduleTableStartTick( schedulerVar, scheduleTableIterator );
     hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );

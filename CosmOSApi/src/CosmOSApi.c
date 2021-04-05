@@ -7,7 +7,7 @@
 *****************************************************************************//**
 ** @file CosmOSApi.c
 *********************************************************************************
-<!--                     CosmOSApi Unit Local Group Definition                   -->
+<!--                   CosmOSApi Unit Local Group Definition                  -->
 *********************************************************************************	
 ** @defgroup Local_CosmOSApi Local
 ** @ingroup CosmOSApi_unit 

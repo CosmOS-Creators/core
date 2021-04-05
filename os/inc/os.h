@@ -54,7 +54,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "sysDefs.h"
-#include "CosmOSTypesStd.h"
+#include "cosmosTypesStd.h"
 #include "memoryMapping.h"
 /********************************************************************************
 **                            Include Files | Stop                             **

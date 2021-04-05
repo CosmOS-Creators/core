@@ -24,7 +24,7 @@
 #include "os.h"
 #include "core.h"
 #include "coreSync.h"
-#include "CosmOSAssert.h"
+#include "cosmosAssert.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -195,7 +195,7 @@ __OS_FUNC_SECTION void coreSync_reactivateBarrier(CosmOS_CoreVariableType * core
 {
     CosmOS_BarrierVariableType * barrierVar;
 
-    CosmOSAssert( barrierId IS_EQUAL_TO SCHEDULERS_SYNC_ID );
+    cosmosAssert( barrierId IS_EQUAL_TO SCHEDULERS_SYNC_ID );
 
     barrierVar = core_getBarrierVar( coreVar, barrierId );
     coreSync_setBarrierState( barrierVar, BARRIER_STATE_ENUM__ACTIVATED );
