@@ -113,11 +113,34 @@ typedef struct
 typedef struct
 {
     unsigned char * const buffer;
+    const BitWidthType id;
     const BitWidthType size;
     const CosmOS_PermissionsConfigurationType * const readPermission;
     const CosmOS_PermissionsConfigurationType * const writePermission;
 
 } CosmOS_BufferConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_BufferDoublePairConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    void * const buffer;
+
+} CosmOS_BufferDoublePairConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_BufferDoubleConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    const CosmOS_BufferDoublePairConfigurationType * const bufferPair;
+
+} CosmOS_BufferDoubleConfigurationType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **

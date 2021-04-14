@@ -258,24 +258,18 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
     }
     else
     {   
-        BitWidthType bufferVarIndex;
-
         CosmOS_AccessStateType accessState;
 
         CosmOS_OsVariableType * osVar;
         CosmOS_CoreVariableType * coreVar;
         CosmOS_BufferVariableType * bufferVar;
-        CosmOS_RoutesConfigurationType * routeVar;
         CosmOS_PermissionsConfigurationType * readPermission;
 
 
         osVar = os_getOsVar();
         coreVar = CIL_core_getCoreVar();
 
-        routeVar = os_getOsRoutes( osVar );
-
-        bufferVarIndex = route_getRoutesEntityId( routeVar, id );
-        bufferVar = os_getOsBufferVar( osVar, bufferVarIndex );
+        bufferVar = os_getOsBufferVar( osVar, id );
 
         readPermission = buffer_getBufferReadPermission( bufferVar );
         accessState = permission_tryAccess( readPermission, coreVar );
@@ -349,24 +343,18 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
     }
     else
     {   
-        BitWidthType bufferVarIndex;
-
         CosmOS_AccessStateType accessState;
 
         CosmOS_OsVariableType * osVar;
         CosmOS_CoreVariableType * coreVar;
         CosmOS_BufferVariableType * bufferVar;
-        CosmOS_RoutesConfigurationType * routeVar;
         CosmOS_PermissionsConfigurationType * writePermission;
 
 
         osVar = os_getOsVar();
         coreVar = CIL_core_getCoreVar();
 
-        routeVar = os_getOsRoutes( osVar );
-
-        bufferVarIndex = route_getRoutesEntityId( routeVar, id );
-        bufferVar = os_getOsBufferVar( osVar, bufferVarIndex );
+        bufferVar = os_getOsBufferVar( osVar, id );
 
         writePermission = buffer_getBufferWritePermission( bufferVar );
         accessState = permission_tryAccess( writePermission, coreVar );

@@ -206,6 +206,22 @@ __STATIC_FORCEINLINE unsigned char * buffer_getBuffer(CosmOS_BufferVariableType 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn buffer_getBufferId(CosmOS_BufferVariableType * bufferVar) 
+  * 
+  * @brief Get buffer id.
+  * 
+  * @param[in]  CosmOS_BufferVariableType * bufferVar
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType buffer_getBufferId(CosmOS_BufferVariableType * bufferVar)
+{
+    return (bufferVar->cfg->id);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn buffer_getBufferSize(CosmOS_BufferVariableType * bufferVar) 
   * 
   * @brief Get buffer size.

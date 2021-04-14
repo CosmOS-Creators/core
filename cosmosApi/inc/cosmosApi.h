@@ -187,10 +187,10 @@
 #define cosmosApi_start() sysCalls_os(SYSCALL_OS_START)
 #define cosmosApi_togglePin(gpio, pin) (void)sysCalls_readWrite(SYSCALL_DEVICEIO_TOGGLEPIN, gpio, pin)
 
-#define cosmosApi_read_buffer_x_core_buffer_0(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_READ_BUFFER_0, array, size)
-#define cosmosApi_write_buffer_x_core_buffer_0(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_WRITE_BUFFER_0, array, size)
-#define cosmosApi_read_buffer_x_core_buffer_1(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_READ_BUFFER_1, array, size)
-#define cosmosApi_write_buffer_x_core_buffer_1(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_WRITE_BUFFER_1, array, size)
+#define cosmosApi_read_buffer_x_core_buffer_0(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_READ_BUFFER_0_ID, array, size)
+#define cosmosApi_write_buffer_x_core_buffer_0(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_WRITE_BUFFER_0_ID, array, size)
+#define cosmosApi_read_buffer_x_core_buffer_1(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_READ_BUFFER_1_ID, array, size)
+#define cosmosApi_write_buffer_x_core_buffer_1(array, size) (cosmos_BufferStateType)sysCalls_readWrite(SYSCALL_WRITE_BUFFER_1_ID, array, size)
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

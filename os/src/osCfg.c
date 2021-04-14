@@ -24,6 +24,7 @@
 #include "osCfg.h"
 #include "coreCfg.h"
 #include "bufferCfg.h"
+#include "bufferDoubleCfg.h"
 #include "routeCfg.h"
 #include "sysJobsCfg.h"
 /********************************************************************************
@@ -79,10 +80,11 @@ __SEC_START(__OS_VAR_SECTION_START)
 /* @endcond*/
 CosmOS_OsVariableType OsVar __OS_VAR_SECTION
 IS_INITIALIZED_TO
-{                       /* osVar                                       */
-    &OsCfg,             /* const CosmOS_OsConfigurationType * cfg      */
-    CoresVar,           /* CosmOS_CoreVariableType * coreVars          */   
-    BuffersVar,         /* CosmOS_BufferVariableType * bufferVars      */
+{                       /* osVar                                                      */
+    &OsCfg,             /* const CosmOS_OsConfigurationType * cfg                     */
+    CoresVar,           /* CosmOS_CoreVariableType * coreVars                         */   
+    BuffersVar,         /* CosmOS_BufferVariableType * bufferVars                     */
+    BuffersDoubleVar,   /* CosmOS_BufferDoubleVariableType * const bufferDoubleVars   */
 };
 /* @cond S */
 __SEC_STOP(__OS_VAR_SECTION_STOP)

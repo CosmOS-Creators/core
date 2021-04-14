@@ -57,6 +57,7 @@
 #include "sysDefsRoutes.h"
 #include "sysDefsBarriers.h"
 #include "sysDefsBuffers.h"
+#include "sysDefsBuffersDouble.h"
 #include "sysDefsTasks.h"
 #include "sysDefsPrograms.h"
 #include "sysDefsPermissions.h"

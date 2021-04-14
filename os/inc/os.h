@@ -327,6 +327,39 @@ __STATIC_FORCEINLINE CosmOS_BufferVariableType * os_getOsBufferVar(CosmOS_OsVari
 {
     return (&(osVar->bufferVars[bufferId]));
 }
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_getOsBufferDoubleVars(CosmOS_OsVariableType * osVar) 
+  * 
+  * @brief Get os bufferDoubleVars pointer.
+  * 
+  * @param[in]  CosmOS_OsVariableType * osVar
+  * 
+  * @return CosmOS_BufferDoubleVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVars(CosmOS_OsVariableType * osVar)
+{
+    return (osVar->bufferDoubleVars);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar,BitWidthType bufferDoubleId) 
+  * 
+  * @brief Get os bufferDouble pointer.
+  * 
+  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  BitWidthType bufferId
+  * 
+  * @return CosmOS_BufferDoubleVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar, BitWidthType bufferDoubleId)
+{
+    return (&(osVar->bufferDoubleVars[bufferDoubleId]));
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

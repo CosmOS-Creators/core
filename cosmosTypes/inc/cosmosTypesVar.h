@@ -108,6 +108,19 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_BufferDoubleVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    const CosmOS_BufferDoubleConfigurationType * const cfg;
+    BitWidthType activeKernelBufferId;
+    BitWidthType activeUserBufferId;
+
+} CosmOS_BufferDoubleVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_TaskVariableType struct type
 ********************************************************************************/
 typedef struct
@@ -200,6 +213,7 @@ typedef struct
     const CosmOS_OsConfigurationType * const cfg;
     CosmOS_CoreVariableType * const coreVars;
     CosmOS_BufferVariableType * const bufferVars;
+    CosmOS_BufferDoubleVariableType * const bufferDoubleVars;
     
 } CosmOS_OsVariableType;
 /********************************************************************************

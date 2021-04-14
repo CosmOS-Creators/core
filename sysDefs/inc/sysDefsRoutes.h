@@ -63,7 +63,8 @@
   * @{    
 ********************************************************************************/
 #define ROUTES_FUNC_NUM (BitWidthType)6          /* Number of route RW */
-#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)4     /* Number of route identificators */
+
+#define ROUTES_ID_TO_ENTITY_DUMMY (BitWidthType)0     /* Dummy it to entity */
 
 #define BUFFER_READARRAY (BitWidthType)0            /* Identificator pointing on function pointer in array (Routes) */
 #define BUFFER_WRITEARRAY (BitWidthType)1            /* Identificator pointing on function pointer in array (Routes) */
@@ -73,10 +74,10 @@
 #define TASK_SETEXECUTIONSTATETOFINISHED (BitWidthType)5            /* Identificator pointing on function pointer in array (Routes) */
 
 
-#define SYSCALL_READ_BUFFER_0 (BitWidthType)0   /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
-#define SYSCALL_WRITE_BUFFER_0 (BitWidthType)1  /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
-#define SYSCALL_READ_BUFFER_1 (BitWidthType)2   /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
-#define SYSCALL_WRITE_BUFFER_1 (BitWidthType)3  /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
+#define SYSCALL_READ_BUFFER_0_ID (BitWidthType)0   /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
+#define SYSCALL_WRITE_BUFFER_0_ID (BitWidthType)1  /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
+#define SYSCALL_READ_BUFFER_1_ID (BitWidthType)2   /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
+#define SYSCALL_WRITE_BUFFER_1_ID (BitWidthType)3  /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
 #define SYSCALL_DEVICEIO_TOGGLEPIN (BitWidthType)4            /* Identificator pointing on function pointer in array (Routes) */
 #define SYSCALL_OSINIT_INIT (BitWidthType)5            /* Identificator pointing on function pointer in array (Routes) */
 #define SYSCALL_OS_START (BitWidthType)6            /* Identificator pointing on function pointer in array (Routes) */
@@ -84,6 +85,7 @@
 
 
 #define ROUTES_ID_TO_FUNC_NUM (BitWidthType)8    /* Number of route identificators */
+#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)8     /* Number of route identificators */
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

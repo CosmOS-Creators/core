@@ -72,12 +72,14 @@ IS_INITIALIZED_TO
 {
 		{
         buffer0Arr,
+        BUFFER_0_ID,
         BUFFER_0_SIZE,
         PermissionsBuffer0ReadCfgConst,
         PermissionsBuffer0WriteCfgConst,
     },
 		{
         buffer1Arr,
+        BUFFER_1_ID,
         BUFFER_1_SIZE,
         PermissionsBuffer1ReadCfgConst,
         PermissionsBuffer1WriteCfgConst,
@@ -91,13 +93,13 @@ CosmOS_BufferVariableType BuffersVar[BUFFER_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO
 {
 		{
-        &BuffersCfgConst[BUFFER_0],
+        &BuffersCfgConst[BUFFER_0_ID],
         0,
         0,
         0,
     },
 		{
-        &BuffersCfgConst[BUFFER_1],
+        &BuffersCfgConst[BUFFER_1_ID],
         0,
         0,
         0,
