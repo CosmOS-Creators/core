@@ -179,6 +179,8 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
     hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );
     currentTick = scheduler_getSchedulerCurrentTick( schedulerVar );
 
+
+    //this should be moved to the sysTick interrupt with higher priority to have faster response
     if ( schedulerState IS_EQUAL_TO SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK )
     {
         CosmOS_TaskExecutionStateType taskExecutionState;
