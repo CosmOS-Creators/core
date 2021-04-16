@@ -21,11 +21,8 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "os.h"
-#include "task.h"
-#include "program.h"
+#include "schedulable.h"
 #include "core.h"
-#include "cosmosAssert.h"
 
 /* CIL interfaces */
 #include "CIL_core.h"
@@ -145,32 +142,34 @@ __OS_FUNC_SECTION CosmOS_CoreVariableType * core_getCoreVar(void)
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @endcond*/
+
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_setTaskIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_TaskVariableType * taskVar)
+  * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_TaskVariableType * taskVar)
   * 
-  * @brief Set core program into current context, set task into program current context.
+  * @brief Set program and schedulable into the current context.
   * 
   * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  CosmOS_TaskVariableType * taskVar
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
   * 
   * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void core_setTaskIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_TaskVariableType * taskVar)
+__OS_FUNC_SECTION void core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_SchedulableVariableType * schedulableVar)
 {
     BitWidthType programId;
 
     CosmOS_ProgramVariableType * programVar;
 
-    programId = task_getTaskProgramId( taskVar );
+
+    programId = schedulable_getProgramId( schedulableVar );
     programVar = core_getCoreProgramVar( coreVar, programId ); 
 
-    program_setProgramTaskInCurrentContext( programVar, taskVar );
-    core_setCoreProgramInCurrentContext( coreVar, programVar );
+    core_setCoreProgramInExecution( coreVar, programVar );
+    core_setCoreSchedulableInExecution( coreVar, schedulableVar );
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file sysDefsBuffers.h                                      	 		
+** @file sysDefsSchedulerThreadLists.h                                      	 		
 *********************************************************************************	
-<!--                   sysDefsBuffers Unit Group Definition                   -->
+<!--            sysDefsSchedulerThreadLists Unit Group Definition             -->
 ********************************************************************************* 
-** @defgroup sysDefsBuffers_unit sysDefsBuffers Unit 
+** @defgroup sysDefsSchedulerThreadLists_unit sysDefsSchedulerThreadLists Unit 
 ** @ingroup sysDefs_module        
-** @brief sysDefsBuffers Unit 
+** @brief sysDefsSchedulerThreadLists Unit 
 ** @details lorem                               
 *********************************************************************************	
 <!--                           Version Information                            -->
@@ -25,18 +25,18 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License       	
 *********************************************************************************
-<!--               sysDefsBuffers Unit Global Group Definition                -->
+<!--       sysDefsSchedulerThreadLists Unit Global Group Definition           -->
 *********************************************************************************	
-** @defgroup Global_sysDefsBuffers Global
-** @ingroup sysDefsBuffers_unit 
-** @brief sysDefsBuffers globals
+** @defgroup Global_sysDefsSchedulerThreadLists Global
+** @ingroup sysDefsSchedulerThreadLists_unit 
+** @brief sysDefsSchedulerThreadLists globals
 ** @details lorem 
 ********************************************************************************/ 
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __SYSDEFSBUFFERS_H__
-#define __SYSDEFSBUFFERS_H__
+#ifndef __SYSDEFSSCHEDULERTHREADLISTS_H__
+#define __SYSDEFSSCHEDULERTHREADLISTS_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -57,23 +57,17 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_sysDefsBuffers_h Macros
-  * @ingroup Global_sysDefsBuffers  
+  * @defgroup Macros_sysDefsSchedulerThreadLists_h Macros
+  * @ingroup Global_sysDefsSchedulerThreadLists  
   * @{    
 ********************************************************************************/
-#define BUFFER_NUM (BitWidthType)2     /* Number of initialized buffers */
-
-
-#define BUFFER_0_ID      (BitWidthType)0      /* Buffer x_core_buffer_0 id */
-#define BUFFER_0_SIZE (BitWidthType)32      /* Buffer x_core_buffer_0 size */
-
-#define BUFFER_1_ID      (BitWidthType)1      /* Buffer x_core_buffer_1 id */
-#define BUFFER_1_SIZE (BitWidthType)32      /* Buffer x_core_buffer_1 size */
+#define SCHEDULERTHREADLIST_SCHEDULER_0_ELEMENT_NUM     (BitWidthType)1             /* Number of elements in threadlist for core CM7 */
+#define SCHEDULERTHREADLIST_SCHEDULER_1_ELEMENT_NUM     (BitWidthType)1             /* Number of elements in threadlist for core CM4 */
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_sysDefsBuffers_h  
+  * Macros_sysDefsSchedulerThreadLists_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -84,15 +78,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_sysDefsBuffers_h Variables  
-  * @ingroup Global_sysDefsBuffers  
+  * @defgroup Variables_sysDefsSchedulerThreadLists_h Variables  
+  * @ingroup Global_sysDefsSchedulerThreadLists  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Variables_sysDefsBuffers_h  
+  * Variables_sysDefsSchedulerThreadLists_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -103,47 +97,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_sysDefsBuffers_h API's 
-  * @ingroup Global_sysDefsBuffers
+  * @defgroup Apis_sysDefsSchedulerThreadLists_h API's 
+  * @ingroup Global_sysDefsSchedulerThreadLists
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_sysDefsBuffers_h Getters  
-  * @ingroup Apis_sysDefsBuffers_h                                            
+  * @addtogroup Getters_sysDefsSchedulerThreadLists_h Getters  
+  * @ingroup Apis_sysDefsSchedulerThreadLists_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_sysDefsBuffers_h
+  * Getters_sysDefsSchedulerThreadLists_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_sysDefsBuffers_h Setters  
-  * @ingroup Apis_sysDefsBuffers_h                                            
+  * @addtogroup Setters_sysDefsSchedulerThreadLists_h Setters  
+  * @ingroup Apis_sysDefsSchedulerThreadLists_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_sysDefsBuffers_h   
+  * Setters_sysDefsSchedulerThreadLists_h   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_sysDefsBuffers_h General  
-  * @ingroup Apis_sysDefsBuffers_h                                            
+  * @addtogroup General_sysDefsSchedulerThreadLists_h General  
+  * @ingroup Apis_sysDefsSchedulerThreadLists_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_sysDefsBuffers_h  
+  * General_sysDefsSchedulerThreadLists_h  
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -154,41 +148,41 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_sysDefsBuffers_h Getters  
-  * @ingroup Apis_sysDefsBuffers_h                                            
+  * @addtogroup Getters_sysDefsSchedulerThreadLists_h Getters  
+  * @ingroup Apis_sysDefsSchedulerThreadLists_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_sysDefsBuffers_h
+  * Getters_sysDefsSchedulerThreadLists_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_sysDefsBuffers_h Setters  
-  * @ingroup Apis_sysDefsBuffers_h                                            
+  * @addtogroup Setters_sysDefsSchedulerThreadLists_h Setters  
+  * @ingroup Apis_sysDefsSchedulerThreadLists_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_sysDefsBuffers_h   
+  * Setters_sysDefsSchedulerThreadLists_h   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_sysDefsBuffers_h General  
-  * @ingroup Apis_sysDefsBuffers_h                                            
+  * @addtogroup General_sysDefsSchedulerThreadLists_h General  
+  * @ingroup Apis_sysDefsSchedulerThreadLists_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_sysDefsBuffers_h  
+  * General_sysDefsSchedulerThreadLists_h  
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

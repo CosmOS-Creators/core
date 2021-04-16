@@ -22,6 +22,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "programCfg.h"
+#include "threadCfg.h"
 #include "taskCfg.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
@@ -61,18 +62,18 @@ __SEC_START(__OS_CONST_SECTION_START)
 const CosmOS_ProgramConfigurationType ProgramsCore0CfgConst[PROGRAM_CORE_0_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		{                                                   /* ProgramsCore0CfgConst[PROGRAM_0_CORE_0_ID]           */
-        TasksProgram0Core0CfgConst,                     /* const CosmOS_TaskConfigurationType * tasks              */
+		{
         CORE_0_ID,                                      /* const BitWidthType coreId                            */
         TASK_PROGRAM_0_CORE_0_NUM,                      /* const BitWidthType numberOfTasks                     */
+        THREAD_PROGRAM_0_CORE_0_NUM,                      /* const BitWidthType numberOfThreads                     */
         PROGRAM_0_CORE_0_SIZE,                      /* const BitWidthType programMemorySize                     */
         PROGRAM_0_CORE_0_LOW_ADDRESS,                      /* const AddressType programMemoryLowAddress                     */
         PROGRAM_0_CORE_0_HIGH_ADDRESS,                      /* const AddressType programMemoryHighAddress                     */
     },
-		{                                                   /* ProgramsCore0CfgConst[PROGRAM_1_CORE_0_ID]           */
-        TasksProgram1Core0CfgConst,                     /* const CosmOS_TaskConfigurationType * tasks              */
+		{
         CORE_0_ID,                                      /* const BitWidthType coreId                            */
         TASK_PROGRAM_1_CORE_0_NUM,                      /* const BitWidthType numberOfTasks                     */
+        THREAD_PROGRAM_1_CORE_0_NUM,                      /* const BitWidthType numberOfThreads                     */
         PROGRAM_1_CORE_0_SIZE,                      /* const BitWidthType programMemorySize                     */
         PROGRAM_1_CORE_0_LOW_ADDRESS,                      /* const AddressType programMemoryLowAddress                     */
         PROGRAM_1_CORE_0_HIGH_ADDRESS,                      /* const AddressType programMemoryHighAddress                     */
@@ -81,18 +82,18 @@ IS_INITIALIZED_TO
 const CosmOS_ProgramConfigurationType ProgramsCore1CfgConst[PROGRAM_CORE_1_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		{                                                   /* ProgramsCore1CfgConst[PROGRAM_0_CORE_1_ID]           */
-        TasksProgram0Core1CfgConst,                     /* const CosmOS_TaskConfigurationType * tasks              */
+		{
         CORE_1_ID,                                      /* const BitWidthType coreId                            */
         TASK_PROGRAM_0_CORE_1_NUM,                      /* const BitWidthType numberOfTasks                     */
+        THREAD_PROGRAM_0_CORE_1_NUM,                      /* const BitWidthType numberOfThreads                     */
         PROGRAM_0_CORE_1_SIZE,                      /* const BitWidthType programMemorySize                     */
         PROGRAM_0_CORE_1_LOW_ADDRESS,                      /* const AddressType programMemoryLowAddress                     */
         PROGRAM_0_CORE_1_HIGH_ADDRESS,                      /* const AddressType programMemoryHighAddress                     */
     },
-		{                                                   /* ProgramsCore1CfgConst[PROGRAM_1_CORE_1_ID]           */
-        TasksProgram1Core1CfgConst,                     /* const CosmOS_TaskConfigurationType * tasks              */
+		{
         CORE_1_ID,                                      /* const BitWidthType coreId                            */
         TASK_PROGRAM_1_CORE_1_NUM,                      /* const BitWidthType numberOfTasks                     */
+        THREAD_PROGRAM_1_CORE_1_NUM,                      /* const BitWidthType numberOfThreads                     */
         PROGRAM_1_CORE_1_SIZE,                      /* const BitWidthType programMemorySize                     */
         PROGRAM_1_CORE_1_LOW_ADDRESS,                      /* const AddressType programMemoryLowAddress                     */
         PROGRAM_1_CORE_1_HIGH_ADDRESS,                      /* const AddressType programMemoryHighAddress                     */
@@ -108,29 +109,29 @@ __SEC_START(__OS_VAR_SECTION_START)
 CosmOS_ProgramVariableType ProgramsCore0Var[PROGRAM_CORE_0_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO
 {
-		{                                                   /* ProgramsCore0Var[PROGRAM_0_CORE_0_ID]                          */
+		{
         &ProgramsCore0CfgConst[PROGRAM_0_CORE_0_ID],    /* const CosmOS_ProgramConfigurationType * cfg                       */
-        NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
-        TasksProgram0Core0Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
+        TasksProgram0Core0Var,                          /* CosmOS_TaskVariableType * taskVars                                */
+        ThreadsProgram0Core0Var,                          /* CosmOS_ThreadVariableType * threadVars                                */
     },
-		{                                                   /* ProgramsCore0Var[PROGRAM_1_CORE_0_ID]                          */
+		{
         &ProgramsCore0CfgConst[PROGRAM_1_CORE_0_ID],    /* const CosmOS_ProgramConfigurationType * cfg                       */
-        NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
-        TasksProgram1Core0Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
+        TasksProgram1Core0Var,                          /* CosmOS_TaskVariableType * taskVars                                */
+        ThreadsProgram1Core0Var,                          /* CosmOS_ThreadVariableType * threadVars                                */
     },
 };
 CosmOS_ProgramVariableType ProgramsCore1Var[PROGRAM_CORE_1_NUM] __OS_VAR_SECTION
 IS_INITIALIZED_TO
 {
-		{                                                   /* ProgramsCore0Var[PROGRAM_0_CORE_1_ID]                          */
+		{
         &ProgramsCore1CfgConst[PROGRAM_0_CORE_1_ID],    /* const CosmOS_ProgramConfigurationType * cfg                       */
-        NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
-        TasksProgram0Core1Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
+        TasksProgram0Core1Var,                          /* CosmOS_TaskVariableType * taskVars                                */
+        ThreadsProgram0Core1Var,                          /* CosmOS_ThreadVariableType * threadVars                                */
     },
-		{                                                   /* ProgramsCore0Var[PROGRAM_1_CORE_1_ID]                          */
+		{
         &ProgramsCore1CfgConst[PROGRAM_1_CORE_1_ID],    /* const CosmOS_ProgramConfigurationType * cfg                       */
-        NULL,                                           /* CosmOS_TaskVariableType * taskInCurrentContext                    */      
-        TasksProgram1Core1Var,                          /* CosmOS_TaskVariableType * taskVars                                */                        
+        TasksProgram1Core1Var,                          /* CosmOS_TaskVariableType * taskVars                                */
+        ThreadsProgram1Core1Var,                          /* CosmOS_ThreadVariableType * threadVars                                */
     },
 };
 /* @cond S */

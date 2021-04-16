@@ -161,49 +161,49 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn stack_getStackSize(CosmOS_StackVariableType * stack)
+  * @fn stack_getStackSize(CosmOS_StackConfigurationType * stack)
   * 
   * @brief Get stackSize.
   * 
-  * @param[in]  CosmOS_StackVariableType * stack
+  * @param[in]  CosmOS_StackConfigurationType * stack
   * 
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType stack_getStackSize(CosmOS_StackVariableType * stack)
+__STATIC_FORCEINLINE BitWidthType stack_getStackSize(CosmOS_StackConfigurationType * stack)
 {
-    return (stack->cfg->stackSize);
+    return (stack->stackSize);
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn stack_getStackLowAddress(CosmOS_StackVariableType * stack)
+  * @fn stack_getStackLowAddress(CosmOS_StackConfigurationType * stack)
   * 
   * @brief Get stackLowAddress.
   * 
-  * @param[in]  CosmOS_StackVariableType * stack
+  * @param[in]  CosmOS_StackConfigurationType * stack
   * 
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType stack_getStackLowAddress(CosmOS_StackVariableType * stack)
+__STATIC_FORCEINLINE AddressType stack_getStackLowAddress(CosmOS_StackConfigurationType * stack)
 {
-    return (stack->cfg->stackLowAddress);
+    return (stack->stackLowAddress);
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn stack_getStackHighAddress(CosmOS_StackVariableType * stack)
+  * @fn stack_getStackHighAddress(CosmOS_StackConfigurationType * stack)
   * 
   * @brief Get stackHighAddress.
   * 
-  * @param[in]  CosmOS_StackVariableType * stack
+  * @param[in]  CosmOS_StackConfigurationType * stack
   * 
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType stack_getStackHighAddress(CosmOS_StackVariableType * stack)
+__STATIC_FORCEINLINE AddressType stack_getStackHighAddress(CosmOS_StackConfigurationType * stack)
 {
-    return (stack->cfg->stackHighAddress);
+    return (stack->stackHighAddress);
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

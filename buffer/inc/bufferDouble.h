@@ -339,7 +339,7 @@ __STATIC_FORCEINLINE void bufferDouble_setBufferDoubleUserBuffer(CosmOS_BufferDo
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType bufferDouble_isUserAndKernelBufferSame(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
 {
-    return (bufferDoubleVar->activeKernelBufferId IS_EQUAL_TO bufferDoubleVar->activeUserBufferId ? true : false);
+    return (bufferDoubleVar->activeKernelBufferId IS_EQUAL_TO bufferDoubleVar->activeUserBufferId ? True : False);
 }
 
 /********************************************************************************

@@ -137,15 +137,15 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn stackInit_taskStackInit(CosmOS_TaskVariableType  * taskVar)
+  * @fn stackInit_schedulableStackInit(CosmOS_SchedulableConfigurationType  * schedulable)
   * 
-  * @brief Task stack initialization.
+  * @brief Schedulable stack initialization.
   * 
-  * @param[in]  CosmOS_TaskVariableType  * taskVar
+  * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
   * 
-  * @return BitWidthType
+  * @return StackPointerType
 ********************************************************************************/
-__OS_FUNC_SECTION BitWidthType stackInit_taskStackInit(CosmOS_TaskVariableType  * taskVar);
+__OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_SchedulableVariableType  * schedulable);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **

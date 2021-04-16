@@ -136,16 +136,16 @@ __OS_FUNC_SECTION void memoryProtection_init();
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_setMemoryProtection(CosmOS_TaskVariableType * task)
+  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable)
   * 
   * @brief Set memory protection for current execution context.
   * 
   * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_TaskVariableType * task
+  * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
   * 
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_TaskVariableType * task);
+__OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

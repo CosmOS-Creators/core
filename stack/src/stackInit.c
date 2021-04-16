@@ -26,8 +26,8 @@
 #include "core.h"
 #include "program.h"
 #include "task.h"
-
-#include "cosmosAssert.h"
+#include "thread.h"
+#include "schedulable.h"
 
 /* CIL interfaces */
 #include "CIL_stack.h"
@@ -129,29 +129,30 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn stackInit_taskStackInit(CosmOS_TaskVariableType  * taskVar)
+  * @fn stackInit_schedulableStackInit(CosmOS_SchedulableVariableType  * schedulable)
   * 
-  * @brief Task stack initialization.
+  * @brief Schedulable stack initialization.
   * 
-  * @param[in]  CosmOS_TaskVariableType  * taskVar
+  * @param[in]  CosmOS_SchedulableVariableType  * schedulable
   * 
-  * @return BitWidthType
+  * @return StackPointerType
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION BitWidthType stackInit_taskStackInit(CosmOS_TaskVariableType  * taskVar)
+__OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_SchedulableVariableType  * schedulable)
 {
     AddressType stackLowAddress,
-                 stackHighAddress;
-    CosmOS_StackVariableType * stack;
+                stackHighAddress;
+
     CosmOS_HandlerType handler;
     StackPointerType stackPointer;
 
-    cosmosAssert( taskVar IS_NOT_EQUAL_TO NULL );
+    CosmOS_StackConfigurationType * stack;
 
-    stack = task_getTaskStackVar( taskVar );
-    handler = task_getTaskHandler( taskVar );
+
+    stack = schedulable_getStack( schedulable );
+    handler = schedulable_getHandler( schedulable );
 
     stackLowAddress = stack_getStackLowAddress( stack );
     stackHighAddress = stack_getStackHighAddress( stack );
@@ -169,7 +170,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * *************************************************************************//**
   * @fn stackInit_init(CosmOS_CoreVariableType * coreVar)
   * 
-  * @brief Stack intialization for all tasks.
+  * @brief Stack intialization for all thread schedulables.
   * 
   * @param[in] CosmOS_CoreVariableType * coreVar
   * 
@@ -180,7 +181,32 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void stackInit_init(CosmOS_CoreVariableType * coreVar)
 {
+    BitWidthType  numberOfThreads,
+                  numberOfPrograms,
+                  stackPointerRetVal;
 
+    CosmOS_ThreadVariableType * threadVar;
+    CosmOS_ProgramVariableType * programVar;
+
+    numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
+
+    for ( BitWidthType programIterator = 0; programIterator < numberOfPrograms; programIterator++ )
+    {
+        programVar = core_getCoreProgramVar( coreVar, programIterator );
+        numberOfThreads = program_getProgramNumberOfThreads( programVar );
+
+        for( BitWidthType threadIterator = 0; threadIterator < numberOfThreads; threadIterator++ )
+        {   
+            CosmOS_SchedulableVariableType * schedulableVar;
+
+
+            threadVar = program_getProgramThread( programVar, threadIterator );
+            schedulableVar = thread_getThreadSchedulable( threadVar );
+
+            stackPointerRetVal = stackInit_schedulableStackInit( schedulableVar );
+            schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
+        }
+    }
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -191,6 +217,3 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
 **                           END OF THE SOURCE FILE                            **
 ********************************************************************************/
-
-
-

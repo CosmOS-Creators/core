@@ -24,6 +24,7 @@
 #include "taskCfg.h"
 #include "schedulerCfg.h"
 #include "schedulerScheduleTableCfg.h"
+#include "schedulerThreadListCfg.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -64,6 +65,7 @@ IS_INITIALIZED_TO
 {
 		{                                                           /* SchedulersCfgConst[SCHEDULER_CORE_0_ID]           */
         ScheduleTableScheduler0CfgConst,                /* const CosmOS_ScheduleTableConfigurationType * scheduleTable     */
+        SchedulerThreadListScheduler0CfgConst,          /* const CosmOS_ThreadListConfigurationType * const threadList     */
         HYPERTICK_SCHEDULER_0,                          /* const BitWidthType hyperTick                                    */
         SCHEDULETABLE_SCHEDULER_0_ELEMENT_NUM,          /* const BitWidthType scheduleTableElementsNum                     */
         LAST_TO_FIRST_TASK_TICK_SCHEDULER_0,            /* const BitWidthType lastToFirstTaskTicks                         */
@@ -73,6 +75,7 @@ IS_INITIALIZED_TO
     },
 		{                                                           /* SchedulersCfgConst[SCHEDULER_CORE_1_ID]           */
         ScheduleTableScheduler1CfgConst,                /* const CosmOS_ScheduleTableConfigurationType * scheduleTable     */
+        SchedulerThreadListScheduler1CfgConst,          /* const CosmOS_ThreadListConfigurationType * const threadList     */
         HYPERTICK_SCHEDULER_1,                          /* const BitWidthType hyperTick                                    */
         SCHEDULETABLE_SCHEDULER_1_ELEMENT_NUM,          /* const BitWidthType scheduleTableElementsNum                     */
         LAST_TO_FIRST_TASK_TICK_SCHEDULER_1,            /* const BitWidthType lastToFirstTaskTicks                         */
@@ -96,18 +99,20 @@ IS_INITIALIZED_TO
         0,                                              /* BitWidthType curentTick                          */
         0,                                              /* BitWidthType scheduleTableIterator               */
         0,                                              /* BitWidthType scheduleTableIteratorPrior          */
+        0,                                              /* BitWidthType threadListIterator                  */
         SCHEDULER_STATE_ENUM__NOT_STARTED,              /* CosmOS_SchedulerStateType schedulerState         */
         0,                                              /* BitWidthType nextSyncTick                        */
-        false,                                          /* CosmOS_BooleanType syncInitState                 */
+        False,                                          /* CosmOS_BooleanType syncInitState                 */
     },
 		{                                                   /* SchedulersCfgConst[SCHEDULER_CORE_1_ID]          */
         &SchedulersCfgConst[SCHEDULER_CORE_1_ID],       /* CosmOS_SchedulerConfigurationType * cfg    */
         0,                                              /* BitWidthType curentTick                          */
         0,                                              /* BitWidthType scheduleTableIterator               */
         0,                                              /* BitWidthType scheduleTableIteratorPrior          */
+        0,                                              /* BitWidthType threadListIterator                  */
         SCHEDULER_STATE_ENUM__NOT_STARTED,              /* CosmOS_SchedulerStateType schedulerState         */
         0,                                              /* BitWidthType nextSyncTick                        */
-        false,                                          /* CosmOS_BooleanType syncInitState                 */
+        False,                                          /* CosmOS_BooleanType syncInitState                 */
     },
 };
 /* @cond S */

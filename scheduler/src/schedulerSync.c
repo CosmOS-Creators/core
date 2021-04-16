@@ -146,7 +146,7 @@ __OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_Schedu
 
     syncInitState = scheduler_getSchedulerSyncInitState( schedulerVar );
 
-    if ( __COSMOS_UNLIKELY( syncInitState IS_EQUAL_TO false ) )
+    if ( __COSMOS_UNLIKELY( syncInitState IS_EQUAL_TO False ) )
     {
         BitWidthType firstSyncTaskStartTick;
 
@@ -164,7 +164,7 @@ __OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_Schedu
             nextTick = ( currentTick + syncTicks ) % hyperTick;
             scheduler_setSchedulerNextSyncTick( schedulerVar, nextTick );
 
-            scheduler_setSchedulerSyncInitState( schedulerVar, true );
+            scheduler_setSchedulerSyncInitState( schedulerVar, True );
 
             schedulerState = SCHEDULER_SYNC_STATE_ENUM__IN_SYNC;
         }

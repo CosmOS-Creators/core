@@ -346,6 +346,22 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerScheduleTableIteratorPri
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn scheduler_getSchedulerThreadListIterator(CosmOS_SchedulerVariableType * scheduler) 
+  * 
+  * @brief Get scheduler threadListIterator.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerThreadListIterator(CosmOS_SchedulerVariableType * scheduler)
+{
+    return (scheduler->threadListIterator);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn scheduler_getSchedulerState(CosmOS_SchedulerVariableType * scheduler) 
   * 
   * @brief Get scheduler schedulerState.
@@ -424,6 +440,23 @@ __STATIC_FORCEINLINE CosmOS_TaskVariableType * scheduler_getSchedulerScheduleTab
 {
     return (CosmOS_TaskVariableType *)(scheduler->cfg->scheduleTable[scheduleTableIterator].taskVar);
 }
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_getSchedulerThreadListThreadVar(CosmOS_SchedulerVariableType * scheduler, BitWidthType threadListIterator) 
+  * 
+  * @brief Get scheduler threadList element threadVar.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  BitWidthType threadListIterator
+  * 
+  * @return CosmOS_ThreadVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_ThreadVariableType * scheduler_getSchedulerThreadListThreadVar(CosmOS_SchedulerVariableType * scheduler, BitWidthType threadListIterator)
+{
+    return (CosmOS_ThreadVariableType *)(scheduler->cfg->threadList[threadListIterator].threadVar);
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -469,6 +502,23 @@ __STATIC_FORCEINLINE void scheduler_setSchedulerCurrentTick(CosmOS_SchedulerVari
 __STATIC_FORCEINLINE void scheduler_setSchedulerScheduleTableIterator(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIteratorParam)
 {
     scheduler->scheduleTableIterator = scheduleTableIteratorParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_setSchedulerThreadListIterator(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIteratorParam) 
+  * 
+  * @brief Set scheduler threadListIterator.
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  BitWidthType threadListIteratorParam
+  * 
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void scheduler_setSchedulerThreadListIterator(CosmOS_SchedulerVariableType * scheduler, BitWidthType threadListIteratorParam)
+{
+    scheduler->threadListIterator = threadListIteratorParam;
 }
 
 /********************************************************************************

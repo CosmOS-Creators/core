@@ -158,18 +158,41 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_TaskConfigurationType struct type
+  * @brief  CosmOS_SchedulableConfigurationType struct type
 ********************************************************************************/
 typedef struct
 {
     const CosmOS_StackConfigurationType * const stack;
+    const CosmOS_SchedulableInstanceType instance;
     const CosmOS_HandlerType handler;
+    const CosmOS_BooleanType fp;
     const BitWidthType id;
-    const BitWidthType wcet;
     const BitWidthType programId;
     const BitWidthType coreId;
     
+} CosmOS_SchedulableConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_TaskConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    const BitWidthType wcet;
+    
 } CosmOS_TaskConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_ThreadConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    const BitWidthType dummy;
+
+} CosmOS_ThreadConfigurationType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -177,10 +200,10 @@ typedef struct
   * @brief  CosmOS_ProgramConfigurationType struct type
 ********************************************************************************/
 typedef struct            
-{               
-    const CosmOS_TaskConfigurationType * const tasks;
+{
     const BitWidthType coreId;
     const BitWidthType numberOfTasks;
+    const BitWidthType numberOfThreads;
     const BitWidthType programMemorySize;
     const AddressType programMemoryLowAddress;
     const AddressType programMemoryHighAddress;
@@ -202,11 +225,23 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_ThreadListConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    void * const threadVar;
+
+} CosmOS_ThreadListConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_SchedulerConfigurationType struct type
 ********************************************************************************/
 typedef struct
 {
     const CosmOS_ScheduleTableConfigurationType * const scheduleTable;
+    const CosmOS_ThreadListConfigurationType * const threadList;
     const BitWidthType hyperTick;
     const BitWidthType scheduleTableElementsNum;
     const BitWidthType lastToFirstTaskTicks;

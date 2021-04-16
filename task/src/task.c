@@ -22,7 +22,6 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "task.h"
-#include "core.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -118,36 +117,6 @@
 /********************************************************************************
 **                        Function Definitions | Start                         **
 ********************************************************************************/
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn task_setExecutionStateToFinished(void) 
-  * 
-  * @brief Set task execution state to finished DEMO CODE.
-  * 
-  * @param[in]  none
-  * 
-  * @return none
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION void task_setExecutionStateToFinished(void)
-{
-    CosmOS_TaskVariableType * taskVar;
-    CosmOS_CoreVariableType * coreVar;
-    
-
-    coreVar = core_getCoreVar();
-
-    taskVar = core_getCoreTaskInCurrentContext( coreVar );
-
-    task_setTaskExecutionState( taskVar, TASK_EXECUTION_STATE_ENUM__EXECUTED );
-    
-};
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
