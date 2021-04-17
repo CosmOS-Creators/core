@@ -178,7 +178,6 @@ typedef struct
     const CosmOS_SchedulerConfigurationType * const cfg;
     BitWidthType currentTick;
     BitWidthType scheduleTableIterator;
-    BitWidthType scheduleTableIteratorPrior;
     BitWidthType threadListIterator;
     CosmOS_SchedulerStateType schedulerState;
     BitWidthType nextSyncTick;

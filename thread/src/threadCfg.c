@@ -103,8 +103,8 @@ CosmOS_ThreadVariableType ThreadsProgram0Core1Var[THREAD_PROGRAM_0_CORE_1_NUM] _
 IS_INITIALIZED_TO 
 {
 		{
-        &ThreadsProgram0Core1CfgConst[THREAD_1_PROGRAM_0_CORE_1_ID],      /* const CosmOS_ThreadConfigurationType * const cfg                      */
-        &ThreadsSchedulablesVar[SCHEDULABLE_THREAD_1_PROGRAM_0_CORE_1_ID],            /* CosmOS_SchedulableVariableType * const schedulable                       */ 
+        &ThreadsProgram0Core1CfgConst[THREAD_0_PROGRAM_0_CORE_1_ID],      /* const CosmOS_ThreadConfigurationType * const cfg                      */
+        &ThreadsSchedulablesVar[SCHEDULABLE_THREAD_0_PROGRAM_0_CORE_1_ID],            /* CosmOS_SchedulableVariableType * const schedulable                       */ 
     },
 };
 CosmOS_ThreadVariableType ThreadsProgram1Core1Var[THREAD_PROGRAM_1_CORE_1_NUM] __OS_VAR_SECTION 

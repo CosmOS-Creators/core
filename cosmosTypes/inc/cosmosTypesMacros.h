@@ -169,7 +169,7 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  __SUPRESS_UNUSED_VAR used to supress compilator warnings
+  * @brief  __SUPRESS_UNUSED_VAR used to supress compiler warnings
 ********************************************************************************/
 #if     defined ( __GNUC__ )
     #define __SUPRESS_UNUSED_VAR(dummy) (void)(dummy)

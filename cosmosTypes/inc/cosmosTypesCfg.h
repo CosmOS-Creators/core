@@ -243,7 +243,9 @@ typedef struct
     const CosmOS_ScheduleTableConfigurationType * const scheduleTable;
     const CosmOS_ThreadListConfigurationType * const threadList;
     const BitWidthType hyperTick;
+    const BitWidthType preemptTick;
     const BitWidthType scheduleTableElementsNum;
+    const BitWidthType threadListElementsNum;
     const BitWidthType lastToFirstTaskTicks;
     const BitWidthType syncTicks;
     const BitWidthType firstSyncTaskStartTick;

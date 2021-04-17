@@ -26,10 +26,12 @@
 #include "coreSync.h"
 #include "os.h"
 #include "task.h"
+#include "thread.h"
 #include "program.h"
 #include "schedulable.h"
 #include "stackInit.h"
 #include "cosmosAssert.h"
+#include "switchScheduler.h"
 #include "switchSchedulerSync.h"
 #include "switchMemoryProtection.h"
 
@@ -121,33 +123,6 @@
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn scheduler_classicScheduling(CosmOS_BufferVariableType * bufferVar, unsigned char * data)
-  * 
-  * @brief Pull data from the buffer DEMO CODE.
-  * 
-  * @param[in]  CosmOS_BufferVariableType * bufferVar
-  * @param[in]  unsigned char * data
-  * 
-  * @return CosmOS_BufferStateType
-********************************************************************************/
-__OS_FUNC_SECTION static CosmOS_BufferStateType scheduler_classicScheduling(CosmOS_BufferVariableType * buffer, unsigned char * data);
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn scheduler_performanceScheduling(CosmOS_BufferVariableType * bufferVar, unsigned char * data)
-  * 
-  * @brief Pull data from the buffer DEMO CODE.
-  * 
-  * @param[in]  CosmOS_BufferVariableType * bufferVar
-  * @param[in]  unsigned char * data
-  * 
-  * @return CosmOS_BufferStateType
-********************************************************************************/
-__OS_FUNC_SECTION static CosmOS_BufferStateType scheduler_performanceScheduling(CosmOS_BufferVariableType * buffer, unsigned char * data);
-/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
@@ -162,44 +137,135 @@ __OS_FUNC_SECTION static CosmOS_BufferStateType scheduler_performanceScheduling(
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn scheduler_scheduleNextInstance(void) 
+  * @fn  scheduler_performanceScheduling(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType ** schedulableVar,\
+  * StackPointerType * stackPointerRetVal,BitWidthType * timerTicks)
   * 
-  * @brief Algorithm for scheduling next task DEMO CODE.
+  * @brief Performance scheduling function. DEMO
   * 
-  * @param[in]  BitWidthType stackPointer
+  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
+  * @param[in]  StackPointerType * stackPointerRetVal
+  * @param[in]  BitWidthType * timerTicks
+  * 
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void scheduler_performanceScheduling(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType ** schedulableVar,\
+StackPointerType * stackPointerRetVal,BitWidthType * timerTicks)
+{
+        BitWidthType preemptTick,
+                     threadListIterator,
+                     threadListElementsNum;
+
+        CosmOS_ThreadVariableType * threadVar;
+
+        threadListIterator = scheduler_getSchedulerThreadListIterator( schedulerVar );
+        threadListElementsNum = scheduler_getSchedulerThreadListElementsNum( schedulerVar );
+
+        cosmosAssert( threadListIterator < threadListElementsNum );
+
+        threadVar = scheduler_getSchedulerThreadListThreadVar( schedulerVar, threadListIterator );
+
+        *schedulableVar = thread_getThreadSchedulable( threadVar );
+        *stackPointerRetVal = schedulable_getStackPointer( *schedulableVar );
+
+        threadListIterator = ( ( threadListIterator + 1 ) % threadListElementsNum );
+        scheduler_setSchedulerThreadListIterator( schedulerVar, threadListIterator );
+
+        preemptTick = scheduler_getSchedulerPreemptTick( schedulerVar );
+        *timerTicks = preemptTick;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn  scheduler_classicScheduling(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType * schedulableVar,StackPointerType * stackPointerRetVal,
+  * BitWidthType * timerTicks, BitWidthType startTick, BitWidthType currentTick)
+  * 
+  * @brief Classic scheduling function. DEMO
+  * 
+  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
+  * @param[in]  StackPointerType * stackPointerRetVal
+  * @param[in]  BitWidthType * timerTicks
+  * @param[in]  BitWidthType startTick
+  * @param[in]  BitWidthType currentTick
+  * 
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void scheduler_classicScheduling(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType ** schedulableVar,\
+StackPointerType * stackPointerRetVal,BitWidthType * timerTicks, BitWidthType startTick, BitWidthType currentTick)
+{
+    CosmOS_TaskVariableType * taskVar;
+
+
+    taskVar = scheduler_getSchedulerIdleTaskVar( schedulerVar );
+
+    *schedulableVar = task_getTaskSchedulable( taskVar );
+    *stackPointerRetVal = stackInit_schedulableStackInit( *schedulableVar );
+
+    if ( startTick < currentTick )
+    {
+        *timerTicks = scheduler_getSchedulerLastToFirstTaskTicks( schedulerVar );
+    }
+    else
+    {
+        *timerTicks = startTick - currentTick;
+    }
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
+  * 
+  * @brief Algorithm for scheduling next schedulable DEMO CODE.
+  * 
+  * @param[in]  StackPointerType stackPointer
   * 
   * @return BitWidthType
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stackPointer)
+__OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerType stackPointer)
 {
     BitWidthType  currentTick,
                   hyperTick,
                   startTick,
                   timerTicks,
-                  stackPointerRetVal,
                   scheduleTableIterator,
-                  scheduleTableElementsNum,
-                  scheduleTableIteratorPrior;
+                  scheduleTableElementsNum;
+
+    StackPointerType stackPointerRetVal;
 
     CosmOS_SchedulerSyncStateType schedulersSyncState;
     CosmOS_SchedulerStateType schedulerState;
 
     CosmOS_CoreVariableType * coreVar;
-    CosmOS_TaskVariableType * taskVar;
     CosmOS_SchedulerVariableType * schedulerVar;
     CosmOS_SchedulableVariableType * schedulableVar;
+    CosmOS_SchedulableVariableType * priorSchedulableVar;
 
 
     coreVar = core_getCoreVar();
 
     schedulerVar = core_getCoreSchedulerVar( coreVar );
     schedulerState = scheduler_getSchedulerState( schedulerVar );
+    priorSchedulableVar = core_getCoreSchedulableInCurrentContext( coreVar );
 
     scheduleTableIterator = scheduler_getSchedulerScheduleTableIterator( schedulerVar );
-    scheduleTableIteratorPrior = scheduler_getSchedulerScheduleTableIteratorPrior( schedulerVar );
     scheduleTableElementsNum = scheduler_getSchedulerScheduleTableElementsNum( schedulerVar );
 
     cosmosAssert( scheduleTableIterator < scheduleTableElementsNum );
@@ -208,28 +274,29 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
     hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );
     currentTick = scheduler_getSchedulerCurrentTick( schedulerVar );
 
-
     //this should be moved to the sysTick interrupt with higher priority to have faster response
     if ( schedulerState IS_EQUAL_TO SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK )
     {
         CosmOS_SchedulableStateType schedulableState;
 
-        CosmOS_TaskVariableType * priorTaskVar;
-        CosmOS_SchedulableVariableType * priorSchedulable;
-
-        priorTaskVar = scheduler_getSchedulerScheduleTableTaskVar( schedulerVar, scheduleTableIteratorPrior );
-        priorSchedulable = task_getTaskSchedulable( priorTaskVar );
-        schedulableState = schedulable_getState( priorSchedulable );
+        schedulableState = schedulable_getState( priorSchedulableVar );
 
         if ( schedulableState IS_NOT_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__EXECUTED )
         {
             /* reaction */
         }
     }
+    else
+    {
+        /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+        switchScheduler_setStackPointer( priorSchedulableVar, stackPointer );
+    }
 
     if ( startTick IS_EQUAL_TO currentTick )
     {   
         BitWidthType wcet;
+
+        CosmOS_TaskVariableType * taskVar;
 
         taskVar = scheduler_getSchedulerScheduleTableTaskVar( schedulerVar, scheduleTableIterator );
 
@@ -238,7 +305,6 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
 
         schedulable_setState( schedulableVar, SCHEDULABLE_INSTANCE_ENUM__RUNNING );
 
-        scheduler_setSchedulerScheduleTableIteratorPrior( schedulerVar, scheduleTableIterator );
         scheduleTableIterator = ( ( scheduleTableIterator + 1 ) % scheduleTableElementsNum );
         scheduler_setSchedulerScheduleTableIterator( schedulerVar, scheduleTableIterator );
 
@@ -249,19 +315,10 @@ __OS_FUNC_SECTION BitWidthType scheduler_scheduleNextInstance(BitWidthType stack
     }
     else
     {
-        taskVar = scheduler_getSchedulerIdleTaskVar( schedulerVar );
-
-        schedulableVar = task_getTaskSchedulable( taskVar );
-        stackPointerRetVal = stackInit_schedulableStackInit( schedulableVar );
-
-        if ( startTick < currentTick )
-        {
-            timerTicks = scheduler_getSchedulerLastToFirstTaskTicks( schedulerVar );
-        }
-        else
-        {
-            timerTicks = startTick - currentTick;
-        }
+        /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+        switchScheduler_performanceScheduling(schedulerVar,&schedulableVar,&stackPointerRetVal,&timerTicks);
+        /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO OFF */
+        switchScheduler_classicScheduling(schedulerVar,&schedulableVar,&stackPointerRetVal,&timerTicks,startTick,currentTick);
 
         schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
     }
@@ -313,7 +370,6 @@ __OS_FUNC_SECTION void scheduler_start(void)
     CosmOS_SchedulerStateType schedulerState;
 
     CosmOS_CoreVariableType * coreVar;
-    CosmOS_TaskVariableType * taskVar;
     CosmOS_SchedulerVariableType * schedulerVar;
     CosmOS_SchedulableVariableType * schedulableVar;
 
@@ -334,6 +390,8 @@ __OS_FUNC_SECTION void scheduler_start(void)
     {   
         BitWidthType wcet;
 
+        CosmOS_TaskVariableType * taskVar;
+
         taskVar = scheduler_getSchedulerScheduleTableTaskVar( schedulerVar, scheduleTableIterator );
 
         schedulableVar = task_getTaskSchedulable( taskVar );
@@ -341,7 +399,6 @@ __OS_FUNC_SECTION void scheduler_start(void)
 
         schedulable_setState( schedulableVar, SCHEDULABLE_INSTANCE_ENUM__RUNNING );
 
-        scheduler_setSchedulerScheduleTableIteratorPrior( schedulerVar, scheduleTableIterator );
         scheduleTableIterator = ( ( scheduleTableIterator + 1 ) % scheduleTableElementsNum );
         scheduler_setSchedulerScheduleTableIterator( schedulerVar, scheduleTableIterator );
 
@@ -352,12 +409,11 @@ __OS_FUNC_SECTION void scheduler_start(void)
     }
     else
     {
-        taskVar = scheduler_getSchedulerIdleTaskVar( schedulerVar );
+        /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+        switchScheduler_performanceScheduling(schedulerVar,&schedulableVar,&stackPointerRetVal,&timerTicks);
+        /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO OFF */
+        switchScheduler_classicScheduling(schedulerVar,&schedulableVar,&stackPointerRetVal,&timerTicks,startTick,currentTick);
 
-        schedulableVar = task_getTaskSchedulable( taskVar );
-        stackPointerRetVal = stackInit_schedulableStackInit( schedulableVar );
-
-        timerTicks = startTick - currentTick;
         schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
     }
 

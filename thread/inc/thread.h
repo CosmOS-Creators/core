@@ -161,15 +161,15 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_getThreadWcet(CosmOS_ThreadVariableType *thread) 
+  * @fn thread_getThreadDummy(CosmOS_ThreadVariableType *thread) 
   * 
-  * @brief Get thread wcet.
+  * @brief Get thread dummy.
   * 
   * @param[in]  CosmOS_ThreadVariableType * thread
   * 
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType thread_getThreadWcet(CosmOS_ThreadVariableType * thread)
+__STATIC_FORCEINLINE BitWidthType thread_getThreadDummy(CosmOS_ThreadVariableType * thread)
 {
     return (thread->cfg->dummy);
 }
