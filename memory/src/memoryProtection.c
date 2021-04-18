@@ -22,8 +22,8 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "core.h"
-#include "task.h"
 #include "stack.h"
+#include "schedulable.h"
 #include "program.h"
 #include "memoryProtection.h"
 
@@ -149,15 +149,15 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_setStackOverflowProtection(CosmOS_StackVariableType * stack)
+  * @fn memoryProtection_setStackOverflowProtection(CosmOS_StackConfigurationType * stack)
   * 
   * @brief Set stack overflow protection.
   * 
-  * @param[in]  CosmOS_StackVariableType * stack
+  * @param[in]  CosmOS_StackConfigurationType * stack
   * 
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_StackVariableType * stack)
+__STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_StackConfigurationType * stack)
 {
     AddressType stackLowAddress,
                  stackHighAddress;
@@ -184,7 +184,7 @@ __STATIC_FORCEINLINE void memoryProtection_setProgramMemoryProtection(CosmOS_Pro
     BitWidthType size;
 
     AddressType lowAddress,
-                 highAddress;
+                highAddress;
 
     size = program_getProgramMemorySize( program );
     lowAddress = program_getProgramMemoryLowAddress( program );
@@ -199,31 +199,32 @@ __STATIC_FORCEINLINE void memoryProtection_setProgramMemoryProtection(CosmOS_Pro
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_TaskVariableType * task)
+  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable)
   * 
   * @brief Set memory protection for current execution context.
   * 
   * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_TaskVariableType * task
+  * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
   * 
   * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_TaskVariableType * task)
+__OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable)
 {
     BitWidthType programId;
 
-    CosmOS_StackVariableType * stackVar;
+    CosmOS_StackConfigurationType * stack;
     CosmOS_ProgramVariableType * programVar;
 
-    programId = task_getTaskProgramId( task );
+
+    programId = schedulable_getProgramId( schedulable );
     programVar = core_getCoreProgramVar( core, programId ); 
 
-    stackVar = task_getTaskStackVar( task );
+    stack = schedulable_getStack( schedulable );
 
-    memoryProtection_setStackOverflowProtection( stackVar );
+    memoryProtection_setStackOverflowProtection( stack );
     memoryProtection_setProgramMemoryProtection( programVar );
 }
 /* @cond S */

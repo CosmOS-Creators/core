@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file schedulerSync.c
+** @file schedulable.c
 *********************************************************************************
-<!--                schedulerSync Unit Local Group Definition                 -->
+<!--                 schedulable Unit Local Group Definition                  -->
 *********************************************************************************	
-** @defgroup Local_schedulerSync Local
-** @ingroup schedulerSync_unit 
-** @brief schedulerSync locals
+** @defgroup Local_schedulable Local
+** @ingroup schedulable_unit 
+** @brief schedulable locals
 ** @details lorem 
 ********************************************************************************/ 
 /********************************************************************************  
@@ -21,9 +21,8 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "schedulerSync.h"
-#include "scheduler.h"
-#include "coreSync.h"
+#include "schedulable.h"
+#include "core.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -33,15 +32,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_schedulerSync Macros
-  * @ingroup Local_schedulerSync
+  * @defgroup Macros_schedulable Macros
+  * @ingroup Local_schedulable
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_schedulerSync  
+  * Macros_schedulable  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -52,15 +51,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_schedulerSync Variables  
-  * @ingroup Local_schedulerSync
+  * @defgroup Variables_schedulable Variables  
+  * @ingroup Local_schedulable
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Variables_schedulerSync  
+  * Variables_schedulable  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -71,47 +70,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_schedulerSync_c API's  
-  * @ingroup Local_schedulerSync
+  * @defgroup Apis_schedulable_c API's  
+  * @ingroup Local_schedulable
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_schedulerSync_c Getters  
-  * @ingroup Apis_schedulerSync_c                                            
+  * @addtogroup Getters_schedulable_c Getters  
+  * @ingroup Apis_schedulable_c                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_schedulerSync_c
+  * Getters_schedulable_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_schedulerSync_c Setters  
-  * @ingroup Apis_schedulerSync_c                                            
+  * @addtogroup Setters_schedulable_c Setters  
+  * @ingroup Apis_schedulable_c                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_schedulerSync_c   
+  * Setters_schedulable_c   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_schedulerSync_c General  
-  * @ingroup Apis_schedulerSync_c                                            
+  * @addtogroup General_schedulable_c General  
+  * @ingroup Apis_schedulable_c                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_schedulerSync_c  
+  * General_schedulable_c  
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -122,82 +121,28 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
+  * @fn schedulable_setExecutionStateToFinished(void) 
   * 
-  * @brief Algorithm for synchronization during runtime DEMO CODE.
+  * @brief Set schedulable execution state to finished DEMO CODE.
   * 
-  * @param[in] CosmOS_SchedulerVariableType * schedulerVar
-  * @param[in] CosmOS_CoreVariableType * coreVar
-  * @param[in] BitWidthType currentTick
-  * @param[in] BitWidthType hyperTick
-  *  
-  * @return CosmOS_SchedulerSyncStateType
+  * @param[in]  none
+  * 
+  * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
+__OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(void)
 {
-    
-    CosmOS_BooleanType syncInitState;
-
-    CosmOS_SchedulerSyncStateType schedulerState = SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC;
+    CosmOS_CoreVariableType * coreVar;
+    CosmOS_SchedulableVariableType * schedulableVar;
 
 
-    syncInitState = scheduler_getSchedulerSyncInitState( schedulerVar );
+    coreVar = core_getCoreVar();
 
-    if ( __COSMOS_UNLIKELY( syncInitState IS_EQUAL_TO False ) )
-    {
-        BitWidthType firstSyncTaskStartTick;
+    schedulableVar = core_getCoreSchedulableInCurrentContext( coreVar );
 
-
-        firstSyncTaskStartTick = scheduler_getSchedulerFirstSyncTaskStartTick( schedulerVar );
-
-        if ( firstSyncTaskStartTick IS_EQUAL_TO currentTick )
-        {
-            BitWidthType  syncTicks,
-                          nextTick;
-
-
-            syncTicks = scheduler_getSchedulerSyncTicks( schedulerVar );
-
-            nextTick = ( currentTick + syncTicks ) % hyperTick;
-            scheduler_setSchedulerNextSyncTick( schedulerVar, nextTick );
-
-            scheduler_setSchedulerSyncInitState( schedulerVar, True );
-
-            schedulerState = SCHEDULER_SYNC_STATE_ENUM__IN_SYNC;
-        }
-    }
-    else
-    {
-        BitWidthType nextTick;
-
-
-        nextTick = scheduler_getSchedulerNextSyncTick( schedulerVar );
-
-        if ( __COSMOS_UNLIKELY( nextTick IS_EQUAL_TO currentTick ) )
-        {
-            BitWidthType  syncTicks;
-
-
-            syncTicks = scheduler_getSchedulerSyncTicks( schedulerVar );
-
-            nextTick = ( currentTick + syncTicks ) % hyperTick;
-            scheduler_setSchedulerNextSyncTick( schedulerVar, nextTick );
-
-            schedulerState = SCHEDULER_SYNC_STATE_ENUM__IN_SYNC;
-        }
-    }
-
-    if ( schedulerState IS_EQUAL_TO SCHEDULER_SYNC_STATE_ENUM__IN_SYNC )
-    {
-        coreSync_reactivateBarrier( coreVar, SCHEDULERS_SYNC_ID );
-        coreSync_getBarrier( coreVar, SCHEDULERS_SYNC_ID );
-    }
-
-
-    return schedulerState;
+    schedulable_setState( schedulableVar, SCHEDULABLE_INSTANCE_ENUM__EXECUTED );
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

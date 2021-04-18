@@ -112,21 +112,21 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn permission_tryTaskAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_TaskVariableType * task)
+  * @fn permission_trySchedulableAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_SchedulableVariableType * schedulableVar)
   * 
-  * @brief Try if task has permitted access.
+  * @brief Try if schedulable has access.
   * 
   * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * @param[in]  CosmOS_TaskVariableType * task
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
   * 
   * @return CosmOS_AccessStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_AccessStateType permission_tryTaskAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_TaskVariableType * task)
+__STATIC_FORCEINLINE CosmOS_AccessStateType permission_trySchedulableAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_SchedulableVariableType * schedulableVar)
 {
-    cosmosAssert( IS_NOT( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] & \
-              permission[task->cfg->coreId].bitLocksTasksInverted[TaskIdToBitLock[task->cfg->id]] ) );
+    cosmosAssert( IS_NOT( permission[schedulableVar->cfg->coreId].bitLocksTasks[TaskIdToBitLock[schedulableVar->cfg->id]] & \
+              permission[schedulableVar->cfg->coreId].bitLocksTasksInverted[TaskIdToBitLock[schedulableVar->cfg->id]] ) );
 
-    return ((( permission[task->cfg->coreId].bitLocksTasks[TaskIdToBitLock[task->cfg->id]] >> task->cfg->id ) & BITLOCK_MASK ) ? \
+    return ((( permission[schedulableVar->cfg->coreId].bitLocksTasks[TaskIdToBitLock[schedulableVar->cfg->id]] >> schedulableVar->cfg->id ) & BITLOCK_MASK ) ? \
             ACCESS_STATE_ENUM__ALLOWED : ACCESS_STATE_ENUM__DENIED );
 }
 /********************************************************************************
@@ -160,10 +160,10 @@ __OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_Permissions
 {
     CosmOS_AccessStateType accessState;
 
-    CosmOS_TaskVariableType * taskVar;
+    CosmOS_SchedulableVariableType * schedulableVar;
 
-    taskVar = core_getCoreTaskInCurrentContext( coreVar );
-    accessState = permission_tryTaskAccess( permission, taskVar );
+    schedulableVar = core_getCoreSchedulableInCurrentContext( coreVar );
+    accessState = permission_trySchedulableAccess( permission, schedulableVar );
 
     return accessState;
 }

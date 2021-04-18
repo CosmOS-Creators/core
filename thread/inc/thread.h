@@ -5,25 +5,57 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file schedulerSync.c
+** @file thread.h
 *********************************************************************************
-<!--                schedulerSync Unit Local Group Definition                 -->
+<!--                      thread Module Group Definition                      -->
+*********************************************************************************  
+** @defgroup thread_module thread
+** @brief thread Module
+** @details lorem   	 		
 *********************************************************************************	
-** @defgroup Local_schedulerSync Local
-** @ingroup schedulerSync_unit 
-** @brief schedulerSync locals
-** @details lorem 
-********************************************************************************/ 
-/********************************************************************************  
-**                           START OF THE SOURCE FILE                          **
+<!--                       thread Unit Group Definition                       -->
+********************************************************************************* 
+** @defgroup thread_unit thread Unit 
+** @ingroup thread_module        
+** @brief thread Unit 
+** @details lorem                               
+*********************************************************************************	
+<!--                           Version Information                            -->
+*********************************************************************************
+** @version 1.0.0
+** @date 1.8.2020
+** @author https://github.com/PavolKostolansky   
+*********************************************************************************	
+<!--                          Warnings and License                            -->
+*********************************************************************************
+** @warning Modifying code can lead to unexpected behaviour of the whole system
+** @copyright MIT License 
+*********************************************************************************
+<!--                    thread Unit Global Group Definition                   -->
+*********************************************************************************
+** @defgroup Global_thread Global
+** @ingroup thread_unit 
+** @brief thread globals
+** @details lorem  
 ********************************************************************************/
+/********************************************************************************
+**                           START OF THE HEADER FILE                          **
+********************************************************************************/
+#ifndef __THREAD_H__
+#define __THREAD_H__
+/********************************************************************************
+**                         START OF C++ SUPPORT SECTION                        **
+********************************************************************************/
+#ifdef __cplusplus
+ extern "C" {
+#endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "schedulerSync.h"
-#include "scheduler.h"
-#include "coreSync.h"
+#include "sysDefs.h"
+#include "cosmosTypesStd.h"
+#include "memoryMapping.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -33,15 +65,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_schedulerSync Macros
-  * @ingroup Local_schedulerSync
+  * @defgroup Macros_thread_h Macros
+  * @ingroup Global_thread  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Macros_schedulerSync  
+  * Macros_thread_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -52,15 +84,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_schedulerSync Variables  
-  * @ingroup Local_schedulerSync
+  * @defgroup Variables_thread_h Variables  
+  * @ingroup Global_thread  
   * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}  
-  * Variables_schedulerSync  
+  * Variables_thread_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -71,47 +103,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_schedulerSync_c API's  
-  * @ingroup Local_schedulerSync
+  * @defgroup Apis_thread_h API's 
+  * @ingroup Global_thread
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_schedulerSync_c Getters  
-  * @ingroup Apis_schedulerSync_c                                            
+  * @addtogroup Getters_thread_h Getters  
+  * @ingroup Apis_thread_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}       
-  * Getters_schedulerSync_c
+  * Getters_thread_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_schedulerSync_c Setters  
-  * @ingroup Apis_schedulerSync_c                                            
+  * @addtogroup Setters_thread_h Setters  
+  * @ingroup Apis_thread_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}    
-  * Setters_schedulerSync_c   
+  * Setters_thread_h   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_schedulerSync_c General  
-  * @ingroup Apis_schedulerSync_c                                            
+  * @addtogroup General_thread_h General  
+  * @ingroup Apis_thread_h                                            
   * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_schedulerSync_c  
+  * General_thread_h  
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -120,91 +152,85 @@
 **                        Function Definitions | Start                         **
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Getters_thread_h Getters  
+  * @ingroup Apis_thread_h                                            
+  * @{                                                                           
+********************************************************************************/
+/********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
+  * @fn thread_getThreadDummy(CosmOS_ThreadVariableType *thread) 
   * 
-  * @brief Algorithm for synchronization during runtime DEMO CODE.
+  * @brief Get thread dummy.
   * 
-  * @param[in] CosmOS_SchedulerVariableType * schedulerVar
-  * @param[in] CosmOS_CoreVariableType * coreVar
-  * @param[in] BitWidthType currentTick
-  * @param[in] BitWidthType hyperTick
-  *  
-  * @return CosmOS_SchedulerSyncStateType
+  * @param[in]  CosmOS_ThreadVariableType * thread
+  * 
+  * @return BitWidthType
 ********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
+__STATIC_FORCEINLINE BitWidthType thread_getThreadDummy(CosmOS_ThreadVariableType * thread)
 {
-    
-    CosmOS_BooleanType syncInitState;
+    return (thread->cfg->dummy);
+}
 
-    CosmOS_SchedulerSyncStateType schedulerState = SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC;
-
-
-    syncInitState = scheduler_getSchedulerSyncInitState( schedulerVar );
-
-    if ( __COSMOS_UNLIKELY( syncInitState IS_EQUAL_TO False ) )
-    {
-        BitWidthType firstSyncTaskStartTick;
-
-
-        firstSyncTaskStartTick = scheduler_getSchedulerFirstSyncTaskStartTick( schedulerVar );
-
-        if ( firstSyncTaskStartTick IS_EQUAL_TO currentTick )
-        {
-            BitWidthType  syncTicks,
-                          nextTick;
-
-
-            syncTicks = scheduler_getSchedulerSyncTicks( schedulerVar );
-
-            nextTick = ( currentTick + syncTicks ) % hyperTick;
-            scheduler_setSchedulerNextSyncTick( schedulerVar, nextTick );
-
-            scheduler_setSchedulerSyncInitState( schedulerVar, True );
-
-            schedulerState = SCHEDULER_SYNC_STATE_ENUM__IN_SYNC;
-        }
-    }
-    else
-    {
-        BitWidthType nextTick;
-
-
-        nextTick = scheduler_getSchedulerNextSyncTick( schedulerVar );
-
-        if ( __COSMOS_UNLIKELY( nextTick IS_EQUAL_TO currentTick ) )
-        {
-            BitWidthType  syncTicks;
-
-
-            syncTicks = scheduler_getSchedulerSyncTicks( schedulerVar );
-
-            nextTick = ( currentTick + syncTicks ) % hyperTick;
-            scheduler_setSchedulerNextSyncTick( schedulerVar, nextTick );
-
-            schedulerState = SCHEDULER_SYNC_STATE_ENUM__IN_SYNC;
-        }
-    }
-
-    if ( schedulerState IS_EQUAL_TO SCHEDULER_SYNC_STATE_ENUM__IN_SYNC )
-    {
-        coreSync_reactivateBarrier( coreVar, SCHEDULERS_SYNC_ID );
-        coreSync_getBarrier( coreVar, SCHEDULERS_SYNC_ID );
-    }
-
-
-    return schedulerState;
-};
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn thread_getThreadSchedulable(CosmOS_ThreadVariableType *thread) 
+  * 
+  * @brief Get thread schedulable.
+  * 
+  * @param[in]  CosmOS_ThreadVariableType * thread
+  * 
+  * @return CosmOS_SchedulableVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * thread_getThreadSchedulable(CosmOS_ThreadVariableType * thread)
+{
+    return (CosmOS_SchedulableVariableType *)(thread->schedulable);
+}
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}       
+  * Getters_thread_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_thread_h Setters  
+  * @ingroup Apis_thread_h                                            
+  * @{                                                                           
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}    
+  * Setters_thread_h   
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_thread_h General  
+  * @ingroup Apis_thread_h                                            
+  * @{                                                                           
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_thread_h  
+********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
+#ifdef __cplusplus
+}
+#endif
 /********************************************************************************
-**                           END OF THE SOURCE FILE                            **
+**                         END OF C++ SUPPORT SECTION                          **
+********************************************************************************/
+#endif
+/********************************************************************************
+**                           END OF THE HEADER FILE                            **
 ********************************************************************************/

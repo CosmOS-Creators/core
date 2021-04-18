@@ -24,7 +24,7 @@
 #include "routeCfg.h"
 #include "buffer.h"
 #include "os.h"
-#include "task.h"
+#include "schedulable.h"
 #include "osInit.h"
 #include "deviceIO.h"
 /********************************************************************************
@@ -70,7 +70,7 @@ IS_INITIALIZED_TO
 		(CosmOS_GenericVoidType)deviceIO_togglePin,
 		(CosmOS_GenericVoidType)osInit_init,
 		(CosmOS_GenericVoidType)os_start,
-		(CosmOS_GenericVoidType)task_setExecutionStateToFinished,
+		(CosmOS_GenericVoidType)schedulable_setExecutionStateToFinished,
 };
 
 const BitWidthType RoutesIdToFuncConst[ROUTES_ID_TO_FUNC_NUM] __OS_CONST_SECTION
@@ -83,7 +83,7 @@ IS_INITIALIZED_TO
 		DEVICEIO_TOGGLEPIN,
 		OSINIT_INIT,
 		OS_START,
-		TASK_SETEXECUTIONSTATETOFINISHED,
+		SCHEDULABLE_SETEXECUTIONSTATETOFINISHED,
 };
 
 const BitWidthType RoutesIdToEntityConst[ROUTES_ID_TO_ENTITY_NUM] __OS_CONST_SECTION

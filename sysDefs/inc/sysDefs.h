@@ -59,13 +59,16 @@
 #include "sysDefsBuffers.h"
 #include "sysDefsBuffersDouble.h"
 #include "sysDefsTasks.h"
+#include "sysDefsThreads.h"
 #include "sysDefsPrograms.h"
 #include "sysDefsPermissions.h"
 #include "sysDefsSchedulers.h"
 #include "sysDefsScheduleTables.h"
+#include "sysDefsSchedulables.h"
 #include "sysDefsCores.h"
 #include "sysDefsOsBoot.h"
 #include "sysDefsSysJobs.h"
+#include "sysDefsSchedulerThreadLists.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/

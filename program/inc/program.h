@@ -161,22 +161,6 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn program_getProgramTasks(CosmOS_ProgramVariableType * program) 
-  * 
-  * @brief Get program tasks pointer.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * 
-  * @return CosmOS_TaskConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskConfigurationType * program_getProgramTasks(CosmOS_ProgramVariableType * program)
-{
-    return (CosmOS_TaskConfigurationType *)(program->cfg->tasks);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn program_getProgramCoreId(CosmOS_ProgramVariableType * program) 
   * 
   * @brief Get program coreId.
@@ -204,6 +188,22 @@ __STATIC_FORCEINLINE BitWidthType program_getProgramCoreId(CosmOS_ProgramVariabl
 __STATIC_FORCEINLINE BitWidthType program_getProgramNumberOfTasks(CosmOS_ProgramVariableType * program)
 {
     return (program->cfg->numberOfTasks);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramNumberOfThreads(CosmOS_ProgramVariableType * program) 
+  * 
+  * @brief Get program numberOfThreads.
+  * 
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramNumberOfThreads(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->numberOfThreads);
 }
 
 /********************************************************************************
@@ -257,23 +257,7 @@ __STATIC_FORCEINLINE BitWidthType program_getProgramMemoryHighAddress(CosmOS_Pro
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn program_getProgramTaskInCurrentContext(CosmOS_ProgramVariableType * program) 
-  * 
-  * @brief Get program taskInCurrentContext pointer.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * 
-  * @return CosmOS_TaskVariableType * 
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTaskInCurrentContext(CosmOS_ProgramVariableType * program)
-{
-    return (program->taskInCurrentContext);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn program_getProgramTaskVars(CosmOS_ProgramVariableType * program) 
+  * @fn program_getProgramTasks(CosmOS_ProgramVariableType * program) 
   * 
   * @brief Get program taskVars.
   * 
@@ -281,7 +265,7 @@ __STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTaskInCurrentCo
   * 
   * @return CosmOS_TaskVariableType * 
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTaskVars(CosmOS_ProgramVariableType * program)
+__STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTasks(CosmOS_ProgramVariableType * program)
 {
     return (program->taskVars);
 }
@@ -289,7 +273,7 @@ __STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTaskVars(CosmOS
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn program_getProgramTaskVars(CosmOS_ProgramVariableType * program, BitWidthType taskIterator) 
+  * @fn program_getProgramTask(CosmOS_ProgramVariableType * program, BitWidthType taskIterator) 
   * 
   * @brief Get program taskVars element pointer.
   * 
@@ -298,9 +282,42 @@ __STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTaskVars(CosmOS
   * 
   * @return CosmOS_TaskVariableType * 
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTaskVar(CosmOS_ProgramVariableType * program, BitWidthType taskIterator)
+__STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTask(CosmOS_ProgramVariableType * program, BitWidthType taskIterator)
 {
     return (&(program->taskVars[taskIterator]));
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramThreads(CosmOS_ProgramVariableType * program) 
+  * 
+  * @brief Get program threadVars.
+  * 
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * 
+  * @return CosmOS_ThreadVariableType * 
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThreads(CosmOS_ProgramVariableType * program)
+{
+    return (program->threadVars);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramThread(CosmOS_ProgramVariableType * program, BitWidthType threadIterator) 
+  * 
+  * @brief Get program threadVars element pointer.
+  * 
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * @param[in]  BitWidthType threadIterator
+  * 
+  * @return CosmOS_ThreadVariableType * 
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThread(CosmOS_ProgramVariableType * program, BitWidthType threadIterator)
+{
+    return (&(program->threadVars[threadIterator]));
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -315,22 +332,6 @@ __STATIC_FORCEINLINE CosmOS_TaskVariableType * program_getProgramTaskVar(CosmOS_
   * @ingroup Apis_program_h                                            
   * @{                                                                           
 ********************************************************************************/
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn program_setProgramTaskInCurrentContext(CosmOS_ProgramVariableType * program, CosmOS_TaskVariableType *taskInCurrentContextParam) 
-  * 
-  * @brief Set program taskInCurrentContext pointer.
-  * 
-  * @param[in]  CosmOS_ProgramVariableType * program
-  * @param[in]  CosmOS_TaskVariableType * program
-  * 
-  * @return none 
-********************************************************************************/
-__STATIC_FORCEINLINE void program_setProgramTaskInCurrentContext(CosmOS_ProgramVariableType * program, CosmOS_TaskVariableType *taskInCurrentContextParam)
-{
-    program->taskInCurrentContext = taskInCurrentContextParam;
-}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

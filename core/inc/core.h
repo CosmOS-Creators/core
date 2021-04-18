@@ -142,15 +142,16 @@ __OS_FUNC_SECTION CosmOS_CoreVariableType * core_getCoreVar(void);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_setTaskIntoCurrentContext(CosmOS_TaskVariableType * taskVar)
+  * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_TaskVariableType * taskVar)
   * 
-  * @brief Set core program into current context, set task into program current context.
+  * @brief Set program and schedulable into the current context.
   * 
-  * @param[in]  CosmOS_TaskVariableType * taskVar
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
   * 
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void core_setTaskIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_TaskVariableType * taskVar);
+__OS_FUNC_SECTION void core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_SchedulableVariableType * schedulableVar);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -234,17 +235,33 @@ __STATIC_FORCEINLINE CosmOS_SchedulerConfigurationType * core_getCoreScheduler(C
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_getCoreProgramInCurrentContext(CosmOS_CoreVariableType * core) 
+  * @fn core_getCoreSchedulableInCurrentContext(CosmOS_CoreVariableType * core) 
   * 
-  * @brief Get core programInCurrentContext pointer.
+  * @brief Get core schedulableInExecution pointer.
+  * 
+  * @param[in]  CosmOS_CoreVariableType * core
+  * 
+  * @return CosmOS_SchedulableVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * core_getCoreSchedulableInCurrentContext(CosmOS_CoreVariableType * core)
+{
+    return (core->schedulableInExecution);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getCoreProgramInExecution(CosmOS_CoreVariableType * core) 
+  * 
+  * @brief Get core programInExecution pointer.
   * 
   * @param[in]  CosmOS_CoreVariableType * core
   * 
   * @return CosmOS_ProgramVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramInCurrentContext(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramInExecution(CosmOS_CoreVariableType * core)
 {
-    return (core->programInCurrentContext);
+    return (core->programInExecution);
 }
 
 /********************************************************************************
@@ -316,22 +333,6 @@ __STATIC_FORCEINLINE CosmOS_BarrierVariableType * core_getBarrierVar(CosmOS_Core
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_getCoreTaskInCurrentContext(CosmOS_CoreVariableType * core) 
-  * 
-  * @brief Get core programInCurrentContext taskInCurrentContext pointer.
-  * 
-  * @param[in]  CosmOS_CoreVariableType * core
-  * 
-  * @return CosmOS_TaskVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskVariableType * core_getCoreTaskInCurrentContext(CosmOS_CoreVariableType * core)
-{
-    return (core->programInCurrentContext->taskInCurrentContext);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn core_getCoreOsState(CosmOS_CoreVariableType * core) 
   * 
   * @brief Get core osState.
@@ -376,18 +377,35 @@ __STATIC_FORCEINLINE CosmOS_SysJobsVariableType * core_getCoreOsSysJobs(CosmOS_C
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_setCoreProgramInCurrentContext(CosmOS_CoreVariableType * core, CosmOS_ProgramVariableType * programInCurrentContextParam) 
+  * @fn core_setCoreProgramInExecution(CosmOS_CoreVariableType * core, CosmOS_ProgramVariableType * programInExecutionParam) 
   * 
-  * @brief Set core programInCurrentContext pointer.
+  * @brief Set core programInExecution pointer.
   * 
   * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_ProgramVariableType * programInCurrentContextParam
+  * @param[in]  CosmOS_ProgramVariableType * programInExecutionParam
   * 
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void core_setCoreProgramInCurrentContext(CosmOS_CoreVariableType * core, CosmOS_ProgramVariableType * programInCurrentContextParam)
+__STATIC_FORCEINLINE void core_setCoreProgramInExecution(CosmOS_CoreVariableType * core, CosmOS_ProgramVariableType * programInExecutionParam)
 {
-    core->programInCurrentContext = programInCurrentContextParam;
+    core->programInExecution = programInExecutionParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_setCoreSchedulableInExecution(CosmOS_CoreVariableType * core, CosmOS_SchedulableVariableType * schedulableInExecutionParam)
+  * 
+  * @brief Set core schedulableInExecution pointer.
+  * 
+  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableInExecutionParam
+  * 
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void core_setCoreSchedulableInExecution(CosmOS_CoreVariableType * core, CosmOS_SchedulableVariableType * schedulableInExecutionParam)
+{
+    core->schedulableInExecution = schedulableInExecutionParam;
 }
 
 /********************************************************************************

@@ -106,7 +106,7 @@ typedef BitWidthType (*CosmOS_GenericBitWidthRWType)(BitWidthType,void *,BitWidt
   * *************************************************************************//**
   * @brief  CosmOS_BooleanType enum
 ********************************************************************************/
-typedef enum { false, true } CosmOS_BooleanType;
+typedef enum { False = 0x00, True = 0x01} CosmOS_BooleanType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -169,6 +169,32 @@ typedef enum {
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_SchedulableInstanceType enum
+********************************************************************************/
+typedef enum {
+
+    SCHEDULABLE_INSTANCE_ENUM__TASK,
+    SCHEDULABLE_INSTANCE_ENUM__THREAD,
+    
+} CosmOS_SchedulableInstanceType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_SchedulableStateType enum
+********************************************************************************/
+typedef enum {
+
+    SCHEDULABLE_INSTANCE_ENUM__READY,
+    SCHEDULABLE_INSTANCE_ENUM__RUNNING,
+    SCHEDULABLE_INSTANCE_ENUM__EXECUTED,
+    SCHEDULABLE_INSTANCE_ENUM__BLOCKED,
+
+} CosmOS_SchedulableStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_SchedulerSyncStateType enum
 ********************************************************************************/
 typedef enum {
@@ -191,32 +217,6 @@ typedef enum {
     BARRIER_STATE_ENUM__FORCE      = FORCE_ENUM,
 
 } CosmOS_BarrierStateType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_TaskStateType enum
-********************************************************************************/
-typedef enum {
-
-    TASK_STATE_ENUM__ACTIVATED       = 0x00,
-    TASK_STATE_ENUM__DEACTIVATED     = SECURE_NUMBER,
-    TASK_STATE_ENUM__FORCE           = FORCE_ENUM,
-
-} CosmOS_TaskStateType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_TaskExecutionStateType enum
-********************************************************************************/
-typedef enum {
-
-    TASK_EXECUTION_STATE_ENUM__RUNNING    = 0x00,
-    TASK_EXECUTION_STATE_ENUM__EXECUTED   = SECURE_NUMBER,
-    TASK_EXECUTION_STATE_ENUM__FORCE      = FORCE_ENUM,
-
-} CosmOS_TaskExecutionStateType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **

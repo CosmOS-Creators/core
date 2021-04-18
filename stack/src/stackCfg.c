@@ -106,48 +106,23 @@ IS_INITIALIZED_TO
         STACK_TASK_0_PROGRAM_1_CORE_1_HIGH_ADDRESS,       /* const AddressType stackHighAddress                         */
     },
 };
+
+const CosmOS_StackConfigurationType ThreadsStacksCfgConst[THREAD_NUM] __OS_CONST_SECTION 
+IS_INITIALIZED_TO
+{
+		{                                                     /* ThreadsStacksCfgConst[STACK_THREAD_0_PROGRAM_0_CORE_0_ID]  */
+        STACK_THREAD_0_PROGRAM_0_CORE_0_SIZE,             /* const BitWidthType stackSize                               */
+        STACK_THREAD_0_PROGRAM_0_CORE_0_LOW_ADDRESS,      /* const AddressType stackLowAddress                          */
+        STACK_THREAD_0_PROGRAM_0_CORE_0_HIGH_ADDRESS,     /* const AddressType stackHighAddress                         */
+    },
+		{                                                     /* ThreadsStacksCfgConst[STACK_THREAD_0_PROGRAM_0_CORE_1_ID]  */
+        STACK_THREAD_0_PROGRAM_0_CORE_1_SIZE,             /* const BitWidthType stackSize                               */
+        STACK_THREAD_0_PROGRAM_0_CORE_1_LOW_ADDRESS,      /* const AddressType stackLowAddress                          */
+        STACK_THREAD_0_PROGRAM_0_CORE_1_HIGH_ADDRESS,     /* const AddressType stackHighAddress                         */
+    },
+};
 /* @cond S */
 __SEC_STOP(__OS_CONST_SECTION_STOP)
-/* @endcond*/
-
-/* @cond S */
-__SEC_START(__OS_VAR_SECTION_START)
-/* @endcond*/
-CosmOS_StackVariableType KernelsStacksVar[KERNEL_NUM] __OS_VAR_SECTION 
-IS_INITIALIZED_TO
-{
-		{                                                                 /* KernelsStacksVar[STACK_KERNEL_0_CORE_0_ID]             */
-        &KernelsStacksCfgConst[STACK_KERNEL_0_CORE_0_ID],             /* const CosmOS_StackConfigurationType * cfg                 */
-    },
-		{                                                                 /* KernelsStacksVar[STACK_KERNEL_0_CORE_1_ID]             */
-        &KernelsStacksCfgConst[STACK_KERNEL_0_CORE_1_ID],             /* const CosmOS_StackConfigurationType * cfg                 */
-    },
-};
-
-CosmOS_StackVariableType TasksStacksVar[TASK_NUM] __OS_VAR_SECTION
-IS_INITIALIZED_TO
-{
-		{                                                                 /* TasksStacksVar[STACK_TASK_0_PROGRAM_0_CORE_0_ID]       */
-        &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_0_CORE_0_ID],       /* const CosmOS_StackConfigurationType * cfg                 */
-    },
-		{                                                                 /* TasksStacksVar[STACK_TASK_1_PROGRAM_0_CORE_0_ID]       */
-        &TasksStacksCfgConst[STACK_TASK_1_PROGRAM_0_CORE_0_ID],       /* const CosmOS_StackConfigurationType * cfg                 */
-    },
-		{                                                                 /* TasksStacksVar[STACK_TASK_0_PROGRAM_1_CORE_0_ID]       */
-        &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_1_CORE_0_ID],       /* const CosmOS_StackConfigurationType * cfg                 */
-    },
-		{                                                                 /* TasksStacksVar[STACK_TASK_0_PROGRAM_0_CORE_1_ID]       */
-        &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_0_CORE_1_ID],       /* const CosmOS_StackConfigurationType * cfg                 */
-    },
-		{                                                                 /* TasksStacksVar[STACK_TASK_1_PROGRAM_0_CORE_1_ID]       */
-        &TasksStacksCfgConst[STACK_TASK_1_PROGRAM_0_CORE_1_ID],       /* const CosmOS_StackConfigurationType * cfg                 */
-    },
-		{                                                                 /* TasksStacksVar[STACK_TASK_0_PROGRAM_1_CORE_1_ID]       */
-        &TasksStacksCfgConst[STACK_TASK_0_PROGRAM_1_CORE_1_ID],       /* const CosmOS_StackConfigurationType * cfg                 */
-    },
-};
-/* @cond S */
-__SEC_STOP(__OS_VAR_SECTION_STOP)
 /* @endcond*/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
