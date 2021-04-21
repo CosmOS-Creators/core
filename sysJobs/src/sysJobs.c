@@ -155,8 +155,8 @@ __OS_FUNC_SECTION void sysJobs(void)
 
         groupTickMultiplicator = sysJobs_getSysJobsGroupTickMultiplicator( sysJobsVar, groupIterator );
 
-        if ( IS_NOT( groupTickMultiplicator ) )
-        {   
+        if ( IS_NOT( sysJobsCurrentTick % groupTickMultiplicator ) )
+        {
             BitWidthType numOfHandlers;
             CosmOS_GenericVoidType * handlers;
 
@@ -169,32 +169,13 @@ __OS_FUNC_SECTION void sysJobs(void)
                 handlers[handlerIterator]();
             }
         }
-        else
-        {
-            if ( IS_NOT( sysJobsCurrentTick % groupTickMultiplicator ) )
-            {
-                BitWidthType numOfHandlers;
-                CosmOS_GenericVoidType * handlers;
-
-
-                handlers = sysJobs_getSysJobsGroupHandlers( sysJobsVar, groupIterator );
-                numOfHandlers = sysJobs_getSysJobsGroupNumOfHandlers( sysJobsVar, groupIterator );
-
-                for ( BitWidthType handlerIterator = 0; handlerIterator < numOfHandlers; handlerIterator++ )
-                {
-                    handlers[handlerIterator]();
-                }
-            }
-        }
     }
 
     maxTickMultiplicator = sysJobs_getSysJobsMaxTickMultiplicator( sysJobsVar );
 
-    if ( maxTickMultiplicator )
-    {
-        sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % maxTickMultiplicator );
-        sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
-    }
+    sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % maxTickMultiplicator );
+    sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
+
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
