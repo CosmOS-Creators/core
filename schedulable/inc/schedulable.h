@@ -237,6 +237,22 @@ __STATIC_FORCEINLINE BitWidthType schedulable_getId(CosmOS_SchedulableVariableTy
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn schedulable_getInstanceId(CosmOS_SchedulableVariableType * schedulable) 
+  * 
+  * @brief Get schedulable instanceId.
+  * 
+  * @param[in]  CosmOS_SchedulableVariableType * schedulable
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType schedulable_getInstanceId(CosmOS_SchedulableVariableType * schedulable)
+{
+    return (schedulable->cfg->instanceId);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn schedulable_getTaskProgramId(CosmOS_SchedulableVariableType * schedulable) 
   * 
   * @brief Get schedulable programId.

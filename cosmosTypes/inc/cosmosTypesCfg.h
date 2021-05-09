@@ -167,6 +167,7 @@ typedef struct
     const CosmOS_HandlerType handler;
     const CosmOS_BooleanType fp;
     const BitWidthType id;
+    const BitWidthType instanceId;
     const BitWidthType programId;
     const BitWidthType coreId;
     
