@@ -278,7 +278,7 @@ void wrapped_Idle_CM7(void)
 };
 void wrapped_sysJobs_CM7(void)
 {
-    sysJobs_CM7();
+    sysCalls_os(SYSCALL_SYSJOBS_DISPATCHER);
     sysCalls_os(SYSCALL_SCHEDULABLE_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };
@@ -296,7 +296,7 @@ void wrapped_Idle_CM4(void)
 };
 void wrapped_sysJobs_CM4(void)
 {
-    sysJobs_CM4();
+    sysCalls_os(SYSCALL_SYSJOBS_DISPATCHER);
     sysCalls_os(SYSCALL_SCHEDULABLE_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };

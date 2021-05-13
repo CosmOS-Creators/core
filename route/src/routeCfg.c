@@ -23,10 +23,12 @@
 /* CORE interfaces */
 #include "routeCfg.h"
 #include "buffer.h"
+#include "buffer.h"
+#include "deviceIO.h"
+#include "osInit.h"
 #include "os.h"
 #include "schedulable.h"
-#include "osInit.h"
-#include "deviceIO.h"
+#include "sysJobs.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -71,6 +73,7 @@ IS_INITIALIZED_TO
 		(CosmOS_GenericVoidType)osInit_init,
 		(CosmOS_GenericVoidType)os_start,
 		(CosmOS_GenericVoidType)schedulable_setExecutionStateToFinished,
+		(CosmOS_GenericVoidType)sysJobs_dispatcher,
 };
 
 const BitWidthType RoutesIdToFuncConst[ROUTES_ID_TO_FUNC_NUM] __OS_CONST_SECTION
@@ -84,6 +87,7 @@ IS_INITIALIZED_TO
 		OSINIT_INIT,
 		OS_START,
 		SCHEDULABLE_SETEXECUTIONSTATETOFINISHED,
+		SYSJOBS_DISPATCHER,
 };
 
 const BitWidthType RoutesIdToEntityConst[ROUTES_ID_TO_ENTITY_NUM] __OS_CONST_SECTION
@@ -93,6 +97,7 @@ IS_INITIALIZED_TO
 		BUFFER_0_ID,
 		BUFFER_1_ID,
 		BUFFER_1_ID,
+		ROUTES_ID_TO_ENTITY_DUMMY,
 		ROUTES_ID_TO_ENTITY_DUMMY,
 		ROUTES_ID_TO_ENTITY_DUMMY,
 		ROUTES_ID_TO_ENTITY_DUMMY,

@@ -62,7 +62,7 @@
   * @ingroup Global_sysDefsRoutes  
   * @{    
 ********************************************************************************/
-#define ROUTES_FUNC_NUM (BitWidthType)6          /* Number of route RW */
+#define ROUTES_FUNC_NUM (BitWidthType)7          /* Number of route RW */
 
 #define ROUTES_ID_TO_ENTITY_DUMMY (BitWidthType)0     /* Dummy it to entity */
 
@@ -72,6 +72,7 @@
 #define OSINIT_INIT (BitWidthType)3            /* Identificator pointing on function pointer in array (Routes) */
 #define OS_START (BitWidthType)4            /* Identificator pointing on function pointer in array (Routes) */
 #define SCHEDULABLE_SETEXECUTIONSTATETOFINISHED (BitWidthType)5            /* Identificator pointing on function pointer in array (Routes) */
+#define SYSJOBS_DISPATCHER (BitWidthType)6            /* Identificator pointing on function pointer in array (Routes) */
 
 
 #define SYSCALL_READ_BUFFER_0_ID (BitWidthType)0   /* Identificator pointing on element in id array (RoutesIdToFuncConst) */
@@ -82,10 +83,11 @@
 #define SYSCALL_OSINIT_INIT (BitWidthType)5            /* Identificator pointing on function pointer in array (Routes) */
 #define SYSCALL_OS_START (BitWidthType)6            /* Identificator pointing on function pointer in array (Routes) */
 #define SYSCALL_SCHEDULABLE_SETEXECUTIONSTATETOFINISHED (BitWidthType)7            /* Identificator pointing on function pointer in array (Routes) */
+#define SYSCALL_SYSJOBS_DISPATCHER (BitWidthType)8            /* Identificator pointing on function pointer in array (Routes) */
 
 
-#define ROUTES_ID_TO_FUNC_NUM (BitWidthType)8    /* Number of route identificators */
-#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)8     /* Number of route identificators */
+#define ROUTES_ID_TO_FUNC_NUM (BitWidthType)9    /* Number of route identificators */
+#define ROUTES_ID_TO_ENTITY_NUM (BitWidthType)9     /* Number of route identificators */
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -121,9 +121,9 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysJobs(void) 
+  * @fn sysJobs_dispatcher(void) 
   * 
-  * @brief System jobs DEMO FUNCTION.
+  * @brief System jobs dispatcher DEMO FUNCTION.
   * 
   * @param[in]  none
   * 
@@ -132,7 +132,7 @@
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void sysJobs(void)
+__OS_FUNC_SECTION void sysJobs_dispatcher(void)
 {
     BitWidthType  sysJobsCurrentTick,
                   maxTickMultiplicator,
