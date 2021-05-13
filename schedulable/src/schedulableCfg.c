@@ -273,7 +273,6 @@ __SEC_STOP(__OS_VAR_SECTION_STOP)
 void wrapped_Idle_CM7(void)
 {
     Idle_CM7();
-    sysCalls_os(SYSCALL_SCHEDULABLE_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };
 void wrapped_sysJobs_CM7(void)
@@ -291,7 +290,6 @@ void wrapped_Task_0_Core_0_Handler(void)
 void wrapped_Idle_CM4(void)
 {
     Idle_CM4();
-    sysCalls_os(SYSCALL_SCHEDULABLE_SETEXECUTIONSTATETOFINISHED);
     for(;;);
 };
 void wrapped_sysJobs_CM4(void)
