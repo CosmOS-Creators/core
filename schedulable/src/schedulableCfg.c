@@ -270,6 +270,15 @@ __SEC_STOP(__OS_VAR_SECTION_STOP)
 /********************************************************************************
 **                        Function Definitions | Start                         **
 ********************************************************************************/
+__WEAK void Idle_CM7(void){};
+__WEAK void sysJobs_CM7(void){};
+__WEAK void Task_0_Core_0_Handler(void){};
+__WEAK void Idle_CM4(void){};
+__WEAK void sysJobs_CM4(void){};
+__WEAK void Task_0_Core_1_Handler(void){};
+__WEAK void IdleThread_CM7(void){};
+__WEAK void IdleThread_CM4(void){};
+
 void wrapped_Idle_CM7(void)
 {
     Idle_CM7();

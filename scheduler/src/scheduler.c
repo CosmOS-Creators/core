@@ -155,9 +155,9 @@ __SEC_START(__OS_FUNC_SECTION_START)
 __OS_FUNC_SECTION void scheduler_performanceScheduling(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType ** schedulableVar,\
 StackPointerType * stackPointerRetVal,BitWidthType * timerTicks)
 {
-        BitWidthType preemptTick,
-                     threadListIterator,
-                     threadListElementsNum;
+        BitWidthType  preemptTick,
+                      threadListIterator,
+                      threadListElementsNum;
 
         CosmOS_ThreadVariableType * threadVar;
 
@@ -274,7 +274,7 @@ __OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerTy
     hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );
     currentTick = scheduler_getSchedulerCurrentTick( schedulerVar );
 
-    //this should be moved to the sysTick interrupt with higher priority to have faster response
+    //this should be moved to the sysTick interrupt with higher priority to have faster response - without else, that should stay here
     if ( schedulerState IS_EQUAL_TO SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK )
     {
         CosmOS_SchedulableStateType schedulableState;

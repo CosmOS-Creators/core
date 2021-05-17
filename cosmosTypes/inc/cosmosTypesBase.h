@@ -173,8 +173,9 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    SCHEDULABLE_INSTANCE_ENUM__TASK,
-    SCHEDULABLE_INSTANCE_ENUM__THREAD,
+    SCHEDULABLE_INSTANCE_ENUM__TASK    = 0x00,
+    SCHEDULABLE_INSTANCE_ENUM__THREAD  = SECURE_NUMBER,
+    SCHEDULABLE_INSTANCE_ENUM__FORCE   = FORCE_ENUM,
     
 } CosmOS_SchedulableInstanceType;
 
