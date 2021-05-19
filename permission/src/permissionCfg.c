@@ -75,93 +75,91 @@
 /* @cond S */
 __SEC_START(__OS_CONST_SECTION_START)
 /* @endcond*/
-const BitWidthType TaskIdToBitLock[MAX_TASKS_ON_ONE_CORE*sizeof(BitWidthType)*8] __OS_CONST_SECTION
+const uint8_t SchedulableIdToBitLock[((MAX_SCHEDULABLES_ON_ONE_CORE/(sizeof(BitWidthType)*8)) + 1)*(sizeof(BitWidthType)*8)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		BITLOCK_ID_PLACEMENT_32BIT(0)
-		BITLOCK_ID_PLACEMENT_32BIT(1)
-		BITLOCK_ID_PLACEMENT_32BIT(2)
 };
 
-const BitWidthType BitLockBuffer0TasksCore0ReadCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0SchedulablesCore0ReadCfgConst[((TASK_NUM_CORE_0/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b00000000000000000000000000000000,
 };
-const BitWidthType BitLockBuffer0TasksCore1ReadCfgConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0SchedulablesCore1ReadCfgConst[((TASK_NUM_CORE_1/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		0b00000000000000000000000000000001,
+		0b00000000000000000000000001010000,
 };
-const BitWidthType BitLockBuffer1TasksCore0ReadCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer1SchedulablesCore0ReadCfgConst[((TASK_NUM_CORE_0/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b00000000000000000000000000000000,
 };
-const BitWidthType BitLockBuffer1TasksCore1ReadCfgConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer1SchedulablesCore1ReadCfgConst[((TASK_NUM_CORE_1/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		0b00000000000000000000000000000001,
+		0b00000000000000000000000001010000,
 };
 
-const BitWidthType BitLockBuffer0TasksCore0WriteCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0SchedulablesCore0WriteCfgConst[((TASK_NUM_CORE_0/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		0b00000000000000000000000000000001,
+		0b00000000000000000000000000000101,
 };
-const BitWidthType BitLockBuffer0TasksCore1WriteCfgConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0SchedulablesCore1WriteCfgConst[((TASK_NUM_CORE_1/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b00000000000000000000000000000000,
 };
-const BitWidthType BitLockBuffer1TasksCore0WriteCfgConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer1SchedulablesCore0WriteCfgConst[((TASK_NUM_CORE_0/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		0b00000000000000000000000000000001,
+		0b00000000000000000000000000000101,
 };
-const BitWidthType BitLockBuffer1TasksCore1WriteCfgConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer1SchedulablesCore1WriteCfgConst[((TASK_NUM_CORE_1/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b00000000000000000000000000000000,
 };
 
-const BitWidthType BitLockBuffer0TasksCore0ReadCfgInvertedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0SchedulablesCore0ReadCfgInvertedConst[((TASK_NUM_CORE_0/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b11111111111111111111111111111111,
 };
-const BitWidthType BitLockBuffer0TasksCore1ReadCfgInvertedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0SchedulablesCore1ReadCfgInvertedConst[((TASK_NUM_CORE_1/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		0b11111111111111111111111111111110,
+		0b11111111111111111111111110101111,
 };
-const BitWidthType BitLockBuffer1TasksCore0ReadCfgInvertedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer1SchedulablesCore0ReadCfgInvertedConst[((TASK_NUM_CORE_0/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b11111111111111111111111111111111,
 };
-const BitWidthType BitLockBuffer1TasksCore1ReadCfgInvertedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer1SchedulablesCore1ReadCfgInvertedConst[((TASK_NUM_CORE_1/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		0b11111111111111111111111111111110,
+		0b11111111111111111111111110101111,
 };
 
-const BitWidthType BitLockBuffer0TasksCore0WriteCfgInvertedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0SchedulablesCore0WriteCfgInvertedConst[((TASK_NUM_CORE_0/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		0b11111111111111111111111111111110,
+		0b11111111111111111111111111111010,
 };
-const BitWidthType BitLockBuffer0TasksCore1WriteCfgInvertedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer0SchedulablesCore1WriteCfgInvertedConst[((TASK_NUM_CORE_1/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b11111111111111111111111111111111,
 };
-const BitWidthType BitLockBuffer1TasksCore0WriteCfgInvertedConst[((TASK_NUM_CORE_0/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer1SchedulablesCore0WriteCfgInvertedConst[((TASK_NUM_CORE_0/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
-		0b11111111111111111111111111111110,
+		0b11111111111111111111111111111010,
 };
-const BitWidthType BitLockBuffer1TasksCore1WriteCfgInvertedConst[((TASK_NUM_CORE_1/sizeof(BitWidthType)) + 1)] __OS_CONST_SECTION
+const BitWidthType BitLockBuffer1SchedulablesCore1WriteCfgInvertedConst[((TASK_NUM_CORE_1/(sizeof(BitWidthType)*8)) + 1)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		0b11111111111111111111111111111111,
@@ -171,24 +169,24 @@ const CosmOS_PermissionsConfigurationType PermissionsBuffer0ReadCfgConst[CORE_NU
 IS_INITIALIZED_TO
 {
 		{   /* CORE_0_ID */
-        BitLockBuffer0TasksCore0ReadCfgConst,
-        BitLockBuffer0TasksCore0ReadCfgInvertedConst,
+        BitLockBuffer0SchedulablesCore0ReadCfgConst,
+        BitLockBuffer0SchedulablesCore0ReadCfgInvertedConst,
     },
 		{   /* CORE_1_ID */
-        BitLockBuffer0TasksCore1ReadCfgConst,
-        BitLockBuffer0TasksCore1ReadCfgInvertedConst,
+        BitLockBuffer0SchedulablesCore1ReadCfgConst,
+        BitLockBuffer0SchedulablesCore1ReadCfgInvertedConst,
     },
 };
 const CosmOS_PermissionsConfigurationType PermissionsBuffer1ReadCfgConst[CORE_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		{   /* CORE_0_ID */
-        BitLockBuffer1TasksCore0ReadCfgConst,
-        BitLockBuffer1TasksCore0ReadCfgInvertedConst,
+        BitLockBuffer1SchedulablesCore0ReadCfgConst,
+        BitLockBuffer1SchedulablesCore0ReadCfgInvertedConst,
     },
 		{   /* CORE_1_ID */
-        BitLockBuffer1TasksCore1ReadCfgConst,
-        BitLockBuffer1TasksCore1ReadCfgInvertedConst,
+        BitLockBuffer1SchedulablesCore1ReadCfgConst,
+        BitLockBuffer1SchedulablesCore1ReadCfgInvertedConst,
     },
 };
 
@@ -196,24 +194,24 @@ const CosmOS_PermissionsConfigurationType PermissionsBuffer0WriteCfgConst[CORE_N
 IS_INITIALIZED_TO
 {
 		{   /* CORE_0_ID */
-        BitLockBuffer0TasksCore0WriteCfgConst,
-        BitLockBuffer0TasksCore0WriteCfgInvertedConst,
+        BitLockBuffer0SchedulablesCore0WriteCfgConst,
+        BitLockBuffer0SchedulablesCore0WriteCfgInvertedConst,
     },
 		{   /* CORE_1_ID */
-        BitLockBuffer0TasksCore1WriteCfgConst,
-        BitLockBuffer0TasksCore1WriteCfgInvertedConst,
+        BitLockBuffer0SchedulablesCore1WriteCfgConst,
+        BitLockBuffer0SchedulablesCore1WriteCfgInvertedConst,
     },
 };
 const CosmOS_PermissionsConfigurationType PermissionsBuffer1WriteCfgConst[CORE_NUM] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		{   /* CORE_0_ID */
-        BitLockBuffer1TasksCore0WriteCfgConst,
-        BitLockBuffer1TasksCore0WriteCfgInvertedConst,
+        BitLockBuffer1SchedulablesCore0WriteCfgConst,
+        BitLockBuffer1SchedulablesCore0WriteCfgInvertedConst,
     },
 		{   /* CORE_1_ID */
-        BitLockBuffer1TasksCore1WriteCfgConst,
-        BitLockBuffer1TasksCore1WriteCfgInvertedConst,
+        BitLockBuffer1SchedulablesCore1WriteCfgConst,
+        BitLockBuffer1SchedulablesCore1WriteCfgInvertedConst,
     },
 };
 /* @cond S */

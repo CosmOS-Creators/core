@@ -123,10 +123,10 @@
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_AccessStateType permission_trySchedulableAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_SchedulableVariableType * schedulableVar)
 {
-    cosmosAssert( IS_NOT( permission[schedulableVar->cfg->coreId].bitLocksTasks[TaskIdToBitLock[schedulableVar->cfg->id]] & \
-              permission[schedulableVar->cfg->coreId].bitLocksTasksInverted[TaskIdToBitLock[schedulableVar->cfg->id]] ) );
+    cosmosAssert( IS_NOT( permission[schedulableVar->cfg->coreId].bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] & \
+              permission[schedulableVar->cfg->coreId].bitLocksTasksInverted[SchedulableIdToBitLock[schedulableVar->cfg->id]] ) );
 
-    return ((( permission[schedulableVar->cfg->coreId].bitLocksTasks[TaskIdToBitLock[schedulableVar->cfg->id]] >> schedulableVar->cfg->id ) & BITLOCK_MASK ) ? \
+    return ((( permission[schedulableVar->cfg->coreId].bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] >> schedulableVar->cfg->id ) & BITLOCK_MASK ) ? \
             ACCESS_STATE_ENUM__ALLOWED : ACCESS_STATE_ENUM__DENIED );
 }
 /********************************************************************************
