@@ -276,7 +276,7 @@ typedef struct
 {
     const CosmOS_SysJobsGroupConfigurationType * const groups;
     const BitWidthType numOfGroups;
-    const BitWidthType maxTickMultiplicator;
+    const BitWidthType hyperTick;
 
 } CosmOS_SysJobsConfigurationType;
 

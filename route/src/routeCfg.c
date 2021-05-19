@@ -22,7 +22,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "routeCfg.h"
-#include "buffer.h"
+/* GENERATED interfaces */
 #include "buffer.h"
 #include "deviceIO.h"
 #include "osInit.h"

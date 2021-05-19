@@ -135,7 +135,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 __OS_FUNC_SECTION void sysJobs_dispatcher(void)
 {
     BitWidthType  sysJobsCurrentTick,
-                  maxTickMultiplicator,
+                  hyperTick,
                   numOfGroups;
 
     CosmOS_CoreVariableType * coreVar;
@@ -171,9 +171,9 @@ __OS_FUNC_SECTION void sysJobs_dispatcher(void)
         }
     }
 
-    maxTickMultiplicator = sysJobs_getSysJobsMaxTickMultiplicator( sysJobsVar );
+    hyperTick = sysJobs_getSysJobsHyperTick( sysJobsVar );
 
-    sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % maxTickMultiplicator );
+    sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % hyperTick );
     sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
 
 };

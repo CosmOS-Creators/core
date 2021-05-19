@@ -205,17 +205,17 @@ __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsNumOfGroups(CosmOS_SysJobsVa
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysJobs_getSysJobsMaxTickMultiplicator(CosmOS_SysJobsVariableType * sysJobs)
+  * @fn sysJobs_getSysJobsHyperTick(CosmOS_SysJobsVariableType * sysJobs)
   * 
-  * @brief Get sysJobs maxTickMultiplicator.
+  * @brief Get sysJobs hyperTick.
   * 
   * @param[in]  CosmOS_SysJobsVariableType * sysJobs
   * 
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsMaxTickMultiplicator(CosmOS_SysJobsVariableType * sysJobs)
+__STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsHyperTick(CosmOS_SysJobsVariableType * sysJobs)
 {
-    return (sysJobs->cfg->maxTickMultiplicator);
+    return (sysJobs->cfg->hyperTick);
 }
 
 /********************************************************************************

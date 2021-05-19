@@ -22,8 +22,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "sysJobsCfg.h"
-
-/* CIL interfaces */
+/* GENERATED interfaces */
 #include "CIL_uart.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
@@ -94,12 +93,12 @@ IS_INITIALIZED_TO
     {
         SysJobsGroupsCore0ConstCfg,                   /* const CosmOS_SysJobsGroupConfigurationType * const groups    */
         SYSJOBS_GROUPS_CORE_0_NUM,                    /* const BitWidthType numOfGroups                               */
-        SYSJOBS_CORE_0_MAX_TICK_MULTIPLICATOR         /* const BitWidthType maxTickMultiplicator                      */
+        SYSJOBS_CORE_0_HYPERTICK                      /* const BitWidthType hyperTick                                 */
     },
 {
         SysJobsGroupsCore1ConstCfg,                   /* const CosmOS_SysJobsGroupConfigurationType * const groups    */
         SYSJOBS_GROUPS_CORE_1_NUM,                    /* const BitWidthType numOfGroups                               */
-        SYSJOBS_CORE_1_MAX_TICK_MULTIPLICATOR         /* const BitWidthType maxTickMultiplicator                      */
+        SYSJOBS_CORE_1_HYPERTICK                      /* const BitWidthType hyperTick                                 */
     },
 };
 /* @cond S */
