@@ -161,6 +161,7 @@ StackPointerType * stackPointerRetVal,BitWidthType * timerTicks)
 
     CosmOS_ThreadVariableType *threadVar;
 
+
     threadListIterator = scheduler_getSchedulerThreadListIterator(schedulerVar);
     threadListElementsNum = scheduler_getSchedulerThreadListElementsNum(schedulerVar);
 
@@ -300,7 +301,6 @@ __OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerTy
 
     coreVar = core_getCoreVar();
 
-
     schedulerVar = core_getCoreSchedulerVar( coreVar );
     priorSchedulableVar = core_getCoreSchedulableInCurrentContext( coreVar );
 
@@ -314,7 +314,7 @@ __OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerTy
     {
         cosmosAssert( scheduleTableIterator < scheduleTableElementsNum );
 
-        currentTick = scheduler_getSchedulerCurrentTick( schedulerVar );
+        startTick = scheduler_getSchedulerScheduleTableStartTick( schedulerVar, scheduleTableIterator );
     }
 
     //this should be moved to the sysTick interrupt with higher priority to have faster response - without else, that should stay here
