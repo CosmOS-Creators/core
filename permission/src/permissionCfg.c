@@ -75,7 +75,7 @@
 /* @cond S */
 __SEC_START(__OS_CONST_SECTION_START)
 /* @endcond*/
-const uint8_t SchedulableIdToBitLock[((MAX_SCHEDULABLES_ON_ONE_CORE/(sizeof(BitWidthType)*8)) + 1)*(sizeof(BitWidthType)*8)] __OS_CONST_SECTION
+const unsigned char SchedulableIdToBitLock[((MAX_SCHEDULABLES_ON_ONE_CORE/(sizeof(BitWidthType)*8)) + 1)*(sizeof(BitWidthType)*8)] __OS_CONST_SECTION
 IS_INITIALIZED_TO
 {
 		BITLOCK_ID_PLACEMENT_32BIT(0)

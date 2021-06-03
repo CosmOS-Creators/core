@@ -83,6 +83,31 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_ProgramSectionConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    unsigned char * const startAddress;
+    unsigned char * const endAddress;
+    unsigned char * const flashAddress;
+
+} CosmOS_ProgramSectionConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_BootSectionConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    const CosmOS_ProgramSectionConfigurationType * const programSections;
+    BitWidthType programSectionsNumber;
+
+} CosmOS_BootSectionConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_PermissionsConfigurationType struct type
 ********************************************************************************/
 typedef struct

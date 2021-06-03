@@ -192,10 +192,9 @@ __OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_Schedu
 
     if ( schedulerState IS_EQUAL_TO SCHEDULER_SYNC_STATE_ENUM__IN_SYNC )
     {
-        coreSync_reactivateBarrier( coreVar, SCHEDULERS_SYNC_ID );
         coreSync_getBarrier( coreVar, SCHEDULERS_SYNC_ID );
+        coreSync_reactivateBarrier( coreVar, SCHEDULERS_SYNC_ID );
     }
-
 
     return schedulerState;
 };
