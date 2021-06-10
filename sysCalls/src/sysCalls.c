@@ -126,28 +126,6 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_osBoot(void) 
-  * 
-  * @brief Boot of the CosmOS - operating system.
-  * 
-  * @param[in]  none
-  * 
-  * @return none
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION void sysCalls_osBoot(void)
-{
-    osBoot_boot();
-}
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn sysCalls_os(BitWidthType id) 
   * 
   * @brief System call handling general operating system functionalities.
