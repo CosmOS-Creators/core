@@ -27,7 +27,7 @@
 #include "sysCalls.h"
 
 /* CIL interfaces */
-#include "CIL_sysCalls.h"
+#include "CILsysCalls.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -139,7 +139,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void sysCalls_os(BitWidthType id)
 {
-    CIL_sysCalls_os( id );
+    CILsysCalls_os( id );
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -165,7 +165,7 @@ __OS_FUNC_SECTION BitWidthType sysCalls_readWrite(BitWidthType id, void * entity
 {   
     BitWidthType returnValue;
 
-    returnValue = CIL_sysCalls_readWrite( id, entity, size );
+    returnValue = CILsysCalls_readWrite( id, entity, size );
 
     return returnValue;
 };

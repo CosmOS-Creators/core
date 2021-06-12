@@ -28,7 +28,7 @@
 #include "memoryProtection.h"
 
 /* CIL interfaces */
-#include "CIL_memoryProtection.h"
+#include "CILmemoryProtection.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -140,7 +140,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void memoryProtection_init(void)
 {
-    CIL_memoryProtection_init();
+    CILmemoryProtection_init();
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -165,7 +165,7 @@ __STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_Sta
     stackLowAddress = stack_getStackLowAddress( stack );
     stackHighAddress = stack_getStackHighAddress( stack );
 
-    CIL_memoryProtection_setStackOverflowProtection( stackLowAddress, stackHighAddress );
+    CILmemoryProtection_setStackOverflowProtection( stackLowAddress, stackHighAddress );
 }
 
 /********************************************************************************
@@ -192,7 +192,7 @@ __STATIC_FORCEINLINE void memoryProtection_setProgramMemoryProtection(CosmOS_Pro
 
     if ( size )
     {
-        CIL_memoryProtection_setProgramMemoryProtection( lowAddress, highAddress );
+        CILmemoryProtection_setProgramMemoryProtection( lowAddress, highAddress );
     }
 }
 

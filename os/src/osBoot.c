@@ -25,7 +25,7 @@
 #include "osBootCfg.h"
 
 /* CIL interfaces */
-#include "CIL_core.h"
+#include "CILcore.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -165,7 +165,7 @@ void osBoot_boot(void)
 
     CosmOS_ProgramSectionConfigurationType * programSections;
 
-    coreId = CIL_core_getCoreId();
+    coreId = CILcore_getCoreId();
 
     programSections = (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId].programSections;
     programSectionsNumber = bootSections[coreId].programSectionsNumber;

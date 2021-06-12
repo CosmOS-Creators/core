@@ -28,7 +28,7 @@
 #include "permission.h"
 
 /* CIL interfaces */
-#include "CIL_core.h"
+#include "CILcore.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -267,7 +267,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
 
 
         osVar = os_getOsVar();
-        coreVar = CIL_core_getCoreVar();
+        coreVar = CILcore_getCoreVar();
 
         bufferVar = os_getOsBufferVar( osVar, id );
 
@@ -352,7 +352,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
 
 
         osVar = os_getOsVar();
-        coreVar = CIL_core_getCoreVar();
+        coreVar = CILcore_getCoreVar();
 
         bufferVar = os_getOsBufferVar( osVar, id );
 

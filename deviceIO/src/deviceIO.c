@@ -24,7 +24,7 @@
 #include "deviceIO.h"
 
 /* CIL interfaces */
-#include "CIL_GPIO.h"
+#include "CILGPIO.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -136,7 +136,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void deviceIO_togglePin(BitWidthType id, void *GPIOx, BitWidthType GPIO_Pin)
 {    
-    CIL_GPIO_togglePin( GPIOx, GPIO_Pin );
+    CILGPIO_togglePin( GPIOx, GPIO_Pin );
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

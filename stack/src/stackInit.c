@@ -30,7 +30,7 @@
 #include "schedulable.h"
 
 /* CIL interfaces */
-#include "CIL_stack.h"
+#include "CILstack.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -157,7 +157,7 @@ __OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_Schedul
     stackLowAddress = stack_getStackLowAddress( stack );
     stackHighAddress = stack_getStackHighAddress( stack );
 
-    stackPointer = CIL_stack_stackInit( stackLowAddress, stackHighAddress, (BitWidthType)handler );
+    stackPointer = CILstack_stackInit( stackLowAddress, stackHighAddress, (BitWidthType)handler );
 
     return stackPointer;
 }

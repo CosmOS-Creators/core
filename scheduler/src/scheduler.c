@@ -36,9 +36,9 @@
 #include "switchMemoryProtection.h"
 
 /* CIL interfaces */
-#include "CIL_core.h"
-#include "CIL_stack.h"
-#include "CIL_sysTimer.h"
+#include "CILcore.h"
+#include "CILstack.h"
+#include "CILsysTimer.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -362,7 +362,7 @@ __OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerTy
 
     switchMemoryProtection_setMemoryProtection( coreVar, schedulableVar );
 
-    CIL_sysTimer_setTicks( timerTicks, schedulersSyncState );
+    CILsysTimer_setTicks( timerTicks, schedulersSyncState );
 
     return stackPointerRetVal;
 };
@@ -445,9 +445,9 @@ __OS_FUNC_SECTION void scheduler_start(void)
 
     switchMemoryProtection_setMemoryProtection( coreVar , schedulableVar );
 
-    CIL_sysTimer_setTicks( timerTicks, schedulersSyncState );
+    CILsysTimer_setTicks( timerTicks, schedulersSyncState );
 
-    CIL_stack_setStackPointer( stackPointerRetVal );
+    CILstack_setStackPointer( stackPointerRetVal );
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

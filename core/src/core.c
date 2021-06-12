@@ -25,7 +25,7 @@
 #include "core.h"
 
 /* CIL interfaces */
-#include "CIL_core.h"
+#include "CILcore.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -137,7 +137,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_CoreVariableType * core_getCoreVar(void)
 {
-    return CIL_core_getCoreVar();
+    return CILcore_getCoreVar();
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

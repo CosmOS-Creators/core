@@ -30,7 +30,7 @@
 #include "switchMemoryProtection.h"
 
 /* CIL interfaces */
-#include "CIL_core.h"
+#include "CILcore.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -149,7 +149,7 @@ __OS_FUNC_SECTION void osInit_init(void)
 
     osVar = os_getOsVar();
 
-    CIL_core_setCoreVar(osVar);
+    CILcore_setCoreVar(osVar);
 
     coreVar = core_getCoreVar();
 
@@ -157,7 +157,7 @@ __OS_FUNC_SECTION void osInit_init(void)
 
     //init MPU 
     //init DMA to buffers
-    //Maybe better have here CIL_microInit()
+    //Maybe better have here CILmicroInit()
 
     coreSync_getBarrier( coreVar, OS_INIT_ID );
     
