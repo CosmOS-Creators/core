@@ -5,27 +5,53 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file osBoot.c
+** @file CILsysCalls.h
+*********************************************************************************	
+<!--                     CILsysCalls Unit Group Definition                    -->
+********************************************************************************* 
+** @defgroup CILsysCalls_unit CILsysCalls Unit 
+** @ingroup CILmodule        
+** @brief CILsysCalls Unit 
+** @details lorem                               
+*********************************************************************************	
+<!--                           Version Information                            -->
 *********************************************************************************
-<!--                   osBoot Unit Local Group Definition                     -->
+** @version 1.0.0
+** @date 1.8.2020
+** @author https://github.com/PavolKostolansky     
+*********************************************************************************	
+<!--                          Warnings and License                            -->
 *********************************************************************************
-** @defgroup Local_osBoot Local
-** @ingroup osBoot_unit
-** @brief osBoot locals
-** @details lorem
+** @warning Modifying code can lead to unexpected behaviour of the whole system
+** @copyright MIT License
+*********************************************************************************
+<!--                 CILsysCalls Unit Global Group Definition                 -->
+*********************************************************************************
+** @defgroup Global_CILsysCalls Global
+** @ingroup CILsysCalls_unit 
+** @brief CILsysCalls globals
+** @details lorem  
 ********************************************************************************/
 /********************************************************************************
-**                           START OF THE SOURCE FILE                          **
+**                           START OF THE HEADER FILE                          **
 ********************************************************************************/
+#ifndef __CILSYSCALLS_H__
+#define __CILSYSCALLS_H__
+/********************************************************************************
+**                         START OF C++ SUPPORT SECTION                        **
+********************************************************************************/
+#ifdef __cplusplus
+ extern "C" {
+#endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "osBoot.h"
-#include "osBootCfg.h"
+#include "sysDefs.h"
+#include "memoryMapping.h"
 
 /* CIL interfaces */
-#include "CILcore.h"
+#include "CILstdTypes.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -35,15 +61,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_osBoot_c Macros
-  * @ingroup Local_osBoot
-  * @{
+  * @defgroup Macros_CILsysCalls_h Macros
+  * @ingroup Global_CILsysCalls  
+  * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_osBoot_c
+  * @}  
+  * Macros_CILsysCalls_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -54,15 +80,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_osBoot_c Variables
-  * @ingroup Local_osBoot
-  * @{
+  * @defgroup Variables_CILsysCalls_h Variables  
+  * @ingroup Global_CILsysCalls  
+  * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_osBoot_c
+  * @}  
+  * Variables_CILsysCalls_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -73,47 +99,87 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_osBoot_c API's
-  * @ingroup Local_osBoot
+  * @defgroup Apis_CILsysCalls_h API's 
+  * @ingroup Global_CILsysCalls
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_osBoot_c Getters
-  * @ingroup Apis_osBoot_c
-  * @{
+  * @addtogroup Getters_CILsysCalls_h Getters  
+  * @ingroup Apis_CILsysCalls_h                                            
+  * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_osBoot_c
+  * @}       
+  * Getters_CILsysCalls_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_osBoot_c Setters
-  * @ingroup Apis_osBoot_c
-  * @{
+  * @addtogroup Setters_CILsysCalls_h Setters  
+  * @ingroup Apis_CILsysCalls_h                                            
+  * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_osBoot_c
+  * @}    
+  * Setters_CILsysCalls_h   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_osBoot_c General
-  * @ingroup Apis_osBoot_c
-  * @{
+  * @addtogroup General_CILsysCalls_h General  
+  * @ingroup Apis_CILsysCalls_h                                            
+  * @{                                                                           
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn CILsysCalls_dispatcher(BitWidthType *sp) 
+  * 
+  * @brief Selector of sysCall function.
+  * 
+  * @param[in] BitWidthType *sp
+  * 
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void CILsysCalls_dispatcher(BitWidthType *sp);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn CILsysCalls_os(BitWidthType id) 
+  * 
+  * @brief System call handling general operating system functionalities.
+  * 
+  * @param[in]  BitWidthType id
+  * 
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void CILsysCalls_os(BitWidthType id);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn CILsysCalls_readWrite(BitWidthType id, void * entity, BitWidthType num) 
+  * 
+  * @brief System call handling read/write from/to buffers or registers.
+  * 
+  * @param[in]  BitWidthType id
+  * @param[in]  void * entity
+  * @param[in]  BitWidthType num
+  * 
+  * @return BitWidthType
+********************************************************************************/
+__OS_FUNC_SECTION BitWidthType CILsysCalls_readWrite(BitWidthType id, void * entity, BitWidthType num);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_osBoot_c
+  * General_CILsysCalls_h  
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -122,63 +188,54 @@
 **                        Function Definitions | Start                         **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @fn osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
-  *
-  * @brief Boot of the section.
-  *
-  * @param[in]  unsigned char * sectionStart
-  * @param[in]  unsigned char * sectionEnd
-  * @param[in]  unsigned char * sectionStartInFlash
-  *
-  * @return none
+  * @addtogroup Getters_CILsysCalls_h Getters  
+  * @ingroup Apis_CILsysCalls_h                                            
+  * @{                                                                           
 ********************************************************************************/
-__STATIC_FORCEINLINE void osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
-{
-    BitWidthType size = (BitWidthType)(sectionEnd - sectionStart);
-
-	  unsigned char *pDst = sectionStart;
-	  unsigned char *pSrc = sectionStartInFlash;
-
-	  for ( BitWidthType i = 0; i < (size * sizeof(BitWidthType)); i++ )
-    {
-	  	  *pDst++=*pSrc++;
-    }
-}
-
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @fn osBoot_boot(void)
-  *
-  * @brief Boot of operating system.
-  *
-  * @param[in]  none
-  *
-  * @return none
+  * @}       
+  * Getters_CILsysCalls_h
 ********************************************************************************/
-void osBoot_boot(void)
-{
-    BitWidthType  coreId,
-                  programSectionsNumber;
-
-    CosmOS_ProgramSectionConfigurationType * programSections;
-
-    coreId = CILcore_getCoreId();
-
-    programSections = (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId].programSections;
-    programSectionsNumber = bootSections[coreId].programSectionsNumber;
-
-
-    for (BitWidthType i=0; i < programSectionsNumber; i++)
-    {
-        osBoot_bootSection(programSections[i].startAddress,programSections[i].endAddress,programSections[i].flashAddress);
-    }
-};
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_CILsysCalls_h Setters  
+  * @ingroup Apis_CILsysCalls_h                                            
+  * @{                                                                           
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}    
+  * Setters_CILsysCalls_h   
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_CILsysCalls_h General  
+  * @ingroup Apis_CILsysCalls_h                                            
+  * @{                                                                           
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_CILsysCalls_h  
+********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
+#ifdef __cplusplus
+}
+#endif
 /********************************************************************************
-**                           END OF THE SOURCE FILE                            **
+**                         END OF C++ SUPPORT SECTION                          **
+********************************************************************************/
+#endif
+/********************************************************************************
+**                           END OF THE HEADER FILE                            **
 ********************************************************************************/

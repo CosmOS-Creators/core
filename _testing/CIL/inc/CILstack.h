@@ -5,27 +5,53 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file osBoot.c
+** @file CILstack.h
+*********************************************************************************	
+<!--                       CILstack Unit Group Definition                     -->
+********************************************************************************* 
+** @defgroup CILstack_unit CILstack Unit 
+** @ingroup CILmodule        
+** @brief CILstack Unit 
+** @details lorem                               
+*********************************************************************************	
+<!--                           Version Information                            -->
 *********************************************************************************
-<!--                   osBoot Unit Local Group Definition                     -->
+** @version 1.0.0
+** @date 1.8.2020
+** @author https://github.com/PavolKostolansky     
+*********************************************************************************	
+<!--                          Warnings and License                            -->
 *********************************************************************************
-** @defgroup Local_osBoot Local
-** @ingroup osBoot_unit
-** @brief osBoot locals
-** @details lorem
+** @warning Modifying code can lead to unexpected behaviour of the whole system
+** @copyright MIT License
+*********************************************************************************
+<!--                  CILstack Unit Global Group Definition                   -->
+*********************************************************************************
+** @defgroup Global_CILstack Global
+** @ingroup CILstack_unit 
+** @brief CILstack globals
+** @details lorem  
 ********************************************************************************/
 /********************************************************************************
-**                           START OF THE SOURCE FILE                          **
+**                           START OF THE HEADER FILE                          **
 ********************************************************************************/
+#ifndef __CILSTACK_H__
+#define __CILSTACK_H__
+/********************************************************************************
+**                         START OF C++ SUPPORT SECTION                        **
+********************************************************************************/
+#ifdef __cplusplus
+ extern "C" {
+#endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "osBoot.h"
-#include "osBootCfg.h"
+#include "sysDefs.h"
+#include "memoryMapping.h"
 
 /* CIL interfaces */
-#include "CILcore.h"
+#include "CILstdTypes.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -35,15 +61,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_osBoot_c Macros
-  * @ingroup Local_osBoot
-  * @{
+  * @defgroup Macros_CILstack_h Macros
+  * @ingroup Global_CILstack  
+  * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_osBoot_c
+  * @}  
+  * Macros_CILstack_h  
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -54,15 +80,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_osBoot_c Variables
-  * @ingroup Local_osBoot
-  * @{
+  * @defgroup Variables_CILstack_h Variables  
+  * @ingroup Global_CILstack  
+  * @{    
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_osBoot_c
+  * @}  
+  * Variables_CILstack_h  
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -73,47 +99,61 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_osBoot_c API's
-  * @ingroup Local_osBoot
+  * @defgroup Apis_CILstack_h API's 
+  * @ingroup Global_CILstack
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_osBoot_c Getters
-  * @ingroup Apis_osBoot_c
-  * @{
+  * @addtogroup Getters_CILstack_h Getters  
+  * @ingroup Apis_CILstack_h                                            
+  * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_osBoot_c
+  * @}       
+  * Getters_CILstack_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_osBoot_c Setters
-  * @ingroup Apis_osBoot_c
-  * @{
+  * @addtogroup Setters_CILstack_h Setters  
+  * @ingroup Apis_CILstack_h                                            
+  * @{                                                                           
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_osBoot_c
+  * @}    
+  * Setters_CILstack_h   
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_osBoot_c General
-  * @ingroup Apis_osBoot_c
-  * @{
+  * @addtogroup General_CILstack_h General  
+  * @ingroup Apis_CILstack_h                                            
+  * @{                                                                           
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn CILstack_stackInit(AddressType stackLowAddress, AddressType stackHighAddress, AddressType handlerAddress)
+  * 
+  * @brief Task stack initialization.
+  * 
+  * @param[in]  AddressType stackLowAddress
+  * @param[in]  AddressType stackHighAddress
+  * @param[in]  AddressType handlerAddress
+  * 
+  * @return StackPointerType
+********************************************************************************/
+__OS_FUNC_SECTION StackPointerType CILstack_stackInit(AddressType stackLowAddress, AddressType stackHighAddress, AddressType handlerAddress);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_osBoot_c
+  * General_CILstack_h  
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -122,63 +162,66 @@
 **                        Function Definitions | Start                         **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @fn osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
-  *
-  * @brief Boot of the section.
-  *
-  * @param[in]  unsigned char * sectionStart
-  * @param[in]  unsigned char * sectionEnd
-  * @param[in]  unsigned char * sectionStartInFlash
-  *
-  * @return none
+  * @addtogroup Getters_CILstack_h Getters  
+  * @ingroup Apis_CILstack_h                                            
+  * @{                                                                           
 ********************************************************************************/
-__STATIC_FORCEINLINE void osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
-{
-    BitWidthType size = (BitWidthType)(sectionEnd - sectionStart);
-
-	  unsigned char *pDst = sectionStart;
-	  unsigned char *pSrc = sectionStartInFlash;
-
-	  for ( BitWidthType i = 0; i < (size * sizeof(BitWidthType)); i++ )
-    {
-	  	  *pDst++=*pSrc++;
-    }
-}
-
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}       
+  * Getters_CILstack_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_CILstack_h Setters  
+  * @ingroup Apis_CILstack_h                                            
+  * @{                                                                           
+********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn osBoot_boot(void)
-  *
-  * @brief Boot of operating system.
-  *
-  * @param[in]  none
-  *
+  * @fn CILstack_setStackPointer(AddressType address)
+  * 
+  * @brief Set stack pointer DEMO CODE.
+  * 
+  * @param[in]  AddressType address
+  * 
   * @return none
 ********************************************************************************/
-void osBoot_boot(void)
-{
-    BitWidthType  coreId,
-                  programSectionsNumber;
-
-    CosmOS_ProgramSectionConfigurationType * programSections;
-
-    coreId = CILcore_getCoreId();
-
-    programSections = (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId].programSections;
-    programSectionsNumber = bootSections[coreId].programSectionsNumber;
-
-
-    for (BitWidthType i=0; i < programSectionsNumber; i++)
-    {
-        osBoot_bootSection(programSections[i].startAddress,programSections[i].endAddress,programSections[i].flashAddress);
-    }
-};
+__OS_FUNC_SECTION __NAKED void CILstack_setStackPointer(AddressType address);
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}    
+  * Setters_CILstack_h   
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_CILstack_h General  
+  * @ingroup Apis_CILstack_h                                            
+  * @{                                                                           
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_CILstack_h  
+********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
+#ifdef __cplusplus
+}
+#endif
 /********************************************************************************
-**                           END OF THE SOURCE FILE                            **
+**                         END OF C++ SUPPORT SECTION                          **
+********************************************************************************/
+#endif
+/********************************************************************************
+**                           END OF THE HEADER FILE                            **
 ********************************************************************************/
