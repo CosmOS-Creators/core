@@ -1,38 +1,15 @@
-#include "CppUTest/TestHarness.h"
-#include "CppUTestExt/MockSupport.h"
-#include "CppUTest/CommandLineTestRunner.h"
+#include <gtest/gtest.h>
+
+#include "memoryProtection_mock.h"
 
 #include "osInit.h"
 
-int main(int ac, char** av)
+TEST(osInit, executionFlow)
 {
-    return CommandLineTestRunner::RunAllTests(ac, av);
-}
 
-TEST_GROUP(osInit)
-{
-    void setup() {
-    }
-
-
-    void teardown() {
-        mock().clear();
-    }
-
-};
-
-
-TEST(osInit, simpleTest)
-{
-		mock().strictOrder();
-    mock().expectOneCall("memoryProtection_init");
-		mock().expectOneCall("os_getOsVar");
-		mock().expectOneCall("CILcore_setCoreVar");
-		mock().expectOneCall("core_getCoreVar");
-		mock().expectOneCall("stackInit_init");
-		mock().expectOneCall("coreSync_getBarrier");
+		MemoryProtection_TestFixture mock;
+    // << "switchMemoryProtection_init has to be called at least one as part of osInit_Init"
+    EXPECT_CALL(*mock._MemoryProtectionMock, memoryProtection_init()).Times(1);
 
     osInit_init();
-
-    mock().checkExpectations();
 }

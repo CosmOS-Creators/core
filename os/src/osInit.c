@@ -147,19 +147,19 @@ __OS_FUNC_SECTION void osInit_init(void)
 
     switchMemoryProtection_init();
 
-    osVar = os_getOsVar();
+    //osVar = os_getOsVar();
 
-    CILcore_setCoreVar(osVar);
+    //CILcore_setCoreVar(osVar);
 
-    coreVar = core_getCoreVar();
+    //coreVar = core_getCoreVar();
 
-    stackInit_init( coreVar );
+    //stackInit_init( coreVar );
 
     //init MPU
     //init DMA to buffers
     //Maybe better have here CILmicroInit()
 
-    coreSync_getBarrier( coreVar, OS_INIT_ID );
+    //coreSync_getBarrier( coreVar, OS_INIT_ID );
 
 };
 /* @cond S */

@@ -21,6 +21,8 @@
 #    )
 #
 #add_executable(${executableName} ${SOURCES})
-#target_link_libraries(${executableName} CppUTest CppUTestExt)
+#target_link_libraries(${executableName} gtest_main gmock_main)
 #
-#add_test(${testName} ${executableName})
+#include(GoogleTest)
+#gtest_add_tests(TARGET ${executableName}
+#EXTRA_ARGS --gtest_output=xml:googletest_${executableName}.xml)
