@@ -16,7 +16,7 @@ public:
     ~MemoryProtection_MOCK(){}
 
     // mock methods
-    MOCK_METHOD0(memoryProtection_init, void());
+    MOCK_METHOD(void,memoryProtection_init, ());
     // MOCK_METHOD2(MemoryProtection_setMemoryProtection,void(CosmOS_CoreVariableType*, CosmOS_SchedulableVariableType*));
 };
 

@@ -147,11 +147,11 @@ __OS_FUNC_SECTION void osInit_init(void)
 
     switchMemoryProtection_init();
 
-    //osVar = os_getOsVar();
+    osVar = os_getOsVar();
 
     //CILcore_setCoreVar(osVar);
 
-    //coreVar = core_getCoreVar();
+    coreVar = core_getCoreVar();
 
     //stackInit_init( coreVar );
 
