@@ -11,4 +11,6 @@ std::unique_ptr<Core_MOCK> Core_TestFixture::_CoreMock;
 CosmOS_CoreVariableType * core_getCoreVar()
 {
     Core_TestFixture::_CoreMock->core_getCoreVar();
+
+		return (NULL);
 }

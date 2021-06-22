@@ -2,7 +2,7 @@
 
 #include "stack_mock.h"
 
-#include "stack.h"
+#include "stackInit.h"
 
 // instantiate mocked lib
 std::unique_ptr<Stack_MOCK> Stack_TestFixture::_StackMock;

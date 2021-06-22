@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "stack.h"
+#include "stackInit.h"
 
 using namespace ::testing;
 using ::testing::Return;
