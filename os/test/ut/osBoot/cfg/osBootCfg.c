@@ -1,17 +1,17 @@
 /********************************************************************************
 **                                                                             **
-**                         COSMOS FILE | CREATED BY HUMAN                      **
+**                       GENERATED FILE BY CosmOS CustomBox                    **
 **                                                                             **
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file osBoot.c
+** @file osBootCfg.c
 *********************************************************************************
-<!--                   osBoot Unit Local Group Definition                     -->
+<!--                   osBootCfg Unit Local Group Definition                  -->
 *********************************************************************************
-** @defgroup Local_osBoot Local
-** @ingroup osBoot_unit
-** @brief osBoot locals
+** @defgroup Local_osBootCfg Local
+** @ingroup osBootCfg_unit
+** @brief osBootCfg locals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
@@ -21,11 +21,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "osBoot.h"
 #include "osBootCfg.h"
-
-/* CIL interfaces */
-#include "CILcore.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -35,15 +31,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_osBoot_c Macros
-  * @ingroup Local_osBoot
+  * @defgroup Macros_osBootCfg_c Macros
+  * @ingroup Local_osBootCfg
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Macros_osBoot_c
+  * Macros_osBootCfg_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -54,15 +50,56 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_osBoot_c Variables
-  * @ingroup Local_osBoot
+  * @defgroup Variables_osBootCfg_c Variables
+  * @ingroup Local_osBootCfg
   * @{
 ********************************************************************************/
+extern unsigned char _s_os_section_vars[];
+extern unsigned char _s_program_blinking_led_CM7_section_init[];
+
+extern unsigned char _e_os_section_vars[];
+extern unsigned char _e_program_blinking_led_CM7_section_init[];
+
+extern unsigned char _flash_os_section_vars_start[];
+extern unsigned char _flash_program_blinking_led_CM7_section_init[];
+
+const CosmOS_ProgramSectionConfigurationType pogramSectionsCore0[1]
+IS_INITIALIZED_TO
+{
+	{
+        _s_program_blinking_led_CM7_section_init,
+        _e_program_blinking_led_CM7_section_init,
+        _flash_program_blinking_led_CM7_section_init,
+    },
+};
+
+const CosmOS_ProgramSectionConfigurationType pogramSectionsCore1[1]
+IS_INITIALIZED_TO
+{
+    {
+        _s_os_section_vars,
+        _e_os_section_vars,
+        _flash_os_section_vars_start,
+    },
+};
+
+const CosmOS_BootSectionConfigurationType bootSections[2]
+IS_INITIALIZED_TO
+{
+		{
+        pogramSectionsCore0,
+        1,
+    },
+		{
+        pogramSectionsCore1,
+        1,
+    },
+};
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Variables_osBoot_c
+  * Variables_osBootCfg_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -73,47 +110,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_osBoot_c API's
-  * @ingroup Local_osBoot
+  * @defgroup Apis_osBootCfg_c API's
+  * @ingroup Local_osBootCfg
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_osBoot_c Getters
-  * @ingroup Apis_osBoot_c
+  * @addtogroup Getters_osBootCfg_c Getters
+  * @ingroup Apis_osBootCfg_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Getters_osBoot_c
+  * Getters_osBootCfg_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_osBoot_c Setters
-  * @ingroup Apis_osBoot_c
+  * @addtogroup Setters_osBootCfg_c Setters
+  * @ingroup Apis_osBootCfg_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Setters_osBoot_c
+  * Setters_osBootCfg_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_osBoot_c General
-  * @ingroup Apis_osBoot_c
+  * @addtogroup General_osBootCfg_c General
+  * @ingroup Apis_osBootCfg_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_osBoot_c
+  * General_osBootCfg_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -121,61 +158,6 @@
 /********************************************************************************
 **                        Function Definitions | Start                         **
 ********************************************************************************/
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
-  *
-  * @brief Boot of the section.
-  *
-  * @param[in]  unsigned char * sectionStart
-  * @param[in]  unsigned char * sectionEnd
-  * @param[in]  unsigned char * sectionStartInFlash
-  *
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
-{
-    BitWidthType size = (BitWidthType)(sectionEnd - sectionStart);
-
-	  unsigned char *pDst = sectionStart;
-	  unsigned char *pSrc = sectionStartInFlash;
-
-	  for ( BitWidthType i = 0; i < (size * sizeof(BitWidthType)); i++ )
-    {
-	  	  *pDst++=*pSrc++;
-    }
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn osBoot_boot(void)
-  *
-  * @brief Boot of operating system.
-  *
-  * @param[in]  none
-  *
-  * @return none
-********************************************************************************/
-void osBoot_boot(void)
-{
-    BitWidthType  coreId,
-                  programSectionsNumber;
-
-    CosmOS_ProgramSectionConfigurationType * programSections;
-
-    coreId = CILcore_getCoreId();
-
-    programSections = (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId].programSections;
-    programSectionsNumber = bootSections[coreId].programSectionsNumber;
-
-
-    for (BitWidthType i=0; i < programSectionsNumber; i++)
-    {
-        osBoot_bootSection(programSections[i].startAddress,programSections[i].endAddress,programSections[i].flashAddress);
-    }
-};
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
