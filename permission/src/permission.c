@@ -8,13 +8,13 @@
 ** @file permission.c
 *********************************************************************************
 <!--                  permission Unit Local Group Definition                 -->
-*********************************************************************************	
+*********************************************************************************
 ** @defgroup Local_permission Local
-** @ingroup permission_unit 
+** @ingroup permission_unit
 ** @brief permission locals
-** @details lorem 
-********************************************************************************/ 
-/********************************************************************************  
+** @details lorem
+********************************************************************************/
+/********************************************************************************
 **                           START OF THE SOURCE FILE                          **
 ********************************************************************************/
 /********************************************************************************
@@ -36,13 +36,13 @@
   * *************************************************************************//**
   * @defgroup Macros_permission Macros
   * @ingroup Local_permission
-  * @{    
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_permission  
+  * @}
+  * Macros_permission
 ********************************************************************************/
 #define BITLOCK_MASK (BitWidthType)0x1
 /********************************************************************************
@@ -54,15 +54,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_permission Variables  
+  * @defgroup Variables_permission Variables
   * @ingroup Local_permission
-  * @{    
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_permission  
+  * @}
+  * Variables_permission
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -73,67 +73,67 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_permission_c API's  
+  * @defgroup Apis_permission_c API's
   * @ingroup Local_permission
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_permission_c Getters  
-  * @ingroup Apis_permission_c                                            
-  * @{                                                                           
+  * @addtogroup Getters_permission_c Getters
+  * @ingroup Apis_permission_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_permission_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_permission_c Setters  
-  * @ingroup Apis_permission_c                                            
-  * @{                                                                           
+  * @addtogroup Setters_permission_c Setters
+  * @ingroup Apis_permission_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_permission_c   
+  * @}
+  * Setters_permission_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_permission_c General  
-  * @ingroup Apis_permission_c                                            
-  * @{                                                                           
+  * @addtogroup General_permission_c General
+  * @ingroup Apis_permission_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn permission_trySchedulableAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_SchedulableVariableType * schedulableVar)
-  * 
+  *
   * @brief Try if schedulable has access.
-  * 
+  *
   * @param[in]  CosmOS_PermissionsConfigurationType * permission
   * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
-  * 
+  *
   * @return CosmOS_AccessStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_AccessStateType permission_trySchedulableAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_SchedulableVariableType * schedulableVar)
 {
-    cosmosAssert( IS_NOT( permission[schedulableVar->cfg->coreId].bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] & \
-              permission[schedulableVar->cfg->coreId].bitLocksTasksInverted[SchedulableIdToBitLock[schedulableVar->cfg->id]] ) );
+    cosmosAssert( IS_NOT( permission->bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] & \
+				permission->bitLocksTasksInverted[SchedulableIdToBitLock[schedulableVar->cfg->id]] ) );
 
-    return ((( permission[schedulableVar->cfg->coreId].bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] >> schedulableVar->cfg->id ) & BITLOCK_MASK ) ? \
+    return ((( permission->bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] >> schedulableVar->cfg->id ) & BITLOCK_MASK ) ? \
             ACCESS_STATE_ENUM__ALLOWED : ACCESS_STATE_ENUM__DENIED );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_permission_c  
+  * General_permission_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -145,12 +145,12 @@ __STATIC_FORCEINLINE CosmOS_AccessStateType permission_trySchedulableAccess(Cosm
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar)
-  * 
+  *
   * @brief Try access of current running instance DEMO CODE.
-  * 
+  *
   * @param[in]  CosmOS_PermissionsConfigurationType * permission
   * @param[in]  CosmOS_CoreVariableType * coreVar
-  * 
+  *
   * @return CosmOS_AccessStateType
 ********************************************************************************/
 /* @cond S */

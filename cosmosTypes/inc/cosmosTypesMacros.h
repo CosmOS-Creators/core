@@ -5,33 +5,33 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file cosmosTypesMacros.h                                      
-*********************************************************************************	
+** @file cosmosTypesMacros.h
+*********************************************************************************
 <!--                  cosmosTypesMacros Unit Group Definition                 -->
-********************************************************************************* 
-** @defgroup cosmosTypesMacros_unit cosmosTypesMacros Unit 
-** @ingroup cosmosTypes_module        
-** @brief cosmosTypesMacros Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup cosmosTypesMacros_unit cosmosTypesMacros Unit
+** @ingroup cosmosTypes_module
+** @brief cosmosTypesMacros Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
-** @copyright MIT License       	
+** @copyright MIT License
 *********************************************************************************
 <!--               cosmosTypesMacros Unit Global Group Definition             -->
-*********************************************************************************	
+*********************************************************************************
 ** @defgroup Global_cosmosTypesMacros Global
-** @ingroup cosmosTypesMacros_unit 
+** @ingroup cosmosTypesMacros_unit
 ** @brief cosmosTypesMacros globals
-** @details lorem 
-********************************************************************************/ 
+** @details lorem
+********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
@@ -56,8 +56,8 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_cosmosTypesMacros_h Macros
-  * @ingroup Global_cosmosTypesMacros  
-  * @{    
+  * @ingroup Global_cosmosTypesMacros
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -125,9 +125,9 @@
         #define __STATIC_FORCEINLINE __attribute__((always_inline)) static inline
     #endif
 #elif   defined ( __CC_ARM )
-    #ifndef __STATIC_FORCEINLINE 
+    #ifndef __STATIC_FORCEINLINE
         #define __STATIC_FORCEINLINE __attribute__((always_inline)) static inline
-    #endif 
+    #endif
 #else
     #error "Your compiler is currently not supported by CosmOS!"
 #endif
@@ -142,9 +142,9 @@
         #define __NAKED __attribute__((naked))
     #endif
 #elif   defined ( __CC_ARM )
-    #ifndef __NAKED 
+    #ifndef __NAKED
         #define __NAKED __attribute__((naked))
-    #endif 
+    #endif
 #else
     #error "Your compiler is currently not supported by CosmOS!"
 #endif
@@ -159,9 +159,9 @@
         #define __FORCEINLINE __attribute__((always_inline)) inline
     #endif
 #elif   defined ( __CC_ARM )
-    #ifndef __FORCEINLINE 
+    #ifndef __FORCEINLINE
         #define __FORCEINLINE __attribute__((always_inline)) inline
-    #endif 
+    #endif
 #else
     #error "Your compiler is currently not supported by CosmOS!"
 #endif
@@ -228,12 +228,11 @@
   * @brief  __SEC_START
 ********************************************************************************/
 #if     defined ( __GNUC__ )
-    #define __SEC_START( pragma ) \
-    pragma
-
+    #define __SEC_START( attr ) \
+		attr
 #elif   defined ( __CC_ARM )
-    #define __SEC_START( pragma ) \
-    pragma
+    #define __SEC_START( attr ) \
+    pragma attr
 #else
     #error "Your compiler is currently not supported by CosmOS!"
 #endif
@@ -244,19 +243,19 @@
   * @brief  __SEC_STOP
 ********************************************************************************/
 #if     defined ( __GNUC__ )
-    #define __SEC_STOP( pragma ) \
-    pragma 
+    #define __SEC_STOP( attr ) \
+		attr
 #elif   defined ( __CC_ARM )
-    #define __SEC_STOP( pragma ) \
-    pragma
+    #define __SEC_STOP( attr ) \
+    pragma attr
 #else
     #error "Your compiler is currently not supported by CosmOS!"
 #endif
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_cosmosTypesMacros_h  
+  * @}
+  * Macros_cosmosTypesMacros_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -268,14 +267,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Typedefs_cosmosTypesMacrosCfg_h Typedefs
-  * @ingroup Global_cosmosTypesMacros  
-  * @{    
+  * @ingroup Global_cosmosTypesMacros
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Typedefs_cosmosTypesMacros_h  
+  * @}
+  * Typedefs_cosmosTypesMacros_h
 ********************************************************************************/
 /********************************************************************************
 **                              Typedefs | Stop                                **

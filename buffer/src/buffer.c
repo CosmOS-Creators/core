@@ -8,13 +8,13 @@
 ** @file buffer.c
 *********************************************************************************
 <!--                    buffer Unit Local Group Definition                    -->
-*********************************************************************************	
+*********************************************************************************
 ** @defgroup Local_buffer Local
-** @ingroup buffer_unit 
+** @ingroup buffer_unit
 ** @brief buffer locals
-** @details lorem 
-********************************************************************************/ 
-/********************************************************************************  
+** @details lorem
+********************************************************************************/
+/********************************************************************************
 **                           START OF THE SOURCE FILE                          **
 ********************************************************************************/
 /********************************************************************************
@@ -40,13 +40,13 @@
   * *************************************************************************//**
   * @defgroup Macros_buffer Macros
   * @ingroup Local_buffer
-  * @{    
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_buffer  
+  * @}
+  * Macros_buffer
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -57,15 +57,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_buffer Variables  
+  * @defgroup Variables_buffer Variables
   * @ingroup Local_buffer
-  * @{    
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_buffer  
+  * @}
+  * Variables_buffer
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -76,52 +76,52 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_buffer_c API's  
+  * @defgroup Apis_buffer_c API's
   * @ingroup Local_buffer
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_buffer_c Getters  
-  * @ingroup Apis_buffer_c                                            
-  * @{                                                                           
+  * @addtogroup Getters_buffer_c Getters
+  * @ingroup Apis_buffer_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_buffer_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_buffer_c Setters  
-  * @ingroup Apis_buffer_c                                            
-  * @{                                                                           
+  * @addtogroup Setters_buffer_c Setters
+  * @ingroup Apis_buffer_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_buffer_c   
+  * @}
+  * Setters_buffer_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_buffer_c General  
-  * @ingroup Apis_buffer_c                                            
-  * @{                                                                           
+  * @addtogroup General_buffer_c General
+  * @ingroup Apis_buffer_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn buffer_pull(CosmOS_BufferVariableType * bufferVar, unsigned char * data)
-  * 
+  *
   * @brief Pull data from the buffer DEMO CODE.
-  * 
+  *
   * @param[in]  CosmOS_BufferVariableType * bufferVar
   * @param[in]  unsigned char * data
-  * 
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __OS_FUNC_SECTION static CosmOS_BufferStateType buffer_pull(CosmOS_BufferVariableType * buffer, unsigned char * data);
@@ -130,12 +130,12 @@ __OS_FUNC_SECTION static CosmOS_BufferStateType buffer_pull(CosmOS_BufferVariabl
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn buffer_push(CosmOS_BufferVariableType * bufferVar, unsigned char data)
-  * 
+  *
   * @brief Push data to the buffer DEMO CODE.
-  * 
+  *
   * @param[in]  CosmOS_BufferVariableType * bufferVar
   * @param[in]  unsigned char data
-  * 
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __OS_FUNC_SECTION static CosmOS_BufferStateType buffer_push(CosmOS_BufferVariableType * bufferVar, unsigned char data);
@@ -143,7 +143,7 @@ __OS_FUNC_SECTION static CosmOS_BufferStateType buffer_push(CosmOS_BufferVariabl
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_buffer_c  
+  * General_buffer_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -155,12 +155,12 @@ __OS_FUNC_SECTION static CosmOS_BufferStateType buffer_push(CosmOS_BufferVariabl
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn buffer_pull(CosmOS_BufferVariableType * bufferVar, unsigned char * data)
-  * 
+  *
   * @brief Pull data from the buffer DEMO CODE.
-  * 
+  *
   * @param[in]  CosmOS_BufferVariableType * bufferVar
   * @param[in]  unsigned char * data
-  * 
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
@@ -195,12 +195,12 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn buffer_push(CosmOS_BufferVariableType * bufferVar, unsigned char data)
-  * 
+  *
   * @brief Push data to the buffer DEMO CODE.
-  * 
+  *
   * @param[in]  CosmOS_BufferVariableType * bufferVar
   * @param[in]  unsigned char data
-  * 
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
@@ -234,14 +234,14 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn buffer_readArray(BitWidthType id, void * buffer, BitWidthType num) 
-  * 
+  * @fn buffer_readArray(BitWidthType id, void * buffer, BitWidthType num)
+  *
   * @brief Reading array from the buffer DEMO CODE.
-  * 
+  *
   * @param[in]  BitWidthType id
   * @param[in]  void * buffer
   * @param[in]  BitWidthType size
-  * 
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
@@ -257,7 +257,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
         bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_IS_NULL_POINTER;
     }
     else
-    {   
+    {
         CosmOS_AccessStateType accessState;
 
         CosmOS_OsVariableType * osVar;
@@ -291,7 +291,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
 
                 unsigned char * userBuffer;
 
-                
+
                 userBuffer = buffer;
                 userBufferIndex = 0;
 
@@ -319,14 +319,14 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn buffer_writeArray(BitWidthType id, void * buffer, BitWidthType num) 
-  * 
+  * @fn buffer_writeArray(BitWidthType id, void * buffer, BitWidthType num)
+  *
   * @brief Writing array into the buffer DEMO CODE.
-  * 
+  *
   * @param[in]  BitWidthType id
   * @param[in]  void * buffer
   * @param[in]  BitWidthType size
-  * 
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
@@ -342,7 +342,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
         bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_IS_NULL_POINTER;
     }
     else
-    {   
+    {
         CosmOS_AccessStateType accessState;
 
         CosmOS_OsVariableType * osVar;
@@ -364,7 +364,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
             bufferState = BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED;
         }
         else
-        {   
+        {
             BitWidthType emptyCellsNum;
 
 
