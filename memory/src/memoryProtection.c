@@ -8,11 +8,11 @@
 ** @file memoryProtection.c
 *********************************************************************************
 <!--              memoryProtection Unit Local Group Definition                -->
-*********************************************************************************	
+*********************************************************************************
 ** @defgroup Local_memoryProtection Local
-** @ingroup memoryProtection_unit 
+** @ingroup memoryProtection_unit
 ** @brief memoryProtection locals
-** @details lorem 
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE SOURCE FILE                          **
@@ -40,13 +40,13 @@
   * *************************************************************************//**
   * @defgroup Macros_memoryProtection_c Macros
   * @ingroup Local_memoryProtection
-  * @{    
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_memoryProtection_c  
+  * @}
+  * Macros_memoryProtection_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -57,15 +57,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_memoryProtection_c Variables  
+  * @defgroup Variables_memoryProtection_c Variables
   * @ingroup Local_memoryProtection
-  * @{    
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_memoryProtection_c  
+  * @}
+  * Variables_memoryProtection_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -76,47 +76,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_memoryProtection_c API's  
+  * @defgroup Apis_memoryProtection_c API's
   * @ingroup Local_memoryProtection
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_memoryProtection_c Getters  
-  * @ingroup Apis_memoryProtection_c                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}       
-  * Getters_memoryProtection_c
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_memoryProtection_c Setters  
-  * @ingroup Apis_memoryProtection_c                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}    
-  * Setters_memoryProtection_c   
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_memoryProtection_c General  
-  * @ingroup Apis_memoryProtection_c                                            
-  * @{                                                                           
+  * @addtogroup Getters_memoryProtection_c Getters
+  * @ingroup Apis_memoryProtection_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_memoryProtection_c  
+  * Getters_memoryProtection_c
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_memoryProtection_c Setters
+  * @ingroup Apis_memoryProtection_c
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Setters_memoryProtection_c
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_memoryProtection_c General
+  * @ingroup Apis_memoryProtection_c
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_memoryProtection_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -128,11 +128,11 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn memoryProtection_init(CosmOS_StackVariableType * stack)
-  * 
+  *
   * @brief Set stack overflow protection.
-  * 
+  *
   * @param[in]  none
-  * 
+  *
   * @return none
 ********************************************************************************/
 /* @cond S */
@@ -150,11 +150,11 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn memoryProtection_setStackOverflowProtection(CosmOS_StackConfigurationType * stack)
-  * 
+  *
   * @brief Set stack overflow protection.
-  * 
+  *
   * @param[in]  CosmOS_StackConfigurationType * stack
-  * 
+  *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_StackConfigurationType * stack)
@@ -172,11 +172,11 @@ __STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_Sta
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program)
-  * 
+  *
   * @brief Set program memory protection.
-  * 
+  *
   * @param[in]  CosmOS_ProgramVariableType * program
-  * 
+  *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program)
@@ -200,12 +200,12 @@ __STATIC_FORCEINLINE void memoryProtection_setProgramMemoryProtection(CosmOS_Pro
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable)
-  * 
+  *
   * @brief Set memory protection for current execution context.
-  * 
+  *
   * @param[in]  CosmOS_CoreVariableType * core
   * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
-  * 
+  *
   * @return none
 ********************************************************************************/
 /* @cond S */
@@ -220,7 +220,7 @@ __OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableT
 
 
     programId = schedulable_getProgramId( schedulable );
-    programVar = core_getCoreProgramVar( core, programId ); 
+    programVar = core_getCoreProgramVar( core, programId );
 
     stack = schedulable_getStack( schedulable );
 

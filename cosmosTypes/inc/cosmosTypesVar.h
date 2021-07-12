@@ -5,33 +5,33 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file cosmosTypesVar.h                                      
-*********************************************************************************	
+** @file cosmosTypesVar.h
+*********************************************************************************
 <!--                   cosmosTypesVar Unit Group Definition                   -->
-********************************************************************************* 
-** @defgroup cosmosTypesVar_unit cosmosTypesVar Unit 
-** @ingroup cosmosTypes_module        
-** @brief cosmosTypesVar Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup cosmosTypesVar_unit cosmosTypesVar Unit
+** @ingroup cosmosTypes_module
+** @brief cosmosTypesVar Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
-** @copyright MIT License       	
+** @copyright MIT License
 *********************************************************************************
 <!--              cosmosTypesVar Unit Global Group Definition                 -->
-*********************************************************************************	
+*********************************************************************************
 ** @defgroup Global_cosmosTypesVar Global
-** @ingroup cosmosTypesVar_unit 
+** @ingroup cosmosTypesVar_unit
 ** @brief cosmosTypesVar globals
-** @details lorem 
-********************************************************************************/ 
+** @details lorem
+********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
@@ -58,14 +58,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_cosmosTypesVar_h Macros
-  * @ingroup Global_cosmosTypesVar  
-  * @{    
+  * @ingroup Global_cosmosTypesVar
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_cosmosTypesVar_h  
+  * @}
+  * Macros_cosmosTypesVar_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -77,8 +77,8 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Typedefs_cosmosTypesVarCfg_h Typedefs
-  * @ingroup Global_cosmosTypesVar  
-  * @{    
+  * @ingroup Global_cosmosTypesVar
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -88,7 +88,7 @@
 typedef struct
 {
     CosmOS_BarrierStateType barrierState;
-    
+
 } CosmOS_BarrierVariableType;
 
 /********************************************************************************
@@ -128,7 +128,7 @@ typedef struct
     const CosmOS_SchedulableConfigurationType * const cfg;
     CosmOS_SchedulableStateType state;
     StackPointerType stackPointer;
-    
+
 } CosmOS_SchedulableVariableType;
 
 /********************************************************************************
@@ -226,13 +226,13 @@ typedef struct
     CosmOS_CoreVariableType * const coreVars;
     CosmOS_BufferVariableType * const bufferVars;
     CosmOS_BufferDoubleVariableType * const bufferDoubleVars;
-    
+
 } CosmOS_OsVariableType;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Typedefs_cosmosTypesVar_h  
+  * @}
+  * Typedefs_cosmosTypesVar_h
 ********************************************************************************/
 /********************************************************************************
 **                              Typedefs | Stop                                **

@@ -8,24 +8,24 @@
 ** @file permission.h
 *********************************************************************************
 <!--                    permission Module Group Definition                   -->
-*********************************************************************************  
+*********************************************************************************
 ** @defgroup permission_module permission
 ** @brief permission Module
-** @details lorem   	 		
-*********************************************************************************	
+** @details lorem
+*********************************************************************************
 <!--                     permission Unit Group Definition                    -->
-********************************************************************************* 
-** @defgroup permission_unit permission Unit 
-** @ingroup permission_module        
-** @brief permission Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup permission_unit permission Unit
+** @ingroup permission_module
+** @brief permission Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
@@ -34,9 +34,9 @@
 <!--                  permission Unit Global Group Definition                -->
 *********************************************************************************
 ** @defgroup Global_permission Global
-** @ingroup permission_unit 
+** @ingroup permission_unit
 ** @brief permission globals
-** @details lorem  
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
@@ -66,14 +66,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_permission_h Macros
-  * @ingroup Global_permission  
-  * @{    
+  * @ingroup Global_permission
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_permission_h  
+  * @}
+  * Macros_permission_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -84,15 +84,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_permission_h Variables  
-  * @ingroup Global_permission  
-  * @{    
+  * @defgroup Variables_permission_h Variables
+  * @ingroup Global_permission
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_permission_h  
+  * @}
+  * Variables_permission_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -103,52 +103,52 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_permission_h API's 
+  * @defgroup Apis_permission_h API's
   * @ingroup Global_permission
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_permission_h Getters  
-  * @ingroup Apis_permission_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_permission_h Getters
+  * @ingroup Apis_permission_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_permission_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_permission_h Setters  
-  * @ingroup Apis_permission_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_permission_h Setters
+  * @ingroup Apis_permission_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_permission_h   
+  * @}
+  * Setters_permission_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_permission_h General  
-  * @ingroup Apis_permission_h                                            
-  * @{                                                                           
+  * @addtogroup General_permission_h General
+  * @ingroup Apis_permission_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar)
-  * 
+  *
   * @brief Try access of current running instance DEMO CODE.
-  * 
+  *
   * @param[in]  CosmOS_PermissionsConfigurationType * permission
   * @param[in]  CosmOS_CoreVariableType * coreVar
-  * 
+  *
   * @return CosmOS_AccessStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar);
@@ -156,7 +156,7 @@ __OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_Permissions
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_permission_h  
+  * General_permission_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -167,19 +167,19 @@ __OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_Permissions
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_permission_h Getters  
-  * @ingroup Apis_permission_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_permission_h Getters
+  * @ingroup Apis_permission_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn permission_getBitLocksTasks(CosmOS_PermissionsConfigurationType * permission)
-  * 
+  *
   * @brief Get permission bitLocksTasks.
-  * 
+  *
   * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * 
+  *
   * @return BitWidthType *
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasks(CosmOS_PermissionsConfigurationType * permission)
@@ -191,11 +191,11 @@ __STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasks(CosmOS_Permissio
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn permission_getBitLocksTasksFlipped(CosmOS_PermissionsConfigurationType * permission)
-  * 
+  *
   * @brief Get permission bitLocksTasksInverted.
-  * 
+  *
   * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * 
+  *
   * @return BitWidthType *
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasksFlipped(CosmOS_PermissionsConfigurationType * permission)
@@ -206,34 +206,34 @@ __STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasksFlipped(CosmOS_Pe
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_permission_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_permission_h Setters  
-  * @ingroup Apis_permission_h                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}    
-  * Setters_permission_h   
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_permission_h General  
-  * @ingroup Apis_permission_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_permission_h Setters
+  * @ingroup Apis_permission_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_permission_h  
+  * Setters_permission_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_permission_h General
+  * @ingroup Apis_permission_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_permission_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

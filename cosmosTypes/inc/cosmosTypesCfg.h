@@ -5,33 +5,33 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file cosmosTypesCfg.h                                      
-*********************************************************************************	
+** @file cosmosTypesCfg.h
+*********************************************************************************
 <!--                   cosmosTypesCfg Unit Group Definition                   -->
-********************************************************************************* 
-** @defgroup cosmosTypesCfg_unit cosmosTypesCfg Unit 
-** @ingroup cosmosTypes_module        
-** @brief cosmosTypesCfg Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup cosmosTypesCfg_unit cosmosTypesCfg Unit
+** @ingroup cosmosTypes_module
+** @brief cosmosTypesCfg Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
-** @copyright MIT License       	
+** @copyright MIT License
 *********************************************************************************
 <!--                cosmosTypesCfg Unit Global Group Definition               -->
-*********************************************************************************	
+*********************************************************************************
 ** @defgroup Global_cosmosTypesCfg Global
-** @ingroup cosmosTypesCfg_unit 
+** @ingroup cosmosTypesCfg_unit
 ** @brief cosmosTypesCfg globals
-** @details lorem 
-********************************************************************************/ 
+** @details lorem
+********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
@@ -58,14 +58,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_cosmosTypesCfg_h Macros
-  * @ingroup Global_cosmosTypesCfg  
-  * @{    
+  * @ingroup Global_cosmosTypesCfg
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_cosmosTypesCfg_h  
+  * @}
+  * Macros_cosmosTypesCfg_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -77,8 +77,8 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Typedefs_cosmosTypesCfgCfg_h Typedefs
-  * @ingroup Global_cosmosTypesCfg  
-  * @{    
+  * @ingroup Global_cosmosTypesCfg
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -177,7 +177,7 @@ typedef struct
     const BitWidthType stackSize;
     const AddressType stackLowAddress;
     const AddressType stackHighAddress;
-    
+
 } CosmOS_StackConfigurationType;
 
 /********************************************************************************
@@ -195,7 +195,7 @@ typedef struct
     const BitWidthType instanceId;
     const BitWidthType programId;
     const BitWidthType coreId;
-    
+
 } CosmOS_SchedulableConfigurationType;
 
 /********************************************************************************
@@ -206,7 +206,7 @@ typedef struct
 typedef struct
 {
     const BitWidthType wcet;
-    
+
 } CosmOS_TaskConfigurationType;
 
 /********************************************************************************
@@ -225,7 +225,7 @@ typedef struct
   * *************************************************************************//**
   * @brief  CosmOS_ProgramConfigurationType struct type
 ********************************************************************************/
-typedef struct            
+typedef struct
 {
     const BitWidthType coreId;
     const BitWidthType numberOfTasks;
@@ -233,7 +233,7 @@ typedef struct
     const BitWidthType programMemorySize;
     const AddressType programMemoryLowAddress;
     const AddressType programMemoryHighAddress;
-    
+
 } CosmOS_ProgramConfigurationType;
 
 /********************************************************************************
@@ -330,13 +330,13 @@ typedef struct
     const CosmOS_BufferConfigurationType * const buffers;
     const BitWidthType numberOfBuffers;
     const CosmOS_RoutesConfigurationType * const route;
-    
+
 } CosmOS_OsConfigurationType;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Typedefs_cosmosTypesCfg_h  
+  * @}
+  * Typedefs_cosmosTypesCfg_h
 ********************************************************************************/
 /********************************************************************************
 **                              Typedefs | Stop                                **

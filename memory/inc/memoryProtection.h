@@ -6,20 +6,20 @@
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
 ** @file memoryProtection.h
-*********************************************************************************	
+*********************************************************************************
 <!--                  memoryProtection Unit Group Definition                  -->
-********************************************************************************* 
-** @defgroup memoryProtection_unit memoryProtection Unit 
-** @ingroup memory_module        
-** @brief memoryProtection Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup memoryProtection_unit memoryProtection Unit
+** @ingroup memory_module
+** @brief memoryProtection Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky 
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
@@ -28,9 +28,9 @@
 <!--             memoryProtection Unit Global Group Definition                -->
 *********************************************************************************
 ** @defgroup Global_memoryProtection Global
-** @ingroup memoryProtection_unit 
+** @ingroup memoryProtection_unit
 ** @brief memoryProtection globals
-** @details lorem  
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
@@ -60,14 +60,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_memoryProtection_h Macros
-  * @ingroup Global_memoryProtection  
-  * @{    
+  * @ingroup Global_memoryProtection
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_memoryProtection_h  
+  * @}
+  * Macros_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -78,15 +78,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_memoryProtection_h Variables  
-  * @ingroup Global_memoryProtection  
-  * @{    
+  * @defgroup Variables_memoryProtection_h Variables
+  * @ingroup Global_memoryProtection
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_memoryProtection_h  
+  * @}
+  * Variables_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -97,38 +97,38 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_memoryProtection_h API's 
+  * @defgroup Apis_memoryProtection_h API's
   * @ingroup Global_memoryProtection
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_memoryProtection_h Getters  
-  * @ingroup Apis_memoryProtection_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_memoryProtection_h Getters
+  * @ingroup Apis_memoryProtection_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_memoryProtection_h Setters  
-  * @ingroup Apis_memoryProtection_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_memoryProtection_h Setters
+  * @ingroup Apis_memoryProtection_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn memoryProtection_init(CosmOS_StackVariableType * stack)
-  * 
+  *
   * @brief Set stack overflow protection.
-  * 
+  *
   * @param[in]  none
-  * 
+  *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void memoryProtection_init();
@@ -137,33 +137,33 @@ __OS_FUNC_SECTION void memoryProtection_init();
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable)
-  * 
+  *
   * @brief Set memory protection for current execution context.
-  * 
+  *
   * @param[in]  CosmOS_CoreVariableType * core
   * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
-  * 
+  *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_memoryProtection_h   
+  * @}
+  * Setters_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_memoryProtection_h General  
-  * @ingroup Apis_memoryProtection_h                                            
-  * @{                                                                           
+  * @addtogroup General_memoryProtection_h General
+  * @ingroup Apis_memoryProtection_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_memoryProtection_h  
+  * General_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -174,41 +174,41 @@ __OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableT
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_memoryProtection_h Getters  
-  * @ingroup Apis_memoryProtection_h                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}       
-  * Getters_memoryProtection_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_memoryProtection_h Setters  
-  * @ingroup Apis_memoryProtection_h                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}    
-  * Setters_memoryProtection_h   
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_memoryProtection_h General  
-  * @ingroup Apis_memoryProtection_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_memoryProtection_h Getters
+  * @ingroup Apis_memoryProtection_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_memoryProtection_h  
+  * Getters_memoryProtection_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_memoryProtection_h Setters
+  * @ingroup Apis_memoryProtection_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Setters_memoryProtection_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_memoryProtection_h General
+  * @ingroup Apis_memoryProtection_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

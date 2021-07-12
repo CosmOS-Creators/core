@@ -8,13 +8,13 @@
 ** @file scheduler.c
 *********************************************************************************
 <!--                   scheduler Unit Local Group Definition                  -->
-*********************************************************************************	
+*********************************************************************************
 ** @defgroup Local_scheduler Local
-** @ingroup scheduler_unit 
+** @ingroup scheduler_unit
 ** @brief scheduler locals
-** @details lorem 
-********************************************************************************/ 
-/********************************************************************************  
+** @details lorem
+********************************************************************************/
+/********************************************************************************
 **                           START OF THE SOURCE FILE                          **
 ********************************************************************************/
 /********************************************************************************
@@ -50,13 +50,13 @@
   * *************************************************************************//**
   * @defgroup Macros_scheduler Macros
   * @ingroup Local_scheduler
-  * @{    
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_scheduler  
+  * @}
+  * Macros_scheduler
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -67,15 +67,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_scheduler Variables  
+  * @defgroup Variables_scheduler Variables
   * @ingroup Local_scheduler
-  * @{    
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_scheduler  
+  * @}
+  * Variables_scheduler
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -86,47 +86,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_scheduler_c API's  
+  * @defgroup Apis_scheduler_c API's
   * @ingroup Local_scheduler
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_scheduler_c Getters  
-  * @ingroup Apis_scheduler_c                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}       
-  * Getters_scheduler_c
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_scheduler_c Setters  
-  * @ingroup Apis_scheduler_c                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}    
-  * Setters_scheduler_c   
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_scheduler_c General  
-  * @ingroup Apis_scheduler_c                                            
-  * @{                                                                           
+  * @addtogroup Getters_scheduler_c Getters
+  * @ingroup Apis_scheduler_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_scheduler_c  
+  * Getters_scheduler_c
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_scheduler_c Setters
+  * @ingroup Apis_scheduler_c
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Setters_scheduler_c
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_scheduler_c General
+  * @ingroup Apis_scheduler_c
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_scheduler_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -139,14 +139,14 @@
   * *************************************************************************//**
   * @fn  scheduler_performanceScheduling(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType ** schedulableVar,\
   * StackPointerType * stackPointerRetVal,BitWidthType * timerTicks)
-  * 
+  *
   * @brief Performance scheduling function. DEMO
-  * 
+  *
   * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
   * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
   * @param[in]  StackPointerType * stackPointerRetVal
   * @param[in]  BitWidthType * timerTicks
-  * 
+  *
   * @return none
 ********************************************************************************/
 /* @cond S */
@@ -187,16 +187,16 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * *************************************************************************//**
   * @fn  scheduler_classicScheduling(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType * schedulableVar,StackPointerType * stackPointerRetVal,
   * BitWidthType * timerTicks, BitWidthType startTick, BitWidthType currentTick)
-  * 
+  *
   * @brief Classic scheduling function. DEMO
-  * 
+  *
   * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
   * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
   * @param[in]  StackPointerType * stackPointerRetVal
   * @param[in]  BitWidthType * timerTicks
   * @param[in]  BitWidthType startTick
   * @param[in]  BitWidthType currentTick
-  * 
+  *
   * @return none
 ********************************************************************************/
 /* @cond S */
@@ -231,16 +231,16 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * *************************************************************************//**
   * @fn  scheduler_classicSchedulingCore(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType ** schedulableVar,
   * StackPointerType * stackPointerRetVal, BitWidthType * timerTicks, BitWidthType * scheduleTableIterator)
-  * 
+  *
   * @brief Classic scheduling core function. DEMO
-  * 
+  *
   * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
   * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
   * @param[in]  StackPointerType * stackPointerRetVal
   * @param[in]  BitWidthType * timerTicks
   * @param[in]  BitWidthType * scheduleTableIterator
   * @param[in]  BitWidthType scheduleTableElementsNum
-  * 
+  *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void scheduler_classicSchedulingCore(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType ** schedulableVar,\
@@ -269,11 +269,11 @@ StackPointerType * stackPointerRetVal, BitWidthType * timerTicks, BitWidthType *
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
-  * 
+  *
   * @brief Algorithm for scheduling next schedulable DEMO CODE.
-  * 
+  *
   * @param[in]  StackPointerType stackPointer
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 /* @cond S */
@@ -336,7 +336,7 @@ __OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerTy
     }
 
     if ( scheduleTableElementsNum AND startTick IS_EQUAL_TO currentTick )
-    {   
+    {
         scheduler_classicSchedulingCore(schedulerVar,&schedulableVar,&stackPointerRetVal,&timerTicks, &scheduleTableIterator, scheduleTableElementsNum);
 
         schedulerState = SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK;
@@ -357,7 +357,7 @@ __OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerTy
     scheduler_setSchedulerState( schedulerVar, schedulerState );
     schedulersSyncState = switchSchedulerSync_sync( schedulerVar, coreVar, currentTick, hyperTick );
 
-    currentTick = ( ( currentTick + timerTicks ) % hyperTick ); 
+    currentTick = ( ( currentTick + timerTicks ) % hyperTick );
     scheduler_setSchedulerCurrentTick( schedulerVar, currentTick );
 
     switchMemoryProtection_setMemoryProtection( coreVar, schedulableVar );
@@ -373,12 +373,12 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn scheduler_start(void) 
-  * 
+  * @fn scheduler_start(void)
+  *
   * @brief Start of scheduler, pick the starting task and execute it DEMO CODE.
-  * 
+  *
   * @param[in]  none
-  * 
+  *
   * @return none
 ********************************************************************************/
 /* @cond S */
@@ -419,7 +419,7 @@ __OS_FUNC_SECTION void scheduler_start(void)
     }
 
     if ( scheduleTableElementsNum AND (startTick IS_EQUAL_TO currentTick) )
-    {   
+    {
         scheduler_classicSchedulingCore(schedulerVar,&schedulableVar,&stackPointerRetVal,&timerTicks, &scheduleTableIterator, scheduleTableElementsNum);
 
         schedulerState = SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK;

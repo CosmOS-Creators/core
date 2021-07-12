@@ -8,24 +8,24 @@
 ** @file sysJobs.h
 *********************************************************************************
 <!--                      sysJobs Module Group Definition                     -->
-*********************************************************************************  
+*********************************************************************************
 ** @defgroup sysJobs_module sysJobs
 ** @brief sysJobs Module
-** @details lorem   	 		
-*********************************************************************************	
+** @details lorem
+*********************************************************************************
 <!--                       sysJobs Unit Group Definition                      -->
-********************************************************************************* 
-** @defgroup sysJobs_unit sysJobs Unit 
-** @ingroup sysJobs_module        
-** @brief sysJobs Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup sysJobs_unit sysJobs Unit
+** @ingroup sysJobs_module
+** @brief sysJobs Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
@@ -34,9 +34,9 @@
 <!--                    sysJobs Unit Global Group Definition                  -->
 *********************************************************************************
 ** @defgroup Global_sysJobs Global
-** @ingroup sysJobs_unit 
+** @ingroup sysJobs_unit
 ** @brief sysJobs globals
-** @details lorem  
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
@@ -66,14 +66,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_sysJobs_h Macros
-  * @ingroup Global_sysJobs  
-  * @{    
+  * @ingroup Global_sysJobs
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_sysJobs_h  
+  * @}
+  * Macros_sysJobs_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -84,15 +84,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_sysJobs_h Variables  
-  * @ingroup Global_sysJobs  
-  * @{    
+  * @defgroup Variables_sysJobs_h Variables
+  * @ingroup Global_sysJobs
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_sysJobs_h  
+  * @}
+  * Variables_sysJobs_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -103,51 +103,51 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_sysJobs_h API's 
+  * @defgroup Apis_sysJobs_h API's
   * @ingroup Global_sysJobs
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_sysJobs_h Getters  
-  * @ingroup Apis_sysJobs_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_sysJobs_h Getters
+  * @ingroup Apis_sysJobs_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_sysJobs_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_sysJobs_h Setters  
-  * @ingroup Apis_sysJobs_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_sysJobs_h Setters
+  * @ingroup Apis_sysJobs_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_sysJobs_h   
+  * @}
+  * Setters_sysJobs_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_sysJobs_h General  
-  * @ingroup Apis_sysJobs_h                                            
-  * @{                                                                           
+  * @addtogroup General_sysJobs_h General
+  * @ingroup Apis_sysJobs_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysJobs_dispatcher(void) 
-  * 
+  * @fn sysJobs_dispatcher(void)
+  *
   * @brief System jobs dispatcher DEMO FUNCTION.
-  * 
+  *
   * @param[in]  none
-  * 
+  *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void sysJobs_dispatcher(void);
@@ -155,7 +155,7 @@ __OS_FUNC_SECTION void sysJobs_dispatcher(void);
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_sysJobs_h  
+  * General_sysJobs_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -166,19 +166,19 @@ __OS_FUNC_SECTION void sysJobs_dispatcher(void);
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_sysJobs_h Getters  
-  * @ingroup Apis_sysJobs_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_sysJobs_h Getters
+  * @ingroup Apis_sysJobs_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn sysJobs_getSysJobsGroups(CosmOS_SysJobsVariableType * sysJobs)
-  * 
+  *
   * @brief Get sysJobs groups.
-  * 
+  *
   * @param[in]  CosmOS_SysJobsVariableType * sysJobs
-  * 
+  *
   * @return CosmOS_SysJobsGroupConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_SysJobsGroupConfigurationType * sysJobs_getSysJobsGroups(CosmOS_SysJobsVariableType * sysJobs)
@@ -190,11 +190,11 @@ __STATIC_FORCEINLINE CosmOS_SysJobsGroupConfigurationType * sysJobs_getSysJobsGr
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn sysJobs_getSysJobsNumOfGroups(CosmOS_SysJobsVariableType * sysJobs)
-  * 
+  *
   * @brief Get sysJobs numOfGroups.
-  * 
+  *
   * @param[in]  CosmOS_SysJobsVariableType * sysJobs
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsNumOfGroups(CosmOS_SysJobsVariableType * sysJobs)
@@ -206,11 +206,11 @@ __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsNumOfGroups(CosmOS_SysJobsVa
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn sysJobs_getSysJobsHyperTick(CosmOS_SysJobsVariableType * sysJobs)
-  * 
+  *
   * @brief Get sysJobs hyperTick.
-  * 
+  *
   * @param[in]  CosmOS_SysJobsVariableType * sysJobs
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsHyperTick(CosmOS_SysJobsVariableType * sysJobs)
@@ -222,11 +222,11 @@ __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsHyperTick(CosmOS_SysJobsVari
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn sysJobs_getSysJobsCurrentTick(CosmOS_SysJobsVariableType * sysJobs)
-  * 
+  *
   * @brief Get sysJobs currentTick.
-  * 
+  *
   * @param[in]  CosmOS_SysJobsVariableType * sysJobs
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsCurrentTick(CosmOS_SysJobsVariableType * sysJobs)
@@ -238,12 +238,12 @@ __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsCurrentTick(CosmOS_SysJobsVa
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn sysJobs_getSysJobsGroupHandlers(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
-  * 
+  *
   * @brief Get sysJobs group handlers.
-  * 
+  *
   * @param[in]  CosmOS_SysJobsVariableType * sysJobs
   * @param[in]  BitWidthType groupId
-  * 
+  *
   * @return CosmOS_GenericVoidType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_GenericVoidType * sysJobs_getSysJobsGroupHandlers(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
@@ -255,12 +255,12 @@ __STATIC_FORCEINLINE CosmOS_GenericVoidType * sysJobs_getSysJobsGroupHandlers(Co
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn sysJobs_getSysJobsGroupNumOfHandlers(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
-  * 
+  *
   * @brief Get sysJobs group numOfHandlers.
-  * 
+  *
   * @param[in]  CosmOS_SysJobsVariableType * sysJobs
   * @param[in]  BitWidthType groupId
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsGroupNumOfHandlers(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
@@ -272,12 +272,12 @@ __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsGroupNumOfHandlers(CosmOS_Sy
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn sysJobs_getSysJobsGroupTickMultiplicator(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
-  * 
+  *
   * @brief Get sysJobs group tickMultiplicator.
-  * 
+  *
   * @param[in]  CosmOS_SysJobsVariableType * sysJobs
   * @param[in]  BitWidthType groupId
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsGroupTickMultiplicator(CosmOS_SysJobsVariableType * sysJobs, BitWidthType groupId)
@@ -287,25 +287,25 @@ __STATIC_FORCEINLINE BitWidthType sysJobs_getSysJobsGroupTickMultiplicator(CosmO
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_sysJobs_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_sysJobs_h Setters  
-  * @ingroup Apis_sysJobs_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_sysJobs_h Setters
+  * @ingroup Apis_sysJobs_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn sysJobs_setSysJobsCurrentTick(CosmOS_SysJobsVariableType * sysJobs, BitWidthType currentTickParam)
-  * 
+  *
   * @brief Set sysJobs currentTick.
-  * 
+  *
   * @param[in]  CosmOS_SysJobsVariableType * sysJobs
-  * 
+  *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void sysJobs_setSysJobsCurrentTick(CosmOS_SysJobsVariableType * sysJobs, BitWidthType currentTickParam)
@@ -315,21 +315,21 @@ __STATIC_FORCEINLINE void sysJobs_setSysJobsCurrentTick(CosmOS_SysJobsVariableTy
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_sysJobs_h   
+  * @}
+  * Setters_sysJobs_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_sysJobs_h General  
-  * @ingroup Apis_sysJobs_h                                            
-  * @{                                                                           
+  * @addtogroup General_sysJobs_h General
+  * @ingroup Apis_sysJobs_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_sysJobs_h  
+  * General_sysJobs_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

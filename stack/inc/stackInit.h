@@ -6,20 +6,20 @@
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
 ** @file stackInit.h
-*********************************************************************************	
+*********************************************************************************
 <!--                     stackInit Unit Group Definition                      -->
-********************************************************************************* 
-** @defgroup stackInit_unit stackInit Unit 
-** @ingroup stack_module        
-** @brief stackInit Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup stackInit_unit stackInit Unit
+** @ingroup stack_module
+** @brief stackInit Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky    
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
@@ -28,9 +28,9 @@
 <!--                  stackInit Unit Global Group Definition                 -->
 *********************************************************************************
 ** @defgroup Global_stackInit Global
-** @ingroup stackInit_unit 
-** @brief stackInit globals 
-** @details lorem 
+** @ingroup stackInit_unit
+** @brief stackInit globals
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
@@ -60,14 +60,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_stackInit_h Macros
-  * @ingroup Global_stackInit  
-  * @{    
+  * @ingroup Global_stackInit
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_stackInit_h  
+  * @}
+  * Macros_stackInit_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -78,16 +78,16 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_stackInit_h Variables  
-  * @ingroup Global_stackInit  
-  * @{    
+  * @defgroup Variables_stackInit_h Variables
+  * @ingroup Global_stackInit
+  * @{
 ********************************************************************************/
 
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_stackInit_h  
+  * @}
+  * Variables_stackInit_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -98,51 +98,51 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_stackInit_h API's  
+  * @defgroup Apis_stackInit_h API's
   * @ingroup Global_stackInit
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_stackInit_h Getters 
-  * @ingroup Apis_stackInit_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_stackInit_h Getters
+  * @ingroup Apis_stackInit_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_stackInit_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_stackInit_h Setters  
-  * @ingroup Apis_stackInit_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_stackInit_h Setters
+  * @ingroup Apis_stackInit_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_stackInit_h   
+  * @}
+  * Setters_stackInit_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_stackInit_h General  
-  * @ingroup Apis_stackInit_h                                            
-  * @{                                                                           
+  * @addtogroup General_stackInit_h General
+  * @ingroup Apis_stackInit_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn stackInit_schedulableStackInit(CosmOS_SchedulableConfigurationType  * schedulable)
-  * 
+  *
   * @brief Schedulable stack initialization.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
-  * 
+  *
   * @return StackPointerType
 ********************************************************************************/
 __OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_SchedulableVariableType  * schedulable);
@@ -151,11 +151,11 @@ __OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_Schedul
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn stackInit_init(CosmOS_CoreVariableType * coreVar)
-  * 
+  *
   * @brief Stack intialization for all tasks.
-  * 
+  *
   * @param[in] CosmOS_CoreVariableType * coreVar
-  * 
+  *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void stackInit_init(CosmOS_CoreVariableType * coreVar);
@@ -163,7 +163,7 @@ __OS_FUNC_SECTION void stackInit_init(CosmOS_CoreVariableType * coreVar);
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_stackInit_h  
+  * General_stackInit_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -174,43 +174,43 @@ __OS_FUNC_SECTION void stackInit_init(CosmOS_CoreVariableType * coreVar);
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_stackInit_h Getters 
-  * @ingroup Apis_stackInit_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_stackInit_h Getters
+  * @ingroup Apis_stackInit_h
+  * @{
 ********************************************************************************/
 
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_stackInit_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_stackInit_h Setters  
-  * @ingroup Apis_stackInit_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_stackInit_h Setters
+  * @ingroup Apis_stackInit_h
+  * @{
 ********************************************************************************/
 
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_stackInit_h   
+  * @}
+  * Setters_stackInit_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_stackInit_h General  
-  * @ingroup Apis_stackInit_h                                            
-  * @{                                                                           
+  * @addtogroup General_stackInit_h General
+  * @ingroup Apis_stackInit_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_stackInit_h  
+  * General_stackInit_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

@@ -8,24 +8,24 @@
 ** @file os.h
 *********************************************************************************
 <!--                        os Module Group Definition                        -->
-*********************************************************************************  
+*********************************************************************************
 ** @defgroup os_module os
 ** @brief os Module
-** @details lorem   	 		
-*********************************************************************************	
+** @details lorem
+*********************************************************************************
 <!--                         os Unit Group Definition                         -->
-********************************************************************************* 
-** @defgroup os_unit os Unit 
-** @ingroup os_module        
-** @brief os Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup os_unit os Unit
+** @ingroup os_module
+** @brief os Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
@@ -34,9 +34,9 @@
 <!--                      os Unit Global Group Definition                     -->
 *********************************************************************************
 ** @defgroup Global_os Global
-** @ingroup os_unit 
+** @ingroup os_unit
 ** @brief os globals
-** @details lorem  
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
@@ -66,14 +66,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_os_h Macros
-  * @ingroup Global_os  
-  * @{    
+  * @ingroup Global_os
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_os_h  
+  * @}
+  * Macros_os_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -84,15 +84,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_os_h Variables  
-  * @ingroup Global_os  
-  * @{    
+  * @defgroup Variables_os_h Variables
+  * @ingroup Global_os
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_os_h  
+  * @}
+  * Variables_os_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -103,63 +103,63 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_os_h API's 
+  * @defgroup Apis_os_h API's
   * @ingroup Global_os
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_os_h Getters  
-  * @ingroup Apis_os_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_os_h Getters
+  * @ingroup Apis_os_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsVar(void) 
-  * 
+  * @fn os_getOsVar(void)
+  *
   * @brief Get osVar.
-  * 
+  *
   * @param[in]  none
-  * 
+  *
   * @return CosmOS_OsVariableType *
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_OsVariableType * os_getOsVar(void);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_os_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_os_h Setters  
-  * @ingroup Apis_os_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_os_h Setters
+  * @ingroup Apis_os_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_os_h   
+  * @}
+  * Setters_os_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_os_h General  
-  * @ingroup Apis_os_h                                            
-  * @{                                                                           
+  * @addtogroup General_os_h General
+  * @ingroup Apis_os_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_start(void) 
-  * 
+  * @fn os_start(void)
+  *
   * @brief Start operating system.
-  * 
+  *
   * @param[in]  none
-  * 
+  *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void os_start(void);
@@ -167,7 +167,7 @@ __OS_FUNC_SECTION void os_start(void);
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_os_h  
+  * General_os_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -178,19 +178,19 @@ __OS_FUNC_SECTION void os_start(void);
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_os_h Getters  
-  * @ingroup Apis_os_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_os_h Getters
+  * @ingroup Apis_os_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsCores(CosmOS_OsVariableType * osVar) 
-  * 
+  * @fn os_getOsCores(CosmOS_OsVariableType * osVar)
+  *
   * @brief Get os cores pointer.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
-  * 
+  *
   * @return CosmOS_CoreConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_CoreConfigurationType * os_getOsCores(CosmOS_OsVariableType * osVar)
@@ -201,12 +201,12 @@ __STATIC_FORCEINLINE CosmOS_CoreConfigurationType * os_getOsCores(CosmOS_OsVaria
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsNumberOfCores(CosmOS_OsVariableType * osVar) 
-  * 
+  * @fn os_getOsNumberOfCores(CosmOS_OsVariableType * osVar)
+  *
   * @brief Get os numberOfCores.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfCores(CosmOS_OsVariableType * osVar)
@@ -217,12 +217,12 @@ __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfCores(CosmOS_OsVariableType * 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsBuffers(CosmOS_OsVariableType * osVar) 
-  * 
+  * @fn os_getOsBuffers(CosmOS_OsVariableType * osVar)
+  *
   * @brief Get os buffers pointer.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
-  * 
+  *
   * @return CosmOS_BufferConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferConfigurationType * os_getOsBuffers(CosmOS_OsVariableType * osVar)
@@ -233,12 +233,12 @@ __STATIC_FORCEINLINE CosmOS_BufferConfigurationType * os_getOsBuffers(CosmOS_OsV
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsNumberOfBuffers(CosmOS_OsVariableType * osVar) 
-  * 
+  * @fn os_getOsNumberOfBuffers(CosmOS_OsVariableType * osVar)
+  *
   * @brief Get os numberOfBuffers.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfBuffers(CosmOS_OsVariableType * osVar)
@@ -249,12 +249,12 @@ __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfBuffers(CosmOS_OsVariableType 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsRoutes(CosmOS_OsVariableType * osVar) 
-  * 
+  * @fn os_getOsRoutes(CosmOS_OsVariableType * osVar)
+  *
   * @brief Get os route pointer.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
-  * 
+  *
   * @return CosmOS_RoutesConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_RoutesConfigurationType * os_getOsRoutes(CosmOS_OsVariableType * osVar)
@@ -265,12 +265,12 @@ __STATIC_FORCEINLINE CosmOS_RoutesConfigurationType * os_getOsRoutes(CosmOS_OsVa
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsCoreVars(CosmOS_OsVariableType * osVar) 
-  * 
+  * @fn os_getOsCoreVars(CosmOS_OsVariableType * osVar)
+  *
   * @brief Get os coreVars pointer.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
-  * 
+  *
   * @return CosmOS_CoreVariableType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_CoreVariableType * os_getOsCoreVars(CosmOS_OsVariableType * osVar)
@@ -281,13 +281,13 @@ __STATIC_FORCEINLINE CosmOS_CoreVariableType * os_getOsCoreVars(CosmOS_OsVariabl
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getCoreVar(CosmOS_OsVariableType * osVar, BitWidthType coreId) 
-  * 
+  * @fn os_getCoreVar(CosmOS_OsVariableType * osVar, BitWidthType coreId)
+  *
   * @brief Get os core pointer.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
   * @param[in]  BitWidthType coreId
-  * 
+  *
   * @return CosmOS_CoreVariableType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_CoreVariableType * os_getCoreVar(CosmOS_OsVariableType * osVar, BitWidthType coreId)
@@ -298,12 +298,12 @@ __STATIC_FORCEINLINE CosmOS_CoreVariableType * os_getCoreVar(CosmOS_OsVariableTy
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsBufferVars(CosmOS_OsVariableType * osVar) 
-  * 
+  * @fn os_getOsBufferVars(CosmOS_OsVariableType * osVar)
+  *
   * @brief Get os bufferVars pointer.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
-  * 
+  *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferVariableType * os_getOsBufferVars(CosmOS_OsVariableType * osVar)
@@ -314,13 +314,13 @@ __STATIC_FORCEINLINE CosmOS_BufferVariableType * os_getOsBufferVars(CosmOS_OsVar
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsBufferVar(CosmOS_OsVariableType * osVar,BitWidthType bufferId) 
-  * 
+  * @fn os_getOsBufferVar(CosmOS_OsVariableType * osVar,BitWidthType bufferId)
+  *
   * @brief Get os buffer pointer.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
   * @param[in]  BitWidthType bufferId
-  * 
+  *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferVariableType * os_getOsBufferVar(CosmOS_OsVariableType * osVar, BitWidthType bufferId)
@@ -331,12 +331,12 @@ __STATIC_FORCEINLINE CosmOS_BufferVariableType * os_getOsBufferVar(CosmOS_OsVari
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsBufferDoubleVars(CosmOS_OsVariableType * osVar) 
-  * 
+  * @fn os_getOsBufferDoubleVars(CosmOS_OsVariableType * osVar)
+  *
   * @brief Get os bufferDoubleVars pointer.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
-  * 
+  *
   * @return CosmOS_BufferDoubleVariableType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVars(CosmOS_OsVariableType * osVar)
@@ -347,13 +347,13 @@ __STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVars(
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar,BitWidthType bufferDoubleId) 
-  * 
+  * @fn os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar,BitWidthType bufferDoubleId)
+  *
   * @brief Get os bufferDouble pointer.
-  * 
+  *
   * @param[in]  CosmOS_OsVariableType * osVar
   * @param[in]  BitWidthType bufferId
-  * 
+  *
   * @return CosmOS_BufferDoubleVariableType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar, BitWidthType bufferDoubleId)
@@ -363,34 +363,34 @@ __STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVar(C
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_os_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_os_h Setters  
-  * @ingroup Apis_os_h                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}    
-  * Setters_os_h   
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_os_h General  
-  * @ingroup Apis_os_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_os_h Setters
+  * @ingroup Apis_os_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_os_h  
+  * Setters_os_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_os_h General
+  * @ingroup Apis_os_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_os_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

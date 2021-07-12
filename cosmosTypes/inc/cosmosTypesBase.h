@@ -5,33 +5,33 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file cosmosTypesBase.h                                      
-*********************************************************************************	
+** @file cosmosTypesBase.h
+*********************************************************************************
 <!--                   cosmosTypesBase Unit Group Definition                  -->
-********************************************************************************* 
-** @defgroup cosmosTypesBase_unit cosmosTypesBase Unit 
-** @ingroup cosmosTypes_module        
-** @brief cosmosTypesBase Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup cosmosTypesBase_unit cosmosTypesBase Unit
+** @ingroup cosmosTypes_module
+** @brief cosmosTypesBase Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
-** @copyright MIT License       	
+** @copyright MIT License
 *********************************************************************************
 <!--               cosmosTypesBase Unit Global Group Definition               -->
-*********************************************************************************	
+*********************************************************************************
 ** @defgroup Global_cosmosTypesBase Global
-** @ingroup cosmosTypesBase_unit 
+** @ingroup cosmosTypesBase_unit
 ** @brief cosmosTypesBase globals
-** @details lorem 
-********************************************************************************/ 
+** @details lorem
+********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
@@ -58,14 +58,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_cosmosTypesBase_h Macros
-  * @ingroup Global_cosmosTypesBase  
-  * @{    
+  * @ingroup Global_cosmosTypesBase
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_cosmosTypesBase_h  
+  * @}
+  * Macros_cosmosTypesBase_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -77,8 +77,8 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Typedefs_cosmosTypesBaseCfg_h Typedefs
-  * @ingroup Global_cosmosTypesBase  
-  * @{    
+  * @ingroup Global_cosmosTypesBase
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -129,7 +129,7 @@ typedef enum {
 typedef enum {
 
     PERMISSION_INSTANCE_ENUM__NONE,
-    PERMISSION_INSTANCE_ENUM__ONLY_TASKS,     
+    PERMISSION_INSTANCE_ENUM__ONLY_TASKS,
     PERMISSION_INSTANCE_ENUM__ONLY_THREADS,
     PERMISSION_INSTANCE_ENUM__ALL_TASKS,
     PERMISSION_INSTANCE_ENUM__ALL_THREADS,
@@ -151,7 +151,7 @@ typedef enum {
     BUFFER_STATE_ENUM__ERROR_INPUT_IS_NULL_POINTER,
     BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS,
     BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM,
-    
+
 } CosmOS_BufferStateType;
 
 /********************************************************************************
@@ -163,7 +163,7 @@ typedef enum {
 
     BUFFER_DOUBLE_ACCESS_ENUM__USER,
     BUFFER_DOUBLE_ACCESS_ENUM__KERNEL,
-    
+
 } CosmOS_BufferDoubleAccessType;
 
 /********************************************************************************
@@ -176,7 +176,7 @@ typedef enum {
     SCHEDULABLE_INSTANCE_ENUM__TASK    = 0x00,
     SCHEDULABLE_INSTANCE_ENUM__THREAD  = SECURE_NUMBER,
     SCHEDULABLE_INSTANCE_ENUM__FORCE   = FORCE_ENUM,
-    
+
 } CosmOS_SchedulableInstanceType;
 
 /********************************************************************************
@@ -247,8 +247,8 @@ typedef enum {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Typedefs_cosmosTypesBase_h  
+  * @}
+  * Typedefs_cosmosTypesBase_h
 ********************************************************************************/
 /********************************************************************************
 **                              Typedefs | Stop                                **
