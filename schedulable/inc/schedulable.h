@@ -8,35 +8,35 @@
 ** @file schedulable.h
 *********************************************************************************
 <!--                   schedulable Module Group Definition                    -->
-*********************************************************************************  
+*********************************************************************************
 ** @defgroup schedulable_module schedulable
 ** @brief schedulable Module
-** @details lorem   	 		
-*********************************************************************************	
+** @details lorem
+*********************************************************************************
 <!--                     schedulable Unit Group Definition                    -->
-********************************************************************************* 
-** @defgroup schedulable_unit schedulable Unit 
-** @ingroup schedulable_module        
-** @brief schedulable Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup schedulable_unit schedulable Unit
+** @ingroup schedulable_module
+** @brief schedulable Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
-** @copyright MIT License 
+** @copyright MIT License
 *********************************************************************************
 <!--                schedulable Unit Global Group Definition                  -->
 *********************************************************************************
 ** @defgroup Global_schedulable Global
-** @ingroup schedulable_unit 
+** @ingroup schedulable_unit
 ** @brief schedulable globals
-** @details lorem  
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
@@ -66,14 +66,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_schedulable_h Macros
-  * @ingroup Global_schedulable  
-  * @{    
+  * @ingroup Global_schedulable
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_schedulable_h  
+  * @}
+  * Macros_schedulable_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -84,15 +84,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_schedulable_h Variables  
-  * @ingroup Global_schedulable  
-  * @{    
+  * @defgroup Variables_schedulable_h Variables
+  * @ingroup Global_schedulable
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_schedulable_h  
+  * @}
+  * Variables_schedulable_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -103,59 +103,59 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_schedulable_h API's 
+  * @defgroup Apis_schedulable_h API's
   * @ingroup Global_schedulable
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_schedulable_h Getters  
-  * @ingroup Apis_schedulable_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_schedulable_h Getters
+  * @ingroup Apis_schedulable_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_schedulable_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_schedulable_h Setters  
-  * @ingroup Apis_schedulable_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_schedulable_h Setters
+  * @ingroup Apis_schedulable_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_setExecutionStateToFinished(void) 
-  * 
+  * @fn schedulable_setExecutionStateToFinished(void)
+  *
   * @brief Set schedulable execution state to finished DEMO CODE.
-  * 
+  *
   * @param[in]  none
-  * 
+  *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(void);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_schedulable_h   
+  * @}
+  * Setters_schedulable_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_schedulable_h General  
-  * @ingroup Apis_schedulable_h                                            
-  * @{                                                                           
+  * @addtogroup General_schedulable_h General
+  * @ingroup Apis_schedulable_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_schedulable_h  
+  * General_schedulable_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -166,19 +166,19 @@ __OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(void);
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_schedulable_h Getters  
-  * @ingroup Apis_schedulable_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_schedulable_h Getters
+  * @ingroup Apis_schedulable_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskStack(CosmOS_SchedulableVariableType * schedulable) 
-  * 
+  * @fn schedulable_getTaskStack(CosmOS_SchedulableVariableType * schedulable)
+  *
   * @brief Get schedulable stack pointer.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  * 
+  *
   * @return CosmOS_StackConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_StackConfigurationType * schedulable_getStack(CosmOS_SchedulableVariableType * schedulable)
@@ -189,12 +189,12 @@ __STATIC_FORCEINLINE CosmOS_StackConfigurationType * schedulable_getStack(CosmOS
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskHandler(CosmOS_SchedulableVariableType * schedulable) 
-  * 
+  * @fn schedulable_getTaskHandler(CosmOS_SchedulableVariableType * schedulable)
+  *
   * @brief Get schedulable handler.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  * 
+  *
   * @return CosmOS_HandlerType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_HandlerType schedulable_getHandler(CosmOS_SchedulableVariableType * schedulable)
@@ -205,12 +205,12 @@ __STATIC_FORCEINLINE CosmOS_HandlerType schedulable_getHandler(CosmOS_Schedulabl
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getFp(CosmOS_SchedulableVariableType * schedulable) 
-  * 
+  * @fn schedulable_getFp(CosmOS_SchedulableVariableType * schedulable)
+  *
   * @brief Get schedulable fb.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  * 
+  *
   * @return CosmOS_BooleanType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType schedulable_getFp(CosmOS_SchedulableVariableType * schedulable)
@@ -221,12 +221,12 @@ __STATIC_FORCEINLINE CosmOS_BooleanType schedulable_getFp(CosmOS_SchedulableVari
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskId(CosmOS_SchedulableVariableType * schedulable) 
-  * 
+  * @fn schedulable_getTaskId(CosmOS_SchedulableVariableType * schedulable)
+  *
   * @brief Get schedulable id.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType schedulable_getId(CosmOS_SchedulableVariableType * schedulable)
@@ -237,12 +237,12 @@ __STATIC_FORCEINLINE BitWidthType schedulable_getId(CosmOS_SchedulableVariableTy
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getInstanceId(CosmOS_SchedulableVariableType * schedulable) 
-  * 
+  * @fn schedulable_getInstanceId(CosmOS_SchedulableVariableType * schedulable)
+  *
   * @brief Get schedulable instanceId.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType schedulable_getInstanceId(CosmOS_SchedulableVariableType * schedulable)
@@ -253,12 +253,12 @@ __STATIC_FORCEINLINE BitWidthType schedulable_getInstanceId(CosmOS_SchedulableVa
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskProgramId(CosmOS_SchedulableVariableType * schedulable) 
-  * 
+  * @fn schedulable_getTaskProgramId(CosmOS_SchedulableVariableType * schedulable)
+  *
   * @brief Get schedulable programId.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType schedulable_getProgramId(CosmOS_SchedulableVariableType * schedulable)
@@ -269,12 +269,12 @@ __STATIC_FORCEINLINE BitWidthType schedulable_getProgramId(CosmOS_SchedulableVar
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskCoreId(CosmOS_SchedulableVariableType * schedulable) 
-  * 
+  * @fn schedulable_getTaskCoreId(CosmOS_SchedulableVariableType * schedulable)
+  *
   * @brief Get schedulable coreId.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType schedulable_getCoreId(CosmOS_SchedulableVariableType * schedulable)
@@ -285,12 +285,12 @@ __STATIC_FORCEINLINE BitWidthType schedulable_getCoreId(CosmOS_SchedulableVariab
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getState(CosmOS_SchedulableVariableType * schedulable) 
-  * 
+  * @fn schedulable_getState(CosmOS_SchedulableVariableType * schedulable)
+  *
   * @brief Get schedulable state.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  * 
+  *
   * @return CosmOS_SchedulableStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_SchedulableStateType schedulable_getState(CosmOS_SchedulableVariableType * schedulable)
@@ -301,12 +301,12 @@ __STATIC_FORCEINLINE CosmOS_SchedulableStateType schedulable_getState(CosmOS_Sch
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getStackPointer(CosmOS_SchedulableVariableType * schedulable) 
-  * 
+  * @fn schedulable_getStackPointer(CosmOS_SchedulableVariableType * schedulable)
+  *
   * @brief Get schedulable stackPointer.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  * 
+  *
   * @return StackPointerType
 ********************************************************************************/
 __STATIC_FORCEINLINE StackPointerType schedulable_getStackPointer(CosmOS_SchedulableVariableType * schedulable)
@@ -316,26 +316,26 @@ __STATIC_FORCEINLINE StackPointerType schedulable_getStackPointer(CosmOS_Schedul
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_schedulable_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_schedulable_h Setters  
-  * @ingroup Apis_schedulable_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_schedulable_h Setters
+  * @ingroup Apis_schedulable_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn schedulable_setState(CosmOS_SchedulableVariableType * schedulable,CosmOS_SchedulableStateType stateParam)
-  * 
+  *
   * @brief Set schedulable state.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
   * @param[in]  CosmOS_SchedulableStateType stateParam
-  * 
+  *
   * @return CosmOS_SchedulableStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE void schedulable_setState(CosmOS_SchedulableVariableType * schedulable, CosmOS_SchedulableStateType stateParam)
@@ -347,12 +347,12 @@ __STATIC_FORCEINLINE void schedulable_setState(CosmOS_SchedulableVariableType * 
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn schedulable_setStackPointer(CosmOS_SchedulableVariableType * schedulable, StackPointerType stackPointerParam)
-  * 
+  *
   * @brief Set schedulable stackPointer.
-  * 
+  *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
   * @param[in]  StackPointerType stackPointerParam
-  * 
+  *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void schedulable_setStackPointer(CosmOS_SchedulableVariableType * schedulable, StackPointerType stackPointerParam)
@@ -362,21 +362,21 @@ __STATIC_FORCEINLINE void schedulable_setStackPointer(CosmOS_SchedulableVariable
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}    
-  * Setters_schedulable_h   
+  * @}
+  * Setters_schedulable_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_schedulable_h General  
-  * @ingroup Apis_schedulable_h                                            
-  * @{                                                                           
+  * @addtogroup General_schedulable_h General
+  * @ingroup Apis_schedulable_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_schedulable_h  
+  * General_schedulable_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

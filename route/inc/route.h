@@ -8,36 +8,36 @@
 ** @file route.h
 *********************************************************************************
 <!--                      route Module Group Definition                      -->
-*********************************************************************************  
+*********************************************************************************
 ** @defgroup route_module route
 ** @brief route Module
-** @details lorem   	 		
-*********************************************************************************	
+** @details lorem
+*********************************************************************************
 <!--                       route Unit Group Definition                       -->
-********************************************************************************* 
-** @defgroup route_unit route Unit 
-** @ingroup route_module        
-** @brief route Unit 
-** @details lorem                               
-*********************************************************************************	
+*********************************************************************************
+** @defgroup route_unit route Unit
+** @ingroup route_module
+** @brief route Unit
+** @details lorem
+*********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
 ** @date 1.8.2020
-** @author https://github.com/PavolKostolansky   
-*********************************************************************************	
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
-** @copyright MIT License                                                                
+** @copyright MIT License
 *********************************************************************************
 <!--                    route Unit Global Group Definition                   -->
 *********************************************************************************
 ** @defgroup Global_route Global
-** @ingroup route_unit 
-** @brief route globals 
-** @details lorem        
-********************************************************************************/                                          
+** @ingroup route_unit
+** @brief route globals
+** @details lorem
+********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
@@ -66,14 +66,14 @@
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @defgroup Macros_route_h Macros
-  * @ingroup Global_route  
-  * @{    
+  * @ingroup Global_route
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Macros_route_h   
+  * @}
+  * Macros_route_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -84,15 +84,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_route_h Variables 
-  * @ingroup Global_route  
-  * @{    
+  * @defgroup Variables_route_h Variables
+  * @ingroup Global_route
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}  
-  * Variables_route_h  
+  * @}
+  * Variables_route_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -103,47 +103,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_route_h API's  
+  * @defgroup Apis_route_h API's
   * @ingroup Global_route
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_route_h Getters 
-  * @ingroup Apis_route_h                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}       
-  * Getters_route_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_route_h Setters  
-  * @ingroup Apis_route_h                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}    
-  * Setters_route_h   
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_route_h General  
-  * @ingroup Apis_route_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_route_h Getters
+  * @ingroup Apis_route_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_route_h  
+  * Getters_route_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_route_h Setters
+  * @ingroup Apis_route_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Setters_route_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_route_h General
+  * @ingroup Apis_route_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_route_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -154,20 +154,20 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_route_h Getters 
-  * @ingroup Apis_route_h                                            
-  * @{                                                                           
+  * @addtogroup Getters_route_h Getters
+  * @ingroup Apis_route_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn route_getRoutesFunc(CosmOS_RoutesConfigurationType * route, BitWidthType callId) 
-  * 
+  * @fn route_getRoutesFunc(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
+  *
   * @brief Get route func pointer.
-  * 
+  *
   * @param[in]  CosmOS_RoutesConfigurationType * route
   * @param[in]  BitWidthType callId
-  * 
+  *
   * @return CosmOS_GenericVoidType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_GenericVoidType route_getRoutesFunc(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
@@ -178,12 +178,12 @@ __STATIC_FORCEINLINE CosmOS_GenericVoidType route_getRoutesFunc(CosmOS_RoutesCon
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn route_getRoutesIdToFunc(CosmOS_RoutesConfigurationType * route) 
-  * 
+  * @fn route_getRoutesIdToFunc(CosmOS_RoutesConfigurationType * route)
+  *
   * @brief Get route routeIdToFunc pointer.
-  * 
+  *
   * @param[in]  CosmOS_RoutesConfigurationType * route
-  * 
+  *
   * @return BitWidthType *
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType * route_getRoutesIdToFunc(CosmOS_RoutesConfigurationType * route)
@@ -194,13 +194,13 @@ __STATIC_FORCEINLINE BitWidthType * route_getRoutesIdToFunc(CosmOS_RoutesConfigu
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn route_getRoutesFuncId(CosmOS_RoutesConfigurationType * route, BitWidthType callId) 
-  * 
+  * @fn route_getRoutesFuncId(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
+  *
   * @brief Get route function id.
-  * 
+  *
   * @param[in]  CosmOS_RoutesConfigurationType * route
   * @param[in]  BitWidthType callId
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType route_getRoutesFuncId(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
@@ -211,12 +211,12 @@ __STATIC_FORCEINLINE BitWidthType route_getRoutesFuncId(CosmOS_RoutesConfigurati
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn route_getRoutesIdToEntity(CosmOS_RoutesConfigurationType * route) 
-  * 
+  * @fn route_getRoutesIdToEntity(CosmOS_RoutesConfigurationType * route)
+  *
   * @brief Get route routeIdToEntity pointer.
-  * 
+  *
   * @param[in]  CosmOS_RoutesConfigurationType * route
-  * 
+  *
   * @return BitWidthType *
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType * route_getRoutesIdToEntity(CosmOS_RoutesConfigurationType * route)
@@ -227,13 +227,13 @@ __STATIC_FORCEINLINE BitWidthType * route_getRoutesIdToEntity(CosmOS_RoutesConfi
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn route_getRoutesEntityId(CosmOS_RoutesConfigurationType * route, BitWidthType callId) 
-  * 
+  * @fn route_getRoutesEntityId(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
+  *
   * @brief Get route entity id.
-  * 
+  *
   * @param[in]  CosmOS_RoutesConfigurationType * route
   * @param[in]  BitWidthType callId
-  * 
+  *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType route_getRoutesEntityId(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
@@ -243,34 +243,34 @@ __STATIC_FORCEINLINE BitWidthType route_getRoutesEntityId(CosmOS_RoutesConfigura
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}       
+  * @}
   * Getters_route_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_route_h Setters  
-  * @ingroup Apis_route_h                                            
-  * @{                                                                           
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}    
-  * Setters_route_h   
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_route_h General 
-  * @ingroup Apis_route_h                                            
-  * @{                                                                           
+  * @addtogroup Setters_route_h Setters
+  * @ingroup Apis_route_h
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_route_h  
+  * Setters_route_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_route_h General
+  * @ingroup Apis_route_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_route_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
