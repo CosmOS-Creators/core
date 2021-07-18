@@ -146,6 +146,21 @@ __OS_FUNC_SECTION void memoryProtection_init();
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn memoryProtection_isMemoryRegionProtected(CosmOS_CoreVariableType * core, void  * regionLowAddressPointer, BitWidthType size)
+  *
+  * @brief Check if specific memory region is protected against changes for the current execution context.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  void * regionLowAddressPointer
+  * @param[in]  BitWidthType size
+  *
+  * @return CosmOS_BooleanType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_BooleanType memoryProtection_isMemoryRegionProtected(CosmOS_CoreVariableType * core, void * regionLowAddressPointer, BitWidthType size);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
