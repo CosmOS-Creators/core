@@ -159,13 +159,13 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 ********************************************************************************/
 __STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_StackConfigurationType * stack)
 {
-    AddressType stackLowAddress,
-                 stackHighAddress;
+    AddressType lowAddress,
+                highAddress;
 
-    stackLowAddress = stack_getStackLowAddress( stack );
-    stackHighAddress = stack_getStackHighAddress( stack );
+    lowAddress = stack_getStackLowAddress( stack );
+    highAddress = stack_getStackHighAddress( stack );
 
-    CILmemoryProtection_setStackOverflowProtection( stackLowAddress, stackHighAddress );
+    CILmemoryProtection_setStackOverflowProtection( lowAddress, highAddress );
 }
 
 /********************************************************************************
@@ -226,6 +226,63 @@ __OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableT
 
     memoryProtection_setStackOverflowProtection( stack );
     memoryProtection_setProgramMemoryProtection( programVar );
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn memoryProtection_isMemoryRegionProtected(CosmOS_CoreVariableType * core, void  * regionLowAddressPointer, BitWidthType size)
+  *
+  * @brief Check if specific memory region is protected against changes for the current execution context.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  void * regionLowAddressPointer
+  * @param[in]  BitWidthType size
+  *
+  * @return CosmOS_BooleanType
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_BooleanType memoryProtection_isMemoryRegionProtected(CosmOS_CoreVariableType * core, void * regionLowAddressPointer, BitWidthType size)
+{
+    AddressType stackLowAddress,
+                stackHighAddress,
+				programLowAddress,
+				programHighAddress,
+				regionLowAddress,
+				regionHighAddress;
+
+	CosmOS_BooleanType isMemoryRegionProtected = True;
+
+    CosmOS_StackConfigurationType * stack;
+    CosmOS_ProgramVariableType * programVar;
+	CosmOS_SchedulableVariableType * schedulable;
+
+	regionLowAddress = (AddressType)regionLowAddressPointer;
+
+    programVar = core_getCoreProgramInExecution( core );
+	schedulable = core_getCoreSchedulableInCurrentContext( core );
+    stack = schedulable_getStack( schedulable );
+
+	stackLowAddress = stack_getStackLowAddress( stack );
+    stackHighAddress = stack_getStackHighAddress( stack );
+
+    programLowAddress = program_getProgramMemoryLowAddress( programVar );
+    programHighAddress = program_getProgramMemoryHighAddress( programVar );
+
+	regionHighAddress = regionLowAddress + (AddressType)size;
+
+	if (((regionHighAddress < stackHighAddress) && (regionLowAddress > stackLowAddress)) || \
+		((regionHighAddress < programHighAddress) && (regionLowAddress > programLowAddress)))
+	{
+		isMemoryRegionProtected = False;
+	}
+
+	return isMemoryRegionProtected;
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

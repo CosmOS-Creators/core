@@ -26,6 +26,7 @@
 #include "buffer.h"
 #include "route.h"
 #include "permission.h"
+#include "memoryProtection.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -249,25 +250,28 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void * buffer, BitWidthType size)
 {
+	CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
+	CosmOS_OsVariableType * osVar;
+	CosmOS_CoreVariableType * coreVar;
 
-    if ( buffer IS_EQUAL_TO NULL )
+
+    osVar = os_getOsVar();
+    coreVar = CILcore_getCoreVar();
+
+	isMemoryRegionProtected = memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
+
+    if ( isMemoryRegionProtected )
     {
-        bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_IS_NULL_POINTER;
+        bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED;
     }
     else
     {
         CosmOS_AccessStateType accessState;
 
-        CosmOS_OsVariableType * osVar;
-        CosmOS_CoreVariableType * coreVar;
         CosmOS_BufferVariableType * bufferVar;
         CosmOS_PermissionsConfigurationType * readPermission;
-
-
-        osVar = os_getOsVar();
-        coreVar = CILcore_getCoreVar();
 
         bufferVar = os_getOsBufferVar( osVar, id );
 
@@ -334,25 +338,28 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void * buffer, BitWidthType size)
 {
+	CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
+	CosmOS_OsVariableType * osVar;
+	CosmOS_CoreVariableType * coreVar;
 
-    if ( buffer IS_EQUAL_TO NULL )
+
+    osVar = os_getOsVar();
+    coreVar = CILcore_getCoreVar();
+
+	isMemoryRegionProtected = memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
+
+    if ( isMemoryRegionProtected )
     {
-        bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_IS_NULL_POINTER;
+        bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED;
     }
     else
     {
         CosmOS_AccessStateType accessState;
 
-        CosmOS_OsVariableType * osVar;
-        CosmOS_CoreVariableType * coreVar;
         CosmOS_BufferVariableType * bufferVar;
         CosmOS_PermissionsConfigurationType * writePermission;
-
-
-        osVar = os_getOsVar();
-        coreVar = CILcore_getCoreVar();
 
         bufferVar = os_getOsBufferVar( osVar, id );
 
