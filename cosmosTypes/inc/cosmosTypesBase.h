@@ -244,6 +244,21 @@ typedef enum {
     SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME,
 
 } CosmOS_SchedulerStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_SpinlockStateType enum
+********************************************************************************/
+typedef enum {
+
+    SPINLOCK_STATE_ENUM__ERROR = 0xFF,
+    SPINLOCK_STATE_ENUM__RELEASED = 0x00,
+    SPINLOCK_STATE_ENUM__OCCUPIED = 0x01,
+		SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED = 0x02,
+		SPINLOCK_STATE_ENUM__FORCE      = FORCE_ENUM,
+
+} CosmOS_SpinlockStateType;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -5,13 +5,19 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file cosmosTypesCfg.h
+** @file spinlock.h
 *********************************************************************************
-<!--                   cosmosTypesCfg Unit Group Definition                   -->
+<!--                     spinlock Module Group Definition                     -->
 *********************************************************************************
-** @defgroup cosmosTypesCfg_unit cosmosTypesCfg Unit
-** @ingroup cosmosTypes_module
-** @brief cosmosTypesCfg Unit
+** @defgroup spinlock_module spinlock
+** @brief spinlock Module
+** @details lorem
+*********************************************************************************
+<!--                      spinlock Unit Group Definition                      -->
+*********************************************************************************
+** @defgroup spinlock_unit spinlock Unit
+** @ingroup spinlock_module
+** @brief spinlock Unit
 ** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
@@ -25,18 +31,18 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                cosmosTypesCfg Unit Global Group Definition               -->
+<!--                   spinlock Unit Global Group Definition                  -->
 *********************************************************************************
-** @defgroup Global_cosmosTypesCfg Global
-** @ingroup cosmosTypesCfg_unit
-** @brief cosmosTypesCfg globals
+** @defgroup Global_spinlock Global
+** @ingroup spinlock_unit
+** @brief spinlock globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __COSMOSTYPESCFG_H__
-#define __COSMOSTYPESCFG_H__
+#ifndef __SPINLOCK_H__
+#define __SPINLOCK_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -47,7 +53,9 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "cosmosTypesBase.h"
+#include "sysDefs.h"
+#include "cosmosTypesStd.h"
+#include "memoryMapping.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -57,291 +65,186 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_cosmosTypesCfg_h Macros
-  * @ingroup Global_cosmosTypesCfg
+  * @defgroup Macros_spinlock_h Macros
+  * @ingroup Global_spinlock
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Macros_cosmosTypesCfg_h
+  * Macros_spinlock_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
 ********************************************************************************/
 /********************************************************************************
-**                              Typedefs | Start                               **
+**                              Variables | Start                              **
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Typedefs_cosmosTypesCfgCfg_h Typedefs
-  * @ingroup Global_cosmosTypesCfg
+  * @defgroup Variables_spinlock_h Variables
+  * @ingroup Global_spinlock
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Variables_spinlock_h
+********************************************************************************/
+/********************************************************************************
+**                              Variables | Stop                               **
+********************************************************************************/
+/********************************************************************************
+**                         Function Prototypes | Start                         **
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DEF GROUP                                                          **
+  * *************************************************************************//**
+  * @defgroup Apis_spinlock_h API's
+  * @ingroup Global_spinlock
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Getters_spinlock_h Getters
+  * @ingroup Apis_spinlock_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_ProgramSectionConfigurationType struct type
+  * @fn spinlock_getSpinlock(BitWidthType id)
+  *
+  * @brief Get spinlock DEMO CODE.
+  *
+  * @param[in]  BitWidthType id
+  *
+  * @return CosmOS_SpinlockStateType
 ********************************************************************************/
-typedef struct
-{
-    unsigned char * const startAddress;
-    unsigned char * const endAddress;
-    unsigned char * const flashAddress;
-
-} CosmOS_ProgramSectionConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_BootSectionConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_ProgramSectionConfigurationType * const programSections;
-    BitWidthType programSectionsNumber;
-
-} CosmOS_BootSectionConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_PermissionsConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const BitWidthType * const bitLocksTasks;
-    const BitWidthType * const bitLocksTasksInverted;
-
-} CosmOS_PermissionsConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_BufferConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_GenericVoidType * const routeFunc;
-    const BitWidthType * const routeIdToFunc;
-    const BitWidthType * const routeIdToEntity;
-
-} CosmOS_RoutesConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_BufferConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    unsigned char * const buffer;
-    const BitWidthType id;
-    const BitWidthType size;
-    const CosmOS_PermissionsConfigurationType * const readPermission;
-    const CosmOS_PermissionsConfigurationType * const writePermission;
-
-} CosmOS_BufferConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_BufferDoublePairConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    void * const buffer;
-
-} CosmOS_BufferDoublePairConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_BufferDoubleConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_BufferDoublePairConfigurationType * const bufferPair;
-
-} CosmOS_BufferDoubleConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_StackConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const BitWidthType stackSize;
-    const AddressType stackLowAddress;
-    const AddressType stackHighAddress;
-
-} CosmOS_StackConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_SchedulableConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_StackConfigurationType * const stack;
-    const CosmOS_SchedulableInstanceType instance;
-    const CosmOS_HandlerType handler;
-    const CosmOS_BooleanType fp;
-    const BitWidthType id;
-    const BitWidthType instanceId;
-    const BitWidthType programId;
-    const BitWidthType coreId;
-
-} CosmOS_SchedulableConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_TaskConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const BitWidthType wcet;
-
-} CosmOS_TaskConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_ThreadConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const BitWidthType dummy;
-
-} CosmOS_ThreadConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_ProgramConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const BitWidthType coreId;
-    const BitWidthType numberOfTasks;
-    const BitWidthType numberOfThreads;
-    const BitWidthType programMemorySize;
-    const AddressType programMemoryLowAddress;
-    const AddressType programMemoryHighAddress;
-
-} CosmOS_ProgramConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_ScheduleTableConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const BitWidthType startTick;
-    void * const taskVar;
-
-} CosmOS_ScheduleTableConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_ThreadListConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    void * const threadVar;
-
-} CosmOS_ThreadListConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_SchedulerConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_ScheduleTableConfigurationType * const scheduleTable;
-    const CosmOS_ThreadListConfigurationType * const threadList;
-    const BitWidthType hyperTick;
-    const BitWidthType preemptTick;
-    const BitWidthType scheduleTableElementsNum;
-    const BitWidthType threadListElementsNum;
-    const BitWidthType lastToFirstTaskTicks;
-    const BitWidthType syncTicks;
-    const BitWidthType firstSyncTaskStartTick;
-    void * const idleTaskVar;
-
-} CosmOS_SchedulerConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_SysJobsGroupConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_GenericVoidType * const handlers;
-    const BitWidthType numOfHandlers;
-    const BitWidthType tickMultiplicator;
-
-} CosmOS_SysJobsGroupConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_SysJobsGroupConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_SysJobsGroupConfigurationType * const groups;
-    const BitWidthType numOfGroups;
-    const BitWidthType hyperTick;
-
-} CosmOS_SysJobsConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_CoreConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_ProgramConfigurationType * const programs;
-    const BitWidthType numberOfPrograms;
-    const CosmOS_SchedulerConfigurationType * const scheduler;
-	const BitWidthType coreId;
-
-} CosmOS_CoreConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_OsConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    const CosmOS_CoreConfigurationType * const cores;
-    const BitWidthType numberOfCores;
-    const CosmOS_BufferConfigurationType * const buffers;
-    const BitWidthType numberOfBuffers;
-    const CosmOS_RoutesConfigurationType * const route;
-	const BitWidthType numberOfSpinlocks;
-
-} CosmOS_OsConfigurationType;
+__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_getSpinlock(BitWidthType id);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Typedefs_cosmosTypesCfg_h
+  * Getters_spinlock_h
 ********************************************************************************/
 /********************************************************************************
-**                              Typedefs | Stop                                **
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_spinlock_h Setters
+  * @ingroup Apis_spinlock_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Setters_spinlock_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_spinlock_h General
+  * @ingroup Apis_spinlock_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn spinlock_trySpinlock(BitWidthType id)
+  *
+  * @brief Try to get spinlock DEMO CODE.
+  *
+  * @param[in]  BitWidthType id
+  *
+  * @return CosmOS_SpinlockStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_BufferStateType spinlock_trySpinlock(BitWidthType id);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn spinlock_releaseSpinlock(BitWidthType id)
+  *
+  * @brief Release spinlock DEMO CODE.
+  *
+  * @param[in]  BitWidthType id
+  *
+  * @return CosmOS_SpinlockStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_releaseSpinlock(BitWidthType id);
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_spinlock_h
+********************************************************************************/
+/********************************************************************************
+**                         Function Prototypes | Stop                          **
+********************************************************************************/
+/********************************************************************************
+**                        Function Definitions | Start                         **
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Getters_spinlock_h Getters
+  * @ingroup Apis_spinlock_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Getters_spinlock_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_spinlock_h Setters
+  * @ingroup Apis_spinlock_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Setters_spinlock_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_spinlock_h General
+  * @ingroup Apis_spinlock_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
+  *
+  * @brief Check if the spinlock will ends up in deadlock DEMO CODE.
+  *
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+	*
+  * @return CosmOS_BufferStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BooleanType spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
+{
+    return ((spinlockVar->spinlock) AND (coreVar->cfg->coreId IS_EQUAL_TO spinlockVar->lockedByCoreId)) ? True : False;
+}
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_spinlock_h
+********************************************************************************/
+/********************************************************************************
+**                        Function Definitions | Stop                          **
 ********************************************************************************/
 #ifdef __cplusplus
 }

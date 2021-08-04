@@ -200,6 +200,18 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_SysJobsGroupConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+		BitWidthType spinlock;
+		BitWidthType lockedByCoreId;
+
+} CosmOS_SpinlockVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_CoreVariableType struct type
 ********************************************************************************/
 typedef struct
@@ -226,6 +238,7 @@ typedef struct
     CosmOS_CoreVariableType * const coreVars;
     CosmOS_BufferVariableType * const bufferVars;
     CosmOS_BufferDoubleVariableType * const bufferDoubleVars;
+		CosmOS_SpinlockVariableType * const spinlockVars;
 
 } CosmOS_OsVariableType;
 /********************************************************************************
