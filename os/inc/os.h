@@ -265,6 +265,22 @@ __STATIC_FORCEINLINE CosmOS_RoutesConfigurationType * os_getOsRoutes(CosmOS_OsVa
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn os_getOsNumberOfSpinlocks(CosmOS_OsVariableType * osVar)
+  *
+  * @brief Get os numberOfSpinlocks.
+  *
+  * @param[in]  CosmOS_OsVariableType * osVar
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType os_getOsNumberOfSpinlocks(CosmOS_OsVariableType * osVar)
+{
+    return (osVar->cfg->numberOfSpinlocks);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn os_getOsCoreVars(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os coreVars pointer.
@@ -359,6 +375,39 @@ __STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVars(
 __STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar, BitWidthType bufferDoubleId)
 {
     return (&(osVar->bufferDoubleVars[bufferDoubleId]));
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_getOsSpinlockVars(CosmOS_OsVariableType * osVar)
+  *
+  * @brief Get os spinlockVars pointer.
+  *
+  * @param[in]  CosmOS_OsVariableType * osVar
+  *
+  * @return CosmOS_SpinlockVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SpinlockVariableType * os_getOsSpinlockVars(CosmOS_OsVariableType * osVar)
+{
+    return (osVar->spinlockVars);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_getOsSpinlockVar(CosmOS_OsVariableType * osVar,BitWidthType spinlockId)
+  *
+  * @brief Get os spinlock pointer.
+  *
+  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  BitWidthType bufferId
+  *
+  * @return CosmOS_SpinlockVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SpinlockVariableType * os_getOsSpinlockVar(CosmOS_OsVariableType * osVar, BitWidthType spinlockId)
+{
+    return (&(osVar->spinlockVars[spinlockId]));
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

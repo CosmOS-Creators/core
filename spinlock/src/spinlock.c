@@ -5,71 +5,30 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file sysDefs.h
+** @file spinlock.c
 *********************************************************************************
-<!--                      sysDefs Module Group Definition                     -->
+<!--                   spinlock Unit Local Group Definition                   -->
 *********************************************************************************
-** @defgroup sysDefs_module sysDefs
-** @brief sysDefs Module
-** @details lorem
-*********************************************************************************
-<!--                       sysDefs Unit Group Definition                      -->
-*********************************************************************************
-** @defgroup sysDefs_unit sysDefs Unit
-** @ingroup sysDefs_module
-** @brief sysDefs Unit
-** @details lorem
-*********************************************************************************
-<!--                           Version Information                            -->
-*********************************************************************************
-** @version 1.0.0
-** @date 1.8.2020
-** @author https://github.com/PavolKostolansky
-*********************************************************************************
-<!--                          Warnings and License                            -->
-*********************************************************************************
-** @warning Modifying code can lead to unexpected behaviour of the whole system
-** @copyright MIT License
-*********************************************************************************
-<!--                   sysDefs Unit Global Group Definition                   -->
-*********************************************************************************
-** @defgroup Global_sysDefs Global
-** @ingroup sysDefs_unit
-** @brief sysDefs globals
+** @defgroup Local_spinlock Local
+** @ingroup spinlock_unit
+** @brief spinlock locals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
-**                           START OF THE HEADER FILE                          **
+**                           START OF THE SOURCE FILE                          **
 ********************************************************************************/
-#ifndef __SYSDEFS_H__
-#define __SYSDEFS_H__
-/********************************************************************************
-**                         START OF C++ SUPPORT SECTION                        **
-********************************************************************************/
-#ifdef __cplusplus
- extern "C" {
-#endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefsStacks.h"
-#include "sysDefsRoutes.h"
-#include "sysDefsBarriers.h"
-#include "sysDefsBuffers.h"
-#include "sysDefsBuffersDouble.h"
-#include "sysDefsTasks.h"
-#include "sysDefsThreads.h"
-#include "sysDefsPrograms.h"
-#include "sysDefsPermissions.h"
-#include "sysDefsSchedulers.h"
-#include "sysDefsScheduleTables.h"
-#include "sysDefsSchedulables.h"
-#include "sysDefsCores.h"
-#include "sysDefsOsBoot.h"
-#include "sysDefsSysJobs.h"
-#include "sysDefsSchedulerThreadLists.h"
-#include "sysDefsSpinlocks.h"
+#include "os.h"
+#include "core.h"
+#include "spinlock.h"
+#include "cosmosAssert.h"
+
+/* CIL interfaces */
+#include "CILcore.h"
+#include "CILspinlock.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -79,15 +38,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_sysDefs_h Macros
-  * @ingroup Global_sysDefs
+  * @defgroup Macros_spinlock Macros
+  * @ingroup Local_spinlock
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Macros_sysDefs_h
+  * Macros_spinlock
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -98,15 +57,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_sysDefs_h Variables
-  * @ingroup Global_sysDefs
+  * @defgroup Variables_spinlock Variables
+  * @ingroup Local_spinlock
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Variables_sysDefs_h
+  * Variables_spinlock
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -117,47 +76,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_sysDefs_h API's
-  * @ingroup Global_sysDefs
+  * @defgroup Apis_spinlock_c API's
+  * @ingroup Local_spinlock
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_sysDefs_h Getters
-  * @ingroup Apis_sysDefs_h
+  * @addtogroup Getters_spinlock_c Getters
+  * @ingroup Apis_spinlock_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Getters_sysDefs_h
+  * Getters_spinlock_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_sysDefs_h Setters
-  * @ingroup Apis_sysDefs_h
+  * @addtogroup Setters_spinlock_c Setters
+  * @ingroup Apis_spinlock_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Setters_sysDefs_h
+  * Setters_spinlock_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_sysDefs_h General
-  * @ingroup Apis_sysDefs_h
+  * @addtogroup General_spinlock_c General
+  * @ingroup Apis_spinlock_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_sysDefs_h
+  * General_spinlock_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -166,54 +125,153 @@
 **                        Function Definitions | Start                         **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @addtogroup Getters_sysDefs_h Getters
-  * @ingroup Apis_sysDefs_h
-  * @{
+  * @fn spinlock_getSpinlock(BitWidthType id)
+  *
+  * @brief Get spinlock DEMO CODE.
+  *
+  * @param[in]  BitWidthType id
+  *
+  * @return CosmOS_SpinlockStateType
 ********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_getSpinlock(BitWidthType id)
+{
+	BitWidthType numberOfSpinlocks;
+
+	CosmOS_BooleanType willCauseDeadlock;
+    CosmOS_SpinlockStateType spinlockState;
+
+	CosmOS_OsVariableType * osVar;
+	CosmOS_CoreVariableType * coreVar;
+	CosmOS_SpinlockVariableType * spinlockVar;
+
+
+    osVar = os_getOsVar();
+    coreVar = CILcore_getCoreVar();
+
+	numberOfSpinlocks = os_getOsNumberOfSpinlocks(osVar);
+
+	cosmosAssert( id < numberOfSpinlocks );
+	spinlockVar = os_getOsSpinlockVar(osVar, id);
+
+	willCauseDeadlock = spinlock_willCauseDeadlock(coreVar, spinlockVar);
+
+	if( willCauseDeadlock )
+	{
+		spinlockState = SPINLOCK_STATE_ENUM__ERROR;
+	}
+	else
+	{
+		spinlockState = CILspinlock_getSpinlock( &(spinlockVar->spinlock) );
+		spinlockVar->lockedByCoreId = coreVar->cfg->coreId;
+	}
+
+    return spinlockState;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @}
-  * Getters_sysDefs_h
+  * @fn spinlock_trySpinlock(BitWidthType id)
+  *
+  * @brief Try to get spinlock DEMO CODE.
+  *
+  * @param[in]  BitWidthType id
+  *
+  * @return CosmOS_SpinlockStateType
 ********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_BufferStateType spinlock_trySpinlock(BitWidthType id)
+{
+	BitWidthType numberOfSpinlocks;
+
+	CosmOS_BooleanType willCauseDeadlock;
+    CosmOS_SpinlockStateType spinlockState;
+
+	CosmOS_OsVariableType * osVar;
+	CosmOS_CoreVariableType * coreVar;
+	CosmOS_SpinlockVariableType * spinlockVar;
+
+
+    osVar = os_getOsVar();
+    coreVar = CILcore_getCoreVar();
+
+	numberOfSpinlocks = os_getOsNumberOfSpinlocks(osVar);
+
+	cosmosAssert( id < numberOfSpinlocks );
+	spinlockVar = os_getOsSpinlockVar(osVar, id);
+
+	willCauseDeadlock = spinlock_willCauseDeadlock(coreVar, spinlockVar);
+
+	if( willCauseDeadlock )
+	{
+		spinlockState = SPINLOCK_STATE_ENUM__ERROR;
+	}
+	else
+	{
+		spinlockState = CILspinlock_trySpinlock( &(spinlockVar->spinlock) );
+
+		if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
+		{
+			spinlockVar->lockedByCoreId = coreVar->cfg->coreId;
+		}
+	}
+
+    return spinlockState;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @addtogroup Setters_sysDefs_h Setters
-  * @ingroup Apis_sysDefs_h
-  * @{
+  * @fn spinlock_releaseSpinlock(BitWidthType id)
+  *
+  * @brief Release spinlock DEMO CODE.
+  *
+  * @param[in]  BitWidthType id
+  *
+  * @return CosmOS_SpinlockStateType
 ********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Setters_sysDefs_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_sysDefs_h General
-  * @ingroup Apis_sysDefs_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * General_sysDefs_h
-********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_releaseSpinlock(BitWidthType id)
+{
+	BitWidthType numberOfSpinlocks;
+
+    CosmOS_SpinlockStateType spinlockState;
+
+	CosmOS_OsVariableType * osVar;
+	CosmOS_SpinlockVariableType * spinlockVar;
+
+    osVar = os_getOsVar();
+
+	numberOfSpinlocks = os_getOsNumberOfSpinlocks(osVar);
+
+	cosmosAssert( id < numberOfSpinlocks );
+	spinlockVar = os_getOsSpinlockVar(osVar, id);
+
+	spinlockState = CILspinlock_releaseSpinlock( &(spinlockVar->spinlock) );
+
+	return spinlockState;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
-#ifdef __cplusplus
-}
-#endif
 /********************************************************************************
-**                         END OF C++ SUPPORT SECTION                          **
-********************************************************************************/
-#endif
-/********************************************************************************
-**                           END OF THE HEADER FILE                            **
+**                           END OF THE SOURCE FILE                            **
 ********************************************************************************/

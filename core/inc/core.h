@@ -235,6 +235,22 @@ __STATIC_FORCEINLINE CosmOS_SchedulerConfigurationType * core_getCoreScheduler(C
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn core_getCoreId(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get coreId.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType core_getCoreId(CosmOS_CoreVariableType * core)
+{
+    return (core->cfg->coreId);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn core_getCoreSchedulableInCurrentContext(CosmOS_CoreVariableType * core)
   *
   * @brief Get core schedulableInExecution pointer.
