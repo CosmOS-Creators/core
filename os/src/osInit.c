@@ -22,6 +22,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "osInit.h"
+#include "osBoot.h"
 #include "stackInit.h"
 #include "coreSync.h"
 #include "os.h"
@@ -146,6 +147,7 @@ __OS_FUNC_SECTION void osInit_init(void)
     CosmOS_OsVariableType * osVar;
 
     switchMemoryProtection_init();
+	osBoot_bootValidate();
 
     osVar = os_getOsVar();
 
