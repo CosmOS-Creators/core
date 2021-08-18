@@ -5,12 +5,10 @@
 #include "osBoot.h"
 
 // instantiate mocked lib
-std::unique_ptr<Os_MOCK> OsBoot_TestFixture::_OsBootMock;
+std::unique_ptr<OsBoot_MOCK> OsBoot_TestFixture::_OsBootMock;
 
 // fake lib functions
 void osBoot_bootValidate()
 {
-    Os_TestFixture::_OsMock->osBoot_bootValidate();
-
-		return (NULL);
+    Os_TestFixture::_OsBootMock->osBoot_bootValidate();
 }
