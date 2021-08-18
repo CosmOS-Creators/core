@@ -101,7 +101,7 @@ typedef struct
 typedef struct
 {
     const CosmOS_ProgramSectionConfigurationType * const programSections;
-    BitWidthType programSectionsNumber;
+    const BitWidthType programSectionsNumber;
 
 } CosmOS_BootSectionConfigurationType;
 
@@ -142,6 +142,8 @@ typedef struct
     const BitWidthType size;
     const CosmOS_PermissionsConfigurationType * const readPermission;
     const CosmOS_PermissionsConfigurationType * const writePermission;
+		const CosmOS_BooleanType isInterCore;
+		const BitWidthType spinlockId;
 
 } CosmOS_BufferConfigurationType;
 
@@ -312,10 +314,10 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    const CosmOS_ProgramConfigurationType * const programs;
-    const BitWidthType numberOfPrograms;
-    const CosmOS_SchedulerConfigurationType * const scheduler;
-	const BitWidthType coreId;
+		const CosmOS_ProgramConfigurationType * const programs;
+		const BitWidthType numberOfPrograms;
+		const CosmOS_SchedulerConfigurationType * const scheduler;
+		const BitWidthType coreId;
 
 } CosmOS_CoreConfigurationType;
 
@@ -331,7 +333,7 @@ typedef struct
     const CosmOS_BufferConfigurationType * const buffers;
     const BitWidthType numberOfBuffers;
     const CosmOS_RoutesConfigurationType * const route;
-	const BitWidthType numberOfSpinlocks;
+		const BitWidthType numberOfSpinlocks;
 
 } CosmOS_OsConfigurationType;
 /********************************************************************************

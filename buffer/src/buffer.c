@@ -25,11 +25,13 @@
 #include "core.h"
 #include "buffer.h"
 #include "route.h"
+#include "spinlock.h"
 #include "permission.h"
 #include "memoryProtection.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
+#include "CILinterrupt.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -284,31 +286,61 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
         }
         else
         {
-            BitWidthType fullCellsNum;
+			BitWidthType 	spinlockId,
+							fullCellsNum;
+			CosmOS_AccessStateType isBufferInterCore;
+			CosmOS_SpinlockStateType spinlockState;
+
+			CILinterrupt_disableInterrupts();
+
+			isBufferInterCore = buffer_isBufferInterCore( bufferVar );
+
+			if ( isBufferInterCore )
+			{
+				spinlockId = buffer_getBufferSpinlockId( bufferVar );
+				spinlockState = spinlock_trySpinlock( spinlockId );
+			}
+			else
+			{
+				spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
+			}
+
+			if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
+			{
+				fullCellsNum = buffer_getFullCellsNum( bufferVar );
+
+				if ( fullCellsNum >= size)
+				{
+					BitWidthType userBufferIndex;
+
+            	    unsigned char * userBuffer;
 
 
-            fullCellsNum = buffer_getFullCellsNum( bufferVar );
+					userBuffer = buffer;
+					userBufferIndex = 0;
 
-            if ( fullCellsNum >= size)
-            {
-                BitWidthType userBufferIndex;
+					while ( ( userBufferIndex < size ) )
+					{
+						bufferState = buffer_pull( bufferVar, ( userBuffer + userBufferIndex ) );
+						userBufferIndex++;
+					}
+				}
+				else
+				{
+					bufferState = BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM;
+				}
 
-                unsigned char * userBuffer;
+				if ( isBufferInterCore )
+				{
+					spinlockState = spinlock_releaseSpinlock( spinlockId );
+				}
+			}
+			else
+			{
+				bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
+			}
 
-
-                userBuffer = buffer;
-                userBufferIndex = 0;
-
-                while ( ( userBufferIndex < size ) )
-                {
-                    bufferState = buffer_pull( bufferVar, ( userBuffer + userBufferIndex ) );
-                    userBufferIndex++;
-                }
-            }
-            else
-            {
-                bufferState = BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM;
-            }
+			CILinterrupt_enableInterrupts();
         }
     }
 
@@ -372,31 +404,61 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
         }
         else
         {
-            BitWidthType emptyCellsNum;
+			BitWidthType 	spinlockId,
+							emptyCellsNum;
+			CosmOS_AccessStateType isBufferInterCore;
+			CosmOS_SpinlockStateType spinlockState;
+
+			CILinterrupt_disableInterrupts();
+
+			isBufferInterCore = buffer_isBufferInterCore( bufferVar );
+
+			if ( isBufferInterCore )
+			{
+				spinlockId = buffer_getBufferSpinlockId( bufferVar );
+				spinlockState = spinlock_trySpinlock( spinlockId );
+			}
+			else
+			{
+				spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
+			}
+
+			if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
+			{
+				emptyCellsNum = buffer_getEmptyCellsNum( bufferVar );
+
+				if ( emptyCellsNum >= size)
+				{
+					BitWidthType userBufferIndex;
+
+            	    unsigned char * userBuffer;
 
 
-            emptyCellsNum = buffer_getEmptyCellsNum( bufferVar );
+					userBuffer = buffer;
+					userBufferIndex = 0;
 
-            if ( emptyCellsNum >= size)
-            {
-                BitWidthType userBufferIndex;
+					while ( ( userBufferIndex < size ) )
+					{
+            	        bufferState = buffer_push( bufferVar, *( userBuffer + userBufferIndex ) );
+						userBufferIndex++;
+					}
+				}
+				else
+				{
+					bufferState = BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS;
+				}
 
-                unsigned char * userBuffer;
+				if ( isBufferInterCore )
+				{
+					spinlockState = spinlock_releaseSpinlock( spinlockId );
+				}
+			}
+			else
+			{
+				bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
+			}
 
-
-                userBuffer = buffer;
-                userBufferIndex = 0;
-
-                while ( ( userBufferIndex < size ) )
-                {
-                    bufferState = buffer_push( bufferVar, *( userBuffer + userBufferIndex ) );
-                    userBufferIndex++;
-                }
-            }
-            else
-            {
-                bufferState = BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS;
-            }
+			CILinterrupt_enableInterrupts();
         }
     }
 

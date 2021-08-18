@@ -238,6 +238,38 @@ __STATIC_FORCEINLINE BitWidthType buffer_getBufferSize(CosmOS_BufferVariableType
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn buffer_isBufferInterCore(CosmOS_BufferVariableType * bufferVar)
+  *
+  * @brief Is buffer inter core.
+  *
+  * @param[in]  CosmOS_BufferVariableType * bufferVar
+  *
+  * @return CosmOS_BooleanType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BooleanType buffer_isBufferInterCore(CosmOS_BufferVariableType * bufferVar)
+{
+    return (bufferVar->cfg->isInterCore);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn buffer_getBufferSpinlockId(CosmOS_BufferVariableType * bufferVar)
+  *
+  * @brief Get buffer spinlockId.
+  *
+  * @param[in]  CosmOS_BufferVariableType * bufferVar
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType buffer_getBufferSpinlockId(CosmOS_BufferVariableType * bufferVar)
+{
+    return (bufferVar->cfg->spinlockId);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn buffer_getBufferReadPermission(CosmOS_BufferVariableType * bufferVar)
   *
   * @brief Get buffer readPermission.

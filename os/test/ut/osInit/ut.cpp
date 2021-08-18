@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "os_mock.h"
+#include "osBoot_mock.h"
 #include "core_mock.h"
 #include "stack_mock.h"
 #include "CILcore_mock.h"
@@ -18,8 +19,10 @@ TEST(osInit, executionFlow)
 		Stack_TestFixture stackMock;
 		Core_TestFixture coreMock;
 		Os_TestFixture osMock;
+		OsBoot_TestFixture osBootMock;
 
     EXPECT_CALL(*memoryProtectionMock._MemoryProtectionMock, memoryProtection_init()).Times(1);
+		EXPECT_CALL(*osBootMock._OsBootMock, osBoot_bootValidate()).Times(1);
 		EXPECT_CALL(*osMock._OsMock, os_getOsVar()).Times(1).WillOnce(Return((CosmOS_OsVariableType*)NULL));
 		EXPECT_CALL(*CILcoreMock._CILcoreMock, CILcore_setCoreVar((CosmOS_OsVariableType*)NULL)).Times(1);
 		EXPECT_CALL(*coreMock._CoreMock, core_getCoreVar()).Times(1).WillOnce(Return((CosmOS_CoreVariableType*)NULL));
