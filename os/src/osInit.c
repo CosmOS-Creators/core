@@ -145,6 +145,7 @@ __OS_FUNC_SECTION void osInit_init(void)
 {
     CosmOS_CoreVariableType * coreVar;
     CosmOS_OsVariableType * osVar;
+	//check if the os sections were booted and init and start was not called yet
 
     switchMemoryProtection_init();
 	osBoot_bootValidate();

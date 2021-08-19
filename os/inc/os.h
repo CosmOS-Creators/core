@@ -125,6 +125,19 @@
   * @return CosmOS_OsVariableType *
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_OsVariableType * os_getOsVar(void);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_kernelPanic(void)
+  *
+  * @brief OS kernel panic function DEMO.
+  *
+  * @param[in]  none
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void os_kernelPanic(void);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -276,6 +289,22 @@ __STATIC_FORCEINLINE CosmOS_RoutesConfigurationType * os_getOsRoutes(CosmOS_OsVa
 __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfSpinlocks(CosmOS_OsVariableType * osVar)
 {
     return (osVar->cfg->numberOfSpinlocks);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_getKernelPanicHook(CosmOS_OsVariableType * osVar)
+  *
+  * @brief Get os kernelPanicHook.
+  *
+  * @param[in]  CosmOS_OsVariableType * osVar
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_GenericVoidType os_getKernelPanicHook(CosmOS_OsVariableType * osVar)
+{
+    return (CosmOS_GenericVoidType)(osVar->cfg->kernelPanicHook);
 }
 
 /********************************************************************************

@@ -167,7 +167,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_readArray(BitWidthType id,
 
         default :
         {
-            /* PANIC */
+            os_kernelPanic();
             break;
         }
     }
@@ -229,7 +229,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_writeArray(BitWidthType id
 
         default :
         {
-            /* PANIC */
+            os_kernelPanic();
             break;
         }
     }

@@ -83,13 +83,6 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_HandlerType void pointer type
-********************************************************************************/
-typedef void (*CosmOS_HandlerType)(void);
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @brief  CosmOS_GenericVoidType void pointer type
 ********************************************************************************/
 typedef void (*CosmOS_GenericVoidType)(void);
@@ -97,7 +90,7 @@ typedef void (*CosmOS_GenericVoidType)(void);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_GenericBitWidthRWType BitWidthType pointer RW type
+  * @brief  CosmOS_GenericBitWidthRWType BitWidthType pointer Read Write type
 ********************************************************************************/
 typedef BitWidthType (*CosmOS_GenericBitWidthRWType)(BitWidthType,void *,BitWidthType);
 

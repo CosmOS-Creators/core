@@ -55,6 +55,7 @@
 /* CORE interfaces */
 #include "cosmosTypesStd.h"
 #include "memoryMapping.h"
+#include "os.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -197,12 +198,9 @@
 ********************************************************************************/
 __STATIC_FORCEINLINE void cosmosAssert(BitWidthType result)
 {
-    if ( IS_NOT( result ) ){
-        /* Kernel_Panic */
-    }
-    else
-    {
-
+    if ( IS_NOT( result ) )
+		{
+        os_kernelPanic();
     }
 }
 /********************************************************************************

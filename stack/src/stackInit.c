@@ -145,7 +145,7 @@ __OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_Schedul
     AddressType stackLowAddress,
                 stackHighAddress;
 
-    CosmOS_HandlerType handler;
+    CosmOS_GenericVoidType handler;
     StackPointerType stackPointer;
 
     CosmOS_StackConfigurationType * stack;

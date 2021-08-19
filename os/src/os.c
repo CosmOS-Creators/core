@@ -162,6 +162,30 @@ __OS_FUNC_SECTION CosmOS_OsVariableType * os_getOsVar(void)
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_kernelPanic(void)
+  *
+  * @brief OS kernel panic function DEMO.
+  *
+  * @param[in]  none
+  *
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void os_kernelPanic(void)
+{
+    OsCfg.kernelPanicHook();
+
+	for(;;);
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

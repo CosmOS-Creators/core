@@ -191,7 +191,7 @@ typedef struct
 {
     const CosmOS_StackConfigurationType * const stack;
     const CosmOS_SchedulableInstanceType instance;
-    const CosmOS_HandlerType handler;
+    const CosmOS_GenericVoidType handler;
     const CosmOS_BooleanType fp;
     const BitWidthType id;
     const BitWidthType instanceId;
@@ -334,6 +334,7 @@ typedef struct
     const BitWidthType numberOfBuffers;
     const CosmOS_RoutesConfigurationType * const route;
 		const BitWidthType numberOfSpinlocks;
+		const CosmOS_GenericVoidType kernelPanicHook;
 
 } CosmOS_OsConfigurationType;
 /********************************************************************************

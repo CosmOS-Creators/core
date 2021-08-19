@@ -195,9 +195,9 @@ __STATIC_FORCEINLINE CosmOS_StackConfigurationType * schedulable_getStack(CosmOS
   *
   * @param[in]  CosmOS_SchedulableVariableType * schedulable
   *
-  * @return CosmOS_HandlerType
+  * @return CosmOS_GenericVoidType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_HandlerType schedulable_getHandler(CosmOS_SchedulableVariableType * schedulable)
+__STATIC_FORCEINLINE CosmOS_GenericVoidType schedulable_getHandler(CosmOS_SchedulableVariableType * schedulable)
 {
     return (schedulable->cfg->handler);
 }
