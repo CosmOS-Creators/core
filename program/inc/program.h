@@ -257,6 +257,54 @@ __STATIC_FORCEINLINE BitWidthType program_getProgramMemoryHighAddress(CosmOS_Pro
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn program_getProgramHeapSize(CosmOS_ProgramVariableType * program)
+  *
+  * @brief Get program programHeapSize.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramHeapSize(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programHeapSize);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramHeapLowAddress(CosmOS_ProgramVariableType * program)
+  *
+  * @brief Get program programHeapLowAddress.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramHeapLowAddress(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programHeapLowAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramHeapHighAddress(CosmOS_ProgramVariableType * program)
+  *
+  * @brief Get program programHeapHighAddress.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramHeapHighAddress(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programHeapHighAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn program_getProgramTasks(CosmOS_ProgramVariableType * program)
   *
   * @brief Get program taskVars.
