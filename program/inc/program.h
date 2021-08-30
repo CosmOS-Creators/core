@@ -367,6 +367,22 @@ __STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThread(CosmOS
 {
     return (&(program->threadVars[threadIterator]));
 }
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramCurrentHeapAddress(CosmOS_ProgramVariableType * program)
+  *
+  * @brief Get program currentHeapAddress.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType program_getProgramCurrentHeapAddress(CosmOS_ProgramVariableType * program)
+{
+    return (program->currentHeapAddress);
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -380,6 +396,22 @@ __STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThread(CosmOS
   * @ingroup Apis_program_h
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_setProgramCurrentHeapAddress(CosmOS_ProgramVariableType * program, AddressType currentHeapAddressParam)
+  *
+  * @brief Set program currentHeapAddress.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * @param[in]  AddressType currentHeapAddressParam
+	*
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void program_setProgramCurrentHeapAddress(CosmOS_ProgramVariableType * program, AddressType currentHeapAddressParam)
+{
+    program->currentHeapAddress = currentHeapAddressParam;
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

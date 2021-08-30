@@ -165,6 +165,7 @@ typedef struct
     const CosmOS_ProgramConfigurationType * const cfg;
     CosmOS_TaskVariableType * const taskVars;
     CosmOS_ThreadVariableType * const threadVars;
+		AddressType currentHeapAddress;
 
 } CosmOS_ProgramVariableType;
 

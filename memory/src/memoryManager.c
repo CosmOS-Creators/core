@@ -21,6 +21,8 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 #include "memoryManager.h"
+#include "program.h"
+#include "core.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -119,21 +121,45 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryManager_allocateMemory(int incr)
+  * @fn memoryManager_sbrk(int incr)
   *
-  * @brief Set memory protection for current execution context.
+  * @brief Sbrk function DEMO implementation.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
+  * @param[in] int incr
   *
   * @return AddressType
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION AddressType * memoryManager_allocateMemory(int incr)
+__OS_FUNC_SECTION AddressType memoryManager_sbrk(int incr)
 {
+	AddressType currentHeapAddress,
+				heapHighAddress,
+				priorHeapAddress;
 
+    CosmOS_CoreVariableType * coreVar;
+	CosmOS_ProgramVariableType * programVar;
+
+
+    coreVar = core_getCoreVar();
+
+    programVar = core_getCoreProgramInExecution( coreVar );
+
+	currentHeapAddress = program_getProgramCurrentHeapAddress( programVar );
+	heapHighAddress = program_getProgramHeapHighAddress( programVar );
+
+	priorHeapAddress = currentHeapAddress;
+	if (currentHeapAddress + incr > heapHighAddress )
+	{
+		//ERROR HANDLER NEEDS TO BE INVOKED
+		return (AddressType) -1;
+	}
+
+	currentHeapAddress += incr;
+	program_setProgramCurrentHeapAddress( programVar, currentHeapAddress );
+
+	return priorHeapAddress;
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

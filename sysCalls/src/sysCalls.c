@@ -172,6 +172,106 @@ __OS_FUNC_SECTION BitWidthType sysCalls_readWrite(BitWidthType id, void * entity
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @endcond*/
+
+#if     defined ( __GNUC__ )
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn _sbrk(int incr)
+  *
+  * @brief _sbrk DEMO implementation.
+  *
+  * @param[in]  int incr
+  *
+  * @return char *
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION char * _sbrk(int incr){
+
+	AddressType address;
+
+
+	address = sysCalls_readWrite(SYSCALL_MEMORYMANAGER_SBRK,incr,OFF);
+
+	return (char *) address;
+};
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn _getpid(void)
+  *
+  * @brief _getpid STUB implementation.
+  *
+  * @param[in]  none
+  *
+  * @return int
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION int _getpid(void) {
+	return 1;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn _kill(void)
+  *
+  * @brief _kill STUB implementation.
+  *
+  * @param[in]  int pid
+  * @param[in]  int sig
+  *
+  * @return int
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION int _kill(int pid, int sig) {
+	return 0;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn _getpid(void)
+  *
+  * @brief _getpid STUB implementation.
+  *
+  * @param[in]  int status
+  *
+  * @return void
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void _exit (int status) {
+	_kill(status, 0);
+	while (1) {}
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+#elif   defined ( __CC_ARM )
+	#error "Your compiler is currently not supported by CosmOS!"
+#else
+    #error "Your compiler is currently not supported by CosmOS!"
+#endif
+
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
