@@ -164,7 +164,7 @@ __OS_FUNC_SECTION void CILsysCalls_os(BitWidthType id);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn CILsysCalls_readWrite(BitWidthType id, void * entity, BitWidthType num)
+  * @fn CILsysCalls_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * entity, BitWidthType num)
   *
   * @brief System call handling read/write from/to buffers or registers.
   *
@@ -174,7 +174,7 @@ __OS_FUNC_SECTION void CILsysCalls_os(BitWidthType id);
   *
   * @return BitWidthType
 ********************************************************************************/
-__OS_FUNC_SECTION BitWidthType CILsysCalls_readWrite(BitWidthType id, void * entity, BitWidthType num);
+__OS_FUNC_SECTION BitWidthType CILsysCalls_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * entity, BitWidthType num);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
