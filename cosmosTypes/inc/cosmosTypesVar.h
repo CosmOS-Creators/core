@@ -83,6 +83,19 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_MallocVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    void * prior;
+    void * next;
+    BitWidthType size;
+
+} CosmOS_MallocVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_TaskVariableType struct type
 ********************************************************************************/
 typedef struct
@@ -165,7 +178,7 @@ typedef struct
     const CosmOS_ProgramConfigurationType * const cfg;
     CosmOS_TaskVariableType * const taskVars;
     CosmOS_ThreadVariableType * const threadVars;
-		AddressType currentHeapAddress;
+	BitWidthType numberOfMallocVars;
 
 } CosmOS_ProgramVariableType;
 
@@ -205,8 +218,8 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-		BitWidthType spinlock;
-		BitWidthType lockedByCoreId;
+	BitWidthType spinlock;
+	BitWidthType lockedByCoreId;
 
 } CosmOS_SpinlockVariableType;
 
@@ -239,7 +252,7 @@ typedef struct
     CosmOS_CoreVariableType * const coreVars;
     CosmOS_BufferVariableType * const bufferVars;
     CosmOS_BufferDoubleVariableType * const bufferDoubleVars;
-		CosmOS_SpinlockVariableType * const spinlockVars;
+	CosmOS_SpinlockVariableType * const spinlockVars;
 
 } CosmOS_OsVariableType;
 /********************************************************************************

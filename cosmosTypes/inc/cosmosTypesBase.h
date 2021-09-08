@@ -90,9 +90,16 @@ typedef void (*CosmOS_GenericVoidType)(void);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_GenericBitWidthRWType BitWidthType pointer Read Write type
+  * @brief  CosmOS_Generic_bitWidthType_ret_bitWidthType type
 ********************************************************************************/
-typedef BitWidthType (*CosmOS_GenericBitWidthRWType)(BitWidthType,void *,BitWidthType);
+typedef BitWidthType (*CosmOS_Generic_bitWidthType_ret_bitWidthType)(BitWidthType,BitWidthType);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_Generic_voidPtr_bitWidthType_ret_bitWidthType type
+********************************************************************************/
+typedef BitWidthType (*CosmOS_Generic_voidPtr_bitWidthType_ret_bitWidthType)(BitWidthType,void *,BitWidthType);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -104,7 +111,7 @@ typedef enum { False = 0x00, True = 0x01} CosmOS_BooleanType;
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_PermissionType enum
+  * @brief  CosmOS_AccessStateType enum
 ********************************************************************************/
 typedef enum {
 

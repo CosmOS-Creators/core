@@ -121,45 +121,41 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryManager_sbrk(int incr)
+  * @fn memoryManager_heapInit(void)
   *
-  * @brief Sbrk function DEMO implementation.
+  * @brief Heap init function DEMO implementation.
   *
-  * @param[in] int incr
+  * @param[in] none
   *
-  * @return AddressType
+  * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION AddressType memoryManager_sbrk(int incr)
+__OS_FUNC_SECTION void memoryManager_heapInit(void)
 {
-	AddressType currentHeapAddress,
-				heapHighAddress,
-				priorHeapAddress;
+	BitWidthType numberOfPrograms;
 
-    CosmOS_CoreVariableType * coreVar;
-	CosmOS_ProgramVariableType * programVar;
+	CosmOS_CoreVariableType * coreVar;
+	CosmOS_ProgramVariableType * programVars;
+	CosmOS_MallocVariableType * currentMallocVar;
 
+	coreVar = core_getCoreVar();
 
-    coreVar = core_getCoreVar();
+	programVars = core_getCoreProgramVars( coreVar );
+	numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
 
-    programVar = core_getCoreProgramInExecution( coreVar );
-
-	currentHeapAddress = program_getProgramCurrentHeapAddress( programVar );
-	heapHighAddress = program_getProgramHeapHighAddress( programVar );
-
-	priorHeapAddress = currentHeapAddress;
-	if (currentHeapAddress + incr > heapHighAddress )
+	for (BitWidthType i = 0; i < numberOfPrograms; i++)
 	{
-		//ERROR HANDLER NEEDS TO BE INVOKED
-		return (AddressType) -1;
+		if (programVars[i].cfg->programHeapSize)
+		{
+			currentMallocVar = (CosmOS_MallocVariableType *)programVars[i].cfg->programHeapLowAddress;
+
+			currentMallocVar->prior = NULL;
+			currentMallocVar->next = NULL;
+			currentMallocVar->size = (BitWidthType)ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(AddressType));
+		}
 	}
-
-	currentHeapAddress += incr;
-	program_setProgramCurrentHeapAddress( programVar, currentHeapAddress );
-
-	return priorHeapAddress;
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

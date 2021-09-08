@@ -28,6 +28,7 @@
 #include "os.h"
 #include "core.h"
 #include "cosmosAssert.h"
+#include "memoryManager.h"
 #include "switchMemoryProtection.h"
 
 /* CIL interfaces */
@@ -157,6 +158,8 @@ __OS_FUNC_SECTION void osInit_init(void)
     coreVar = core_getCoreVar();
 
     stackInit_init( coreVar );
+
+	memoryManager_heapInit();
 
     //init MPU
     //init DMA to buffers

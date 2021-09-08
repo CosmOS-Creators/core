@@ -371,17 +371,17 @@ __STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThread(CosmOS
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn program_getProgramCurrentHeapAddress(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramNumberOfMallocVars(CosmOS_ProgramVariableType * program)
   *
-  * @brief Get program currentHeapAddress.
+  * @brief Get program numberOfMallocVars.
   *
   * @param[in]  CosmOS_ProgramVariableType * program
   *
-  * @return AddressType
+  * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType program_getProgramCurrentHeapAddress(CosmOS_ProgramVariableType * program)
+__STATIC_FORCEINLINE BitWidthType program_getProgramNumberOfMallocVars(CosmOS_ProgramVariableType * program)
 {
-    return (program->currentHeapAddress);
+    return (program->numberOfMallocVars);
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -399,18 +399,18 @@ __STATIC_FORCEINLINE AddressType program_getProgramCurrentHeapAddress(CosmOS_Pro
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn program_setProgramCurrentHeapAddress(CosmOS_ProgramVariableType * program, AddressType currentHeapAddressParam)
+  * @fn program_setProgramNumberOfMallocVars(CosmOS_ProgramVariableType * program, BitWidthType numberOfMallocVarsParam)
   *
-  * @brief Set program currentHeapAddress.
+  * @brief Set program numberOfMallocVars.
   *
   * @param[in]  CosmOS_ProgramVariableType * program
-  * @param[in]  AddressType currentHeapAddressParam
+  * @param[in]  BitWidthType numberOfMallocVarsParam
 	*
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void program_setProgramCurrentHeapAddress(CosmOS_ProgramVariableType * program, AddressType currentHeapAddressParam)
+__STATIC_FORCEINLINE void program_setProgramNumberOfMallocVars(CosmOS_ProgramVariableType * program, BitWidthType numberOfMallocVarsParam)
 {
-    program->currentHeapAddress = currentHeapAddressParam;
+    program->numberOfMallocVars = numberOfMallocVarsParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

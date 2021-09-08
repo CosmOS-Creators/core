@@ -148,24 +148,23 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_readWrite(BitWidthType id, void * entity, BitWidthType size)
+  * @fn sysCalls_bitWidthType_ret_bitWidthType(BitWidthType id, BitWidthType arg)
   *
-  * @brief System call handling read/write from/to buffers or registers.
+  * @brief System call for bitWidthType args and ret bitWidthType.
   *
   * @param[in]  BitWidthType id
-  * @param[in]  void * entity
-  * @param[in]  BitWidthType size
+  * @param[in]  BitWidthType arg
   *
   * @return BitWidthType
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION BitWidthType sysCalls_readWrite(BitWidthType id, void * entity, BitWidthType size)
+__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_ret_bitWidthType(BitWidthType id, BitWidthType arg)
 {
     BitWidthType returnValue;
 
-    returnValue = CILsysCalls_readWrite( id, entity, size );
+    returnValue = CILsysCalls_bitWidthType_ret_bitWidthType( id, arg );
 
     return returnValue;
 };
@@ -173,105 +172,33 @@ __OS_FUNC_SECTION BitWidthType sysCalls_readWrite(BitWidthType id, void * entity
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @endcond*/
 
-#if     defined ( __GNUC__ )
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn _sbrk(int incr)
+  * @fn sysCalls_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
   *
-  * @brief _sbrk DEMO implementation.
+  * @brief System call for voidPtr,bitWidthType args and ret bitWidthType.
   *
-  * @param[in]  int incr
+  * @param[in]  BitWidthType id
+  * @param[in]  void * ptr
+  * @param[in]  BitWidthType arg
   *
-  * @return char *
+  * @return BitWidthType
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION char * _sbrk(int incr){
+__OS_FUNC_SECTION BitWidthType sysCalls_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
+{
+    BitWidthType returnValue;
 
-	AddressType address;
+    returnValue = CILsysCalls_voidPtr_bitWidthType_ret_bitWidthType( id, ptr, arg );
 
-
-	address = sysCalls_readWrite(SYSCALL_MEMORYMANAGER_SBRK,incr,OFF);
-
-	return (char *) address;
+    return returnValue;
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn _getpid(void)
-  *
-  * @brief _getpid STUB implementation.
-  *
-  * @param[in]  none
-  *
-  * @return int
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION int _getpid(void) {
-	return 1;
-}
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn _kill(void)
-  *
-  * @brief _kill STUB implementation.
-  *
-  * @param[in]  int pid
-  * @param[in]  int sig
-  *
-  * @return int
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION int _kill(int pid, int sig) {
-	return 0;
-}
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn _getpid(void)
-  *
-  * @brief _getpid STUB implementation.
-  *
-  * @param[in]  int status
-  *
-  * @return void
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION void _exit (int status) {
-	_kill(status, 0);
-	while (1) {}
-}
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
-
-#elif   defined ( __CC_ARM )
-	#error "Your compiler is currently not supported by CosmOS!"
-#else
-    #error "Your compiler is currently not supported by CosmOS!"
-#endif
-
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

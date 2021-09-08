@@ -283,9 +283,25 @@ __STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramInExecution
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn core_getCoreProgramVars(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get core programVars.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return CosmOS_ProgramVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramVars(CosmOS_CoreVariableType * core)
+{
+    return (core->programVars);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn core_getCoreProgramVar(CosmOS_CoreVariableType * core, BitWidthType programIterator)
   *
-  * @brief Get core programVars element pointer.
+  * @brief Get core programVar element pointer.
   *
   * @param[in]  CosmOS_CoreVariableType * core
   * @param[in]  BitWidthType programIterator

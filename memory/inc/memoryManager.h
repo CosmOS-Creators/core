@@ -136,15 +136,15 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryManager_sbrk(int incr)
+  * @fn memoryManager_heapInit(void)
   *
-  * @brief Sbrk function DEMO implementation.
+  * @brief Heap init function DEMO implementation.
   *
-  * @param[in] int incr
+  * @param[in] none
   *
-  * @return AddressType
+  * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION AddressType memoryManager_sbrk(int incr);
+__OS_FUNC_SECTION void memoryManager_heapInit(void);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
