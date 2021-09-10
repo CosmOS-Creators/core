@@ -235,9 +235,11 @@ typedef struct
     const BitWidthType programMemorySize;
     const AddressType programMemoryLowAddress;
     const AddressType programMemoryHighAddress;
-		const BitWidthType programHeapSize;
+	const BitWidthType programHeapSize;
     const AddressType programHeapLowAddress;
     const AddressType programHeapHighAddress;
+	const BitWidthType programHeapGetSpinlockRouteId;
+	const BitWidthType programHeapReleaseSpinlockRouteId;
 
 } CosmOS_ProgramConfigurationType;
 

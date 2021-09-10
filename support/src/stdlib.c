@@ -21,6 +21,8 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
+#include "sysCalls.h"
+#include "spinlock.h"
 #include "program.h"
 #include "stdlib.h"
 #include "core.h"
@@ -177,12 +179,16 @@ CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAddress, A
 ********************************************************************************/
 void* malloc( size_t size )
 {
+	BitWidthType 	getSpinlockRouteId,
+					releaseSpinlockRouteId;
 	AddressType	heapLowAddress,
 				heapHighAddress,
 				nextAvailableAddress,
 				returnAddress;
 	CosmOS_BooleanType 	allocated,
 						lastItem;
+
+	CosmOS_SpinlockStateType spinlockState;
 
     CosmOS_CoreVariableType * coreVar;
 	CosmOS_ProgramVariableType * programVar;
@@ -200,6 +206,11 @@ void* malloc( size_t size )
 	lastItem = False;
 	currentMallocVar = (CosmOS_MallocVariableType *)heapLowAddress;
 	returnAddress = (AddressType)NULL;
+
+	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId( programVar );
+	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId( programVar );
+
+	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(getSpinlockRouteId);
 
 	while ( IS_NOT( lastItem ) __OR IS_NOT( allocated ) )
 	{
@@ -245,6 +256,10 @@ void* malloc( size_t size )
 		}
 	}
 
+	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(releaseSpinlockRouteId);
+
+	__SUPRESS_UNUSED_VAR(spinlockState);
+
 	return (void *)returnAddress;
 }
 
@@ -261,8 +276,25 @@ void* malloc( size_t size )
 ********************************************************************************/
 void free( void* ptr )
 {
+	BitWidthType 	getSpinlockRouteId,
+					releaseSpinlockRouteId;
+	CosmOS_SpinlockStateType spinlockState;
+
+	CosmOS_CoreVariableType * coreVar;
+	CosmOS_ProgramVariableType * programVar;
+
 	CosmOS_MallocVariableType * mallocVarToFree = \
 	(CosmOS_MallocVariableType *)((AddressType)ptr - ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(AddressType)));
+
+
+    coreVar = core_getCoreVar();
+
+    programVar = core_getCoreProgramInExecution( coreVar );
+
+	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId( programVar );
+	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId( programVar );
+
+	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(getSpinlockRouteId);
 
 	if (mallocVarToFree->prior)
 	{
@@ -275,6 +307,10 @@ void free( void* ptr )
 		((CosmOS_MallocVariableType *)mallocVarToFree->next)->prior = \
 		mallocVarToFree->prior ? mallocVarToFree->prior : NULL;
 	}
+
+	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(releaseSpinlockRouteId);
+
+	__SUPRESS_UNUSED_VAR(spinlockState);
 }
 /********************************************************************************
 **                        Function Definitions | Stop                          **

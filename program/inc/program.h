@@ -305,6 +305,38 @@ __STATIC_FORCEINLINE BitWidthType program_getProgramHeapHighAddress(CosmOS_Progr
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn program_getProgramHeapGetSpinlockRouteId(CosmOS_ProgramVariableType * program)
+  *
+  * @brief Get program programHeapGetSpinlockRouteId.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramHeapGetSpinlockRouteId(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programHeapGetSpinlockRouteId);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramHeapReleaseSpinlockRouteId(CosmOS_ProgramVariableType * program)
+  *
+  * @brief Get program programHeapReleaseSpinlockRouteId.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramHeapReleaseSpinlockRouteId(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programHeapReleaseSpinlockRouteId);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn program_getProgramTasks(CosmOS_ProgramVariableType * program)
   *
   * @brief Get program taskVars.

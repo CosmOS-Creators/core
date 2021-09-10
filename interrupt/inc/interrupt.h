@@ -179,33 +179,37 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn interrupt_enableInterrupts(void)
+  * @fn interrupt_enableInterrupts(BitWidthType entityId)
   *
   * @brief Enable interrupts for the current core.
   *
-  * @param[in] none
+  * @param[in] BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void interrupt_enableInterrupts(void)
+__STATIC_FORCEINLINE void interrupt_enableInterrupts(BitWidthType entityId)
 {
 	CILinterrupt_enableInterrupts();
+
+	__SUPRESS_UNUSED_VAR(entityId);
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn interrupt_disableInterrupts(void)
+  * @fn interrupt_disableInterrupts(BitWidthType entityId)
   *
   * @brief Disable interrupts for the current core.
   *
-  * @param[in]  none
+  * @param[in]  BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void interrupt_disableInterrupts(void)
+__STATIC_FORCEINLINE void interrupt_disableInterrupts(BitWidthType entityId)
 {
 	CILinterrupt_disableInterrupts();
+
+	__SUPRESS_UNUSED_VAR(entityId);
 }
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **

@@ -122,20 +122,22 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_start(void)
+  * @fn os_start(BitWidthType entityId)
   *
   * @brief Start operating system. DEMO / NO RETURN FUNC
   *
-  * @param[in]  none
+  * @param[in]  BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void os_start(void)
+__OS_FUNC_SECTION void os_start(BitWidthType entityId)
 {
     scheduler_start();
+
+	__SUPRESS_UNUSED_VAR(entityId);
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

@@ -121,18 +121,18 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysJobs_dispatcher(void)
+  * @fn sysJobs_dispatcher(BitWidthType entityId)
   *
   * @brief System jobs dispatcher DEMO FUNCTION.
   *
-  * @param[in]  none
+  * @param[in]  BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void sysJobs_dispatcher(void)
+__OS_FUNC_SECTION void sysJobs_dispatcher(BitWidthType entityId)
 {
     BitWidthType  sysJobsCurrentTick,
                   hyperTick,
@@ -175,6 +175,8 @@ __OS_FUNC_SECTION void sysJobs_dispatcher(void)
 
     sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % hyperTick );
     sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
+
+	__SUPRESS_UNUSED_VAR(entityId);
 
 };
 /* @cond S */

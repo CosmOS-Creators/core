@@ -131,18 +131,18 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn osInit_init(void)
+  * @fn osInit_init(BitWidthType entityId)
   *
   * @brief Initialization of operating system DEMO CODE.
   *
-  * @param[in]  none
+  * @param[in]  BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void osInit_init(void)
+__OS_FUNC_SECTION void osInit_init(BitWidthType entityId)
 {
     CosmOS_CoreVariableType * coreVar;
     CosmOS_OsVariableType * osVar;
@@ -166,6 +166,8 @@ __OS_FUNC_SECTION void osInit_init(void)
     //Maybe better have here CILmicroInit()
 
     coreSync_getBarrier( coreVar, OS_INIT_ID );
+
+	__SUPRESS_UNUSED_VAR(entityId);
 
 };
 /* @cond S */

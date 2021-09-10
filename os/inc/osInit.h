@@ -136,15 +136,15 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn osInit_init(void)
+  * @fn osInit_init(BitWidthType entityId)
   *
-  * @brief Initialization of operating system.
+  * @brief Initialization of operating system DEMO CODE.
   *
-  * @param[in]  none
+  * @param[in]  BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void osInit_init(void);
+__OS_FUNC_SECTION void osInit_init(BitWidthType entityId);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

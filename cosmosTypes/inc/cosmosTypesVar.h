@@ -219,7 +219,7 @@ typedef struct
 typedef struct
 {
 	BitWidthType spinlock;
-	BitWidthType lockedByCoreId;
+	CosmOS_SchedulableVariableType * schedulableOwner;
 
 } CosmOS_SpinlockVariableType;
 

@@ -90,16 +90,30 @@ typedef void (*CosmOS_GenericVoidType)(void);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_Generic_bitWidthType_ret_bitWidthType type
+  * @brief  CosmOS_Generic_bitWidthType_ret_void type
 ********************************************************************************/
-typedef BitWidthType (*CosmOS_Generic_bitWidthType_ret_bitWidthType)(BitWidthType,BitWidthType);
+typedef void (*CosmOS_Generic_bitWidthType_ret_void)(BitWidthType);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_Generic_voidPtr_bitWidthType_ret_bitWidthType type
+  * @brief  CosmOS_Generic_bitWidthType_ret_bitWidthType type
 ********************************************************************************/
-typedef BitWidthType (*CosmOS_Generic_voidPtr_bitWidthType_ret_bitWidthType)(BitWidthType,void *,BitWidthType);
+typedef BitWidthType (*CosmOS_Generic_bitWidthType_ret_bitWidthType)(BitWidthType);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_Generic_bitWidthType_bitWidthType_ret_bitWidthType type
+********************************************************************************/
+typedef BitWidthType (*CosmOS_Generic_bitWidthType_bitWidthType_ret_bitWidthType)(BitWidthType,BitWidthType);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_Generic_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType type
+********************************************************************************/
+typedef BitWidthType (*CosmOS_Generic_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType)(BitWidthType,void *,BitWidthType);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -117,7 +131,6 @@ typedef enum {
 
     ACCESS_STATE_ENUM__ALLOWED      = 0x00,
     ACCESS_STATE_ENUM__DENIED       = SECURE_NUMBER,
-    ACCESS_STATE_ENUM__FORCE        = FORCE_ENUM,
 
 } CosmOS_AccessStateType;
 
@@ -176,7 +189,6 @@ typedef enum {
 
     SCHEDULABLE_INSTANCE_ENUM__TASK    = 0x00,
     SCHEDULABLE_INSTANCE_ENUM__THREAD  = SECURE_NUMBER,
-    SCHEDULABLE_INSTANCE_ENUM__FORCE   = FORCE_ENUM,
 
 } CosmOS_SchedulableInstanceType;
 
@@ -203,7 +215,6 @@ typedef enum {
 
     SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC  = 0x00,
     SCHEDULER_SYNC_STATE_ENUM__IN_SYNC      = SECURE_NUMBER,
-    SCHEDULER_SYNC_STATE_ENUM__FORCE        = FORCE_ENUM,
 
 } CosmOS_SchedulerSyncStateType;
 
@@ -216,7 +227,6 @@ typedef enum {
 
     BARRIER_STATE_ENUM__ACTIVATED  = 0x00,
     BARRIER_STATE_ENUM__REACHED    = SECURE_NUMBER,
-    BARRIER_STATE_ENUM__FORCE      = FORCE_ENUM,
 
 } CosmOS_BarrierStateType;
 

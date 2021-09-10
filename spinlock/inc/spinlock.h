@@ -235,7 +235,8 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_releaseSpinlock(BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
 {
-    return ((spinlockVar->spinlock) AND (coreVar->cfg->coreId IS_EQUAL_TO spinlockVar->lockedByCoreId)) ? True : False;
+    return ((spinlockVar->spinlock IS_EQUAL_TO (BitWidthType)SPINLOCK_STATE_ENUM__OCCUPIED)\
+			AND (coreVar->schedulableInExecution IS_EQUAL_TO spinlockVar->schedulableOwner)) ? True : False;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

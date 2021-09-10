@@ -167,7 +167,7 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_getSpinlock(BitWidthType id)
 	else
 	{
 		spinlockState = CILspinlock_getSpinlock( &(spinlockVar->spinlock) );
-		spinlockVar->lockedByCoreId = coreVar->cfg->coreId;
+		spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
 	}
 
     return spinlockState;
@@ -194,7 +194,6 @@ __OS_FUNC_SECTION CosmOS_BufferStateType spinlock_trySpinlock(BitWidthType id)
 {
 	BitWidthType numberOfSpinlocks;
 
-	CosmOS_BooleanType willCauseDeadlock;
     CosmOS_SpinlockStateType spinlockState;
 
 	CosmOS_OsVariableType * osVar;
@@ -210,20 +209,11 @@ __OS_FUNC_SECTION CosmOS_BufferStateType spinlock_trySpinlock(BitWidthType id)
 	cosmosAssert( id < numberOfSpinlocks );
 	spinlockVar = os_getOsSpinlockVar(osVar, id);
 
-	willCauseDeadlock = spinlock_willCauseDeadlock(coreVar, spinlockVar);
+	spinlockState = CILspinlock_trySpinlock( &(spinlockVar->spinlock) );
 
-	if( willCauseDeadlock )
+	if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
 	{
-		spinlockState = SPINLOCK_STATE_ENUM__ERROR;
-	}
-	else
-	{
-		spinlockState = CILspinlock_trySpinlock( &(spinlockVar->spinlock) );
-
-		if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
-		{
-			spinlockVar->lockedByCoreId = coreVar->cfg->coreId;
-		}
+		spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
 	}
 
     return spinlockState;
