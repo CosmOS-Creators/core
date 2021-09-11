@@ -12,7 +12,7 @@
 ** @defgroup Local_new Local
 ** @ingroup new_unit
 ** @brief new locals
-** @details
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE SOURCE FILE                          **

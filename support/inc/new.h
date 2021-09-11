@@ -12,7 +12,7 @@
 ** @defgroup new_unit new Unit
 ** @ingroup support_module
 ** @brief new Unit
-** @details
+** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
@@ -30,7 +30,7 @@
 ** @defgroup Global_new Global
 ** @ingroup new_unit
 ** @brief new globals
-** @details
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **

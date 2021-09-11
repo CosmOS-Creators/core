@@ -12,7 +12,7 @@
 ** @defgroup Local_errorHandler Local
 ** @ingroup errorHandler_unit
 ** @brief errorHandler locals
-** @details
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE SOURCE FILE                          **

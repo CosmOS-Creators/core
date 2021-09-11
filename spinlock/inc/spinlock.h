@@ -47,7 +47,7 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
@@ -202,12 +202,76 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_releaseSpinlock(BitWidthType
   * Getters_spinlock_h
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn spinlock_getSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar)
+  *
+  * @brief Get spinlock value.
+  *
+  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType spinlock_getSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar)
+{
+    return (spinlockVar->spinlock);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn spinlock_getSpinlockSchedulableOwner(CosmOS_SpinlockVariableType * spinlockVar)
+  *
+  * @brief Get spinlock schedulableOwner.
+  *
+  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+  *
+  * @return CosmOS_SchedulableVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * spinlock_getSpinlockSchedulableOwner(CosmOS_SpinlockVariableType * spinlockVar)
+{
+    return (CosmOS_SchedulableVariableType *)(spinlockVar->schedulableOwner);
+}
+/********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
   * @addtogroup Setters_spinlock_h Setters
   * @ingroup Apis_spinlock_h
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn spinlock_setSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar, BitWidthType spinlockParam)
+  *
+  * @brief Set spinlock value.
+  *
+  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+  * @param[in]  CosmOS_SpinlockStateType spinlockParam
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void spinlock_setSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar, BitWidthType spinlockParam)
+{
+    spinlockVar->spinlock = spinlockParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn spinlock_setSpinlockSchedulableOwner(CosmOS_SpinlockVariableType * spinlock, BitWidthType spinlockParam)
+  *
+  * @brief Set spinlock schedulableOwner.
+  *
+  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableOwnerParam
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void spinlock_setSpinlockSchedulableOwner(CosmOS_SpinlockVariableType * spinlockVar, CosmOS_SchedulableVariableType * schedulableOwnerParam)
+{
+    spinlockVar->schedulableOwner = schedulableOwnerParam;
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -12,7 +12,7 @@
 ** @defgroup errorHandler_unit errorHandler Unit
 ** @ingroup errorHandler_module
 ** @brief errorHandler Unit
-** @details
+** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
@@ -30,7 +30,7 @@
 ** @defgroup Global_errorHandler Global
 ** @ingroup errorHandler_unit
 ** @brief errorHandler globals
-** @details
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **

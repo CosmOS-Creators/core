@@ -12,7 +12,7 @@
 ** @defgroup Local_stdlib Local
 ** @ingroup stdlib_unit
 ** @brief stdlib locals
-** @details
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE SOURCE FILE                          **
@@ -144,7 +144,7 @@ static CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAdd
   * @fn malloc_varAlloc( AddressType nextAvailableAddress, AddressType priorMallocAddress,
   * 					 AddressType nextMallocAddress, BitWidthType size )
   *
-  * @brief Malloc support function.
+  * @brief Malloc support function for initializing malloc variable.
   *
   * @param[in]  AddressType nextAvailableAddress
   * @param[in]  AddressType priorMallocAddress
@@ -153,8 +153,8 @@ static CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAdd
   *
   * @return CosmOS_MallocVariableType *
 ********************************************************************************/
-CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAddress, AddressType priorMallocAddress,\
-											AddressType nextMallocAddress, BitWidthType size )
+static CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAddress, AddressType priorMallocAddress,\
+													AddressType nextMallocAddress, BitWidthType size )
 {
 	CosmOS_MallocVariableType * newMallocVar = (CosmOS_MallocVariableType *)nextAvailableAddress;
 
@@ -177,58 +177,59 @@ CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAddress, A
   *
   * @return void *
 ********************************************************************************/
-void* malloc( size_t size )
+void *malloc(size_t size)
 {
-	BitWidthType 	getSpinlockRouteId,
+	BitWidthType getSpinlockRouteId,
 					releaseSpinlockRouteId;
-	AddressType	heapLowAddress,
+	AddressType heapLowAddress,
 				heapHighAddress,
 				nextAvailableAddress,
 				returnAddress;
-	CosmOS_BooleanType 	allocated,
+	CosmOS_BooleanType allocated,
 						lastItem;
 
 	CosmOS_SpinlockStateType spinlockState;
 
-    CosmOS_CoreVariableType * coreVar;
-	CosmOS_ProgramVariableType * programVar;
-	CosmOS_MallocVariableType * currentMallocVar,
-							  * newMallocVar;
+	CosmOS_CoreVariableType *coreVar;
+	CosmOS_ProgramVariableType *programVar;
+	CosmOS_MallocVariableType *currentMallocVar,
+								*newMallocVar;
 
-    coreVar = core_getCoreVar();
 
-    programVar = core_getCoreProgramInExecution( coreVar );
+	coreVar = core_getCoreVar();
 
-	heapLowAddress = program_getProgramHeapLowAddress( programVar );
-	heapHighAddress = program_getProgramHeapHighAddress( programVar );
+	programVar = core_getCoreProgramInExecution(coreVar);
+
+	heapLowAddress = program_getProgramHeapLowAddress(programVar);
+	heapHighAddress = program_getProgramHeapHighAddress(programVar);
+
+	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId(programVar);
+	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId(programVar);
 
 	allocated = False;
 	lastItem = False;
 	currentMallocVar = (CosmOS_MallocVariableType *)heapLowAddress;
 	returnAddress = (AddressType)NULL;
 
-	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId( programVar );
-	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId( programVar );
-
 	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(getSpinlockRouteId);
 
-	while ( IS_NOT( lastItem ) __OR IS_NOT( allocated ) )
+	while (IS_NOT(lastItem) __OR IS_NOT(allocated))
 	{
-		if ( currentMallocVar->next IS_NOT_EQUAL_TO NULL )
+		if (currentMallocVar->next IS_NOT_EQUAL_TO NULL)
 		{
 			nextAvailableAddress = (AddressType)currentMallocVar + (AddressType)currentMallocVar->size;
-			if ( size < ( (AddressType)currentMallocVar->next - nextAvailableAddress ) )
+			if (size < ((AddressType)currentMallocVar->next - nextAvailableAddress))
 			{
-				newMallocVar = malloc_varAlloc( nextAvailableAddress, \
-												(AddressType)currentMallocVar,\
+				newMallocVar = malloc_varAlloc(nextAvailableAddress,
+												(AddressType)currentMallocVar,
 												(AddressType)currentMallocVar->next,
-												size );
+												size);
 
 				((CosmOS_MallocVariableType *)currentMallocVar->next)->prior = newMallocVar;
 				currentMallocVar->next = newMallocVar;
 
-				returnAddress = (AddressType)newMallocVar + \
-								(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(AddressType));
+				returnAddress = (AddressType)newMallocVar +
+								(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
 				allocated = True;
 			}
 			else
@@ -239,17 +240,17 @@ void* malloc( size_t size )
 		else
 		{
 			nextAvailableAddress = (AddressType)currentMallocVar + (AddressType)currentMallocVar->size;
-			if ( size < ( heapHighAddress - nextAvailableAddress ) )
+			if (size < (heapHighAddress - nextAvailableAddress))
 			{
-				newMallocVar = malloc_varAlloc( nextAvailableAddress, \
-												(AddressType)currentMallocVar,\
+				newMallocVar = malloc_varAlloc(nextAvailableAddress,
+												(AddressType)currentMallocVar,
 												(AddressType)NULL,
-												size );
+												size);
 
 				currentMallocVar->next = newMallocVar;
 
-				returnAddress = (AddressType)newMallocVar + \
-								(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(AddressType));
+				returnAddress = (AddressType)newMallocVar +
+								(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
 				allocated = True;
 			}
 			lastItem = True;
@@ -274,38 +275,38 @@ void* malloc( size_t size )
   *
   * @return none
 ********************************************************************************/
-void free( void* ptr )
+void free(void *ptr)
 {
-	BitWidthType 	getSpinlockRouteId,
+	BitWidthType getSpinlockRouteId,
 					releaseSpinlockRouteId;
 	CosmOS_SpinlockStateType spinlockState;
 
-	CosmOS_CoreVariableType * coreVar;
-	CosmOS_ProgramVariableType * programVar;
+	CosmOS_CoreVariableType *coreVar;
+	CosmOS_ProgramVariableType *programVar;
 
-	CosmOS_MallocVariableType * mallocVarToFree = \
-	(CosmOS_MallocVariableType *)((AddressType)ptr - ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(AddressType)));
+	CosmOS_MallocVariableType *mallocVarToFree =
+	(CosmOS_MallocVariableType *)((AddressType)ptr - ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType)));
 
 
-    coreVar = core_getCoreVar();
+	coreVar = core_getCoreVar();
 
-    programVar = core_getCoreProgramInExecution( coreVar );
+	programVar = core_getCoreProgramInExecution(coreVar);
 
-	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId( programVar );
-	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId( programVar );
+	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId(programVar);
+	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId(programVar);
 
 	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(getSpinlockRouteId);
 
 	if (mallocVarToFree->prior)
 	{
-		((CosmOS_MallocVariableType *)mallocVarToFree->prior)->next = \
-		mallocVarToFree->next ? mallocVarToFree->next : NULL;
+		((CosmOS_MallocVariableType *)mallocVarToFree->prior)->next =
+			mallocVarToFree->next ? mallocVarToFree->next : NULL;
 	}
 
 	if (mallocVarToFree->next)
 	{
-		((CosmOS_MallocVariableType *)mallocVarToFree->next)->prior = \
-		mallocVarToFree->prior ? mallocVarToFree->prior : NULL;
+		((CosmOS_MallocVariableType *)mallocVarToFree->next)->prior =
+			mallocVarToFree->prior ? mallocVarToFree->prior : NULL;
 	}
 
 	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(releaseSpinlockRouteId);

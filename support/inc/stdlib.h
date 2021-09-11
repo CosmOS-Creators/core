@@ -12,7 +12,7 @@
 ** @defgroup stdlib_unit stdlib Unit
 ** @ingroup support_module
 ** @brief stdlib Unit
-** @details
+** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
@@ -30,7 +30,7 @@
 ** @defgroup Global_stdlib Global
 ** @ingroup stdlib_unit
 ** @brief stdlib globals
-** @details
+** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
