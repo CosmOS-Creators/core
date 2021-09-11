@@ -5,48 +5,27 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file interrupt.h
+** @file stdlib.c
 *********************************************************************************
-<!--                	interrupt Unit Group Definition            		      -->
+<!--               	    stdlib Unit Local Group Definition                    -->
 *********************************************************************************
-** @defgroup interrupt_unit interrupt Unit
-** @ingroup interrupt_module
-** @brief interrupt Unit
-** @details lorem
-*********************************************************************************
-<!--                           Version Information                            -->
-*********************************************************************************
-** @version 1.0.0
-** @date 18.08.2021
-** @author https://github.com/pavolkostolansky
-*********************************************************************************
-<!--                          Warnings and License                            -->
-*********************************************************************************
-** @warning Modifying code can lead to unexpected behaviour of the whole system
-** @copyright MIT License
-*********************************************************************************
-<!--           		interrupt Unit Global Group Definition              	  -->
-*********************************************************************************
-** @defgroup Global_interrupt Global
-** @ingroup interrupt_unit
-** @brief interrupt globals
+** @defgroup Local_stdlib Local
+** @ingroup stdlib_unit
+** @brief stdlib locals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
-**                           START OF THE HEADER FILE                          **
+**                           START OF THE SOURCE FILE                          **
 ********************************************************************************/
-#ifndef __INTERRUPT_H__
-#define __INTERRUPT_H__
-/********************************************************************************
-**                         START OF C++ SUPPORT SECTION                        **
-********************************************************************************/
-#ifdef __cplusplus
-extern "C" {
-#endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
-#include "CILinterrupt.h"
+/* CORE interfaces */
+#include "sysCalls.h"
+#include "spinlock.h"
+#include "program.h"
+#include "stdlib.h"
+#include "core.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -56,15 +35,15 @@ extern "C" {
 /********************************************************************************
 * DOXYGEN START GROUP                                                          **
 * ***************************************************************************//**
-* @defgroup Macros_interrupt_h Macros
-* @ingroup Global_interrupt
+* @defgroup Macros_stdlib_c Macros
+* @ingroup Local_stdlib
 * @{
 ********************************************************************************/
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**
 * @}
-* Macros_interrupt_h
+* Macros_stdlib_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -75,15 +54,15 @@ extern "C" {
 /********************************************************************************
 * DOXYGEN START GROUP                                                          **
 * ***************************************************************************//**
-* @defgroup Variables_interrupt_h Variables
-* @ingroup Global_interrupt
+* @defgroup Variables_stdlib_c Variables
+* @ingroup Local_stdlib
 * @{
 ********************************************************************************/
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**
 * @}
-* Variables_interrupt_h
+* Variables_stdlib_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -94,48 +73,64 @@ extern "C" {
 /********************************************************************************
 * DOXYGEN DEF GROUP                                                            **
 * ***************************************************************************//**
-* @defgroup Apis_interrupt_h API's
-* @ingroup Global_interrupt
+* @defgroup Apis_stdlib_c API's
+* @ingroup Local_stdlib
 ********************************************************************************/
 /********************************************************************************
 * DOXYGEN START GROUP                                                          **
 * ***************************************************************************//**
-* @addtogroup Getters_interrupt_h Getters
-* @ingroup Apis_interrupt_h
+* @addtogroup Getters_stdlib_c Getters
+* @ingroup Apis_stdlib_c
 * @{
 ********************************************************************************/
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**
 * @}
-* Getters_interrupt_h
+* Getters_stdlib_c
 ********************************************************************************/
 /********************************************************************************
 * DOXYGEN START GROUP                                                          **
 * ***************************************************************************//**
-* @addtogroup Setters_interrupt_h Setters
-* @ingroup Apis_interrupt_h
-* @{
-********************************************************************************/
-
-/********************************************************************************
-* DOXYGEN STOP GROUP                                                           **
-* ***************************************************************************//**
-* @}
-* Setters_interrupt_h
-********************************************************************************/
-/********************************************************************************
-* DOXYGEN START GROUP                                                          **
-* ***************************************************************************//**
-* @addtogroup General_interrupt_h General
-* @ingroup Apis_interrupt_h
+* @addtogroup Setters_stdlib_c Setters
+* @ingroup Apis_stdlib_c
 * @{
 ********************************************************************************/
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**
 * @}
-* General_interrupt_h
+* Setters_stdlib_c
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup General_stdlib_c General
+* @ingroup Apis_stdlib_c
+* @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn malloc_varAlloc( AddressType nextAvailableAddress, AddressType priorMallocAddress,
+  * 					 AddressType nextMallocAddress, BitWidthType size )
+  *
+  * @brief Malloc support function.
+  *
+  * @param[in]  AddressType nextAvailableAddress
+  * @param[in]  AddressType priorMallocAddress
+  * @param[in]  AddressType nextMallocAddress
+  * @param[in]  BitWidthType size
+  *
+  * @return CosmOS_MallocVariableType *
+********************************************************************************/
+static CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAddress, AddressType priorMallocAddress,\
+													AddressType nextMallocAddress, BitWidthType size );
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* General_stdlib_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -144,89 +139,183 @@ extern "C" {
 **                        Function Definitions | Start                         **
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN START GROUP                                                          **
-* ***************************************************************************//**
-* @addtogroup Getters_interrupt_h Getters
-* @ingroup Apis_interrupt_h
-* @{
-********************************************************************************/
-/********************************************************************************
-* DOXYGEN STOP GROUP                                                           **
-* ***************************************************************************//**
-* @}
-* Getters_interrupt_h
-********************************************************************************/
-/********************************************************************************
-* DOXYGEN START GROUP                                                          **
-* ***************************************************************************//**
-* @addtogroup Setters_interrupt_h Setters
-* @ingroup Apis_interrupt_h
-* @{
-********************************************************************************/
-/********************************************************************************
-* DOXYGEN STOP GROUP                                                           **
-* ***************************************************************************//**
-* @}
-* Setters_interrupt_h
-********************************************************************************/
-/********************************************************************************
-* DOXYGEN START GROUP                                                          **
-* ***************************************************************************//**
-* @addtogroup General_interrupt_h General
-* @ingroup Apis_interrupt_h
-* @{
-********************************************************************************/
-/********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn interrupt_enableInterrupts(BitWidthType entityId)
+  * @fn malloc_varAlloc( AddressType nextAvailableAddress, AddressType priorMallocAddress,
+  * 					 AddressType nextMallocAddress, BitWidthType size )
   *
-  * @brief Enable interrupts for the current core.
+  * @brief Malloc support function for initializing malloc variable.
   *
-  * @param[in] BitWidthType entityId
+  * @param[in]  AddressType nextAvailableAddress
+  * @param[in]  AddressType priorMallocAddress
+  * @param[in]  AddressType nextMallocAddress
+  * @param[in]  BitWidthType size
   *
-  * @return none
+  * @return CosmOS_MallocVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE void interrupt_enableInterrupts(BitWidthType entityId)
+static CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAddress, AddressType priorMallocAddress,\
+													AddressType nextMallocAddress, BitWidthType size )
 {
-	CILinterrupt_enableInterrupts();
+	CosmOS_MallocVariableType * newMallocVar = (CosmOS_MallocVariableType *)nextAvailableAddress;
 
-	__SUPRESS_UNUSED_VAR(entityId);
+	newMallocVar->prior = (CosmOS_MallocVariableType *)priorMallocAddress;
+	newMallocVar->next = (CosmOS_MallocVariableType *)nextMallocAddress;
+	newMallocVar->size = (ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(AddressType)) + \
+							(AddressType)ALIGN(size,sizeof(AddressType)));
+
+	return newMallocVar;
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn interrupt_disableInterrupts(BitWidthType entityId)
+  * @fn malloc( size_t size )
   *
-  * @brief Disable interrupts for the current core.
+  * @brief Stdlib malloc function implementation redesigned for CosmOS DEMO.
   *
-  * @param[in]  BitWidthType entityId
+  * @param[in]  size_t size
+  *
+  * @return void *
+********************************************************************************/
+void *malloc(size_t size)
+{
+	BitWidthType getSpinlockRouteId,
+					releaseSpinlockRouteId;
+	AddressType heapLowAddress,
+				heapHighAddress,
+				nextAvailableAddress,
+				returnAddress;
+	CosmOS_BooleanType allocated,
+						lastItem;
+
+	CosmOS_SpinlockStateType spinlockState;
+
+	CosmOS_CoreVariableType *coreVar;
+	CosmOS_ProgramVariableType *programVar;
+	CosmOS_MallocVariableType *currentMallocVar,
+								*newMallocVar;
+
+
+	coreVar = core_getCoreVar();
+
+	programVar = core_getCoreProgramInExecution(coreVar);
+
+	heapLowAddress = program_getProgramHeapLowAddress(programVar);
+	heapHighAddress = program_getProgramHeapHighAddress(programVar);
+
+	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId(programVar);
+	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId(programVar);
+
+	allocated = False;
+	lastItem = False;
+	currentMallocVar = (CosmOS_MallocVariableType *)heapLowAddress;
+	returnAddress = (AddressType)NULL;
+
+	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(getSpinlockRouteId);
+
+	while (IS_NOT(lastItem) __OR IS_NOT(allocated))
+	{
+		if (currentMallocVar->next IS_NOT_EQUAL_TO NULL)
+		{
+			nextAvailableAddress = (AddressType)currentMallocVar + (AddressType)currentMallocVar->size;
+			if (size < ((AddressType)currentMallocVar->next - nextAvailableAddress))
+			{
+				newMallocVar = malloc_varAlloc(nextAvailableAddress,
+												(AddressType)currentMallocVar,
+												(AddressType)currentMallocVar->next,
+												size);
+
+				((CosmOS_MallocVariableType *)currentMallocVar->next)->prior = newMallocVar;
+				currentMallocVar->next = newMallocVar;
+
+				returnAddress = (AddressType)newMallocVar +
+								(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
+				allocated = True;
+			}
+			else
+			{
+				currentMallocVar = currentMallocVar->next;
+			}
+		}
+		else
+		{
+			nextAvailableAddress = (AddressType)currentMallocVar + (AddressType)currentMallocVar->size;
+			if (size < (heapHighAddress - nextAvailableAddress))
+			{
+				newMallocVar = malloc_varAlloc(nextAvailableAddress,
+												(AddressType)currentMallocVar,
+												(AddressType)NULL,
+												size);
+
+				currentMallocVar->next = newMallocVar;
+
+				returnAddress = (AddressType)newMallocVar +
+								(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
+				allocated = True;
+			}
+			lastItem = True;
+		}
+	}
+
+	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(releaseSpinlockRouteId);
+
+	__SUPRESS_UNUSED_VAR(spinlockState);
+
+	return (void *)returnAddress;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn free( void* ptr )
+  *
+  * @brief Stdlib free function implementation redesigned for CosmOS DEMO.
+  *
+  * @param[in]  void * ptr
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void interrupt_disableInterrupts(BitWidthType entityId)
+void free(void *ptr)
 {
-	CILinterrupt_disableInterrupts();
+	BitWidthType getSpinlockRouteId,
+					releaseSpinlockRouteId;
+	CosmOS_SpinlockStateType spinlockState;
 
-	__SUPRESS_UNUSED_VAR(entityId);
+	CosmOS_CoreVariableType *coreVar;
+	CosmOS_ProgramVariableType *programVar;
+
+	CosmOS_MallocVariableType *mallocVarToFree =
+	(CosmOS_MallocVariableType *)((AddressType)ptr - ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType)));
+
+
+	coreVar = core_getCoreVar();
+
+	programVar = core_getCoreProgramInExecution(coreVar);
+
+	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId(programVar);
+	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId(programVar);
+
+	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(getSpinlockRouteId);
+
+	if (mallocVarToFree->prior)
+	{
+		((CosmOS_MallocVariableType *)mallocVarToFree->prior)->next =
+			mallocVarToFree->next ? mallocVarToFree->next : NULL;
+	}
+
+	if (mallocVarToFree->next)
+	{
+		((CosmOS_MallocVariableType *)mallocVarToFree->next)->prior =
+			mallocVarToFree->prior ? mallocVarToFree->prior : NULL;
+	}
+
+	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(releaseSpinlockRouteId);
+
+	__SUPRESS_UNUSED_VAR(spinlockState);
 }
-/********************************************************************************
-* DOXYGEN STOP GROUP                                                           **
-* ***************************************************************************//**
-* @}
-* General_interrupt_h
-********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
-#ifdef __cplusplus
-}
-#endif
 /********************************************************************************
-**                         END OF C++ SUPPORT SECTION                          **
-********************************************************************************/
-#endif
-/********************************************************************************
-**                           END OF THE HEADER FILE                            **
+**                           END OF THE SOURCE FILE                            **
 ********************************************************************************/

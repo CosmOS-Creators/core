@@ -305,6 +305,38 @@ __STATIC_FORCEINLINE BitWidthType program_getProgramHeapHighAddress(CosmOS_Progr
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn program_getProgramHeapGetSpinlockRouteId(CosmOS_ProgramVariableType * program)
+  *
+  * @brief Get program programHeapGetSpinlockRouteId.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramHeapGetSpinlockRouteId(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programHeapGetSpinlockRouteId);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramHeapReleaseSpinlockRouteId(CosmOS_ProgramVariableType * program)
+  *
+  * @brief Get program programHeapReleaseSpinlockRouteId.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramHeapReleaseSpinlockRouteId(CosmOS_ProgramVariableType * program)
+{
+    return (program->cfg->programHeapReleaseSpinlockRouteId);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn program_getProgramTasks(CosmOS_ProgramVariableType * program)
   *
   * @brief Get program taskVars.
@@ -367,6 +399,22 @@ __STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThread(CosmOS
 {
     return (&(program->threadVars[threadIterator]));
 }
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_getProgramNumberOfMallocVars(CosmOS_ProgramVariableType * program)
+  *
+  * @brief Get program numberOfMallocVars.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType program_getProgramNumberOfMallocVars(CosmOS_ProgramVariableType * program)
+{
+    return (program->numberOfMallocVars);
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -380,6 +428,22 @@ __STATIC_FORCEINLINE CosmOS_ThreadVariableType * program_getProgramThread(CosmOS
   * @ingroup Apis_program_h
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn program_setProgramNumberOfMallocVars(CosmOS_ProgramVariableType * program, BitWidthType numberOfMallocVarsParam)
+  *
+  * @brief Set program numberOfMallocVars.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  * @param[in]  BitWidthType numberOfMallocVarsParam
+	*
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void program_setProgramNumberOfMallocVars(CosmOS_ProgramVariableType * program, BitWidthType numberOfMallocVarsParam)
+{
+    program->numberOfMallocVars = numberOfMallocVarsParam;
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -167,15 +167,15 @@ __OS_FUNC_SECTION void os_kernelPanic(void);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_start(void)
+  * @fn os_start(BitWidthType entityId)
   *
-  * @brief Start operating system.
+  * @brief Start operating system. DEMO / NO RETURN FUNC
   *
-  * @param[in]  none
+  * @param[in]  BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void os_start(void);
+__OS_FUNC_SECTION void os_start(BitWidthType entityId);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -142,7 +142,7 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_osStart(void)
+  * @fn sysCalls_bitWidthType_ret_voidStart(void)
   *
   * @brief System call handling startup of operating system.
   *
@@ -150,22 +150,49 @@
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void sysCalls_os(BitWidthType id);
+__OS_FUNC_SECTION void sysCalls_bitWidthType_ret_void(BitWidthType id);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_readWrite(BitWidthType id, void * entity, BitWidthType size)
+  * @fn sysCalls_bitWidthType_ret_bitWidthType(BitWidthType id)
   *
-  * @brief System call handling read/write from/to buffers or registers.
+  * @brief System call for bitWidthType args and ret bitWidthType.
   *
   * @param[in]  BitWidthType id
-  * @param[in]  void * entity
-  * @param[in]  BitWidthType size
   *
   * @return BitWidthType
 ********************************************************************************/
-__OS_FUNC_SECTION BitWidthType sysCalls_readWrite(BitWidthType id, void * entity, BitWidthType size);
+__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_ret_bitWidthType(BitWidthType id);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(BitWidthType id, BitWidthType arg)
+  *
+  * @brief System call for bitWidthType args and ret bitWidthType.
+  *
+  * @param[in]  BitWidthType id
+  * @param[in]  BitWidthType arg
+  *
+  * @return BitWidthType
+********************************************************************************/
+__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(BitWidthType id, BitWidthType arg);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
+  *
+  * @brief System call for voidPtr,bitWidthType args and ret bitWidthType.
+  *
+  * @param[in]  BitWidthType id
+  * @param[in]  void * ptr
+  * @param[in]  BitWidthType arg
+  *
+  * @return BitWidthType
+********************************************************************************/
+__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

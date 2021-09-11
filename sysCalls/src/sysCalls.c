@@ -126,7 +126,7 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_os(BitWidthType id)
+  * @fn sysCalls_bitWidthType_ret_void(BitWidthType id)
   *
   * @brief System call handling general operating system functionalities.
   *
@@ -137,9 +137,9 @@
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void sysCalls_os(BitWidthType id)
+__OS_FUNC_SECTION void sysCalls_bitWidthType_ret_void(BitWidthType id)
 {
-    CILsysCalls_os( id );
+    CILsysCalls_bitWidthType_ret_void( id );
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -148,24 +148,77 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_readWrite(BitWidthType id, void * entity, BitWidthType size)
+  * @fn sysCalls_bitWidthType_ret_bitWidthType(BitWidthType id)
   *
-  * @brief System call handling read/write from/to buffers or registers.
+  * @brief System call for bitWidthType args and ret bitWidthType.
   *
   * @param[in]  BitWidthType id
-  * @param[in]  void * entity
-  * @param[in]  BitWidthType size
   *
   * @return BitWidthType
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION BitWidthType sysCalls_readWrite(BitWidthType id, void * entity, BitWidthType size)
+__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_ret_bitWidthType(BitWidthType id)
 {
     BitWidthType returnValue;
 
-    returnValue = CILsysCalls_readWrite( id, entity, size );
+    returnValue = CILsysCalls_bitWidthType_ret_bitWidthType( id );
+
+    return returnValue;
+};
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(BitWidthType id, BitWidthType arg)
+  *
+  * @brief System call for bitWidthType args and ret bitWidthType.
+  *
+  * @param[in]  BitWidthType id
+  * @param[in]  BitWidthType arg
+  *
+  * @return BitWidthType
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(BitWidthType id, BitWidthType arg)
+{
+    BitWidthType returnValue;
+
+    returnValue = CILsysCalls_bitWidthType_bitWidthType_ret_bitWidthType( id, arg );
+
+    return returnValue;
+};
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
+  *
+  * @brief System call for voidPtr,bitWidthType args and ret bitWidthType.
+  *
+  * @param[in]  BitWidthType id
+  * @param[in]  void * ptr
+  * @param[in]  BitWidthType arg
+  *
+  * @return BitWidthType
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
+{
+    BitWidthType returnValue;
+
+    returnValue = CILsysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType( id, ptr, arg );
 
     return returnValue;
 };

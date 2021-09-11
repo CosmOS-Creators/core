@@ -121,18 +121,18 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_setExecutionStateToFinished(void)
+  * @fn schedulable_setExecutionStateToFinished(BitWidthType entityId)
   *
   * @brief Set schedulable execution state to finished DEMO CODE.
   *
-  * @param[in]  none
+  * @param[in]  BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(void)
+__OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(BitWidthType entityId)
 {
     CosmOS_CoreVariableType * coreVar;
     CosmOS_SchedulableVariableType * schedulableVar;
@@ -143,6 +143,8 @@ __OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(void)
     schedulableVar = core_getCoreSchedulableInCurrentContext( coreVar );
 
     schedulable_setState( schedulableVar, SCHEDULABLE_INSTANCE_ENUM__EXECUTED );
+
+	__SUPRESS_UNUSED_VAR(entityId);
 };
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

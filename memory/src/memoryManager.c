@@ -21,6 +21,8 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 #include "memoryManager.h"
+#include "program.h"
+#include "core.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -119,21 +121,41 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryManager_allocateMemory(int incr)
+  * @fn memoryManager_heapInit(void)
   *
-  * @brief Set memory protection for current execution context.
+  * @brief Heap init function DEMO implementation.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
+  * @param[in] none
   *
-  * @return AddressType
+  * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION AddressType * memoryManager_allocateMemory(int incr)
+__OS_FUNC_SECTION void memoryManager_heapInit(void)
 {
+	BitWidthType numberOfPrograms;
 
+	CosmOS_CoreVariableType * coreVar;
+	CosmOS_ProgramVariableType * programVars;
+	CosmOS_MallocVariableType * currentMallocVar;
+
+	coreVar = core_getCoreVar();
+
+	programVars = core_getCoreProgramVars( coreVar );
+	numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
+
+	for (BitWidthType i = 0; i < numberOfPrograms; i++)
+	{
+		if (programVars[i].cfg->programHeapSize)
+		{
+			currentMallocVar = (CosmOS_MallocVariableType *)programVars[i].cfg->programHeapLowAddress;
+
+			currentMallocVar->prior = NULL;
+			currentMallocVar->next = NULL;
+			currentMallocVar->size = (BitWidthType)ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(AddressType));
+		}
+	}
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

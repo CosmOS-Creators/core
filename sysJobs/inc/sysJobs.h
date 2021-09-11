@@ -142,15 +142,15 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysJobs_dispatcher(void)
+  * @fn sysJobs_dispatcher(BitWidthType entityId)
   *
   * @brief System jobs dispatcher DEMO FUNCTION.
   *
-  * @param[in]  none
+  * @param[in]  BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void sysJobs_dispatcher(void);
+__OS_FUNC_SECTION void sysJobs_dispatcher(BitWidthType entityId);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

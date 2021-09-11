@@ -129,15 +129,15 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_setExecutionStateToFinished(void)
+  * @fn schedulable_setExecutionStateToFinished(BitWidthType entityId)
   *
   * @brief Set schedulable execution state to finished DEMO CODE.
   *
-  * @param[in]  none
+  * @param[in]  BitWidthType entityId
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(void);
+__OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(BitWidthType entityId);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
