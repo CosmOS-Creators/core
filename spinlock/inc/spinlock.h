@@ -302,6 +302,23 @@ __STATIC_FORCEINLINE CosmOS_BooleanType spinlock_willCauseDeadlock(CosmOS_CoreVa
     return ((spinlockVar->spinlock IS_EQUAL_TO (BitWidthType)SPINLOCK_STATE_ENUM__OCCUPIED)\
 			AND (coreVar->schedulableInExecution IS_EQUAL_TO spinlockVar->schedulableOwner)) ? True : False;
 }
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn spinlock_ownsSchedulableSpinlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
+  *
+  * @brief Check if the schedulable in execution owns the current spinlock.
+  *
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+	*
+  * @return CosmOS_BufferStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BooleanType spinlock_ownsSchedulableSpinlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
+{
+    return (coreVar->schedulableInExecution IS_EQUAL_TO spinlockVar->schedulableOwner) ? True : False;
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

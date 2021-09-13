@@ -8,7 +8,7 @@
 std::unique_ptr<MemoryProtection_MOCK> MemoryProtection_TestFixture::_MemoryProtectionMock;
 
 // fake lib functions
-void memoryProtection_init()
+void memoryProtection_init(AddressType codeMemoryHighAddress,AddressType codeMemoryLowAddress,AddressType stackMemoryHighAddress,AddressType stackMemoryLowAddress)
 {
-    MemoryProtection_TestFixture::_MemoryProtectionMock->memoryProtection_init();
+    MemoryProtection_TestFixture::_MemoryProtectionMock->memoryProtection_init(codeMemoryHighAddress,codeMemoryLowAddress,stackMemoryHighAddress,stackMemoryLowAddress);
 }

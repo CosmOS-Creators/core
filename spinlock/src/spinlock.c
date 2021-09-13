@@ -156,17 +156,20 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_getSpinlock(BitWidthType id)
 	numberOfSpinlocks = os_getOsNumberOfSpinlocks(osVar);
 
 	cosmosAssert( id < numberOfSpinlocks );
+
 	spinlockVar = os_getOsSpinlockVar(osVar, id);
 
 	willCauseDeadlock = spinlock_willCauseDeadlock(coreVar, spinlockVar);
 
 	if( willCauseDeadlock )
 	{
-		spinlockState = SPINLOCK_STATE_ENUM__ERROR;
+		spinlockState = SPINLOCK_STATE_ENUM__DEADLOCK_WARNING;
 	}
 	else
 	{
-		spinlockState = CILspinlock_getSpinlock( &(spinlockVar->spinlock) );
+		spinlockState = CILspinlock_getSpinlock(&(spinlockVar->spinlock), \
+												id, \
+												coreVar->schedulableInExecution->cfg->id );
 		spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
 	}
 
@@ -209,7 +212,9 @@ __OS_FUNC_SECTION CosmOS_BufferStateType spinlock_trySpinlock(BitWidthType id)
 	cosmosAssert( id < numberOfSpinlocks );
 	spinlockVar = os_getOsSpinlockVar(osVar, id);
 
-	spinlockState = CILspinlock_trySpinlock( &(spinlockVar->spinlock) );
+	spinlockState = CILspinlock_trySpinlock(&(spinlockVar->spinlock), \
+											id, \
+											coreVar->schedulableInExecution->cfg->id );
 
 	if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
 	{
@@ -240,19 +245,34 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_releaseSpinlock(BitWidthType
 {
 	BitWidthType numberOfSpinlocks;
 
+	CosmOS_BooleanType ownsSchedulableSpinlock;
+
     CosmOS_SpinlockStateType spinlockState;
 
 	CosmOS_OsVariableType * osVar;
+	CosmOS_CoreVariableType * coreVar;
 	CosmOS_SpinlockVariableType * spinlockVar;
 
     osVar = os_getOsVar();
+    coreVar = CILcore_getCoreVar();
 
 	numberOfSpinlocks = os_getOsNumberOfSpinlocks(osVar);
 
 	cosmosAssert( id < numberOfSpinlocks );
 	spinlockVar = os_getOsSpinlockVar(osVar, id);
 
-	spinlockState = CILspinlock_releaseSpinlock( &(spinlockVar->spinlock) );
+	ownsSchedulableSpinlock = spinlock_ownsSchedulableSpinlock(coreVar, spinlockVar);
+
+	if ( spinlockVar->spinlock AND ownsSchedulableSpinlock )
+	{
+		spinlockState = CILspinlock_releaseSpinlock(&(spinlockVar->spinlock), \
+													id, \
+													coreVar->schedulableInExecution->cfg->id );
+	}
+	else
+	{
+		spinlockState = SPINLOCK_STATE_ENUM__SCHEDULABLE_IS_NOT_OWNER;
+	}
 
 	return spinlockState;
 }

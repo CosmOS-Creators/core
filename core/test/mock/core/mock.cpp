@@ -2,6 +2,7 @@
 
 #include "core_mock.h"
 
+#include "coreCfg.h"
 #include "core.h"
 
 // instantiate mocked lib
@@ -12,5 +13,5 @@ CosmOS_CoreVariableType * core_getCoreVar()
 {
     Core_TestFixture::_CoreMock->core_getCoreVar();
 
-		return (NULL);
+		return &CoresVar[0];
 }

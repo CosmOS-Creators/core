@@ -294,22 +294,6 @@ __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfSpinlocks(CosmOS_OsVariableTyp
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getKernelPanicHook(CosmOS_OsVariableType * osVar)
-  *
-  * @brief Get os kernelPanicHook.
-  *
-  * @param[in]  CosmOS_OsVariableType * osVar
-  *
-  * @return BitWidthType
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_GenericVoidType os_getKernelPanicHook(CosmOS_OsVariableType * osVar)
-{
-    return (CosmOS_GenericVoidType)(osVar->cfg->kernelPanicHook);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn os_getOsCoreVars(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os coreVars pointer.

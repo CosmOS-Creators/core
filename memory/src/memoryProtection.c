@@ -127,20 +127,29 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_init(CosmOS_StackVariableType * stack)
+  * @fn memoryProtection_init(AddressType codeMemoryHighAddress,\
+  *							AddressType codeMemoryLowAddress, \
+  *							AddressType stackMemoryHighAddress, \
+  *							AddressType stackMemoryLowAddress)
   *
-  * @brief Set stack overflow protection.
+  * @brief Init memory protection DEMO CODE.
   *
-  * @param[in]  none
-  *
+  * @param[in]  AddressType codeMemoryHighAddress
+  * @param[in]  AddressType codeMemoryLowAddress
+  * @param[in]  AddressType stackMemoryHighAddress
+  * @param[in]  AddressType stackMemoryLowAddress
   * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void memoryProtection_init(void)
+__OS_FUNC_SECTION void memoryProtection_init(AddressType codeMemoryHighAddress,\
+												AddressType codeMemoryLowAddress, \
+												AddressType stackMemoryHighAddress, \
+												AddressType stackMemoryLowAddress)
 {
-    CILmemoryProtection_init();
+    CILmemoryProtection_init(codeMemoryHighAddress,codeMemoryLowAddress,
+							stackMemoryHighAddress,stackMemoryLowAddress);
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

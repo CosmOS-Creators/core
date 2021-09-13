@@ -3,6 +3,7 @@
 #include "os_mock.h"
 #include "osBoot_mock.h"
 #include "core_mock.h"
+#include "coreCfg.h"
 #include "stack_mock.h"
 #include "CILcore_mock.h"
 #include "coreSync_mock.h"
@@ -23,11 +24,11 @@ TEST(osInit, executionFlow)
 		Os_TestFixture osMock;
 		OsBoot_TestFixture osBootMock;
 
-    EXPECT_CALL(*memoryProtectionMock._MemoryProtectionMock, memoryProtection_init()).Times(1);
-		EXPECT_CALL(*osBootMock._OsBootMock, osBoot_bootValidate()).Times(1);
 		EXPECT_CALL(*osMock._OsMock, os_getOsVar()).Times(1).WillOnce(Return((CosmOS_OsVariableType*)NULL));
 		EXPECT_CALL(*CILcoreMock._CILcoreMock, CILcore_setCoreVar((CosmOS_OsVariableType*)NULL)).Times(1);
-		EXPECT_CALL(*coreMock._CoreMock, core_getCoreVar()).Times(1).WillOnce(Return((CosmOS_CoreVariableType*)NULL));
+		EXPECT_CALL(*coreMock._CoreMock, core_getCoreVar()).Times(1).WillOnce(Return((CosmOS_CoreVariableType*)));
+		EXPECT_CALL(*memoryProtectionMock._MemoryProtectionMock, memoryProtection_init((AddressType)(0) ,(AddressType)(0) ,(AddressType)(0) ,(AddressType)(0))).Times(1);
+		EXPECT_CALL(*osBootMock._OsBootMock, osBoot_bootValidate()).Times(1);
 		EXPECT_CALL(*stackMock._StackMock, stackInit_init((CosmOS_CoreVariableType*)NULL)).Times(1);
 		EXPECT_CALL(*memoryManagerMock._MemoryManagerMock, memoryManager_heapInit()).Times(1);
 		EXPECT_CALL(*coreSyncMock._CoreSyncMock, coreSync_getBarrier((CosmOS_CoreVariableType *)NULL, (BitWidthType)NULL)).Times(1);

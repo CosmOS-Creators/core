@@ -282,6 +282,8 @@ typedef struct
     const BitWidthType lastToFirstTaskTicks;
     const BitWidthType syncTicks;
     const BitWidthType firstSyncTaskStartTick;
+		const BitWidthType maxTimerTick;
+		const BitWidthType timerTickCount;
     void * const idleTaskVar;
 
 } CosmOS_SchedulerConfigurationType;
@@ -323,6 +325,11 @@ typedef struct
 		const BitWidthType numberOfPrograms;
 		const CosmOS_SchedulerConfigurationType * const scheduler;
 		const BitWidthType coreId;
+		const CosmOS_GenericVoidType kernelPanicHook;
+		const AddressType stackMemoryLowAddress;
+		const AddressType stackMemoryHighAddress;
+		const AddressType codeMemoryLowAddress;
+		const AddressType codeMemoryHighAddress;
 
 } CosmOS_CoreConfigurationType;
 
@@ -339,7 +346,6 @@ typedef struct
     const BitWidthType numberOfBuffers;
     const CosmOS_RoutesConfigurationType * const route;
 		const BitWidthType numberOfSpinlocks;
-		const CosmOS_GenericVoidType kernelPanicHook;
 
 } CosmOS_OsConfigurationType;
 /********************************************************************************

@@ -251,6 +251,86 @@ __STATIC_FORCEINLINE BitWidthType core_getCoreId(CosmOS_CoreVariableType * core)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn core_getKernelPanicHook(CosmOS_CoreVariableType * coreVar)
+  *
+  * @brief Get core kernelPanicHook.
+  *
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  *
+  * @return CosmOS_GenericVoidType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_GenericVoidType core_getKernelPanicHook(CosmOS_CoreVariableType * coreVar)
+{
+    return (CosmOS_GenericVoidType)(coreVar->cfg->kernelPanicHook);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getStackMemoryLowAddress(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get stackMemoryLowAddress.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType core_getStackMemoryLowAddress(CosmOS_CoreVariableType * core)
+{
+    return (core->cfg->stackMemoryLowAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getStackMemoryHighAddress(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get stackMemoryHighAddress.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType core_getStackMemoryHighAddress(CosmOS_CoreVariableType * core)
+{
+    return (core->cfg->stackMemoryHighAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getCodeMemoryLowAddress(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get codeMemoryLowAddress.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType core_getCodeMemoryLowAddress(CosmOS_CoreVariableType * core)
+{
+    return (core->cfg->codeMemoryLowAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getCodeMemoryHighAddress(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get codeMemoryHighAddress.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType core_getCodeMemoryHighAddress(CosmOS_CoreVariableType * core)
+{
+    return (core->cfg->codeMemoryHighAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn core_getCoreSchedulableInCurrentContext(CosmOS_CoreVariableType * core)
   *
   * @brief Get core schedulableInExecution pointer.

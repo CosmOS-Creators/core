@@ -352,6 +352,38 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerFirstSyncTaskStartTick(C
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn scheduler_getSchedulerMaxTimerTick(CosmOS_SchedulerVariableType * scheduler)
+  *
+  * @brief Get scheduler maxTimerTick.
+  *
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerMaxTimerTick(CosmOS_SchedulerVariableType * scheduler)
+{
+    return (scheduler->cfg->maxTimerTick);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_getSchedulerTimerTickCount(CosmOS_SchedulerVariableType * scheduler)
+  *
+  * @brief Get scheduler timerTickCount.
+  *
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerTimerTickCount(CosmOS_SchedulerVariableType * scheduler)
+{
+    return (scheduler->cfg->timerTickCount);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn scheduler_getSchedulerIdleTaskVar(CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler idleTaskVar.

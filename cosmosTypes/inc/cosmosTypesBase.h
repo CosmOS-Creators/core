@@ -237,7 +237,8 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    OS_STATE_ENUM__NOT_STARTED,
+    OS_STATE_ENUM__NOT_INITIALIZED,
+		OS_STATE_ENUM__INITIALIZED,
     OS_STATE_ENUM__STARTED,
     OS_STATE_ENUM__ERROR_HOOK,
 
@@ -263,10 +264,11 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    SPINLOCK_STATE_ENUM__ERROR = 0xFF,
+    SPINLOCK_STATE_ENUM__DEADLOCK_WARNING = 0xFF,
     SPINLOCK_STATE_ENUM__RELEASED = 0x00,
     SPINLOCK_STATE_ENUM__OCCUPIED = 0x01,
 		SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED = 0x02,
+		SPINLOCK_STATE_ENUM__SCHEDULABLE_IS_NOT_OWNER = 0x02,
 		SPINLOCK_STATE_ENUM__FORCE      = FORCE_ENUM,
 
 } CosmOS_SpinlockStateType;

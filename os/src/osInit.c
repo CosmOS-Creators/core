@@ -146,24 +146,23 @@ __OS_FUNC_SECTION void osInit_init(BitWidthType entityId)
 {
     CosmOS_CoreVariableType * coreVar;
     CosmOS_OsVariableType * osVar;
-	//check if the os sections were booted and init and start was not called yet
+	//TODO check if the os sections were booted and init and start was not called yet
 
-    switchMemoryProtection_init();
-	osBoot_bootValidate();
+	osVar = os_getOsVar();
 
-    osVar = os_getOsVar();
-
-    CILcore_setCoreVar(osVar);
+	CILcore_setCoreVar(osVar);
 
     coreVar = core_getCoreVar();
+
+    switchMemoryProtection_init(coreVar->cfg->codeMemoryHighAddress, \
+								coreVar->cfg->codeMemoryLowAddress, \
+								coreVar->cfg->stackMemoryHighAddress, \
+								coreVar->cfg->stackMemoryLowAddress );
+	osBoot_bootValidate();
 
     stackInit_init( coreVar );
 
 	memoryManager_heapInit();
-
-    //init MPU
-    //init DMA to buffers
-    //Maybe better have here CILmicroInit()
 
     coreSync_getBarrier( coreVar, OS_INIT_ID );
 
