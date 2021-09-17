@@ -152,6 +152,19 @@ __OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(BitWidthType enti
   * @{
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn schedulable_sleepMs(BitWidthType entityId, BitWidthType delayMs)
+  *
+  * @brief Set schedulable to sleep for x ms DEMO CODE.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  BitWidthType delayMs
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void schedulable_sleepMs(BitWidthType entityId, BitWidthType delayMs);
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
@@ -173,7 +186,7 @@ __OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(BitWidthType enti
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskStack(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getStack(CosmOS_SchedulableVariableType * schedulable)
   *
   * @brief Get schedulable stack pointer.
   *
@@ -189,7 +202,23 @@ __STATIC_FORCEINLINE CosmOS_StackConfigurationType * schedulable_getStack(CosmOS
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskHandler(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getInstanceType(CosmOS_SchedulableVariableType * schedulable)
+  *
+  * @brief Get schedulable instanceType.
+  *
+  * @param[in]  CosmOS_SchedulableVariableType * schedulable
+  *
+  * @return CosmOS_SchedulableInstanceType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SchedulableInstanceType schedulable_getInstanceType(CosmOS_SchedulableVariableType * schedulable)
+{
+    return (schedulable->cfg->instanceType);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn schedulable_getHandler(CosmOS_SchedulableVariableType * schedulable)
   *
   * @brief Get schedulable handler.
   *
@@ -221,7 +250,7 @@ __STATIC_FORCEINLINE CosmOS_BooleanType schedulable_getFp(CosmOS_SchedulableVari
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskId(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getId(CosmOS_SchedulableVariableType * schedulable)
   *
   * @brief Get schedulable id.
   *
@@ -253,7 +282,7 @@ __STATIC_FORCEINLINE BitWidthType schedulable_getInstanceId(CosmOS_SchedulableVa
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskProgramId(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getProgramId(CosmOS_SchedulableVariableType * schedulable)
   *
   * @brief Get schedulable programId.
   *
@@ -269,7 +298,7 @@ __STATIC_FORCEINLINE BitWidthType schedulable_getProgramId(CosmOS_SchedulableVar
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulable_getTaskCoreId(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getCoreId(CosmOS_SchedulableVariableType * schedulable)
   *
   * @brief Get schedulable coreId.
   *
@@ -280,6 +309,22 @@ __STATIC_FORCEINLINE BitWidthType schedulable_getProgramId(CosmOS_SchedulableVar
 __STATIC_FORCEINLINE BitWidthType schedulable_getCoreId(CosmOS_SchedulableVariableType * schedulable)
 {
     return (schedulable->cfg->coreId);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn schedulable_getAlarmId(CosmOS_SchedulableVariableType * schedulable)
+  *
+  * @brief Get schedulable alarmId.
+  *
+  * @param[in]  CosmOS_SchedulableVariableType * schedulable
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType schedulable_getAlarmId(CosmOS_SchedulableVariableType * schedulable)
+{
+    return (schedulable->cfg->alarmId);
 }
 
 /********************************************************************************

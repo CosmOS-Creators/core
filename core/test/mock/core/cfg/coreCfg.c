@@ -106,7 +106,7 @@ IS_INITIALIZED_TO
         ProgramsCore0Var,                           /* CosmOS_ProgramVariableType * programVars                */
         &SchedulersVar[SCHEDULER_CORE_0_ID],        /* CosmOS_SchedulerVariableType * scheduler                */
         BarriersCore0Var,                           /* CosmOS_BarrierVariableType * barrierVars                */
-        OS_STATE_ENUM__NOT_INITIALIZED,                 /* CosmOS_OsState osState                                  */
+        OS_STATE_ENUM__NOT_INITIALIZED,                 /* CosmOS_OsStateType osState                                  */
         &SysJobsVar[CORE_0_ID],                 /* CosmOS_SysJobsVariableType * const sysJobs               */
     },
 		{                                               /* CoresVar[CORE_1_ID]                                  */
@@ -116,7 +116,7 @@ IS_INITIALIZED_TO
         ProgramsCore1Var,                           /* CosmOS_ProgramVariableType * programVars                */
         &SchedulersVar[SCHEDULER_CORE_1_ID],        /* CosmOS_SchedulerVariableType * scheduler                */
         BarriersCore1Var,                           /* CosmOS_BarrierVariableType * barrierVars                */
-        OS_STATE_ENUM__NOT_INITIALIZED,                 /* CosmOS_OsState osState                                  */
+        OS_STATE_ENUM__NOT_INITIALIZED,                 /* CosmOS_OsStateType osState                                  */
         &SysJobsVar[CORE_1_ID],                 /* CosmOS_SysJobsVariableType * const sysJobs               */
     },
 };

@@ -22,7 +22,12 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "schedulable.h"
+#include "scheduler.h"
+#include "alarm.h"
 #include "core.h"
+
+/* CIL interfaces */
+#include "CILinterrupt.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -121,6 +126,65 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn schedulable_sleepMs(BitWidthType entityId, BitWidthType delayMs)
+  *
+  * @brief Set schedulable to sleep for x ms DEMO CODE.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  BitWidthType delayMs
+  *
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void schedulable_sleepMs(BitWidthType entityId, BitWidthType delayMs)
+{
+	BitWidthType alarmId,
+					msToTicks,
+					tickCount;
+
+	CosmOS_SchedulableInstanceType schedulableInstanceType;
+
+	CosmOS_AlarmVariableType * alarmVar;
+	CosmOS_CoreVariableType * coreVar;
+    CosmOS_SchedulableVariableType * schedulableVar;
+
+
+	coreVar = core_getCoreVar();
+
+	msToTicks = core_getMsToTicks(coreVar);
+
+	schedulableVar = core_getCoreSchedulableInExecution(coreVar);
+	schedulableInstanceType = schedulable_getInstanceType(schedulableVar);
+
+	if (schedulableInstanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD)
+	{
+		alarmId = schedulable_getAlarmId(schedulableVar);
+		alarmVar = core_getAlarmVar(coreVar, alarmId);
+		//overflow needs to be checked for this multiplication and return err if overflows
+		tickCount = delayMs * msToTicks;
+
+		schedulable_setState(schedulableVar, SCHEDULABLE_STATE_ENUM__SLEEP);
+		alarm_setAlarmTickCount(alarmVar,tickCount);
+		alarm_setAlarmState(alarmVar,ALARM_STATE_ENUM__ACTIVATED);
+
+		CILinterrupt_contextSwitchRoutineTrigger();
+	}
+	else
+	{
+		//error critical tasks cannot be preempted
+	}
+
+	__SUPRESS_UNUSED_VAR(entityId);
+};
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn schedulable_setExecutionStateToFinished(BitWidthType entityId)
   *
   * @brief Set schedulable execution state to finished DEMO CODE.
@@ -140,9 +204,9 @@ __OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(BitWidthType enti
 
     coreVar = core_getCoreVar();
 
-    schedulableVar = core_getCoreSchedulableInCurrentContext( coreVar );
+    schedulableVar = core_getCoreSchedulableInExecution( coreVar );
 
-    schedulable_setState( schedulableVar, SCHEDULABLE_INSTANCE_ENUM__EXECUTED );
+    schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__EXECUTED );
 
 	__SUPRESS_UNUSED_VAR(entityId);
 };

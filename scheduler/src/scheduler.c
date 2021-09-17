@@ -23,6 +23,7 @@
 /* CORE interfaces */
 #include "scheduler.h"
 #include "core.h"
+#include "alarm.h"
 #include "coreSync.h"
 #include "os.h"
 #include "task.h"
@@ -137,6 +138,61 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn  scheduler_updateAlarms(CosmOS_CoreVariableType * coreVar, BitWidthType priorTickStep)
+  *
+  * @brief Update alarms DEMO.
+  *
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  BitWidthType priorTickStep
+  *
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void scheduler_updateAlarms(CosmOS_CoreVariableType * coreVar, BitWidthType priorTickStep)
+{
+	BitWidthType numberOfAlarms,
+				tickCount;
+
+	CosmOS_AlarmStateType alarmState;
+
+	CosmOS_AlarmVariableType * alarmVar;
+	CosmOS_SchedulableVariableType * schedulableVar;
+
+	numberOfAlarms = core_getCoreNumberOfAlarms(coreVar);
+	for (BitWidthType iterator = 0; iterator < numberOfAlarms; iterator++)
+	{
+		alarmVar = core_getAlarmVar(coreVar, iterator);
+		alarmState = alarm_getAlarmState(alarmVar);
+
+		if (alarmState IS_EQUAL_TO ALARM_STATE_ENUM__ACTIVATED)
+		{
+			tickCount = alarm_getAlarmTickCount(alarmVar);
+
+			if ( tickCount <= priorTickStep )
+			{
+				schedulableVar = alarm_getAlarmSchedulable(alarmVar);
+
+				schedulable_setState(schedulableVar, SCHEDULABLE_STATE_ENUM__READY);
+				alarm_setAlarmState(alarmVar,ALARM_STATE_ENUM__DISABLED);
+				alarm_setAlarmTickCount(alarmVar,0);
+			}
+			else
+			{
+				tickCount -= priorTickStep;
+				alarm_setAlarmTickCount(alarmVar,tickCount);
+			}
+		}
+	}
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn  scheduler_performanceScheduling(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType ** schedulableVar,\
   * StackPointerType * stackPointerRetVal,BitWidthType * timerTicks)
   *
@@ -156,24 +212,29 @@ __OS_FUNC_SECTION void scheduler_performanceScheduling(CosmOS_SchedulerVariableT
 StackPointerType * stackPointerRetVal,BitWidthType * timerTicks)
 {
     BitWidthType preemptTick,
-        threadListIterator,
         threadListElementsNum;
 
-    CosmOS_ThreadVariableType *threadVar;
+	CosmOS_SchedulableStateType schedulableState;
 
+	CosmOS_ThreadVariableType *threadVar;
+	CosmOS_SchedulableVariableType *currentSchedulableVar;
 
-    threadListIterator = scheduler_getSchedulerThreadListIterator(schedulerVar);
     threadListElementsNum = scheduler_getSchedulerThreadListElementsNum(schedulerVar);
 
-    cosmosAssert(threadListIterator < threadListElementsNum);
+	for (BitWidthType iterator = 0; iterator < threadListElementsNum; iterator++)
+	{
+		threadVar = scheduler_getSchedulerThreadListThreadVar(schedulerVar, iterator);
+		currentSchedulableVar = thread_getThreadSchedulable(threadVar);
+		schedulableState = schedulable_getState(currentSchedulableVar);
 
-    threadVar = scheduler_getSchedulerThreadListThreadVar(schedulerVar, threadListIterator);
+		if (schedulableState IS_EQUAL_TO SCHEDULABLE_STATE_ENUM__READY)
+		{
+			break;
+		}
+	}
 
-    *schedulableVar = thread_getThreadSchedulable(threadVar);
+    *schedulableVar = currentSchedulableVar;
     *stackPointerRetVal = schedulable_getStackPointer(*schedulableVar);
-
-    threadListIterator = ((threadListIterator + 1) % threadListElementsNum);
-    scheduler_setSchedulerThreadListIterator(schedulerVar, threadListIterator);
 
     preemptTick = scheduler_getSchedulerPreemptTick(schedulerVar);
     *timerTicks = preemptTick;
@@ -215,7 +276,7 @@ StackPointerType * stackPointerRetVal,BitWidthType * timerTicks, BitWidthType st
 
     if ( startTick < currentTick )
     {
-        *timerTicks = scheduler_getSchedulerLastToFirstTaskTicks( schedulerVar );
+        *timerTicks = scheduler_getSchedulerLastToFirstTaskTicks(schedulerVar);
     }
     else
     {
@@ -256,7 +317,7 @@ StackPointerType * stackPointerRetVal, BitWidthType * timerTicks, BitWidthType *
     *schedulableVar = task_getTaskSchedulable( taskVar );
     *stackPointerRetVal = stackInit_schedulableStackInit( *schedulableVar );
 
-    schedulable_setState( *schedulableVar, SCHEDULABLE_INSTANCE_ENUM__RUNNING );
+    schedulable_setState( *schedulableVar, SCHEDULABLE_STATE_ENUM__RUNNING );
 
     *scheduleTableIterator = ( ( (*scheduleTableIterator) + 1 ) % scheduleTableElementsNum );
     scheduler_setSchedulerScheduleTableIterator( schedulerVar, *scheduleTableIterator );
@@ -286,6 +347,7 @@ __OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerTy
 					startTick,
 					timerTicks,
 					maxTimerTick,
+					priorTickStep,
 					timerTickCount,
 					scheduleTableIterator,
 					scheduleTableElementsNum;
@@ -293,6 +355,8 @@ __OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerTy
     StackPointerType stackPointerRetVal;
 
     CosmOS_SchedulerStateType schedulerState;
+	CosmOS_RescheduleTriggerStateType rescheduleTriggerState;
+	CosmOS_SchedulableInstanceType priorSchedulableInstanceType;
 
     CosmOS_CoreVariableType * coreVar;
     CosmOS_SchedulerVariableType * schedulerVar;
@@ -301,73 +365,103 @@ __OS_FUNC_SECTION StackPointerType scheduler_scheduleNextInstance(StackPointerTy
 
 
     coreVar = core_getCoreVar();
-
     schedulerVar = core_getCoreSchedulerVar( coreVar );
-    priorSchedulableVar = core_getCoreSchedulableInCurrentContext( coreVar );
+    priorSchedulableVar = core_getCoreSchedulableInExecution( coreVar );
+	rescheduleTriggerState = scheduler_getSchedulerRescheduleTriggerState( schedulerVar );
 
-    hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );
-    schedulerState = scheduler_getSchedulerState( schedulerVar );
-    currentTick = scheduler_getSchedulerCurrentTick( schedulerVar );
-    scheduleTableIterator = scheduler_getSchedulerScheduleTableIterator( schedulerVar );
-    scheduleTableElementsNum = scheduler_getSchedulerScheduleTableElementsNum( schedulerVar );
-	startTick = scheduler_getSchedulerScheduleTableStartTick( schedulerVar, scheduleTableIterator );
-
-    //TODO: this should be moved to the sysTick interrupt with higher priority to have faster response - without else, that should stay here
-    if ( schedulerState IS_EQUAL_TO SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK )
+	switch ( rescheduleTriggerState )
     {
-        CosmOS_SchedulableStateType schedulableState;
-
-        schedulableState = schedulable_getState( priorSchedulableVar );
-
-        if ( schedulableState IS_NOT_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__EXECUTED )
+        case RESCHEDULE_TRIGGER_STATE_ENUM__TIMER :
         {
-            /* reaction */
+			hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );
+			schedulerState = scheduler_getSchedulerState( schedulerVar );
+			currentTick = scheduler_getSchedulerCurrentTick( schedulerVar );
+			maxTimerTick = scheduler_getSchedulerMaxTimerTick( schedulerVar );
+			priorTickStep = scheduler_getSchedulerPriorTickStep(schedulerVar);
+			timerTickCount = scheduler_getSchedulerTimerTickCount( schedulerVar );
+			priorSchedulableInstanceType = schedulable_getInstanceType( priorSchedulableVar );
+			scheduleTableIterator = scheduler_getSchedulerScheduleTableIterator( schedulerVar );
+			scheduleTableElementsNum = scheduler_getSchedulerScheduleTableElementsNum( schedulerVar );
+			startTick = scheduler_getSchedulerScheduleTableStartTick( schedulerVar, scheduleTableIterator );
+
+			//TODO: this should be moved to the sysTick interrupt with higher priority to have faster response - without else, that should stay here
+			if ( schedulerState IS_EQUAL_TO SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK )
+			{
+				CosmOS_SchedulableStateType schedulableState;
+
+				schedulableState = schedulable_getState( priorSchedulableVar );
+
+				if ( schedulableState IS_NOT_EQUAL_TO SCHEDULABLE_STATE_ENUM__EXECUTED )
+				{
+					/* reaction */
+				}
+			}
+
+			if ( priorSchedulableInstanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD )
+			{
+				/* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+				switchScheduler_schedulable_setStackPointer( priorSchedulableVar, stackPointer );
+			}
+
+			/* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+			switchScheduler_updateAlarms(coreVar, priorTickStep);
+
+			if ( scheduleTableElementsNum AND startTick IS_EQUAL_TO currentTick )
+			{
+				scheduler_classicSchedulingCore(schedulerVar,&schedulableVar,&stackPointerRetVal,\
+												&timerTicks, &scheduleTableIterator, scheduleTableElementsNum);
+
+				schedulerState = SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK;
+			}
+			else
+			{
+				/* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+				switchScheduler_performanceScheduling( schedulerVar, &schedulableVar,\
+														&stackPointerRetVal, &timerTicks );
+				/* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO OFF */
+				switchScheduler_classicScheduling( schedulerVar, &schedulableVar,\
+													&stackPointerRetVal, &timerTicks, startTick, currentTick );
+
+				schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
+			}
+
+			schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
+			core_setSchedulableIntoCurrentContext( coreVar, schedulableVar );
+
+			scheduler_setSchedulerState( schedulerVar, schedulerState );
+
+			if ( maxTimerTick < timerTicks )
+			{
+				timerTicks = maxTimerTick;
+			}
+
+			currentTick = ( ( currentTick + timerTicks ) % hyperTick );
+			scheduler_setSchedulerPriorTickStep(schedulerVar, timerTicks);
+			scheduler_setSchedulerCurrentTick( schedulerVar, currentTick );
+
+			switchMemoryProtection_setMemoryProtection( coreVar, schedulableVar );
+
+			CILsysTimer_setTicks( timerTicks, timerTickCount );
+			break;
         }
-    }
-    else
-    {
-        /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
-        switchScheduler_setStackPointer( priorSchedulableVar, stackPointer );
-    }
+		case RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM :
+        {
+			/* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+			switchScheduler_schedulable_setStackPointer( priorSchedulableVar, stackPointer );
+			/* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+			switchScheduler_performanceScheduling( schedulerVar, &schedulableVar,\
+													&stackPointerRetVal, &timerTicks );
 
-    if ( scheduleTableElementsNum AND startTick IS_EQUAL_TO currentTick )
-    {
-        scheduler_classicSchedulingCore(schedulerVar,&schedulableVar,&stackPointerRetVal,\
-										&timerTicks, &scheduleTableIterator, scheduleTableElementsNum);
+			schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
+			core_setSchedulableIntoCurrentContext( coreVar, schedulableVar );
 
-        schedulerState = SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK;
-    }
-    else
-    {
-        /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
-        switchScheduler_performanceScheduling( schedulerVar, &schedulableVar,\
-												&stackPointerRetVal, &timerTicks );
-        /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO OFF */
-        switchScheduler_classicScheduling( schedulerVar, &schedulableVar,\
-											&stackPointerRetVal, &timerTicks, startTick, currentTick );
+			switchMemoryProtection_setMemoryProtection( coreVar, schedulableVar );
 
-        schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
-    }
-
-    schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
-    core_setSchedulableIntoCurrentContext( coreVar, schedulableVar );
-
-    scheduler_setSchedulerState( schedulerVar, schedulerState );
-
-	maxTimerTick = scheduler_getSchedulerMaxTimerTick( schedulerVar );
-	if ( maxTimerTick < timerTicks )
-	{
-		timerTicks = maxTimerTick;
+			break;
+		}
 	}
 
-    currentTick = ( ( currentTick + timerTicks ) % hyperTick );
-    scheduler_setSchedulerCurrentTick( schedulerVar, currentTick );
-
-    switchMemoryProtection_setMemoryProtection( coreVar, schedulableVar );
-
-	timerTickCount = scheduler_getSchedulerTimerTickCount( schedulerVar );
-    CILsysTimer_setTicks( timerTicks, timerTickCount );
-
+	scheduler_setSchedulerRescheduleTriggerState( schedulerVar, RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM );
     return stackPointerRetVal;
 };
 /* @cond S */
@@ -408,11 +502,11 @@ __OS_FUNC_SECTION void scheduler_start(void)
 
 
     coreVar = core_getCoreVar();
-
     schedulerVar = core_getCoreSchedulerVar( coreVar );
-
     hyperTick = scheduler_getSchedulerHyperTick( schedulerVar );
     currentTick = scheduler_getSchedulerCurrentTick( schedulerVar );
+	maxTimerTick = scheduler_getSchedulerMaxTimerTick( schedulerVar );
+	timerTickCount = scheduler_getSchedulerTimerTickCount( schedulerVar );
     scheduleTableIterator = scheduler_getSchedulerScheduleTableIterator( schedulerVar );
     scheduleTableElementsNum = scheduler_getSchedulerScheduleTableElementsNum( schedulerVar );
 
@@ -447,21 +541,21 @@ __OS_FUNC_SECTION void scheduler_start(void)
 
     scheduler_setSchedulerState( schedulerVar, schedulerState );
 
-	maxTimerTick = scheduler_getSchedulerMaxTimerTick( schedulerVar );
-
 	if ( maxTimerTick < timerTicks )
 	{
 		timerTicks = maxTimerTick;
 	}
 
     currentTick = ( currentTick + timerTicks ) % hyperTick;
-    scheduler_setSchedulerCurrentTick( schedulerVar, currentTick );
+	scheduler_setSchedulerPriorTickStep(schedulerVar, timerTicks);
+	scheduler_setSchedulerCurrentTick(schedulerVar, currentTick);
 
-    switchMemoryProtection_setMemoryProtection( coreVar , schedulableVar );
+	switchMemoryProtection_setMemoryProtection( coreVar , schedulableVar );
 
 	core_setCoreOsState( coreVar, OS_STATE_ENUM__STARTED );
 
-	timerTickCount = scheduler_getSchedulerTimerTickCount( schedulerVar );
+	scheduler_setSchedulerRescheduleTriggerState( schedulerVar, RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM );
+
     CILsysTimer_startTimer( timerTicks, timerTickCount );
 
     CILstack_setStackPointer( stackPointerRetVal );

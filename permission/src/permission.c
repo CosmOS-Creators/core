@@ -162,7 +162,7 @@ __OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_Permissions
 
     CosmOS_SchedulableVariableType * schedulableVar;
 
-    schedulableVar = core_getCoreSchedulableInCurrentContext( coreVar );
+    schedulableVar = core_getCoreSchedulableInExecution( coreVar );
     accessState = permission_trySchedulableAccess( permission, schedulableVar );
 
     return accessState;

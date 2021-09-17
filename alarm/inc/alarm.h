@@ -5,49 +5,43 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file thread.h
+** @file alarm.h
 *********************************************************************************
-<!--                      thread Module Group Definition                      -->
+<!--               			  	alarm Unit Group Definition              		      -->
 *********************************************************************************
-** @defgroup thread_module thread
-** @brief thread Module
-** @details lorem
-*********************************************************************************
-<!--                       thread Unit Group Definition                       -->
-*********************************************************************************
-** @defgroup thread_unit thread Unit
-** @ingroup thread_module
-** @brief thread Unit
+** @defgroup alarm_unit alarm Unit
+** @ingroup alarm_module
+** @brief alarm Unit
 ** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
-** @date 1.8.2020
-** @author https://github.com/PavolKostolansky
+** @date 18.08.2021
+** @author https://github.com/pavolkostolansky
 *********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                    thread Unit Global Group Definition                   -->
+<!--           			 	alarm Unit Global Group Definition                  	  -->
 *********************************************************************************
-** @defgroup Global_thread Global
-** @ingroup thread_unit
-** @brief thread globals
+** @defgroup Global_alarm Global
+** @ingroup alarm_unit
+** @brief alarm globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __THREAD_H__
-#define __THREAD_H__
+#ifndef __ALARM_H__
+#define __ALARM_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
@@ -63,17 +57,17 @@
 **                          Macro Definitions | Start                          **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @defgroup Macros_thread_h Macros
-  * @ingroup Global_thread
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup Macros_alarm_h Macros
+* @ingroup Global_alarm
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Macros_thread_h
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Macros_alarm_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -82,17 +76,17 @@
 **                              Variables | Start                              **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @defgroup Variables_thread_h Variables
-  * @ingroup Global_thread
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup Variables_alarm_h Variables
+* @ingroup Global_alarm
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Variables_thread_h
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Variables_alarm_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -101,49 +95,50 @@
 **                         Function Prototypes | Start                         **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN DEF GROUP                                                          **
-  * *************************************************************************//**
-  * @defgroup Apis_thread_h API's
-  * @ingroup Global_thread
+* DOXYGEN DEF GROUP                                                            **
+* ***************************************************************************//**
+* @defgroup Apis_alarm_h API's
+* @ingroup Global_alarm
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Getters_thread_h Getters
-  * @ingroup Apis_thread_h
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup Getters_alarm_h Getters
+* @ingroup Apis_alarm_h
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Getters_thread_h
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Getters_alarm_h
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_thread_h Setters
-  * @ingroup Apis_thread_h
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup Setters_alarm_h Setters
+* @ingroup Apis_alarm_h
+* @{
+********************************************************************************/
+
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Setters_alarm_h
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Setters_thread_h
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup General_alarm_h General
+* @ingroup Apis_alarm_h
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_thread_h General
-  * @ingroup Apis_thread_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * General_thread_h
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* General_alarm_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -152,74 +147,125 @@
 **                        Function Definitions | Start                         **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Getters_thread_h Getters
-  * @ingroup Apis_thread_h
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup Getters_alarm_h Getters
+* @ingroup Apis_alarm_h
+* @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_getThreadPriority(CosmOS_ThreadVariableType *thread)
+  * @fn alarm_getAlarmSchedulable(CosmOS_AlarmVariableType * alarm)
   *
-  * @brief Get thread priority.
+  * @brief Get alarm schedulable pointer.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
+  * @param[in]  CosmOS_AlarmVariableType * alarm
   *
-  * @return BitWidthType
+  * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType thread_getThreadPriority(CosmOS_ThreadVariableType * thread)
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * alarm_getAlarmSchedulable(CosmOS_AlarmVariableType * alarm)
 {
-    return (thread->cfg->priority);
+    return (CosmOS_SchedulableVariableType *)(alarm->cfg->schedulableVar);
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_getThreadSchedulable(CosmOS_ThreadVariableType *thread)
+  * @fn alarm_getAlarmState(CosmOS_AlarmVariableType * alarm)
   *
-  * @brief Get thread schedulable.
+  * @brief Get alarm state.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
+  * @param[in]  CosmOS_AlarmVariableType * alarm
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * thread_getThreadSchedulable(CosmOS_ThreadVariableType * thread)
+__STATIC_FORCEINLINE BitWidthType alarm_getAlarmState(CosmOS_AlarmVariableType * alarm)
 {
-    return (CosmOS_SchedulableVariableType *)(thread->schedulable);
+    return (alarm->state);
 }
+
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @}
-  * Getters_thread_h
+  * @fn alarm_getAlarmTickCount(CosmOS_AlarmVariableType * alarm)
+  *
+  * @brief Get alarm tickCount.
+  *
+  * @param[in]  CosmOS_AlarmVariableType * alarm
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType alarm_getAlarmTickCount(CosmOS_AlarmVariableType * alarm)
+{
+    return (alarm->tickCount);
+}
+
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Getters_alarm_h
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_thread_h Setters
-  * @ingroup Apis_thread_h
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup Setters_alarm_h Setters
+* @ingroup Apis_alarm_h
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @}
-  * Setters_thread_h
+  * @fn alarm_setAlarmState(CosmOS_AlarmVariableType * alarm, CosmOS_AlarmStateType stateParam)
+  *
+  * @brief Set alarm state.
+  *
+  * @param[in]  CosmOS_AlarmVariableType * alarm
+  * @param[in]  CosmOS_AlarmStateType stateParam
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void alarm_setAlarmState(CosmOS_AlarmVariableType * alarm, CosmOS_AlarmStateType stateParam)
+{
+    alarm->state = stateParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn alarm_setAlarmTickCount(CosmOS_AlarmVariableType * alarm, BitWidthType tickCountParam)
+  *
+  * @brief Set alarm tickCount.
+  *
+  * @param[in]  CosmOS_AlarmVariableType * alarm
+  * @param[in]  BitWidthType tickCountParam
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void alarm_setAlarmTickCount(CosmOS_AlarmVariableType * alarm, BitWidthType tickCountParam)
+{
+    alarm->tickCount = tickCountParam;
+}
+
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Setters_alarm_h
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_thread_h General
-  * @ingroup Apis_thread_h
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup General_alarm_h General
+* @ingroup Apis_alarm_h
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * General_thread_h
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* General_alarm_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

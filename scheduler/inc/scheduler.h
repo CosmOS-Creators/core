@@ -142,6 +142,20 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn  scheduler_updateAlarms(CosmOS_CoreVariableType * coreVar, BitWidthType priorTickStep)
+  *
+  * @brief Update alarms DEMO.
+  *
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  BitWidthType priorTickStep
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void scheduler_updateAlarms(CosmOS_CoreVariableType *coreVar, BitWidthType priorTickStep);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn  scheduler_performanceScheduling(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_SchedulableVariableType ** schedulableVar,\
   * StackPointerType * stackPointerRetVal,BitWidthType * timerTicks)
   *
@@ -416,6 +430,22 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerCurrentTick(CosmOS_Sched
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn scheduler_getSchedulerPriorTickStep(CosmOS_SchedulerVariableType * scheduler)
+  *
+  * @brief Get scheduler priorTickStep.
+  *
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerPriorTickStep(CosmOS_SchedulerVariableType * scheduler)
+{
+    return (scheduler->priorTickStep);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn scheduler_getSchedulerScheduleTableIterator(CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler scheduleTableIterator.
@@ -491,6 +521,22 @@ __STATIC_FORCEINLINE BitWidthType scheduler_getSchedulerNextSyncTick(CosmOS_Sche
 __STATIC_FORCEINLINE CosmOS_BooleanType scheduler_getSchedulerSyncInitState(CosmOS_SchedulerVariableType * scheduler)
 {
     return (scheduler->syncInitState);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_getSchedulerRescheduleTriggerState(CosmOS_SchedulerVariableType * scheduler)
+  *
+  * @brief Get scheduler rescheduleTriggerState.
+  *
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  *
+  * @return CosmOS_RescheduleTriggerStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_RescheduleTriggerStateType scheduler_getSchedulerRescheduleTriggerState(CosmOS_SchedulerVariableType * scheduler)
+{
+    return (scheduler->rescheduleTriggerState);
 }
 
 /********************************************************************************
@@ -576,6 +622,23 @@ __STATIC_FORCEINLINE void scheduler_setSchedulerCurrentTick(CosmOS_SchedulerVari
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn scheduler_setSchedulerPriorTickStep(CosmOS_SchedulerVariableType * scheduler, BitWidthType priorTickStepParam)
+  *
+  * @brief Set scheduler priorTickStep.
+  *
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  BitWidthType priorTickStepParam
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void scheduler_setSchedulerPriorTickStep(CosmOS_SchedulerVariableType * scheduler, BitWidthType priorTickStepParam)
+{
+    scheduler->priorTickStep = priorTickStepParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn scheduler_setSchedulerScheduleTableIterator(CosmOS_SchedulerVariableType * scheduler, BitWidthType scheduleTableIteratorParam)
   *
   * @brief Set scheduler scheduleTableIterator.
@@ -656,6 +719,23 @@ __STATIC_FORCEINLINE void scheduler_setSchedulerNextSyncTick(CosmOS_SchedulerVar
 __STATIC_FORCEINLINE void scheduler_setSchedulerSyncInitState(CosmOS_SchedulerVariableType * scheduler, CosmOS_BooleanType paramSyncInitState)
 {
     scheduler->syncInitState = paramSyncInitState;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn scheduler_setSchedulerRescheduleTriggerState(CosmOS_SchedulerVariableType * scheduler)
+  *
+  * @brief Set scheduler rescheduleTriggerState.
+  *
+  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  CosmOS_BooleanType paramRescheduleTriggerState
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void scheduler_setSchedulerRescheduleTriggerState(CosmOS_SchedulerVariableType * scheduler, CosmOS_BooleanType paramRescheduleTriggerState)
+{
+    scheduler->rescheduleTriggerState = paramRescheduleTriggerState;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

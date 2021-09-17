@@ -331,7 +331,39 @@ __STATIC_FORCEINLINE AddressType core_getCodeMemoryHighAddress(CosmOS_CoreVariab
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_getCoreSchedulableInCurrentContext(CosmOS_CoreVariableType * core)
+  * @fn core_getMsToTicks(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get msToTicks.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType core_getMsToTicks(CosmOS_CoreVariableType * core)
+{
+    return (core->cfg->msToTicks);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getCoreNumberOfAlarms(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get core numberOfAlarms.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType core_getCoreNumberOfAlarms(CosmOS_CoreVariableType * core)
+{
+    return (core->cfg->numberOfAlarms);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getCoreSchedulableInExecution(CosmOS_CoreVariableType * core)
   *
   * @brief Get core schedulableInExecution pointer.
   *
@@ -339,7 +371,7 @@ __STATIC_FORCEINLINE AddressType core_getCodeMemoryHighAddress(CosmOS_CoreVariab
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * core_getCoreSchedulableInCurrentContext(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * core_getCoreSchedulableInExecution(CosmOS_CoreVariableType * core)
 {
     return (core->schedulableInExecution);
 }
@@ -428,7 +460,7 @@ __STATIC_FORCEINLINE CosmOS_BarrierVariableType * core_getCoreBarrierVars(CosmOS
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_getBarrierVar(CosmOS_BarrierVariableType * barriers, BitWidthType * barrierId)
+  * @fn core_getBarrierVar(CosmOS_CoreVariableType * core, BitWidthType * barrierId)
   *
   * @brief Get barrierVars element pointer.
   *
@@ -451,9 +483,9 @@ __STATIC_FORCEINLINE CosmOS_BarrierVariableType * core_getBarrierVar(CosmOS_Core
   *
   * @param[in]  CosmOS_CoreVariableType * core
   *
-  * @return CosmOS_OsState
+  * @return CosmOS_OsStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_OsState core_getCoreOsState(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_OsStateType core_getCoreOsState(CosmOS_CoreVariableType * core)
 {
     return (core->osState);
 }
@@ -461,7 +493,7 @@ __STATIC_FORCEINLINE CosmOS_OsState core_getCoreOsState(CosmOS_CoreVariableType 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_getCoreOsSysJobs(CosmOS_CoreVariableType * core)
+  * @fn core_getCoreSysJobs(CosmOS_CoreVariableType * core)
   *
   * @brief Get core sysJobs.
   *
@@ -469,9 +501,42 @@ __STATIC_FORCEINLINE CosmOS_OsState core_getCoreOsState(CosmOS_CoreVariableType 
   *
   * @return CosmOS_SysJobsVariableType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SysJobsVariableType * core_getCoreOsSysJobs(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_SysJobsVariableType * core_getCoreSysJobs(CosmOS_CoreVariableType * core)
 {
     return (core->sysJobs);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getCoreAlarmVars(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get core alarmVars.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return CosmOS_AlarmVariableType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_AlarmVariableType * core_getCoreAlarmVars(CosmOS_CoreVariableType * core)
+{
+    return (core->alarmVars);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getAlarmVar(CosmOS_CoreVariableType * core, BitWidthType * barrierId)
+  *
+  * @brief Get alarmVars element pointer.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  BitWidthType alarmId
+  *
+  * @return CosmOS_AlarmVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_AlarmVariableType * core_getAlarmVar(CosmOS_CoreVariableType * core, BitWidthType alarmId)
+{
+    return (&(core->alarmVars[alarmId]));
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -528,11 +593,11 @@ __STATIC_FORCEINLINE void core_setCoreSchedulableInExecution(CosmOS_CoreVariable
   * @brief Set core osState.
   *
   * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_OsState osStateParam
+  * @param[in]  CosmOS_OsStateType osStateParam
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void core_setCoreOsState(CosmOS_CoreVariableType * core, CosmOS_OsState osStateParam)
+__STATIC_FORCEINLINE void core_setCoreOsState(CosmOS_CoreVariableType * core, CosmOS_OsStateType osStateParam)
 {
     core->osState = osStateParam;
 }

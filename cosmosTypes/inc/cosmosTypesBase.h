@@ -129,26 +129,10 @@ typedef enum { False = 0x00, True = 0x01} CosmOS_BooleanType;
 ********************************************************************************/
 typedef enum {
 
-    ACCESS_STATE_ENUM__ALLOWED      = 0x00,
-    ACCESS_STATE_ENUM__DENIED       = SECURE_NUMBER,
+	ACCESS_STATE_ENUM__ALLOWED      = 0x00,
+	ACCESS_STATE_ENUM__DENIED       = SECURE_NUMBER,
 
 } CosmOS_AccessStateType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @brief  CosmOS_PermissionType enum
-********************************************************************************/
-typedef enum {
-
-    PERMISSION_INSTANCE_ENUM__NONE,
-    PERMISSION_INSTANCE_ENUM__ONLY_TASKS,
-    PERMISSION_INSTANCE_ENUM__ONLY_THREADS,
-    PERMISSION_INSTANCE_ENUM__ALL_TASKS,
-    PERMISSION_INSTANCE_ENUM__ALL_THREADS,
-    PERMISSION_INSTANCE_ENUM__ALL,
-
-} CosmOS_PermissionInstanceType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -157,14 +141,14 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    BUFFER_STATE_ENUM__OK,
-    BUFFER_STATE_ENUM__EMPTY,
-    BUFFER_STATE_ENUM__FULL,
-    BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED,
-		BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED,
-    BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED,
-    BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS,
-    BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM,
+	BUFFER_STATE_ENUM__OK,
+	BUFFER_STATE_ENUM__EMPTY,
+	BUFFER_STATE_ENUM__FULL,
+	BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED,
+	BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED,
+	BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED,
+	BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS,
+	BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM,
 
 } CosmOS_BufferStateType;
 
@@ -175,8 +159,8 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    BUFFER_DOUBLE_ACCESS_ENUM__USER,
-    BUFFER_DOUBLE_ACCESS_ENUM__KERNEL,
+	BUFFER_DOUBLE_ACCESS_ENUM__USER,
+	BUFFER_DOUBLE_ACCESS_ENUM__KERNEL,
 
 } CosmOS_BufferDoubleAccessType;
 
@@ -187,8 +171,8 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    SCHEDULABLE_INSTANCE_ENUM__TASK    = 0x00,
-    SCHEDULABLE_INSTANCE_ENUM__THREAD  = SECURE_NUMBER,
+	SCHEDULABLE_INSTANCE_ENUM__TASK    = 0x00,
+	SCHEDULABLE_INSTANCE_ENUM__THREAD  = SECURE_NUMBER,
 
 } CosmOS_SchedulableInstanceType;
 
@@ -199,10 +183,11 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    SCHEDULABLE_INSTANCE_ENUM__READY,
-    SCHEDULABLE_INSTANCE_ENUM__RUNNING,
-    SCHEDULABLE_INSTANCE_ENUM__EXECUTED,
-    SCHEDULABLE_INSTANCE_ENUM__BLOCKED,
+	SCHEDULABLE_STATE_ENUM__READY,
+	SCHEDULABLE_STATE_ENUM__RUNNING,
+	SCHEDULABLE_STATE_ENUM__EXECUTED,
+	SCHEDULABLE_STATE_ENUM__BLOCKED,
+	SCHEDULABLE_STATE_ENUM__SLEEP,
 
 } CosmOS_SchedulableStateType;
 
@@ -213,8 +198,8 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC  = 0x00,
-    SCHEDULER_SYNC_STATE_ENUM__IN_SYNC      = SECURE_NUMBER,
+	SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC  = 0x00,
+	SCHEDULER_SYNC_STATE_ENUM__IN_SYNC      = SECURE_NUMBER,
 
 } CosmOS_SchedulerSyncStateType;
 
@@ -225,24 +210,36 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    BARRIER_STATE_ENUM__ACTIVATED  = 0x00,
-    BARRIER_STATE_ENUM__REACHED    = SECURE_NUMBER,
+	BARRIER_STATE_ENUM__ACTIVATED  = 0x00,
+	BARRIER_STATE_ENUM__REACHED    = SECURE_NUMBER,
 
 } CosmOS_BarrierStateType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_OsState enum
+  * @brief  CosmOS_BarrierStateType enum
 ********************************************************************************/
 typedef enum {
 
-    OS_STATE_ENUM__NOT_INITIALIZED,
-		OS_STATE_ENUM__INITIALIZED,
-    OS_STATE_ENUM__STARTED,
-    OS_STATE_ENUM__ERROR_HOOK,
+	ALARM_STATE_ENUM__ACTIVATED  = 0x00,
+	ALARM_STATE_ENUM__DISABLED   = SECURE_NUMBER,
 
-} CosmOS_OsState;
+} CosmOS_AlarmStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_OsStateType enum
+********************************************************************************/
+typedef enum {
+
+	OS_STATE_ENUM__NOT_INITIALIZED,
+	OS_STATE_ENUM__INITIALIZED,
+	OS_STATE_ENUM__STARTED,
+	OS_STATE_ENUM__ERROR_HOOK,
+
+} CosmOS_OsStateType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -251,11 +248,23 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    SCHEDULER_STATE_ENUM__NOT_STARTED,
-    SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK,
-    SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME,
+	SCHEDULER_STATE_ENUM__NOT_STARTED 					= FORCE_ENUM,
+	SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK	= 0x00,
+	SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME 		= 0x01,
 
 } CosmOS_SchedulerStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_RescheduleTriggerStateType enum
+********************************************************************************/
+typedef enum {
+
+	RESCHEDULE_TRIGGER_STATE_ENUM__TIMER	= FORCE_ENUM,
+	RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM 	= 0x00,
+
+} CosmOS_RescheduleTriggerStateType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -264,12 +273,12 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-    SPINLOCK_STATE_ENUM__DEADLOCK_WARNING = 0xFF,
-    SPINLOCK_STATE_ENUM__RELEASED = 0x00,
-    SPINLOCK_STATE_ENUM__OCCUPIED = 0x01,
-		SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED = 0x02,
-		SPINLOCK_STATE_ENUM__SCHEDULABLE_IS_NOT_OWNER = 0x02,
-		SPINLOCK_STATE_ENUM__FORCE      = FORCE_ENUM,
+	SPINLOCK_STATE_ENUM__DEADLOCK_WARNING 			= 0xFF,
+	SPINLOCK_STATE_ENUM__RELEASED 					= 0x00,
+	SPINLOCK_STATE_ENUM__OCCUPIED 					= 0x01,
+	SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED		= 0x02,
+	SPINLOCK_STATE_ENUM__SCHEDULABLE_IS_NOT_OWNER 	= 0x02,
+	SPINLOCK_STATE_ENUM__FORCE      				= FORCE_ENUM,
 
 } CosmOS_SpinlockStateType;
 /********************************************************************************

@@ -191,11 +191,13 @@ typedef struct
 {
     const CosmOS_SchedulerConfigurationType * const cfg;
     BitWidthType currentTick;
+	BitWidthType priorTickStep;
     BitWidthType scheduleTableIterator;
     BitWidthType threadListIterator;
     CosmOS_SchedulerStateType schedulerState;
     BitWidthType nextSyncTick;
     CosmOS_BooleanType syncInitState;
+	CosmOS_RescheduleTriggerStateType rescheduleTriggerState;
 
 } CosmOS_SchedulerVariableType;
 
@@ -210,6 +212,19 @@ typedef struct
     BitWidthType currentTick;
 
 } CosmOS_SysJobsVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_AlarmVariableType struct type
+********************************************************************************/
+typedef struct
+{
+	const CosmOS_AlarmConfigurationType * const cfg;
+	CosmOS_AlarmStateType state;
+	BitWidthType tickCount;
+
+} CosmOS_AlarmVariableType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -236,8 +251,9 @@ typedef struct
     CosmOS_ProgramVariableType * const programVars;
     CosmOS_SchedulerVariableType * const schedulerVar;
     CosmOS_BarrierVariableType * const barrierVars;
-    CosmOS_OsState osState;
+    CosmOS_OsStateType osState;
     CosmOS_SysJobsVariableType * const sysJobs;
+	CosmOS_AlarmVariableType * const alarmVars;
 
 } CosmOS_CoreVariableType;
 

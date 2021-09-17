@@ -46,6 +46,12 @@ extern "C" {
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
+/* CORE interfaces */
+#include "sysDefs.h"
+#include "cosmosTypesStd.h"
+#include "memoryMapping.h"
+
+/* CIL interfaces */
 #include "CILinterrupt.h"
 /********************************************************************************
 **                            Include Files | Stop                             **

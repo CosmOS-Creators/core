@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file sysJobs.c
+** @file alarm.c
 *********************************************************************************
-<!--                    sysJobs Unit Local Group Definition                   -->
+<!--               	     alarm Unit Local Group Definition                    -->
 *********************************************************************************
-** @defgroup Local_sysJobs Local
-** @ingroup sysJobs_unit
-** @brief sysJobs locals
+** @defgroup Local_alarm Local
+** @ingroup alarm_unit
+** @brief alarm locals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
@@ -20,9 +20,7 @@
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
-/* CORE interfaces */
-#include "core.h"
-#include "sysJobs.h"
+#include "alarm.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -30,17 +28,17 @@
 **                          Macro Definitions | Start                          **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @defgroup Macros_sysJobs Macros
-  * @ingroup Local_sysJobs
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup Macros_alarm_c Macros
+* @ingroup Local_alarm
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Macros_sysJobs
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Macros_alarm_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -49,17 +47,17 @@
 **                              Variables | Start                              **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @defgroup Variables_sysJobs Variables
-  * @ingroup Local_sysJobs
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup Variables_alarm_c Variables
+* @ingroup Local_alarm
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Variables_sysJobs
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Variables_alarm_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -68,49 +66,49 @@
 **                         Function Prototypes | Start                         **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN DEF GROUP                                                          **
-  * *************************************************************************//**
-  * @defgroup Apis_sysJobs_c API's
-  * @ingroup Local_sysJobs
+* DOXYGEN DEF GROUP                                                            **
+* ***************************************************************************//**
+* @defgroup Apis_alarm_c API's
+* @ingroup Local_alarm
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Getters_sysJobs_c Getters
-  * @ingroup Apis_sysJobs_c
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup Getters_alarm_c Getters
+* @ingroup Apis_alarm_c
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Getters_sysJobs_c
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Getters_alarm_c
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_sysJobs_c Setters
-  * @ingroup Apis_sysJobs_c
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup Setters_alarm_c Setters
+* @ingroup Apis_alarm_c
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Setters_sysJobs_c
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Setters_alarm_c
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_sysJobs_c General
-  * @ingroup Apis_sysJobs_c
-  * @{
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @addtogroup General_alarm_c General
+* @ingroup Apis_alarm_c
+* @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * General_sysJobs_c
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* General_alarm_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -118,70 +116,7 @@
 /********************************************************************************
 **                        Function Definitions | Start                         **
 ********************************************************************************/
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn sysJobs_dispatcher(BitWidthType entityId)
-  *
-  * @brief System jobs dispatcher DEMO FUNCTION.
-  *
-  * @param[in]  BitWidthType entityId
-  *
-  * @return none
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION void sysJobs_dispatcher(BitWidthType entityId)
-{
-    BitWidthType  sysJobsCurrentTick,
-                  hyperTick,
-                  numOfGroups;
 
-    CosmOS_CoreVariableType * coreVar;
-    CosmOS_SysJobsVariableType * sysJobsVar;
-
-
-    coreVar = core_getCoreVar();
-    sysJobsVar = core_getCoreSysJobs( coreVar );
-
-    sysJobsCurrentTick = sysJobs_getSysJobsCurrentTick( sysJobsVar );
-    numOfGroups = sysJobs_getSysJobsNumOfGroups( sysJobsVar );
-
-    for ( BitWidthType groupIterator = 0; groupIterator < numOfGroups; groupIterator++ )
-    {
-        BitWidthType  groupTickMultiplicator;
-
-
-        groupTickMultiplicator = sysJobs_getSysJobsGroupTickMultiplicator( sysJobsVar, groupIterator );
-
-        if ( IS_NOT( sysJobsCurrentTick % groupTickMultiplicator ) )
-        {
-            BitWidthType numOfHandlers;
-            CosmOS_GenericVoidType * handlers;
-
-
-            handlers = sysJobs_getSysJobsGroupHandlers( sysJobsVar, groupIterator );
-            numOfHandlers = sysJobs_getSysJobsGroupNumOfHandlers( sysJobsVar, groupIterator );
-
-            for ( BitWidthType handlerIterator = 0; handlerIterator < numOfHandlers; handlerIterator++ )
-            {
-                handlers[handlerIterator]();
-            }
-        }
-    }
-
-    hyperTick = sysJobs_getSysJobsHyperTick( sysJobsVar );
-
-    sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % hyperTick );
-    sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
-
-	__SUPRESS_UNUSED_VAR(entityId);
-
-};
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

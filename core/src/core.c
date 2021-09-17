@@ -162,14 +162,24 @@ __OS_FUNC_SECTION void core_setSchedulableIntoCurrentContext(CosmOS_CoreVariable
 {
     BitWidthType programId;
 
-    CosmOS_ProgramVariableType * programVar;
+	CosmOS_SchedulableStateType priorSchedulableVarState;
 
+	CosmOS_ProgramVariableType * programVar;
+	CosmOS_SchedulableVariableType * priorSchedulableVar;
 
-    programId = schedulable_getProgramId( schedulableVar );
+	programId = schedulable_getProgramId( schedulableVar );
     programVar = core_getCoreProgramVar( coreVar, programId );
+	priorSchedulableVar = core_getCoreSchedulableInExecution( coreVar );
+	priorSchedulableVarState = schedulable_getState( priorSchedulableVar );
 
-    core_setCoreProgramInExecution( coreVar, programVar );
+	core_setCoreProgramInExecution( coreVar, programVar );
     core_setCoreSchedulableInExecution( coreVar, schedulableVar );
+
+	if (priorSchedulableVarState IS_EQUAL_TO SCHEDULABLE_STATE_ENUM__RUNNING)
+	{
+		schedulable_setState(priorSchedulableVar, SCHEDULABLE_STATE_ENUM__READY);
+	}
+	schedulable_setState(schedulableVar, SCHEDULABLE_STATE_ENUM__RUNNING);
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

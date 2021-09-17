@@ -274,7 +274,7 @@ __OS_FUNC_SECTION CosmOS_BooleanType memoryProtection_isMemoryRegionProtected(Co
 	regionLowAddress = (AddressType)regionLowAddressPointer;
 
     programVar = core_getCoreProgramInExecution( core );
-	schedulable = core_getCoreSchedulableInCurrentContext( core );
+	schedulable = core_getCoreSchedulableInExecution( core );
     stack = schedulable_getStack( schedulable );
 
 	stackLowAddress = stack_getStackLowAddress( stack );

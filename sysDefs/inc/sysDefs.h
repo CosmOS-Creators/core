@@ -54,6 +54,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "sysDefsStacks.h"
+#include "sysDefsAlarms.h"
 #include "sysDefsRoutes.h"
 #include "sysDefsBarriers.h"
 #include "sysDefsBuffers.h"

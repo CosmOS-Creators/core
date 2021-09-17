@@ -142,8 +142,8 @@ typedef struct
     const BitWidthType size;
     const CosmOS_PermissionsConfigurationType * const readPermission;
     const CosmOS_PermissionsConfigurationType * const writePermission;
-		const CosmOS_BooleanType isInterCore;
-		const BitWidthType spinlockId;
+	const CosmOS_BooleanType isInterCore;
+	const BitWidthType spinlockId;
 
 } CosmOS_BufferConfigurationType;
 
@@ -190,13 +190,14 @@ typedef struct
 typedef struct
 {
     const CosmOS_StackConfigurationType * const stack;
-    const CosmOS_SchedulableInstanceType instance;
+    const CosmOS_SchedulableInstanceType instanceType;
     const CosmOS_GenericVoidType handler;
     const CosmOS_BooleanType fp;
     const BitWidthType id;
     const BitWidthType instanceId;
     const BitWidthType programId;
     const BitWidthType coreId;
+		const BitWidthType alarmId;
 
 } CosmOS_SchedulableConfigurationType;
 
@@ -218,7 +219,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    const BitWidthType dummy;
+    const BitWidthType priority;
 
 } CosmOS_ThreadConfigurationType;
 
@@ -282,8 +283,8 @@ typedef struct
     const BitWidthType lastToFirstTaskTicks;
     const BitWidthType syncTicks;
     const BitWidthType firstSyncTaskStartTick;
-		const BitWidthType maxTimerTick;
-		const BitWidthType timerTickCount;
+	const BitWidthType maxTimerTick;
+	const BitWidthType timerTickCount;
     void * const idleTaskVar;
 
 } CosmOS_SchedulerConfigurationType;
@@ -300,6 +301,17 @@ typedef struct
     const BitWidthType tickMultiplicator;
 
 } CosmOS_SysJobsGroupConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_AlarmConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    void * const schedulableVar;
+
+} CosmOS_AlarmConfigurationType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -321,15 +333,17 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-		const CosmOS_ProgramConfigurationType * const programs;
-		const BitWidthType numberOfPrograms;
-		const CosmOS_SchedulerConfigurationType * const scheduler;
-		const BitWidthType coreId;
-		const CosmOS_GenericVoidType kernelPanicHook;
-		const AddressType stackMemoryLowAddress;
-		const AddressType stackMemoryHighAddress;
-		const AddressType codeMemoryLowAddress;
-		const AddressType codeMemoryHighAddress;
+	const CosmOS_ProgramConfigurationType * const programs;
+	const BitWidthType numberOfPrograms;
+	const CosmOS_SchedulerConfigurationType * const scheduler;
+	const BitWidthType coreId;
+	const CosmOS_GenericVoidType kernelPanicHook;
+	const AddressType stackMemoryLowAddress;
+	const AddressType stackMemoryHighAddress;
+	const AddressType codeMemoryLowAddress;
+	const AddressType codeMemoryHighAddress;
+	const BitWidthType msToTicks;
+	const BitWidthType numberOfAlarms;
 
 } CosmOS_CoreConfigurationType;
 
@@ -345,7 +359,7 @@ typedef struct
     const CosmOS_BufferConfigurationType * const buffers;
     const BitWidthType numberOfBuffers;
     const CosmOS_RoutesConfigurationType * const route;
-		const BitWidthType numberOfSpinlocks;
+	const BitWidthType numberOfSpinlocks;
 
 } CosmOS_OsConfigurationType;
 /********************************************************************************
