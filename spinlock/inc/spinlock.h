@@ -162,7 +162,7 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_getSpinlock(BitWidthType id)
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_BufferStateType spinlock_trySpinlock(BitWidthType id);
+__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_trySpinlock(BitWidthType id);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -299,7 +299,7 @@ __STATIC_FORCEINLINE void spinlock_setSpinlockSchedulableOwner(CosmOS_SpinlockVa
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
 {
-    return ((spinlockVar->spinlock IS_EQUAL_TO (BitWidthType)SPINLOCK_STATE_ENUM__OCCUPIED)\
+    return ((spinlockVar->spinlock IS_EQUAL_TO SPINLOCK_STATE_ENUM__OCCUPIED)\
 			AND (coreVar->schedulableInExecution IS_EQUAL_TO spinlockVar->schedulableOwner)) ? True : False;
 }
 

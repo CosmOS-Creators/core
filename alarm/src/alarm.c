@@ -21,6 +21,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 #include "alarm.h"
+#include "schedulable.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -104,6 +105,34 @@
 * @ingroup Apis_alarm_c
 * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn alarm_expire(CosmOS_AlarmVariableType *alarmVar)
+  *
+  * @brief Alarm expires DEMO CODE.
+  *
+  * @param[in]  CosmOS_AlarmVariableType *alarmVar
+  *
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void alarm_expire(CosmOS_AlarmVariableType *alarmVar)
+{
+	CosmOS_SchedulableVariableType * schedulableVar;
+
+
+	schedulableVar = alarm_getAlarmSchedulable(alarmVar);
+
+	schedulable_setState(schedulableVar, SCHEDULABLE_STATE_ENUM__READY);
+	alarm_setAlarmState(alarmVar,ALARM_STATE_ENUM__DISABLED);
+	alarm_setAlarmTickCount(alarmVar,0);
+};
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**

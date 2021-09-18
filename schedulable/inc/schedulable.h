@@ -152,19 +152,6 @@ __OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(BitWidthType enti
   * @{
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn schedulable_sleepMs(BitWidthType entityId, BitWidthType delayMs)
-  *
-  * @brief Set schedulable to sleep for x ms DEMO CODE.
-  *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  BitWidthType delayMs
-  *
-  * @return none
-********************************************************************************/
-__OS_FUNC_SECTION void schedulable_sleepMs(BitWidthType entityId, BitWidthType delayMs);
-/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}

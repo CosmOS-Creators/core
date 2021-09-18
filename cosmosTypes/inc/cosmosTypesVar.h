@@ -159,12 +159,25 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_MutexVariableType struct type
+********************************************************************************/
+typedef struct
+{
+	BitWidthType mutex;
+	CosmOS_SchedulableVariableType * schedulableOwner;
+
+} CosmOS_MutexVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_ThreadVariableType struct type
 ********************************************************************************/
 typedef struct
 {
     const CosmOS_ThreadConfigurationType * const cfg;
     CosmOS_SchedulableVariableType * const schedulable;
+	CosmOS_MutexVariableType *blockingMutexVar;
 
 } CosmOS_ThreadVariableType;
 
@@ -229,7 +242,7 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  CosmOS_SysJobsGroupConfigurationType struct type
+  * @brief  CosmOS_SpinlockVariableType struct type
 ********************************************************************************/
 typedef struct
 {

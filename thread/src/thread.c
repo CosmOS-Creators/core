@@ -21,7 +21,13 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
+#include "schedulable.h"
+#include "alarm.h"
+#include "core.h"
 #include "thread.h"
+
+/* CIL interfaces */
+#include "CILinterrupt.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -105,6 +111,81 @@
   * @ingroup Apis_thread_c
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn thread_sleepMs(BitWidthType entityId, BitWidthType delayMs)
+  *
+  * @brief Set thread to sleep for x ms DEMO CODE.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  BitWidthType delayMs
+  *
+  * @return CosmOS_SleepStateType
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType entityId, BitWidthType delayMs)
+{
+	BitWidthType alarmId,
+					msToTicks,
+					tickCount;
+
+	CosmOS_SleepStateType sleepStateReturn;
+	CosmOS_SchedulableInstanceType schedulableInstanceType;
+
+	CosmOS_AlarmVariableType * alarmVar;
+	CosmOS_CoreVariableType * coreVar;
+    CosmOS_SchedulableVariableType * schedulableVar;
+
+
+	if ( delayMs )
+	{
+		coreVar = core_getCoreVar();
+
+		msToTicks = core_getMsToTicks(coreVar);
+
+		schedulableVar = core_getCoreSchedulableInExecution(coreVar);
+		schedulableInstanceType = schedulable_getInstanceType(schedulableVar);
+
+		if (schedulableInstanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD)
+		{
+			alarmId = schedulable_getAlarmId(schedulableVar);
+			alarmVar = core_getAlarmVar(coreVar, alarmId);
+
+			if ( __MUL_OVERFLOW(delayMs,msToTicks,&tickCount) )
+			{
+				sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX_MS;
+			}
+			else
+			{
+				schedulable_setState(schedulableVar, SCHEDULABLE_STATE_ENUM__SLEEP);
+				alarm_setAlarmTickCount(alarmVar,tickCount);
+				alarm_setAlarmState(alarmVar,ALARM_STATE_ENUM__ACTIVATED);
+
+				sleepStateReturn = SLEEP_STATE_ENUM__OK;
+
+				CILinterrupt_contextSwitchRoutineTrigger();
+			}
+
+		}
+		else
+		{
+			sleepStateReturn = SLEEP_STATE_ENUM__ERROR_ONLY_THREADS_CAN_SLEEP;
+		}
+	}
+	else
+	{
+		sleepStateReturn = SLEEP_STATE_ENUM__ERROR_MIN_MS;
+	}
+
+	return sleepStateReturn;
+	__SUPRESS_UNUSED_VAR(entityId);
+};
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

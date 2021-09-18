@@ -272,6 +272,20 @@
 #else
     #error "Your compiler is currently not supported by CosmOS!"
 #endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  __SEC_STOP
+********************************************************************************/
+#if     defined ( __GNUC__ )
+    #define __MUL_OVERFLOW(a,b,result) \
+		__builtin_mul_overflow (a,b,result)
+#elif   defined ( __CC_ARM )
+    #define __MUL_OVERFLOW(a,b,result)
+#else
+    #error "Your compiler is currently not supported by CosmOS!"
+#endif
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

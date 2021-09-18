@@ -193,7 +193,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_BufferStateType spinlock_trySpinlock(BitWidthType id)
+__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_trySpinlock(BitWidthType id)
 {
 	BitWidthType numberOfSpinlocks;
 
@@ -263,15 +263,22 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_releaseSpinlock(BitWidthType
 
 	ownsSchedulableSpinlock = spinlock_ownsSchedulableSpinlock(coreVar, spinlockVar);
 
-	if ( spinlockVar->spinlock AND ownsSchedulableSpinlock )
+	if ( spinlockVar->spinlock IS_EQUAL_TO SPINLOCK_STATE_ENUM__OCCUPIED )
 	{
-		spinlockState = CILspinlock_releaseSpinlock(&(spinlockVar->spinlock), \
-													id, \
-													coreVar->schedulableInExecution->cfg->id );
+		if ( ownsSchedulableSpinlock )
+		{
+			spinlockState = CILspinlock_releaseSpinlock(&(spinlockVar->spinlock), \
+														id, \
+														coreVar->schedulableInExecution->cfg->id );
+		}
+		else
+		{
+			spinlockState = SPINLOCK_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER;
+		}
 	}
 	else
 	{
-		spinlockState = SPINLOCK_STATE_ENUM__SCHEDULABLE_IS_NOT_OWNER;
+		spinlockState = SPINLOCK_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE;
 	}
 
 	return spinlockState;

@@ -230,17 +230,16 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    const BitWidthType coreId;
-    const BitWidthType numberOfTasks;
-    const BitWidthType numberOfThreads;
-    const BitWidthType programMemorySize;
-    const AddressType programMemoryLowAddress;
-    const AddressType programMemoryHighAddress;
+	const BitWidthType coreId;
+	const BitWidthType numberOfTasks;
+	const BitWidthType numberOfThreads;
+	const BitWidthType programMemorySize;
+	const AddressType programMemoryLowAddress;
+	const AddressType programMemoryHighAddress;
 	const BitWidthType programHeapSize;
-    const AddressType programHeapLowAddress;
-    const AddressType programHeapHighAddress;
-	const BitWidthType programHeapGetSpinlockRouteId;
-	const BitWidthType programHeapReleaseSpinlockRouteId;
+	const AddressType programHeapLowAddress;
+	const AddressType programHeapHighAddress;
+	void * const heapMutex;
 
 } CosmOS_ProgramConfigurationType;
 

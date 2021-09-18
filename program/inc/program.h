@@ -305,33 +305,17 @@ __STATIC_FORCEINLINE BitWidthType program_getProgramHeapHighAddress(CosmOS_Progr
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn program_getProgramHeapGetSpinlockRouteId(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramHeapMutex(CosmOS_ProgramVariableType * program)
   *
-  * @brief Get program programHeapGetSpinlockRouteId.
-  *
-  * @param[in]  CosmOS_ProgramVariableType * program
-  *
-  * @return BitWidthType
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType program_getProgramHeapGetSpinlockRouteId(CosmOS_ProgramVariableType * program)
-{
-    return (program->cfg->programHeapGetSpinlockRouteId);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn program_getProgramHeapReleaseSpinlockRouteId(CosmOS_ProgramVariableType * program)
-  *
-  * @brief Get program programHeapReleaseSpinlockRouteId.
+  * @brief Get program programHeapMutex.
   *
   * @param[in]  CosmOS_ProgramVariableType * program
   *
-  * @return BitWidthType
+  * @return CosmOS_MutexVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType program_getProgramHeapReleaseSpinlockRouteId(CosmOS_ProgramVariableType * program)
+__STATIC_FORCEINLINE CosmOS_MutexVariableType * program_getProgramHeapMutex(CosmOS_ProgramVariableType * program)
 {
-    return (program->cfg->programHeapReleaseSpinlockRouteId);
+    return (CosmOS_MutexVariableType *)(program->cfg->heapMutex);
 }
 
 /********************************************************************************

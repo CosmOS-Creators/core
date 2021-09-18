@@ -21,8 +21,8 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysCalls.h"
-#include "spinlock.h"
+#include "cosmosAssert.h"
+#include "cosmosApi.h"
 #include "program.h"
 #include "stdlib.h"
 #include "core.h"
@@ -179,8 +179,6 @@ static CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAdd
 ********************************************************************************/
 void *malloc(size_t size)
 {
-	BitWidthType getSpinlockRouteId,
-					releaseSpinlockRouteId;
 	AddressType heapLowAddress,
 				heapHighAddress,
 				nextAvailableAddress,
@@ -188,7 +186,7 @@ void *malloc(size_t size)
 	CosmOS_BooleanType allocated,
 						lastItem;
 
-	CosmOS_SpinlockStateType spinlockState;
+	CosmOS_MutexStateType mutexState;
 
 	CosmOS_CoreVariableType *coreVar;
 	CosmOS_ProgramVariableType *programVar;
@@ -203,15 +201,15 @@ void *malloc(size_t size)
 	heapLowAddress = program_getProgramHeapLowAddress(programVar);
 	heapHighAddress = program_getProgramHeapHighAddress(programVar);
 
-	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId(programVar);
-	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId(programVar);
-
 	allocated = False;
 	lastItem = False;
 	currentMallocVar = (CosmOS_MallocVariableType *)heapLowAddress;
 	returnAddress = (AddressType)NULL;
 
-	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(getSpinlockRouteId);
+	mutexState = cosmosApi_mutex_getMutex(programVar->cfg->heapMutex);
+
+	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
+	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED);
 
 	while (IS_NOT(lastItem) __OR IS_NOT(allocated))
 	{
@@ -257,9 +255,10 @@ void *malloc(size_t size)
 		}
 	}
 
-	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(releaseSpinlockRouteId);
+	mutexState = cosmosApi_mutex_releaseMutex(programVar->cfg->heapMutex);
 
-	__SUPRESS_UNUSED_VAR(spinlockState);
+	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
+	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED);
 
 	return (void *)returnAddress;
 }
@@ -277,9 +276,7 @@ void *malloc(size_t size)
 ********************************************************************************/
 void free(void *ptr)
 {
-	BitWidthType getSpinlockRouteId,
-					releaseSpinlockRouteId;
-	CosmOS_SpinlockStateType spinlockState;
+	CosmOS_MutexStateType mutexState;
 
 	CosmOS_CoreVariableType *coreVar;
 	CosmOS_ProgramVariableType *programVar;
@@ -292,10 +289,10 @@ void free(void *ptr)
 
 	programVar = core_getCoreProgramInExecution(coreVar);
 
-	getSpinlockRouteId = program_getProgramHeapGetSpinlockRouteId(programVar);
-	releaseSpinlockRouteId = program_getProgramHeapReleaseSpinlockRouteId(programVar);
+	mutexState = cosmosApi_mutex_getMutex(programVar->cfg->heapMutex);
 
-	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(getSpinlockRouteId);
+	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
+	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED);
 
 	if (mallocVarToFree->prior)
 	{
@@ -309,9 +306,10 @@ void free(void *ptr)
 			mallocVarToFree->prior ? mallocVarToFree->prior : NULL;
 	}
 
-	spinlockState = (CosmOS_SpinlockStateType)sysCalls_bitWidthType_ret_bitWidthType(releaseSpinlockRouteId);
+	mutexState = cosmosApi_mutex_releaseMutex(programVar->cfg->heapMutex);
 
-	__SUPRESS_UNUSED_VAR(spinlockState);
+	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
+	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED);
 }
 /********************************************************************************
 **                        Function Definitions | Stop                          **

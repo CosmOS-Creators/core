@@ -193,6 +193,20 @@ __OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_bitWidthType_ret_bitWidthTy
   * @return BitWidthType
 ********************************************************************************/
 __OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
+  *
+  * @brief System call for voidPtr and ret bitWidthType.
+  *
+  * @param[in]  BitWidthType id
+  * @param[in]  void * ptr
+  *
+  * @return BitWidthType
+********************************************************************************/
+__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_voidPtr_ret_bitWidthType(BitWidthType id, void *ptr);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

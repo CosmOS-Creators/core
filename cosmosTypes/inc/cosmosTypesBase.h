@@ -118,6 +118,13 @@ typedef BitWidthType (*CosmOS_Generic_bitWidthType_voidPtr_bitWidthType_ret_bitW
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_Generic_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType type
+********************************************************************************/
+typedef BitWidthType (*CosmOS_Generic_bitWidthType_voidPtr_ret_bitWidthType)(BitWidthType,void *);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_BooleanType enum
 ********************************************************************************/
 typedef enum { False = 0x00, True = 0x01} CosmOS_BooleanType;
@@ -129,8 +136,8 @@ typedef enum { False = 0x00, True = 0x01} CosmOS_BooleanType;
 ********************************************************************************/
 typedef enum {
 
-	ACCESS_STATE_ENUM__ALLOWED      = 0x00,
-	ACCESS_STATE_ENUM__DENIED       = SECURE_NUMBER,
+	ACCESS_STATE_ENUM__ALLOWED,
+	ACCESS_STATE_ENUM__DENIED = FORCE_ENUM,
 
 } CosmOS_AccessStateType;
 
@@ -171,8 +178,8 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-	SCHEDULABLE_INSTANCE_ENUM__TASK    = 0x00,
-	SCHEDULABLE_INSTANCE_ENUM__THREAD  = SECURE_NUMBER,
+	SCHEDULABLE_INSTANCE_ENUM__TASK,
+	SCHEDULABLE_INSTANCE_ENUM__THREAD = FORCE_ENUM,
 
 } CosmOS_SchedulableInstanceType;
 
@@ -183,13 +190,27 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-	SCHEDULABLE_STATE_ENUM__READY,
 	SCHEDULABLE_STATE_ENUM__RUNNING,
 	SCHEDULABLE_STATE_ENUM__EXECUTED,
 	SCHEDULABLE_STATE_ENUM__BLOCKED,
 	SCHEDULABLE_STATE_ENUM__SLEEP,
+	SCHEDULABLE_STATE_ENUM__READY = FORCE_ENUM,
 
 } CosmOS_SchedulableStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_SleepStateType enum
+********************************************************************************/
+typedef enum {
+
+	SLEEP_STATE_ENUM__ERROR_ONLY_THREADS_CAN_SLEEP,
+	SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX_MS,
+	SLEEP_STATE_ENUM__ERROR_MIN_MS,
+	SLEEP_STATE_ENUM__OK,
+
+} CosmOS_SleepStateType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -198,8 +219,8 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-	SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC  = 0x00,
-	SCHEDULER_SYNC_STATE_ENUM__IN_SYNC      = SECURE_NUMBER,
+	SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC,
+	SCHEDULER_SYNC_STATE_ENUM__IN_SYNC = FORCE_ENUM,
 
 } CosmOS_SchedulerSyncStateType;
 
@@ -210,8 +231,8 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-	BARRIER_STATE_ENUM__ACTIVATED  = 0x00,
-	BARRIER_STATE_ENUM__REACHED    = SECURE_NUMBER,
+	BARRIER_STATE_ENUM__ACTIVATED,
+	BARRIER_STATE_ENUM__REACHED = FORCE_ENUM,
 
 } CosmOS_BarrierStateType;
 
@@ -222,8 +243,8 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-	ALARM_STATE_ENUM__ACTIVATED  = 0x00,
-	ALARM_STATE_ENUM__DISABLED   = SECURE_NUMBER,
+	ALARM_STATE_ENUM__DISABLED,
+	ALARM_STATE_ENUM__ACTIVATED = FORCE_ENUM,
 
 } CosmOS_AlarmStateType;
 
@@ -248,9 +269,9 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-	SCHEDULER_STATE_ENUM__NOT_STARTED 					= FORCE_ENUM,
-	SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK	= 0x00,
-	SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME 		= 0x01,
+	SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK,
+	SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME,
+	SCHEDULER_STATE_ENUM__NOT_STARTED = FORCE_ENUM,
 
 } CosmOS_SchedulerStateType;
 
@@ -261,8 +282,8 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-	RESCHEDULE_TRIGGER_STATE_ENUM__TIMER	= FORCE_ENUM,
-	RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM 	= 0x00,
+	RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM,
+	RESCHEDULE_TRIGGER_STATE_ENUM__TIMER = FORCE_ENUM,
 
 } CosmOS_RescheduleTriggerStateType;
 
@@ -273,14 +294,32 @@ typedef enum {
 ********************************************************************************/
 typedef enum {
 
-	SPINLOCK_STATE_ENUM__DEADLOCK_WARNING 			= 0xFF,
 	SPINLOCK_STATE_ENUM__RELEASED 					= 0x00,
 	SPINLOCK_STATE_ENUM__OCCUPIED 					= 0x01,
 	SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED		= 0x02,
-	SPINLOCK_STATE_ENUM__SCHEDULABLE_IS_NOT_OWNER 	= 0x02,
-	SPINLOCK_STATE_ENUM__FORCE      				= FORCE_ENUM,
+	SPINLOCK_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER 	= 0x03,
+	SPINLOCK_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE	 	= 0x04,
+	SPINLOCK_STATE_ENUM__DEADLOCK_WARNING 			= FORCE_ENUM,
 
 } CosmOS_SpinlockStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  CosmOS_SpinlockStateType enum
+********************************************************************************/
+typedef enum {
+
+	MUTEX_STATE_ENUM__RELEASED 					= 0x00,
+	MUTEX_STATE_ENUM__OCCUPIED 					= 0x01,
+	MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED		= 0x02,
+	MUTEX_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER 	= 0x03,
+	MUTEX_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE		= 0x04,
+	MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX		= 0x05,
+	MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS 		=0x06,
+	MUTEX_STATE_ENUM__DEADLOCK_WARNING 			= FORCE_ENUM,
+
+} CosmOS_MutexStateType;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -5,19 +5,19 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file thread.h
+** @file mutex.h
 *********************************************************************************
-<!--                      thread Module Group Definition                      -->
+<!--                     mutex Module Group Definition                     -->
 *********************************************************************************
-** @defgroup thread_module thread
-** @brief thread Module
+** @defgroup mutex_module mutex
+** @brief mutex Module
 ** @details lorem
 *********************************************************************************
-<!--                       thread Unit Group Definition                       -->
+<!--                      mutex Unit Group Definition                      -->
 *********************************************************************************
-** @defgroup thread_unit thread Unit
-** @ingroup thread_module
-** @brief thread Unit
+** @defgroup mutex_unit mutex Unit
+** @ingroup mutex_module
+** @brief mutex Unit
 ** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
@@ -31,23 +31,23 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                    thread Unit Global Group Definition                   -->
+<!--                   mutex Unit Global Group Definition                  -->
 *********************************************************************************
-** @defgroup Global_thread Global
-** @ingroup thread_unit
-** @brief thread globals
+** @defgroup Global_mutex Global
+** @ingroup mutex_unit
+** @brief mutex globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __THREAD_H__
-#define __THREAD_H__
+#ifndef __MUTEX_H__
+#define __MUTEX_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
@@ -65,15 +65,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_thread_h Macros
-  * @ingroup Global_thread
+  * @defgroup Macros_mutex_h Macros
+  * @ingroup Global_mutex
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Macros_thread_h
+  * Macros_mutex_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -84,15 +84,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_thread_h Variables
-  * @ingroup Global_thread
+  * @defgroup Variables_mutex_h Variables
+  * @ingroup Global_mutex
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Variables_thread_h
+  * Variables_mutex_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -103,60 +103,87 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_thread_h API's
-  * @ingroup Global_thread
+  * @defgroup Apis_mutex_h API's
+  * @ingroup Global_mutex
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_thread_h Getters
-  * @ingroup Apis_thread_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Getters_thread_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_thread_h Setters
-  * @ingroup Apis_thread_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * Setters_thread_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_thread_h General
-  * @ingroup Apis_thread_h
+  * @addtogroup Getters_mutex_h Getters
+  * @ingroup Apis_mutex_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_sleepMs(BitWidthType entityId, BitWidthType delayMs)
+  * @fn mutex_getMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Set thread to sleep for x ms DEMO CODE.
+  * @brief Get mutex DEMO CODE.
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  BitWidthType delayMs
+  *	@param[in]	BitWidthType entityId
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
-  * @return CosmOS_SleepStateType
+  * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType entityId, BitWidthType delayMs);
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * General_thread_h
+  * Getters_mutex_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_mutex_h Setters
+  * @ingroup Apis_mutex_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Setters_mutex_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_mutex_h General
+  * @ingroup Apis_mutex_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_tryMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  *
+  * @brief Try to get mutex DEMO CODE.
+  *
+  *	@param[in]	BitWidthType entityId
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  *
+  * @return CosmOS_MutexStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_releaseMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  *
+  * @brief Release mutex DEMO CODE.
+  *
+  *	@param[in]	BitWidthType entityId
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  *
+  * @return CosmOS_MutexStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar);
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * General_mutex_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -167,104 +194,139 @@ __OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType entityId, Bi
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_thread_h Getters
-  * @ingroup Apis_thread_h
+  * @addtogroup Getters_mutex_h Getters
+  * @ingroup Apis_mutex_h
   * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @}
+  * Getters_mutex_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_getThreadPriority(CosmOS_ThreadVariableType *thread)
+  * @fn mutex_getMutexValue(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get thread priority.
+  * @brief Get mutex value.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType thread_getThreadPriority(CosmOS_ThreadVariableType * thread)
+__STATIC_FORCEINLINE BitWidthType mutex_getMutexValue(CosmOS_MutexVariableType * mutexVar)
 {
-    return (thread->cfg->priority);
+    return (mutexVar->mutex);
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_getThreadSchedulable(CosmOS_ThreadVariableType *thread)
+  * @fn mutex_getMutexSchedulableOwner(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get thread schedulable.
+  * @brief Get mutex schedulableOwner.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * thread_getThreadSchedulable(CosmOS_ThreadVariableType * thread)
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * mutex_getMutexSchedulableOwner(CosmOS_MutexVariableType * mutexVar)
 {
-    return (CosmOS_SchedulableVariableType *)(thread->schedulable);
+    return (CosmOS_SchedulableVariableType *)(mutexVar->schedulableOwner);
+}
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_mutex_h Setters
+  * @ingroup Apis_mutex_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_setMutexValue(CosmOS_MutexVariableType * mutexVar, BitWidthType mutexParam)
+  *
+  * @brief Set mutex value.
+  *
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  CosmOS_MutexStateType mutexParam
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void mutex_setMutexValue(CosmOS_MutexVariableType * mutexVar, BitWidthType mutexParam)
+{
+    mutexVar->mutex = mutexParam;
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_getThreadBlockingMutexVar(CosmOS_ThreadVariableType *thread)
+  * @fn mutex_setMutexSchedulableOwner(CosmOS_MutexVariableType * mutex, BitWidthType mutexParam)
   *
-  * @brief Get thread blockingMutexVar.
+  * @brief Set mutex schedulableOwner.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableOwnerParam
   *
-  * @return CosmOS_MutexVariableType *
+  * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_MutexVariableType * thread_getThreadBlockingMutexVar(CosmOS_ThreadVariableType * thread)
+__STATIC_FORCEINLINE void mutex_setMutexSchedulableOwner(CosmOS_MutexVariableType * mutexVar, CosmOS_SchedulableVariableType * schedulableOwnerParam)
 {
-    return (CosmOS_MutexVariableType *)(thread->blockingMutexVar);
+    mutexVar->schedulableOwner = schedulableOwnerParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Getters_thread_h
+  * Setters_mutex_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_thread_h Setters
-  * @ingroup Apis_thread_h
+  * @addtogroup General_mutex_h General
+  * @ingroup Apis_mutex_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_setThreadBlockingMutexVar(CosmOS_ThreadVariableType *thread)
+  * @fn mutex_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Set thread blockingMutexVar.
+  * @brief Check if the mutex will ends up in deadlock DEMO CODE.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
-  * @param[in]  CosmOS_MutexVariableType * mutexParam
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
 	*
-  * @return none
+  * @return CosmOS_BufferStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE void thread_setThreadBlockingMutexVar(CosmOS_ThreadVariableType * thread, CosmOS_MutexVariableType * mutexParam)
+__STATIC_FORCEINLINE CosmOS_BooleanType mutex_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
 {
-    thread->blockingMutexVar = mutexParam;
+    return ((mutexVar->mutex IS_EQUAL_TO MUTEX_STATE_ENUM__OCCUPIED)\
+			AND (coreVar->schedulableInExecution IS_EQUAL_TO mutexVar->schedulableOwner)) ? True : False;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_ownsSchedulableMutex(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
+  *
+  * @brief Check if the schedulable in execution owns the current mutex.
+  *
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+	*
+  * @return CosmOS_BufferStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BooleanType mutex_ownsSchedulableMutex(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
+{
+    return (coreVar->schedulableInExecution IS_EQUAL_TO mutexVar->schedulableOwner) ? True : False;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @}
-  * Setters_thread_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_thread_h General
-  * @ingroup Apis_thread_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * General_thread_h
+  * General_mutex_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

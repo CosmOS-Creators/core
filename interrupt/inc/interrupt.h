@@ -217,6 +217,24 @@ __STATIC_FORCEINLINE void interrupt_disableInterrupts(BitWidthType entityId)
 
 	__SUPRESS_UNUSED_VAR(entityId);
 }
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn interrupt_contextSwitchRoutineTrigger(BitWidthType entityId)
+  *
+  * @brief Context switch routine trigger.
+  *
+  * @param[in]  BitWidthType entityId
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void interrupt_contextSwitchRoutineTrigger(BitWidthType entityId)
+{
+	CILinterrupt_contextSwitchRoutineTrigger();
+
+	__SUPRESS_UNUSED_VAR(entityId);
+}
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**

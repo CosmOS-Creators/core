@@ -225,6 +225,33 @@ __OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bi
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
+  *
+  * @brief System call for voidPtr and ret bitWidthType.
+  *
+  * @param[in]  BitWidthType id
+  * @param[in]  void * ptr
+  *
+  * @return BitWidthType
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_voidPtr_ret_bitWidthType(BitWidthType id, void * ptr)
+{
+    BitWidthType returnValue;
+
+    returnValue = CILsysCalls_bitWidthType_voidPtr_ret_bitWidthType( id, ptr );
+
+    return returnValue;
+};
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

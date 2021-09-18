@@ -193,6 +193,84 @@ __OS_FUNC_SECTION void os_kernelPanic(void)
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_write8(void)
+  *
+  * @brief OS write to protected memory 8bit variable DEMO.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  uint8_t *address
+  * @param[in]  uint8_t value
+  *
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void os_write8(BitWidthType entityId,uint8_t *address,uint8_t value)
+{
+	//TODO: memoryProtection_isMemoryRegionProtected check
+	*address = value;
+	__SUPRESS_UNUSED_VAR(entityId);
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_write16(void)
+  *
+  * @brief OS write to protected memory 16bit variable DEMO.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  uint16_t *address
+  * @param[in]  uint16_t value
+  *
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void os_write16(BitWidthType entityId,uint16_t *address,uint16_t value)
+{
+	//TODO: memoryProtection_isMemoryRegionProtected check
+	*address = value;
+	__SUPRESS_UNUSED_VAR(entityId);
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn os_write32(void)
+  *
+  * @brief OS write to protected memory 32bit variable DEMO.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  uint32_t *address
+  * @param[in]  uint32_t value
+  *
+  * @return none
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION void os_write32(BitWidthType entityId,uint32_t *address,uint32_t value)
+{
+	//TODO: memoryProtection_isMemoryRegionProtected check
+	*address = value;
+	__SUPRESS_UNUSED_VAR(entityId);
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

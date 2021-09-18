@@ -158,7 +158,6 @@ __OS_FUNC_SECTION void scheduler_updateAlarms(CosmOS_CoreVariableType * coreVar,
 	CosmOS_AlarmStateType alarmState;
 
 	CosmOS_AlarmVariableType * alarmVar;
-	CosmOS_SchedulableVariableType * schedulableVar;
 
 	numberOfAlarms = core_getCoreNumberOfAlarms(coreVar);
 	for (BitWidthType iterator = 0; iterator < numberOfAlarms; iterator++)
@@ -172,11 +171,7 @@ __OS_FUNC_SECTION void scheduler_updateAlarms(CosmOS_CoreVariableType * coreVar,
 
 			if ( tickCount <= priorTickStep )
 			{
-				schedulableVar = alarm_getAlarmSchedulable(alarmVar);
-
-				schedulable_setState(schedulableVar, SCHEDULABLE_STATE_ENUM__READY);
-				alarm_setAlarmState(alarmVar,ALARM_STATE_ENUM__DISABLED);
-				alarm_setAlarmTickCount(alarmVar,0);
+				alarm_expire(alarmVar);
 			}
 			else
 			{
