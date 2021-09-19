@@ -243,6 +243,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexPrivileged(BitWidthTyp
 		if (coreVar->programInExecution->threadVars[iterator].blockingMutexVar IS_EQUAL_TO mutexVar)
 		{
 			coreVar->programInExecution->threadVars[iterator].schedulable->state = SCHEDULABLE_STATE_ENUM__READY;
+			coreVar->programInExecution->threadVars[iterator].blockingMutexVar = NULL;
 
 			threadVar = program_getProgramThread(coreVar->programInExecution,coreVar->schedulableInExecution->cfg->instanceId);
 			if ( coreVar->programInExecution->threadVars[iterator].cfg->priority > threadVar->cfg->priority )
