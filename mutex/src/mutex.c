@@ -144,7 +144,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
 {
-    CosmOS_MutexStateType mutexState;
+	CosmOS_MutexStateType mutexState;
 
 	CosmOS_CoreVariableType * coreVar;
 	CosmOS_ThreadVariableType * threadVar;
@@ -167,7 +167,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexPrivileged(BitWidthType en
 	}
 
 	__SUPRESS_UNUSED_VAR(entityId);
-    return mutexState;
+	return mutexState;
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -190,7 +190,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
 {
-    CosmOS_MutexStateType mutexState;
+	CosmOS_MutexStateType mutexState;
 
 	CosmOS_CoreVariableType * coreVar;
 
@@ -204,7 +204,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexPrivileged(BitWidthType en
 	}
 
 	__SUPRESS_UNUSED_VAR(entityId);
-    return mutexState;
+	return mutexState;
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -228,7 +228,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 __OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
 {
 	CosmOS_BooleanType higherPriorityThreadBlocked;
-    CosmOS_MutexStateType mutexState;
+	CosmOS_MutexStateType mutexState;
 
 	CosmOS_CoreVariableType * coreVar;
 	CosmOS_ThreadVariableType * threadVar;
@@ -282,7 +282,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(CosmOS_MutexVariableType 
 {
 	CosmOS_BooleanType isMutexInProtectedMemory;
 	CosmOS_BooleanType willCauseDeadlock;
-    CosmOS_MutexStateType mutexState;
+	CosmOS_MutexStateType mutexState;
 
 	CosmOS_CoreVariableType * coreVar;
 
@@ -319,7 +319,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(CosmOS_MutexVariableType 
 		mutexState = MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS;
 	}
 
-    return mutexState;
+	return mutexState;
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -342,7 +342,7 @@ __SEC_START(__OS_FUNC_SECTION_START)
 __OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(CosmOS_MutexVariableType * mutexVar)
 {
 	CosmOS_BooleanType isMutexInProtectedMemory;
-    CosmOS_MutexStateType mutexState;
+	CosmOS_MutexStateType mutexState;
 
 	CosmOS_CoreVariableType * coreVar;
 
@@ -367,7 +367,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(CosmOS_MutexVariableType 
 		mutexState = MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS;
 	}
 
-    return mutexState;
+	return mutexState;
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)
@@ -391,7 +391,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(CosmOS_MutexVariableT
 {
 	CosmOS_BooleanType ownsSchedulableMutex,
 						isMutexInProtectedMemory;
-    CosmOS_MutexStateType mutexState;
+	CosmOS_MutexStateType mutexState;
 
 	CosmOS_CoreVariableType * coreVar;
 

@@ -256,7 +256,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(CosmOS_MutexVariableT
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType mutex_getMutexValue(CosmOS_MutexVariableType * mutexVar)
 {
-    return (mutexVar->mutex);
+	return (mutexVar->mutex);
 }
 
 /********************************************************************************
@@ -272,7 +272,7 @@ __STATIC_FORCEINLINE BitWidthType mutex_getMutexValue(CosmOS_MutexVariableType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_SchedulableVariableType * mutex_getMutexSchedulableOwner(CosmOS_MutexVariableType * mutexVar)
 {
-    return (CosmOS_SchedulableVariableType *)(mutexVar->schedulableOwner);
+	return (CosmOS_SchedulableVariableType *)(mutexVar->schedulableOwner);
 }
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -295,7 +295,7 @@ __STATIC_FORCEINLINE CosmOS_SchedulableVariableType * mutex_getMutexSchedulableO
 ********************************************************************************/
 __STATIC_FORCEINLINE void mutex_setMutexValue(CosmOS_MutexVariableType * mutexVar, BitWidthType mutexParam)
 {
-    mutexVar->mutex = mutexParam;
+	mutexVar->mutex = mutexParam;
 }
 
 /********************************************************************************
@@ -312,7 +312,7 @@ __STATIC_FORCEINLINE void mutex_setMutexValue(CosmOS_MutexVariableType * mutexVa
 ********************************************************************************/
 __STATIC_FORCEINLINE void mutex_setMutexSchedulableOwner(CosmOS_MutexVariableType * mutexVar, CosmOS_SchedulableVariableType * schedulableOwnerParam)
 {
-    mutexVar->schedulableOwner = schedulableOwnerParam;
+	mutexVar->schedulableOwner = schedulableOwnerParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -341,7 +341,7 @@ __STATIC_FORCEINLINE void mutex_setMutexSchedulableOwner(CosmOS_MutexVariableTyp
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType mutex_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
 {
-    return ((mutexVar->mutex IS_EQUAL_TO MUTEX_STATE_ENUM__OCCUPIED)\
+	return ((mutexVar->mutex IS_EQUAL_TO MUTEX_STATE_ENUM__OCCUPIED)\
 			AND (coreVar->schedulableInExecution IS_EQUAL_TO mutexVar->schedulableOwner)) ? True : False;
 }
 
@@ -359,7 +359,7 @@ __STATIC_FORCEINLINE CosmOS_BooleanType mutex_willCauseDeadlock(CosmOS_CoreVaria
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType mutex_ownsSchedulableMutex(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
 {
-    return (coreVar->schedulableInExecution IS_EQUAL_TO mutexVar->schedulableOwner) ? True : False;
+	return (coreVar->schedulableInExecution IS_EQUAL_TO mutexVar->schedulableOwner) ? True : False;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
