@@ -22,7 +22,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "cosmosAssert.h"
-#include "cosmosApi.h"
+#include "mutex.h"
 #include "program.h"
 #include "stdlib.h"
 #include "core.h"
@@ -206,7 +206,7 @@ void *malloc(size_t size)
 	currentMallocVar = (CosmOS_MallocVariableType *)heapLowAddress;
 	returnAddress = (AddressType)NULL;
 
-	mutexState = cosmosApi_mutex_getMutex(programVar->cfg->heapMutex);
+	mutexState = mutex_getMutex(programVar->cfg->heapMutex);
 
 	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
 	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED);
@@ -255,7 +255,7 @@ void *malloc(size_t size)
 		}
 	}
 
-	mutexState = cosmosApi_mutex_releaseMutex(programVar->cfg->heapMutex);
+	mutexState = mutex_releaseMutex(programVar->cfg->heapMutex);
 
 	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
 	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED);
@@ -289,7 +289,7 @@ void free(void *ptr)
 
 	programVar = core_getCoreProgramInExecution(coreVar);
 
-	mutexState = cosmosApi_mutex_getMutex(programVar->cfg->heapMutex);
+	mutexState = mutex_getMutex(programVar->cfg->heapMutex);
 
 	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
 	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED);
@@ -306,7 +306,7 @@ void free(void *ptr)
 			mallocVarToFree->prior ? mallocVarToFree->prior : NULL;
 	}
 
-	mutexState = cosmosApi_mutex_releaseMutex(programVar->cfg->heapMutex);
+	mutexState = mutex_releaseMutex(programVar->cfg->heapMutex);
 
 	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
 	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED);

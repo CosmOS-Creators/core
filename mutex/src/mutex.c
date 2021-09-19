@@ -25,6 +25,7 @@
 #include "mutex.h"
 #include "program.h"
 #include "cosmosAssert.h"
+#include "cosmosApiPrivate.h"
 #include "memoryProtection.h"
 
 /* CIL interfaces */
@@ -129,9 +130,9 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_getMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_getMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get mutex DEMO CODE.
+  * @brief Get mutex privileged DEMO CODE.
   *
   *	@param[in]	BitWidthType entityId
   * @param[in]  CosmOS_MutexVariableType * mutexVar
@@ -141,14 +142,149 @@
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+{
+    CosmOS_MutexStateType mutexState;
+
+	CosmOS_CoreVariableType * coreVar;
+	CosmOS_ThreadVariableType * threadVar;
+
+
+	coreVar = CILcore_getCoreVar();
+
+	mutexState = CILmutex_tryMutex(&(mutexVar->mutex));
+	if ( mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED )
+	{
+		mutexVar->schedulableOwner = coreVar->schedulableInExecution;
+		__SUPRESS_UNUSED_VAR(threadVar);
+	}
+	else
+	{
+		threadVar = program_getProgramThread(coreVar->programInExecution,coreVar->schedulableInExecution->cfg->instanceId);
+		threadVar->blockingMutexVar = mutexVar;
+		coreVar->schedulableInExecution->state = SCHEDULABLE_STATE_ENUM__BLOCKED;
+		CILinterrupt_contextSwitchRoutineTrigger();
+	}
+
+	__SUPRESS_UNUSED_VAR(entityId);
+    return mutexState;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_tryMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  *
+  * @brief Get mutex privileged DEMO CODE.
+  *
+  *	@param[in]	BitWidthType entityId
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  *
+  * @return CosmOS_MutexStateType
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+{
+    CosmOS_MutexStateType mutexState;
+
+	CosmOS_CoreVariableType * coreVar;
+
+
+	coreVar = CILcore_getCoreVar();
+
+	mutexState = CILmutex_tryMutex(&(mutexVar->mutex));
+	if ( mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED )
+	{
+		mutexVar->schedulableOwner = coreVar->schedulableInExecution;
+	}
+
+	__SUPRESS_UNUSED_VAR(entityId);
+    return mutexState;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_releaseMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  *
+  * @brief Release mutex privileged DEMO CODE.
+  *
+  *	@param[in]	BitWidthType entityId
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  *
+  * @return CosmOS_MutexStateType
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+{
+	CosmOS_BooleanType higherPriorityThreadBlocked;
+    CosmOS_MutexStateType mutexState;
+
+	CosmOS_CoreVariableType * coreVar;
+	CosmOS_ThreadVariableType * threadVar;
+
+	coreVar = CILcore_getCoreVar();
+
+	mutexState = CILmutex_releaseMutex(&(mutexVar->mutex));
+
+	higherPriorityThreadBlocked = False;
+	for (BitWidthType iterator = 0; iterator < coreVar->programInExecution->cfg->numberOfThreads; iterator++)
+	{
+		if (coreVar->programInExecution->threadVars[iterator].blockingMutexVar IS_EQUAL_TO mutexVar)
+		{
+			coreVar->programInExecution->threadVars[iterator].schedulable->state = SCHEDULABLE_STATE_ENUM__READY;
+
+			threadVar = program_getProgramThread(coreVar->programInExecution,coreVar->schedulableInExecution->cfg->instanceId);
+			if ( coreVar->programInExecution->threadVars[iterator].cfg->priority > threadVar->cfg->priority )
+			{
+				higherPriorityThreadBlocked = True;
+			}
+		}
+	}
+
+	if (higherPriorityThreadBlocked)
+	{
+		CILinterrupt_contextSwitchRoutineTrigger();
+	}
+
+	__SUPRESS_UNUSED_VAR(entityId);
+	return mutexState;
+}
+/* @cond S */
+__SEC_STOP(__OS_FUNC_SECTION_STOP)
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_getMutex(CosmOS_MutexVariableType * mutexVar)
+  *
+  * @brief Get mutex DEMO CODE.
+  *
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  *
+  * @return CosmOS_MutexStateType
+********************************************************************************/
+/* @cond S */
+__SEC_START(__OS_FUNC_SECTION_START)
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(CosmOS_MutexVariableType * mutexVar)
 {
 	CosmOS_BooleanType isMutexInProtectedMemory;
 	CosmOS_BooleanType willCauseDeadlock;
     CosmOS_MutexStateType mutexState;
 
 	CosmOS_CoreVariableType * coreVar;
-	CosmOS_ThreadVariableType * threadVar;
 
 
 	coreVar = CILcore_getCoreVar();
@@ -166,18 +302,11 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(BitWidthType entityId, Co
 			}
 			else
 			{
-				mutexState = CILmutex_tryMutex(&(mutexVar->mutex));
-				if ( mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED )
+				do
 				{
-					mutexVar->schedulableOwner = coreVar->schedulableInExecution;
-				}
-				else
-				{
-					threadVar = program_getProgramThread(coreVar->programInExecution,coreVar->schedulableInExecution->cfg->instanceId);
-					threadVar->blockingMutexVar = mutexVar;
-					coreVar->schedulableInExecution->state = SCHEDULABLE_STATE_ENUM__BLOCKED;
-					CILinterrupt_contextSwitchRoutineTrigger();
-				}
+					mutexState = cosmosApiPrivate_mutex_getMutexPrivileged(mutexVar);
+				} while ( mutexState IS_NOT_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED );
+
 			}
 		}
 		else
@@ -190,7 +319,6 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(BitWidthType entityId, Co
 		mutexState = MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS;
 	}
 
-	__SUPRESS_UNUSED_VAR(entityId);
     return mutexState;
 }
 /* @cond S */
@@ -200,11 +328,10 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_tryMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_tryMutex(CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Try to get mutex DEMO CODE
   * .
-  *	@param[in]	BitWidthType entityId
   * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return CosmOS_MutexStateType
@@ -212,7 +339,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(CosmOS_MutexVariableType * mutexVar)
 {
 	CosmOS_BooleanType isMutexInProtectedMemory;
     CosmOS_MutexStateType mutexState;
@@ -228,11 +355,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(BitWidthType entityId, Co
 	{
 		if (coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD )
 		{
-			mutexState = CILmutex_tryMutex(&(mutexVar->mutex));
-			if ( mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED )
-			{
-				mutexVar->schedulableOwner = coreVar->schedulableInExecution;
-			}
+			mutexState = cosmosApiPrivate_mutex_tryMutexPrivileged(mutexVar);
 		}
 		else
 		{
@@ -244,7 +367,6 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(BitWidthType entityId, Co
 		mutexState = MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS;
 	}
 
-	__SUPRESS_UNUSED_VAR(entityId);
     return mutexState;
 }
 /* @cond S */
@@ -254,11 +376,10 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_releaseMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_releaseMutex(CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Release mutex DEMO CODE.
   *
-  *	@param[in]	BitWidthType entityId
   * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return CosmOS_MutexStateType
@@ -266,7 +387,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(CosmOS_MutexVariableType * mutexVar)
 {
 	CosmOS_BooleanType ownsSchedulableMutex,
 						isMutexInProtectedMemory;
@@ -288,15 +409,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(BitWidthType entityId
 			{
 				if ( ownsSchedulableMutex )
 				{
-					mutexState = CILmutex_releaseMutex(&(mutexVar->mutex));
-
-					for (BitWidthType iterator = 0; iterator < coreVar->programInExecution->cfg->numberOfThreads; iterator++)
-					{
-						if (coreVar->programInExecution->threadVars[iterator].blockingMutexVar IS_EQUAL_TO mutexVar)
-						{
-							coreVar->programInExecution->threadVars[iterator].schedulable->state = SCHEDULABLE_STATE_ENUM__READY;
-						}
-					}
+					mutexState = cosmosApiPrivate_mutex_releaseMutexPrivileged(mutexVar);
 				}
 				else
 				{
@@ -318,7 +431,6 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(BitWidthType entityId
 		mutexState = MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS;
 	}
 
-	__SUPRESS_UNUSED_VAR(entityId);
 	return mutexState;
 }
 /* @cond S */

@@ -116,16 +116,29 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_getMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_getMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get mutex DEMO CODE.
+  * @brief Get mutex privileged DEMO CODE.
   *
   *	@param[in]	BitWidthType entityId
   * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_getMutex(CosmOS_MutexVariableType * mutexVar)
+  *
+  * @brief Get mutex DEMO CODE.
+  *
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  *
+  * @return CosmOS_MutexStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(CosmOS_MutexVariableType * mutexVar);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -155,30 +168,56 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(BitWidthType entityId, Co
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_tryMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_tryMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Try to get mutex DEMO CODE.
+  * @brief Get mutex privileged DEMO CODE.
   *
   *	@param[in]	BitWidthType entityId
   * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_releaseMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_releaseMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Release mutex DEMO CODE.
+  * @brief Release mutex privileged DEMO CODE.
   *
   *	@param[in]	BitWidthType entityId
   * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_tryMutex(CosmOS_MutexVariableType * mutexVar)
+  *
+  * @brief Try to get mutex DEMO CODE.
+  *
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  *
+  * @return CosmOS_MutexStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(CosmOS_MutexVariableType * mutexVar);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn mutex_releaseMutex(CosmOS_MutexVariableType * mutexVar)
+  *
+  * @brief Release mutex DEMO CODE.
+  *
+  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  *
+  * @return CosmOS_MutexStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(CosmOS_MutexVariableType * mutexVar);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
