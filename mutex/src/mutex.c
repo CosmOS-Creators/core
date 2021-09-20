@@ -25,7 +25,7 @@
 #include "mutex.h"
 #include "program.h"
 #include "cosmosAssert.h"
-#include "cosmosApiPrivate.h"
+#include "cosmosApiInternal.h"
 #include "memoryProtection.h"
 
 /* CIL interfaces */
@@ -130,7 +130,7 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_getMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_getMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Get mutex privileged DEMO CODE.
   *
@@ -142,7 +142,7 @@
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
 {
 	CosmOS_MutexStateType mutexState;
 
@@ -176,7 +176,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_tryMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_tryMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Get mutex privileged DEMO CODE.
   *
@@ -188,7 +188,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
 {
 	CosmOS_MutexStateType mutexState;
 
@@ -213,7 +213,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_releaseMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_releaseMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Release mutex privileged DEMO CODE.
   *
@@ -225,7 +225,7 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
 {
 	CosmOS_BooleanType higherPriorityThreadBlocked;
 	CosmOS_MutexStateType mutexState;
@@ -305,7 +305,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(CosmOS_MutexVariableType 
 			{
 				do
 				{
-					mutexState = cosmosApiPrivate_mutex_getMutexPrivileged(mutexVar);
+					mutexState = cosmosApiInternal_mutex_getMutexInternal(mutexVar);
 				} while ( mutexState IS_NOT_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED );
 
 			}
@@ -356,7 +356,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(CosmOS_MutexVariableType 
 	{
 		if (coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD )
 		{
-			mutexState = cosmosApiPrivate_mutex_tryMutexPrivileged(mutexVar);
+			mutexState = cosmosApiInternal_mutex_tryMutexInternal(mutexVar);
 		}
 		else
 		{
@@ -410,7 +410,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(CosmOS_MutexVariableT
 			{
 				if ( ownsSchedulableMutex )
 				{
-					mutexState = cosmosApiPrivate_mutex_releaseMutexPrivileged(mutexVar);
+					mutexState = cosmosApiInternal_mutex_releaseMutexInternal(mutexVar);
 				}
 				else
 				{

@@ -183,8 +183,7 @@ void *malloc(size_t size)
 				heapHighAddress,
 				nextAvailableAddress,
 				returnAddress;
-	CosmOS_BooleanType allocated,
-						lastItem;
+	CosmOS_BooleanType allocated;
 
 	CosmOS_MutexStateType mutexState;
 
@@ -195,70 +194,72 @@ void *malloc(size_t size)
 
 
 	coreVar = core_getCoreVar();
-
-	programVar = core_getCoreProgramInExecution(coreVar);
-
-	heapLowAddress = program_getProgramHeapLowAddress(programVar);
-	heapHighAddress = program_getProgramHeapHighAddress(programVar);
-
-	allocated = False;
-	lastItem = False;
-	currentMallocVar = (CosmOS_MallocVariableType *)heapLowAddress;
 	returnAddress = (AddressType)NULL;
 
-	mutexState = mutex_getMutex(programVar->cfg->heapMutex);
-
-	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
-	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED);
-
-	while (IS_NOT(lastItem) __OR IS_NOT(allocated))
+	if ( coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD )
 	{
-		if (currentMallocVar->next IS_NOT_EQUAL_TO NULL)
+
+		programVar = core_getCoreProgramInExecution(coreVar);
+
+		heapLowAddress = program_getProgramHeapLowAddress(programVar);
+		heapHighAddress = program_getProgramHeapHighAddress(programVar);
+
+		allocated = False;
+		currentMallocVar = (CosmOS_MallocVariableType *)heapLowAddress;
+
+		mutexState = mutex_getMutex(programVar->cfg->heapMutex);
+
+		//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
+		cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED);
+
+		do
 		{
-			nextAvailableAddress = (AddressType)currentMallocVar + (AddressType)currentMallocVar->size;
-			if (size < ((AddressType)currentMallocVar->next - nextAvailableAddress))
+			if (currentMallocVar->next IS_NOT_EQUAL_TO NULL)
 			{
-				newMallocVar = malloc_varAlloc(nextAvailableAddress,
-												(AddressType)currentMallocVar,
-												(AddressType)currentMallocVar->next,
-												size);
+				nextAvailableAddress = (AddressType)currentMallocVar + (AddressType)currentMallocVar->size;
+				if (size < ((AddressType)currentMallocVar->next - nextAvailableAddress))
+				{
+					newMallocVar = malloc_varAlloc(nextAvailableAddress,
+													(AddressType)currentMallocVar,
+													(AddressType)currentMallocVar->next,
+													size);
 
-				((CosmOS_MallocVariableType *)currentMallocVar->next)->prior = newMallocVar;
-				currentMallocVar->next = newMallocVar;
+					((CosmOS_MallocVariableType *)currentMallocVar->next)->prior = newMallocVar;
+					currentMallocVar->next = newMallocVar;
 
-				returnAddress = (AddressType)newMallocVar +
-								(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
-				allocated = True;
+					returnAddress = (AddressType)newMallocVar +
+									(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
+					allocated = True;
+				}
+				else
+				{
+					currentMallocVar = currentMallocVar->next;
+				}
 			}
 			else
 			{
-				currentMallocVar = currentMallocVar->next;
-			}
-		}
-		else
-		{
-			nextAvailableAddress = (AddressType)currentMallocVar + (AddressType)currentMallocVar->size;
-			if (size < (heapHighAddress - nextAvailableAddress))
-			{
-				newMallocVar = malloc_varAlloc(nextAvailableAddress,
-												(AddressType)currentMallocVar,
-												(AddressType)NULL,
-												size);
+				nextAvailableAddress = (AddressType)currentMallocVar + (AddressType)currentMallocVar->size;
+				if (size < (heapHighAddress - nextAvailableAddress))
+				{
+					newMallocVar = malloc_varAlloc(nextAvailableAddress,
+													(AddressType)currentMallocVar,
+													(AddressType)NULL,
+													size);
 
-				currentMallocVar->next = newMallocVar;
+					currentMallocVar->next = newMallocVar;
 
-				returnAddress = (AddressType)newMallocVar +
-								(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
-				allocated = True;
+					returnAddress = (AddressType)newMallocVar +
+									(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
+					allocated = True;
+				}
 			}
-			lastItem = True;
-		}
+		} while (currentMallocVar->next AND IS_NOT(allocated));
+
+		mutexState = mutex_releaseMutex(programVar->cfg->heapMutex);
+
+		//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
+		cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED);
 	}
-
-	mutexState = mutex_releaseMutex(programVar->cfg->heapMutex);
-
-	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
-	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED);
 
 	return (void *)returnAddress;
 }
@@ -286,30 +287,33 @@ void free(void *ptr)
 
 
 	coreVar = core_getCoreVar();
-
-	programVar = core_getCoreProgramInExecution(coreVar);
-
-	mutexState = mutex_getMutex(programVar->cfg->heapMutex);
-
-	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
-	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED);
-
-	if (mallocVarToFree->prior)
+	if ( coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD )
 	{
-		((CosmOS_MallocVariableType *)mallocVarToFree->prior)->next =
-			mallocVarToFree->next ? mallocVarToFree->next : NULL;
+		//TODO: check if the pointer is one of the allocated heap variables
+		programVar = core_getCoreProgramInExecution(coreVar);
+
+		mutexState = mutex_getMutex(programVar->cfg->heapMutex);
+
+		//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
+		cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED);
+
+		if (mallocVarToFree->prior)
+		{
+			((CosmOS_MallocVariableType *)mallocVarToFree->prior)->next =
+				mallocVarToFree->next ? mallocVarToFree->next : NULL;
+		}
+
+		if (mallocVarToFree->next)
+		{
+			((CosmOS_MallocVariableType *)mallocVarToFree->next)->prior =
+				mallocVarToFree->prior ? mallocVarToFree->prior : NULL;
+		}
+
+		mutexState = mutex_releaseMutex(programVar->cfg->heapMutex);
+
+		//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
+		cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED);
 	}
-
-	if (mallocVarToFree->next)
-	{
-		((CosmOS_MallocVariableType *)mallocVarToFree->next)->prior =
-			mallocVarToFree->prior ? mallocVarToFree->prior : NULL;
-	}
-
-	mutexState = mutex_releaseMutex(programVar->cfg->heapMutex);
-
-	//TODO: this assertion cannot be here cause it will in the future disable ISRs - so only os can call it in privileged context
-	cosmosAssert(mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED);
 }
 /********************************************************************************
 **                        Function Definitions | Stop                          **

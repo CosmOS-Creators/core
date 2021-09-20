@@ -116,7 +116,7 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_getMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_getMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Get mutex privileged DEMO CODE.
   *
@@ -125,7 +125,7 @@ extern "C" {
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -168,7 +168,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(CosmOS_MutexVariableType 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_tryMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_tryMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Get mutex privileged DEMO CODE.
   *
@@ -177,12 +177,12 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(CosmOS_MutexVariableType 
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_releaseMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_releaseMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Release mutex privileged DEMO CODE.
   *
@@ -191,7 +191,7 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexPrivileged(BitWidthType en
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexPrivileged(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **

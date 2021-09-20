@@ -142,16 +142,45 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_sleepMs(BitWidthType entityId, BitWidthType delayMs)
+  * @fn thread_sleepMsInternal(BitWidthType entityId, CosmOS_CoreVariableType * coreVar, BitWidthType tickCount)
   *
-  * @brief Set thread to sleep for x ms DEMO CODE.
+  * @brief Set thread to sleep internal for x milliseconds DEMO CODE.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  BitWidthType tickCount
+  *
+  * @return CosmOS_SleepStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMsInternal(BitWidthType entityId, CosmOS_CoreVariableType *coreVar, BitWidthType tickCount);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn thread_sleepMs(BitWidthType delayMs)
+  *
+  * @brief Set thread to sleep for x milliseconds DEMO CODE.
   *
   * @param[in]  BitWidthType entityId
   * @param[in]  BitWidthType delayMs
   *
   * @return CosmOS_SleepStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType entityId, BitWidthType delayMs);
+__OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType delayMs);
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn thread_sleep(BitWidthType delay)
+  *
+  * @brief Set thread to sleep for x seconds DEMO CODE.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  BitWidthType delay
+  *
+  * @return CosmOS_SleepStateType
+********************************************************************************/
+#define thread_sleep(delay) thread_sleepMs(delay*1000)
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
