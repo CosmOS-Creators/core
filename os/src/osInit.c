@@ -162,7 +162,7 @@ __OS_FUNC_SECTION void osInit_init(BitWidthType entityId)
 
     stackInit_init( coreVar );
 
-	memoryManager_heapInit();
+	memoryManager_heapInit( coreVar );
 
     coreSync_getBarrier( coreVar, OS_INIT_ID );
 

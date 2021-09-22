@@ -125,16 +125,16 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  ALIGN macro
+  * @brief  __ALIGN_MASK macro
 ********************************************************************************/
-#define ALIGN(x,a)              __ALIGN_MASK(x,(typeof(x))(a)-1)
+#define __ALIGN_MASK(x,mask)    (((x)+(mask))&~(mask))
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  __ALIGN_MASK macro
+  * @brief  ALIGN macro
 ********************************************************************************/
-#define __ALIGN_MASK(x,mask)    (((x)+(mask))&~(mask))
+#define ALIGN(x,a)              __ALIGN_MASK(x,(typeof(x))(a)-1)
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -276,13 +276,27 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief  __SEC_STOP
+  * @brief  __MUL_OVERFLOW
 ********************************************************************************/
 #if     defined ( __GNUC__ )
     #define __MUL_OVERFLOW(a,b,result) \
 		__builtin_mul_overflow (a,b,result)
 #elif   defined ( __CC_ARM )
     #define __MUL_OVERFLOW(a,b,result)
+#else
+    #error "Your compiler is currently not supported by CosmOS!"
+#endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @brief  __SEC_STOP
+********************************************************************************/
+#if     defined ( __GNUC__ )
+    #define __ADD_OVERFLOW(a,b,result) \
+		__builtin_add_overflow (a,b,result)
+#elif   defined ( __CC_ARM )
+    #define __ADD_OVERFLOW(a,b,result)
 #else
     #error "Your compiler is currently not supported by CosmOS!"
 #endif

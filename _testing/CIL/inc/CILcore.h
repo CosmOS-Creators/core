@@ -189,12 +189,7 @@ __OS_FUNC_SECTION void CILcore_setCoreVar(CosmOS_OsVariableType * osVar);
   *
   * @return CosmOS_CoreVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreVariableType * CILcore_getCoreVar(void)
-{
-    uint32_t result;
-    __asm volatile ("MOV %[resultVariable], R9":  [resultVariable] "=r" (result) );
-    return (CosmOS_CoreVariableType *)result;
-}
+CosmOS_CoreVariableType *CILcore_getCoreVar(void);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

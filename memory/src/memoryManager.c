@@ -125,22 +125,20 @@
   *
   * @brief Heap init function DEMO implementation.
   *
-  * @param[in] none
+  * @param[in] CosmOS_CoreVariableType * coreVar
   *
   * @return none
 ********************************************************************************/
 /* @cond S */
 __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
-__OS_FUNC_SECTION void memoryManager_heapInit(void)
+__OS_FUNC_SECTION void memoryManager_heapInit( CosmOS_CoreVariableType * coreVar )
 {
 	BitWidthType numberOfPrograms;
 
-	CosmOS_CoreVariableType * coreVar;
 	CosmOS_ProgramVariableType * programVars;
 	CosmOS_MallocVariableType * currentMallocVar;
 
-	coreVar = core_getCoreVar();
 
 	programVars = core_getCoreProgramVars( coreVar );
 	numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );

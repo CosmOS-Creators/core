@@ -10,5 +10,11 @@ std::unique_ptr<CILcore_MOCK> CILcore_TestFixture::_CILcoreMock;
 // fake lib functions
 void CILcore_setCoreVar(CosmOS_OsVariableType * osVar)
 {
-		CILcore_TestFixture::_CILcoreMock->CILcore_setCoreVar(osVar);
+	CILcore_TestFixture::_CILcoreMock->CILcore_setCoreVar(osVar);
+}
+
+// fake lib functions
+CosmOS_CoreVariableType* CILcore_getCoreVar(void)
+{
+	return CILcore_TestFixture::_CILcoreMock->CILcore_getCoreVar();
 }

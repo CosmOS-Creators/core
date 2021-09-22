@@ -137,7 +137,11 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_CoreVariableType * core_getCoreVar(void)
 {
-    return CILcore_getCoreVar();
+	CosmOS_CoreVariableType * coreVar;
+
+	coreVar = CILcore_getCoreVar();
+
+	return coreVar;
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

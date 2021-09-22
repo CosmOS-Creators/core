@@ -140,11 +140,11 @@
   *
   * @brief Heap init function DEMO implementation.
   *
-  * @param[in] none
+  * @param[in] CosmOS_CoreVariableType * coreVar
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void memoryManager_heapInit(void);
+__OS_FUNC_SECTION void memoryManager_heapInit(CosmOS_CoreVariableType *coreVar);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

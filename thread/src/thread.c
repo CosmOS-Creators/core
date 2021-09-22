@@ -201,9 +201,15 @@ __OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType delayMs)
 			}
 			else
 			{
-				sleepStateReturn = cosmosApiInternal_thread_sleepMsInternal(coreVar, tickCount);
+				if ( __ADD_OVERFLOW(tickCount,(BitWidthType)1,&tickCount) )
+				{
+					sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX;
+				}
+				else
+				{
+					sleepStateReturn = cosmosApiInternal_thread_sleepMsInternal(coreVar, tickCount);
+				}
 			}
-
 		}
 		else
 		{

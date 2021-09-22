@@ -729,11 +729,11 @@ __STATIC_FORCEINLINE void scheduler_setSchedulerSyncInitState(CosmOS_SchedulerVa
   * @brief Set scheduler rescheduleTriggerState.
   *
   * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  CosmOS_BooleanType paramRescheduleTriggerState
+  * @param[in]  CosmOS_RescheduleTriggerStateType paramRescheduleTriggerState
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void scheduler_setSchedulerRescheduleTriggerState(CosmOS_SchedulerVariableType * scheduler, CosmOS_BooleanType paramRescheduleTriggerState)
+__STATIC_FORCEINLINE void scheduler_setSchedulerRescheduleTriggerState(CosmOS_SchedulerVariableType * scheduler, CosmOS_RescheduleTriggerStateType paramRescheduleTriggerState)
 {
     scheduler->rescheduleTriggerState = paramRescheduleTriggerState;
 }

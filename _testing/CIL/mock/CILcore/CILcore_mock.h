@@ -16,6 +16,7 @@ public:
     ~CILcore_MOCK(){}
 
     MOCK_METHOD(void, CILcore_setCoreVar, (CosmOS_OsVariableType * osVar));
+		MOCK_METHOD((CosmOS_CoreVariableType *), CILcore_getCoreVar, ());
 };
 
 class CILcore_TestFixture: public ::testing::Test{
