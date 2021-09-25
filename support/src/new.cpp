@@ -140,7 +140,7 @@ void * operator new(size_t size) noexcept
 		++size;
 	}
 
-	ptr = malloc(size);
+	ptr = malloc_internal(size);
 
 	return ptr;
 }
@@ -158,7 +158,7 @@ void * operator new(size_t size) noexcept
 ********************************************************************************/
 void operator delete(void* ptr) noexcept
 {
-	free(ptr);
+	free_internal(ptr);
 }
 
 /********************************************************************************
@@ -175,7 +175,7 @@ void operator delete(void* ptr) noexcept
 ********************************************************************************/
 void operator delete(void* ptr, size_t size) noexcept
 {
-	free(ptr);
+	free_internal(ptr);
 	__SUPRESS_UNUSED_VAR(size);
 }
 /********************************************************************************

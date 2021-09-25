@@ -169,7 +169,7 @@ static CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAdd
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn malloc( size_t size )
+  * @fn malloc_internal( size_t size )
   *
   * @brief Stdlib malloc function implementation redesigned for CosmOS DEMO.
   *
@@ -177,7 +177,7 @@ static CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAdd
   *
   * @return void *
 ********************************************************************************/
-void *malloc(size_t size)
+void *malloc_internal(size_t size)
 {
 	AddressType heapLowAddress,
 				heapHighAddress,
@@ -267,7 +267,7 @@ void *malloc(size_t size)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn free( void* ptr )
+  * @fn free_internal( void* ptr )
   *
   * @brief Stdlib free function implementation redesigned for CosmOS DEMO.
   *
@@ -275,7 +275,7 @@ void *malloc(size_t size)
   *
   * @return none
 ********************************************************************************/
-void free(void *ptr)
+void free_internal(void *ptr)
 {
 	CosmOS_MutexStateType mutexState;
 

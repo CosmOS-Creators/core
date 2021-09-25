@@ -140,7 +140,7 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn malloc( size_t size )
+  * @fn malloc_internal( size_t size )
   *
   * @brief Stdlib malloc function implementation redesigned for CosmOS DEMO.
   *
@@ -148,7 +148,7 @@ extern "C" {
   *
   * @return void *
 ********************************************************************************/
-void* malloc( size_t size );
+void* malloc_internal( size_t size );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -161,7 +161,7 @@ void* malloc( size_t size );
   *
   * @return none
 ********************************************************************************/
-void free( void* ptr );
+void free_internal( void* ptr );
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**
