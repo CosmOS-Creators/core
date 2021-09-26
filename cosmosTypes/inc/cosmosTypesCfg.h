@@ -198,6 +198,9 @@ typedef struct
     const BitWidthType programId;
     const BitWidthType coreId;
 		const BitWidthType alarmId;
+		const AddressType peripheralAccessLowAddress;
+		const AddressType peripheralAccessHighAddress;
+		const BitWidthType peripheralAccessSize;
 
 } CosmOS_SchedulableConfigurationType;
 

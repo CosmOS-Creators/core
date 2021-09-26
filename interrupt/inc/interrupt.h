@@ -203,6 +203,26 @@ __STATIC_FORCEINLINE void interrupt_enableInterrupts(BitWidthType entityId)
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn interrupt_enableInterrupt(BitWidthType entityId)
+  *
+  * @brief Enable specific interrupt for the current core.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  BitWidthType ISR
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void interrupt_enableInterrupt(BitWidthType entityId,BitWidthType ISR)
+{
+	CILinterrupt_enableInterrupt(ISR);
+
+	__SUPRESS_UNUSED_VAR(entityId);
+	__SUPRESS_UNUSED_VAR(ISR);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn interrupt_disableInterrupts(BitWidthType entityId)
   *
   * @brief Disable interrupts for the current core.
@@ -216,6 +236,26 @@ __STATIC_FORCEINLINE void interrupt_disableInterrupts(BitWidthType entityId)
 	CILinterrupt_disableInterrupts();
 
 	__SUPRESS_UNUSED_VAR(entityId);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn interrupt_disableInterrupt(BitWidthType entityId)
+  *
+  * @brief Disable specific interrupt for the current core.
+  *
+  * @param[in]  BitWidthType entityId
+  * @param[in]  BitWidthType ISR
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void interrupt_disableInterrupt(BitWidthType entityId,BitWidthType ISR)
+{
+	CILinterrupt_disableInterrupt(ISR);
+
+	__SUPRESS_UNUSED_VAR(entityId);
+	__SUPRESS_UNUSED_VAR(ISR);
 }
 
 /********************************************************************************

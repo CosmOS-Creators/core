@@ -334,22 +334,6 @@ __STATIC_FORCEINLINE BitWidthType buffer_getBufferTail(CosmOS_BufferVariableType
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn buffer_getBufferFullCells(CosmOS_BufferVariableType * bufferVar)
-  *
-  * @brief Get buffer fullCells.
-  *
-  * @param[in]  CosmOS_BufferVariableType * bufferVar
-  *
-  * @return BitWidthType
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType buffer_getBufferFullCells(CosmOS_BufferVariableType * bufferVar)
-{
-    return (bufferVar->fullCells);
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
   * @fn buffer_getFullCellsNum(BitWidthType id, void * bufferVar, BitWidthType num)
   *
   * @brief Get full bufferVar cells DEMO CODE.

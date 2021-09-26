@@ -142,7 +142,7 @@ __STATIC_FORCEINLINE void osBoot_bootSection( unsigned char * sectionStart, unsi
 	unsigned char *pDst = sectionStart;
 	unsigned char *pSrc = sectionStartInFlash;
 
-	for ( BitWidthType i = 0; i < (size * sizeof(BitWidthType)); i++ )
+	for ( BitWidthType i = 0; i < (size * sizeof(unsigned char)); i++ )
 	{
 		*pDst++=*pSrc++;
 	}
@@ -198,7 +198,7 @@ __STATIC_FORCEINLINE void osBoot_validateSection( unsigned char * sectionStart, 
 	unsigned char *pDst = sectionStart;
 	unsigned char *pSrc = sectionStartInFlash;
 
-	for ( BitWidthType i = 0; i < (size * sizeof(BitWidthType)); i++ )
+	for ( BitWidthType i = 0; i < (size * sizeof(unsigned char)); i++ )
 	{
 		cosmosAssert( (*pDst++) IS_EQUAL_TO (*pSrc++) );
 	}

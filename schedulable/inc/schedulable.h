@@ -317,6 +317,54 @@ __STATIC_FORCEINLINE BitWidthType schedulable_getAlarmId(CosmOS_SchedulableVaria
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn schedulable_getPeripheralAccessLowAddress(CosmOS_SchedulableVariableType * schedulable)
+  *
+  * @brief Get schedulable peripheralAccessLowAddress.
+  *
+  * @param[in]  CosmOS_SchedulableVariableType * schedulable
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType schedulable_getPeripheralAccessLowAddress(CosmOS_SchedulableVariableType * schedulable)
+{
+    return (schedulable->cfg->peripheralAccessLowAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn schedulable_getPeripheralAccessHighAddress(CosmOS_SchedulableVariableType * schedulable)
+  *
+  * @brief Get schedulable peripheralAccessHighAddress.
+  *
+  * @param[in]  CosmOS_SchedulableVariableType * schedulable
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType schedulable_getPeripheralAccessHighAddress(CosmOS_SchedulableVariableType * schedulable)
+{
+    return (schedulable->cfg->peripheralAccessHighAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn schedulable_getPeripheralAccessSize(CosmOS_SchedulableVariableType * schedulable)
+  *
+  * @brief Get schedulable peripheralAccessSize.
+  *
+  * @param[in]  CosmOS_SchedulableVariableType * schedulable
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType schedulable_getPeripheralAccessSize(CosmOS_SchedulableVariableType * schedulable)
+{
+    return (schedulable->cfg->peripheralAccessSize);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn schedulable_getState(CosmOS_SchedulableVariableType * schedulable)
   *
   * @brief Get schedulable state.
