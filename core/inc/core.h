@@ -331,6 +331,38 @@ __STATIC_FORCEINLINE AddressType core_getCodeMemoryHighAddress(CosmOS_CoreVariab
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn core_getUnprotectedMemoryLowAddress(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get unprotectedMemoryLowAddress.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType core_getUnprotectedMemoryLowAddress(CosmOS_CoreVariableType * core)
+{
+    return (core->cfg->unprotectedMemoryLowAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn core_getUnprotectedMemoryHighAddress(CosmOS_CoreVariableType * core)
+  *
+  * @brief Get unprotectedMemoryHighAddress.
+  *
+  * @param[in]  CosmOS_CoreVariableType * core
+  *
+  * @return AddressType
+********************************************************************************/
+__STATIC_FORCEINLINE AddressType core_getUnprotectedMemoryHighAddress(CosmOS_CoreVariableType * core)
+{
+    return (core->cfg->unprotectedMemoryHighAddress);
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn core_getMsToTicks(CosmOS_CoreVariableType * core)
   *
   * @brief Get msToTicks.

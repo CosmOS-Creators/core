@@ -125,6 +125,30 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @fn osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd)
+  *
+  * @brief Boot of the section.
+  *
+  * @param[in]  unsigned char * sectionStart
+  * @param[in]  unsigned char * sectionEnd
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void osBoot_clearSection( unsigned char * sectionStart, unsigned char * sectionEnd)
+{
+	BitWidthType size = (BitWidthType)(sectionEnd - sectionStart);
+
+	unsigned char *pDst = sectionStart;
+
+	for ( BitWidthType i = 0; i < (size * sizeof(unsigned char)); i++ )
+	{
+		*pDst++=0;
+	}
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @fn osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
   *
   * @brief Boot of the section.
@@ -162,19 +186,30 @@ __STATIC_FORCEINLINE void osBoot_bootSection( unsigned char * sectionStart, unsi
 void osBoot_boot(void)
 {
     BitWidthType  coreId,
-					programSectionsNumber;
+					bootSectionsNumber,
+					clearSectionsNumber;
 
-	CosmOS_ProgramSectionConfigurationType * programSections;
+	CosmOS_ProgramSectionConfigurationType * bootProgramSections,
+											*clearProgramSections;
 
 	coreId = CILcore_getCoreId();
 
-	programSections = (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId].programSections;
-	programSectionsNumber = bootSections[coreId].programSectionsNumber;
+	clearProgramSections = (CosmOS_ProgramSectionConfigurationType *)clearSections[coreId].programSections;
+	clearSectionsNumber = clearSections[coreId].programSectionsNumber;
 
 
-	for (BitWidthType i=0; i < programSectionsNumber; i++)
+	for (BitWidthType i=0; i < clearSectionsNumber; i++)
 	{
-		osBoot_bootSection(programSections[i].startAddress,programSections[i].endAddress,programSections[i].flashAddress);
+		osBoot_clearSection(clearProgramSections[i].startAddress,clearProgramSections[i].endAddress);
+	}
+
+	bootProgramSections = (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId].programSections;
+	bootSectionsNumber = bootSections[coreId].programSectionsNumber;
+
+
+	for (BitWidthType i=0; i < bootSectionsNumber; i++)
+	{
+		osBoot_bootSection(bootProgramSections[i].startAddress,bootProgramSections[i].endAddress,bootProgramSections[i].flashAddress);
 	}
 };
 

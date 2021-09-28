@@ -123,23 +123,28 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_init(AddressType codeMemoryHighAddress,\
-  *							AddressType codeMemoryLowAddress, \
-  *							AddressType stackMemoryHighAddress, \
-  *							AddressType stackMemoryLowAddress)
-  *
+  * @fn memoryProtection_init(AddressType codeMemoryHighAddress,
+  *							AddressType codeMemoryLowAddress,
+  *							AddressType stackMemoryHighAddress,
+  *							AddressType stackMemoryLowAddress,
+  *							AddressType unprotectedMemoryLowAddress,
+  *							AddressType unprotectedMemoryHighAddress)
   * @brief Init memory protection DEMO CODE.
   *
   * @param[in]  AddressType codeMemoryHighAddress
   * @param[in]  AddressType codeMemoryLowAddress
   * @param[in]  AddressType stackMemoryHighAddress
-  * @param[in]  AddressType stackMemoryLowAddress
+  * @param[in]  AddressType unprotectedMemoryLowAddress
+  * @param[in]  AddressType unprotectedMemoryHighAddress
+	*
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void memoryProtection_init(AddressType codeMemoryHighAddress,\
-												AddressType codeMemoryLowAddress, \
-												AddressType stackMemoryHighAddress, \
-												AddressType stackMemoryLowAddress);
+__OS_FUNC_SECTION void memoryProtection_init(AddressType codeMemoryHighAddress,
+												AddressType codeMemoryLowAddress,
+												AddressType stackMemoryHighAddress,
+												AddressType stackMemoryLowAddress,
+												AddressType unprotectedMemoryLowAddress,
+												AddressType unprotectedMemoryHighAddress);
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **

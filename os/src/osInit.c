@@ -157,14 +157,17 @@ __OS_FUNC_SECTION void osInit_init(BitWidthType entityId)
     switchMemoryProtection_init(coreVar->cfg->codeMemoryHighAddress, \
 								coreVar->cfg->codeMemoryLowAddress, \
 								coreVar->cfg->stackMemoryHighAddress, \
-								coreVar->cfg->stackMemoryLowAddress );
+								coreVar->cfg->stackMemoryLowAddress, \
+								coreVar->cfg->unprotectedMemoryLowAddress, \
+								coreVar->cfg->unprotectedMemoryHighAddress \
+								);
 	osBoot_bootValidate();
 
     stackInit_init( coreVar );
 
 	memoryManager_heapInit( coreVar );
 
-    coreSync_getBarrier( coreVar, OS_INIT_ID );
+    //coreSync_getBarrier( coreVar, OS_INIT_ID );
 
 	__SUPRESS_UNUSED_VAR(entityId);
 

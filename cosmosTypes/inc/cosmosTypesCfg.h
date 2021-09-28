@@ -344,6 +344,8 @@ typedef struct
 	const AddressType stackMemoryHighAddress;
 	const AddressType codeMemoryLowAddress;
 	const AddressType codeMemoryHighAddress;
+	const AddressType unprotectedMemoryLowAddress;
+	const AddressType unprotectedMemoryHighAddress;
 	const BitWidthType msToTicks;
 	const BitWidthType numberOfAlarms;
 
