@@ -14,6 +14,10 @@ IS_INITIALIZED_TO
 		210,																			 /* const AddressType stackMemoryHighAddress   */
 		300,																			 /* const AddressType codeMemoryLowAddress   */
 		310,																			 /* const AddressType codeMemoryHighAddress   */
+		400,		/* const AddressType unprotectedMemoryLowAddress   */
+		500,		/* const AddressType unprotectedMemoryHighAddress   */
+		10,		/* const BitWidthType msToTicks   */
+		11,		/* const BitWidthType numberOfAlarms   */
 	},
 	{
 		/* CoresCfgConst[CORE_0_ID]                         */
@@ -26,6 +30,10 @@ IS_INITIALIZED_TO
 		210,													/* const AddressType stackMemoryHighAddress   */
 		300,													/* const AddressType codeMemoryLowAddress   */
 		310,													/* const AddressType codeMemoryHighAddress   */
+		400,		/* const AddressType unprotectedMemoryLowAddress   */
+		500,		/* const AddressType unprotectedMemoryHighAddress   */
+		10,		/* const BitWidthType msToTicks   */
+		11,		/* const BitWidthType numberOfAlarms   */
 	},
 };
 
