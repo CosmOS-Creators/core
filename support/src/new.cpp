@@ -22,9 +22,15 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "cosmosApi.h"
+#include "stdlibInt.h"
+#include "os.h"
+#include "core.h"
+
+/* CIL interfaces */
+#include "CILcore.h"
 
 /* LIB interfaces */
-#include "stdlib.h"
+#include <stdlib.h>
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -133,6 +139,13 @@
 ********************************************************************************/
 void * operator new(size_t size) noexcept
 {
+  BitWidthType coreId;
+
+  CosmOS_OsStateType osState;
+
+  CosmOS_OsVariableType * osVar;
+  CosmOS_CoreVariableType * coreVar;
+
 	void *ptr;
 
 	if ( IS_NOT( size ) )
@@ -140,7 +153,19 @@ void * operator new(size_t size) noexcept
 		++size;
 	}
 
-	ptr = malloc_internal(size);
+  coreId = cosmosApi_CILcore_getCoreId();
+  osVar = os_getOsVar();
+  coreVar = os_getCoreVar( osVar,coreId );
+  osState = core_getCoreOsState( coreVar );
+
+  if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
+  {
+    ptr = malloc_internal(size);
+  }
+	else
+  {
+    ptr = malloc(size);
+  }
 
 	return ptr;
 }
@@ -158,7 +183,26 @@ void * operator new(size_t size) noexcept
 ********************************************************************************/
 void operator delete(void* ptr) noexcept
 {
-	free_internal(ptr);
+  BitWidthType coreId;
+
+  CosmOS_OsStateType osState;
+
+  CosmOS_OsVariableType * osVar;
+  CosmOS_CoreVariableType * coreVar;
+
+  coreId = cosmosApi_CILcore_getCoreId();
+  osVar = os_getOsVar();
+  coreVar = os_getCoreVar( osVar,coreId );
+  osState = core_getCoreOsState( coreVar );
+
+  if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
+  {
+    free_internal(ptr);
+  }
+  else
+  {
+    free(ptr);
+  }
 }
 
 /********************************************************************************
@@ -175,7 +219,28 @@ void operator delete(void* ptr) noexcept
 ********************************************************************************/
 void operator delete(void* ptr, size_t size) noexcept
 {
-	free_internal(ptr);
+
+  BitWidthType coreId;
+
+  CosmOS_OsStateType osState;
+
+  CosmOS_OsVariableType * osVar;
+  CosmOS_CoreVariableType * coreVar;
+
+  coreId = cosmosApi_CILcore_getCoreId();
+  osVar = os_getOsVar();
+  coreVar = os_getCoreVar( osVar,coreId );
+  osState = core_getCoreOsState( coreVar );
+
+  if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
+  {
+    free_internal(ptr);
+  }
+  else
+  {
+    free(ptr);
+  }
+
 	__SUPRESS_UNUSED_VAR(size);
 }
 /********************************************************************************

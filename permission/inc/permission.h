@@ -190,7 +190,7 @@ __STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasks(CosmOS_Permissio
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn permission_getBitLocksTasksFlipped(CosmOS_PermissionsConfigurationType * permission)
+  * @fn permission_getBitLocksTasksInverted(CosmOS_PermissionsConfigurationType * permission)
   *
   * @brief Get permission bitLocksTasksInverted.
   *
@@ -198,7 +198,7 @@ __STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasks(CosmOS_Permissio
   *
   * @return BitWidthType *
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasksFlipped(CosmOS_PermissionsConfigurationType * permission)
+__STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasksInverted(CosmOS_PermissionsConfigurationType * permission)
 {
     return (BitWidthType *)(permission->bitLocksTasksInverted);
 }
