@@ -26,6 +26,7 @@
 #include "program.h"
 #include "stdlibInt.h"
 #include "core.h"
+#include "heap.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -160,8 +161,8 @@ static CosmOS_MallocVariableType * malloc_varAlloc( AddressType nextAvailableAdd
 
 	newMallocVar->prior = (CosmOS_MallocVariableType *)priorMallocAddress;
 	newMallocVar->next = (CosmOS_MallocVariableType *)nextMallocAddress;
-	newMallocVar->size = (ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(AddressType)) + \
-							(AddressType)ALIGN(size,sizeof(AddressType)));
+	newMallocVar->size = ((BitWidthType)ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(BitWidthType)) + \
+							(BitWidthType)ALIGN(size,sizeof(BitWidthType)));
 
 	return newMallocVar;
 }
@@ -189,6 +190,7 @@ void *malloc_internal(size_t size)
 
 	CosmOS_CoreVariableType *coreVar;
 	CosmOS_ProgramVariableType *programVar;
+	CosmOS_HeapConfigurationType *heapCfg;
 	CosmOS_MallocVariableType *currentMallocVar,
 								*newMallocVar;
 
@@ -201,8 +203,10 @@ void *malloc_internal(size_t size)
 
 		programVar = core_getCoreProgramInExecution(coreVar);
 
-		heapLowAddress = program_getProgramHeapLowAddress(programVar);
-		heapHighAddress = program_getProgramHeapHighAddress(programVar);
+		heapCfg = program_getHeap(programVar);
+
+		heapLowAddress = heap_getHeapLowAddress(heapCfg);
+		heapHighAddress = heap_getHeapHighAddress(heapCfg);
 
 		allocated = False;
 		currentMallocVar = (CosmOS_MallocVariableType *)heapLowAddress;
@@ -228,7 +232,7 @@ void *malloc_internal(size_t size)
 					currentMallocVar->next = newMallocVar;
 
 					returnAddress = (AddressType)newMallocVar +
-									(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
+									(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(BitWidthType));
 					allocated = True;
 				}
 				else
@@ -249,7 +253,7 @@ void *malloc_internal(size_t size)
 					currentMallocVar->next = newMallocVar;
 
 					returnAddress = (AddressType)newMallocVar +
-									(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType));
+									(AddressType)ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(BitWidthType));
 					allocated = True;
 				}
 			}
@@ -283,7 +287,7 @@ void free_internal(void *ptr)
 	CosmOS_ProgramVariableType *programVar;
 
 	CosmOS_MallocVariableType *mallocVarToFree =
-	(CosmOS_MallocVariableType *)((AddressType)ptr - ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(AddressType)));
+	(CosmOS_MallocVariableType *)((AddressType)ptr - ALIGN(sizeof(CosmOS_MallocVariableType), sizeof(BitWidthType)));
 
 
 	coreVar = core_getCoreVar();

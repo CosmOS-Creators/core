@@ -7,7 +7,7 @@
 
 /* CORE interfaces */
 #include "sysDefs.h"
-#include "cosmosTypesStd.h"
+#include "cosmosTypes.h"
 #include "memoryMapping.h"
 
 void dummyKernelPanic_core0(void);

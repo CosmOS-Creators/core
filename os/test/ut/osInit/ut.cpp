@@ -3,7 +3,6 @@
 #include "os_mock.h"
 #include "osBoot_mock.h"
 #include "core_mock.h"
-#include "stack_mock.h"
 #include "CILcore_mock.h"
 #include "coreSync_mock.h"
 #include "memoryManager_mock.h"
@@ -19,7 +18,6 @@ TEST(osInit, executionFlow)
 	MemoryManager_TestFixture memoryManagerMock;
 	CoreSync_TestFixture coreSyncMock;
 	CILcore_TestFixture CILcoreMock;
-	Stack_TestFixture stackMock;
 	Core_TestFixture coreMock;
 	Os_TestFixture osMock;
 	OsBoot_TestFixture osBootMock;
@@ -29,7 +27,7 @@ TEST(osInit, executionFlow)
 	EXPECT_CALL(*coreMock._CoreMock, core_getCoreVar()).Times(1).WillOnce(Return(&CoresVar[0]));
 	EXPECT_CALL(*memoryProtectionMock._MemoryProtectionMock, memoryProtection_init(310 ,300 ,210 ,200,400,500)).Times(1);
 	EXPECT_CALL(*osBootMock._OsBootMock, osBoot_bootValidate()).Times(1);
-	EXPECT_CALL(*stackMock._StackMock, stackInit_init(&CoresVar[0])).Times(1);
+	EXPECT_CALL(*memoryManagerMock._MemoryManagerMock, memoryManager_stackInit(&CoresVar[0])).Times(1);
 	EXPECT_CALL(*memoryManagerMock._MemoryManagerMock, memoryManager_heapInit(&CoresVar[0])).Times(1);
 	//EXPECT_CALL(*coreSyncMock._CoreSyncMock, coreSync_getBarrier(&CoresVar[0], OS_INIT_ID)).Times(1);
 

@@ -148,6 +148,8 @@ __OS_FUNC_SECTION void sysJobs_dispatcher(BitWidthType entityId)
     sysJobsCurrentTick = sysJobs_getSysJobsCurrentTick( sysJobsVar );
     numOfGroups = sysJobs_getSysJobsNumOfGroups( sysJobsVar );
 
+    sysJobsCurrentTick++;
+
     for ( BitWidthType groupIterator = 0; groupIterator < numOfGroups; groupIterator++ )
     {
         BitWidthType  groupTickMultiplicator;
@@ -173,7 +175,7 @@ __OS_FUNC_SECTION void sysJobs_dispatcher(BitWidthType entityId)
 
     hyperTick = sysJobs_getSysJobsHyperTick( sysJobsVar );
 
-    sysJobsCurrentTick = ( ( sysJobsCurrentTick + 1 ) % hyperTick );
+    sysJobsCurrentTick = ( sysJobsCurrentTick % hyperTick );
     sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
 
 	__SUPRESS_UNUSED_VAR(entityId);

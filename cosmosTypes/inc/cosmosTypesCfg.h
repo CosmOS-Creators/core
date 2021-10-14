@@ -47,7 +47,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "cosmosTypesBase.h"
+#include "cosmosTypesStd.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -185,6 +185,19 @@ typedef struct
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
+  * @brief  CosmOS_HeapConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    const BitWidthType heapSize;
+    const AddressType heapLowAddress;
+    const AddressType heapHighAddress;
+
+} CosmOS_HeapConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
   * @brief  CosmOS_SchedulableConfigurationType struct type
 ********************************************************************************/
 typedef struct
@@ -239,9 +252,7 @@ typedef struct
 	const BitWidthType programMemorySize;
 	const AddressType programMemoryLowAddress;
 	const AddressType programMemoryHighAddress;
-	const BitWidthType programHeapSize;
-	const AddressType programHeapLowAddress;
-	const AddressType programHeapHighAddress;
+	const CosmOS_HeapConfigurationType * const heap;
 	void * const heapMutex;
 
 } CosmOS_ProgramConfigurationType;

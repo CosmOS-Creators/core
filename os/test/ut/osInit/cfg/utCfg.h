@@ -3,7 +3,7 @@
 
 /* CORE interfaces */
 #include "sysDefs.h"
-#include "cosmosTypesStd.h"
+#include "cosmosTypes.h"
 #include "memoryMapping.h"
 
 extern const CosmOS_CoreConfigurationType CoresCfgConst[2];

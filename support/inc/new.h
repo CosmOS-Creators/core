@@ -48,7 +48,7 @@ extern "C" {
 ********************************************************************************/
 /* CORE interfaces */
 #include "sysDefs.h"
-#include "cosmosTypesStd.h"
+#include "cosmosTypes.h"
 #include "memoryMapping.h"
 
 /* LIB interfaces */

@@ -23,7 +23,6 @@
 /* CORE interfaces */
 #include "osInit.h"
 #include "osBoot.h"
-#include "stackInit.h"
 #include "coreSync.h"
 #include "os.h"
 #include "core.h"
@@ -144,17 +143,17 @@ __SEC_START(__OS_FUNC_SECTION_START)
 /* @endcond*/
 __OS_FUNC_SECTION void osInit_init(BitWidthType entityId)
 {
-    CosmOS_CoreVariableType * coreVar;
-    CosmOS_OsVariableType * osVar;
+  CosmOS_CoreVariableType * coreVar;
+  CosmOS_OsVariableType * osVar;
 	//TODO check if the os sections were booted and init and start was not called yet
 
 	osVar = os_getOsVar();
 
 	CILcore_setCoreVar(osVar);
 
-    coreVar = core_getCoreVar();
+  coreVar = core_getCoreVar();
 
-    switchMemoryProtection_init(coreVar->cfg->codeMemoryHighAddress, \
+  switchMemoryProtection_init(coreVar->cfg->codeMemoryHighAddress, \
 								coreVar->cfg->codeMemoryLowAddress, \
 								coreVar->cfg->stackMemoryHighAddress, \
 								coreVar->cfg->stackMemoryLowAddress, \
@@ -163,11 +162,11 @@ __OS_FUNC_SECTION void osInit_init(BitWidthType entityId)
 								);
 	osBoot_bootValidate();
 
-    stackInit_init( coreVar );
+  memoryManager_stackInit( coreVar );
 
 	memoryManager_heapInit( coreVar );
 
-    //coreSync_getBarrier( coreVar, OS_INIT_ID );
+  //coreSync_getBarrier( coreVar, OS_INIT_ID );
 
 	__SUPRESS_UNUSED_VAR(entityId);
 

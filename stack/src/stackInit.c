@@ -23,10 +23,6 @@
 /* CORE interfaces */
 #include "stackInit.h"
 #include "stack.h"
-#include "core.h"
-#include "program.h"
-#include "task.h"
-#include "thread.h"
 #include "schedulable.h"
 
 /* CIL interfaces */
@@ -160,53 +156,6 @@ __OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_Schedul
     stackPointer = CILstack_stackInit( stackLowAddress, stackHighAddress, (BitWidthType)handler );
 
     return stackPointer;
-}
-/* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn stackInit_init(CosmOS_CoreVariableType * coreVar)
-  *
-  * @brief Stack intialization for all thread schedulables.
-  *
-  * @param[in] CosmOS_CoreVariableType * coreVar
-  *
-  * @return none
-********************************************************************************/
-/* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
-/* @endcond*/
-__OS_FUNC_SECTION void stackInit_init(CosmOS_CoreVariableType * coreVar)
-{
-    BitWidthType  numberOfThreads,
-                  numberOfPrograms,
-                  stackPointerRetVal;
-
-    CosmOS_ThreadVariableType * threadVar;
-    CosmOS_ProgramVariableType * programVar;
-
-    numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
-
-    for ( BitWidthType programIterator = 0; programIterator < numberOfPrograms; programIterator++ )
-    {
-        programVar = core_getCoreProgramVar( coreVar, programIterator );
-        numberOfThreads = program_getProgramNumberOfThreads( programVar );
-
-        for( BitWidthType threadIterator = 0; threadIterator < numberOfThreads; threadIterator++ )
-        {
-            CosmOS_SchedulableVariableType * schedulableVar;
-
-
-            threadVar = program_getProgramThread( programVar, threadIterator );
-            schedulableVar = thread_getThreadSchedulable( threadVar );
-
-            stackPointerRetVal = stackInit_schedulableStackInit( schedulableVar );
-            schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
-        }
-    }
 }
 /* @cond S */
 __SEC_STOP(__OS_FUNC_SECTION_STOP)

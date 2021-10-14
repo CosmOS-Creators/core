@@ -48,7 +48,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "sysDefs.h"
-#include "cosmosTypesStd.h"
+#include "cosmosTypes.h"
 #include "memoryMapping.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
@@ -133,6 +133,18 @@
   * @ingroup Apis_memoryManager_h
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * *************************************************************************//**
+  * @fn memoryManager_stackInit(CosmOS_CoreVariableType * coreVar)
+  *
+  * @brief Stack intialization for all thread schedulables.
+  *
+  * @param[in] CosmOS_CoreVariableType * coreVar
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void memoryManager_stackInit(CosmOS_CoreVariableType * coreVar);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**

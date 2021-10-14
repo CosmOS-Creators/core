@@ -48,7 +48,7 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "sysDefs.h"
-#include "cosmosTypesStd.h"
+#include "cosmosTypes.h"
 #include "memoryMapping.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
@@ -146,19 +146,6 @@
   * @return StackPointerType
 ********************************************************************************/
 __OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_SchedulableVariableType  * schedulable);
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn stackInit_init(CosmOS_CoreVariableType * coreVar)
-  *
-  * @brief Stack intialization for all tasks.
-  *
-  * @param[in] CosmOS_CoreVariableType * coreVar
-  *
-  * @return none
-********************************************************************************/
-__OS_FUNC_SECTION void stackInit_init(CosmOS_CoreVariableType * coreVar);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

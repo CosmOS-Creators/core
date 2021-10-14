@@ -53,7 +53,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "cosmosTypesStd.h"
+#include "cosmosTypes.h"
 #include "sysDefs.h"
 #include "memoryMapping.h"
 /********************************************************************************

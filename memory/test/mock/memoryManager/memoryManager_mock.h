@@ -17,6 +17,7 @@ public:
 
 	// mock methods
 	MOCK_METHOD(void,memoryManager_heapInit, (CosmOS_CoreVariableType * coreVar));
+	MOCK_METHOD(void,memoryManager_stackInit, (CosmOS_CoreVariableType * coreVar));
 };
 
 class MemoryManager_TestFixture: public ::testing::Test{
