@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -150,7 +151,8 @@
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void deviceIO_togglePin(BitWidthType id, void *GPIOx, BitWidthType GPIO_Pin);
+__OS_FUNC_SECTION void
+deviceIO_togglePin( BitWidthType id, void * GPIOx, BitWidthType GPIO_Pin );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

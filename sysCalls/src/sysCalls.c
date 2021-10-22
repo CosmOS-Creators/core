@@ -21,10 +21,10 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "os.h"
-#include "osInit.h"
-#include "osBoot.h"
 #include "sysCalls.h"
+#include "os.h"
+#include "osBoot.h"
+#include "osInit.h"
 
 /* CIL interfaces */
 #include "CILsysCalls.h"
@@ -135,14 +135,15 @@
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void sysCalls_bitWidthType_ret_void(BitWidthType id)
+__OS_FUNC_SECTION void
+sysCalls_bitWidthType_ret_void( BitWidthType id )
 {
     CILsysCalls_bitWidthType_ret_void( id );
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -157,9 +158,10 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return BitWidthType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_ret_bitWidthType(BitWidthType id)
+__OS_FUNC_SECTION BitWidthType
+sysCalls_bitWidthType_ret_bitWidthType( BitWidthType id )
 {
     BitWidthType returnValue;
 
@@ -168,13 +170,14 @@ __OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_ret_bitWidthType(BitWidthTy
     return returnValue;
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(BitWidthType id, BitWidthType arg)
+  * @fn sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(BitWidthType id,
+  * BitWidthType arg)
   *
   * @brief System call for bitWidthType args and ret bitWidthType.
   *
@@ -184,24 +187,31 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return BitWidthType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(BitWidthType id, BitWidthType arg)
+__OS_FUNC_SECTION BitWidthType
+sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(
+    BitWidthType id,
+    BitWidthType arg )
 {
     BitWidthType returnValue;
 
-    returnValue = CILsysCalls_bitWidthType_bitWidthType_ret_bitWidthType( id, arg );
+    returnValue =
+        CILsysCalls_bitWidthType_bitWidthType_ret_bitWidthType( id, arg );
 
     return returnValue;
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
+  * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(
+  * BitWidthType id,
+  * void * ptr,
+  * BitWidthType arg)
   *
   * @brief System call for voidPtr,bitWidthType args and ret bitWidthType.
   *
@@ -212,24 +222,32 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return BitWidthType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
+__OS_FUNC_SECTION BitWidthType
+sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(
+    BitWidthType id,
+    void * ptr,
+    BitWidthType arg )
 {
     BitWidthType returnValue;
 
-    returnValue = CILsysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType( id, ptr, arg );
+    returnValue = CILsysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(
+        id, ptr, arg );
 
     return returnValue;
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(BitWidthType id, void * ptr, BitWidthType arg)
+  * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(
+  * BitWidthType id,
+  * void * ptr,
+  * BitWidthType arg)
   *
   * @brief System call for voidPtr and ret bitWidthType.
   *
@@ -239,9 +257,10 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return BitWidthType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_voidPtr_ret_bitWidthType(BitWidthType id, void * ptr)
+__OS_FUNC_SECTION BitWidthType
+sysCalls_bitWidthType_voidPtr_ret_bitWidthType( BitWidthType id, void * ptr )
 {
     BitWidthType returnValue;
 
@@ -250,7 +269,7 @@ __OS_FUNC_SECTION BitWidthType sysCalls_bitWidthType_voidPtr_ret_bitWidthType(Bi
     return returnValue;
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

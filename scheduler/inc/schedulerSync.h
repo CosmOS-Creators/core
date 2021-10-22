@@ -41,15 +41,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -136,7 +137,10 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
+  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar,
+  * CosmOS_CoreVariableType * coreVar,
+  * BitWidthType currentTick,
+  * BitWidthType hyperTick)
   *
   * @brief Algorithm for synchronization during runtime DEMO CODE.
   *
@@ -147,7 +151,12 @@
   *
   * @return CosmOS_SchedulerSyncStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick);
+__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType
+schedulerSync_sync(
+    CosmOS_SchedulerVariableType * schedulerVar,
+    CosmOS_CoreVariableType * coreVar,
+    BitWidthType currentTick,
+    BitWidthType hyperTick );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

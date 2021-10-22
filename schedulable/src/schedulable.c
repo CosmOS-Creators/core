@@ -130,13 +130,13 @@
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(BitWidthType entityId)
+__OS_FUNC_SECTION void
+schedulable_setExecutionStateToFinished( BitWidthType entityId )
 {
     CosmOS_CoreVariableType * coreVar;
     CosmOS_SchedulableVariableType * schedulableVar;
-
 
     coreVar = core_getCoreVar();
 
@@ -144,10 +144,10 @@ __OS_FUNC_SECTION void schedulable_setExecutionStateToFinished(BitWidthType enti
 
     schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__EXECUTED );
 
-	__SUPRESS_UNUSED_VAR(entityId);
+    __SUPRESS_UNUSED_VAR( entityId );
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

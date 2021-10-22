@@ -41,15 +41,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -144,7 +145,8 @@
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void memoryManager_stackInit(CosmOS_CoreVariableType * coreVar);
+__OS_FUNC_SECTION void
+memoryManager_stackInit( CosmOS_CoreVariableType * coreVar );
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
@@ -156,7 +158,8 @@ __OS_FUNC_SECTION void memoryManager_stackInit(CosmOS_CoreVariableType * coreVar
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void memoryManager_heapInit(CosmOS_CoreVariableType *coreVar);
+__OS_FUNC_SECTION void
+memoryManager_heapInit( CosmOS_CoreVariableType * coreVar );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -169,9 +170,10 @@
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType heap_getHeapSize(CosmOS_HeapConfigurationType * heap)
+__STATIC_FORCEINLINE BitWidthType
+heap_getHeapSize( CosmOS_HeapConfigurationType * heap )
 {
-    return (heap->heapSize);
+    return ( heap->heapSize );
 }
 
 /********************************************************************************
@@ -185,9 +187,10 @@ __STATIC_FORCEINLINE BitWidthType heap_getHeapSize(CosmOS_HeapConfigurationType 
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType heap_getHeapLowAddress(CosmOS_HeapConfigurationType * heap)
+__STATIC_FORCEINLINE AddressType
+heap_getHeapLowAddress( CosmOS_HeapConfigurationType * heap )
 {
-    return (heap->heapLowAddress);
+    return ( heap->heapLowAddress );
 }
 
 /********************************************************************************
@@ -201,9 +204,10 @@ __STATIC_FORCEINLINE AddressType heap_getHeapLowAddress(CosmOS_HeapConfiguration
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType heap_getHeapHighAddress(CosmOS_HeapConfigurationType * heap)
+__STATIC_FORCEINLINE AddressType
+heap_getHeapHighAddress( CosmOS_HeapConfigurationType * heap )
 {
-    return (heap->heapHighAddress);
+    return ( heap->heapHighAddress );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

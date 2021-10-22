@@ -21,11 +21,11 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "schedulable.h"
-#include "alarm.h"
-#include "cosmosApiInternal.h"
-#include "core.h"
 #include "thread.h"
+#include "alarm.h"
+#include "core.h"
+#include "cosmosApiInternal.h"
+#include "schedulable.h"
 
 /* CIL interfaces */
 #include "CILinterrupt.h"
@@ -115,7 +115,9 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_sleepMsInternal(BitWidthType entityId, CosmOS_CoreVariableType * coreVar, BitWidthType tickCount)
+  * @fn thread_sleepMsInternal(BitWidthType entityId,
+  * CosmOS_CoreVariableType * coreVar,
+  * BitWidthType tickCount)
   *
   * @brief Set thread to sleep internal for x milliseconds DEMO CODE.
   *
@@ -126,36 +128,39 @@
   * @return CosmOS_SleepStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMsInternal(BitWidthType entityId, CosmOS_CoreVariableType * coreVar, BitWidthType tickCount)
+__OS_FUNC_SECTION CosmOS_SleepStateType
+thread_sleepMsInternal(
+    BitWidthType entityId,
+    CosmOS_CoreVariableType * coreVar,
+    BitWidthType tickCount )
 {
-	BitWidthType alarmId;
+    BitWidthType alarmId;
 
-	CosmOS_SleepStateType sleepStateReturn;
+    CosmOS_SleepStateType sleepStateReturn;
 
-	CosmOS_AlarmVariableType * alarmVar;
+    CosmOS_AlarmVariableType * alarmVar;
     CosmOS_SchedulableVariableType * schedulableVar;
 
+    schedulableVar = core_getCoreSchedulableInExecution( coreVar );
 
-	schedulableVar = core_getCoreSchedulableInExecution(coreVar);
+    alarmId = schedulable_getAlarmId( schedulableVar );
+    alarmVar = core_getAlarmVar( coreVar, alarmId );
 
-	alarmId = schedulable_getAlarmId(schedulableVar);
-	alarmVar = core_getAlarmVar(coreVar, alarmId);
+    schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__SLEEP );
+    alarm_setAlarmTickCount( alarmVar, tickCount );
+    alarm_setAlarmState( alarmVar, ALARM_STATE_ENUM__ACTIVATED );
 
-	schedulable_setState(schedulableVar, SCHEDULABLE_STATE_ENUM__SLEEP);
-	alarm_setAlarmTickCount(alarmVar,tickCount);
-	alarm_setAlarmState(alarmVar,ALARM_STATE_ENUM__ACTIVATED);
+    sleepStateReturn = SLEEP_STATE_ENUM__OK;
 
-	sleepStateReturn = SLEEP_STATE_ENUM__OK;
+    CILinterrupt_contextSwitchRoutineTrigger();
 
-	CILinterrupt_contextSwitchRoutineTrigger();
-
-	return sleepStateReturn;
-	__SUPRESS_UNUSED_VAR(entityId);
+    return sleepStateReturn;
+    __SUPRESS_UNUSED_VAR( entityId );
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -170,61 +175,62 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return CosmOS_SleepStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType delayMs)
+__OS_FUNC_SECTION CosmOS_SleepStateType
+thread_sleepMs( BitWidthType delayMs )
 {
-	BitWidthType msToTicks,
-					tickCount;
+    BitWidthType msToTicks, tickCount;
 
-	CosmOS_SleepStateType sleepStateReturn;
-	CosmOS_SchedulableInstanceType schedulableInstanceType;
+    CosmOS_SleepStateType sleepStateReturn;
+    CosmOS_SchedulableInstanceType schedulableInstanceType;
 
-	CosmOS_CoreVariableType * coreVar;
+    CosmOS_CoreVariableType * coreVar;
     CosmOS_SchedulableVariableType * schedulableVar;
 
+    if ( delayMs )
+    {
+        coreVar = core_getCoreVar();
 
-	if ( delayMs )
-	{
-		coreVar = core_getCoreVar();
+        msToTicks = core_getMsToTicks( coreVar );
 
-		msToTicks = core_getMsToTicks(coreVar);
+        schedulableVar = core_getCoreSchedulableInExecution( coreVar );
+        schedulableInstanceType = schedulable_getInstanceType( schedulableVar );
 
-		schedulableVar = core_getCoreSchedulableInExecution(coreVar);
-		schedulableInstanceType = schedulable_getInstanceType(schedulableVar);
+        if ( schedulableInstanceType IS_EQUAL_TO
+                 SCHEDULABLE_INSTANCE_ENUM__THREAD )
+        {
+            if ( __MUL_OVERFLOW( delayMs, msToTicks, &tickCount ) )
+            {
+                sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX;
+            }
+            else
+            {
+                if ( __ADD_OVERFLOW( tickCount, (BitWidthType)1, &tickCount ) )
+                {
+                    sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX;
+                }
+                else
+                {
+                    sleepStateReturn = cosmosApiInternal_thread_sleepMsInternal(
+                        coreVar, tickCount );
+                }
+            }
+        }
+        else
+        {
+            sleepStateReturn = SLEEP_STATE_ENUM__ERROR_ONLY_THREADS_CAN_SLEEP;
+        }
+    }
+    else
+    {
+        sleepStateReturn = SLEEP_STATE_ENUM__ERROR_MIN;
+    }
 
-		if (schedulableInstanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD)
-		{
-			if ( __MUL_OVERFLOW(delayMs,msToTicks,&tickCount) )
-			{
-				sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX;
-			}
-			else
-			{
-				if ( __ADD_OVERFLOW(tickCount,(BitWidthType)1,&tickCount) )
-				{
-					sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX;
-				}
-				else
-				{
-					sleepStateReturn = cosmosApiInternal_thread_sleepMsInternal(coreVar, tickCount);
-				}
-			}
-		}
-		else
-		{
-			sleepStateReturn = SLEEP_STATE_ENUM__ERROR_ONLY_THREADS_CAN_SLEEP;
-		}
-	}
-	else
-	{
-		sleepStateReturn = SLEEP_STATE_ENUM__ERROR_MIN;
-	}
-
-	return sleepStateReturn;
+    return sleepStateReturn;
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

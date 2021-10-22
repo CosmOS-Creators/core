@@ -53,9 +53,10 @@ extern "C" {
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -124,7 +125,8 @@ extern "C" {
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_getSpinlock(BitWidthType id);
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+spinlock_getSpinlock( BitWidthType id );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -162,7 +164,8 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_getSpinlock(BitWidthType id)
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_trySpinlock(BitWidthType id);
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+spinlock_trySpinlock( BitWidthType id );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -175,7 +178,8 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_trySpinlock(BitWidthType id)
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_releaseSpinlock(BitWidthType id);
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+spinlock_releaseSpinlock( BitWidthType id );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -212,15 +216,17 @@ __OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_releaseSpinlock(BitWidthType
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType spinlock_getSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar)
+__STATIC_FORCEINLINE BitWidthType
+spinlock_getSpinlockValue( CosmOS_SpinlockVariableType * spinlockVar )
 {
-    return (spinlockVar->spinlock);
+    return ( spinlockVar->spinlock );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn spinlock_getSpinlockSchedulableOwner(CosmOS_SpinlockVariableType * spinlockVar)
+  * @fn spinlock_getSpinlockSchedulableOwner(
+  * CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Get spinlock schedulableOwner.
   *
@@ -228,9 +234,10 @@ __STATIC_FORCEINLINE BitWidthType spinlock_getSpinlockValue(CosmOS_SpinlockVaria
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * spinlock_getSpinlockSchedulableOwner(CosmOS_SpinlockVariableType * spinlockVar)
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+spinlock_getSpinlockSchedulableOwner( CosmOS_SpinlockVariableType * spinlockVar )
 {
-    return (CosmOS_SchedulableVariableType *)(spinlockVar->schedulableOwner);
+    return (CosmOS_SchedulableVariableType *)( spinlockVar->schedulableOwner );
 }
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -242,7 +249,8 @@ __STATIC_FORCEINLINE CosmOS_SchedulableVariableType * spinlock_getSpinlockSchedu
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn spinlock_setSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar, BitWidthType spinlockParam)
+  * @fn spinlock_setSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar,
+  * BitWidthType spinlockParam)
   *
   * @brief Set spinlock value.
   *
@@ -251,7 +259,10 @@ __STATIC_FORCEINLINE CosmOS_SchedulableVariableType * spinlock_getSpinlockSchedu
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void spinlock_setSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar, BitWidthType spinlockParam)
+__STATIC_FORCEINLINE void
+spinlock_setSpinlockValue(
+    CosmOS_SpinlockVariableType * spinlockVar,
+    BitWidthType spinlockParam )
 {
     spinlockVar->spinlock = spinlockParam;
 }
@@ -259,7 +270,9 @@ __STATIC_FORCEINLINE void spinlock_setSpinlockValue(CosmOS_SpinlockVariableType 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn spinlock_setSpinlockSchedulableOwner(CosmOS_SpinlockVariableType * spinlock, BitWidthType spinlockParam)
+  * @fn spinlock_setSpinlockSchedulableOwner(
+  * CosmOS_SpinlockVariableType * spinlock,
+  * BitWidthType spinlockParam)
   *
   * @brief Set spinlock schedulableOwner.
   *
@@ -268,7 +281,10 @@ __STATIC_FORCEINLINE void spinlock_setSpinlockValue(CosmOS_SpinlockVariableType 
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void spinlock_setSpinlockSchedulableOwner(CosmOS_SpinlockVariableType * spinlockVar, CosmOS_SchedulableVariableType * schedulableOwnerParam)
+__STATIC_FORCEINLINE void
+spinlock_setSpinlockSchedulableOwner(
+    CosmOS_SpinlockVariableType * spinlockVar,
+    CosmOS_SchedulableVariableType * schedulableOwnerParam )
 {
     spinlockVar->schedulableOwner = schedulableOwnerParam;
 }
@@ -288,36 +304,50 @@ __STATIC_FORCEINLINE void spinlock_setSpinlockSchedulableOwner(CosmOS_SpinlockVa
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
+  * @fn spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar,
+  * CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Check if the spinlock will ends up in deadlock DEMO CODE.
   *
   * @param[in]  CosmOS_CoreVariableType * coreVar
   * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
-	*
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BooleanType spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
+__STATIC_FORCEINLINE CosmOS_BooleanType
+spinlock_willCauseDeadlock(
+    CosmOS_CoreVariableType * coreVar,
+    CosmOS_SpinlockVariableType * spinlockVar )
 {
-    return ((spinlockVar->spinlock IS_EQUAL_TO SPINLOCK_STATE_ENUM__OCCUPIED)\
-			AND (coreVar->schedulableInExecution IS_EQUAL_TO spinlockVar->schedulableOwner)) ? True : False;
+    return ( (spinlockVar->spinlock IS_EQUAL_TO SPINLOCK_STATE_ENUM__OCCUPIED)
+                 AND( coreVar->schedulableInExecution IS_EQUAL_TO
+                          spinlockVar->schedulableOwner ) )
+               ? True
+               : False;
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn spinlock_ownsSchedulableSpinlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
+  * @fn spinlock_ownsSchedulableSpinlock(CosmOS_CoreVariableType * coreVar,
+  * CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Check if the schedulable in execution owns the current spinlock.
   *
   * @param[in]  CosmOS_CoreVariableType * coreVar
   * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
-	*
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BooleanType spinlock_ownsSchedulableSpinlock(CosmOS_CoreVariableType * coreVar, CosmOS_SpinlockVariableType * spinlockVar)
+__STATIC_FORCEINLINE CosmOS_BooleanType
+spinlock_ownsSchedulableSpinlock(
+    CosmOS_CoreVariableType * coreVar,
+    CosmOS_SpinlockVariableType * spinlockVar )
 {
-    return (coreVar->schedulableInExecution IS_EQUAL_TO spinlockVar->schedulableOwner) ? True : False;
+    return ( coreVar->schedulableInExecution IS_EQUAL_TO
+                 spinlockVar->schedulableOwner )
+               ? True
+               : False;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

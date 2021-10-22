@@ -22,12 +22,12 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "osInit.h"
-#include "osBoot.h"
-#include "coreSync.h"
-#include "os.h"
 #include "core.h"
+#include "coreSync.h"
 #include "cosmosAssert.h"
 #include "memoryManager.h"
+#include "os.h"
+#include "osBoot.h"
 #include "switchMemoryProtection.h"
 
 /* CIL interfaces */
@@ -139,40 +139,42 @@
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void osInit_init(BitWidthType entityId)
+__OS_FUNC_SECTION void
+osInit_init( BitWidthType entityId )
 {
-  CosmOS_CoreVariableType * coreVar;
-  CosmOS_OsVariableType * osVar;
-	//TODO check if the os sections were booted and init and start was not called yet
+    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsVariableType * osVar;
+    /*TODO: check if the os sections were booted and
+    init and start was not called yet */
 
-	osVar = os_getOsVar();
+    osVar = os_getOsVar();
 
-	CILcore_setCoreVar(osVar);
+    CILcore_setCoreVar( osVar );
 
-  coreVar = core_getCoreVar();
+    coreVar = core_getCoreVar();
 
-  switchMemoryProtection_init(coreVar->cfg->codeMemoryHighAddress, \
-								coreVar->cfg->codeMemoryLowAddress, \
-								coreVar->cfg->stackMemoryHighAddress, \
-								coreVar->cfg->stackMemoryLowAddress, \
-								coreVar->cfg->unprotectedMemoryLowAddress, \
-								coreVar->cfg->unprotectedMemoryHighAddress \
-								);
-	osBoot_bootValidate();
+    switchMemoryProtection_init(
+        coreVar->cfg->codeMemoryHighAddress,
+        coreVar->cfg->codeMemoryLowAddress,
+        coreVar->cfg->stackMemoryHighAddress,
+        coreVar->cfg->stackMemoryLowAddress,
+        coreVar->cfg->unprotectedMemoryLowAddress,
+        coreVar->cfg->unprotectedMemoryHighAddress );
 
-  memoryManager_stackInit( coreVar );
+    osBoot_bootValidate();
 
-	memoryManager_heapInit( coreVar );
+    memoryManager_stackInit( coreVar );
 
-  //coreSync_getBarrier( coreVar, OS_INIT_ID );
+    memoryManager_heapInit( coreVar );
 
-	__SUPRESS_UNUSED_VAR(entityId);
+    //coreSync_getBarrier( coreVar, OS_INIT_ID );
 
+    __SUPRESS_UNUSED_VAR( entityId );
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

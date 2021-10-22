@@ -21,10 +21,10 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "os.h"
-#include "core.h"
 #include "spinlock.h"
+#include "core.h"
 #include "cosmosAssert.h"
+#include "os.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -136,47 +136,48 @@
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_getSpinlock(BitWidthType id)
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+spinlock_getSpinlock( BitWidthType id )
 {
-	BitWidthType numberOfSpinlocks;
+    BitWidthType numberOfSpinlocks;
 
-	CosmOS_BooleanType willCauseDeadlock;
+    CosmOS_BooleanType willCauseDeadlock;
     CosmOS_SpinlockStateType spinlockState;
 
-	CosmOS_OsVariableType * osVar;
-	CosmOS_CoreVariableType * coreVar;
-	CosmOS_SpinlockVariableType * spinlockVar;
-
+    CosmOS_OsVariableType * osVar;
+    CosmOS_CoreVariableType * coreVar;
+    CosmOS_SpinlockVariableType * spinlockVar;
 
     osVar = os_getOsVar();
     coreVar = CILcore_getCoreVar();
 
-	numberOfSpinlocks = os_getOsNumberOfSpinlocks(osVar);
+    numberOfSpinlocks = os_getOsNumberOfSpinlocks( osVar );
 
-	cosmosAssert( id < numberOfSpinlocks );
+    cosmosAssert( id < numberOfSpinlocks );
 
-	spinlockVar = os_getOsSpinlockVar(osVar, id);
+    spinlockVar = os_getOsSpinlockVar( osVar, id );
 
-	willCauseDeadlock = spinlock_willCauseDeadlock(coreVar, spinlockVar);
+    willCauseDeadlock = spinlock_willCauseDeadlock( coreVar, spinlockVar );
 
-	if( willCauseDeadlock )
-	{
-		spinlockState = SPINLOCK_STATE_ENUM__DEADLOCK_WARNING;
-	}
-	else
-	{
-		spinlockState = CILspinlock_getSpinlock(&(spinlockVar->spinlock), \
-												id, \
-												coreVar->schedulableInExecution->cfg->id );
-		spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
-	}
+    if ( willCauseDeadlock )
+    {
+        spinlockState = SPINLOCK_STATE_ENUM__DEADLOCK_WARNING;
+    }
+    else
+    {
+        spinlockState = CILspinlock_getSpinlock(
+            &( spinlockVar->spinlock ),
+            id,
+            coreVar->schedulableInExecution->cfg->id );
+        spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
+    }
 
     return spinlockState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -191,40 +192,41 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_trySpinlock(BitWidthType id)
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+spinlock_trySpinlock( BitWidthType id )
 {
-	BitWidthType numberOfSpinlocks;
+    BitWidthType numberOfSpinlocks;
 
     CosmOS_SpinlockStateType spinlockState;
 
-	CosmOS_OsVariableType * osVar;
-	CosmOS_CoreVariableType * coreVar;
-	CosmOS_SpinlockVariableType * spinlockVar;
-
+    CosmOS_OsVariableType * osVar;
+    CosmOS_CoreVariableType * coreVar;
+    CosmOS_SpinlockVariableType * spinlockVar;
 
     osVar = os_getOsVar();
     coreVar = CILcore_getCoreVar();
 
-	numberOfSpinlocks = os_getOsNumberOfSpinlocks(osVar);
+    numberOfSpinlocks = os_getOsNumberOfSpinlocks( osVar );
 
-	cosmosAssert( id < numberOfSpinlocks );
-	spinlockVar = os_getOsSpinlockVar(osVar, id);
+    cosmosAssert( id < numberOfSpinlocks );
+    spinlockVar = os_getOsSpinlockVar( osVar, id );
 
-	spinlockState = CILspinlock_trySpinlock(&(spinlockVar->spinlock), \
-											id, \
-											coreVar->schedulableInExecution->cfg->id );
+    spinlockState = CILspinlock_trySpinlock(
+        &( spinlockVar->spinlock ),
+        id,
+        coreVar->schedulableInExecution->cfg->id );
 
-	if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
-	{
-		spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
-	}
+    if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
+    {
+        spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
+    }
 
     return spinlockState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -239,52 +241,55 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_SpinlockStateType spinlock_releaseSpinlock(BitWidthType id)
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+spinlock_releaseSpinlock( BitWidthType id )
 {
-	BitWidthType numberOfSpinlocks;
+    BitWidthType numberOfSpinlocks;
 
-	CosmOS_BooleanType ownsSchedulableSpinlock;
+    CosmOS_BooleanType ownsSchedulableSpinlock;
 
     CosmOS_SpinlockStateType spinlockState;
 
-	CosmOS_OsVariableType * osVar;
-	CosmOS_CoreVariableType * coreVar;
-	CosmOS_SpinlockVariableType * spinlockVar;
+    CosmOS_OsVariableType * osVar;
+    CosmOS_CoreVariableType * coreVar;
+    CosmOS_SpinlockVariableType * spinlockVar;
 
     osVar = os_getOsVar();
     coreVar = CILcore_getCoreVar();
 
-	numberOfSpinlocks = os_getOsNumberOfSpinlocks(osVar);
+    numberOfSpinlocks = os_getOsNumberOfSpinlocks( osVar );
 
-	cosmosAssert( id < numberOfSpinlocks );
-	spinlockVar = os_getOsSpinlockVar(osVar, id);
+    cosmosAssert( id < numberOfSpinlocks );
+    spinlockVar = os_getOsSpinlockVar( osVar, id );
 
-	ownsSchedulableSpinlock = spinlock_ownsSchedulableSpinlock(coreVar, spinlockVar);
+    ownsSchedulableSpinlock =
+        spinlock_ownsSchedulableSpinlock( coreVar, spinlockVar );
 
-	if ( spinlockVar->spinlock IS_EQUAL_TO SPINLOCK_STATE_ENUM__OCCUPIED )
-	{
-		if ( ownsSchedulableSpinlock )
-		{
-			spinlockState = CILspinlock_releaseSpinlock(&(spinlockVar->spinlock), \
-														id, \
-														coreVar->schedulableInExecution->cfg->id );
-		}
-		else
-		{
-			spinlockState = SPINLOCK_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER;
-		}
-	}
-	else
-	{
-		spinlockState = SPINLOCK_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE;
-	}
+    if ( spinlockVar->spinlock IS_EQUAL_TO SPINLOCK_STATE_ENUM__OCCUPIED )
+    {
+        if ( ownsSchedulableSpinlock )
+        {
+            spinlockState = CILspinlock_releaseSpinlock(
+                &( spinlockVar->spinlock ),
+                id,
+                coreVar->schedulableInExecution->cfg->id );
+        }
+        else
+        {
+            spinlockState = SPINLOCK_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER;
+        }
+    }
+    else
+    {
+        spinlockState = SPINLOCK_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE;
+    }
 
-	return spinlockState;
+    return spinlockState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

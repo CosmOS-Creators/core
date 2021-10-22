@@ -21,8 +21,9 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "schedulable.h"
 #include "core.h"
+#include "schedulable.h"
+
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -133,24 +134,26 @@
   * @return CosmOS_CoreVariableType *
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_CoreVariableType * core_getCoreVar(void)
+__OS_FUNC_SECTION CosmOS_CoreVariableType *
+core_getCoreVar( void )
 {
-	CosmOS_CoreVariableType * coreVar;
+    CosmOS_CoreVariableType * coreVar;
 
-	coreVar = CILcore_getCoreVar();
+    coreVar = CILcore_getCoreVar();
 
-	return coreVar;
+    return coreVar;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_TaskVariableType * taskVar)
+  * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar,
+  * CosmOS_TaskVariableType * taskVar)
   *
   * @brief Set program and schedulable into the current context.
   *
@@ -160,33 +163,37 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_SchedulableVariableType * schedulableVar)
+__OS_FUNC_SECTION void
+core_setSchedulableIntoCurrentContext(
+    CosmOS_CoreVariableType * coreVar,
+    CosmOS_SchedulableVariableType * schedulableVar )
 {
     BitWidthType programId;
 
-	CosmOS_SchedulableStateType priorSchedulableVarState;
+    CosmOS_SchedulableStateType priorSchedulableVarState;
 
-	CosmOS_ProgramVariableType * programVar;
-	CosmOS_SchedulableVariableType * priorSchedulableVar;
+    CosmOS_ProgramVariableType * programVar;
+    CosmOS_SchedulableVariableType * priorSchedulableVar;
 
-	programId = schedulable_getProgramId( schedulableVar );
+    programId = schedulable_getProgramId( schedulableVar );
     programVar = core_getCoreProgramVar( coreVar, programId );
-	priorSchedulableVar = core_getCoreSchedulableInExecution( coreVar );
-	priorSchedulableVarState = schedulable_getState( priorSchedulableVar );
+    priorSchedulableVar = core_getCoreSchedulableInExecution( coreVar );
+    priorSchedulableVarState = schedulable_getState( priorSchedulableVar );
 
-	core_setCoreProgramInExecution( coreVar, programVar );
+    core_setCoreProgramInExecution( coreVar, programVar );
     core_setCoreSchedulableInExecution( coreVar, schedulableVar );
 
-	if (priorSchedulableVarState IS_EQUAL_TO SCHEDULABLE_STATE_ENUM__RUNNING)
-	{
-		schedulable_setState(priorSchedulableVar, SCHEDULABLE_STATE_ENUM__READY);
-	}
-	schedulable_setState(schedulableVar, SCHEDULABLE_STATE_ENUM__RUNNING);
+    if ( priorSchedulableVarState IS_EQUAL_TO SCHEDULABLE_STATE_ENUM__RUNNING )
+    {
+        schedulable_setState(
+            priorSchedulableVar, SCHEDULABLE_STATE_ENUM__READY );
+    }
+    schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__RUNNING );
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

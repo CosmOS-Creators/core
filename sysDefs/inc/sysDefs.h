@@ -47,31 +47,32 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefsStacks.h"
-#include "sysDefsHeaps.h"
 #include "sysDefsAlarms.h"
-#include "sysDefsRoutes.h"
 #include "sysDefsBarriers.h"
 #include "sysDefsBuffers.h"
 #include "sysDefsBuffersDouble.h"
+#include "sysDefsCores.h"
+#include "sysDefsHeaps.h"
+#include "sysDefsOsBoot.h"
+#include "sysDefsPermissions.h"
+#include "sysDefsPrograms.h"
+#include "sysDefsRoutes.h"
+#include "sysDefsSchedulables.h"
+#include "sysDefsScheduleTables.h"
+#include "sysDefsSchedulerThreadLists.h"
+#include "sysDefsSchedulers.h"
+#include "sysDefsSpinlocks.h"
+#include "sysDefsStacks.h"
+#include "sysDefsSysJobs.h"
 #include "sysDefsTasks.h"
 #include "sysDefsThreads.h"
-#include "sysDefsPrograms.h"
-#include "sysDefsPermissions.h"
-#include "sysDefsSchedulers.h"
-#include "sysDefsScheduleTables.h"
-#include "sysDefsSchedulables.h"
-#include "sysDefsCores.h"
-#include "sysDefsOsBoot.h"
-#include "sysDefsSysJobs.h"
-#include "sysDefsSchedulerThreadLists.h"
-#include "sysDefsSpinlocks.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/

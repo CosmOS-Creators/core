@@ -41,15 +41,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -110,7 +111,8 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn coreSync_getBarrier(CosmOS_CoreVariableType * coreVar, BitWidthType barrierId)
+  * @fn coreSync_getBarrier(CosmOS_CoreVariableType * coreVar,
+  * BitWidthType barrierId)
   *
   * @brief Set barrier with specific id for core X.
   *
@@ -119,7 +121,8 @@
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void coreSync_getBarrier(CosmOS_CoreVariableType * coreVar, BitWidthType barrierId);
+__OS_FUNC_SECTION void
+coreSync_getBarrier( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -149,7 +152,8 @@ __OS_FUNC_SECTION void coreSync_getBarrier(CosmOS_CoreVariableType * coreVar, Bi
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn coreSync_reactivateBarrier(CosmOS_CoreVariableType * coreVar, BitWidthType barrierId)
+  * @fn coreSync_reactivateBarrier(CosmOS_CoreVariableType * coreVar,
+  * BitWidthType barrierId)
   *
   * @brief Reactivate barrier with specific barrierId for coreVar.
   *
@@ -158,7 +162,10 @@ __OS_FUNC_SECTION void coreSync_getBarrier(CosmOS_CoreVariableType * coreVar, Bi
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void coreSync_reactivateBarrier(CosmOS_CoreVariableType * coreVar, BitWidthType barrierId);
+__OS_FUNC_SECTION void
+coreSync_reactivateBarrier(
+    CosmOS_CoreVariableType * coreVar,
+    BitWidthType barrierId );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -189,9 +196,10 @@ __OS_FUNC_SECTION void coreSync_reactivateBarrier(CosmOS_CoreVariableType * core
   *
   * @return CosmOS_BarrierStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BarrierStateType coreSync_getBarrierState(CosmOS_BarrierVariableType * barrier)
+__STATIC_FORCEINLINE CosmOS_BarrierStateType
+coreSync_getBarrierState( CosmOS_BarrierVariableType * barrier )
 {
-    return (barrier->barrierState);
+    return ( barrier->barrierState );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -209,7 +217,8 @@ __STATIC_FORCEINLINE CosmOS_BarrierStateType coreSync_getBarrierState(CosmOS_Bar
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn coreSync_setBarrierState(CosmOS_BarrierVariableType * barrier, CosmOS_BarrierStateType barrierStateParam)
+  * @fn coreSync_setBarrierState(CosmOS_BarrierVariableType * barrier,
+  * CosmOS_BarrierStateType barrierStateParam)
   *
   * @brief Set barrierState.
   *
@@ -218,7 +227,10 @@ __STATIC_FORCEINLINE CosmOS_BarrierStateType coreSync_getBarrierState(CosmOS_Bar
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void coreSync_setBarrierState(CosmOS_BarrierVariableType * barrier, CosmOS_BarrierStateType barrierStateParam)
+__STATIC_FORCEINLINE void
+coreSync_setBarrierState(
+    CosmOS_BarrierVariableType * barrier,
+    CosmOS_BarrierStateType barrierStateParam )
 {
     barrier->barrierState = barrierStateParam;
 }

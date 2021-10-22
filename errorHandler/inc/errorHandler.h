@@ -7,7 +7,7 @@
 *****************************************************************************//**
 ** @file errorHandler.h
 *********************************************************************************
-<!--               		  errorHandler Unit Group Definition               		  -->
+<!--                    errorHandler Unit Group Definition                    -->
 *********************************************************************************
 ** @defgroup errorHandler_unit errorHandler Unit
 ** @ingroup errorHandler_module
@@ -25,7 +25,7 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--          			 errorHandler Unit Global Group Definition                -->
+<!--                errorHandler Unit Global Group Definition                 -->
 *********************************************************************************
 ** @defgroup Global_errorHandler Global
 ** @ingroup errorHandler_unit

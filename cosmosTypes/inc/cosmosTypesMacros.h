@@ -41,7 +41,7 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
@@ -120,37 +120,37 @@
   * *************************************************************************//**
   * @brief  IS_NOT more readable expresion than !
 ********************************************************************************/
-#define IS_NOT(expr)  !(expr)
+#define IS_NOT( expr ) !( expr )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @brief  __ALIGN_MASK macro
 ********************************************************************************/
-#define __ALIGN_MASK(x,mask)    (((x)+(mask))&~(mask))
+#define __ALIGN_MASK( x, mask ) ( ( ( x ) + ( mask ) ) & ~( mask ) )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @brief  ALIGN macro
 ********************************************************************************/
-#define ALIGN(x,a)              __ALIGN_MASK(x,(typeof(x))(a)-1)
+#define ALIGN( x, a ) __ALIGN_MASK( x, ( typeof( x ) )(a)-1 )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @brief  __STATIC_FORCEINLINE
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #ifndef __STATIC_FORCEINLINE
-        #define __STATIC_FORCEINLINE __attribute__((always_inline)) static inline
-    #endif
-#elif   defined ( __CC_ARM )
-    #ifndef __STATIC_FORCEINLINE
-        #define __STATIC_FORCEINLINE __attribute__((always_inline)) static inline
-    #endif
+#if defined( __GNUC__ )
+#ifndef __STATIC_FORCEINLINE
+#define __STATIC_FORCEINLINE __attribute__( ( always_inline ) ) static inline
+#endif
+#elif defined( __CC_ARM )
+#ifndef __STATIC_FORCEINLINE
+#define __STATIC_FORCEINLINE __attribute__( ( always_inline ) ) static inline
+#endif
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -158,16 +158,16 @@
   * *************************************************************************//**
   * @brief  __NAKED
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #ifndef __NAKED
-        #define __NAKED __attribute__((naked))
-    #endif
-#elif   defined ( __CC_ARM )
-    #ifndef __NAKED
-        #define __NAKED __attribute__((naked))
-    #endif
+#if defined( __GNUC__ )
+#ifndef __NAKED
+#define __NAKED __attribute__( ( naked ) )
+#endif
+#elif defined( __CC_ARM )
+#ifndef __NAKED
+#define __NAKED __attribute__( ( naked ) )
+#endif
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -175,16 +175,16 @@
   * *************************************************************************//**
   * @brief  __FORCEINLINE
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #ifndef __FORCEINLINE
-        #define __FORCEINLINE __attribute__((always_inline)) inline
-    #endif
-#elif   defined ( __CC_ARM )
-    #ifndef __FORCEINLINE
-        #define __FORCEINLINE __attribute__((always_inline)) inline
-    #endif
+#if defined( __GNUC__ )
+#ifndef __FORCEINLINE
+#define __FORCEINLINE __attribute__( ( always_inline ) ) inline
+#endif
+#elif defined( __CC_ARM )
+#ifndef __FORCEINLINE
+#define __FORCEINLINE __attribute__( ( always_inline ) ) inline
+#endif
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -192,12 +192,12 @@
   * *************************************************************************//**
   * @brief  __SUPRESS_UNUSED_VAR used to supress compiler warnings
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #define __SUPRESS_UNUSED_VAR(dummy) (void)(dummy)
-#elif   defined ( __CC_ARM )
-    #define __SUPRESS_UNUSED_VAR(dummy)
+#if defined( __GNUC__ )
+#define __SUPRESS_UNUSED_VAR( dummy ) (void)( dummy )
+#elif defined( __CC_ARM )
+#define __SUPRESS_UNUSED_VAR( dummy )
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -205,16 +205,16 @@
   * *************************************************************************//**
   * @brief  NULL pointer macro
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #ifndef NULL
-        #define NULL ((void *)0)
-    #endif
-#elif   defined ( __CC_ARM )
-    #ifndef NULL
-        #define NULL ((void *)0)
-    #endif
+#if defined( __GNUC__ )
+#ifndef NULL
+#define NULL ( (void *)0 )
+#endif
+#elif defined( __CC_ARM )
+#ifndef NULL
+#define NULL ( (void *)0 )
+#endif
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -222,12 +222,12 @@
   * *************************************************************************//**
   * @brief  __COSMOS_LIKELY pointer macro
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #define __COSMOS_LIKELY(expr)      __builtin_expect(!!(expr),1)
-#elif   defined ( __CC_ARM )
-    #define __COSMOS_LIKELY(expr)      (expr)
+#if defined( __GNUC__ )
+#define __COSMOS_LIKELY( expr ) __builtin_expect( !!( expr ), 1 )
+#elif defined( __CC_ARM )
+#define __COSMOS_LIKELY( expr ) ( expr )
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -235,12 +235,12 @@
   * *************************************************************************//**
   * @brief  __COSMOS_UNLIKELY pointer macro
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #define __COSMOS_UNLIKELY(expr)    __builtin_expect(!!(expr),0)
-#elif   defined ( __CC_ARM )
-    #define __COSMOS_UNLIKELY(expr)      (expr)
+#if defined( __GNUC__ )
+#define __COSMOS_UNLIKELY( expr ) __builtin_expect( !!( expr ), 0 )
+#elif defined( __CC_ARM )
+#define __COSMOS_UNLIKELY( expr ) ( expr )
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -248,14 +248,12 @@
   * *************************************************************************//**
   * @brief  __SEC_START
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #define __SEC_START( attr ) \
-		attr
-#elif   defined ( __CC_ARM )
-    #define __SEC_START( attr ) \
-    pragma attr
+#if defined( __GNUC__ )
+#define __SEC_START( attr ) attr
+#elif defined( __CC_ARM )
+#define __SEC_START( attr ) pragma attr
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -263,14 +261,12 @@
   * *************************************************************************//**
   * @brief  __SEC_STOP
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #define __SEC_STOP( attr ) \
-		attr
-#elif   defined ( __CC_ARM )
-    #define __SEC_STOP( attr ) \
-    pragma attr
+#if defined( __GNUC__ )
+#define __SEC_STOP( attr ) attr
+#elif defined( __CC_ARM )
+#define __SEC_STOP( attr ) pragma attr
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -278,13 +274,12 @@
   * *************************************************************************//**
   * @brief  __MUL_OVERFLOW
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #define __MUL_OVERFLOW(a,b,result) \
-		__builtin_mul_overflow (a,b,result)
-#elif   defined ( __CC_ARM )
-    #define __MUL_OVERFLOW(a,b,result)
+#if defined( __GNUC__ )
+#define __MUL_OVERFLOW( a, b, result ) __builtin_mul_overflow( a, b, result )
+#elif defined( __CC_ARM )
+#define __MUL_OVERFLOW( a, b, result )
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -292,13 +287,12 @@
   * *************************************************************************//**
   * @brief  __SEC_STOP
 ********************************************************************************/
-#if     defined ( __GNUC__ )
-    #define __ADD_OVERFLOW(a,b,result) \
-		__builtin_add_overflow (a,b,result)
-#elif   defined ( __CC_ARM )
-    #define __ADD_OVERFLOW(a,b,result)
+#if defined( __GNUC__ )
+#define __ADD_OVERFLOW( a, b, result ) __builtin_add_overflow( a, b, result )
+#elif defined( __CC_ARM )
+#define __ADD_OVERFLOW( a, b, result )
 #else
-    #error "Your compiler is currently not supported by CosmOS!"
+#error "Your compiler is currently not supported by CosmOS!"
 #endif
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

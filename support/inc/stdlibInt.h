@@ -7,7 +7,7 @@
 *****************************************************************************//**
 ** @file stdlibInt.h
 *********************************************************************************
-<!--             		 	   stdlibInt Unit Group Definition         			        -->
+<!--                      stdlibInt Unit Group Definition                     -->
 *********************************************************************************
 ** @defgroup stdlibInt_unit stdlibInt Unit
 ** @ingroup support_module
@@ -25,7 +25,7 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--          			 stdlibInt Unit Global Group Definition            		    -->
+<!--                 stdlibInt Unit Global Group Definition                   -->
 *********************************************************************************
 ** @defgroup Global_stdlibInt Global
 ** @ingroup stdlibInt_unit
@@ -47,9 +47,10 @@ extern "C" {
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 
 /* LIB interfaces */
 #include <stddef.h>
@@ -148,7 +149,8 @@ extern "C" {
   *
   * @return void *
 ********************************************************************************/
-void* malloc_internal( size_t size );
+void *
+malloc_internal( size_t size );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -161,7 +163,8 @@ void* malloc_internal( size_t size );
   *
   * @return none
 ********************************************************************************/
-void free_internal( void* ptr );
+void
+free_internal( void * ptr );
 
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **

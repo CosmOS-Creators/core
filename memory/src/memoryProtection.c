@@ -21,11 +21,12 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "core.h"
-#include "stack.h"
-#include "schedulable.h"
-#include "program.h"
 #include "memoryProtection.h"
+#include "core.h"
+#include "program.h"
+#include "schedulable.h"
+#include "stack.h"
+
 
 /* CIL interfaces */
 #include "CILmemoryProtection.h"
@@ -128,11 +129,11 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn memoryProtection_init(AddressType codeMemoryHighAddress,
-  *							AddressType codeMemoryLowAddress,
-  *							AddressType stackMemoryHighAddress,
-  *							AddressType stackMemoryLowAddress,
-  *							AddressType unprotectedMemoryLowAddress,
-  *							AddressType unprotectedMemoryHighAddress)
+  * AddressType codeMemoryLowAddress,
+  * AddressType stackMemoryHighAddress,
+  * AddressType stackMemoryLowAddress,
+  * AddressType unprotectedMemoryLowAddress,
+  * AddressType unprotectedMemoryHighAddress)
   * @brief Init memory protection DEMO CODE.
   *
   * @param[in]  AddressType codeMemoryHighAddress
@@ -140,31 +141,38 @@
   * @param[in]  AddressType stackMemoryHighAddress
   * @param[in]  AddressType unprotectedMemoryLowAddress
   * @param[in]  AddressType unprotectedMemoryHighAddress
-	*
+  *
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void memoryProtection_init(AddressType codeMemoryHighAddress,\
-												AddressType codeMemoryLowAddress,\
-												AddressType stackMemoryHighAddress,\
-												AddressType stackMemoryLowAddress,\
-												AddressType unprotectedMemoryLowAddress,\
-												AddressType unprotectedMemoryHighAddress)
+__OS_FUNC_SECTION void
+memoryProtection_init(
+    AddressType codeMemoryHighAddress,
+    AddressType codeMemoryLowAddress,
+    AddressType stackMemoryHighAddress,
+    AddressType stackMemoryLowAddress,
+    AddressType unprotectedMemoryLowAddress,
+    AddressType unprotectedMemoryHighAddress )
 {
-    CILmemoryProtection_init(codeMemoryHighAddress,codeMemoryLowAddress,
-							stackMemoryHighAddress,stackMemoryLowAddress,
-							unprotectedMemoryLowAddress,unprotectedMemoryHighAddress);
+    CILmemoryProtection_init(
+        codeMemoryHighAddress,
+        codeMemoryLowAddress,
+        stackMemoryHighAddress,
+        stackMemoryLowAddress,
+        unprotectedMemoryLowAddress,
+        unprotectedMemoryHighAddress );
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_setStackOverflowProtection(CosmOS_StackConfigurationType * stack)
+  * @fn memoryProtection_setStackOverflowProtection(
+  * CosmOS_StackConfigurationType * stack)
   *
   * @brief Set stack overflow protection.
   *
@@ -172,10 +180,11 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_StackConfigurationType * stack)
+__STATIC_FORCEINLINE void
+memoryProtection_setStackOverflowProtection(
+    CosmOS_StackConfigurationType * stack )
 {
-    AddressType lowAddress,
-                highAddress;
+    AddressType lowAddress, highAddress;
 
     lowAddress = stack_getStackLowAddress( stack );
     highAddress = stack_getStackHighAddress( stack );
@@ -186,7 +195,8 @@ __STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_Sta
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program)
+  * @fn memoryProtection_setProgramMemoryProtection(
+  * CosmOS_ProgramVariableType * program)
   *
   * @brief Set program memory protection.
   *
@@ -194,12 +204,13 @@ __STATIC_FORCEINLINE void memoryProtection_setStackOverflowProtection(CosmOS_Sta
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void memoryProtection_setProgramMemoryProtection(CosmOS_ProgramVariableType * program)
+__STATIC_FORCEINLINE void
+memoryProtection_setProgramMemoryProtection(
+    CosmOS_ProgramVariableType * program )
 {
     BitWidthType size;
 
-    AddressType lowAddress,
-                highAddress;
+    AddressType lowAddress, highAddress;
 
     size = program_getProgramMemorySize( program );
     lowAddress = program_getProgramMemoryLowAddress( program );
@@ -207,14 +218,16 @@ __STATIC_FORCEINLINE void memoryProtection_setProgramMemoryProtection(CosmOS_Pro
 
     if ( size )
     {
-        CILmemoryProtection_setProgramMemoryProtection( lowAddress, highAddress );
+        CILmemoryProtection_setProgramMemoryProtection(
+            lowAddress, highAddress );
     }
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_setSchedulablePeripheralProtection(CosmOS_SchedulableVariableType * schedulable)
+  * @fn memoryProtection_setSchedulablePeripheralProtection(
+  * CosmOS_SchedulableVariableType * schedulable)
   *
   * @brief Set schedulable peripheral protection.
   *
@@ -222,12 +235,13 @@ __STATIC_FORCEINLINE void memoryProtection_setProgramMemoryProtection(CosmOS_Pro
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void memoryProtection_setSchedulablePeripheralProtection(CosmOS_SchedulableVariableType * schedulable)
+__STATIC_FORCEINLINE void
+memoryProtection_setSchedulablePeripheralProtection(
+    CosmOS_SchedulableVariableType * schedulable )
 {
     BitWidthType size;
 
-    AddressType lowAddress,
-                highAddress;
+    AddressType lowAddress, highAddress;
 
     size = schedulable_getPeripheralAccessSize( schedulable );
     lowAddress = schedulable_getPeripheralAccessLowAddress( schedulable );
@@ -235,14 +249,16 @@ __STATIC_FORCEINLINE void memoryProtection_setSchedulablePeripheralProtection(Co
 
     if ( size )
     {
-        CILmemoryProtection_setSchedulablePeripheralProtection( lowAddress, highAddress );
+        CILmemoryProtection_setSchedulablePeripheralProtection(
+            lowAddress, highAddress );
     }
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable)
+  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,
+  * CosmOS_SchedulableVariableType  * schedulable)
   *
   * @brief Set memory protection for current execution context.
   *
@@ -252,15 +268,17 @@ __STATIC_FORCEINLINE void memoryProtection_setSchedulablePeripheralProtection(Co
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable)
+__OS_FUNC_SECTION void
+memoryProtection_setMemoryProtection(
+    CosmOS_CoreVariableType * core,
+    CosmOS_SchedulableVariableType * schedulable )
 {
     BitWidthType programId;
 
     CosmOS_StackConfigurationType * stack;
     CosmOS_ProgramVariableType * programVar;
-
 
     programId = schedulable_getProgramId( schedulable );
     programVar = core_getCoreProgramVar( core, programId );
@@ -269,18 +287,22 @@ __OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableT
 
     memoryProtection_setStackOverflowProtection( stack );
     memoryProtection_setProgramMemoryProtection( programVar );
-	memoryProtection_setSchedulablePeripheralProtection( schedulable );
+    memoryProtection_setSchedulablePeripheralProtection( schedulable );
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_isMemoryRegionProtected(CosmOS_CoreVariableType * core, void  * regionLowAddressPointer, BitWidthType size)
+  * @fn memoryProtection_isMemoryRegionProtected(
+  * CosmOS_CoreVariableType * core,
+  * void  * regionLowAddressPointer,
+  * BitWidthType size)
   *
-  * @brief Check if specific memory region is protected against changes for the current execution context.
+  * @brief Check if specific memory region is protected against changes
+  * for the current execution context.
   *
   * @param[in]  CosmOS_CoreVariableType * core
   * @param[in]  void * regionLowAddressPointer
@@ -289,47 +311,49 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return CosmOS_BooleanType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_BooleanType memoryProtection_isMemoryRegionProtected(CosmOS_CoreVariableType * core, void * regionLowAddressPointer, BitWidthType size)
+__OS_FUNC_SECTION CosmOS_BooleanType
+memoryProtection_isMemoryRegionProtected(
+    CosmOS_CoreVariableType * core,
+    void * regionLowAddressPointer,
+    BitWidthType size )
 {
-    AddressType stackLowAddress,
-                stackHighAddress,
-				programLowAddress,
-				programHighAddress,
-				regionLowAddress,
-				regionHighAddress;
+    AddressType stackLowAddress, stackHighAddress, programLowAddress,
+        programHighAddress, regionLowAddress, regionHighAddress;
 
-	CosmOS_BooleanType isMemoryRegionProtected = True;
+    CosmOS_BooleanType isMemoryRegionProtected = True;
 
     CosmOS_StackConfigurationType * stack;
     CosmOS_ProgramVariableType * programVar;
-	CosmOS_SchedulableVariableType * schedulable;
+    CosmOS_SchedulableVariableType * schedulable;
 
-	regionLowAddress = (AddressType)regionLowAddressPointer;
+    regionLowAddress = (AddressType)regionLowAddressPointer;
 
     programVar = core_getCoreProgramInExecution( core );
-	schedulable = core_getCoreSchedulableInExecution( core );
+    schedulable = core_getCoreSchedulableInExecution( core );
     stack = schedulable_getStack( schedulable );
 
-	stackLowAddress = stack_getStackLowAddress( stack );
+    stackLowAddress = stack_getStackLowAddress( stack );
     stackHighAddress = stack_getStackHighAddress( stack );
 
     programLowAddress = program_getProgramMemoryLowAddress( programVar );
     programHighAddress = program_getProgramMemoryHighAddress( programVar );
 
-	regionHighAddress = regionLowAddress + (AddressType)size;
+    regionHighAddress = regionLowAddress + (AddressType)size;
 
-	if (((regionHighAddress < stackHighAddress) && (regionLowAddress > stackLowAddress)) || \
-		((regionHighAddress < programHighAddress) && (regionLowAddress > programLowAddress)))
-	{
-		isMemoryRegionProtected = False;
-	}
+    if ( ( ( regionHighAddress < stackHighAddress ) &&
+           ( regionLowAddress > stackLowAddress ) ) ||
+         ( ( regionHighAddress < programHighAddress ) &&
+           ( regionLowAddress > programLowAddress ) ) )
+    {
+        isMemoryRegionProtected = False;
+    }
 
-	return isMemoryRegionProtected;
+    return isMemoryRegionProtected;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

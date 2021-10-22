@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -124,7 +125,8 @@
   *
   * @return CosmOS_OsVariableType *
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_OsVariableType * os_getOsVar(void);
+__OS_FUNC_SECTION CosmOS_OsVariableType *
+os_getOsVar( void );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -137,7 +139,8 @@ __OS_FUNC_SECTION CosmOS_OsVariableType * os_getOsVar(void);
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void os_kernelPanic(void);
+__OS_FUNC_SECTION void
+os_kernelPanic( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -175,7 +178,8 @@ __OS_FUNC_SECTION void os_kernelPanic(void);
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void os_start(BitWidthType entityId);
+__OS_FUNC_SECTION void
+os_start( BitWidthType entityId );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -190,7 +194,8 @@ __OS_FUNC_SECTION void os_start(BitWidthType entityId);
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void os_write8(BitWidthType entityId, uint8_t *address, uint8_t value);
+__OS_FUNC_SECTION void
+os_write8( BitWidthType entityId, uint8_t * address, uint8_t value );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -205,7 +210,8 @@ __OS_FUNC_SECTION void os_write8(BitWidthType entityId, uint8_t *address, uint8_
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void os_write16(BitWidthType entityId, uint16_t *address, uint16_t value);
+__OS_FUNC_SECTION void
+os_write16( BitWidthType entityId, uint16_t * address, uint16_t value );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -220,7 +226,8 @@ __OS_FUNC_SECTION void os_write16(BitWidthType entityId, uint16_t *address, uint
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void os_write32(BitWidthType entityId, uint32_t *address, uint32_t value);
+__OS_FUNC_SECTION void
+os_write32( BitWidthType entityId, uint32_t * address, uint32_t value );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -251,9 +258,10 @@ __OS_FUNC_SECTION void os_write32(BitWidthType entityId, uint32_t *address, uint
   *
   * @return CosmOS_CoreConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreConfigurationType * os_getOsCores(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
+os_getOsCores( CosmOS_OsVariableType * osVar )
 {
-    return (CosmOS_CoreConfigurationType *)(osVar->cfg->cores);
+    return (CosmOS_CoreConfigurationType *)( osVar->cfg->cores );
 }
 
 /********************************************************************************
@@ -267,9 +275,10 @@ __STATIC_FORCEINLINE CosmOS_CoreConfigurationType * os_getOsCores(CosmOS_OsVaria
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType os_getOsNumberOfCores(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE BitWidthType
+os_getOsNumberOfCores( CosmOS_OsVariableType * osVar )
 {
-    return (osVar->cfg->numberOfCores);
+    return ( osVar->cfg->numberOfCores );
 }
 
 /********************************************************************************
@@ -283,9 +292,10 @@ __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfCores(CosmOS_OsVariableType * 
   *
   * @return CosmOS_BufferConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferConfigurationType * os_getOsBuffers(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE CosmOS_BufferConfigurationType *
+os_getOsBuffers( CosmOS_OsVariableType * osVar )
 {
-    return (CosmOS_BufferConfigurationType *)(osVar->cfg->buffers);
+    return (CosmOS_BufferConfigurationType *)( osVar->cfg->buffers );
 }
 
 /********************************************************************************
@@ -299,9 +309,10 @@ __STATIC_FORCEINLINE CosmOS_BufferConfigurationType * os_getOsBuffers(CosmOS_OsV
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType os_getOsNumberOfBuffers(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE BitWidthType
+os_getOsNumberOfBuffers( CosmOS_OsVariableType * osVar )
 {
-    return (osVar->cfg->numberOfBuffers);
+    return ( osVar->cfg->numberOfBuffers );
 }
 
 /********************************************************************************
@@ -315,9 +326,10 @@ __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfBuffers(CosmOS_OsVariableType 
   *
   * @return CosmOS_RoutesConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_RoutesConfigurationType * os_getOsRoutes(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE CosmOS_RoutesConfigurationType *
+os_getOsRoutes( CosmOS_OsVariableType * osVar )
 {
-    return (CosmOS_RoutesConfigurationType *)(osVar->cfg->route);
+    return (CosmOS_RoutesConfigurationType *)( osVar->cfg->route );
 }
 
 /********************************************************************************
@@ -331,9 +343,10 @@ __STATIC_FORCEINLINE CosmOS_RoutesConfigurationType * os_getOsRoutes(CosmOS_OsVa
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType os_getOsNumberOfSpinlocks(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE BitWidthType
+os_getOsNumberOfSpinlocks( CosmOS_OsVariableType * osVar )
 {
-    return (osVar->cfg->numberOfSpinlocks);
+    return ( osVar->cfg->numberOfSpinlocks );
 }
 
 /********************************************************************************
@@ -347,9 +360,10 @@ __STATIC_FORCEINLINE BitWidthType os_getOsNumberOfSpinlocks(CosmOS_OsVariableTyp
   *
   * @return CosmOS_CoreVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreVariableType * os_getOsCoreVars(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE CosmOS_CoreVariableType *
+os_getOsCoreVars( CosmOS_OsVariableType * osVar )
 {
-    return (osVar->coreVars);
+    return ( osVar->coreVars );
 }
 
 /********************************************************************************
@@ -364,9 +378,10 @@ __STATIC_FORCEINLINE CosmOS_CoreVariableType * os_getOsCoreVars(CosmOS_OsVariabl
   *
   * @return CosmOS_CoreVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreVariableType * os_getCoreVar(CosmOS_OsVariableType * osVar, BitWidthType coreId)
+__STATIC_FORCEINLINE CosmOS_CoreVariableType *
+os_getCoreVar( CosmOS_OsVariableType * osVar, BitWidthType coreId )
 {
-    return (&(osVar->coreVars[coreId]));
+    return ( &( osVar->coreVars[coreId] ) );
 }
 
 /********************************************************************************
@@ -380,9 +395,10 @@ __STATIC_FORCEINLINE CosmOS_CoreVariableType * os_getCoreVar(CosmOS_OsVariableTy
   *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferVariableType * os_getOsBufferVars(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE CosmOS_BufferVariableType *
+os_getOsBufferVars( CosmOS_OsVariableType * osVar )
 {
-    return (osVar->bufferVars);
+    return ( osVar->bufferVars );
 }
 
 /********************************************************************************
@@ -397,9 +413,10 @@ __STATIC_FORCEINLINE CosmOS_BufferVariableType * os_getOsBufferVars(CosmOS_OsVar
   *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferVariableType * os_getOsBufferVar(CosmOS_OsVariableType * osVar, BitWidthType bufferId)
+__STATIC_FORCEINLINE CosmOS_BufferVariableType *
+os_getOsBufferVar( CosmOS_OsVariableType * osVar, BitWidthType bufferId )
 {
-    return (&(osVar->bufferVars[bufferId]));
+    return ( &( osVar->bufferVars[bufferId] ) );
 }
 
 /********************************************************************************
@@ -413,15 +430,17 @@ __STATIC_FORCEINLINE CosmOS_BufferVariableType * os_getOsBufferVar(CosmOS_OsVari
   *
   * @return CosmOS_BufferDoubleVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVars(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType *
+os_getOsBufferDoubleVars( CosmOS_OsVariableType * osVar )
 {
-    return (osVar->bufferDoubleVars);
+    return ( osVar->bufferDoubleVars );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar,BitWidthType bufferDoubleId)
+  * @fn os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar,
+  * BitWidthType bufferDoubleId)
   *
   * @brief Get os bufferDouble pointer.
   *
@@ -430,9 +449,12 @@ __STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVars(
   *
   * @return CosmOS_BufferDoubleVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar, BitWidthType bufferDoubleId)
+__STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType *
+os_getOsBufferDoubleVar(
+    CosmOS_OsVariableType * osVar,
+    BitWidthType bufferDoubleId )
 {
-    return (&(osVar->bufferDoubleVars[bufferDoubleId]));
+    return ( &( osVar->bufferDoubleVars[bufferDoubleId] ) );
 }
 
 /********************************************************************************
@@ -446,15 +468,17 @@ __STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType * os_getOsBufferDoubleVar(C
   *
   * @return CosmOS_SpinlockVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SpinlockVariableType * os_getOsSpinlockVars(CosmOS_OsVariableType * osVar)
+__STATIC_FORCEINLINE CosmOS_SpinlockVariableType *
+os_getOsSpinlockVars( CosmOS_OsVariableType * osVar )
 {
-    return (osVar->spinlockVars);
+    return ( osVar->spinlockVars );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn os_getOsSpinlockVar(CosmOS_OsVariableType * osVar,BitWidthType spinlockId)
+  * @fn os_getOsSpinlockVar(CosmOS_OsVariableType * osVar,
+  * BitWidthType spinlockId)
   *
   * @brief Get os spinlock pointer.
   *
@@ -463,9 +487,10 @@ __STATIC_FORCEINLINE CosmOS_SpinlockVariableType * os_getOsSpinlockVars(CosmOS_O
   *
   * @return CosmOS_SpinlockVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SpinlockVariableType * os_getOsSpinlockVar(CosmOS_OsVariableType * osVar, BitWidthType spinlockId)
+__STATIC_FORCEINLINE CosmOS_SpinlockVariableType *
+os_getOsSpinlockVar( CosmOS_OsVariableType * osVar, BitWidthType spinlockId )
 {
-    return (&(osVar->spinlockVars[spinlockId]));
+    return ( &( osVar->spinlockVars[spinlockId] ) );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

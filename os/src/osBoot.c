@@ -22,8 +22,8 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "osBoot.h"
-#include "osBootCfg.h"
 #include "cosmosAssert.h"
+#include "osBootCfg.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -125,7 +125,8 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd)
+  * @fn osBoot_bootSection( unsigned char * sectionStart,
+  * unsigned char * sectionEnd)
   *
   * @brief Boot of the section.
   *
@@ -134,22 +135,25 @@
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void osBoot_clearSection( unsigned char * sectionStart, unsigned char * sectionEnd)
+__STATIC_FORCEINLINE void
+osBoot_clearSection( unsigned char * sectionStart, unsigned char * sectionEnd )
 {
-	BitWidthType size = (BitWidthType)(sectionEnd - sectionStart);
+    BitWidthType size = ( BitWidthType )( sectionEnd - sectionStart );
 
-	unsigned char *pDst = sectionStart;
+    unsigned char * pDst = sectionStart;
 
-	for ( BitWidthType i = 0; i < (size * sizeof(unsigned char)); i++ )
-	{
-		*pDst++=0;
-	}
+    for ( BitWidthType i = 0; i < ( size * sizeof( unsigned char ) ); i++ )
+    {
+        *pDst++ = 0;
+    }
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
+  * @fn osBoot_bootSection( unsigned char * sectionStart,
+  * unsigned char * sectionEnd,
+  * unsigned char * sectionStartInFlash)
   *
   * @brief Boot of the section.
   *
@@ -159,17 +163,21 @@ __STATIC_FORCEINLINE void osBoot_clearSection( unsigned char * sectionStart, uns
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void osBoot_bootSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
+__STATIC_FORCEINLINE void
+osBoot_bootSection(
+    unsigned char * sectionStart,
+    unsigned char * sectionEnd,
+    unsigned char * sectionStartInFlash )
 {
-	BitWidthType size = (BitWidthType)(sectionEnd - sectionStart);
+    BitWidthType size = ( BitWidthType )( sectionEnd - sectionStart );
 
-	unsigned char *pDst = sectionStart;
-	unsigned char *pSrc = sectionStartInFlash;
+    unsigned char * pDst = sectionStart;
+    unsigned char * pSrc = sectionStartInFlash;
 
-	for ( BitWidthType i = 0; i < (size * sizeof(unsigned char)); i++ )
-	{
-		*pDst++=*pSrc++;
-	}
+    for ( BitWidthType i = 0; i < ( size * sizeof( unsigned char ) ); i++ )
+    {
+        *pDst++ = *pSrc++;
+    }
 }
 
 /********************************************************************************
@@ -183,40 +191,48 @@ __STATIC_FORCEINLINE void osBoot_bootSection( unsigned char * sectionStart, unsi
   *
   * @return none
 ********************************************************************************/
-void osBoot_boot(void)
+void
+osBoot_boot( void )
 {
-    BitWidthType  coreId,
-					bootSectionsNumber,
-					clearSectionsNumber;
+    BitWidthType coreId, bootSectionsNumber, clearSectionsNumber;
 
-	CosmOS_ProgramSectionConfigurationType * bootProgramSections,
-											*clearProgramSections;
+    CosmOS_ProgramSectionConfigurationType *bootProgramSections,
+        *clearProgramSections;
 
-	coreId = CILcore_getCoreId();
+    coreId = CILcore_getCoreId();
 
-	clearProgramSections = (CosmOS_ProgramSectionConfigurationType *)clearSections[coreId].programSections;
-	clearSectionsNumber = clearSections[coreId].programSectionsNumber;
+    clearProgramSections =
+        (CosmOS_ProgramSectionConfigurationType *)clearSections[coreId]
+            .programSections;
+    clearSectionsNumber = clearSections[coreId].programSectionsNumber;
 
+    for ( BitWidthType i = 0; i < clearSectionsNumber; i++ )
+    {
+        osBoot_clearSection(
+            clearProgramSections[i].startAddress,
+            clearProgramSections[i].endAddress );
+    }
 
-	for (BitWidthType i=0; i < clearSectionsNumber; i++)
-	{
-		osBoot_clearSection(clearProgramSections[i].startAddress,clearProgramSections[i].endAddress);
-	}
+    bootProgramSections =
+        (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId]
+            .programSections;
+    bootSectionsNumber = bootSections[coreId].programSectionsNumber;
 
-	bootProgramSections = (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId].programSections;
-	bootSectionsNumber = bootSections[coreId].programSectionsNumber;
-
-
-	for (BitWidthType i=0; i < bootSectionsNumber; i++)
-	{
-		osBoot_bootSection(bootProgramSections[i].startAddress,bootProgramSections[i].endAddress,bootProgramSections[i].flashAddress);
-	}
+    for ( BitWidthType i = 0; i < bootSectionsNumber; i++ )
+    {
+        osBoot_bootSection(
+            bootProgramSections[i].startAddress,
+            bootProgramSections[i].endAddress,
+            bootProgramSections[i].flashAddress );
+    }
 };
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn osBoot_validateSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
+  * @fn osBoot_validateSection( unsigned char * sectionStart,
+  * unsigned char * sectionEnd,
+  * unsigned char * sectionStartInFlash)
   *
   * @brief Validation of the section.
   *
@@ -226,17 +242,21 @@ void osBoot_boot(void)
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void osBoot_validateSection( unsigned char * sectionStart, unsigned char * sectionEnd, unsigned char * sectionStartInFlash)
+__STATIC_FORCEINLINE void
+osBoot_validateSection(
+    unsigned char * sectionStart,
+    unsigned char * sectionEnd,
+    unsigned char * sectionStartInFlash )
 {
-	BitWidthType size = (BitWidthType)(sectionEnd - sectionStart);
+    BitWidthType size = ( BitWidthType )( sectionEnd - sectionStart );
 
-	unsigned char *pDst = sectionStart;
-	unsigned char *pSrc = sectionStartInFlash;
+    unsigned char * pDst = sectionStart;
+    unsigned char * pSrc = sectionStartInFlash;
 
-	for ( BitWidthType i = 0; i < (size * sizeof(unsigned char)); i++ )
-	{
-		cosmosAssert( (*pDst++) IS_EQUAL_TO (*pSrc++) );
-	}
+    for ( BitWidthType i = 0; i < ( size * sizeof( unsigned char ) ); i++ )
+    {
+        cosmosAssert( (*pDst++)IS_EQUAL_TO( *pSrc++ ) );
+    }
 }
 
 /********************************************************************************
@@ -251,28 +271,32 @@ __STATIC_FORCEINLINE void osBoot_validateSection( unsigned char * sectionStart, 
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void osBoot_bootValidate(void)
+__OS_FUNC_SECTION void
+osBoot_bootValidate( void )
 {
-	BitWidthType  coreId,
-					programSectionsNumber;
+    BitWidthType coreId, programSectionsNumber;
 
-	CosmOS_ProgramSectionConfigurationType * programSections;
+    CosmOS_ProgramSectionConfigurationType * programSections;
 
-	coreId = CILcore_getCoreId();
+    coreId = CILcore_getCoreId();
 
-	programSections = (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId].programSections;
-	programSectionsNumber = bootSections[coreId].programSectionsNumber;
+    programSections =
+        (CosmOS_ProgramSectionConfigurationType *)bootSections[coreId]
+            .programSections;
+    programSectionsNumber = bootSections[coreId].programSectionsNumber;
 
-
-	for (BitWidthType i=0; i < programSectionsNumber; i++)
-	{
-		osBoot_validateSection(programSections[i].startAddress,programSections[i].endAddress,programSections[i].flashAddress);
-	}
+    for ( BitWidthType i = 0; i < programSectionsNumber; i++ )
+    {
+        osBoot_validateSection(
+            programSections[i].startAddress,
+            programSections[i].endAddress,
+            programSections[i].flashAddress );
+    }
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

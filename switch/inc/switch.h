@@ -7,13 +7,13 @@
 *****************************************************************************//**
 ** @file switch.h
 *********************************************************************************
-<!--                     switch Module Group Definition              	        -->
+<!--                     switch Module Group Definition                       -->
 *********************************************************************************
 ** @defgroup switch_module switch
 ** @brief switch Module
 ** @details lorem
 *********************************************************************************
-<!--                      switch Unit Group Definition               	        -->
+<!--                      switch Unit Group Definition                        -->
 *********************************************************************************
 ** @defgroup switch_unit switch Unit
 ** @ingroup switch_module
@@ -31,7 +31,7 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                  switch Unit Global Group Definition                  	  -->
+<!--                  switch Unit Global Group Definition                     -->
 *********************************************************************************
 ** @defgroup Global_switch Global
 ** @ingroup switch_unit
@@ -47,7 +47,7 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **

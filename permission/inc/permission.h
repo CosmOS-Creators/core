@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -142,7 +143,8 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar)
+  * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,
+  * CosmOS_CoreVariableType * coreVar)
   *
   * @brief Try access of current running instance DEMO CODE.
   *
@@ -151,7 +153,10 @@
   *
   * @return CosmOS_AccessStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar);
+__OS_FUNC_SECTION CosmOS_AccessStateType
+permission_tryAccess(
+    CosmOS_PermissionsConfigurationType * permission,
+    CosmOS_CoreVariableType * coreVar );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -174,7 +179,8 @@ __OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_Permissions
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn permission_getBitLocksTasks(CosmOS_PermissionsConfigurationType * permission)
+  * @fn permission_getBitLocksTasks(
+  * CosmOS_PermissionsConfigurationType * permission)
   *
   * @brief Get permission bitLocksTasks.
   *
@@ -182,15 +188,17 @@ __OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_Permissions
   *
   * @return BitWidthType *
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasks(CosmOS_PermissionsConfigurationType * permission)
+__STATIC_FORCEINLINE BitWidthType *
+permission_getBitLocksTasks( CosmOS_PermissionsConfigurationType * permission )
 {
-    return (BitWidthType *)(permission->bitLocksTasks);
+    return (BitWidthType *)( permission->bitLocksTasks );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn permission_getBitLocksTasksInverted(CosmOS_PermissionsConfigurationType * permission)
+  * @fn permission_getBitLocksTasksInverted(
+  * CosmOS_PermissionsConfigurationType * permission)
   *
   * @brief Get permission bitLocksTasksInverted.
   *
@@ -198,11 +206,12 @@ __STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasks(CosmOS_Permissio
   *
   * @return BitWidthType *
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType * permission_getBitLocksTasksInverted(CosmOS_PermissionsConfigurationType * permission)
+__STATIC_FORCEINLINE BitWidthType *
+permission_getBitLocksTasksInverted(
+    CosmOS_PermissionsConfigurationType * permission )
 {
-    return (BitWidthType *)(permission->bitLocksTasksInverted);
+    return (BitWidthType *)( permission->bitLocksTasksInverted );
 }
-
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
