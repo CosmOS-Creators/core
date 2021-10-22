@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -152,7 +153,8 @@
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void * buffer, BitWidthType size);
+__OS_FUNC_SECTION CosmOS_BufferStateType
+buffer_readArray( BitWidthType id, void * buffer, BitWidthType size );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -167,7 +169,8 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void * buffer, BitWidthType size);
+__OS_FUNC_SECTION CosmOS_BufferStateType
+buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -198,9 +201,10 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
   *
   * @return unsigned char *
 ********************************************************************************/
-__STATIC_FORCEINLINE unsigned char * buffer_getBuffer(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE unsigned char *
+buffer_getBuffer( CosmOS_BufferVariableType * bufferVar )
 {
-    return (unsigned char *)(bufferVar->cfg->buffer);
+    return (unsigned char *)( bufferVar->cfg->buffer );
 }
 
 /********************************************************************************
@@ -214,9 +218,10 @@ __STATIC_FORCEINLINE unsigned char * buffer_getBuffer(CosmOS_BufferVariableType 
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType buffer_getBufferId(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE BitWidthType
+buffer_getBufferId( CosmOS_BufferVariableType * bufferVar )
 {
-    return (bufferVar->cfg->id);
+    return ( bufferVar->cfg->id );
 }
 
 /********************************************************************************
@@ -230,9 +235,10 @@ __STATIC_FORCEINLINE BitWidthType buffer_getBufferId(CosmOS_BufferVariableType *
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType buffer_getBufferSize(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE BitWidthType
+buffer_getBufferSize( CosmOS_BufferVariableType * bufferVar )
 {
-    return (bufferVar->cfg->size);
+    return ( bufferVar->cfg->size );
 }
 
 /********************************************************************************
@@ -246,9 +252,10 @@ __STATIC_FORCEINLINE BitWidthType buffer_getBufferSize(CosmOS_BufferVariableType
   *
   * @return CosmOS_BooleanType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BooleanType buffer_isBufferInterCore(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE CosmOS_BooleanType
+buffer_isBufferInterCore( CosmOS_BufferVariableType * bufferVar )
 {
-    return (bufferVar->cfg->isInterCore);
+    return ( bufferVar->cfg->isInterCore );
 }
 
 /********************************************************************************
@@ -262,9 +269,10 @@ __STATIC_FORCEINLINE CosmOS_BooleanType buffer_isBufferInterCore(CosmOS_BufferVa
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType buffer_getBufferSpinlockId(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE BitWidthType
+buffer_getBufferSpinlockId( CosmOS_BufferVariableType * bufferVar )
 {
-    return (bufferVar->cfg->spinlockId);
+    return ( bufferVar->cfg->spinlockId );
 }
 
 /********************************************************************************
@@ -278,9 +286,11 @@ __STATIC_FORCEINLINE BitWidthType buffer_getBufferSpinlockId(CosmOS_BufferVariab
   *
   * @return CosmOS_PermissionsConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType * buffer_getBufferReadPermission(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType *
+buffer_getBufferReadPermission( CosmOS_BufferVariableType * bufferVar )
 {
-    return (CosmOS_PermissionsConfigurationType *)(bufferVar->cfg->readPermission);
+    return (
+        CosmOS_PermissionsConfigurationType *)( bufferVar->cfg->readPermission );
 }
 
 /********************************************************************************
@@ -294,9 +304,11 @@ __STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType * buffer_getBufferReadP
   *
   * @return CosmOS_PermissionsConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType * buffer_getBufferWritePermission(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType *
+buffer_getBufferWritePermission( CosmOS_BufferVariableType * bufferVar )
 {
-    return (CosmOS_PermissionsConfigurationType *)(bufferVar->cfg->writePermission);
+    return (CosmOS_PermissionsConfigurationType *)( bufferVar->cfg
+                                                        ->writePermission );
 }
 
 /********************************************************************************
@@ -310,9 +322,10 @@ __STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType * buffer_getBufferWrite
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType buffer_getBufferHead(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE BitWidthType
+buffer_getBufferHead( CosmOS_BufferVariableType * bufferVar )
 {
-    return (bufferVar->head);
+    return ( bufferVar->head );
 }
 
 /********************************************************************************
@@ -326,15 +339,17 @@ __STATIC_FORCEINLINE BitWidthType buffer_getBufferHead(CosmOS_BufferVariableType
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType buffer_getBufferTail(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE BitWidthType
+buffer_getBufferTail( CosmOS_BufferVariableType * bufferVar )
 {
-    return (bufferVar->tail);
+    return ( bufferVar->tail );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn buffer_getFullCellsNum(BitWidthType id, void * bufferVar, BitWidthType num)
+  * @fn buffer_getFullCellsNum(BitWidthType id, void * bufferVar,
+  * BitWidthType num)
   *
   * @brief Get full bufferVar cells DEMO CODE.
   *
@@ -342,9 +357,10 @@ __STATIC_FORCEINLINE BitWidthType buffer_getBufferTail(CosmOS_BufferVariableType
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType buffer_getFullCellsNum(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE BitWidthType
+buffer_getFullCellsNum( CosmOS_BufferVariableType * bufferVar )
 {
-    return (bufferVar->fullCells);
+    return ( bufferVar->fullCells );
 }
 
 /********************************************************************************
@@ -358,9 +374,10 @@ __STATIC_FORCEINLINE BitWidthType buffer_getFullCellsNum(CosmOS_BufferVariableTy
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType buffer_getEmptyCellsNum(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE BitWidthType
+buffer_getEmptyCellsNum( CosmOS_BufferVariableType * bufferVar )
 {
-    return ((bufferVar->cfg->size) - (bufferVar->fullCells));
+    return ( ( bufferVar->cfg->size ) - ( bufferVar->fullCells ) );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -378,7 +395,8 @@ __STATIC_FORCEINLINE BitWidthType buffer_getEmptyCellsNum(CosmOS_BufferVariableT
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn buffer_setBufferHead(CosmOS_BufferVariableType * bufferVar, BitWidthType tailParam)
+  * @fn buffer_setBufferHead(CosmOS_BufferVariableType * bufferVar,
+  * BitWidthType tailParam)
   *
   * @brief Set buffer head.
   *
@@ -387,7 +405,10 @@ __STATIC_FORCEINLINE BitWidthType buffer_getEmptyCellsNum(CosmOS_BufferVariableT
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void buffer_setBufferHead(CosmOS_BufferVariableType * bufferVar, BitWidthType headParam)
+__STATIC_FORCEINLINE void
+buffer_setBufferHead(
+    CosmOS_BufferVariableType * bufferVar,
+    BitWidthType headParam )
 {
     bufferVar->head = headParam;
 }
@@ -395,7 +416,8 @@ __STATIC_FORCEINLINE void buffer_setBufferHead(CosmOS_BufferVariableType * buffe
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn buffer_setBufferTail(CosmOS_BufferVariableType * bufferVar, BitWidthType tailParam)
+  * @fn buffer_setBufferTail(CosmOS_BufferVariableType * bufferVar,
+  * BitWidthType tailParam)
   *
   * @brief Set buffer tail.
   *
@@ -404,7 +426,10 @@ __STATIC_FORCEINLINE void buffer_setBufferHead(CosmOS_BufferVariableType * buffe
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void buffer_setBufferTail(CosmOS_BufferVariableType * bufferVar, BitWidthType tailParam)
+__STATIC_FORCEINLINE void
+buffer_setBufferTail(
+    CosmOS_BufferVariableType * bufferVar,
+    BitWidthType tailParam )
 {
     bufferVar->tail = tailParam;
 }
@@ -412,7 +437,8 @@ __STATIC_FORCEINLINE void buffer_setBufferTail(CosmOS_BufferVariableType * buffe
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn buffer_setBufferfullCells(CosmOS_BufferVariableType * bufferVar, BitWidthType fullCellsParam)
+  * @fn buffer_setBufferfullCells(CosmOS_BufferVariableType * bufferVar,
+  * BitWidthType fullCellsParam)
   *
   * @brief Set buffer fullCells.
   *
@@ -421,7 +447,10 @@ __STATIC_FORCEINLINE void buffer_setBufferTail(CosmOS_BufferVariableType * buffe
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void buffer_setBufferfullCells(CosmOS_BufferVariableType * bufferVar, BitWidthType fullCellsParam)
+__STATIC_FORCEINLINE void
+buffer_setBufferfullCells(
+    CosmOS_BufferVariableType * bufferVar,
+    BitWidthType fullCellsParam )
 {
     bufferVar->fullCells = fullCellsParam;
 }
@@ -449,9 +478,12 @@ __STATIC_FORCEINLINE void buffer_setBufferfullCells(CosmOS_BufferVariableType * 
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferStateType buffer_isEmpty(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE CosmOS_BufferStateType
+buffer_isEmpty( CosmOS_BufferVariableType * bufferVar )
 {
-    return (IS_NOT(bufferVar->fullCells) ? BUFFER_STATE_ENUM__EMPTY : BUFFER_STATE_ENUM__OK);
+    return (
+        IS_NOT( bufferVar->fullCells ) ? BUFFER_STATE_ENUM__EMPTY
+                                       : BUFFER_STATE_ENUM__OK );
 }
 
 /********************************************************************************
@@ -465,10 +497,13 @@ __STATIC_FORCEINLINE CosmOS_BufferStateType buffer_isEmpty(CosmOS_BufferVariable
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferStateType buffer_isFull(CosmOS_BufferVariableType * bufferVar)
+__STATIC_FORCEINLINE CosmOS_BufferStateType
+buffer_isFull( CosmOS_BufferVariableType * bufferVar )
 {
-    return (IS_NOT((bufferVar->cfg->size) ^ (bufferVar->fullCells)) ? \
-    BUFFER_STATE_ENUM__FULL : BUFFER_STATE_ENUM__OK);
+    return (
+        IS_NOT( ( bufferVar->cfg->size ) ^ ( bufferVar->fullCells ) )
+            ? BUFFER_STATE_ENUM__FULL
+            : BUFFER_STATE_ENUM__OK );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

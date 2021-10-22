@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -142,7 +143,9 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn thread_sleepMsInternal(BitWidthType entityId, CosmOS_CoreVariableType * coreVar, BitWidthType tickCount)
+  * @fn thread_sleepMsInternal(BitWidthType entityId,
+  * CosmOS_CoreVariableType * coreVar,
+  * BitWidthType tickCount)
   *
   * @brief Set thread to sleep internal for x milliseconds DEMO CODE.
   *
@@ -152,7 +155,11 @@
   *
   * @return CosmOS_SleepStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMsInternal(BitWidthType entityId, CosmOS_CoreVariableType *coreVar, BitWidthType tickCount);
+__OS_FUNC_SECTION CosmOS_SleepStateType
+thread_sleepMsInternal(
+    BitWidthType entityId,
+    CosmOS_CoreVariableType * coreVar,
+    BitWidthType tickCount );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -166,7 +173,8 @@ __OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMsInternal(BitWidthType enti
   *
   * @return CosmOS_SleepStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType delayMs);
+__OS_FUNC_SECTION CosmOS_SleepStateType
+thread_sleepMs( BitWidthType delayMs );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -180,7 +188,7 @@ __OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType delayMs);
   *
   * @return CosmOS_SleepStateType
 ********************************************************************************/
-#define thread_sleep(delay) thread_sleepMs(delay*1000)
+#define thread_sleep( delay ) thread_sleepMs( delay * 1000 )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -211,9 +219,10 @@ __OS_FUNC_SECTION CosmOS_SleepStateType thread_sleepMs(BitWidthType delayMs);
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType thread_getThreadPriority(CosmOS_ThreadVariableType * thread)
+__STATIC_FORCEINLINE BitWidthType
+thread_getThreadPriority( CosmOS_ThreadVariableType * thread )
 {
-    return (thread->cfg->priority);
+    return ( thread->cfg->priority );
 }
 
 /********************************************************************************
@@ -227,9 +236,10 @@ __STATIC_FORCEINLINE BitWidthType thread_getThreadPriority(CosmOS_ThreadVariable
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * thread_getThreadSchedulable(CosmOS_ThreadVariableType * thread)
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+thread_getThreadSchedulable( CosmOS_ThreadVariableType * thread )
 {
-    return (CosmOS_SchedulableVariableType *)(thread->schedulable);
+    return (CosmOS_SchedulableVariableType *)( thread->schedulable );
 }
 
 /********************************************************************************
@@ -243,9 +253,10 @@ __STATIC_FORCEINLINE CosmOS_SchedulableVariableType * thread_getThreadSchedulabl
   *
   * @return CosmOS_MutexVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_MutexVariableType * thread_getThreadBlockingMutexVar(CosmOS_ThreadVariableType * thread)
+__STATIC_FORCEINLINE CosmOS_MutexVariableType *
+thread_getThreadBlockingMutexVar( CosmOS_ThreadVariableType * thread )
 {
-    return (CosmOS_MutexVariableType *)(thread->blockingMutexVar);
+    return (CosmOS_MutexVariableType *)( thread->blockingMutexVar );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -269,10 +280,13 @@ __STATIC_FORCEINLINE CosmOS_MutexVariableType * thread_getThreadBlockingMutexVar
   *
   * @param[in]  CosmOS_ThreadVariableType * thread
   * @param[in]  CosmOS_MutexVariableType * mutexParam
-	*
+  *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void thread_setThreadBlockingMutexVar(CosmOS_ThreadVariableType * thread, CosmOS_MutexVariableType * mutexParam)
+__STATIC_FORCEINLINE void
+thread_setThreadBlockingMutexVar(
+    CosmOS_ThreadVariableType * thread,
+    CosmOS_MutexVariableType * mutexParam )
 {
     thread->blockingMutexVar = mutexParam;
 }

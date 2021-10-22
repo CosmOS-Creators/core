@@ -7,7 +7,7 @@
 *****************************************************************************//**
 ** @file interrupt.h
 *********************************************************************************
-<!--                	interrupt Unit Group Definition            		      -->
+<!--                      interrupt Unit Group Definition                     -->
 *********************************************************************************
 ** @defgroup interrupt_unit interrupt Unit
 ** @ingroup interrupt_module
@@ -25,7 +25,7 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--           		interrupt Unit Global Group Definition              	  -->
+<!--                 interrupt Unit Global Group Definition                   -->
 *********************************************************************************
 ** @defgroup Global_interrupt Global
 ** @ingroup interrupt_unit
@@ -47,9 +47,10 @@ extern "C" {
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 
 /* CIL interfaces */
 #include "CILinterrupt.h"
@@ -193,11 +194,12 @@ extern "C" {
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void interrupt_enableInterrupts(BitWidthType entityId)
+__STATIC_FORCEINLINE void
+interrupt_enableInterrupts( BitWidthType entityId )
 {
-	CILinterrupt_enableInterrupts();
+    CILinterrupt_enableInterrupts();
 
-	__SUPRESS_UNUSED_VAR(entityId);
+    __SUPRESS_UNUSED_VAR( entityId );
 }
 
 /********************************************************************************
@@ -212,12 +214,13 @@ __STATIC_FORCEINLINE void interrupt_enableInterrupts(BitWidthType entityId)
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void interrupt_enableInterrupt(BitWidthType entityId,BitWidthType ISR)
+__STATIC_FORCEINLINE void
+interrupt_enableInterrupt( BitWidthType entityId, BitWidthType ISR )
 {
-	CILinterrupt_enableInterrupt(ISR);
+    CILinterrupt_enableInterrupt( ISR );
 
-	__SUPRESS_UNUSED_VAR(entityId);
-	__SUPRESS_UNUSED_VAR(ISR);
+    __SUPRESS_UNUSED_VAR( entityId );
+    __SUPRESS_UNUSED_VAR( ISR );
 }
 
 /********************************************************************************
@@ -231,11 +234,12 @@ __STATIC_FORCEINLINE void interrupt_enableInterrupt(BitWidthType entityId,BitWid
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void interrupt_disableInterrupts(BitWidthType entityId)
+__STATIC_FORCEINLINE void
+interrupt_disableInterrupts( BitWidthType entityId )
 {
-	CILinterrupt_disableInterrupts();
+    CILinterrupt_disableInterrupts();
 
-	__SUPRESS_UNUSED_VAR(entityId);
+    __SUPRESS_UNUSED_VAR( entityId );
 }
 
 /********************************************************************************
@@ -250,12 +254,13 @@ __STATIC_FORCEINLINE void interrupt_disableInterrupts(BitWidthType entityId)
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void interrupt_disableInterrupt(BitWidthType entityId,BitWidthType ISR)
+__STATIC_FORCEINLINE void
+interrupt_disableInterrupt( BitWidthType entityId, BitWidthType ISR )
 {
-	CILinterrupt_disableInterrupt(ISR);
+    CILinterrupt_disableInterrupt( ISR );
 
-	__SUPRESS_UNUSED_VAR(entityId);
-	__SUPRESS_UNUSED_VAR(ISR);
+    __SUPRESS_UNUSED_VAR( entityId );
+    __SUPRESS_UNUSED_VAR( ISR );
 }
 
 /********************************************************************************
@@ -269,11 +274,12 @@ __STATIC_FORCEINLINE void interrupt_disableInterrupt(BitWidthType entityId,BitWi
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void interrupt_contextSwitchRoutineTrigger(BitWidthType entityId)
+__STATIC_FORCEINLINE void
+interrupt_contextSwitchRoutineTrigger( BitWidthType entityId )
 {
-	CILinterrupt_contextSwitchRoutineTrigger();
+    CILinterrupt_contextSwitchRoutineTrigger();
 
-	__SUPRESS_UNUSED_VAR(entityId);
+    __SUPRESS_UNUSED_VAR( entityId );
 }
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **

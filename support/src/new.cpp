@@ -7,7 +7,7 @@
 *****************************************************************************//**
 ** @file new.cpp
 *********************************************************************************
-<!--              	     new Unit Local Group Definition               		    -->
+<!--                      new Unit Local Group Definition                     -->
 *********************************************************************************
 ** @defgroup Local_new Local
 ** @ingroup new_unit
@@ -21,10 +21,10 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "cosmosApi.h"
-#include "stdlibInt.h"
-#include "os.h"
 #include "core.h"
+#include "cosmosApi.h"
+#include "os.h"
+#include "stdlibInt.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -131,43 +131,45 @@
   * *************************************************************************//**
   * @fn new(size_t size)
   *
-  * @brief NewLib new operator function implementation redesigned for CosmOS DEMO.
+  * @brief NewLib new operator function implementation redesigned for
+  * CosmOS DEMO.
   *
   * @param[in]  size_t size
   *
   * @return void *
 ********************************************************************************/
-void * operator new(size_t size) noexcept
+void *
+operator new( size_t size ) noexcept
 {
-  BitWidthType coreId;
+    BitWidthType coreId;
 
-  CosmOS_OsStateType osState;
+    CosmOS_OsStateType osState;
 
-  CosmOS_OsVariableType * osVar;
-  CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsVariableType * osVar;
+    CosmOS_CoreVariableType * coreVar;
 
-	void *ptr;
+    void * ptr;
 
-	if ( IS_NOT( size ) )
-	{
-		++size;
-	}
+    if ( IS_NOT( size ) )
+    {
+        ++size;
+    }
 
-  coreId = cosmosApi_CILcore_getCoreId();
-  osVar = os_getOsVar();
-  coreVar = os_getCoreVar( osVar,coreId );
-  osState = core_getCoreOsState( coreVar );
+    coreId = cosmosApi_CILcore_getCoreId();
+    osVar = os_getOsVar();
+    coreVar = os_getCoreVar( osVar, coreId );
+    osState = core_getCoreOsState( coreVar );
 
-  if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
-  {
-    ptr = malloc_internal(size);
-  }
-	else
-  {
-    ptr = malloc(size);
-  }
+    if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
+    {
+        ptr = malloc_internal( size );
+    }
+    else
+    {
+        ptr = malloc( size );
+    }
 
-	return ptr;
+    return ptr;
 }
 
 /********************************************************************************
@@ -175,34 +177,36 @@ void * operator new(size_t size) noexcept
   * *************************************************************************//**
   * @fn delete(void* ptr)
   *
-  * @brief NewLib delete operator function implementation redesigned for CosmOS DEMO.
+  * @brief NewLib delete operator function implementation redesigned for
+  * CosmOS DEMO.
   *
   * @param[in]  void * ptr
   *
   * @return none
 ********************************************************************************/
-void operator delete(void* ptr) noexcept
+void
+operator delete( void * ptr ) noexcept
 {
-  BitWidthType coreId;
+    BitWidthType coreId;
 
-  CosmOS_OsStateType osState;
+    CosmOS_OsStateType osState;
 
-  CosmOS_OsVariableType * osVar;
-  CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsVariableType * osVar;
+    CosmOS_CoreVariableType * coreVar;
 
-  coreId = cosmosApi_CILcore_getCoreId();
-  osVar = os_getOsVar();
-  coreVar = os_getCoreVar( osVar,coreId );
-  osState = core_getCoreOsState( coreVar );
+    coreId = cosmosApi_CILcore_getCoreId();
+    osVar = os_getOsVar();
+    coreVar = os_getCoreVar( osVar, coreId );
+    osState = core_getCoreOsState( coreVar );
 
-  if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
-  {
-    free_internal(ptr);
-  }
-  else
-  {
-    free(ptr);
-  }
+    if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
+    {
+        free_internal( ptr );
+    }
+    else
+    {
+        free( ptr );
+    }
 }
 
 /********************************************************************************
@@ -210,38 +214,39 @@ void operator delete(void* ptr) noexcept
   * *************************************************************************//**
   * @fn delete(void* ptr)
   *
-  * @brief NewLib delete operator function implementation redesigned for CosmOS DEMO.
+  * @brief NewLib delete operator function implementation redesigned for
+  * CosmOS DEMO.
   *
   * @param[in]  void * ptr
   * @param[in]  size_t size
-	*
+  *
   * @return none
 ********************************************************************************/
-void operator delete(void* ptr, size_t size) noexcept
+void
+operator delete( void * ptr, size_t size ) noexcept
 {
+    BitWidthType coreId;
 
-  BitWidthType coreId;
+    CosmOS_OsStateType osState;
 
-  CosmOS_OsStateType osState;
+    CosmOS_OsVariableType * osVar;
+    CosmOS_CoreVariableType * coreVar;
 
-  CosmOS_OsVariableType * osVar;
-  CosmOS_CoreVariableType * coreVar;
+    coreId = cosmosApi_CILcore_getCoreId();
+    osVar = os_getOsVar();
+    coreVar = os_getCoreVar( osVar, coreId );
+    osState = core_getCoreOsState( coreVar );
 
-  coreId = cosmosApi_CILcore_getCoreId();
-  osVar = os_getOsVar();
-  coreVar = os_getCoreVar( osVar,coreId );
-  osState = core_getCoreOsState( coreVar );
+    if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
+    {
+        free_internal( ptr );
+    }
+    else
+    {
+        free( ptr );
+    }
 
-  if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
-  {
-    free_internal(ptr);
-  }
-  else
-  {
-    free(ptr);
-  }
-
-	__SUPRESS_UNUSED_VAR(size);
+    __SUPRESS_UNUSED_VAR( size );
 }
 /********************************************************************************
 **                        Function Definitions | Stop                          **

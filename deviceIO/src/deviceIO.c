@@ -132,16 +132,17 @@
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void deviceIO_togglePin(BitWidthType id, void *GPIOx, BitWidthType GPIO_Pin)
+__OS_FUNC_SECTION void
+deviceIO_togglePin( BitWidthType id, void * GPIOx, BitWidthType GPIO_Pin )
 {
     CILGPIO_togglePin( GPIOx, GPIO_Pin );
 
-	__SUPRESS_UNUSED_VAR(id);
+    __SUPRESS_UNUSED_VAR( id );
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

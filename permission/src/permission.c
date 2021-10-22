@@ -22,9 +22,10 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "permission.h"
-#include "permissionCfg.h"
 #include "core.h"
 #include "cosmosAssert.h"
+#include "permissionCfg.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -112,7 +113,9 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn permission_trySchedulableAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_SchedulableVariableType * schedulableVar)
+  * @fn permission_trySchedulableAccess(
+  * CosmOS_PermissionsConfigurationType * permission,
+  * CosmOS_SchedulableVariableType * schedulableVar)
   *
   * @brief Try if schedulable has access.
   *
@@ -121,13 +124,24 @@
   *
   * @return CosmOS_AccessStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_AccessStateType permission_trySchedulableAccess(CosmOS_PermissionsConfigurationType * permission, CosmOS_SchedulableVariableType * schedulableVar)
+__STATIC_FORCEINLINE CosmOS_AccessStateType
+permission_trySchedulableAccess(
+    CosmOS_PermissionsConfigurationType * permission,
+    CosmOS_SchedulableVariableType * schedulableVar )
 {
-    cosmosAssert( IS_NOT( permission->bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] & \
-				permission->bitLocksTasksInverted[SchedulableIdToBitLock[schedulableVar->cfg->id]] ) );
+    cosmosAssert( IS_NOT(
+        permission
+            ->bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] &
+        permission->bitLocksTasksInverted
+            [SchedulableIdToBitLock[schedulableVar->cfg->id]] ) );
 
-    return ((( permission->bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] >> schedulableVar->cfg->id ) & BITLOCK_MASK ) ? \
-            ACCESS_STATE_ENUM__ALLOWED : ACCESS_STATE_ENUM__DENIED );
+    return (
+        ( ( permission->bitLocksTasks
+                [SchedulableIdToBitLock[schedulableVar->cfg->id]] >>
+            schedulableVar->cfg->id ) &
+          BITLOCK_MASK )
+            ? ACCESS_STATE_ENUM__ALLOWED
+            : ACCESS_STATE_ENUM__DENIED );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -144,7 +158,8 @@ __STATIC_FORCEINLINE CosmOS_AccessStateType permission_trySchedulableAccess(Cosm
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar)
+  * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,
+  * CosmOS_CoreVariableType * coreVar)
   *
   * @brief Try access of current running instance DEMO CODE.
   *
@@ -154,9 +169,12 @@ __STATIC_FORCEINLINE CosmOS_AccessStateType permission_trySchedulableAccess(Cosm
   * @return CosmOS_AccessStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,CosmOS_CoreVariableType * coreVar)
+__OS_FUNC_SECTION CosmOS_AccessStateType
+permission_tryAccess(
+    CosmOS_PermissionsConfigurationType * permission,
+    CosmOS_CoreVariableType * coreVar )
 {
     CosmOS_AccessStateType accessState;
 
@@ -168,7 +186,7 @@ __OS_FUNC_SECTION CosmOS_AccessStateType permission_tryAccess(CosmOS_Permissions
     return accessState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -169,9 +170,10 @@
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType stack_getStackSize(CosmOS_StackConfigurationType * stack)
+__STATIC_FORCEINLINE BitWidthType
+stack_getStackSize( CosmOS_StackConfigurationType * stack )
 {
-    return (stack->stackSize);
+    return ( stack->stackSize );
 }
 
 /********************************************************************************
@@ -185,9 +187,10 @@ __STATIC_FORCEINLINE BitWidthType stack_getStackSize(CosmOS_StackConfigurationTy
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType stack_getStackLowAddress(CosmOS_StackConfigurationType * stack)
+__STATIC_FORCEINLINE AddressType
+stack_getStackLowAddress( CosmOS_StackConfigurationType * stack )
 {
-    return (stack->stackLowAddress);
+    return ( stack->stackLowAddress );
 }
 
 /********************************************************************************
@@ -201,9 +204,10 @@ __STATIC_FORCEINLINE AddressType stack_getStackLowAddress(CosmOS_StackConfigurat
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType stack_getStackHighAddress(CosmOS_StackConfigurationType * stack)
+__STATIC_FORCEINLINE AddressType
+stack_getStackHighAddress( CosmOS_StackConfigurationType * stack )
 {
-    return (stack->stackHighAddress);
+    return ( stack->stackHighAddress );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

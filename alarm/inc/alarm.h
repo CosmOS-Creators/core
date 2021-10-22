@@ -7,7 +7,7 @@
 *****************************************************************************//**
 ** @file alarm.h
 *********************************************************************************
-<!--               			  	alarm Unit Group Definition              		      -->
+<!--                        alarm Unit Group Definition                       -->
 *********************************************************************************
 ** @defgroup alarm_unit alarm Unit
 ** @ingroup alarm_module
@@ -25,7 +25,7 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--           			 	alarm Unit Global Group Definition                  	  -->
+<!--                   alarm Unit Global Group Definition                     -->
 *********************************************************************************
 ** @defgroup Global_alarm Global
 ** @ingroup alarm_unit
@@ -47,9 +47,10 @@ extern "C" {
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -145,7 +146,8 @@ extern "C" {
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void alarm_expire(CosmOS_AlarmVariableType *alarmVar);
+__OS_FUNC_SECTION void
+alarm_expire( CosmOS_AlarmVariableType * alarmVar );
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**
@@ -176,9 +178,10 @@ __OS_FUNC_SECTION void alarm_expire(CosmOS_AlarmVariableType *alarmVar);
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * alarm_getAlarmSchedulable(CosmOS_AlarmVariableType * alarm)
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+alarm_getAlarmSchedulable( CosmOS_AlarmVariableType * alarm )
 {
-    return (CosmOS_SchedulableVariableType *)(alarm->cfg->schedulableVar);
+    return (CosmOS_SchedulableVariableType *)( alarm->cfg->schedulableVar );
 }
 
 /********************************************************************************
@@ -192,9 +195,10 @@ __STATIC_FORCEINLINE CosmOS_SchedulableVariableType * alarm_getAlarmSchedulable(
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType alarm_getAlarmState(CosmOS_AlarmVariableType * alarm)
+__STATIC_FORCEINLINE BitWidthType
+alarm_getAlarmState( CosmOS_AlarmVariableType * alarm )
 {
-    return (alarm->state);
+    return ( alarm->state );
 }
 
 /********************************************************************************
@@ -208,11 +212,11 @@ __STATIC_FORCEINLINE BitWidthType alarm_getAlarmState(CosmOS_AlarmVariableType *
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType alarm_getAlarmTickCount(CosmOS_AlarmVariableType * alarm)
+__STATIC_FORCEINLINE BitWidthType
+alarm_getAlarmTickCount( CosmOS_AlarmVariableType * alarm )
 {
-    return (alarm->tickCount);
+    return ( alarm->tickCount );
 }
-
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**
@@ -238,7 +242,10 @@ __STATIC_FORCEINLINE BitWidthType alarm_getAlarmTickCount(CosmOS_AlarmVariableTy
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void alarm_setAlarmState(CosmOS_AlarmVariableType * alarm, CosmOS_AlarmStateType stateParam)
+__STATIC_FORCEINLINE void
+alarm_setAlarmState(
+    CosmOS_AlarmVariableType * alarm,
+    CosmOS_AlarmStateType stateParam )
 {
     alarm->state = stateParam;
 }
@@ -255,11 +262,13 @@ __STATIC_FORCEINLINE void alarm_setAlarmState(CosmOS_AlarmVariableType * alarm, 
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void alarm_setAlarmTickCount(CosmOS_AlarmVariableType * alarm, BitWidthType tickCountParam)
+__STATIC_FORCEINLINE void
+alarm_setAlarmTickCount(
+    CosmOS_AlarmVariableType * alarm,
+    BitWidthType tickCountParam )
 {
     alarm->tickCount = tickCountParam;
 }
-
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**

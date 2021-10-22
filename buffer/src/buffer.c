@@ -21,13 +21,14 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "os.h"
-#include "core.h"
 #include "buffer.h"
+#include "core.h"
+#include "memoryProtection.h"
+#include "os.h"
+#include "permission.h"
 #include "route.h"
 #include "spinlock.h"
-#include "permission.h"
-#include "memoryProtection.h"
+
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -127,7 +128,8 @@
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__OS_FUNC_SECTION static CosmOS_BufferStateType buffer_pull(CosmOS_BufferVariableType * buffer, unsigned char * data);
+__OS_FUNC_SECTION static CosmOS_BufferStateType
+buffer_pull( CosmOS_BufferVariableType * buffer, unsigned char * data );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -141,7 +143,8 @@ __OS_FUNC_SECTION static CosmOS_BufferStateType buffer_pull(CosmOS_BufferVariabl
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__OS_FUNC_SECTION static CosmOS_BufferStateType buffer_push(CosmOS_BufferVariableType * bufferVar, unsigned char data);
+__OS_FUNC_SECTION static CosmOS_BufferStateType
+buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -167,16 +170,16 @@ __OS_FUNC_SECTION static CosmOS_BufferStateType buffer_push(CosmOS_BufferVariabl
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION static CosmOS_BufferStateType buffer_pull(CosmOS_BufferVariableType * bufferVar, unsigned char * data)
+__OS_FUNC_SECTION static CosmOS_BufferStateType
+buffer_pull( CosmOS_BufferVariableType * bufferVar, unsigned char * data )
 {
     BitWidthType bufferSize;
 
     CosmOS_BufferStateType bufferState;
 
     unsigned char * osBuffer;
-
 
     bufferSize = buffer_getBufferSize( bufferVar );
     osBuffer = buffer_getBuffer( bufferVar );
@@ -191,7 +194,7 @@ __OS_FUNC_SECTION static CosmOS_BufferStateType buffer_pull(CosmOS_BufferVariabl
     return bufferState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -207,16 +210,16 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION static CosmOS_BufferStateType buffer_push(CosmOS_BufferVariableType * bufferVar, unsigned char data)
+__OS_FUNC_SECTION static CosmOS_BufferStateType
+buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data )
 {
     BitWidthType bufferSize;
 
     CosmOS_BufferStateType bufferState;
 
     unsigned char * osBuffer;
-
 
     bufferSize = buffer_getBufferSize( bufferVar );
     osBuffer = buffer_getBuffer( bufferVar );
@@ -231,7 +234,7 @@ __OS_FUNC_SECTION static CosmOS_BufferStateType buffer_push(CosmOS_BufferVariabl
     return bufferState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -248,21 +251,22 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void * buffer, BitWidthType size)
+__OS_FUNC_SECTION CosmOS_BufferStateType
+buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
 {
-	CosmOS_BooleanType isMemoryRegionProtected;
+    CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
-	CosmOS_OsVariableType * osVar;
-	CosmOS_CoreVariableType * coreVar;
-
+    CosmOS_OsVariableType * osVar;
+    CosmOS_CoreVariableType * coreVar;
 
     osVar = os_getOsVar();
     coreVar = CILcore_getCoreVar();
 
-	isMemoryRegionProtected = memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
+    isMemoryRegionProtected =
+        memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
 
     if ( isMemoryRegionProtected )
     {
@@ -286,61 +290,62 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
         }
         else
         {
-			BitWidthType 	spinlockId,
-							fullCellsNum;
-			CosmOS_AccessStateType isBufferInterCore;
-			CosmOS_SpinlockStateType spinlockState;
+            BitWidthType spinlockId, fullCellsNum;
+            CosmOS_AccessStateType isBufferInterCore;
+            CosmOS_SpinlockStateType spinlockState;
 
-			CILinterrupt_disableInterrupts();
+            CILinterrupt_disableInterrupts();
 
-			isBufferInterCore = buffer_isBufferInterCore( bufferVar );
+            isBufferInterCore = buffer_isBufferInterCore( bufferVar );
 
-			if ( isBufferInterCore )
-			{
-				spinlockId = buffer_getBufferSpinlockId( bufferVar );
-				spinlockState = spinlock_trySpinlock( spinlockId );
-			}
-			else
-			{
-				spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
-			}
+            if ( isBufferInterCore )
+            {
+                spinlockId = buffer_getBufferSpinlockId( bufferVar );
+                spinlockState = spinlock_trySpinlock( spinlockId );
+            }
+            else
+            {
+                spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
+            }
 
-			if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
-			{
-				fullCellsNum = buffer_getFullCellsNum( bufferVar );
+            if ( spinlockState IS_EQUAL_TO
+                     SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
+            {
+                fullCellsNum = buffer_getFullCellsNum( bufferVar );
 
-				if ( fullCellsNum >= size)
-				{
-					BitWidthType userBufferIndex;
+                if ( fullCellsNum >= size )
+                {
+                    BitWidthType userBufferIndex;
 
-            	    unsigned char * userBuffer;
+                    unsigned char * userBuffer;
 
+                    userBuffer = buffer;
+                    userBufferIndex = 0;
 
-					userBuffer = buffer;
-					userBufferIndex = 0;
+                    while ( ( userBufferIndex < size ) )
+                    {
+                        bufferState = buffer_pull(
+                            bufferVar, ( userBuffer + userBufferIndex ) );
+                        userBufferIndex++;
+                    }
+                }
+                else
+                {
+                    bufferState =
+                        BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM;
+                }
 
-					while ( ( userBufferIndex < size ) )
-					{
-						bufferState = buffer_pull( bufferVar, ( userBuffer + userBufferIndex ) );
-						userBufferIndex++;
-					}
-				}
-				else
-				{
-					bufferState = BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM;
-				}
+                if ( isBufferInterCore )
+                {
+                    spinlockState = spinlock_releaseSpinlock( spinlockId );
+                }
+            }
+            else
+            {
+                bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
+            }
 
-				if ( isBufferInterCore )
-				{
-					spinlockState = spinlock_releaseSpinlock( spinlockId );
-				}
-			}
-			else
-			{
-				bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
-			}
-
-			CILinterrupt_enableInterrupts();
+            CILinterrupt_enableInterrupts();
         }
     }
 
@@ -349,7 +354,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_readArray(BitWidthType id, void 
     return bufferState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -366,21 +371,22 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void * buffer, BitWidthType size)
+__OS_FUNC_SECTION CosmOS_BufferStateType
+buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
 {
-	CosmOS_BooleanType isMemoryRegionProtected;
+    CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
-	CosmOS_OsVariableType * osVar;
-	CosmOS_CoreVariableType * coreVar;
-
+    CosmOS_OsVariableType * osVar;
+    CosmOS_CoreVariableType * coreVar;
 
     osVar = os_getOsVar();
     coreVar = CILcore_getCoreVar();
 
-	isMemoryRegionProtected = memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
+    isMemoryRegionProtected =
+        memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
 
     if ( isMemoryRegionProtected )
     {
@@ -404,61 +410,62 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
         }
         else
         {
-			BitWidthType 	spinlockId,
-							emptyCellsNum;
-			CosmOS_AccessStateType isBufferInterCore;
-			CosmOS_SpinlockStateType spinlockState;
+            BitWidthType spinlockId, emptyCellsNum;
+            CosmOS_AccessStateType isBufferInterCore;
+            CosmOS_SpinlockStateType spinlockState;
 
-			CILinterrupt_disableInterrupts();
+            CILinterrupt_disableInterrupts();
 
-			isBufferInterCore = buffer_isBufferInterCore( bufferVar );
+            isBufferInterCore = buffer_isBufferInterCore( bufferVar );
 
-			if ( isBufferInterCore )
-			{
-				spinlockId = buffer_getBufferSpinlockId( bufferVar );
-				spinlockState = spinlock_trySpinlock( spinlockId );
-			}
-			else
-			{
-				spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
-			}
+            if ( isBufferInterCore )
+            {
+                spinlockId = buffer_getBufferSpinlockId( bufferVar );
+                spinlockState = spinlock_trySpinlock( spinlockId );
+            }
+            else
+            {
+                spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
+            }
 
-			if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
-			{
-				emptyCellsNum = buffer_getEmptyCellsNum( bufferVar );
+            if ( spinlockState IS_EQUAL_TO
+                     SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
+            {
+                emptyCellsNum = buffer_getEmptyCellsNum( bufferVar );
 
-				if ( emptyCellsNum >= size)
-				{
-					BitWidthType userBufferIndex;
+                if ( emptyCellsNum >= size )
+                {
+                    BitWidthType userBufferIndex;
 
-            	    unsigned char * userBuffer;
+                    unsigned char * userBuffer;
 
+                    userBuffer = buffer;
+                    userBufferIndex = 0;
 
-					userBuffer = buffer;
-					userBufferIndex = 0;
+                    while ( ( userBufferIndex < size ) )
+                    {
+                        bufferState = buffer_push(
+                            bufferVar, *( userBuffer + userBufferIndex ) );
+                        userBufferIndex++;
+                    }
+                }
+                else
+                {
+                    bufferState =
+                        BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS;
+                }
 
-					while ( ( userBufferIndex < size ) )
-					{
-            	        bufferState = buffer_push( bufferVar, *( userBuffer + userBufferIndex ) );
-						userBufferIndex++;
-					}
-				}
-				else
-				{
-					bufferState = BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS;
-				}
+                if ( isBufferInterCore )
+                {
+                    spinlockState = spinlock_releaseSpinlock( spinlockId );
+                }
+            }
+            else
+            {
+                bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
+            }
 
-				if ( isBufferInterCore )
-				{
-					spinlockState = spinlock_releaseSpinlock( spinlockId );
-				}
-			}
-			else
-			{
-				bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
-			}
-
-			CILinterrupt_enableInterrupts();
+            CILinterrupt_enableInterrupts();
         }
     }
 
@@ -467,7 +474,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType buffer_writeArray(BitWidthType id, void
     return bufferState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

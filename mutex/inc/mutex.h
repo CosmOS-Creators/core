@@ -53,9 +53,10 @@ extern "C" {
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -116,16 +117,20 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_getMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_getMutexInternal(BitWidthType entityId,
+  * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Get mutex privileged DEMO CODE.
   *
-  *	@param[in]	BitWidthType entityId
+  * @param[in]  BitWidthType entityId
   * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType
+mutex_getMutexInternal(
+    BitWidthType entityId,
+    CosmOS_MutexVariableType * mutexVar );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -138,7 +143,8 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutexInternal(BitWidthType enti
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(CosmOS_MutexVariableType * mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType
+mutex_getMutex( CosmOS_MutexVariableType * mutexVar );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -168,30 +174,38 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_getMutex(CosmOS_MutexVariableType 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_tryMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_tryMutexInternal(BitWidthType entityId,
+  * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Get mutex privileged DEMO CODE.
   *
-  *	@param[in]	BitWidthType entityId
+  * @param[in]  BitWidthType entityId
   * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType
+mutex_tryMutexInternal(
+    BitWidthType entityId,
+    CosmOS_MutexVariableType * mutexVar );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_releaseMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_releaseMutexInternal(BitWidthType entityId,
+  * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Release mutex privileged DEMO CODE.
   *
-  *	@param[in]	BitWidthType entityId
+  * @param[in]  BitWidthType entityId
   * @param[in]  CosmOS_MutexVariableType * mutexVar
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexInternal(BitWidthType entityId, CosmOS_MutexVariableType *mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType
+mutex_releaseMutexInternal(
+    BitWidthType entityId,
+    CosmOS_MutexVariableType * mutexVar );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -204,7 +218,8 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutexInternal(BitWidthType 
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(CosmOS_MutexVariableType * mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType
+mutex_tryMutex( CosmOS_MutexVariableType * mutexVar );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -217,7 +232,8 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_tryMutex(CosmOS_MutexVariableType 
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(CosmOS_MutexVariableType * mutexVar);
+__OS_FUNC_SECTION CosmOS_MutexStateType
+mutex_releaseMutex( CosmOS_MutexVariableType * mutexVar );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -254,9 +270,10 @@ __OS_FUNC_SECTION CosmOS_MutexStateType mutex_releaseMutex(CosmOS_MutexVariableT
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType mutex_getMutexValue(CosmOS_MutexVariableType * mutexVar)
+__STATIC_FORCEINLINE BitWidthType
+mutex_getMutexValue( CosmOS_MutexVariableType * mutexVar )
 {
-	return (mutexVar->mutex);
+    return ( mutexVar->mutex );
 }
 
 /********************************************************************************
@@ -270,9 +287,10 @@ __STATIC_FORCEINLINE BitWidthType mutex_getMutexValue(CosmOS_MutexVariableType *
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * mutex_getMutexSchedulableOwner(CosmOS_MutexVariableType * mutexVar)
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+mutex_getMutexSchedulableOwner( CosmOS_MutexVariableType * mutexVar )
 {
-	return (CosmOS_SchedulableVariableType *)(mutexVar->schedulableOwner);
+    return (CosmOS_SchedulableVariableType *)( mutexVar->schedulableOwner );
 }
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -284,7 +302,8 @@ __STATIC_FORCEINLINE CosmOS_SchedulableVariableType * mutex_getMutexSchedulableO
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_setMutexValue(CosmOS_MutexVariableType * mutexVar, BitWidthType mutexParam)
+  * @fn mutex_setMutexValue(CosmOS_MutexVariableType * mutexVar,
+  * BitWidthType mutexParam)
   *
   * @brief Set mutex value.
   *
@@ -293,15 +312,19 @@ __STATIC_FORCEINLINE CosmOS_SchedulableVariableType * mutex_getMutexSchedulableO
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void mutex_setMutexValue(CosmOS_MutexVariableType * mutexVar, BitWidthType mutexParam)
+__STATIC_FORCEINLINE void
+mutex_setMutexValue(
+    CosmOS_MutexVariableType * mutexVar,
+    BitWidthType mutexParam )
 {
-	mutexVar->mutex = mutexParam;
+    mutexVar->mutex = mutexParam;
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_setMutexSchedulableOwner(CosmOS_MutexVariableType * mutex, BitWidthType mutexParam)
+  * @fn mutex_setMutexSchedulableOwner(CosmOS_MutexVariableType * mutex,
+  * BitWidthType mutexParam)
   *
   * @brief Set mutex schedulableOwner.
   *
@@ -310,9 +333,12 @@ __STATIC_FORCEINLINE void mutex_setMutexValue(CosmOS_MutexVariableType * mutexVa
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void mutex_setMutexSchedulableOwner(CosmOS_MutexVariableType * mutexVar, CosmOS_SchedulableVariableType * schedulableOwnerParam)
+__STATIC_FORCEINLINE void
+mutex_setMutexSchedulableOwner(
+    CosmOS_MutexVariableType * mutexVar,
+    CosmOS_SchedulableVariableType * schedulableOwnerParam )
 {
-	mutexVar->schedulableOwner = schedulableOwnerParam;
+    mutexVar->schedulableOwner = schedulableOwnerParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -330,36 +356,50 @@ __STATIC_FORCEINLINE void mutex_setMutexSchedulableOwner(CosmOS_MutexVariableTyp
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_willCauseDeadlock(CosmOS_CoreVariableType * coreVar,
+  * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Check if the mutex will ends up in deadlock DEMO CODE.
   *
   * @param[in]  CosmOS_CoreVariableType * coreVar
   * @param[in]  CosmOS_MutexVariableType * mutexVar
-	*
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BooleanType mutex_willCauseDeadlock(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
+__STATIC_FORCEINLINE CosmOS_BooleanType
+mutex_willCauseDeadlock(
+    CosmOS_CoreVariableType * coreVar,
+    CosmOS_MutexVariableType * mutexVar )
 {
-	return ((mutexVar->mutex IS_EQUAL_TO MUTEX_STATE_ENUM__OCCUPIED)\
-			AND (coreVar->schedulableInExecution IS_EQUAL_TO mutexVar->schedulableOwner)) ? True : False;
+    return ( (mutexVar->mutex IS_EQUAL_TO MUTEX_STATE_ENUM__OCCUPIED)AND(
+               coreVar->schedulableInExecution IS_EQUAL_TO
+                   mutexVar->schedulableOwner ) )
+               ? True
+               : False;
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn mutex_ownsSchedulableMutex(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
+  * @fn mutex_ownsSchedulableMutex(CosmOS_CoreVariableType * coreVar,
+  * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Check if the schedulable in execution owns the current mutex.
   *
   * @param[in]  CosmOS_CoreVariableType * coreVar
   * @param[in]  CosmOS_MutexVariableType * mutexVar
-	*
+  *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BooleanType mutex_ownsSchedulableMutex(CosmOS_CoreVariableType * coreVar, CosmOS_MutexVariableType * mutexVar)
+__STATIC_FORCEINLINE CosmOS_BooleanType
+mutex_ownsSchedulableMutex(
+    CosmOS_CoreVariableType * coreVar,
+    CosmOS_MutexVariableType * mutexVar )
 {
-	return (coreVar->schedulableInExecution IS_EQUAL_TO mutexVar->schedulableOwner) ? True : False;
+    return ( coreVar->schedulableInExecution IS_EQUAL_TO
+                 mutexVar->schedulableOwner )
+               ? True
+               : False;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

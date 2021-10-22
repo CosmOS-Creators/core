@@ -41,15 +41,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -124,11 +125,11 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn memoryProtection_init(AddressType codeMemoryHighAddress,
-  *							AddressType codeMemoryLowAddress,
-  *							AddressType stackMemoryHighAddress,
-  *							AddressType stackMemoryLowAddress,
-  *							AddressType unprotectedMemoryLowAddress,
-  *							AddressType unprotectedMemoryHighAddress)
+  * AddressType codeMemoryLowAddress,
+  * AddressType stackMemoryHighAddress,
+  * AddressType stackMemoryLowAddress,
+  * AddressType unprotectedMemoryLowAddress,
+  * AddressType unprotectedMemoryHighAddress)
   * @brief Init memory protection DEMO CODE.
   *
   * @param[in]  AddressType codeMemoryHighAddress
@@ -136,20 +137,23 @@
   * @param[in]  AddressType stackMemoryHighAddress
   * @param[in]  AddressType unprotectedMemoryLowAddress
   * @param[in]  AddressType unprotectedMemoryHighAddress
-	*
+  *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void memoryProtection_init(AddressType codeMemoryHighAddress,
-												AddressType codeMemoryLowAddress,
-												AddressType stackMemoryHighAddress,
-												AddressType stackMemoryLowAddress,
-												AddressType unprotectedMemoryLowAddress,
-												AddressType unprotectedMemoryHighAddress);
+__OS_FUNC_SECTION void
+memoryProtection_init(
+    AddressType codeMemoryHighAddress,
+    AddressType codeMemoryLowAddress,
+    AddressType stackMemoryHighAddress,
+    AddressType stackMemoryLowAddress,
+    AddressType unprotectedMemoryLowAddress,
+    AddressType unprotectedMemoryHighAddress );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable)
+  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,
+  * CosmOS_SchedulableVariableType  * schedulable)
   *
   * @brief Set memory protection for current execution context.
   *
@@ -158,14 +162,21 @@ __OS_FUNC_SECTION void memoryProtection_init(AddressType codeMemoryHighAddress,
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,CosmOS_SchedulableVariableType  * schedulable);
+__OS_FUNC_SECTION void
+memoryProtection_setMemoryProtection(
+    CosmOS_CoreVariableType * core,
+    CosmOS_SchedulableVariableType * schedulable );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn memoryProtection_isMemoryRegionProtected(CosmOS_CoreVariableType * core, void  * regionLowAddressPointer, BitWidthType size)
+  * @fn memoryProtection_isMemoryRegionProtected(
+  * CosmOS_CoreVariableType * core,
+  * void  * regionLowAddressPointer,
+  * BitWidthType size)
   *
-  * @brief Check if specific memory region is protected against changes for the current execution context.
+  * @brief Check if specific memory region is protected against changes
+  * for the current execution context.
   *
   * @param[in]  CosmOS_CoreVariableType * core
   * @param[in]  void * regionLowAddressPointer
@@ -173,7 +184,11 @@ __OS_FUNC_SECTION void memoryProtection_setMemoryProtection(CosmOS_CoreVariableT
   *
   * @return CosmOS_BooleanType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_BooleanType memoryProtection_isMemoryRegionProtected(CosmOS_CoreVariableType * core, void * regionLowAddressPointer, BitWidthType size);
+__OS_FUNC_SECTION CosmOS_BooleanType
+memoryProtection_isMemoryRegionProtected(
+    CosmOS_CoreVariableType * core,
+    void * regionLowAddressPointer,
+    BitWidthType size );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

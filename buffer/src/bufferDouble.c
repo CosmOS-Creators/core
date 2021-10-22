@@ -21,9 +21,10 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "os.h"
-#include "buffer.h"
 #include "bufferDouble.h"
+#include "buffer.h"
+#include "os.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -122,7 +123,8 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_readArray(BitWidthType id, void * buffer, BitWidthType size, CosmOS_BufferDoubleAccessType access)cessType access)
+  * @fn bufferDouble_readArray(BitWidthType id, void * buffer,
+  * BitWidthType size, CosmOS_BufferDoubleAccessType access)
   *
   * @brief Reading array from the bufferDouble DEMO CODE.
   *
@@ -134,9 +136,14 @@
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_readArray(BitWidthType id, void * buffer, BitWidthType size, CosmOS_BufferDoubleAccessType access)
+__OS_FUNC_SECTION CosmOS_BufferStateType
+bufferDouble_readArray(
+    BitWidthType id,
+    void * buffer,
+    BitWidthType size,
+    CosmOS_BufferDoubleAccessType access )
 {
     BitWidthType bufferId;
 
@@ -146,26 +153,27 @@ __OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_readArray(BitWidthType id,
     CosmOS_BufferVariableType * bufferVar;
     CosmOS_BufferDoubleVariableType * bufferDoubleVar;
 
-
     osVar = os_getOsVar();
 
     bufferDoubleVar = os_getOsBufferDoubleVar( osVar, id );
 
     switch ( access )
     {
-        case BUFFER_DOUBLE_ACCESS_ENUM__USER :
+        case BUFFER_DOUBLE_ACCESS_ENUM__USER:
         {
-            bufferVar = bufferDouble_getBufferDoubleUserBuffer( bufferDoubleVar );
+            bufferVar =
+                bufferDouble_getBufferDoubleUserBuffer( bufferDoubleVar );
             break;
         }
 
-        case BUFFER_DOUBLE_ACCESS_ENUM__KERNEL :
+        case BUFFER_DOUBLE_ACCESS_ENUM__KERNEL:
         {
-            bufferVar = bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleVar );
+            bufferVar =
+                bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleVar );
             break;
         }
 
-        default :
+        default:
         {
             os_kernelPanic();
             break;
@@ -178,13 +186,14 @@ __OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_readArray(BitWidthType id,
     return bufferState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_writeArray(BitWidthType id, void * buffer, BitWidthType size, CosmOS_BufferDoubleAccessType access)
+  * @fn bufferDouble_writeArray(BitWidthType id, void * buffer,
+  * BitWidthType size, CosmOS_BufferDoubleAccessType access)
   *
   * @brief Writing array into the bufferDouble DEMO CODE.
   *
@@ -196,9 +205,14 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_writeArray(BitWidthType id, void * buffer, BitWidthType size, CosmOS_BufferDoubleAccessType access)
+__OS_FUNC_SECTION CosmOS_BufferStateType
+bufferDouble_writeArray(
+    BitWidthType id,
+    void * buffer,
+    BitWidthType size,
+    CosmOS_BufferDoubleAccessType access )
 {
     BitWidthType bufferId;
 
@@ -208,26 +222,27 @@ __OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_writeArray(BitWidthType id
     CosmOS_BufferVariableType * bufferVar;
     CosmOS_BufferDoubleVariableType * bufferDoubleVar;
 
-
     osVar = os_getOsVar();
 
     bufferDoubleVar = os_getOsBufferDoubleVar( osVar, id );
 
     switch ( access )
     {
-        case BUFFER_DOUBLE_ACCESS_ENUM__USER :
+        case BUFFER_DOUBLE_ACCESS_ENUM__USER:
         {
-            bufferVar = bufferDouble_getBufferDoubleUserBuffer( bufferDoubleVar );
+            bufferVar =
+                bufferDouble_getBufferDoubleUserBuffer( bufferDoubleVar );
             break;
         }
 
-        case BUFFER_DOUBLE_ACCESS_ENUM__KERNEL :
+        case BUFFER_DOUBLE_ACCESS_ENUM__KERNEL:
         {
-            bufferVar = bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleVar );
+            bufferVar =
+                bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleVar );
             break;
         }
 
-        default :
+        default:
         {
             os_kernelPanic();
             break;
@@ -240,7 +255,7 @@ __OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_writeArray(BitWidthType id
     return bufferState;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

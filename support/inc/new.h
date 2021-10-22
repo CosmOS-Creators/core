@@ -7,7 +7,7 @@
 *****************************************************************************//**
 ** @file new.h
 *********************************************************************************
-<!--              				  new Unit Group Definition           				      -->
+<!--                         new Unit Group Definition                        -->
 *********************************************************************************
 ** @defgroup new_unit new Unit
 ** @ingroup support_module
@@ -25,7 +25,7 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--       					    new Unit Global Group Definition       				        -->
+<!--                    new Unit Global Group Definition                      -->
 *********************************************************************************
 ** @defgroup Global_new Global
 ** @ingroup new_unit
@@ -47,9 +47,10 @@ extern "C" {
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 
 /* LIB interfaces */
 #include <cstddef>
@@ -142,55 +143,63 @@ extern "C" {
   * *************************************************************************//**
   * @fn new  (size_t size, void* ptr)
   *
-  * @brief NewLib new operator function implementation redesigned for CosmOS DEMO.
+  * @brief NewLib new operator function implementation redesigned for
+  * CosmOS DEMO.
   *
   * @param[in]  size_t size
   * @param[in]  void* ptr
   *
   * @return void *
 ********************************************************************************/
-void* operator new  (size_t size, void* ptr) noexcept;
+void *
+operator new( size_t size, void * ptr ) noexcept;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn new[](size_t size, void* ptr)
   *
-  * @brief NewLib new operator function implementation redesigned for CosmOS DEMO.
+  * @brief NewLib new operator function implementation redesigned for
+  * CosmOS DEMO.
   *
   * @param[in]  size_t size
   * @param[in]  void* ptr
   *
   * @return void *
 ********************************************************************************/
-void* operator new[](size_t size, void* ptr) noexcept;
+void *
+operator new[]( size_t size, void * ptr ) noexcept;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn delete(void* ptr)
   *
-  * @brief NewLib delete operator function implementation redesigned for CosmOS DEMO.
+  * @brief NewLib delete operator function implementation redesigned for
+  * CosmOS DEMO.
   *
   * @param[in]  void * ptr
   *
   * @return none
 ********************************************************************************/
-void  operator delete  (void* ptr) noexcept;
+void
+operator delete( void * ptr ) noexcept;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
   * @fn delete(void* ptr)
   *
-  * @brief NewLib delete operator function implementation redesigned for CosmOS DEMO.
+  * @brief NewLib delete operator function implementation redesigned for
+  * CosmOS DEMO.
   *
   * @param[in]  void * ptr
   * @param[in]  size_t size
-	*
+  *
   * @return none
 ********************************************************************************/
-void  operator delete[](void* ptr, size_t size) noexcept;
+void
+operator delete[]( void * ptr, size_t size ) noexcept;
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **
 * ***************************************************************************//**

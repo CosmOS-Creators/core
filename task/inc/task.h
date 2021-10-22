@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -137,7 +138,8 @@
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void task_setExecutionStateToFinished(void);
+__OS_FUNC_SECTION void
+task_setExecutionStateToFinished( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -181,9 +183,10 @@ __OS_FUNC_SECTION void task_setExecutionStateToFinished(void);
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType task_getTaskWcet(CosmOS_TaskVariableType * task)
+__STATIC_FORCEINLINE BitWidthType
+task_getTaskWcet( CosmOS_TaskVariableType * task )
 {
-    return (task->cfg->wcet);
+    return ( task->cfg->wcet );
 }
 
 /********************************************************************************
@@ -197,9 +200,10 @@ __STATIC_FORCEINLINE BitWidthType task_getTaskWcet(CosmOS_TaskVariableType * tas
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * task_getTaskSchedulable(CosmOS_TaskVariableType * task)
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+task_getTaskSchedulable( CosmOS_TaskVariableType * task )
 {
-    return (CosmOS_SchedulableVariableType *)(task->schedulable);
+    return (CosmOS_SchedulableVariableType *)( task->schedulable );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

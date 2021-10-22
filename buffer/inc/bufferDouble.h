@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -142,7 +143,9 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_readArray(BitWidthType id, void * buffer, BitWidthType size, CosmOS_BufferDoubleAccessType access)cessType access)
+  * @fn bufferDouble_readArray(BitWidthType id, void * buffer,
+  * BitWidthType size,
+  * CosmOS_BufferDoubleAccessType access)
   *
   * @brief Reading array from the bufferDouble DEMO CODE.
   *
@@ -153,12 +156,19 @@
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_readArray(BitWidthType id, void * buffer, BitWidthType size, CosmOS_BufferDoubleAccessType access);
+__OS_FUNC_SECTION CosmOS_BufferStateType
+bufferDouble_readArray(
+    BitWidthType id,
+    void * buffer,
+    BitWidthType size,
+    CosmOS_BufferDoubleAccessType access );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_writeArray(BitWidthType id, void * buffer, BitWidthType size, CosmOS_BufferDoubleAccessType access)
+  * @fn bufferDouble_writeArray(BitWidthType id, void * buffer,
+  * BitWidthType size,
+  * CosmOS_BufferDoubleAccessType access)
   *
   * @brief Writing array into the bufferDouble DEMO CODE.
   *
@@ -169,7 +179,12 @@ __OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_readArray(BitWidthType id,
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_writeArray(BitWidthType id, void * buffer, BitWidthType size, CosmOS_BufferDoubleAccessType access);
+__OS_FUNC_SECTION CosmOS_BufferStateType
+bufferDouble_writeArray(
+    BitWidthType id,
+    void * buffer,
+    BitWidthType size,
+    CosmOS_BufferDoubleAccessType access );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -192,7 +207,8 @@ __OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_writeArray(BitWidthType id
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_getBufferDoublePair(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+  * @fn bufferDouble_getBufferDoublePair(
+  * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble pair.
   *
@@ -200,15 +216,19 @@ __OS_FUNC_SECTION CosmOS_BufferStateType bufferDouble_writeArray(BitWidthType id
   *
   * @return CosmOS_BufferDoublePairConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferDoublePairConfigurationType * bufferDouble_getBufferDoublePair(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+__STATIC_FORCEINLINE CosmOS_BufferDoublePairConfigurationType *
+bufferDouble_getBufferDoublePair(
+    CosmOS_BufferDoubleVariableType * bufferDoubleVar )
 {
-    return (CosmOS_BufferDoublePairConfigurationType *)(bufferDoubleVar->cfg->bufferPair);
+    return (CosmOS_BufferDoublePairConfigurationType *)( bufferDoubleVar->cfg
+                                                             ->bufferPair );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_getBufferDoubleKernelBufferId(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+  * @fn bufferDouble_getBufferDoubleKernelBufferId(
+  * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble kernelBufferId.
   *
@@ -216,15 +236,18 @@ __STATIC_FORCEINLINE CosmOS_BufferDoublePairConfigurationType * bufferDouble_get
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType bufferDouble_getBufferDoubleKernelBufferId(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+__STATIC_FORCEINLINE BitWidthType
+bufferDouble_getBufferDoubleKernelBufferId(
+    CosmOS_BufferDoubleVariableType * bufferDoubleVar )
 {
-    return (bufferDoubleVar->activeKernelBufferId);
+    return ( bufferDoubleVar->activeKernelBufferId );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_getBufferDoubleUserBufferId(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+  * @fn bufferDouble_getBufferDoubleUserBufferId(
+  * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble userBufferId.
   *
@@ -232,15 +255,18 @@ __STATIC_FORCEINLINE BitWidthType bufferDouble_getBufferDoubleKernelBufferId(Cos
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType bufferDouble_getBufferDoubleUserBufferId(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+__STATIC_FORCEINLINE BitWidthType
+bufferDouble_getBufferDoubleUserBufferId(
+    CosmOS_BufferDoubleVariableType * bufferDoubleVar )
 {
-    return (bufferDoubleVar->activeUserBufferId);
+    return ( bufferDoubleVar->activeUserBufferId );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_getBufferDoubleKernelBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+  * @fn bufferDouble_getBufferDoubleKernelBuffer(
+  * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble kernelBuffer.
   *
@@ -248,15 +274,20 @@ __STATIC_FORCEINLINE BitWidthType bufferDouble_getBufferDoubleUserBufferId(CosmO
   *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferVariableType * bufferDouble_getBufferDoubleKernelBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+__STATIC_FORCEINLINE CosmOS_BufferVariableType *
+bufferDouble_getBufferDoubleKernelBuffer(
+    CosmOS_BufferDoubleVariableType * bufferDoubleVar )
 {
-    return (CosmOS_BufferVariableType *)(&(bufferDoubleVar->cfg->bufferPair[bufferDoubleVar->activeKernelBufferId]));
+    return (CosmOS_BufferVariableType *)( &(
+        bufferDoubleVar->cfg
+            ->bufferPair[bufferDoubleVar->activeKernelBufferId] ) );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_getBufferDoubleUserBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+  * @fn bufferDouble_getBufferDoubleUserBuffer(
+  * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble userBuffer.
   *
@@ -264,9 +295,13 @@ __STATIC_FORCEINLINE CosmOS_BufferVariableType * bufferDouble_getBufferDoubleKer
   *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferVariableType * bufferDouble_getBufferDoubleUserBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+__STATIC_FORCEINLINE CosmOS_BufferVariableType *
+bufferDouble_getBufferDoubleUserBuffer(
+    CosmOS_BufferDoubleVariableType * bufferDoubleVar )
 {
-    return (CosmOS_BufferVariableType *)(&(bufferDoubleVar->cfg->bufferPair[bufferDoubleVar->activeUserBufferId]));
+    return (CosmOS_BufferVariableType *)( &(
+        bufferDoubleVar->cfg
+            ->bufferPair[bufferDoubleVar->activeUserBufferId] ) );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -284,7 +319,9 @@ __STATIC_FORCEINLINE CosmOS_BufferVariableType * bufferDouble_getBufferDoubleUse
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_setBufferDoubleKernelBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar, BitWidthType activeKernelBufferIdParam)
+  * @fn bufferDouble_setBufferDoubleKernelBuffer(
+  * CosmOS_BufferDoubleVariableType * bufferDoubleVar,
+  * BitWidthType activeKernelBufferIdParam)
   *
   * @brief Set bufferDouble activeKernelBufferId.
   *
@@ -292,7 +329,10 @@ __STATIC_FORCEINLINE CosmOS_BufferVariableType * bufferDouble_getBufferDoubleUse
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void bufferDouble_setBufferDoubleKernelBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar, BitWidthType activeKernelBufferIdParam)
+__STATIC_FORCEINLINE void
+bufferDouble_setBufferDoubleKernelBuffer(
+    CosmOS_BufferDoubleVariableType * bufferDoubleVar,
+    BitWidthType activeKernelBufferIdParam )
 {
     bufferDoubleVar->activeKernelBufferId = activeKernelBufferIdParam;
 }
@@ -300,7 +340,9 @@ __STATIC_FORCEINLINE void bufferDouble_setBufferDoubleKernelBuffer(CosmOS_Buffer
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_setBufferDoubleUserBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar, BitWidthType activeUserBufferIdParam)
+  * @fn bufferDouble_setBufferDoubleUserBuffer(
+  * CosmOS_BufferDoubleVariableType * bufferDoubleVar,
+  * BitWidthType activeUserBufferIdParam)
   *
   * @brief Set bufferDouble activeUserBufferId.
   *
@@ -308,7 +350,10 @@ __STATIC_FORCEINLINE void bufferDouble_setBufferDoubleKernelBuffer(CosmOS_Buffer
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void bufferDouble_setBufferDoubleUserBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar, BitWidthType activeUserBufferIdParam)
+__STATIC_FORCEINLINE void
+bufferDouble_setBufferDoubleUserBuffer(
+    CosmOS_BufferDoubleVariableType * bufferDoubleVar,
+    BitWidthType activeUserBufferIdParam )
 {
     bufferDoubleVar->activeUserBufferId = activeUserBufferIdParam;
 }
@@ -329,7 +374,8 @@ __STATIC_FORCEINLINE void bufferDouble_setBufferDoubleUserBuffer(CosmOS_BufferDo
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_isUserAndKernelBufferSame(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+  * @fn bufferDouble_isUserAndKernelBufferSame(
+  * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Does user and kernel use the same buffer.
   *
@@ -337,15 +383,22 @@ __STATIC_FORCEINLINE void bufferDouble_setBufferDoubleUserBuffer(CosmOS_BufferDo
   *
   * @return CosmOS_BooleanType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BooleanType bufferDouble_isUserAndKernelBufferSame(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+__STATIC_FORCEINLINE CosmOS_BooleanType
+bufferDouble_isUserAndKernelBufferSame(
+    CosmOS_BufferDoubleVariableType * bufferDoubleVar )
 {
-    return (bufferDoubleVar->activeKernelBufferId IS_EQUAL_TO bufferDoubleVar->activeUserBufferId ? True : False);
+    return (
+        bufferDoubleVar->activeKernelBufferId IS_EQUAL_TO
+                bufferDoubleVar->activeUserBufferId
+            ? True
+            : False );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn bufferDouble_switchUserAndKernelBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+  * @fn bufferDouble_switchUserAndKernelBuffer(
+  * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Does user and kernel use the same buffer.
   *
@@ -353,10 +406,11 @@ __STATIC_FORCEINLINE CosmOS_BooleanType bufferDouble_isUserAndKernelBufferSame(C
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void bufferDouble_switchUserAndKernelBuffer(CosmOS_BufferDoubleVariableType * bufferDoubleVar)
+__STATIC_FORCEINLINE void
+bufferDouble_switchUserAndKernelBuffer(
+    CosmOS_BufferDoubleVariableType * bufferDoubleVar )
 {
     BitWidthType kernelTempId;
-
 
     kernelTempId = bufferDoubleVar->activeKernelBufferId;
     bufferDoubleVar->activeKernelBufferId = bufferDoubleVar->activeUserBufferId;

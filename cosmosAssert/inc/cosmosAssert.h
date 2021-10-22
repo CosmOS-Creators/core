@@ -47,7 +47,7 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
@@ -196,10 +196,11 @@
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void cosmosAssert(BitWidthType result)
+__STATIC_FORCEINLINE void
+cosmosAssert( BitWidthType result )
 {
     if ( IS_NOT( result ) )
-		{
+    {
         os_kernelPanic();
     }
 }

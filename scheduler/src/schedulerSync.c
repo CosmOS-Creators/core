@@ -22,8 +22,9 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "schedulerSync.h"
-#include "scheduler.h"
 #include "coreSync.h"
+#include "scheduler.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -122,7 +123,10 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
+  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar,
+  * CosmOS_CoreVariableType * coreVar,
+  * BitWidthType currentTick,
+  * BitWidthType hyperTick)
   *
   * @brief Algorithm for synchronization during runtime DEMO CODE.
   *
@@ -134,15 +138,19 @@
   * @return CosmOS_SchedulerSyncStateType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar, CosmOS_CoreVariableType * coreVar, BitWidthType currentTick, BitWidthType hyperTick)
+__OS_FUNC_SECTION CosmOS_SchedulerSyncStateType
+schedulerSync_sync(
+    CosmOS_SchedulerVariableType * schedulerVar,
+    CosmOS_CoreVariableType * coreVar,
+    BitWidthType currentTick,
+    BitWidthType hyperTick )
 {
-
     CosmOS_BooleanType syncInitState;
 
-    CosmOS_SchedulerSyncStateType schedulerState = SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC;
-
+    CosmOS_SchedulerSyncStateType schedulerState =
+        SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC;
 
     syncInitState = scheduler_getSchedulerSyncInitState( schedulerVar );
 
@@ -150,14 +158,12 @@ __OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_Schedu
     {
         BitWidthType firstSyncTaskStartTick;
 
-
-        firstSyncTaskStartTick = scheduler_getSchedulerFirstSyncTaskStartTick( schedulerVar );
+        firstSyncTaskStartTick =
+            scheduler_getSchedulerFirstSyncTaskStartTick( schedulerVar );
 
         if ( firstSyncTaskStartTick IS_EQUAL_TO currentTick )
         {
-            BitWidthType  syncTicks,
-                          nextTick;
-
+            BitWidthType syncTicks, nextTick;
 
             syncTicks = scheduler_getSchedulerSyncTicks( schedulerVar );
 
@@ -173,13 +179,11 @@ __OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_Schedu
     {
         BitWidthType nextTick;
 
-
         nextTick = scheduler_getSchedulerNextSyncTick( schedulerVar );
 
         if ( __COSMOS_UNLIKELY( nextTick IS_EQUAL_TO currentTick ) )
         {
-            BitWidthType  syncTicks;
-
+            BitWidthType syncTicks;
 
             syncTicks = scheduler_getSchedulerSyncTicks( schedulerVar );
 
@@ -199,7 +203,7 @@ __OS_FUNC_SECTION CosmOS_SchedulerSyncStateType schedulerSync_sync(CosmOS_Schedu
     return schedulerState;
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

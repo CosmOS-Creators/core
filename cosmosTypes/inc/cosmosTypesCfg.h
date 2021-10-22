@@ -41,7 +41,7 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
@@ -142,8 +142,8 @@ typedef struct
     const BitWidthType size;
     const CosmOS_PermissionsConfigurationType * const readPermission;
     const CosmOS_PermissionsConfigurationType * const writePermission;
-	const CosmOS_BooleanType isInterCore;
-	const BitWidthType spinlockId;
+    const CosmOS_BooleanType isInterCore;
+    const BitWidthType spinlockId;
 
 } CosmOS_BufferConfigurationType;
 
@@ -210,10 +210,10 @@ typedef struct
     const BitWidthType instanceId;
     const BitWidthType programId;
     const BitWidthType coreId;
-		const BitWidthType alarmId;
-		const AddressType peripheralAccessLowAddress;
-		const AddressType peripheralAccessHighAddress;
-		const BitWidthType peripheralAccessSize;
+    const BitWidthType alarmId;
+    const AddressType peripheralAccessLowAddress;
+    const AddressType peripheralAccessHighAddress;
+    const BitWidthType peripheralAccessSize;
 
 } CosmOS_SchedulableConfigurationType;
 
@@ -246,14 +246,14 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-	const BitWidthType coreId;
-	const BitWidthType numberOfTasks;
-	const BitWidthType numberOfThreads;
-	const BitWidthType programMemorySize;
-	const AddressType programMemoryLowAddress;
-	const AddressType programMemoryHighAddress;
-	const CosmOS_HeapConfigurationType * const heap;
-	void * const heapMutex;
+    const BitWidthType coreId;
+    const BitWidthType numberOfTasks;
+    const BitWidthType numberOfThreads;
+    const BitWidthType programMemorySize;
+    const AddressType programMemoryLowAddress;
+    const AddressType programMemoryHighAddress;
+    const CosmOS_HeapConfigurationType * const heap;
+    void * const heapMutex;
 
 } CosmOS_ProgramConfigurationType;
 
@@ -296,8 +296,8 @@ typedef struct
     const BitWidthType lastToFirstTaskTicks;
     const BitWidthType syncTicks;
     const BitWidthType firstSyncTaskStartTick;
-	const BitWidthType maxTimerTick;
-	const BitWidthType timerTickCount;
+    const BitWidthType maxTimerTick;
+    const BitWidthType timerTickCount;
     void * const idleTaskVar;
 
 } CosmOS_SchedulerConfigurationType;
@@ -346,19 +346,19 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-	const CosmOS_ProgramConfigurationType * const programs;
-	const BitWidthType numberOfPrograms;
-	const CosmOS_SchedulerConfigurationType * const scheduler;
-	const BitWidthType coreId;
-	const CosmOS_GenericVoidType kernelPanicHook;
-	const AddressType stackMemoryLowAddress;
-	const AddressType stackMemoryHighAddress;
-	const AddressType codeMemoryLowAddress;
-	const AddressType codeMemoryHighAddress;
-	const AddressType unprotectedMemoryLowAddress;
-	const AddressType unprotectedMemoryHighAddress;
-	const BitWidthType msToTicks;
-	const BitWidthType numberOfAlarms;
+    const CosmOS_ProgramConfigurationType * const programs;
+    const BitWidthType numberOfPrograms;
+    const CosmOS_SchedulerConfigurationType * const scheduler;
+    const BitWidthType coreId;
+    const CosmOS_GenericVoidType kernelPanicHook;
+    const AddressType stackMemoryLowAddress;
+    const AddressType stackMemoryHighAddress;
+    const AddressType codeMemoryLowAddress;
+    const AddressType codeMemoryHighAddress;
+    const AddressType unprotectedMemoryLowAddress;
+    const AddressType unprotectedMemoryHighAddress;
+    const BitWidthType msToTicks;
+    const BitWidthType numberOfAlarms;
 
 } CosmOS_CoreConfigurationType;
 
@@ -374,7 +374,7 @@ typedef struct
     const CosmOS_BufferConfigurationType * const buffers;
     const BitWidthType numberOfBuffers;
     const CosmOS_RoutesConfigurationType * const route;
-	const BitWidthType numberOfSpinlocks;
+    const BitWidthType numberOfSpinlocks;
 
 } CosmOS_OsConfigurationType;
 /********************************************************************************

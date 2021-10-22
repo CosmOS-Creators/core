@@ -41,7 +41,7 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
@@ -163,8 +163,8 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-	BitWidthType mutex;
-	CosmOS_SchedulableVariableType * schedulableOwner;
+    BitWidthType mutex;
+    CosmOS_SchedulableVariableType * schedulableOwner;
 
 } CosmOS_MutexVariableType;
 
@@ -177,7 +177,7 @@ typedef struct
 {
     const CosmOS_ThreadConfigurationType * const cfg;
     CosmOS_SchedulableVariableType * const schedulable;
-	CosmOS_MutexVariableType *blockingMutexVar;
+    CosmOS_MutexVariableType * blockingMutexVar;
 
 } CosmOS_ThreadVariableType;
 
@@ -191,7 +191,7 @@ typedef struct
     const CosmOS_ProgramConfigurationType * const cfg;
     CosmOS_TaskVariableType * const taskVars;
     CosmOS_ThreadVariableType * const threadVars;
-	BitWidthType numberOfMallocVars;
+    BitWidthType numberOfMallocVars;
 
 } CosmOS_ProgramVariableType;
 
@@ -204,13 +204,13 @@ typedef struct
 {
     const CosmOS_SchedulerConfigurationType * const cfg;
     BitWidthType currentTick;
-	BitWidthType priorTickStep;
+    BitWidthType priorTickStep;
     BitWidthType scheduleTableIterator;
     BitWidthType threadListIterator;
     CosmOS_SchedulerStateType schedulerState;
     BitWidthType nextSyncTick;
     CosmOS_BooleanType syncInitState;
-	CosmOS_RescheduleTriggerStateType rescheduleTriggerState;
+    CosmOS_RescheduleTriggerStateType rescheduleTriggerState;
 
 } CosmOS_SchedulerVariableType;
 
@@ -233,9 +233,9 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-	const CosmOS_AlarmConfigurationType * const cfg;
-	CosmOS_AlarmStateType state;
-	BitWidthType tickCount;
+    const CosmOS_AlarmConfigurationType * const cfg;
+    CosmOS_AlarmStateType state;
+    BitWidthType tickCount;
 
 } CosmOS_AlarmVariableType;
 
@@ -246,8 +246,8 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-	BitWidthType spinlock;
-	CosmOS_SchedulableVariableType * schedulableOwner;
+    BitWidthType spinlock;
+    CosmOS_SchedulableVariableType * schedulableOwner;
 
 } CosmOS_SpinlockVariableType;
 
@@ -266,7 +266,7 @@ typedef struct
     CosmOS_BarrierVariableType * const barrierVars;
     CosmOS_OsStateType osState;
     CosmOS_SysJobsVariableType * const sysJobs;
-	CosmOS_AlarmVariableType * const alarmVars;
+    CosmOS_AlarmVariableType * const alarmVars;
 
 } CosmOS_CoreVariableType;
 
@@ -281,7 +281,7 @@ typedef struct
     CosmOS_CoreVariableType * const coreVars;
     CosmOS_BufferVariableType * const bufferVars;
     CosmOS_BufferDoubleVariableType * const bufferDoubleVars;
-	CosmOS_SpinlockVariableType * const spinlockVars;
+    CosmOS_SpinlockVariableType * const spinlockVars;
 
 } CosmOS_OsVariableType;
 /********************************************************************************

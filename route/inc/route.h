@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -161,7 +162,8 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn route_getRoutesFunc(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
+  * @fn route_getRoutesFunc(CosmOS_RoutesConfigurationType * route,
+  * BitWidthType callId)
   *
   * @brief Get route func pointer.
   *
@@ -170,9 +172,13 @@
   *
   * @return CosmOS_GenericVoidType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_GenericVoidType route_getRoutesFunc(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
+__STATIC_FORCEINLINE CosmOS_GenericVoidType
+route_getRoutesFunc(
+    CosmOS_RoutesConfigurationType * route,
+    BitWidthType callId )
 {
-    return (CosmOS_GenericVoidType)(route->routeFunc[route->routeIdToFunc[callId]]);
+    return ( CosmOS_GenericVoidType )(
+        route->routeFunc[route->routeIdToFunc[callId]] );
 }
 
 /********************************************************************************
@@ -186,15 +192,17 @@ __STATIC_FORCEINLINE CosmOS_GenericVoidType route_getRoutesFunc(CosmOS_RoutesCon
   *
   * @return BitWidthType *
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType * route_getRoutesIdToFunc(CosmOS_RoutesConfigurationType * route)
+__STATIC_FORCEINLINE BitWidthType *
+route_getRoutesIdToFunc( CosmOS_RoutesConfigurationType * route )
 {
-    return (BitWidthType *)(route->routeIdToFunc);
+    return (BitWidthType *)( route->routeIdToFunc );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn route_getRoutesFuncId(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
+  * @fn route_getRoutesFuncId(CosmOS_RoutesConfigurationType * route,
+  * BitWidthType callId)
   *
   * @brief Get route function id.
   *
@@ -203,9 +211,12 @@ __STATIC_FORCEINLINE BitWidthType * route_getRoutesIdToFunc(CosmOS_RoutesConfigu
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType route_getRoutesFuncId(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
+__STATIC_FORCEINLINE BitWidthType
+route_getRoutesFuncId(
+    CosmOS_RoutesConfigurationType * route,
+    BitWidthType callId )
 {
-    return (route->routeIdToFunc[callId]);
+    return ( route->routeIdToFunc[callId] );
 }
 
 /********************************************************************************
@@ -219,15 +230,17 @@ __STATIC_FORCEINLINE BitWidthType route_getRoutesFuncId(CosmOS_RoutesConfigurati
   *
   * @return BitWidthType *
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType * route_getRoutesIdToEntity(CosmOS_RoutesConfigurationType * route)
+__STATIC_FORCEINLINE BitWidthType *
+route_getRoutesIdToEntity( CosmOS_RoutesConfigurationType * route )
 {
-    return (BitWidthType *)(route->routeIdToEntity);
+    return (BitWidthType *)( route->routeIdToEntity );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn route_getRoutesEntityId(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
+  * @fn route_getRoutesEntityId(CosmOS_RoutesConfigurationType * route,
+  * BitWidthType callId)
   *
   * @brief Get route entity id.
   *
@@ -236,9 +249,12 @@ __STATIC_FORCEINLINE BitWidthType * route_getRoutesIdToEntity(CosmOS_RoutesConfi
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType route_getRoutesEntityId(CosmOS_RoutesConfigurationType * route, BitWidthType callId)
+__STATIC_FORCEINLINE BitWidthType
+route_getRoutesEntityId(
+    CosmOS_RoutesConfigurationType * route,
+    BitWidthType callId )
 {
-    return (route->routeIdToEntity[callId]);
+    return ( route->routeIdToEntity[callId] );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

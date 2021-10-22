@@ -7,7 +7,7 @@
 *****************************************************************************//**
 ** @file alarm.c
 *********************************************************************************
-<!--               	     alarm Unit Local Group Definition                    -->
+<!--                     alarm Unit Local Group Definition                    -->
 *********************************************************************************
 ** @defgroup Local_alarm Local
 ** @ingroup alarm_unit
@@ -117,21 +117,21 @@
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void alarm_expire(CosmOS_AlarmVariableType *alarmVar)
+__OS_FUNC_SECTION void
+alarm_expire( CosmOS_AlarmVariableType * alarmVar )
 {
-	CosmOS_SchedulableVariableType * schedulableVar;
+    CosmOS_SchedulableVariableType * schedulableVar;
 
+    schedulableVar = alarm_getAlarmSchedulable( alarmVar );
 
-	schedulableVar = alarm_getAlarmSchedulable(alarmVar);
-
-	schedulable_setState(schedulableVar, SCHEDULABLE_STATE_ENUM__READY);
-	alarm_setAlarmState(alarmVar,ALARM_STATE_ENUM__DISABLED);
-	alarm_setAlarmTickCount(alarmVar,0);
+    schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__READY );
+    alarm_setAlarmState( alarmVar, ALARM_STATE_ENUM__DISABLED );
+    alarm_setAlarmTickCount( alarmVar, 0 );
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 * DOXYGEN STOP GROUP                                                           **

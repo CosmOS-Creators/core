@@ -21,8 +21,9 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "core.h"
 #include "sysJobs.h"
+#include "core.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -130,17 +131,15 @@
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void sysJobs_dispatcher(BitWidthType entityId)
+__OS_FUNC_SECTION void
+sysJobs_dispatcher( BitWidthType entityId )
 {
-    BitWidthType  sysJobsCurrentTick,
-                  hyperTick,
-                  numOfGroups;
+    BitWidthType sysJobsCurrentTick, hyperTick, numOfGroups;
 
     CosmOS_CoreVariableType * coreVar;
     CosmOS_SysJobsVariableType * sysJobsVar;
-
 
     coreVar = core_getCoreVar();
     sysJobsVar = core_getCoreSysJobs( coreVar );
@@ -150,23 +149,27 @@ __OS_FUNC_SECTION void sysJobs_dispatcher(BitWidthType entityId)
 
     sysJobsCurrentTick++;
 
-    for ( BitWidthType groupIterator = 0; groupIterator < numOfGroups; groupIterator++ )
+    for ( BitWidthType groupIterator = 0; groupIterator < numOfGroups;
+          groupIterator++ )
     {
-        BitWidthType  groupTickMultiplicator;
+        BitWidthType groupTickMultiplicator;
 
-
-        groupTickMultiplicator = sysJobs_getSysJobsGroupTickMultiplicator( sysJobsVar, groupIterator );
+        groupTickMultiplicator = sysJobs_getSysJobsGroupTickMultiplicator(
+            sysJobsVar, groupIterator );
 
         if ( IS_NOT( sysJobsCurrentTick % groupTickMultiplicator ) )
         {
             BitWidthType numOfHandlers;
             CosmOS_GenericVoidType * handlers;
 
+            handlers =
+                sysJobs_getSysJobsGroupHandlers( sysJobsVar, groupIterator );
+            numOfHandlers = sysJobs_getSysJobsGroupNumOfHandlers(
+                sysJobsVar, groupIterator );
 
-            handlers = sysJobs_getSysJobsGroupHandlers( sysJobsVar, groupIterator );
-            numOfHandlers = sysJobs_getSysJobsGroupNumOfHandlers( sysJobsVar, groupIterator );
-
-            for ( BitWidthType handlerIterator = 0; handlerIterator < numOfHandlers; handlerIterator++ )
+            for ( BitWidthType handlerIterator = 0;
+                  handlerIterator < numOfHandlers;
+                  handlerIterator++ )
             {
                 handlers[handlerIterator]();
             }
@@ -178,11 +181,10 @@ __OS_FUNC_SECTION void sysJobs_dispatcher(BitWidthType entityId)
     sysJobsCurrentTick = ( sysJobsCurrentTick % hyperTick );
     sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
 
-	__SUPRESS_UNUSED_VAR(entityId);
-
+    __SUPRESS_UNUSED_VAR( entityId );
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

@@ -47,15 +47,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -137,12 +138,14 @@
   *
   * @return CosmOS_CoreVariableType *
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_CoreVariableType * core_getCoreVar(void);
+__OS_FUNC_SECTION CosmOS_CoreVariableType *
+core_getCoreVar( void );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_TaskVariableType * taskVar)
+  * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar,
+  * CosmOS_TaskVariableType * taskVar)
   *
   * @brief Set program and schedulable into the current context.
   *
@@ -151,7 +154,10 @@ __OS_FUNC_SECTION CosmOS_CoreVariableType * core_getCoreVar(void);
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar, CosmOS_SchedulableVariableType * schedulableVar);
+__OS_FUNC_SECTION void
+core_setSchedulableIntoCurrentContext(
+    CosmOS_CoreVariableType * coreVar,
+    CosmOS_SchedulableVariableType * schedulableVar );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -195,9 +201,10 @@ __OS_FUNC_SECTION void core_setSchedulableIntoCurrentContext(CosmOS_CoreVariable
   *
   * @return CosmOS_ProgramConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ProgramConfigurationType * core_getCorePrograms(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_ProgramConfigurationType *
+core_getCorePrograms( CosmOS_CoreVariableType * core )
 {
-    return (CosmOS_ProgramConfigurationType *)(core->cfg->programs);
+    return (CosmOS_ProgramConfigurationType *)( core->cfg->programs );
 }
 
 /********************************************************************************
@@ -211,9 +218,10 @@ __STATIC_FORCEINLINE CosmOS_ProgramConfigurationType * core_getCorePrograms(Cosm
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType core_getCoreNumberOfPrograms(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE BitWidthType
+core_getCoreNumberOfPrograms( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->numberOfPrograms);
+    return ( core->cfg->numberOfPrograms );
 }
 
 /********************************************************************************
@@ -227,9 +235,10 @@ __STATIC_FORCEINLINE BitWidthType core_getCoreNumberOfPrograms(CosmOS_CoreVariab
   *
   * @return CosmOS_SchedulerConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulerConfigurationType * core_getCoreScheduler(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_SchedulerConfigurationType *
+core_getCoreScheduler( CosmOS_CoreVariableType * core )
 {
-    return (CosmOS_SchedulerConfigurationType *)(core->cfg->scheduler);
+    return (CosmOS_SchedulerConfigurationType *)( core->cfg->scheduler );
 }
 
 /********************************************************************************
@@ -243,9 +252,10 @@ __STATIC_FORCEINLINE CosmOS_SchedulerConfigurationType * core_getCoreScheduler(C
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType core_getCoreId(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE BitWidthType
+core_getCoreId( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->coreId);
+    return ( core->cfg->coreId );
 }
 
 /********************************************************************************
@@ -259,9 +269,10 @@ __STATIC_FORCEINLINE BitWidthType core_getCoreId(CosmOS_CoreVariableType * core)
   *
   * @return CosmOS_GenericVoidType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_GenericVoidType core_getKernelPanicHook(CosmOS_CoreVariableType * coreVar)
+__STATIC_FORCEINLINE CosmOS_GenericVoidType
+core_getKernelPanicHook( CosmOS_CoreVariableType * coreVar )
 {
-    return (CosmOS_GenericVoidType)(coreVar->cfg->kernelPanicHook);
+    return ( CosmOS_GenericVoidType )( coreVar->cfg->kernelPanicHook );
 }
 
 /********************************************************************************
@@ -275,9 +286,10 @@ __STATIC_FORCEINLINE CosmOS_GenericVoidType core_getKernelPanicHook(CosmOS_CoreV
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType core_getStackMemoryLowAddress(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE AddressType
+core_getStackMemoryLowAddress( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->stackMemoryLowAddress);
+    return ( core->cfg->stackMemoryLowAddress );
 }
 
 /********************************************************************************
@@ -291,9 +303,10 @@ __STATIC_FORCEINLINE AddressType core_getStackMemoryLowAddress(CosmOS_CoreVariab
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType core_getStackMemoryHighAddress(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE AddressType
+core_getStackMemoryHighAddress( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->stackMemoryHighAddress);
+    return ( core->cfg->stackMemoryHighAddress );
 }
 
 /********************************************************************************
@@ -307,9 +320,10 @@ __STATIC_FORCEINLINE AddressType core_getStackMemoryHighAddress(CosmOS_CoreVaria
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType core_getCodeMemoryLowAddress(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE AddressType
+core_getCodeMemoryLowAddress( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->codeMemoryLowAddress);
+    return ( core->cfg->codeMemoryLowAddress );
 }
 
 /********************************************************************************
@@ -323,9 +337,10 @@ __STATIC_FORCEINLINE AddressType core_getCodeMemoryLowAddress(CosmOS_CoreVariabl
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType core_getCodeMemoryHighAddress(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE AddressType
+core_getCodeMemoryHighAddress( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->codeMemoryHighAddress);
+    return ( core->cfg->codeMemoryHighAddress );
 }
 
 /********************************************************************************
@@ -339,9 +354,10 @@ __STATIC_FORCEINLINE AddressType core_getCodeMemoryHighAddress(CosmOS_CoreVariab
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType core_getUnprotectedMemoryLowAddress(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE AddressType
+core_getUnprotectedMemoryLowAddress( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->unprotectedMemoryLowAddress);
+    return ( core->cfg->unprotectedMemoryLowAddress );
 }
 
 /********************************************************************************
@@ -355,9 +371,10 @@ __STATIC_FORCEINLINE AddressType core_getUnprotectedMemoryLowAddress(CosmOS_Core
   *
   * @return AddressType
 ********************************************************************************/
-__STATIC_FORCEINLINE AddressType core_getUnprotectedMemoryHighAddress(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE AddressType
+core_getUnprotectedMemoryHighAddress( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->unprotectedMemoryHighAddress);
+    return ( core->cfg->unprotectedMemoryHighAddress );
 }
 
 /********************************************************************************
@@ -371,9 +388,10 @@ __STATIC_FORCEINLINE AddressType core_getUnprotectedMemoryHighAddress(CosmOS_Cor
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType core_getMsToTicks(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE BitWidthType
+core_getMsToTicks( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->msToTicks);
+    return ( core->cfg->msToTicks );
 }
 
 /********************************************************************************
@@ -387,9 +405,10 @@ __STATIC_FORCEINLINE BitWidthType core_getMsToTicks(CosmOS_CoreVariableType * co
   *
   * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType core_getCoreNumberOfAlarms(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE BitWidthType
+core_getCoreNumberOfAlarms( CosmOS_CoreVariableType * core )
 {
-    return (core->cfg->numberOfAlarms);
+    return ( core->cfg->numberOfAlarms );
 }
 
 /********************************************************************************
@@ -403,9 +422,10 @@ __STATIC_FORCEINLINE BitWidthType core_getCoreNumberOfAlarms(CosmOS_CoreVariable
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType * core_getCoreSchedulableInExecution(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+core_getCoreSchedulableInExecution( CosmOS_CoreVariableType * core )
 {
-    return (core->schedulableInExecution);
+    return ( core->schedulableInExecution );
 }
 
 /********************************************************************************
@@ -419,9 +439,10 @@ __STATIC_FORCEINLINE CosmOS_SchedulableVariableType * core_getCoreSchedulableInE
   *
   * @return CosmOS_ProgramVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramInExecution(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_ProgramVariableType *
+core_getCoreProgramInExecution( CosmOS_CoreVariableType * core )
 {
-    return (core->programInExecution);
+    return ( core->programInExecution );
 }
 
 /********************************************************************************
@@ -435,15 +456,17 @@ __STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramInExecution
   *
   * @return CosmOS_ProgramVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramVars(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_ProgramVariableType *
+core_getCoreProgramVars( CosmOS_CoreVariableType * core )
 {
-    return (core->programVars);
+    return ( core->programVars );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_getCoreProgramVar(CosmOS_CoreVariableType * core, BitWidthType programIterator)
+  * @fn core_getCoreProgramVar(CosmOS_CoreVariableType * core,
+  * BitWidthType programIterator)
   *
   * @brief Get core programVar element pointer.
   *
@@ -452,9 +475,12 @@ __STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramVars(CosmOS
   *
   * @return CosmOS_ProgramVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramVar(CosmOS_CoreVariableType * core, BitWidthType programIterator)
+__STATIC_FORCEINLINE CosmOS_ProgramVariableType *
+core_getCoreProgramVar(
+    CosmOS_CoreVariableType * core,
+    BitWidthType programIterator )
 {
-    return (&(core->programVars[programIterator]));
+    return ( &( core->programVars[programIterator] ) );
 }
 
 /********************************************************************************
@@ -468,9 +494,10 @@ __STATIC_FORCEINLINE CosmOS_ProgramVariableType * core_getCoreProgramVar(CosmOS_
   *
   * @return CosmOS_SchedulerVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulerVariableType * core_getCoreSchedulerVar(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_SchedulerVariableType *
+core_getCoreSchedulerVar( CosmOS_CoreVariableType * core )
 {
-    return (core->schedulerVar);
+    return ( core->schedulerVar );
 }
 
 /********************************************************************************
@@ -484,15 +511,17 @@ __STATIC_FORCEINLINE CosmOS_SchedulerVariableType * core_getCoreSchedulerVar(Cos
   *
   * @return CosmOS_BarrierVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BarrierVariableType * core_getCoreBarrierVars(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_BarrierVariableType *
+core_getCoreBarrierVars( CosmOS_CoreVariableType * core )
 {
-    return (core->barrierVars);
+    return ( core->barrierVars );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_getBarrierVar(CosmOS_CoreVariableType * core, BitWidthType * barrierId)
+  * @fn core_getBarrierVar(CosmOS_CoreVariableType * core,
+  * BitWidthType * barrierId)
   *
   * @brief Get barrierVars element pointer.
   *
@@ -501,9 +530,10 @@ __STATIC_FORCEINLINE CosmOS_BarrierVariableType * core_getCoreBarrierVars(CosmOS
   *
   * @return CosmOS_BarrierVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BarrierVariableType * core_getBarrierVar(CosmOS_CoreVariableType * core, BitWidthType barrierId)
+__STATIC_FORCEINLINE CosmOS_BarrierVariableType *
+core_getBarrierVar( CosmOS_CoreVariableType * core, BitWidthType barrierId )
 {
-    return (&(core->barrierVars[barrierId]));
+    return ( &( core->barrierVars[barrierId] ) );
 }
 
 /********************************************************************************
@@ -517,9 +547,10 @@ __STATIC_FORCEINLINE CosmOS_BarrierVariableType * core_getBarrierVar(CosmOS_Core
   *
   * @return CosmOS_OsStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_OsStateType core_getCoreOsState(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_OsStateType
+core_getCoreOsState( CosmOS_CoreVariableType * core )
 {
-    return (core->osState);
+    return ( core->osState );
 }
 
 /********************************************************************************
@@ -533,9 +564,10 @@ __STATIC_FORCEINLINE CosmOS_OsStateType core_getCoreOsState(CosmOS_CoreVariableT
   *
   * @return CosmOS_SysJobsVariableType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SysJobsVariableType * core_getCoreSysJobs(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_SysJobsVariableType *
+core_getCoreSysJobs( CosmOS_CoreVariableType * core )
 {
-    return (core->sysJobs);
+    return ( core->sysJobs );
 }
 
 /********************************************************************************
@@ -549,15 +581,17 @@ __STATIC_FORCEINLINE CosmOS_SysJobsVariableType * core_getCoreSysJobs(CosmOS_Cor
   *
   * @return CosmOS_AlarmVariableType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_AlarmVariableType * core_getCoreAlarmVars(CosmOS_CoreVariableType * core)
+__STATIC_FORCEINLINE CosmOS_AlarmVariableType *
+core_getCoreAlarmVars( CosmOS_CoreVariableType * core )
 {
-    return (core->alarmVars);
+    return ( core->alarmVars );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_getAlarmVar(CosmOS_CoreVariableType * core, BitWidthType * barrierId)
+  * @fn core_getAlarmVar(CosmOS_CoreVariableType * core,
+  * BitWidthType * barrierId)
   *
   * @brief Get alarmVars element pointer.
   *
@@ -566,9 +600,10 @@ __STATIC_FORCEINLINE CosmOS_AlarmVariableType * core_getCoreAlarmVars(CosmOS_Cor
   *
   * @return CosmOS_AlarmVariableType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_AlarmVariableType * core_getAlarmVar(CosmOS_CoreVariableType * core, BitWidthType alarmId)
+__STATIC_FORCEINLINE CosmOS_AlarmVariableType *
+core_getAlarmVar( CosmOS_CoreVariableType * core, BitWidthType alarmId )
 {
-    return (&(core->alarmVars[alarmId]));
+    return ( &( core->alarmVars[alarmId] ) );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -586,7 +621,8 @@ __STATIC_FORCEINLINE CosmOS_AlarmVariableType * core_getAlarmVar(CosmOS_CoreVari
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_setCoreProgramInExecution(CosmOS_CoreVariableType * core, CosmOS_ProgramVariableType * programInExecutionParam)
+  * @fn core_setCoreProgramInExecution(CosmOS_CoreVariableType * core,
+  * CosmOS_ProgramVariableType * programInExecutionParam)
   *
   * @brief Set core programInExecution pointer.
   *
@@ -595,7 +631,10 @@ __STATIC_FORCEINLINE CosmOS_AlarmVariableType * core_getAlarmVar(CosmOS_CoreVari
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void core_setCoreProgramInExecution(CosmOS_CoreVariableType * core, CosmOS_ProgramVariableType * programInExecutionParam)
+__STATIC_FORCEINLINE void
+core_setCoreProgramInExecution(
+    CosmOS_CoreVariableType * core,
+    CosmOS_ProgramVariableType * programInExecutionParam )
 {
     core->programInExecution = programInExecutionParam;
 }
@@ -603,7 +642,8 @@ __STATIC_FORCEINLINE void core_setCoreProgramInExecution(CosmOS_CoreVariableType
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn core_setCoreSchedulableInExecution(CosmOS_CoreVariableType * core, CosmOS_SchedulableVariableType * schedulableInExecutionParam)
+  * @fn core_setCoreSchedulableInExecution(CosmOS_CoreVariableType * core,
+  * CosmOS_SchedulableVariableType * schedulableInExecutionParam)
   *
   * @brief Set core schedulableInExecution pointer.
   *
@@ -612,7 +652,10 @@ __STATIC_FORCEINLINE void core_setCoreProgramInExecution(CosmOS_CoreVariableType
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void core_setCoreSchedulableInExecution(CosmOS_CoreVariableType * core, CosmOS_SchedulableVariableType * schedulableInExecutionParam)
+__STATIC_FORCEINLINE void
+core_setCoreSchedulableInExecution(
+    CosmOS_CoreVariableType * core,
+    CosmOS_SchedulableVariableType * schedulableInExecutionParam )
 {
     core->schedulableInExecution = schedulableInExecutionParam;
 }
@@ -629,7 +672,10 @@ __STATIC_FORCEINLINE void core_setCoreSchedulableInExecution(CosmOS_CoreVariable
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void core_setCoreOsState(CosmOS_CoreVariableType * core, CosmOS_OsStateType osStateParam)
+__STATIC_FORCEINLINE void
+core_setCoreOsState(
+    CosmOS_CoreVariableType * core,
+    CosmOS_OsStateType osStateParam )
 {
     core->osState = osStateParam;
 }

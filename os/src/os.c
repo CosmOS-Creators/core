@@ -21,10 +21,11 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "scheduler.h"
+#include "os.h"
 #include "core.h"
 #include "osCfg.h"
-#include "os.h"
+#include "scheduler.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -132,16 +133,17 @@
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void os_start(BitWidthType entityId)
+__OS_FUNC_SECTION void
+os_start( BitWidthType entityId )
 {
     scheduler_start();
 
-	__SUPRESS_UNUSED_VAR(entityId);
+    __SUPRESS_UNUSED_VAR( entityId );
 };
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -156,14 +158,15 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return CosmOS_OsVariableType *
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_OsVariableType * os_getOsVar(void)
+__OS_FUNC_SECTION CosmOS_OsVariableType *
+os_getOsVar( void )
 {
     return &OsVar;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -178,20 +181,21 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void os_kernelPanic(void)
+__OS_FUNC_SECTION void
+os_kernelPanic( void )
 {
-	CosmOS_CoreVariableType * coreVar;
+    CosmOS_CoreVariableType * coreVar;
 
-
-	coreVar = core_getCoreVar();
+    coreVar = core_getCoreVar();
     coreVar->cfg->kernelPanicHook();
 
-	for(;;);
+    for ( ;; )
+        ;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -208,16 +212,17 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void os_write8(BitWidthType entityId,uint8_t *address,uint8_t value)
+__OS_FUNC_SECTION void
+os_write8( BitWidthType entityId, uint8_t * address, uint8_t value )
 {
-	//TODO: memoryProtection_isMemoryRegionProtected check
-	*address = value;
-	__SUPRESS_UNUSED_VAR(entityId);
+    //TODO: memoryProtection_isMemoryRegionProtected check
+    *address = value;
+    __SUPRESS_UNUSED_VAR( entityId );
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -234,16 +239,17 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void os_write16(BitWidthType entityId,uint16_t *address,uint16_t value)
+__OS_FUNC_SECTION void
+os_write16( BitWidthType entityId, uint16_t * address, uint16_t value )
 {
-	//TODO: memoryProtection_isMemoryRegionProtected check
-	*address = value;
-	__SUPRESS_UNUSED_VAR(entityId);
+    //TODO: memoryProtection_isMemoryRegionProtected check
+    *address = value;
+    __SUPRESS_UNUSED_VAR( entityId );
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -260,16 +266,17 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void os_write32(BitWidthType entityId,uint32_t *address,uint32_t value)
+__OS_FUNC_SECTION void
+os_write32( BitWidthType entityId, uint32_t * address, uint32_t value )
 {
-	//TODO: memoryProtection_isMemoryRegionProtected check
-	*address = value;
-	__SUPRESS_UNUSED_VAR(entityId);
+    //TODO: memoryProtection_isMemoryRegionProtected check
+    *address = value;
+    __SUPRESS_UNUSED_VAR( entityId );
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

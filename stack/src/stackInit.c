@@ -22,8 +22,8 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "stackInit.h"
-#include "stack.h"
 #include "schedulable.h"
+#include "stack.h"
 
 /* CIL interfaces */
 #include "CILstack.h"
@@ -125,7 +125,8 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn stackInit_schedulableStackInit(CosmOS_SchedulableVariableType  * schedulable)
+  * @fn stackInit_schedulableStackInit(
+  * CosmOS_SchedulableVariableType  * schedulable)
   *
   * @brief Schedulable stack initialization.
   *
@@ -134,18 +135,17 @@
   * @return StackPointerType
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_SchedulableVariableType  * schedulable)
+__OS_FUNC_SECTION StackPointerType
+stackInit_schedulableStackInit( CosmOS_SchedulableVariableType * schedulable )
 {
-    AddressType stackLowAddress,
-                stackHighAddress;
+    AddressType stackLowAddress, stackHighAddress;
 
     CosmOS_GenericVoidType handler;
     StackPointerType stackPointer;
 
     CosmOS_StackConfigurationType * stack;
-
 
     stack = schedulable_getStack( schedulable );
     handler = schedulable_getHandler( schedulable );
@@ -153,12 +153,13 @@ __OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_Schedul
     stackLowAddress = stack_getStackLowAddress( stack );
     stackHighAddress = stack_getStackHighAddress( stack );
 
-    stackPointer = CILstack_stackInit( stackLowAddress, stackHighAddress, (BitWidthType)handler );
+    stackPointer = CILstack_stackInit(
+        stackLowAddress, stackHighAddress, (BitWidthType)handler );
 
     return stackPointer;
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

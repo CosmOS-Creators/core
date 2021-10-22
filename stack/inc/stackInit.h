@@ -41,15 +41,16 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -137,7 +138,8 @@
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn stackInit_schedulableStackInit(CosmOS_SchedulableConfigurationType  * schedulable)
+  * @fn stackInit_schedulableStackInit(
+  * CosmOS_SchedulableConfigurationType  * schedulable)
   *
   * @brief Schedulable stack initialization.
   *
@@ -145,7 +147,8 @@
   *
   * @return StackPointerType
 ********************************************************************************/
-__OS_FUNC_SECTION StackPointerType stackInit_schedulableStackInit(CosmOS_SchedulableVariableType  * schedulable);
+__OS_FUNC_SECTION StackPointerType
+stackInit_schedulableStackInit( CosmOS_SchedulableVariableType * schedulable );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

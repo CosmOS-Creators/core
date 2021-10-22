@@ -22,11 +22,12 @@
 ********************************************************************************/
 /* CORE interfaces */
 #include "memoryManager.h"
-#include "program.h"
 #include "core.h"
-#include "thread.h"
+#include "program.h"
 #include "schedulable.h"
 #include "stackInit.h"
+#include "thread.h"
+
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -134,39 +135,40 @@
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void memoryManager_stackInit(CosmOS_CoreVariableType * coreVar)
+__OS_FUNC_SECTION void
+memoryManager_stackInit( CosmOS_CoreVariableType * coreVar )
 {
-    BitWidthType  numberOfThreads,
-                  numberOfPrograms,
-                  stackPointerRetVal;
+    BitWidthType numberOfThreads, numberOfPrograms, stackPointerRetVal;
 
     CosmOS_ThreadVariableType * threadVar;
     CosmOS_ProgramVariableType * programVar;
 
     numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
 
-    for ( BitWidthType programIterator = 0; programIterator < numberOfPrograms; programIterator++ )
+    for ( BitWidthType programIterator = 0; programIterator < numberOfPrograms;
+          programIterator++ )
     {
         programVar = core_getCoreProgramVar( coreVar, programIterator );
         numberOfThreads = program_getProgramNumberOfThreads( programVar );
 
-        for( BitWidthType threadIterator = 0; threadIterator < numberOfThreads; threadIterator++ )
+        for ( BitWidthType threadIterator = 0; threadIterator < numberOfThreads;
+              threadIterator++ )
         {
             CosmOS_SchedulableVariableType * schedulableVar;
-
 
             threadVar = program_getProgramThread( programVar, threadIterator );
             schedulableVar = thread_getThreadSchedulable( threadVar );
 
-            stackPointerRetVal = stackInit_schedulableStackInit( schedulableVar );
+            stackPointerRetVal =
+                stackInit_schedulableStackInit( schedulableVar );
             schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
         }
     }
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 
 /********************************************************************************
@@ -181,33 +183,35 @@ __SEC_STOP(__OS_FUNC_SECTION_STOP)
   * @return none
 ********************************************************************************/
 /* @cond S */
-__SEC_START(__OS_FUNC_SECTION_START)
+__SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void memoryManager_heapInit( CosmOS_CoreVariableType * coreVar )
+__OS_FUNC_SECTION void
+memoryManager_heapInit( CosmOS_CoreVariableType * coreVar )
 {
-	BitWidthType numberOfPrograms;
+    BitWidthType numberOfPrograms;
 
-	CosmOS_ProgramVariableType * programVars;
-	CosmOS_MallocVariableType * currentMallocVar;
+    CosmOS_ProgramVariableType * programVars;
+    CosmOS_MallocVariableType * currentMallocVar;
 
+    programVars = core_getCoreProgramVars( coreVar );
+    numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
 
-	programVars = core_getCoreProgramVars( coreVar );
-	numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
+    for ( BitWidthType i = 0; i < numberOfPrograms; i++ )
+    {
+        if ( programVars[i].cfg->heap->heapSize )
+        {
+            currentMallocVar = (CosmOS_MallocVariableType *)programVars[i]
+                                   .cfg->heap->heapLowAddress;
 
-	for (BitWidthType i = 0; i < numberOfPrograms; i++)
-	{
-		if (programVars[i].cfg->heap->heapSize)
-		{
-			currentMallocVar = (CosmOS_MallocVariableType *)programVars[i].cfg->heap->heapLowAddress;
-
-			currentMallocVar->prior = NULL;
-			currentMallocVar->next = NULL;
-			currentMallocVar->size = (BitWidthType)ALIGN(sizeof(CosmOS_MallocVariableType),sizeof(BitWidthType));
-		}
-	}
+            currentMallocVar->prior = NULL;
+            currentMallocVar->next = NULL;
+            currentMallocVar->size = (BitWidthType)ALIGN(
+                sizeof( CosmOS_MallocVariableType ), sizeof( BitWidthType ) );
+        }
+    }
 }
 /* @cond S */
-__SEC_STOP(__OS_FUNC_SECTION_STOP)
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
