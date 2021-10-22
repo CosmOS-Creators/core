@@ -24,7 +24,6 @@
 #include "core.h"
 #include "schedulable.h"
 
-
 /* CIL interfaces */
 #include "CILcore.h"
 /********************************************************************************
@@ -132,6 +131,9 @@
   * @param[in]  none
   *
   * @return CosmOS_CoreVariableType *
+  *
+  * @see TEST_CORE_GETCOREVAR_EXECUTIONFLOW
+  * @see TEST_CORE_GETCOREVAR_RETURNVALUE
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

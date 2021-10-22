@@ -137,6 +137,8 @@
   * @param[in]  BitWidthType entityId
   *
   * @return none
+  *
+  * @see TEST_OSINIT_INIT_EXECUTIONFLOW
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

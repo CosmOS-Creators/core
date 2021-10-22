@@ -1,97 +1,184 @@
+/********************************************************************************
+**                                                                             **
+**                         COSMOS FILE | CREATED BY HUMAN                      **
+**                                                                             **
+*********************************************************************************
+**                       DOXYGEN DOCUMENTATION INFORMATION                     **
+*****************************************************************************//**
+** @file utCfg.cpp
+********************************************************************************/
+/********************************************************************************
+**                           START OF THE SOURCE FILE                          **
+********************************************************************************/
+/********************************************************************************
+**                            Include Files | Start                            **
+********************************************************************************/
 #include "utCfg.h"
-
-const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM]
-IS_INITIALIZED_TO
-{
-	{
-		/* CoresCfgConst[CORE_0_ID]                         */
-		(CosmOS_ProgramConfigurationType *)NULL,	 /* const CosmOS_ProgramConfigurationType * programs    */
-		2,																				 /* const BitWidthType numberOfPrograms              */
-		(CosmOS_SchedulerConfigurationType *)NULL, /* CosmOS_SchedulerConfigurationType * scheduler       */
-		0,																				 /* const BitWidthType coreId       */
-		dummyKernelPanic_core0,							 /* const CosmOS_GenericVoidType kernelPanicHook   */
-		200,																			 /* const AddressType stackMemoryLowAddress   */
-		210,																			 /* const AddressType stackMemoryHighAddress   */
-		300,																			 /* const AddressType codeMemoryLowAddress   */
-		310,																			 /* const AddressType codeMemoryHighAddress   */
-		400,		/* const AddressType unprotectedMemoryLowAddress   */
-		500,		/* const AddressType unprotectedMemoryHighAddress   */
-		10,		/* const BitWidthType msToTicks   */
-		11,		/* const BitWidthType numberOfAlarms   */
-	},
-	{
-		/* CoresCfgConst[CORE_0_ID]                         */
-		(CosmOS_ProgramConfigurationType *)NULL,	 /* const CosmOS_ProgramConfigurationType * programs    */
-		2,																				 /* const BitWidthType numberOfPrograms              */
-		(CosmOS_SchedulerConfigurationType *)NULL, /* CosmOS_SchedulerConfigurationType * scheduler       */
-		1,
-		(CosmOS_GenericVoidType)NULL, /* const CosmOS_GenericVoidType kernelPanicHook   */
-		200,													/* const AddressType stackMemoryLowAddress   */
-		210,													/* const AddressType stackMemoryHighAddress   */
-		300,													/* const AddressType codeMemoryLowAddress   */
-		310,													/* const AddressType codeMemoryHighAddress   */
-		400,		/* const AddressType unprotectedMemoryLowAddress   */
-		500,		/* const AddressType unprotectedMemoryHighAddress   */
-		10,		/* const BitWidthType msToTicks   */
-		11,		/* const BitWidthType numberOfAlarms   */
-	},
-};
-
-CosmOS_CoreVariableType CoresVar[CORE_NUM]
-IS_INITIALIZED_TO
-{
-	{
-		/* CoresVar[CORE_0_ID]                                  */
-		&CoresCfgConst[CORE_0_ID],							/* const CosmOS_CoreConfigurationType *cfg                 */
-		(CosmOS_SchedulableVariableType *)NULL, /* CosmOS_SchedulableVariableType * schedulableInExecution    */
-		(CosmOS_ProgramVariableType *)NULL,			/* CosmOS_ProgramVariableType * programInCurrentContext       */
-		(CosmOS_ProgramVariableType *)NULL,			/* CosmOS_ProgramVariableType * programVars                */
-		(CosmOS_SchedulerVariableType *)NULL,		/* CosmOS_SchedulerVariableType * scheduler                */
-		(CosmOS_BarrierVariableType *)NULL,			/* CosmOS_BarrierVariableType * barrierVars                */
-		OS_STATE_ENUM__NOT_INITIALIZED,					/* CosmOS_OsStateType osState                                  */
-		(CosmOS_SysJobsVariableType *)NULL,			/* CosmOS_SysJobsVariableType * const sysJobs               */
-	},
-	{
-		/* CoresVar[CORE_1_ID]                                  */
-		&CoresCfgConst[CORE_1_ID],							/* const CosmOS_CoreConfigurationType *cfg                 */
-		(CosmOS_SchedulableVariableType *)NULL, /* CosmOS_SchedulableVariableType * schedulableInExecution    */
-		(CosmOS_ProgramVariableType *)NULL,			/* CosmOS_ProgramVariableType * programInCurrentContext       */
-		(CosmOS_ProgramVariableType *)NULL,			/* CosmOS_ProgramVariableType * programVars                */
-		(CosmOS_SchedulerVariableType *)NULL,		/* CosmOS_SchedulerVariableType * scheduler                */
-		(CosmOS_BarrierVariableType *)NULL,			/* CosmOS_BarrierVariableType * barrierVars                */
-		OS_STATE_ENUM__NOT_INITIALIZED,					/* CosmOS_OsStateType osState                                  */
-		(CosmOS_SysJobsVariableType *)NULL,			/* CosmOS_SysJobsVariableType * const sysJobs               */
-	},
-};
-
-const CosmOS_OsConfigurationType OsCfg
-IS_INITIALIZED_TO
-{                       /* osCfg                                        */
-  (CosmOS_CoreConfigurationType*)NULL,      /* const CosmOS_CoreConfigurationType * cores      */
-  2,           /* const BitWidthType numberOfCores             */
-  (CosmOS_BufferConfigurationType*)NULL,    /* const CosmOS_BufferConfigurationType * buffers  */
-  2,         /* const BitWidthType numberOfBuffers           */
-  (CosmOS_RoutesConfigurationType *)NULL,    /* const CosmOS_RoutesConfigurationType route     */
-	2,       /* const BitWidthType numberOfSpinlocks           */
-};
-
-CosmOS_OsVariableType OsVar
-IS_INITIALIZED_TO
-{                       /* osVar                                                      */
-  &OsCfg,             /* const CosmOS_OsConfigurationType * cfg                     */
-  (CosmOS_CoreVariableType*)NULL,           /* CosmOS_CoreVariableType * coreVars                         */
-  (CosmOS_BufferVariableType*)NULL,         /* CosmOS_BufferVariableType * bufferVars                     */
-  (CosmOS_BufferDoubleVariableType*)NULL,   /* CosmOS_BufferDoubleVariableType * const bufferDoubleVars   */
-	(CosmOS_SpinlockVariableType*)NULL,   		/* CosmOS_SpinlockVariableType * const spinlockVars       */
-};
-
-
-// instantiate mocked lib
+/********************************************************************************
+**                            Include Files | Stop                             **
+********************************************************************************/
+/********************************************************************************
+**                          Macro Definitions | Start                          **
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup Macros_os_ut_c Macros
+* @ingroup Test_os
+* @{
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Macros_os_ut_c
+********************************************************************************/
+/********************************************************************************
+**                          Macro Definitions | Stop                           **
+********************************************************************************/
+/********************************************************************************
+**                              Variables | Start                              **
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup Variables_os_ut_c Variables
+* @ingroup Test_os
+* @{
+********************************************************************************/
 std::unique_ptr<UtCfg_MOCK> UtCfg_TestFixture::_UtCfgMock;
 
-// fake lib functions
-void dummyKernelPanic_core0()
+const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
+    {
+        (CosmOS_ProgramConfigurationType *)
+            NULL,
+        2,
+        (CosmOS_SchedulerConfigurationType *)
+            NULL,
+        0,
+        dummyKernelPanic_core0,
+        200,
+        210,
+        300,
+        310,
+        400,
+        500,
+        10,
+        11,
+    },
+    {
+        (CosmOS_ProgramConfigurationType *)
+            NULL,
+        2,
+        (CosmOS_SchedulerConfigurationType *)
+            NULL,
+        1,
+        (CosmOS_GenericVoidType)
+            NULL,
+        200,
+        210,
+        300,
+        310,
+        400,
+        500,
+        10,
+        11,
+    },
+};
+
+CosmOS_CoreVariableType CoresVar[CORE_NUM] IS_INITIALIZED_TO{
+    {
+        &CoresCfgConst
+            [CORE_0_ID],
+        (CosmOS_SchedulableVariableType *)
+            NULL,
+        (CosmOS_ProgramVariableType *)
+            NULL,
+        (CosmOS_ProgramVariableType *)
+            NULL,
+        (CosmOS_SchedulerVariableType *)
+            NULL,
+        (CosmOS_BarrierVariableType *)
+            NULL,
+        OS_STATE_ENUM__NOT_INITIALIZED,
+        (CosmOS_SysJobsVariableType *)
+            NULL,
+    },
+    {
+        &CoresCfgConst
+            [CORE_1_ID],
+        (CosmOS_SchedulableVariableType *)
+            NULL,
+        (CosmOS_ProgramVariableType *)
+            NULL,
+        (CosmOS_ProgramVariableType *)
+            NULL,
+        (CosmOS_SchedulerVariableType *)
+            NULL,
+        (CosmOS_BarrierVariableType *)
+            NULL,
+        OS_STATE_ENUM__NOT_INITIALIZED,
+        (CosmOS_SysJobsVariableType *)
+            NULL,
+    },
+};
+
+const CosmOS_OsConfigurationType OsCfg IS_INITIALIZED_TO{
+    (CosmOS_CoreConfigurationType *)
+        NULL,
+    2,
+    (CosmOS_BufferConfigurationType *)
+        NULL,
+    2,
+    (CosmOS_RoutesConfigurationType *)
+        NULL,
+    2,
+};
+
+CosmOS_OsVariableType OsVar IS_INITIALIZED_TO{
+    &OsCfg,
+    (CosmOS_CoreVariableType *)
+        NULL,
+    (CosmOS_BufferVariableType *)
+        NULL,
+    (CosmOS_BufferDoubleVariableType *)
+        NULL,
+    (CosmOS_SpinlockVariableType *)
+        NULL,
+};
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Variables_os_ut_c
+********************************************************************************/
+/********************************************************************************
+**                              Variables | Stop                               **
+********************************************************************************/
+/********************************************************************************
+**                           Test Definitions | Start                          **
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup functions_os_ut_c Functions
+* @ingroup Test_os
+* @{
+********************************************************************************/
+void
+dummyKernelPanic_core0()
 {
     UtCfg_TestFixture::_UtCfgMock->dummyKernelPanic_core0();
-
 }
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* functions_os_ut_c
+********************************************************************************/
+/********************************************************************************
+**                           Test Definitions | Stop                           **
+********************************************************************************/
+/********************************************************************************
+**                           END OF THE SOURCE FILE                            **
+********************************************************************************/

@@ -1,65 +1,135 @@
+/********************************************************************************
+**                                                                             **
+**                         COSMOS FILE | CREATED BY HUMAN                      **
+**                                                                             **
+*********************************************************************************
+**                       DOXYGEN DOCUMENTATION INFORMATION                     **
+*****************************************************************************//**
+** @file utCfg.cpp
+********************************************************************************/
+/********************************************************************************
+**                           START OF THE SOURCE FILE                          **
+********************************************************************************/
+/********************************************************************************
+**                            Include Files | Start                            **
+********************************************************************************/
 #include "utCfg.h"
-
-const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM]
-IS_INITIALIZED_TO
-{
-	{
-		/* CoresCfgConst[CORE_0_ID]                         */
-		(CosmOS_ProgramConfigurationType *)NULL,	 /* const CosmOS_ProgramConfigurationType * programs    */
-		2,																				 /* const BitWidthType numberOfPrograms              */
-		(CosmOS_SchedulerConfigurationType *)NULL, /* CosmOS_SchedulerConfigurationType * scheduler       */
-		0,																				 /* const BitWidthType coreId       */
-		(CosmOS_GenericVoidType)NULL,							 /* const CosmOS_GenericVoidType kernelPanicHook   */
-		200,																			 /* const AddressType stackMemoryLowAddress   */
-		210,																			 /* const AddressType stackMemoryHighAddress   */
-		300,																			 /* const AddressType codeMemoryLowAddress   */
-		310,																			 /* const AddressType codeMemoryHighAddress   */
-		400,		/* const AddressType unprotectedMemoryLowAddress   */
-		500,		/* const AddressType unprotectedMemoryHighAddress   */
-		10,		/* const BitWidthType msToTicks   */
-		11,		/* const BitWidthType numberOfAlarms   */
-	},
-	{
-		/* CoresCfgConst[CORE_0_ID]                         */
-		(CosmOS_ProgramConfigurationType *)NULL,	 /* const CosmOS_ProgramConfigurationType * programs    */
-		2,																				 /* const BitWidthType numberOfPrograms              */
-		(CosmOS_SchedulerConfigurationType *)NULL, /* CosmOS_SchedulerConfigurationType * scheduler       */
-		1,
-		(CosmOS_GenericVoidType)NULL, /* const CosmOS_GenericVoidType kernelPanicHook   */
-		200,													/* const AddressType stackMemoryLowAddress   */
-		210,													/* const AddressType stackMemoryHighAddress   */
-		300,													/* const AddressType codeMemoryLowAddress   */
-		310,													/* const AddressType codeMemoryHighAddress   */
-		400,		/* const AddressType unprotectedMemoryLowAddress   */
-		500,		/* const AddressType unprotectedMemoryHighAddress   */
-		10,		/* const BitWidthType msToTicks   */
-		11,		/* const BitWidthType numberOfAlarms   */
-	},
+/********************************************************************************
+**                            Include Files | Stop                             **
+********************************************************************************/
+/********************************************************************************
+**                          Macro Definitions | Start                          **
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup Macros_osInit_ut_c Macros
+* @ingroup Test_osInit
+* @{
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Macros_osInit_ut_c
+********************************************************************************/
+/********************************************************************************
+**                          Macro Definitions | Stop                           **
+********************************************************************************/
+/********************************************************************************
+**                              Variables | Start                              **
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup Variables_osInit_ut_c Variables
+* @ingroup Test_osInit
+* @{
+********************************************************************************/
+const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
+    {
+        (CosmOS_ProgramConfigurationType *)NULL,
+        2,
+        (CosmOS_SchedulerConfigurationType *)NULL,
+        0,
+        (CosmOS_GenericVoidType)NULL,
+        200,
+        210,
+        300,
+        310,
+        400,
+        500,
+        10,
+        11,
+    },
+    {
+        (CosmOS_ProgramConfigurationType *)NULL,
+        2,
+        (CosmOS_SchedulerConfigurationType *)NULL,
+        1,
+        (CosmOS_GenericVoidType)NULL,
+        200,
+        210,
+        300,
+        310,
+        400,
+        500,
+        10,
+        11,
+    },
 };
 
-CosmOS_CoreVariableType CoresVar[CORE_NUM]
-IS_INITIALIZED_TO
-{
-	{
-		/* CoresVar[CORE_0_ID]                                  */
-		&CoresCfgConst[CORE_0_ID],							/* const CosmOS_CoreConfigurationType *cfg                 */
-		(CosmOS_SchedulableVariableType *)NULL, /* CosmOS_SchedulableVariableType * schedulableInExecution    */
-		(CosmOS_ProgramVariableType *)NULL,			/* CosmOS_ProgramVariableType * programInCurrentContext       */
-		(CosmOS_ProgramVariableType *)NULL,			/* CosmOS_ProgramVariableType * programVars                */
-		(CosmOS_SchedulerVariableType *)NULL,		/* CosmOS_SchedulerVariableType * scheduler                */
-		(CosmOS_BarrierVariableType *)NULL,			/* CosmOS_BarrierVariableType * barrierVars                */
-		OS_STATE_ENUM__NOT_INITIALIZED,					/* CosmOS_OsStateType osState                                  */
-		(CosmOS_SysJobsVariableType *)NULL,			/* CosmOS_SysJobsVariableType * const sysJobs               */
-	},
-	{
-		/* CoresVar[CORE_1_ID]                                  */
-		&CoresCfgConst[CORE_1_ID],							/* const CosmOS_CoreConfigurationType *cfg                 */
-		(CosmOS_SchedulableVariableType *)NULL, /* CosmOS_SchedulableVariableType * schedulableInExecution    */
-		(CosmOS_ProgramVariableType *)NULL,			/* CosmOS_ProgramVariableType * programInCurrentContext       */
-		(CosmOS_ProgramVariableType *)NULL,			/* CosmOS_ProgramVariableType * programVars                */
-		(CosmOS_SchedulerVariableType *)NULL,		/* CosmOS_SchedulerVariableType * scheduler                */
-		(CosmOS_BarrierVariableType *)NULL,			/* CosmOS_BarrierVariableType * barrierVars                */
-		OS_STATE_ENUM__NOT_INITIALIZED,					/* CosmOS_OsStateType osState                                  */
-		(CosmOS_SysJobsVariableType *)NULL,			/* CosmOS_SysJobsVariableType * const sysJobs               */
-	},
+CosmOS_CoreVariableType CoresVar[CORE_NUM] IS_INITIALIZED_TO{
+    {
+        &CoresCfgConst[CORE_0_ID],
+        (CosmOS_SchedulableVariableType *)NULL,
+        (CosmOS_ProgramVariableType *)NULL,
+        (CosmOS_ProgramVariableType *)NULL,
+        (CosmOS_SchedulerVariableType *)NULL,
+        (CosmOS_BarrierVariableType *)NULL,
+        OS_STATE_ENUM__NOT_INITIALIZED,
+        (CosmOS_SysJobsVariableType *)NULL,
+    },
+    {
+        &CoresCfgConst[CORE_1_ID],
+        (CosmOS_SchedulableVariableType *)NULL,
+        (CosmOS_ProgramVariableType *)NULL,
+        (CosmOS_ProgramVariableType *)NULL,
+        (CosmOS_SchedulerVariableType *)NULL,
+        (CosmOS_BarrierVariableType *)NULL,
+        OS_STATE_ENUM__NOT_INITIALIZED,
+        (CosmOS_SysJobsVariableType *)NULL,
+    },
 };
+
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* Variables_osInit_ut_c
+********************************************************************************/
+/********************************************************************************
+**                              Variables | Stop                               **
+********************************************************************************/
+/********************************************************************************
+**                           Test Definitions | Start                          **
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN START GROUP                                                          **
+* ***************************************************************************//**
+* @defgroup functions_osInit_ut_c Functions
+* @ingroup Test_osInit
+* @{
+********************************************************************************/
+/********************************************************************************
+* DOXYGEN STOP GROUP                                                           **
+* ***************************************************************************//**
+* @}
+* functions_osInit_ut_c
+********************************************************************************/
+/********************************************************************************
+**                           Test Definitions | Stop                           **
+********************************************************************************/
+/********************************************************************************
+**                           END OF THE SOURCE FILE                            **
+********************************************************************************/

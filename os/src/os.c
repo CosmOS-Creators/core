@@ -131,6 +131,8 @@
   * @param[in]  BitWidthType entityId
   *
   * @return none
+  *
+  * @see TEST_OS_START_EXECUTIONFLOW
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -156,6 +158,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @param[in]  none
   *
   * @return CosmOS_OsVariableType *
+  *
+  * @see TEST_OS_GETOSVAR_RETURNVALUE
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -179,6 +183,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @param[in]  none
   *
   * @return none
+  *
+  * @see TEST_OS_KERNELPANIC_EXECUTIONFLOW
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
