@@ -73,8 +73,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_core_h
+  * @} */
+/*  Macros_core_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +92,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_core_h
+  * @} */
+/*  Variables_core_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -117,8 +117,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_core_h
+  * @} */
+/*  Getters_core_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -129,10 +129,12 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn core_getCoreVar()
+  * ****************************************************************************/
+/**
+  * @fn core_getCoreVar( void )
   *
-  * @brief Get current core variable.
+  * @brief Get current core variable. This function can be called
+  * from the unprivileged context directly.
   *
   * @param[in]  none
   *
@@ -143,14 +145,16 @@ core_getCoreVar( void );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar,
   * CosmOS_TaskVariableType * taskVar)
   *
-  * @brief Set program and schedulable into the current context.
+  * @brief Set program and schedulable into the current context. This function
+  * cannot be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
+  * @param[out]  core variable pointerVar
+  * @param[in]  schedulableVar variable pointer
   *
   * @return none
 ********************************************************************************/
@@ -161,8 +165,8 @@ core_setSchedulableIntoCurrentContext(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_core_h
+  * @} */
+/*  Setters_core_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -174,8 +178,8 @@ core_setSchedulableIntoCurrentContext(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_core_h
+  * @} */
+/*  General_core_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -192,12 +196,13 @@ core_setSchedulableIntoCurrentContext(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCorePrograms(CosmOS_CoreVariableType * core)
   *
   * @brief Get core programs pointer.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_ProgramConfigurationType *
 ********************************************************************************/
@@ -209,12 +214,13 @@ core_getCorePrograms( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreNumberOfPrograms(CosmOS_CoreVariableType * core)
   *
   * @brief Get core numberOfPrograms.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -226,12 +232,13 @@ core_getCoreNumberOfPrograms( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreScheduler(CosmOS_CoreVariableType * core)
   *
   * @brief Get core scheduler pointer.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_SchedulerConfigurationType *
 ********************************************************************************/
@@ -243,12 +250,13 @@ core_getCoreScheduler( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreId(CosmOS_CoreVariableType * core)
   *
   * @brief Get coreId.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -260,12 +268,13 @@ core_getCoreId( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getKernelPanicHook(CosmOS_CoreVariableType * coreVar)
   *
   * @brief Get core kernelPanicHook.
   *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  core variable pointerVar
   *
   * @return CosmOS_GenericVoidType
 ********************************************************************************/
@@ -277,12 +286,13 @@ core_getKernelPanicHook( CosmOS_CoreVariableType * coreVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getStackMemoryLowAddress(CosmOS_CoreVariableType * core)
   *
   * @brief Get stackMemoryLowAddress.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return AddressType
 ********************************************************************************/
@@ -294,12 +304,13 @@ core_getStackMemoryLowAddress( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getStackMemoryHighAddress(CosmOS_CoreVariableType * core)
   *
   * @brief Get stackMemoryHighAddress.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return AddressType
 ********************************************************************************/
@@ -311,12 +322,13 @@ core_getStackMemoryHighAddress( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCodeMemoryLowAddress(CosmOS_CoreVariableType * core)
   *
   * @brief Get codeMemoryLowAddress.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return AddressType
 ********************************************************************************/
@@ -328,12 +340,13 @@ core_getCodeMemoryLowAddress( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCodeMemoryHighAddress(CosmOS_CoreVariableType * core)
   *
   * @brief Get codeMemoryHighAddress.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return AddressType
 ********************************************************************************/
@@ -345,12 +358,13 @@ core_getCodeMemoryHighAddress( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getUnprotectedMemoryLowAddress(CosmOS_CoreVariableType * core)
   *
   * @brief Get unprotectedMemoryLowAddress.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return AddressType
 ********************************************************************************/
@@ -362,12 +376,13 @@ core_getUnprotectedMemoryLowAddress( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getUnprotectedMemoryHighAddress(CosmOS_CoreVariableType * core)
   *
   * @brief Get unprotectedMemoryHighAddress.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return AddressType
 ********************************************************************************/
@@ -379,12 +394,13 @@ core_getUnprotectedMemoryHighAddress( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getMsToTicks(CosmOS_CoreVariableType * core)
   *
   * @brief Get msToTicks.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -396,12 +412,13 @@ core_getMsToTicks( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreNumberOfAlarms(CosmOS_CoreVariableType * core)
   *
   * @brief Get core numberOfAlarms.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -413,12 +430,13 @@ core_getCoreNumberOfAlarms( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreSchedulableInExecution(CosmOS_CoreVariableType * core)
   *
   * @brief Get core schedulableInExecution pointer.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
@@ -430,12 +448,13 @@ core_getCoreSchedulableInExecution( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreProgramInExecution(CosmOS_CoreVariableType * core)
   *
   * @brief Get core programInExecution pointer.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_ProgramVariableType *
 ********************************************************************************/
@@ -447,12 +466,13 @@ core_getCoreProgramInExecution( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreProgramVars(CosmOS_CoreVariableType * core)
   *
   * @brief Get core programVars.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_ProgramVariableType *
 ********************************************************************************/
@@ -464,14 +484,15 @@ core_getCoreProgramVars( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreProgramVar(CosmOS_CoreVariableType * core,
   * BitWidthType programIterator)
   *
   * @brief Get core programVar element pointer.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  BitWidthType programIterator
+  * @param[in]  core variable pointer
+  * @param[in]  programIterator required program id
   *
   * @return CosmOS_ProgramVariableType *
 ********************************************************************************/
@@ -485,12 +506,13 @@ core_getCoreProgramVar(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreSchedulerVar(CosmOS_CoreVariableType * core)
   *
   * @brief Get core scheduler pointer.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_SchedulerVariableType *
 ********************************************************************************/
@@ -502,12 +524,13 @@ core_getCoreSchedulerVar( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreBarrierVars(CosmOS_CoreVariableType * core)
   *
   * @brief Get core barrierVars pointer.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_BarrierVariableType *
 ********************************************************************************/
@@ -519,14 +542,15 @@ core_getCoreBarrierVars( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getBarrierVar(CosmOS_CoreVariableType * core,
   * BitWidthType * barrierId)
   *
   * @brief Get barrierVars element pointer.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  BitWidthType barrierId
+  * @param[in]  core variable pointer
+  * @param[in]  barrierId required barrier id
   *
   * @return CosmOS_BarrierVariableType *
 ********************************************************************************/
@@ -538,12 +562,13 @@ core_getBarrierVar( CosmOS_CoreVariableType * core, BitWidthType barrierId )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreOsState(CosmOS_CoreVariableType * core)
   *
   * @brief Get core osState.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_OsStateType
 ********************************************************************************/
@@ -555,12 +580,13 @@ core_getCoreOsState( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreSysJobs(CosmOS_CoreVariableType * core)
   *
   * @brief Get core sysJobs.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_SysJobsVariableType
 ********************************************************************************/
@@ -572,12 +598,13 @@ core_getCoreSysJobs( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getCoreAlarmVars(CosmOS_CoreVariableType * core)
   *
   * @brief Get core alarmVars.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
+  * @param[in]  core variable pointer
   *
   * @return CosmOS_AlarmVariableType
 ********************************************************************************/
@@ -589,14 +616,15 @@ core_getCoreAlarmVars( CosmOS_CoreVariableType * core )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_getAlarmVar(CosmOS_CoreVariableType * core,
   * BitWidthType * barrierId)
   *
   * @brief Get alarmVars element pointer.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  BitWidthType alarmId
+  * @param[in]  core variable pointer
+  * @param[in]  alarmId required alarm id
   *
   * @return CosmOS_AlarmVariableType *
 ********************************************************************************/
@@ -608,8 +636,8 @@ core_getAlarmVar( CosmOS_CoreVariableType * core, BitWidthType alarmId )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_core_h
+  * @} */
+/*  Getters_core_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -620,14 +648,16 @@ core_getAlarmVar( CosmOS_CoreVariableType * core, BitWidthType alarmId )
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_setCoreProgramInExecution(CosmOS_CoreVariableType * core,
   * CosmOS_ProgramVariableType * programInExecutionParam)
   *
-  * @brief Set core programInExecution pointer.
+  * @brief Set core programInExecution pointer. This function cannot be called
+  * from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_ProgramVariableType * programInExecutionParam
+  * @param[out]  core variable pointer
+  * @param[in]  programInExecutionParam variable pointer
   *
   * @return none
 ********************************************************************************/
@@ -641,14 +671,16 @@ core_setCoreProgramInExecution(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_setCoreSchedulableInExecution(CosmOS_CoreVariableType * core,
   * CosmOS_SchedulableVariableType * schedulableInExecutionParam)
   *
-  * @brief Set core schedulableInExecution pointer.
+  * @brief Set core schedulableInExecution pointer. This function cannot be
+  * called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableInExecutionParam
+  * @param[out]  core variable pointer
+  * @param[in]  schedulableInExecutionParam variable pointer
   *
   * @return none
 ********************************************************************************/
@@ -662,13 +694,15 @@ core_setCoreSchedulableInExecution(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_setCoreOsState(CosmOS_CoreVariableType * core)
   *
-  * @brief Set core osState.
+  * @brief Set core osState. This function cannot be called
+  * from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_OsStateType osStateParam
+  * @param[out]  core variable pointer
+  * @param[in]  osStateParam state of the operating system
   *
   * @return none
 ********************************************************************************/
@@ -682,8 +716,8 @@ core_setCoreOsState(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_core_h
+  * @} */
+/*  Setters_core_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -695,8 +729,8 @@ core_setCoreOsState(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_core_h
+  * @} */
+/*  General_core_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

@@ -7,13 +7,13 @@
 *****************************************************************************//**
 ** @file route.h
 *********************************************************************************
-<!--                      route Module Group Definition                      -->
+<!--                       route Module Group Definition                      -->
 *********************************************************************************
 ** @defgroup route_module route
 ** @brief route Module
 ** @details lorem
 *********************************************************************************
-<!--                       route Unit Group Definition                       -->
+<!--                        route Unit Group Definition                       -->
 *********************************************************************************
 ** @defgroup route_unit route Unit
 ** @ingroup route_module
@@ -31,7 +31,7 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                    route Unit Global Group Definition                   -->
+<!--                    route Unit Global Group Definition                    -->
 *********************************************************************************
 ** @defgroup Global_route Global
 ** @ingroup route_unit
@@ -73,8 +73,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_route_h
+  * @} */
+/*  Macros_route_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +92,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_route_h
+  * @} */
+/*  Variables_route_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -117,8 +117,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_route_h
+  * @} */
+/*  Getters_route_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -130,8 +130,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_route_h
+  * @} */
+/*  Setters_route_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -143,8 +143,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_route_h
+  * @} */
+/*  General_route_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -161,13 +161,14 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn route_getRoutesFunc(CosmOS_RoutesConfigurationType * route,
   * BitWidthType callId)
   *
   * @brief Get route func pointer.
   *
-  * @param[in]  CosmOS_RoutesConfigurationType * route
+  * @param[in] route configuration pointer
   * @param[in]  BitWidthType callId
   *
   * @return CosmOS_GenericVoidType
@@ -183,12 +184,13 @@ route_getRoutesFunc(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn route_getRoutesIdToFunc(CosmOS_RoutesConfigurationType * route)
   *
   * @brief Get route routeIdToFunc pointer.
   *
-  * @param[in]  CosmOS_RoutesConfigurationType * route
+  * @param[in] route configuration pointer
   *
   * @return BitWidthType *
 ********************************************************************************/
@@ -200,13 +202,14 @@ route_getRoutesIdToFunc( CosmOS_RoutesConfigurationType * route )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn route_getRoutesFuncId(CosmOS_RoutesConfigurationType * route,
   * BitWidthType callId)
   *
   * @brief Get route function id.
   *
-  * @param[in]  CosmOS_RoutesConfigurationType * route
+  * @param[in] route configuration pointer
   * @param[in]  BitWidthType callId
   *
   * @return BitWidthType
@@ -221,12 +224,13 @@ route_getRoutesFuncId(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn route_getRoutesIdToEntity(CosmOS_RoutesConfigurationType * route)
   *
   * @brief Get route routeIdToEntity pointer.
   *
-  * @param[in]  CosmOS_RoutesConfigurationType * route
+  * @param[in] route configuration pointer
   *
   * @return BitWidthType *
 ********************************************************************************/
@@ -238,13 +242,14 @@ route_getRoutesIdToEntity( CosmOS_RoutesConfigurationType * route )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn route_getRoutesEntityId(CosmOS_RoutesConfigurationType * route,
   * BitWidthType callId)
   *
   * @brief Get route entity id.
   *
-  * @param[in]  CosmOS_RoutesConfigurationType * route
+  * @param[in] route configuration pointer
   * @param[in]  BitWidthType callId
   *
   * @return BitWidthType
@@ -259,8 +264,8 @@ route_getRoutesEntityId(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_route_h
+  * @} */
+/*  Getters_route_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -272,8 +277,8 @@ route_getRoutesEntityId(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_route_h
+  * @} */
+/*  Setters_route_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -285,8 +290,8 @@ route_getRoutesEntityId(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_route_h
+  * @} */
+/*  General_route_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

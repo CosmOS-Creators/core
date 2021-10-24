@@ -42,8 +42,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_os
+  * @} */
+/*  Macros_os
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -61,8 +61,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_os
+  * @} */
+/*  Variables_os
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -86,8 +86,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_os_c
+  * @} */
+/*  Getters_os_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -99,8 +99,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_os_c
+  * @} */
+/*  Setters_os_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -112,8 +112,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_os_c
+  * @} */
+/*  General_os_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -123,14 +123,12 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_start(BitWidthType entityId)
   *
-  * @brief Start operating system. DEMO / NO RETURN FUNC
-  *
-  * @param[in]  BitWidthType entityId
-  *
-  * @return none
+  * @details The implementation contains scheduler_start function call that does
+  * not return.
   *
   * @see TEST_OS_START_EXECUTIONFLOW
 ********************************************************************************/
@@ -150,14 +148,12 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsVar(void)
   *
-  * @brief Get osVar.
-  *
-  * @param[in]  none
-  *
-  * @return CosmOS_OsVariableType *
+  * @details The implementation contains return of the generated operating
+  * system variable address.
   *
   * @see TEST_OS_GETOSVAR_RETURNVALUE
 ********************************************************************************/
@@ -175,14 +171,12 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_kernelPanic(void)
   *
-  * @brief OS kernel panic function DEMO.
-  *
-  * @param[in]  none
-  *
-  * @return none
+  * @details The implementation contains call to the kernel panic hook
+  * configured by the user.
   *
   * @see TEST_OS_KERNELPANIC_EXECUTIONFLOW
 ********************************************************************************/
@@ -206,16 +200,12 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn os_write8(void)
+  * ****************************************************************************/
+/**
+  * @fn os_write8( BitWidthType entityId, uint8_t * address, uint8_t value )
   *
-  * @brief OS write to protected memory 8bit variable DEMO.
-  *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  uint8_t *address
-  * @param[in]  uint8_t value
-  *
-  * @return none
+  * @details The implementation contains write operation of the value to the
+  * specific address.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -223,7 +213,8 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 os_write8( BitWidthType entityId, uint8_t * address, uint8_t value )
 {
-    //TODO: memoryProtection_isMemoryRegionProtected check
+    /* TODO: some mechanism to check if the user has permission to write to
+    this specific memory, alignment check */
     *address = value;
     __SUPRESS_UNUSED_VAR( entityId );
 }
@@ -233,16 +224,12 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn os_write16(void)
+  * ****************************************************************************/
+/**
+  * @fn os_write16( BitWidthType entityId, uint16_t * address, uint16_t value )
   *
-  * @brief OS write to protected memory 16bit variable DEMO.
-  *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  uint16_t *address
-  * @param[in]  uint16_t value
-  *
-  * @return none
+  * @details The implementation contains write operation of the value to the
+  * specific address.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -250,7 +237,8 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 os_write16( BitWidthType entityId, uint16_t * address, uint16_t value )
 {
-    //TODO: memoryProtection_isMemoryRegionProtected check
+    /* TODO: some mechanism to check if the user has permission to write to
+    this specific memory, alignment check */
     *address = value;
     __SUPRESS_UNUSED_VAR( entityId );
 }
@@ -260,16 +248,12 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn os_write32(void)
+  * ****************************************************************************/
+/**
+  * @fn os_write32( BitWidthType entityId, uint32_t * address, uint32_t value )
   *
-  * @brief OS write to protected memory 32bit variable DEMO.
-  *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  uint32_t *address
-  * @param[in]  uint32_t value
-  *
-  * @return none
+  * @details The implementation contains write operation of the value to the
+  * specific address.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -277,7 +261,8 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 os_write32( BitWidthType entityId, uint32_t * address, uint32_t value )
 {
-    //TODO: memoryProtection_isMemoryRegionProtected check
+    /* TODO: some mechanism to check if the user has permission to write to
+    this specific memory, alignment check */
     *address = value;
     __SUPRESS_UNUSED_VAR( entityId );
 }

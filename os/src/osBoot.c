@@ -43,8 +43,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_osBoot_c
+  * @} */
+/*  Macros_osBoot_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -62,8 +62,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_osBoot_c
+  * @} */
+/*  Variables_osBoot_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -87,8 +87,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_osBoot_c
+  * @} */
+/*  Getters_osBoot_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -100,8 +100,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_osBoot_c
+  * @} */
+/*  Setters_osBoot_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -111,10 +111,70 @@
   * @{
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osBoot_clearSection( unsigned char * sectionStart,
+  * unsigned char * sectionEnd )
+  *
+  * @brief Clear of the section.
+  *
+  * @param[out]  sectionStart
+  * @param[out]  sectionEnd
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+osBoot_clearSection( unsigned char * sectionStart, unsigned char * sectionEnd );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osBoot_bootSection( unsigned char * sectionStart,
+  * unsigned char * sectionEnd,
+  * unsigned char * sectionStartInFlash)
+  *
+  * @brief Boot of the section.
+  *
+  * @param[out]  sectionStart
+  * @param[out]  sectionEnd
+  * @param[in]  sectionStartInFlash
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+osBoot_bootSection(
+    unsigned char * sectionStart,
+    unsigned char * sectionEnd,
+    unsigned char * sectionStartInFlash );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osBoot_validateSection( unsigned char * sectionStart,
+  * unsigned char * sectionEnd,
+  * unsigned char * sectionStartInFlash)
+  *
+  * @brief Validation of the section.
+  *
+  * @param[out]  sectionStart
+  * @param[out]  sectionEnd
+  * @param[in]  sectionStartInFlash
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+osBoot_validateSection(
+    unsigned char * sectionStart,
+    unsigned char * sectionEnd,
+    unsigned char * sectionStartInFlash );
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_osBoot_c
+  * @} */
+/*  General_osBoot_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -124,16 +184,13 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn osBoot_bootSection( unsigned char * sectionStart,
-  * unsigned char * sectionEnd)
+  * ****************************************************************************/
+/**
+  * @fn osBoot_clearSection( unsigned char * sectionStart,
+  * unsigned char * sectionEnd )
   *
-  * @brief Boot of the section.
-  *
-  * @param[in]  unsigned char * sectionStart
-  * @param[in]  unsigned char * sectionEnd
-  *
-  * @return none
+  * @details The implementation contains clear for loop sequence where is the
+  * destination memory filled out with zeroes.
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 osBoot_clearSection( unsigned char * sectionStart, unsigned char * sectionEnd )
@@ -150,18 +207,14 @@ osBoot_clearSection( unsigned char * sectionStart, unsigned char * sectionEnd )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn osBoot_bootSection( unsigned char * sectionStart,
   * unsigned char * sectionEnd,
   * unsigned char * sectionStartInFlash)
   *
-  * @brief Boot of the section.
-  *
-  * @param[in]  unsigned char * sectionStart
-  * @param[in]  unsigned char * sectionEnd
-  * @param[in]  unsigned char * sectionStartInFlash
-  *
-  * @return none
+  * @details The implementation contains boot for loop sequence where are all
+  * data copied from the flash memory to the destination memory.
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 osBoot_bootSection(
@@ -182,14 +235,45 @@ osBoot_bootSection(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
+  * @fn osBoot_validateSection( unsigned char * sectionStart,
+  * unsigned char * sectionEnd,
+  * unsigned char * sectionStartInFlash)
+  *
+  * @details The implementation contains validate for loop sequence where are all
+  * data compared against flash memory and if there is mismatch operating system
+  * assertion is triggered.
+********************************************************************************/
+__STATIC_FORCEINLINE void
+osBoot_validateSection(
+    unsigned char * sectionStart,
+    unsigned char * sectionEnd,
+    unsigned char * sectionStartInFlash )
+{
+    BitWidthType size = ( BitWidthType )( sectionEnd - sectionStart );
+
+    unsigned char * pDst = sectionStart;
+    unsigned char * pSrc = sectionStartInFlash;
+
+    for ( BitWidthType i = 0; i < ( size * sizeof( unsigned char ) ); i++ )
+    {
+        cosmosAssert( (*pDst++)IS_EQUAL_TO( *pSrc++ ) );
+    }
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn osBoot_boot(void)
   *
-  * @brief Boot of operating system.
-  *
-  * @param[in]  none
-  *
-  * @return none
+  * @details The implementation contains call to get core id and then generated
+  * clear sections are used to get specific addresses which are passed to the
+  * osBoot_clearSection function to set program uninitialized data sections to
+  * zeroes and after this generated boot sections are used to get specific
+  * addresses which are passed to the osBoot_bootSection for booting initialized
+  * data sections.
 ********************************************************************************/
 void
 osBoot_boot( void )
@@ -229,46 +313,14 @@ osBoot_boot( void )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn osBoot_validateSection( unsigned char * sectionStart,
-  * unsigned char * sectionEnd,
-  * unsigned char * sectionStartInFlash)
-  *
-  * @brief Validation of the section.
-  *
-  * @param[in]  unsigned char * sectionStart
-  * @param[in]  unsigned char * sectionEnd
-  * @param[in]  unsigned char * sectionStartInFlash
-  *
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void
-osBoot_validateSection(
-    unsigned char * sectionStart,
-    unsigned char * sectionEnd,
-    unsigned char * sectionStartInFlash )
-{
-    BitWidthType size = ( BitWidthType )( sectionEnd - sectionStart );
-
-    unsigned char * pDst = sectionStart;
-    unsigned char * pSrc = sectionStartInFlash;
-
-    for ( BitWidthType i = 0; i < ( size * sizeof( unsigned char ) ); i++ )
-    {
-        cosmosAssert( (*pDst++)IS_EQUAL_TO( *pSrc++ ) );
-    }
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn osBoot_bootValidate(void)
   *
-  * @brief Validation of operating system boot.
-  *
-  * @param[in]  none
-  *
-  * @return none
+  * @details The implementation contains call to get core id and then generated
+  * boot sections are used to get specific addresses which are passed to the
+  * osBoot_validateSection to validate it against the flash memory after MPU
+  * activation.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

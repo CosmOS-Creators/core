@@ -36,7 +36,6 @@
 #include "task.h"
 #include "thread.h"
 
-
 /* CIL interfaces */
 #include "CILcore.h"
 #include "CILstack.h"
@@ -57,8 +56,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_scheduler
+  * @} */
+/*  Macros_scheduler
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -76,8 +75,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_scheduler
+  * @} */
+/*  Variables_scheduler
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -101,8 +100,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_scheduler_c
+  * @} */
+/*  Getters_scheduler_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -114,8 +113,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_scheduler_c
+  * @} */
+/*  Setters_scheduler_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -125,10 +124,40 @@
   * @{
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn  scheduler_classicSchedulingCore(
+  * CosmOS_SchedulerVariableType * schedulerVar,
+  * CosmOS_SchedulableVariableType ** schedulableVar,
+  * StackPointerType * stackPointerRetVal,
+  * BitWidthType * timerTicks,
+  * BitWidthType * scheduleTableIterator)
+  *
+  * @brief Classic scheduling core function. DEMO
+  *
+  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
+  * @param[in]  StackPointerType * stackPointerRetVal
+  * @param[in]  BitWidthType * timerTicks
+  * @param[in]  BitWidthType * scheduleTableIterator
+  * @param[in]  BitWidthType scheduleTableElementsNum
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+scheduler_classicSchedulingCore(
+    CosmOS_SchedulerVariableType * schedulerVar,
+    CosmOS_SchedulableVariableType ** schedulableVar,
+    StackPointerType * stackPointerRetVal,
+    BitWidthType * timerTicks,
+    BitWidthType * scheduleTableIterator,
+    BitWidthType scheduleTableElementsNum );
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_scheduler_c
+  * @} */
+/*  General_scheduler_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -138,7 +167,60 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
+  * @fn  scheduler_classicSchedulingCore(
+  * CosmOS_SchedulerVariableType * schedulerVar,
+  * CosmOS_SchedulableVariableType ** schedulableVar,
+  * StackPointerType * stackPointerRetVal,
+  * BitWidthType * timerTicks,
+  * BitWidthType * scheduleTableIterator)
+  *
+  * @brief Classic scheduling core function. DEMO
+  *
+  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
+  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
+  * @param[in]  StackPointerType * stackPointerRetVal
+  * @param[in]  BitWidthType * timerTicks
+  * @param[in]  BitWidthType * scheduleTableIterator
+  * @param[in]  BitWidthType scheduleTableElementsNum
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+scheduler_classicSchedulingCore(
+    CosmOS_SchedulerVariableType * schedulerVar,
+    CosmOS_SchedulableVariableType ** schedulableVar,
+    StackPointerType * stackPointerRetVal,
+    BitWidthType * timerTicks,
+    BitWidthType * scheduleTableIterator,
+    BitWidthType scheduleTableElementsNum )
+{
+    BitWidthType wcet;
+
+    CosmOS_TaskVariableType * taskVar;
+
+    taskVar = scheduler_getSchedulerScheduleTableTaskVar(
+        schedulerVar, *scheduleTableIterator );
+
+    *schedulableVar = task_getTaskSchedulable( taskVar );
+    *stackPointerRetVal = stackInit_schedulableStackInit( *schedulableVar );
+
+    schedulable_setState( *schedulableVar, SCHEDULABLE_STATE_ENUM__RUNNING );
+
+    *scheduleTableIterator =
+        ( ( ( *scheduleTableIterator ) + 1 ) % scheduleTableElementsNum );
+    scheduler_setSchedulerScheduleTableIterator(
+        schedulerVar, *scheduleTableIterator );
+
+    wcet = task_getTaskWcet( taskVar );
+    *timerTicks = wcet;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn  scheduler_updateAlarms(
   * CosmOS_CoreVariableType * coreVar,
   * BitWidthType priorTickStep)
@@ -192,7 +274,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn  scheduler_performanceScheduling(
   * CosmOS_SchedulerVariableType * schedulerVar,
   * CosmOS_SchedulableVariableType ** schedulableVar,
@@ -254,7 +337,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn  scheduler_classicScheduling(
   * CosmOS_SchedulerVariableType * schedulerVar,
   * CosmOS_SchedulableVariableType * schedulableVar,
@@ -308,58 +392,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn  scheduler_classicSchedulingCore(
-  * CosmOS_SchedulerVariableType * schedulerVar,
-  * CosmOS_SchedulableVariableType ** schedulableVar,
-  * StackPointerType * stackPointerRetVal,
-  * BitWidthType * timerTicks,
-  * BitWidthType * scheduleTableIterator)
-  *
-  * @brief Classic scheduling core function. DEMO
-  *
-  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
-  * @param[in]  StackPointerType * stackPointerRetVal
-  * @param[in]  BitWidthType * timerTicks
-  * @param[in]  BitWidthType * scheduleTableIterator
-  * @param[in]  BitWidthType scheduleTableElementsNum
-  *
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void
-scheduler_classicSchedulingCore(
-    CosmOS_SchedulerVariableType * schedulerVar,
-    CosmOS_SchedulableVariableType ** schedulableVar,
-    StackPointerType * stackPointerRetVal,
-    BitWidthType * timerTicks,
-    BitWidthType * scheduleTableIterator,
-    BitWidthType scheduleTableElementsNum )
-{
-    BitWidthType wcet;
-
-    CosmOS_TaskVariableType * taskVar;
-
-    taskVar = scheduler_getSchedulerScheduleTableTaskVar(
-        schedulerVar, *scheduleTableIterator );
-
-    *schedulableVar = task_getTaskSchedulable( taskVar );
-    *stackPointerRetVal = stackInit_schedulableStackInit( *schedulableVar );
-
-    schedulable_setState( *schedulableVar, SCHEDULABLE_STATE_ENUM__RUNNING );
-
-    *scheduleTableIterator =
-        ( ( ( *scheduleTableIterator ) + 1 ) % scheduleTableElementsNum );
-    scheduler_setSchedulerScheduleTableIterator(
-        schedulerVar, *scheduleTableIterator );
-
-    wcet = task_getTaskWcet( taskVar );
-    *timerTicks = wcet;
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
   *
   * @brief Algorithm for scheduling next schedulable DEMO CODE.
@@ -528,7 +562,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_start(void)
   *
   * @brief Start of scheduler, pick the starting task and execute it DEMO CODE.

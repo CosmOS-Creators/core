@@ -42,8 +42,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_core
+  * @} */
+/*  Macros_core
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -61,8 +61,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_core
+  * @} */
+/*  Variables_core
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -86,8 +86,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_core_c
+  * @} */
+/*  Getters_core_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -99,8 +99,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_core_c
+  * @} */
+/*  Setters_core_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -112,8 +112,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_core_c
+  * @} */
+/*  General_core_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -123,14 +123,12 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn core_getCoreVar()
+  * ****************************************************************************/
+/**
+  * @fn core_getCoreVar( void )
   *
-  * @brief Get current core variable.
-  *
-  * @param[in]  none
-  *
-  * @return CosmOS_CoreVariableType *
+  * @details The implementation contains obtaining of the core variable by
+  * calling the CILcore_getCoreVar function and returning the result.
   *
   * @see TEST_CORE_GETCOREVAR_EXECUTIONFLOW
   * @see TEST_CORE_GETCOREVAR_RETURNVALUE
@@ -153,16 +151,25 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar,
   * CosmOS_TaskVariableType * taskVar)
   *
-  * @brief Set program and schedulable into the current context.
-  *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
-  *
-  * @return none
+  * @details The implementation contains obtaining of the program id from the
+  * schedulable variable by schedulable_getProgramId function. Then the program
+  * variable is obtained from all configured programs under the current core
+  * by function core_getCoreProgramVar. For the check of the prior schedulable
+  * in execution state is the prior schedulable obtained by calling function
+  * core_getCoreSchedulableInExecution and then the state of it by calling
+  * schedulable_getState function. Then is the program from schedulable that
+  * has to be set into the current context set as program in execution by
+  * calling function core_setCoreProgramInExecution and also the schedulable by
+  * calling function core_setCoreSchedulableInExecution. If the state of the
+  * priorSchedulableVar is SCHEDULABLE_STATE_ENUM__RUNNING the prior schedulable
+  * state is set to SCHEDULABLE_STATE_ENUM__READY. Then also state of the
+  * schedulable that has to be set into the current context is set by function
+  * schedulable_setState to the SCHEDULABLE_STATE_ENUM__RUNNING.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

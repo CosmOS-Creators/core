@@ -48,8 +48,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_osInit_c
+  * @} */
+/*  Macros_osInit_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -67,8 +67,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_osInit_c
+  * @} */
+/*  Variables_osInit_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -92,8 +92,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_osInit_c
+  * @} */
+/*  Getters_osInit_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -105,8 +105,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_osInit_c
+  * @} */
+/*  Setters_osInit_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -118,8 +118,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_osInit_c
+  * @} */
+/*  General_osInit_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -129,14 +129,21 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn osInit_init(BitWidthType entityId)
   *
-  * @brief Initialization of operating system DEMO CODE.
-  *
-  * @param[in]  BitWidthType entityId
-  *
-  * @return none
+  * @details The implementation contains os_getOsVar function call to get
+  * generated configuration for the operating system, after this point
+  * CILcore_setCoreVar is used to set core variable to the platform registers if
+  * possible on the current CPU.
+  * Then core variable is obtained by core_getCoreVar and used in
+  * the switchMemoryProtection_init function that is not stubbed only if user
+  * turned on MPU in the CosmOS CustomBox configuration. After the MPU
+  * activation the function osBoot_bootValidate is called to check if there is
+  * no data corruption present. After this point memoryManager_stackInit and
+  * memoryManager_heapInit are called to initialize stacks and heaps in the
+  * system. DEMO
   *
   * @see TEST_OSINIT_INIT_EXECUTIONFLOW
 ********************************************************************************/
@@ -171,7 +178,7 @@ osInit_init( BitWidthType entityId )
 
     memoryManager_heapInit( coreVar );
 
-    //coreSync_getBarrier( coreVar, OS_INIT_ID );
+    //TODO: sync after init coreSync_getBarrier( coreVar, OS_INIT_ID );
 
     __SUPRESS_UNUSED_VAR( entityId );
 };

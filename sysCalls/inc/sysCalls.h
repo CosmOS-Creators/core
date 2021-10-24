@@ -73,8 +73,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_sysCalls_h
+  * @} */
+/*  Macros_sysCalls_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +92,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_sysCalls_h
+  * @} */
+/*  Variables_sysCalls_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -117,8 +117,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_sysCalls_h
+  * @} */
+/*  Getters_sysCalls_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -130,8 +130,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_sysCalls_h
+  * @} */
+/*  Setters_sysCalls_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -142,12 +142,13 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_ret_voidStart(void)
   *
-  * @brief System call handling startup of operating system.
+  * @brief System call for bitWidthType args and return none.
   *
-  * @param[in]  none
+  * @param[in]  id is used during the system call dispatching
   *
   * @return none
 ********************************************************************************/
@@ -156,12 +157,13 @@ sysCalls_bitWidthType_ret_void( BitWidthType id );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_ret_bitWidthType(BitWidthType id)
   *
   * @brief System call for bitWidthType args and ret bitWidthType.
   *
-  * @param[in]  BitWidthType id
+  * @param[in]  id is used during the system call dispatching
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -170,14 +172,15 @@ sysCalls_bitWidthType_ret_bitWidthType( BitWidthType id );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(
   * BitWidthType id, BitWidthType arg)
   *
   * @brief System call for bitWidthType args and ret bitWidthType.
   *
-  * @param[in]  BitWidthType id
-  * @param[in]  BitWidthType arg
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  arg generic bitwidth type argument
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -188,15 +191,16 @@ sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(
   * BitWidthType id, void * ptr, BitWidthType arg)
   *
   * @brief System call for voidPtr,bitWidthType args and ret bitWidthType.
   *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * ptr
-  * @param[in]  BitWidthType arg
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  ptr void pointer to some address
+  * @param[in]  arg generic bitwidth type argument
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -208,14 +212,15 @@ sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(
   * BitWidthType id, void * ptr,BitWidthType arg)
   *
   * @brief System call for voidPtr and ret bitWidthType.
   *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * ptr
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  ptr void pointer to some address
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -224,8 +229,8 @@ sysCalls_bitWidthType_voidPtr_ret_bitWidthType( BitWidthType id, void * ptr );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_sysCalls_h
+  * @} */
+/*  General_sysCalls_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -243,8 +248,8 @@ sysCalls_bitWidthType_voidPtr_ret_bitWidthType( BitWidthType id, void * ptr );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_sysCalls_h
+  * @} */
+/*  Getters_sysCalls_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -256,8 +261,8 @@ sysCalls_bitWidthType_voidPtr_ret_bitWidthType( BitWidthType id, void * ptr );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_sysCalls_h
+  * @} */
+/*  Setters_sysCalls_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -269,8 +274,8 @@ sysCalls_bitWidthType_voidPtr_ret_bitWidthType( BitWidthType id, void * ptr );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_sysCalls_h
+  * @} */
+/*  General_sysCalls_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

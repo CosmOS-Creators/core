@@ -67,8 +67,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_coreSync_h
+  * @} */
+/*  Macros_coreSync_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -86,8 +86,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_coreSync_h
+  * @} */
+/*  Variables_coreSync_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -110,14 +110,16 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn coreSync_getBarrier(CosmOS_CoreVariableType * coreVar,
   * BitWidthType barrierId)
   *
-  * @brief Set barrier with specific id for core X.
+  * @brief Set barrier with specific id for coreVar. This function cannot be
+  * called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  BitWidthType barrierId
+  * @param[in]  coreVar pointer
+  * @param[in]  barrierId required barrier id
   *
   * @return none
 ********************************************************************************/
@@ -126,8 +128,8 @@ coreSync_getBarrier( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_coreSync_h
+  * @} */
+/*  Getters_coreSync_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -139,8 +141,8 @@ coreSync_getBarrier( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_coreSync_h
+  * @} */
+/*  Setters_coreSync_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -151,14 +153,16 @@ coreSync_getBarrier( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId )
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn coreSync_reactivateBarrier(CosmOS_CoreVariableType * coreVar,
   * BitWidthType barrierId)
   *
-  * @brief Reactivate barrier with specific barrierId for coreVar.
+  * @brief Reactivate barrier with specific barrierId for coreVar. This function
+  * cannot be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  BitWidthType barrierId
+  * @param[in]  coreVar pointer
+  * @param[in]  barrierId required barrier id
   *
   * @return none
 ********************************************************************************/
@@ -169,8 +173,8 @@ coreSync_reactivateBarrier(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_coreSync_h
+  * @} */
+/*  General_coreSync_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -187,12 +191,13 @@ coreSync_reactivateBarrier(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn coreSync_getBarrierState(CosmOS_CoreVariableType * core)
   *
   * @brief Get barrierState.
   *
-  * @param[in]  CosmOS_BarrierVariableType * barrier
+  * @param[in]  barrier pointer
   *
   * @return CosmOS_BarrierStateType
 ********************************************************************************/
@@ -204,8 +209,8 @@ coreSync_getBarrierState( CosmOS_BarrierVariableType * barrier )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_coreSync_h
+  * @} */
+/*  Getters_coreSync_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -216,14 +221,16 @@ coreSync_getBarrierState( CosmOS_BarrierVariableType * barrier )
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn coreSync_setBarrierState(CosmOS_BarrierVariableType * barrier,
   * CosmOS_BarrierStateType barrierStateParam)
   *
-  * @brief Set barrierState.
+  * @brief Set barrierState. This function cannot be called
+  * from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_BarrierVariableType * barrier
-  * @param[in]  CosmOS_BarrierStateType barrierStateParam
+  * @param[in]  barrier pointer
+  * @param[in]  barrierStateParam barrier state
   *
   * @return none
 ********************************************************************************/
@@ -237,8 +244,8 @@ coreSync_setBarrierState(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_coreSync_h
+  * @} */
+/*  Setters_coreSync_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -250,8 +257,8 @@ coreSync_setBarrierState(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_coreSync_h
+  * @} */
+/*  General_coreSync_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

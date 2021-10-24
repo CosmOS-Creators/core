@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file buffer.c
+** @file bufferDouble.c
 *********************************************************************************
-<!--                    buffer Unit Local Group Definition                    -->
+<!--                 bufferDouble Unit Local Group Definition                 -->
 *********************************************************************************
-** @defgroup Local_buffer Local
-** @ingroup buffer_unit
-** @brief buffer locals
+** @defgroup Local_bufferDouble Local
+** @ingroup bufferDouble_unit
+** @brief bufferDouble locals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
@@ -34,15 +34,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_buffer Macros
-  * @ingroup Local_buffer
+  * @defgroup Macros_bufferDouble Macros
+  * @ingroup Local_bufferDouble
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_buffer
+  * @} */
+/*  Macros_bufferDouble
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -53,15 +53,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_buffer Variables
-  * @ingroup Local_buffer
+  * @defgroup Variables_bufferDouble Variables
+  * @ingroup Local_bufferDouble
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_buffer
+  * @} */
+/*  Variables_bufferDouble
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -72,47 +72,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_buffer_c API's
-  * @ingroup Local_buffer
+  * @defgroup Apis_bufferDouble_c API's
+  * @ingroup Local_bufferDouble
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_buffer_c Getters
-  * @ingroup Apis_buffer_c
+  * @addtogroup Getters_bufferDouble_c Getters
+  * @ingroup Apis_bufferDouble_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_buffer_c
+  * @} */
+/*  Getters_bufferDouble_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_buffer_c Setters
-  * @ingroup Apis_buffer_c
+  * @addtogroup Setters_bufferDouble_c Setters
+  * @ingroup Apis_bufferDouble_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_buffer_c
+  * @} */
+/*  Setters_bufferDouble_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_buffer_c General
-  * @ingroup Apis_buffer_c
+  * @addtogroup General_bufferDouble_c General
+  * @ingroup Apis_bufferDouble_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_buffer_c
+  * @} */
+/*  General_bufferDouble_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -122,18 +122,25 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_readArray(BitWidthType id, void * buffer,
   * BitWidthType size, CosmOS_BufferDoubleAccessType access)
   *
-  * @brief Reading array from the bufferDouble DEMO CODE.
-  *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * buffer
-  * @param[in]  BitWidthType size
-  * @param[in]  CosmOS_BufferDoubleAccessType access
-  *
-  * @return CosmOS_BufferStateType
+  * @details The implementation contains obtaining of the operating system
+  * generated variable structure by os_getOsVar function that stores all system
+  * double buffers in it.
+  * Then the double buffer variable is obtained by the function
+  * os_getOsBufferDoubleVar based on the id argument which is mapped with the
+  * routes to the proper entity, in this case one of the system double buffers.
+  * After this point the buffer variable is obtained based on the access type
+  * either BUFFER_DOUBLE_ACCESS_ENUM__USER or BUFFER_DOUBLE_ACCESS_ENUM__KERNEL.
+  * with functions bufferDouble_getBufferDoubleUserBuffer or
+  * bufferDouble_getBufferDoubleKernelBuffer. In the case of wrong access type
+  * the os_kernelPanic function is called. From the buffer variable the
+  * buffer id is extracted by calling buffer_getBufferId function and then the
+  * function buffer_readArray to read specific number of bytes from the buffer.
+  * Finally the bufferState is returned.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -191,18 +198,25 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_writeArray(BitWidthType id, void * buffer,
   * BitWidthType size, CosmOS_BufferDoubleAccessType access)
   *
-  * @brief Writing array into the bufferDouble DEMO CODE.
-  *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * buffer
-  * @param[in]  BitWidthType size
-  * @param[in]  CosmOS_BufferDoubleAccessType access
-  *
-  * @return CosmOS_BufferStateType
+  * @details The implementation contains obtaining of the operating system
+  * generated variable structure by os_getOsVar function that stores all system
+  * double buffers in it.
+  * Then the double buffer variable is obtained by the function
+  * os_getOsBufferDoubleVar based on the id argument which is mapped with the
+  * routes to the proper entity, in this case one of the system double buffers.
+  * After this point the buffer variable is obtained based on the access type
+  * either BUFFER_DOUBLE_ACCESS_ENUM__USER or BUFFER_DOUBLE_ACCESS_ENUM__KERNEL.
+  * with functions bufferDouble_getBufferDoubleUserBuffer or
+  * bufferDouble_getBufferDoubleKernelBuffer. In the case of wrong access type
+  * the os_kernelPanic function is called. From the buffer variable the
+  * buffer id is extracted by calling buffer_getBufferId function and then the
+  * function buffer_writeArray to read specific number of bytes from the buffer.
+  * Finally the bufferState is returned.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

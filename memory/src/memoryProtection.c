@@ -27,7 +27,6 @@
 #include "schedulable.h"
 #include "stack.h"
 
-
 /* CIL interfaces */
 #include "CILmemoryProtection.h"
 /********************************************************************************
@@ -46,8 +45,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_memoryProtection_c
+  * @} */
+/*  Macros_memoryProtection_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -65,8 +64,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_memoryProtection_c
+  * @} */
+/*  Variables_memoryProtection_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -90,8 +89,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_memoryProtection_c
+  * @} */
+/*  Getters_memoryProtection_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -101,10 +100,60 @@
   * @{
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn memoryProtection_setStackOverflowProtection(
+  * CosmOS_StackConfigurationType * stack)
+  *
+  * @brief Set stack overflow protection.
+  *
+  * @param[in]  CosmOS_StackConfigurationType * stack
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+memoryProtection_setStackOverflowProtection(
+    CosmOS_StackConfigurationType * stack );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn memoryProtection_setProgramMemoryProtection(
+  * CosmOS_ProgramVariableType * program)
+  *
+  * @brief Set program memory protection.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+memoryProtection_setProgramMemoryProtection(
+    CosmOS_ProgramVariableType * program );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn memoryProtection_setSchedulablePeripheralProtection(
+  * CosmOS_SchedulableVariableType * schedulable)
+  *
+  * @brief Set schedulable peripheral protection.
+  *
+  * @param[in]  CosmOS_SchedulableVariableType * schedulable
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+memoryProtection_setSchedulablePeripheralProtection(
+    CosmOS_SchedulableVariableType * schedulable );
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_memoryProtection_c
+  * @} */
+/*  Setters_memoryProtection_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -116,8 +165,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_memoryProtection_c
+  * @} */
+/*  General_memoryProtection_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -127,7 +176,97 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
+  * @fn memoryProtection_setStackOverflowProtection(
+  * CosmOS_StackConfigurationType * stack)
+  *
+  * @brief Set stack overflow protection.
+  *
+  * @param[in]  CosmOS_StackConfigurationType * stack
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+memoryProtection_setStackOverflowProtection(
+    CosmOS_StackConfigurationType * stack )
+{
+    AddressType lowAddress, highAddress;
+
+    lowAddress = stack_getStackLowAddress( stack );
+    highAddress = stack_getStackHighAddress( stack );
+
+    CILmemoryProtection_setStackOverflowProtection( lowAddress, highAddress );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn memoryProtection_setProgramMemoryProtection(
+  * CosmOS_ProgramVariableType * program)
+  *
+  * @brief Set program memory protection.
+  *
+  * @param[in]  CosmOS_ProgramVariableType * program
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+memoryProtection_setProgramMemoryProtection(
+    CosmOS_ProgramVariableType * program )
+{
+    BitWidthType size;
+
+    AddressType lowAddress, highAddress;
+
+    size = program_getProgramMemorySize( program );
+    lowAddress = program_getProgramMemoryLowAddress( program );
+    highAddress = program_getProgramMemoryHighAddress( program );
+
+    if ( size )
+    {
+        CILmemoryProtection_setProgramMemoryProtection(
+            lowAddress, highAddress );
+    }
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn memoryProtection_setSchedulablePeripheralProtection(
+  * CosmOS_SchedulableVariableType * schedulable)
+  *
+  * @brief Set schedulable peripheral protection.
+  *
+  * @param[in]  CosmOS_SchedulableVariableType * schedulable
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+memoryProtection_setSchedulablePeripheralProtection(
+    CosmOS_SchedulableVariableType * schedulable )
+{
+    BitWidthType size;
+
+    AddressType lowAddress, highAddress;
+
+    size = schedulable_getPeripheralAccessSize( schedulable );
+    lowAddress = schedulable_getPeripheralAccessLowAddress( schedulable );
+    highAddress = schedulable_getPeripheralAccessHighAddress( schedulable );
+
+    if ( size )
+    {
+        CILmemoryProtection_setSchedulablePeripheralProtection(
+            lowAddress, highAddress );
+    }
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn memoryProtection_init(AddressType codeMemoryHighAddress,
   * AddressType codeMemoryLowAddress,
   * AddressType stackMemoryHighAddress,
@@ -170,93 +309,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn memoryProtection_setStackOverflowProtection(
-  * CosmOS_StackConfigurationType * stack)
-  *
-  * @brief Set stack overflow protection.
-  *
-  * @param[in]  CosmOS_StackConfigurationType * stack
-  *
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void
-memoryProtection_setStackOverflowProtection(
-    CosmOS_StackConfigurationType * stack )
-{
-    AddressType lowAddress, highAddress;
-
-    lowAddress = stack_getStackLowAddress( stack );
-    highAddress = stack_getStackHighAddress( stack );
-
-    CILmemoryProtection_setStackOverflowProtection( lowAddress, highAddress );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn memoryProtection_setProgramMemoryProtection(
-  * CosmOS_ProgramVariableType * program)
-  *
-  * @brief Set program memory protection.
-  *
-  * @param[in]  CosmOS_ProgramVariableType * program
-  *
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void
-memoryProtection_setProgramMemoryProtection(
-    CosmOS_ProgramVariableType * program )
-{
-    BitWidthType size;
-
-    AddressType lowAddress, highAddress;
-
-    size = program_getProgramMemorySize( program );
-    lowAddress = program_getProgramMemoryLowAddress( program );
-    highAddress = program_getProgramMemoryHighAddress( program );
-
-    if ( size )
-    {
-        CILmemoryProtection_setProgramMemoryProtection(
-            lowAddress, highAddress );
-    }
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn memoryProtection_setSchedulablePeripheralProtection(
-  * CosmOS_SchedulableVariableType * schedulable)
-  *
-  * @brief Set schedulable peripheral protection.
-  *
-  * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  *
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void
-memoryProtection_setSchedulablePeripheralProtection(
-    CosmOS_SchedulableVariableType * schedulable )
-{
-    BitWidthType size;
-
-    AddressType lowAddress, highAddress;
-
-    size = schedulable_getPeripheralAccessSize( schedulable );
-    lowAddress = schedulable_getPeripheralAccessLowAddress( schedulable );
-    highAddress = schedulable_getPeripheralAccessHighAddress( schedulable );
-
-    if ( size )
-    {
-        CILmemoryProtection_setSchedulablePeripheralProtection(
-            lowAddress, highAddress );
-    }
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,
   * CosmOS_SchedulableVariableType  * schedulable)
   *
@@ -295,7 +349,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn memoryProtection_isMemoryRegionProtected(
   * CosmOS_CoreVariableType * core,
   * void  * regionLowAddressPointer,
@@ -305,7 +360,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * for the current execution context.
   *
   * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  void * regionLowAddressPointer
+  * @param[in]  AddressType * regionLowAddressPointer
   * @param[in]  BitWidthType size
   *
   * @return CosmOS_BooleanType
@@ -316,7 +371,7 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION CosmOS_BooleanType
 memoryProtection_isMemoryRegionProtected(
     CosmOS_CoreVariableType * core,
-    void * regionLowAddressPointer,
+    AddressType * regionLowAddressPointer,
     BitWidthType size )
 {
     AddressType stackLowAddress, stackHighAddress, programLowAddress,
