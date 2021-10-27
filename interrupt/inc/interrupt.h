@@ -7,6 +7,12 @@
 *****************************************************************************//**
 ** @file interrupt.h
 *********************************************************************************
+<!--                     interrupt Module Group Definition                    -->
+*********************************************************************************
+** @defgroup interrupt_module interrupt
+** @brief interrupt Module
+** @details lorem
+*********************************************************************************
 <!--                      interrupt Unit Group Definition                     -->
 *********************************************************************************
 ** @defgroup interrupt_unit interrupt Unit
@@ -208,7 +214,7 @@ interrupt_enableInterrupts( BitWidthType entityId )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn interrupt_enableInterrupt(BitWidthType entityId)
+  * @fn interrupt_enableInterrupt( BitWidthType entityId, BitWidthType ISR )
   *
   * @brief Enable specific interrupt for the current core. This function is
   * provided as a CosmOS API system call mapped with the routes and cannot be
@@ -254,7 +260,7 @@ interrupt_disableInterrupts( BitWidthType entityId )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn interrupt_disableInterrupt(BitWidthType entityId)
+  * @fn interrupt_disableInterrupt( BitWidthType entityId, BitWidthType ISR )
   *
   * @brief Disable specific interrupt for the current core. This function is
   * provided as a CosmOS API system call mapped with the routes and cannot be

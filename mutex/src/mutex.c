@@ -135,12 +135,17 @@
   * @fn mutex_getMutexInternal(BitWidthType entityId,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get mutex privileged DEMO CODE.
-  *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
-  *
-  * @return CosmOS_MutexStateType
+  * @details The implementation contains obtaining of the core variable by
+  * calling the CILcore_getCoreVar function. Then the function CILmutex_tryMutex
+  * is called and the returned mutexState is used in the if condition where in
+  * case of MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED the schedulableOwner in the
+  * mutex variable is set to the schedulable in execution obtained from the core
+  * variable. If the mutex was not successfully locked the thread variable is
+  * obtained by calling the program_getProgramThread function and its
+  * blocking mutex variable is set to the mutexVar. The state of the schedulable
+  * is set to the SCHEDULABLE_STATE_ENUM__BLOCKED and context switch routine is
+  * triggered by calling CILinterrupt_contextSwitchRoutineTrigger. In the end
+  * the mutexState is returned.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -187,12 +192,12 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn mutex_tryMutexInternal(BitWidthType entityId,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get mutex privileged DEMO CODE.
-  *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
-  *
-  * @return CosmOS_MutexStateType
+  * @details The implementation contains obtaining of the core variable by
+  * calling the CILcore_getCoreVar function. Then the function CILmutex_tryMutex
+  * is called and the returned mutexState is used in the if condition where in
+  * case of MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED the schedulableOwner in the
+  * mutex variable is set to the schedulable in execution obtained from the core
+  * variable. In the end the mutexState is returned.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -228,12 +233,20 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn mutex_releaseMutexInternal(BitWidthType entityId,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Release mutex privileged DEMO CODE.
-  *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
-  *
-  * @return CosmOS_MutexStateType
+  * @details The implementation contains obtaining of the core variable by
+  * calling the CILcore_getCoreVar function. Then the function
+  * CILmutex_releaseMutex is called. As the mutex is now released it is needed
+  * to notice all threads that were waiting for this specific mutex. As the
+  * mutex can be used only for the threads within the one program the for loop
+  * is implemented that iterates over all threads in the current program and if
+  * the thread variable blockingMutexVar is equal to the mutexVar its
+  * schedulable state is set to the SCHEDULABLE_STATE_ENUM__READY and the
+  * priority of the thread in current context is obtained by getting the thread
+  * variable in the first place by function program_getProgramThread and then
+  * comparing this to the thread variable that was blocked by the mutexVar. If
+  * the blocked thread priority is higher the flag higherPriorityThreadBlocked
+  * is set to True and the CILinterrupt_contextSwitchRoutineTrigger is called
+  * in the end to trigger scheduler algorithm to unblock higher priority thread.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -295,11 +308,22 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn mutex_getMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get mutex DEMO CODE.
-  *
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
-  *
-  * @return CosmOS_MutexStateType
+  * @details The implementation contains obtaining of the core variable by
+  * calling the CILcore_getCoreVar function. Then the mutex variable address is
+  * checked if its not in the memory protected region by calling the function
+  * memoryProtection_isMemoryRegionProtected. If the address of mutex variable
+  * is protected mutexState with MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS
+  * value is returned.
+  * Nested if condition then subsequently checks if the schedulable in execution
+  * which means the mutex release requesting schedulable is a thread type
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD. If not the mutexState is returned with
+  * the value MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX.
+  * After this point another condition is needed to check if the schedulable in
+  * execution will not cause the deadlock by calling mutex_willCauseDeadlock
+  * function. If yes the mutexState is returned with the value
+  * MUTEX_STATE_ENUM__DEADLOCK_WARNING. If not the do while loop is implemented
+  * with calling the cosmosApiInternal_mutex_getMutexInternal till the returned
+  * value is not MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -360,11 +384,18 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn mutex_tryMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Try to get mutex DEMO CODE
-  * .
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
-  *
-  * @return CosmOS_MutexStateType
+  * @details The implementation contains obtaining of the core variable by
+  * calling the CILcore_getCoreVar function. Then the mutex variable address is
+  * checked if its not in the memory protected region by calling the function
+  * memoryProtection_isMemoryRegionProtected. If the address of mutex variable
+  * is protected mutexState with MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS
+  * value is returned.
+  * Nested if condition then subsequently checks if the schedulable in execution
+  * which means the mutex release requesting schedulable is a thread type
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD. If not the mutexState is returned with
+  * the value MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX. If yes then is
+  * possible to try to lock the mutex by calling CosmOS API function
+  * cosmosApiInternal_mutex_tryMutexInternal.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -411,11 +442,25 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn mutex_releaseMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Release mutex DEMO CODE.
-  *
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
-  *
-  * @return CosmOS_MutexStateType
+  * @details The implementation contains obtaining of the core variable by
+  * calling the CILcore_getCoreVar function. Then the mutex variable address is
+  * checked if its not in the memory protected region by calling the function
+  * memoryProtection_isMemoryRegionProtected. If the address of mutex variable
+  * is protected mutexState with MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS
+  * value is returned.
+  * Nested if condition then subsequently checks if the schedulable in execution
+  * which means the mutex release requesting schedulable is a thread type
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD. If not the mutexState is returned with
+  * the value MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX.
+  * After this point another condition is needed to check if the schedulable in
+  * execution owns the mutex variable by calling mutex_ownsSchedulableMutex
+  * function. If not the mutexState is returned with
+  * the value MUTEX_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER.
+  * The last if condition checks if the mutex variable value is equal to
+  * MUTEX_STATE_ENUM__OCCUPIED which means that the mutex is locked, if not the
+  * mutexState is returned with MUTEX_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE.
+  * If yes then the mutex can be released by calling CosmOS API function
+  * cosmosApiInternal_mutex_releaseMutexInternal.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

@@ -122,13 +122,11 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_setExecutionStateToFinished(BitWidthType entityId)
-  *
-  * @brief Set schedulable execution state to finished DEMO CODE.
-  *
-  * @param[in]  BitWidthType entityId
-  *
-  * @return none
+  * @details The implementation contains obtaining of the core variable by
+  * calling the CILcore_getCoreVar function. Then the schedulable variable in
+  * execution is obtained by the core_getCoreSchedulableInExecution function.
+  * The schedulable variable is used in schedulable_setState function call that
+  * sets the schedulable state to the SCHEDULABLE_STATE_ENUM__EXECUTED.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

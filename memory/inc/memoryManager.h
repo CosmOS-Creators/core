@@ -153,7 +153,7 @@ memoryManager_stackInit( CosmOS_CoreVariableType * coreVar );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn memoryManager_heapInit(void)
+  * @fn memoryManager_heapInit(CosmOS_CoreVariableType * coreVar)
   *
   * @brief Heap initialization function for all programs. This function
   * cannot be called from the unprivileged context directly.

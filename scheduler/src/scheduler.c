@@ -396,11 +396,76 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
   *
-  * @brief Algorithm for scheduling next schedulable DEMO CODE.
-  *
-  * @param[in]  StackPointerType stackPointer
-  *
-  * @return BitWidthType
+  * @details The implementation contains obtaining of the core variable by
+  * calling the core_getCoreVar function. Then the scheduler variable in
+  * is obtained by the core_getCoreSchedulerVar and the prior schedulable and
+  * reschedule trigger state are obtained by calling functions
+  * core_getCoreSchedulableInExecution and
+  * scheduler_getSchedulerRescheduleTriggerState. Then the switch statement
+  * is implemented and contains two states RESCHEDULE_TRIGGER_STATE_ENUM__TIMER
+  * and RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM. The timer reschedule state means
+  * that the trigger for the scheduler algorithm execution was timer interrupt.
+  * In this case the hyper tick, scheduler state, current tick
+  * maximum timer tick, prior tick step, timer tick count, prior schedulable
+  * instance type, schedule table iterator, schedule
+  * table elements number and start tick are obtained by calling functions
+  * scheduler_getSchedulerHyperTick, scheduler_getSchedulerCurrentTick,
+  * scheduler_getSchedulerMaxTimerTick, scheduler_getSchedulerTimerTickCount,
+  * scheduler_getSchedulerScheduleTableIterator,
+  * scheduler_getSchedulerScheduleTableElementsNum and
+  * scheduler_getSchedulerScheduleTableStartTick. Then the if condition is
+  * implemented to check if the prior schedulable instance type is
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD and if yes the stack pointer is stored
+  * by calling switchScheduler_schedulable_setStackPointer function based on
+  * the SCHEDULER_PERFORMANCE_SCHEDULING macro state. This is needed just for
+  * the threads, because the tasks stack is always reused. Next the function as
+  * macro switchScheduler_updateAlarms is called based also on the
+  * SCHEDULER_PERFORMANCE_SCHEDULING macro state to update all alarms - only
+  * if there is performance scheduling active otherwise there are no alarms.
+  * Subsequent if condition checks if the schedule table elements number is
+  * non-zero value and if the starttick is equal to the current tick, in this
+  * case zero. If condition is true the scheduler_classicSchedulingCore function
+  * is called and scheduler state is set to the
+  * SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK.
+  * If no the functions as macros switchScheduler_performanceScheduling and
+  * switchScheduler_classicScheduling are called depends on the
+  * SCHEDULER_PERFORMANCE_SCHEDULING macro state (configured via switches).
+  * and scheduler state is set to SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME.
+  * The schedulable stack pointer is then set by calling function
+  * schedulable_setStackPointer and also schedulable variable is set to the
+  * current context by calling function core_setSchedulableIntoCurrentContext
+  * and also scheduler state is set by calling scheduler_setSchedulerState
+  * function. If condition is implemented to check if the timer ticks that need
+  * to be set are more than maximum timer ticks, and if yes than the timer ticks
+  * are reduced to the maximum timer ticks. Current tick is then incremented by
+  * the timer ticks value modulo hyper tick to not exceed the hyper tick. THe
+  * prior tick step is then set by calling scheduler_setSchedulerPriorTickStep
+  * function and the current tick by calling scheduler_setSchedulerCurrentTick.
+  * The function as macro switchMemoryProtection_setMemoryProtection is called
+  * based on the MEMORY_PROTECTION macro state. The operating system state for
+  * the current core variable is set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM
+  * by calling core_setCoreOsState function. The scheduler  reschedule state is
+  * set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
+  * scheduler_setSchedulerRescheduleTriggerState. Then the system timer is set
+  * by calling CILsysTimer_setTicks.
+  * The system reschedule state means that the trigger for the scheduler
+  * algorithm execution was system even such as mutex or putting thread to the
+  * sleep state. In this case there is no need to check the start time for
+  * another critical task as the system timer has not yet occurred and therefore
+  * the prior schedulable instance type has to be in this case
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD. Then the stack pointer must be stored by
+  * calling schedulable_setStackPointer function. After this point the function
+  * scheduler_performanceScheduling is called to schedule next thread for the
+  * execution that is then set as schedulable in current context by calling
+  * core_setSchedulableIntoCurrentContext function. The function as macro
+  * switchMemoryProtection_setMemoryProtection is called based on the
+  * MEMORY_PROTECTION macro state.
+  * In the end the scheduler reschedule state is set to
+  * RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
+  * scheduler_setSchedulerRescheduleTriggerState - this is done only in this
+  * place to force system timer overwrite this state when occurs.
+  * Finally the stackPointerRetVal is returned from the function, that contains
+  * the next schedulable stack pointer.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -510,7 +575,7 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer )
                 schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
             }
 
-            schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
+            // not needed? schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
             core_setSchedulableIntoCurrentContext( coreVar, schedulableVar );
 
             scheduler_setSchedulerState( schedulerVar, schedulerState );
@@ -532,17 +597,15 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer )
         }
         case RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM:
         {
-            /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
-            switchScheduler_schedulable_setStackPointer(
-                priorSchedulableVar, stackPointer );
-            /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
-            switchScheduler_performanceScheduling(
+            schedulable_setStackPointer( priorSchedulableVar, stackPointer );
+
+            scheduler_performanceScheduling(
                 schedulerVar,
                 &schedulableVar,
                 &stackPointerRetVal,
                 &timerTicks );
 
-            schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
+            // not needed? schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
             core_setSchedulableIntoCurrentContext( coreVar, schedulableVar );
 
             switchMemoryProtection_setMemoryProtection(
@@ -566,11 +629,45 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn scheduler_start(void)
   *
-  * @brief Start of scheduler, pick the starting task and execute it DEMO CODE.
-  *
-  * @param[in]  none
-  *
-  * @return none
+  * @details The implementation contains obtaining of the core variable by
+  * calling the core_getCoreVar function. Then the scheduler variable in
+  * is obtained by the core_getCoreSchedulerVar and the hyper tick, current tick
+  * maximum timer tick, timer tick count, schedule table iterator and schedule
+  * table elements number are obtained by calling functions
+  * scheduler_getSchedulerHyperTick, scheduler_getSchedulerCurrentTick,
+  * scheduler_getSchedulerMaxTimerTick, scheduler_getSchedulerTimerTickCount,
+  * scheduler_getSchedulerScheduleTableIterator and
+  * scheduler_getSchedulerScheduleTableElementsNum. If the schedule table
+  * elements number is non-zero value the startick is obtained by calling
+  * function scheduler_getSchedulerScheduleTableStartTick. Subsequent if
+  * condition checks if the schedule table elements number is non-zero value and
+  * if the starttick is equal to the current tick, in this case zero. If
+  * condition is true the scheduler_classicSchedulingCore function is called and
+  * scheduler state is set to the
+  * SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK.
+  * If no the functions as macros switchScheduler_performanceScheduling and
+  * switchScheduler_classicScheduling are called depends on the
+  * SCHEDULER_PERFORMANCE_SCHEDULING macro state (configured via switches).
+  * and scheduler state is set to SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME.
+  * The schedulable stack pointer is then set by calling function
+  * schedulable_setStackPointer and also schedulable variable is set to the
+  * current context by calling function core_setSchedulableIntoCurrentContext
+  * and also scheduler state is set by calling scheduler_setSchedulerState
+  * function. If condition is implemented to check if the timer ticks that need
+  * to be set are more than maximum timer ticks, and if yes than the timer ticks
+  * are reduced to the maximum timer ticks. Current tick is then incremented by
+  * the timer ticks value modulo hyper tick to not exceed the hyper tick. THe
+  * prior tick step is then set by calling scheduler_setSchedulerPriorTickStep
+  * function and the current tick by calling scheduler_setSchedulerCurrentTick.
+  * The function as macro switchMemoryProtection_setMemoryProtection is called
+  * based on the MEMORY_PROTECTION macro state. The operating system state for
+  * the current core variable is set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM
+  * by calling core_setCoreOsState function. The scheduler reschedule state is
+  * set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
+  * scheduler_setSchedulerRescheduleTriggerState - this is done only in this
+  * place to force system timer overwrite this state when occurs.
+  * In the end the system timer is started CILsysTimer_startTimer and the
+  * CILstack_setStackPointer called to switch to the schedulable stack.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

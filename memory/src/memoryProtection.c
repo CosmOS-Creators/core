@@ -108,7 +108,7 @@
   *
   * @brief Set stack overflow protection.
   *
-  * @param[in]  CosmOS_StackConfigurationType * stack
+  * @param[in]  stack pointer to the stack configuration type
   *
   * @return none
 ********************************************************************************/
@@ -125,7 +125,7 @@ memoryProtection_setStackOverflowProtection(
   *
   * @brief Set program memory protection.
   *
-  * @param[in]  CosmOS_ProgramVariableType * program
+  * @param[in]  program pointer to the program variable type
   *
   * @return none
 ********************************************************************************/
@@ -142,7 +142,7 @@ memoryProtection_setProgramMemoryProtection(
   *
   * @brief Set schedulable peripheral protection.
   *
-  * @param[in]  CosmOS_SchedulableVariableType * schedulable
+  * @param[in]  schedulable pointer to the schedulable variable type
   *
   * @return none
 ********************************************************************************/
@@ -181,11 +181,11 @@ memoryProtection_setSchedulablePeripheralProtection(
   * @fn memoryProtection_setStackOverflowProtection(
   * CosmOS_StackConfigurationType * stack)
   *
-  * @brief Set stack overflow protection.
-  *
-  * @param[in]  CosmOS_StackConfigurationType * stack
-  *
-  * @return none
+  * @details The implementation contains obtaining of the stack low and high
+  * address for the current stack argument by calling functions
+  * stack_getStackLowAddress and stack_getStackHighAddress. After this the
+  * CILmemoryProtection_setStackOverflowProtection is called to set stack
+  * overflow protection for the specified addresses.
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 memoryProtection_setStackOverflowProtection(
@@ -206,11 +206,13 @@ memoryProtection_setStackOverflowProtection(
   * @fn memoryProtection_setProgramMemoryProtection(
   * CosmOS_ProgramVariableType * program)
   *
-  * @brief Set program memory protection.
-  *
-  * @param[in]  CosmOS_ProgramVariableType * program
-  *
-  * @return none
+  * @details The implementation contains obtaining of the program size, low and
+  * high address for the current program variable argument by calling functions
+  * program_getProgramMemorySize, program_getProgramMemoryLowAddress and
+  * program_getProgramMemoryHighAddress. After this the if condition is
+  * implemented to check if the program size is non-zero value and then the
+  * CILmemoryProtection_setProgramMemoryProtection is called to set program
+  * memory protection for the specified addresses.
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 memoryProtection_setProgramMemoryProtection(
@@ -238,11 +240,15 @@ memoryProtection_setProgramMemoryProtection(
   * @fn memoryProtection_setSchedulablePeripheralProtection(
   * CosmOS_SchedulableVariableType * schedulable)
   *
-  * @brief Set schedulable peripheral protection.
-  *
-  * @param[in]  CosmOS_SchedulableVariableType * schedulable
-  *
-  * @return none
+  * @details The implementation contains obtaining of the schedulable peripheral
+  * access region size, low and high address for the current schedulable variable
+  * argument by calling functions schedulable_getPeripheralAccessSize,
+  * schedulable_getPeripheralAccessLowAddress and
+  * schedulable_getPeripheralAccessHighAddress. After this the if condition is
+  * implemented to check if the schedulable peripheral access region size is
+  * non-zero value and then the
+  * CILmemoryProtection_setSchedulablePeripheralProtection is called to set
+  * peripheral access region memory protection for the specified addresses.
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 memoryProtection_setSchedulablePeripheralProtection(
@@ -273,15 +279,8 @@ memoryProtection_setSchedulablePeripheralProtection(
   * AddressType stackMemoryLowAddress,
   * AddressType unprotectedMemoryLowAddress,
   * AddressType unprotectedMemoryHighAddress)
-  * @brief Init memory protection DEMO CODE.
   *
-  * @param[in]  AddressType codeMemoryHighAddress
-  * @param[in]  AddressType codeMemoryLowAddress
-  * @param[in]  AddressType stackMemoryHighAddress
-  * @param[in]  AddressType unprotectedMemoryLowAddress
-  * @param[in]  AddressType unprotectedMemoryHighAddress
-  *
-  * @return none
+  * @details The implementation contains CILmemoryProtection_init function call.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -314,12 +313,14 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,
   * CosmOS_SchedulableVariableType  * schedulable)
   *
-  * @brief Set memory protection for current execution context.
-  *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
-  *
-  * @return none
+  * @details The implementation contains obtaining of the program id and program
+  * variable by calling schedulable_getProgramId and core_getCoreProgramVar
+  * functions. From the schedulable variable argument is also extracted its
+  * stack configuration by calling schedulable_getStack. After this point
+  * the memory protection is set for the stack, peripheral and program memory by
+  * calling functions memoryProtection_setStackOverflowProtection,
+  * memoryProtection_setProgramMemoryProtection and
+  * memoryProtection_setSchedulablePeripheralProtection.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -356,14 +357,20 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * void  * regionLowAddressPointer,
   * BitWidthType size)
   *
-  * @brief Check if specific memory region is protected against changes
-  * for the current execution context.
-  *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  AddressType * regionLowAddressPointer
-  * @param[in]  BitWidthType size
-  *
-  * @return CosmOS_BooleanType
+  * @details The implementation contains obtaining of the program
+  * variable by calling core_getCoreProgramInExecution function and schedulable
+  * variable by calling core_getCoreSchedulableInExecution that is then used
+  * to get stack configuration from the stack by calling schedulable_getStack
+  * function.
+  * Subsequently the low and high addresses of the stack, peripheral access
+  * region and program memory are obtained by calling functions
+  * stack_getStackLowAddress, stack_getStackHighAddress,
+  * schedulable_getPeripheralAccessLowAddress,
+  * schedulable_getPeripheralAccessHighAddress,
+  * program_getProgramMemoryLowAddress, program_getProgramMemoryHighAddress.
+  * Then is the if condition implemented where is the region checked agains
+  * all addresses and the isMemoryRegionProtected returned with the boolean
+  * value.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -375,7 +382,8 @@ memoryProtection_isMemoryRegionProtected(
     BitWidthType size )
 {
     AddressType stackLowAddress, stackHighAddress, programLowAddress,
-        programHighAddress, regionLowAddress, regionHighAddress;
+        programHighAddress, regionLowAddress, regionHighAddress,
+        peripheralLowAddress, peripheralHighAddress;
 
     CosmOS_BooleanType isMemoryRegionProtected = True;
 
@@ -392,6 +400,11 @@ memoryProtection_isMemoryRegionProtected(
     stackLowAddress = stack_getStackLowAddress( stack );
     stackHighAddress = stack_getStackHighAddress( stack );
 
+    peripheralLowAddress =
+        schedulable_getPeripheralAccessLowAddress( schedulable );
+    peripheralHighAddress =
+        schedulable_getPeripheralAccessHighAddress( schedulable );
+
     programLowAddress = program_getProgramMemoryLowAddress( programVar );
     programHighAddress = program_getProgramMemoryHighAddress( programVar );
 
@@ -399,6 +412,8 @@ memoryProtection_isMemoryRegionProtected(
 
     if ( ( ( regionHighAddress < stackHighAddress ) &&
            ( regionLowAddress > stackLowAddress ) ) ||
+         ( ( regionHighAddress < peripheralHighAddress ) &&
+           ( regionLowAddress > peripheralLowAddress ) ) ||
          ( ( regionHighAddress < programHighAddress ) &&
            ( regionLowAddress > programLowAddress ) ) )
     {

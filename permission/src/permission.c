@@ -120,8 +120,8 @@
   *
   * @brief Try if schedulable has access.
   *
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
+  * @param[in]  permission pointer to the permission configuration type
+  * @param[in]  schedulableVar pointer
   *
   * @return CosmOS_AccessStateType
 ********************************************************************************/
@@ -149,12 +149,12 @@ permission_trySchedulableAccess(
   * CosmOS_PermissionsConfigurationType * permission,
   * CosmOS_SchedulableVariableType * schedulableVar)
   *
-  * @brief Try if schedulable has access.
-  *
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
-  *
-  * @return CosmOS_AccessStateType
+  * @details The implementation contains cosmosAssert call with the comparing of
+  * bitlock and bitlock inverted value.
+  * After this the bitlock element from bitlock array is extracted by the unique
+  * schedulable id and the specific bit shifted by the unique schedulable id.
+  * If the bit is 0 function returns ACCESS_STATE_ENUM__DENIED if 1
+  * ACCESS_STATE_ENUM__ALLOWED.
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_AccessStateType
 permission_trySchedulableAccess(
@@ -183,12 +183,11 @@ permission_trySchedulableAccess(
   * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,
   * CosmOS_CoreVariableType * coreVar)
   *
-  * @brief Try access of current running instance DEMO CODE.
-  *
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  *
-  * @return CosmOS_AccessStateType
+  * @details The implementation contains obtaining the schedulable variable in
+  * execution by calling core_getCoreSchedulableInExecution function and then
+  * using the schedulable variable with the permission configuration structure
+  * in the permission_trySchedulableAccess function call that returns the
+  * accessState and is returned from the function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

@@ -158,7 +158,8 @@ memoryProtection_init(
   * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,
   * CosmOS_SchedulableVariableType  * schedulable)
   *
-  * @brief Set memory protection for current execution context. This function
+  * @brief Set memory protection for current execution context that means for
+  * the schedulable stack, peripheral access and program memory. This function
   * cannot be called from the unprivileged context directly.
   *
   * @param[in]  core variable pointer
