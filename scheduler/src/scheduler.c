@@ -176,16 +176,17 @@ scheduler_classicSchedulingCore(
   * BitWidthType * timerTicks,
   * BitWidthType * scheduleTableIterator)
   *
-  * @brief Classic scheduling core function. DEMO
-  *
-  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
-  * @param[in]  StackPointerType * stackPointerRetVal
-  * @param[in]  BitWidthType * timerTicks
-  * @param[in]  BitWidthType * scheduleTableIterator
-  * @param[in]  BitWidthType scheduleTableElementsNum
-  *
-  * @return none
+  * @details The implementation contains obtaining task variable from the
+  * schedule table based on the schedule table iterator argument. The task
+  * variable is then used in function task_getTaskSchedulable to get the
+  * schedulable variable. Then the stack is initialized for the schedulable
+  * variable by calling stackInit_schedulableStackInit. The schedule table
+  * iterator is then incremented by one and modulo operation is done by schedule
+  * table elements number to keep the iterator in the range of schedule table
+  * array. The schedule table iterator is then stored back to the scheduler
+  * variable by calling function scheduler_setSchedulerScheduleTableIterator.
+  * In the end the timer ticks are set to the task wcet that is obtained by
+  * calling task_getTaskWcet function.
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 scheduler_classicSchedulingCore(
@@ -206,8 +207,6 @@ scheduler_classicSchedulingCore(
     *schedulableVar = task_getTaskSchedulable( taskVar );
     *stackPointerRetVal = stackInit_schedulableStackInit( *schedulableVar );
 
-    schedulable_setState( *schedulableVar, SCHEDULABLE_STATE_ENUM__RUNNING );
-
     *scheduleTableIterator =
         ( ( ( *scheduleTableIterator ) + 1 ) % scheduleTableElementsNum );
     scheduler_setSchedulerScheduleTableIterator(
@@ -225,12 +224,20 @@ scheduler_classicSchedulingCore(
   * CosmOS_CoreVariableType * coreVar,
   * BitWidthType priorTickStep)
   *
-  * @brief Update alarms DEMO.
-  *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  BitWidthType priorTickStep
-  *
-  * @return none
+  * @details The implementation contains obtaining of the alarms number used
+  * inside the for loop that iterates over all alarm possible identifiers and
+  * get based on them alarm variable by calling core_getAlarmVar function. Then
+  * the alarm variable is used in the alarm_getAlarmState function to get alarm
+  * state. The alarm state is used in the if condition that checks if the alarm
+  * state is ALARM_STATE_ENUM__ACTIVATED which means the alarm internal timer
+  * needs to be updated, otherwise the alarm is ignored. The alarm is updated in
+  * the sequence where its tick count is obtained by function
+  * alarm_getAlarmTickCount and compared in the if condition to the prior tick
+  * step. If the prior tick step is bigger or equal to the tick count it means
+  * that alarm expires as the decrementing prior tick step would lead to zero or
+  * negative alarms timer value, therefore the alarm_expire function is called.
+  * Otherwise the tick count is decremented by the prior tick step and stored
+  * back to the alarm variable by calling alarm_setAlarmTickCount function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -282,14 +289,22 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * StackPointerType * stackPointerRetVal,
   * BitWidthType * timerTicks)
   *
-  * @brief Performance scheduling function. DEMO
-  *
-  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
-  * @param[in]  StackPointerType * stackPointerRetVal
-  * @param[in]  BitWidthType * timerTicks
-  *
-  * @return none
+  * @details The implementation contains obtaining of the thread list elements
+  * number by calling scheduler_getSchedulerThreadListElementsNum function. Then
+  * the for loop is implemented that iterates over all possible thread
+  * identifiers and uses them for obtaining thread variable by calling function
+  * scheduler_getSchedulerThreadListThreadVar. From the thread variable is the
+  * schedulable variable extracted by calling thread_getThreadSchedulable
+  * function and the schedulable state is obtained by calling function
+  * schedulable_getState. Then the if condition is implemented that checks if
+  * the schedulable state is equal to the SCHEDULABLE_STATE_ENUM__READY and if
+  * yes the for loop breaks, otherwise continues till it finds thread in ready
+  * state for execution. The thread list is priority sorted and has to contain
+  * as the lowest priority thread the idle thread. The found schedulable
+  * variable from the for loop is then used in the function
+  * schedulable_getStackPointer to get its stack pointer and the preempt tick is
+  * obtained by calling function scheduler_getSchedulerPreemptTick and passed
+  * to the timer ticks.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -347,16 +362,16 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * BitWidthType startTick,
   * BitWidthType currentTick)
   *
-  * @brief Classic scheduling function. DEMO
-  *
-  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
-  * @param[in]  StackPointerType * stackPointerRetVal
-  * @param[in]  BitWidthType * timerTicks
-  * @param[in]  BitWidthType startTick
-  * @param[in]  BitWidthType currentTick
-  *
-  * @return none
+  * @details The implementation contains obtaining of the idle task variable by
+  * calling scheduler_getSchedulerIdleTaskVar function and schedulable is
+  * extracted out of the idle task variable by calling task_getTaskSchedulable
+  * function. Then the stack is initialized for the schedulable variable by
+  * calling stackInit_schedulableStackInit. Next the if condition is implemented
+  * to check if the current tick is bigger than next start tick in the schedule
+  * table, if yes then it means that the ticks from the last to first task in
+  * schedule table have to be obtained by calling function
+  * scheduler_getSchedulerLastToFirstTaskTicks, otherwise we can subtract
+  * current tick from the start tick variable and get the timer ticks.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -575,7 +590,7 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer )
                 schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
             }
 
-            // not needed? schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
+            schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
             core_setSchedulableIntoCurrentContext( coreVar, schedulableVar );
 
             scheduler_setSchedulerState( schedulerVar, schedulerState );
@@ -605,7 +620,7 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer )
                 &stackPointerRetVal,
                 &timerTicks );
 
-            // not needed? schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
+            schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
             core_setSchedulableIntoCurrentContext( coreVar, schedulableVar );
 
             switchMemoryProtection_setMemoryProtection(
