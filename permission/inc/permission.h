@@ -7,13 +7,13 @@
 *****************************************************************************//**
 ** @file permission.h
 *********************************************************************************
-<!--                    permission Module Group Definition                   -->
+<!--                    permission Module Group Definition                    -->
 *********************************************************************************
 ** @defgroup permission_module permission
 ** @brief permission Module
 ** @details lorem
 *********************************************************************************
-<!--                     permission Unit Group Definition                    -->
+<!--                     permission Unit Group Definition                     -->
 *********************************************************************************
 ** @defgroup permission_unit permission Unit
 ** @ingroup permission_module
@@ -31,7 +31,7 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                  permission Unit Global Group Definition                -->
+<!--                  permission Unit Global Group Definition                 -->
 *********************************************************************************
 ** @defgroup Global_permission Global
 ** @ingroup permission_unit
@@ -73,8 +73,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_permission_h
+  * @} */
+/*  Macros_permission_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +92,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_permission_h
+  * @} */
+/*  Variables_permission_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -117,8 +117,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_permission_h
+  * @} */
+/*  Getters_permission_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -130,8 +130,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_permission_h
+  * @} */
+/*  Setters_permission_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -142,14 +142,15 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,
   * CosmOS_CoreVariableType * coreVar)
   *
-  * @brief Try access of current running instance DEMO CODE.
+  * @brief Try access of current running instance. DEMO
   *
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * @param[in]  CosmOS_CoreVariableType * coreVar
+  * @param[in]  permission configuration pointer
+  * @param[in]  coreVar pointer
   *
   * @return CosmOS_AccessStateType
 ********************************************************************************/
@@ -160,8 +161,8 @@ permission_tryAccess(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_permission_h
+  * @} */
+/*  General_permission_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -178,13 +179,14 @@ permission_tryAccess(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn permission_getBitLocksTasks(
   * CosmOS_PermissionsConfigurationType * permission)
   *
   * @brief Get permission bitLocksTasks.
   *
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
+  * @param[in]  permission configuration pointer
   *
   * @return BitWidthType *
 ********************************************************************************/
@@ -196,13 +198,14 @@ permission_getBitLocksTasks( CosmOS_PermissionsConfigurationType * permission )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn permission_getBitLocksTasksInverted(
   * CosmOS_PermissionsConfigurationType * permission)
   *
   * @brief Get permission bitLocksTasksInverted.
   *
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
+  * @param[in]  permission configuration pointer
   *
   * @return BitWidthType *
 ********************************************************************************/
@@ -215,8 +218,8 @@ permission_getBitLocksTasksInverted(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_permission_h
+  * @} */
+/*  Getters_permission_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -228,8 +231,8 @@ permission_getBitLocksTasksInverted(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_permission_h
+  * @} */
+/*  Setters_permission_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -241,8 +244,8 @@ permission_getBitLocksTasksInverted(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_permission_h
+  * @} */
+/*  General_permission_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

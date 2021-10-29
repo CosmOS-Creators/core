@@ -73,8 +73,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_thread_h
+  * @} */
+/*  Macros_thread_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +92,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_thread_h
+  * @} */
+/*  Variables_thread_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -117,8 +117,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_thread_h
+  * @} */
+/*  Getters_thread_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -130,8 +130,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_thread_h
+  * @} */
+/*  Setters_thread_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -142,16 +142,18 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn thread_sleepMsInternal(BitWidthType entityId,
   * CosmOS_CoreVariableType * coreVar,
   * BitWidthType tickCount)
   *
-  * @brief Set thread to sleep internal for x milliseconds DEMO CODE.
+  * @brief Set thread to sleep internal for x milliseconds. This function cannot
+  * be called from the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  BitWidthType tickCount
+  * @param[in]  entityId is used during the system call dispatching
+  * @param[in]  coreVar pointer
+  * @param[in]  tickCount number of ticks to put thread into sleep for
   *
   * @return CosmOS_SleepStateType
 ********************************************************************************/
@@ -163,13 +165,13 @@ thread_sleepMsInternal(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn thread_sleepMs(BitWidthType delayMs)
   *
-  * @brief Set thread to sleep for x milliseconds DEMO CODE.
+  * @brief Set thread to sleep for x milliseconds. DEMO
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  BitWidthType delayMs
+  * @param[in]  delayMs number of milliseconds to put thread into sleep for
   *
   * @return CosmOS_SleepStateType
 ********************************************************************************/
@@ -178,13 +180,13 @@ thread_sleepMs( BitWidthType delayMs );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn thread_sleep(BitWidthType delay)
   *
-  * @brief Set thread to sleep for x seconds DEMO CODE.
+  * @brief Set thread to sleep for x seconds.
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  BitWidthType delay
+  * @param[in]  delay number of seconds to put thread into sleep for
   *
   * @return CosmOS_SleepStateType
 ********************************************************************************/
@@ -192,8 +194,8 @@ thread_sleepMs( BitWidthType delayMs );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_thread_h
+  * @} */
+/*  General_thread_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -210,12 +212,13 @@ thread_sleepMs( BitWidthType delayMs );
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn thread_getThreadPriority(CosmOS_ThreadVariableType *thread)
   *
   * @brief Get thread priority.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
+  * @param[in] thread pointer to the thread variable type
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -227,12 +230,13 @@ thread_getThreadPriority( CosmOS_ThreadVariableType * thread )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn thread_getThreadSchedulable(CosmOS_ThreadVariableType *thread)
   *
   * @brief Get thread schedulable.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
+  * @param[in] thread pointer to the thread variable type
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
@@ -244,12 +248,13 @@ thread_getThreadSchedulable( CosmOS_ThreadVariableType * thread )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn thread_getThreadBlockingMutexVar(CosmOS_ThreadVariableType *thread)
   *
   * @brief Get thread blockingMutexVar.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
+  * @param[in] thread pointer to the thread variable type
   *
   * @return CosmOS_MutexVariableType *
 ********************************************************************************/
@@ -261,8 +266,8 @@ thread_getThreadBlockingMutexVar( CosmOS_ThreadVariableType * thread )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_thread_h
+  * @} */
+/*  Getters_thread_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -273,13 +278,15 @@ thread_getThreadBlockingMutexVar( CosmOS_ThreadVariableType * thread )
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn thread_setThreadBlockingMutexVar(CosmOS_ThreadVariableType *thread)
   *
-  * @brief Set thread blockingMutexVar.
+  * @brief Set thread blockingMutexVar. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_ThreadVariableType * thread
-  * @param[in]  CosmOS_MutexVariableType * mutexParam
+  * @param[in] thread pointer to the thread variable type
+  * @param[in]  mutexParam pointer to the mutex variable
   *
   * @return none
 ********************************************************************************/
@@ -293,8 +300,8 @@ thread_setThreadBlockingMutexVar(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_thread_h
+  * @} */
+/*  Setters_thread_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -306,8 +313,8 @@ thread_setThreadBlockingMutexVar(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_thread_h
+  * @} */
+/*  General_thread_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

@@ -40,8 +40,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_sysJobs
+  * @} */
+/*  Macros_sysJobs
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -59,8 +59,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_sysJobs
+  * @} */
+/*  Variables_sysJobs
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -84,8 +84,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_sysJobs_c
+  * @} */
+/*  Getters_sysJobs_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -97,8 +97,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_sysJobs_c
+  * @} */
+/*  Setters_sysJobs_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -110,8 +110,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_sysJobs_c
+  * @} */
+/*  General_sysJobs_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -121,14 +121,32 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysJobs_dispatcher(BitWidthType entityId)
   *
-  * @brief System jobs dispatcher DEMO FUNCTION.
-  *
-  * @param[in]  BitWidthType entityId
-  *
-  * @return none
+  * @details The implementation contains obtaining of the core variable by
+  * calling core_getCoreVar function and using it in the function
+  * core_getCoreSysJobs to get system jobs variable for the current core.
+  * As the system jobs have internal scheduling the function
+  * sysJobs_getSysJobsCurrentTick is used to get its current internal tick.
+  * The current tick is then incremented by 1. The number of system jobs groups
+  * for the current core is obtained by calling sysJobs_getSysJobsNumOfGroups
+  * function and for loop that iterates over all system jobs groups for current
+  * core variable implemented. For every system jobs group the group tick
+  * multiplicator is obtained by sysJobs_getSysJobsGroupTickMultiplicator
+  * function and then the if condition is implemented to check if the current
+  * system jobs tick modulo group tick multiplicator is zero, otherwise the
+  * group is skipped. If the result of modulo operation is zero, handlers are
+  * obtained from the current system jobs group by calling function
+  * sysJobs_getSysJobsGroupHandlers and also the number of handlers is obtained
+  * by calling function sysJobs_getSysJobsGroupNumOfHandlers. Then nested for
+  * loop is implemented that iterates over all handlers configured in the
+  * current group and run them.
+  * In the end the system jobs hypertick is obtained by calling function
+  * sysJobs_getSysJobsHyperTick and used in modulo operation with the current
+  * system jobs tick and the result is set to the current system jobs tick by
+  * calling functio sysJobs_setSysJobsCurrentTick.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -145,9 +163,9 @@ sysJobs_dispatcher( BitWidthType entityId )
     sysJobsVar = core_getCoreSysJobs( coreVar );
 
     sysJobsCurrentTick = sysJobs_getSysJobsCurrentTick( sysJobsVar );
-    numOfGroups = sysJobs_getSysJobsNumOfGroups( sysJobsVar );
-
     sysJobsCurrentTick++;
+
+    numOfGroups = sysJobs_getSysJobsNumOfGroups( sysJobsVar );
 
     for ( BitWidthType groupIterator = 0; groupIterator < numOfGroups;
           groupIterator++ )

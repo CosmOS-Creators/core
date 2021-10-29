@@ -7,16 +7,10 @@
 *****************************************************************************//**
 ** @file bufferDouble.h
 *********************************************************************************
-<!--                   bufferDouble Module Group Definition                   -->
-*********************************************************************************
-** @defgroup bufferDouble_module bufferDouble
-** @brief bufferDouble Module
-** @details lorem
-*********************************************************************************
 <!--                    bufferDouble Unit Group Definition                    -->
 *********************************************************************************
 ** @defgroup bufferDouble_unit bufferDouble Unit
-** @ingroup bufferDouble_module
+** @ingroup buffer_module
 ** @brief bufferDouble Unit
 ** @details lorem
 *********************************************************************************
@@ -73,8 +67,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_bufferDouble_h
+  * @} */
+/*  Macros_bufferDouble_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +86,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_bufferDouble_h
+  * @} */
+/*  Variables_bufferDouble_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -117,8 +111,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_bufferDouble_h
+  * @} */
+/*  Getters_bufferDouble_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -130,8 +124,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_bufferDouble_h
+  * @} */
+/*  Setters_bufferDouble_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -142,17 +136,20 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_readArray(BitWidthType id, void * buffer,
   * BitWidthType size,
   * CosmOS_BufferDoubleAccessType access)
   *
-  * @brief Reading array from the bufferDouble DEMO CODE.
+  * @brief Reading array from the bufferDouble. This function is provided
+  * as a CosmOS API system call mapped with the routes and cannot be called from
+  * the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * buffer
-  * @param[in]  BitWidthType size
-  * @param[in]  CosmOS_BufferDoubleAccessType access
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  buffer pointer to the user buffer array
+  * @param[in]  size of the bytes to read
+  * @param[in]  access type of the access
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
@@ -165,17 +162,20 @@ bufferDouble_readArray(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_writeArray(BitWidthType id, void * buffer,
   * BitWidthType size,
   * CosmOS_BufferDoubleAccessType access)
   *
-  * @brief Writing array into the bufferDouble DEMO CODE.
+  * @brief Writing array into the bufferDouble. This function is provided
+  * as a CosmOS API system call mapped with the routes and cannot be called from
+  * the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * buffer
-  * @param[in]  BitWidthType size
-  * @param[in]  CosmOS_BufferDoubleAccessType access
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  buffer pointer to the user buffer array
+  * @param[in]  size of the bytes to read
+  * @param[in]  access type of the access
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
@@ -188,8 +188,8 @@ bufferDouble_writeArray(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_bufferDouble_h
+  * @} */
+/*  General_bufferDouble_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -206,13 +206,14 @@ bufferDouble_writeArray(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_getBufferDoublePair(
   * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble pair.
   *
-  * @param[in]  CosmOS_BufferDoubleVariableType * bufferDoubleVar
+  * @param[in]  bufferDoubleVar pointer
   *
   * @return CosmOS_BufferDoublePairConfigurationType *
 ********************************************************************************/
@@ -226,13 +227,14 @@ bufferDouble_getBufferDoublePair(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_getBufferDoubleKernelBufferId(
   * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble kernelBufferId.
   *
-  * @param[in]  CosmOS_BufferDoubleVariableType * bufferDoubleVar
+  * @param[in]  bufferDoubleVar pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -245,13 +247,14 @@ bufferDouble_getBufferDoubleKernelBufferId(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_getBufferDoubleUserBufferId(
   * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble userBufferId.
   *
-  * @param[in]  CosmOS_BufferDoubleVariableType * bufferDoubleVar
+  * @param[in]  bufferDoubleVar pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -264,13 +267,14 @@ bufferDouble_getBufferDoubleUserBufferId(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_getBufferDoubleKernelBuffer(
   * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble kernelBuffer.
   *
-  * @param[in]  CosmOS_BufferDoubleVariableType * bufferDoubleVar
+  * @param[in]  bufferDoubleVar pointer
   *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
@@ -285,13 +289,14 @@ bufferDouble_getBufferDoubleKernelBuffer(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_getBufferDoubleUserBuffer(
   * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Get bufferDouble userBuffer.
   *
-  * @param[in]  CosmOS_BufferDoubleVariableType * bufferDoubleVar
+  * @param[in]  bufferDoubleVar pointer
   *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
@@ -306,8 +311,8 @@ bufferDouble_getBufferDoubleUserBuffer(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_bufferDouble_h
+  * @} */
+/*  Getters_bufferDouble_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -318,14 +323,16 @@ bufferDouble_getBufferDoubleUserBuffer(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_setBufferDoubleKernelBuffer(
   * CosmOS_BufferDoubleVariableType * bufferDoubleVar,
   * BitWidthType activeKernelBufferIdParam)
   *
-  * @brief Set bufferDouble activeKernelBufferId.
+  * @brief Set bufferDouble activeKernelBufferId. This function cannot be called
+  * from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_BufferDoubleVariableType * bufferDoubleVar
+  * @param[in]  bufferDoubleVar pointer
   *
   * @return none
 ********************************************************************************/
@@ -339,14 +346,16 @@ bufferDouble_setBufferDoubleKernelBuffer(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_setBufferDoubleUserBuffer(
   * CosmOS_BufferDoubleVariableType * bufferDoubleVar,
   * BitWidthType activeUserBufferIdParam)
   *
-  * @brief Set bufferDouble activeUserBufferId.
+  * @brief Set bufferDouble activeUserBufferId. This function cannot be called
+  * from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_BufferDoubleVariableType * bufferDoubleVar
+  * @param[in]  bufferDoubleVar pointer
   *
   * @return none
 ********************************************************************************/
@@ -361,8 +370,8 @@ bufferDouble_setBufferDoubleUserBuffer(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_bufferDouble_h
+  * @} */
+/*  Setters_bufferDouble_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -373,13 +382,14 @@ bufferDouble_setBufferDoubleUserBuffer(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_isUserAndKernelBufferSame(
   * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
   * @brief Does user and kernel use the same buffer.
   *
-  * @param[in]  CosmOS_BufferDoubleVariableType * bufferDoubleVar
+  * @param[in]  bufferDoubleVar pointer
   *
   * @return CosmOS_BooleanType
 ********************************************************************************/
@@ -396,13 +406,15 @@ bufferDouble_isUserAndKernelBufferSame(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn bufferDouble_switchUserAndKernelBuffer(
   * CosmOS_BufferDoubleVariableType * bufferDoubleVar)
   *
-  * @brief Does user and kernel use the same buffer.
+  * @brief Switch user and kernel buffer. This function cannot be called from
+  * the unprivileged context directly.
   *
-  * @param[in]  CosmOS_BufferDoubleVariableType * bufferDoubleVar
+  * @param[in]  bufferDoubleVar pointer
   *
   * @return none
 ********************************************************************************/
@@ -419,8 +431,8 @@ bufferDouble_switchUserAndKernelBuffer(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_bufferDouble_h
+  * @} */
+/*  General_bufferDouble_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

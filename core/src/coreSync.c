@@ -42,8 +42,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_coreSync_c
+  * @} */
+/*  Macros_coreSync_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -61,8 +61,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_coreSync_c
+  * @} */
+/*  Variables_coreSync_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -86,8 +86,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_coreSync_c
+  * @} */
+/*  Getters_coreSync_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -99,8 +99,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_coreSync_c
+  * @} */
+/*  Setters_coreSync_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -112,8 +112,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_coreSync_c
+  * @} */
+/*  General_coreSync_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -123,16 +123,23 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn coreSync_getBarrier(CosmOS_CoreVariableType * coreVar,
   * BitWidthType barrierId)
   *
-  * @brief Set barrier with specific id for core X.
-  *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  BitWidthType barrierId
-  *
-  * @return none
+  * @details The implementation contains obtaining barier variable based on the
+  * barrier id argument by the core_getBarrierVar function. Then the state of
+  * this barrier variable is set to the BARRIER_STATE_ENUM__REACHED by the
+  * coreSync_setBarrierState function.
+  * Then we get operating system variable by calling os_getOsVar function which
+  * is later used in os_getOsNumberOfCores function call to get number of cores.
+  * Number of synchronized cores is then set to zero and used to obtain the
+  * first core variable by calling os_getCoreVar. Then the barrier variable
+  * is obtained by calling core_getBarrierVar. In the implemented while loop we
+  * iterate over the all cores and their barriers with specified barrier id.
+  * The loop ends if there is only one core configured in the system or if
+  * number of synchronized cores is equal to the number of cores.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -185,12 +192,13 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn coreSync_reactivateBarrier(CosmOS_CoreVariableType * coreVar,
   * BitWidthType barrierId)
   *
-  * @brief Reactivate barrier with specific barrierId for coreVar.
-  *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  BitWidthType barrierId
-  *
-  * @return none
+  * @details The implementation contains reactivation of the scheduler
+  * synchronization barriers which are the only barriers that can be currently
+  * reactivated. Calling the cosmosAssert function to check if the barrierId
+  * is equal to the SCHEDULERS_SYNC_ID and then obtaining barrier variable by
+  * calling core_getBarrierVar with the barrier id and setting the barrier
+  * variable state by calling coreSync_setBarrierState function with argument
+  * BARRIER_STATE_ENUM__ACTIVATED. DEMO
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

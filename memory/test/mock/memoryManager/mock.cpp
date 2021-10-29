@@ -1,19 +1,20 @@
 #include <gmock/gmock.h>
-
+#include "memoryManager.h"
 #include "memoryManager_mock.h"
 
-#include "memoryManager.h"
+std::unique_ptr<MemoryManager_MOCK>
+    MemoryManager_TestFixture::_MemoryManagerMock;
 
-// instantiate mocked lib
-std::unique_ptr<MemoryManager_MOCK> MemoryManager_TestFixture::_MemoryManagerMock;
-
-// fake lib functions
-void memoryManager_heapInit(CosmOS_CoreVariableType * coreVar)
+void
+memoryManager_heapInit( CosmOS_CoreVariableType * coreVar )
 {
-  MemoryManager_TestFixture::_MemoryManagerMock->memoryManager_heapInit(coreVar);
+    MemoryManager_TestFixture::_MemoryManagerMock->memoryManager_heapInit(
+        coreVar );
 }
 
-void memoryManager_stackInit(CosmOS_CoreVariableType * coreVar)
+void
+memoryManager_stackInit( CosmOS_CoreVariableType * coreVar )
 {
-  MemoryManager_TestFixture::_MemoryManagerMock->memoryManager_stackInit(coreVar);
+    MemoryManager_TestFixture::_MemoryManagerMock->memoryManager_stackInit(
+        coreVar );
 }

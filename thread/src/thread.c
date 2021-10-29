@@ -45,8 +45,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_thread
+  * @} */
+/*  Macros_thread
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -64,8 +64,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_thread
+  * @} */
+/*  Variables_thread
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -89,8 +89,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_thread_c
+  * @} */
+/*  Getters_thread_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -102,8 +102,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_thread_c
+  * @} */
+/*  Setters_thread_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -114,18 +114,26 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn thread_sleepMsInternal(BitWidthType entityId,
   * CosmOS_CoreVariableType * coreVar,
   * BitWidthType tickCount)
   *
-  * @brief Set thread to sleep internal for x milliseconds DEMO CODE.
-  *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  BitWidthType tickCount
-  *
-  * @return CosmOS_SleepStateType
+  * @details The implementation contains obtaining of the schedulable variable
+  * in execution is obtained by the core_getCoreSchedulableInExecution function.
+  * From the schedulable variable is then extracted the alarm id by calling
+  * schedulable_getAlarmId function, this id is then used to get alarm variable
+  * by calling function core_getAlarmVar. After this point is schedulable
+  * variable state set to the SCHEDULABLE_STATE_ENUM__SLEEP by calling function
+  * schedulable_setState. Subsequently the alarm needs to be configured,
+  * therefore the alarm_setAlarmTickCount function is called with tickCount
+  * argument to set internal timer of the alarm and also alarm state is set to
+  * ALARM_STATE_ENUM__ACTIVATED by calling function alarm_setAlarmState to let
+  * the scheduler know that this alarm needs to be updated from now. Sleep state
+  * is set to the SLEEP_STATE_ENUM__OK and after calling the function for
+  * triggering scheduler algorithm CILinterrupt_contextSwitchRoutineTrigger is
+  * returned from the function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -165,14 +173,29 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn thread_sleepMs(BitWidthType delayMs)
   *
-  * @brief Set thread to sleep for x milliseconds DEMO CODE.
-  *
-  * @param[in]  BitWidthType delayMs
-  *
-  * @return CosmOS_SleepStateType
+  * @details The implementation contains if condition that checks if delayMs is
+  * non-zero value otherwise it returns sleepStateReturn
+  * SLEEP_STATE_ENUM__ERROR_MIN. Then the core variable is obtained by calling
+  * core_getCoreVar function and then the msToTicks is obtained by calling
+  * core_getMsToTicks with core variable argument.
+  * After this point is necessary to know if the schedulable variable obtained
+  * by core_getCoreSchedulableInExecution function is
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD therefore the schedulable type is obtained
+  * by calling schedulable_getInstanceType and then check in the if condition,
+  * otherwise the sleepStateReturn is set to the
+  * SLEEP_STATE_ENUM__ERROR_ONLY_THREADS_CAN_SLEEP and returned.
+  * After this point the __MUL_OVERFLOW function as macro is called to check if
+  * required tickCount wont overflow otherwise the sleepStateReturn is set to
+  * SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX and returned. Additionally the
+  * tickCount has to be incremented by 1 calling the __ADD_OVERFLOW function
+  * and check in the if condition if overflow wont happen otherwise the
+  * sleepStateReturn is set to SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX and
+  * returned. If there is no overflow the CosmOS internal API
+  * cosmosApiInternal_thread_sleepMsInternal is called.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -200,21 +223,22 @@ thread_sleepMs( BitWidthType delayMs )
         if ( schedulableInstanceType IS_EQUAL_TO
                  SCHEDULABLE_INSTANCE_ENUM__THREAD )
         {
-            if ( __MUL_OVERFLOW( delayMs, msToTicks, &tickCount ) )
+            if ( IS_NOT( __MUL_OVERFLOW( delayMs, msToTicks, &tickCount ) ) )
             {
-                sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX;
-            }
-            else
-            {
-                if ( __ADD_OVERFLOW( tickCount, (BitWidthType)1, &tickCount ) )
-                {
-                    sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX;
-                }
-                else
+                if ( IS_NOT( __ADD_OVERFLOW(
+                         tickCount, (BitWidthType)1, &tickCount ) ) )
                 {
                     sleepStateReturn = cosmosApiInternal_thread_sleepMsInternal(
                         coreVar, tickCount );
                 }
+                else
+                {
+                    sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX;
+                }
+            }
+            else
+            {
+                sleepStateReturn = SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX;
             }
         }
         else
@@ -235,8 +259,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_thread_c
+  * @} */
+/*  General_thread_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **

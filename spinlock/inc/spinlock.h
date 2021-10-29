@@ -73,8 +73,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_spinlock_h
+  * @} */
+/*  Macros_spinlock_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +92,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_spinlock_h
+  * @} */
+/*  Variables_spinlock_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -116,12 +116,15 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn spinlock_getSpinlock(BitWidthType id)
   *
-  * @brief Get spinlock DEMO CODE.
+  * @brief Get spinlock. This function is provided
+  * as a CosmOS API system call mapped with the routes and cannot be called from
+  * the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType id
+  * @param[in]  id is used during the system call dispatching
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
@@ -130,8 +133,8 @@ spinlock_getSpinlock( BitWidthType id );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_spinlock_h
+  * @} */
+/*  Getters_spinlock_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -143,8 +146,8 @@ spinlock_getSpinlock( BitWidthType id );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_spinlock_h
+  * @} */
+/*  Setters_spinlock_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -155,12 +158,15 @@ spinlock_getSpinlock( BitWidthType id );
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn spinlock_trySpinlock(BitWidthType id)
   *
-  * @brief Try to get spinlock DEMO CODE.
+  * @brief Try to get spinlock. This function is provided
+  * as a CosmOS API system call mapped with the routes and cannot be called from
+  * the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType id
+  * @param[in]  id is used during the system call dispatching
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
@@ -169,12 +175,15 @@ spinlock_trySpinlock( BitWidthType id );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn spinlock_releaseSpinlock(BitWidthType id)
   *
-  * @brief Release spinlock DEMO CODE.
+  * @brief Release spinlock. This function is provided
+  * as a CosmOS API system call mapped with the routes and cannot be called from
+  * the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType id
+  * @param[in]  id is used during the system call dispatching
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
@@ -183,8 +192,8 @@ spinlock_releaseSpinlock( BitWidthType id );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_spinlock_h
+  * @} */
+/*  General_spinlock_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -202,17 +211,18 @@ spinlock_releaseSpinlock( BitWidthType id );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_spinlock_h
+  * @} */
+/*  Getters_spinlock_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn spinlock_getSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Get spinlock value.
   *
-  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+  * @param[in]  spinlockVar pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -224,13 +234,14 @@ spinlock_getSpinlockValue( CosmOS_SpinlockVariableType * spinlockVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn spinlock_getSpinlockSchedulableOwner(
   * CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Get spinlock schedulableOwner.
   *
-  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+  * @param[in]  spinlockVar pointer
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
@@ -248,14 +259,16 @@ spinlock_getSpinlockSchedulableOwner( CosmOS_SpinlockVariableType * spinlockVar 
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn spinlock_setSpinlockValue(CosmOS_SpinlockVariableType * spinlockVar,
   * BitWidthType spinlockParam)
   *
-  * @brief Set spinlock value.
+  * @brief Set spinlock value. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
-  * @param[in]  CosmOS_SpinlockStateType spinlockParam
+  * @param[out]  spinlockVar pointer
+  * @param[in]  spinlockParam value to be set to the spinlock variable
   *
   * @return none
 ********************************************************************************/
@@ -269,15 +282,18 @@ spinlock_setSpinlockValue(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn spinlock_setSpinlockSchedulableOwner(
   * CosmOS_SpinlockVariableType * spinlock,
   * BitWidthType spinlockParam)
   *
-  * @brief Set spinlock schedulableOwner.
+  * @brief Set spinlock schedulableOwner. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableOwnerParam
+  * @param[out]  spinlockVar pointer
+  * @param[in]  schedulableOwnerParam pointer to the schedulable that owns
+  * current spinlock
   *
   * @return none
 ********************************************************************************/
@@ -291,8 +307,8 @@ spinlock_setSpinlockSchedulableOwner(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_spinlock_h
+  * @} */
+/*  Setters_spinlock_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -303,14 +319,15 @@ spinlock_setSpinlockSchedulableOwner(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar,
   * CosmOS_SpinlockVariableType * spinlockVar)
   *
-  * @brief Check if the spinlock will ends up in deadlock DEMO CODE.
+  * @brief Check if the spinlock will ends up in deadlock. DEMO
   *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+  * @param[in]  coreVar pointer
+  * @param[in]  spinlockVar pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
@@ -328,14 +345,15 @@ spinlock_willCauseDeadlock(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn spinlock_ownsSchedulableSpinlock(CosmOS_CoreVariableType * coreVar,
   * CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Check if the schedulable in execution owns the current spinlock.
   *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  CosmOS_SpinlockVariableType * spinlockVar
+  * @param[in]  coreVar pointer
+  * @param[in]  spinlockVar pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
@@ -352,8 +370,8 @@ spinlock_ownsSchedulableSpinlock(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_spinlock_h
+  * @} */
+/*  General_spinlock_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

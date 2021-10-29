@@ -44,8 +44,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_sysCalls
+  * @} */
+/*  Macros_sysCalls
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -63,8 +63,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_sysCalls
+  * @} */
+/*  Variables_sysCalls
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -88,8 +88,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_sysCalls_c
+  * @} */
+/*  Getters_sysCalls_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -101,8 +101,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_sysCalls_c
+  * @} */
+/*  Setters_sysCalls_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -114,8 +114,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_sysCalls_c
+  * @} */
+/*  General_sysCalls_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -125,14 +125,12 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_ret_void(BitWidthType id)
   *
-  * @brief System call handling general operating system functionalities.
-  *
-  * @param[in]  BitWidthType id
-  *
-  * @return none
+  * @details The implementation contains calling the CIL function
+  * CILsysCalls_bitWidthType_ret_void.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -148,14 +146,13 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_ret_bitWidthType(BitWidthType id)
   *
-  * @brief System call for bitWidthType args and ret bitWidthType.
-  *
-  * @param[in]  BitWidthType id
-  *
-  * @return BitWidthType
+  * @details The implementation contains calling the CIL function
+  * CILsysCalls_bitWidthType_ret_bitWidthType and returning
+  * the result.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -175,16 +172,14 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_bitWidthType_ret_bitWidthType(BitWidthType id,
   * BitWidthType arg)
   *
-  * @brief System call for bitWidthType args and ret bitWidthType.
-  *
-  * @param[in]  BitWidthType id
-  * @param[in]  BitWidthType arg
-  *
-  * @return BitWidthType
+  * @details The implementation contains calling the CIL function
+  * CILsysCalls_bitWidthType_bitWidthType_ret_bitWidthType and returning
+  * the result.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -207,19 +202,16 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(
   * BitWidthType id,
   * void * ptr,
   * BitWidthType arg)
   *
-  * @brief System call for voidPtr,bitWidthType args and ret bitWidthType.
-  *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * ptr
-  * @param[in]  BitWidthType arg
-  *
-  * @return BitWidthType
+  * @details The implementation contains calling the CIL function
+  * CILsysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType and returning
+  * the result.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -243,18 +235,15 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType(
   * BitWidthType id,
   * void * ptr,
   * BitWidthType arg)
   *
-  * @brief System call for voidPtr and ret bitWidthType.
-  *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * ptr
-  *
-  * @return BitWidthType
+  * @details The implementation contains calling the CIL function
+  * CILsysCalls_bitWidthType_voidPtr_ret_bitWidthType and returning the result.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

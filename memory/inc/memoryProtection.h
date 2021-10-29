@@ -67,8 +67,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_memoryProtection_h
+  * @} */
+/*  Macros_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -86,8 +86,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_memoryProtection_h
+  * @} */
+/*  Variables_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -111,8 +111,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_memoryProtection_h
+  * @} */
+/*  Getters_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -123,20 +123,22 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn memoryProtection_init(AddressType codeMemoryHighAddress,
   * AddressType codeMemoryLowAddress,
   * AddressType stackMemoryHighAddress,
   * AddressType stackMemoryLowAddress,
   * AddressType unprotectedMemoryLowAddress,
   * AddressType unprotectedMemoryHighAddress)
-  * @brief Init memory protection DEMO CODE.
   *
-  * @param[in]  AddressType codeMemoryHighAddress
-  * @param[in]  AddressType codeMemoryLowAddress
-  * @param[in]  AddressType stackMemoryHighAddress
-  * @param[in]  AddressType unprotectedMemoryLowAddress
-  * @param[in]  AddressType unprotectedMemoryHighAddress
+  * @brief Memory protection initialization. DEMO
+  *
+  * @param[in]  codeMemoryHighAddress
+  * @param[in]  codeMemoryLowAddress
+  * @param[in]  stackMemoryHighAddress
+  * @param[in]  unprotectedMemoryLowAddress
+  * @param[in]  unprotectedMemoryHighAddress
   *
   * @return none
 ********************************************************************************/
@@ -151,14 +153,17 @@ memoryProtection_init(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,
   * CosmOS_SchedulableVariableType  * schedulable)
   *
-  * @brief Set memory protection for current execution context.
+  * @brief Set memory protection for current execution context that means for
+  * the schedulable stack, peripheral access and program memory. This function
+  * cannot be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  CosmOS_SchedulableConfigurationType  * schedulable
+  * @param[in]  core variable pointer
+  * @param[in]  schedulable variable pointer
   *
   * @return none
 ********************************************************************************/
@@ -169,31 +174,33 @@ memoryProtection_setMemoryProtection(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn memoryProtection_isMemoryRegionProtected(
   * CosmOS_CoreVariableType * core,
   * void  * regionLowAddressPointer,
   * BitWidthType size)
   *
   * @brief Check if specific memory region is protected against changes
-  * for the current execution context.
+  * for the current execution context. This function cannot be called from
+  * the unprivileged context directly. DEMO
   *
-  * @param[in]  CosmOS_CoreVariableType * core
-  * @param[in]  void * regionLowAddressPointer
-  * @param[in]  BitWidthType size
+  * @param[in]  core variable pointer
+  * @param[in]  regionLowAddressPointer pointer to the region
+  * @param[in]  size of the region
   *
   * @return CosmOS_BooleanType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_BooleanType
 memoryProtection_isMemoryRegionProtected(
     CosmOS_CoreVariableType * core,
-    void * regionLowAddressPointer,
+    AddressType * regionLowAddressPointer,
     BitWidthType size );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_memoryProtection_h
+  * @} */
+/*  Setters_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -205,8 +212,8 @@ memoryProtection_isMemoryRegionProtected(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_memoryProtection_h
+  * @} */
+/*  General_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -224,8 +231,8 @@ memoryProtection_isMemoryRegionProtected(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_memoryProtection_h
+  * @} */
+/*  Getters_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -237,8 +244,8 @@ memoryProtection_isMemoryRegionProtected(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_memoryProtection_h
+  * @} */
+/*  Setters_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -250,8 +257,8 @@ memoryProtection_isMemoryRegionProtected(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_memoryProtection_h
+  * @} */
+/*  General_memoryProtection_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

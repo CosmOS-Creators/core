@@ -29,7 +29,6 @@
 #include "route.h"
 #include "spinlock.h"
 
-
 /* CIL interfaces */
 #include "CILcore.h"
 #include "CILinterrupt.h"
@@ -49,8 +48,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_buffer
+  * @} */
+/*  Macros_buffer
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -68,8 +67,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_buffer
+  * @} */
+/*  Variables_buffer
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -93,8 +92,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_buffer_c
+  * @} */
+/*  Getters_buffer_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -106,8 +105,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_buffer_c
+  * @} */
+/*  Setters_buffer_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -118,38 +117,42 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn buffer_pull(CosmOS_BufferVariableType * bufferVar, unsigned char * data)
   *
-  * @brief Pull data from the buffer DEMO CODE.
+  * @brief Pull data from the buffer. This function cannot be called from the
+  * unprivileged context directly. DEMO
   *
-  * @param[in]  CosmOS_BufferVariableType * bufferVar
-  * @param[in]  unsigned char * data
+  * @param[in]  bufferVar buffer variable structure pointer
+  * @param[out]  data data to pull from the buffer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__OS_FUNC_SECTION static CosmOS_BufferStateType
+__STATIC_FORCEINLINE CosmOS_BufferStateType
 buffer_pull( CosmOS_BufferVariableType * buffer, unsigned char * data );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn buffer_push(CosmOS_BufferVariableType * bufferVar, unsigned char data)
   *
-  * @brief Push data to the buffer DEMO CODE.
+  * @brief Push data to the buffer. This function cannot be called from the
+  * unprivileged context directly. DEMO
   *
-  * @param[in]  CosmOS_BufferVariableType * bufferVar
-  * @param[in]  unsigned char data
+  * @param[in]  bufferVar buffer variable structure pointer
+  * @param[in]  data data to push to the buffer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
-__OS_FUNC_SECTION static CosmOS_BufferStateType
+__STATIC_FORCEINLINE CosmOS_BufferStateType
 buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_buffer_c
+  * @} */
+/*  General_buffer_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -159,20 +162,18 @@ buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data );
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn buffer_pull(CosmOS_BufferVariableType * bufferVar, unsigned char * data)
   *
-  * @brief Pull data from the buffer DEMO CODE.
-  *
-  * @param[in]  CosmOS_BufferVariableType * bufferVar
-  * @param[in]  unsigned char * data
-  *
-  * @return CosmOS_BufferStateType
+  * @details The implementation contains obtaining of the buffer size by calling
+  * function buffer_getBufferSize and obtaining buffer array pointer by calling
+  * function buffer_getBuffer. To the data pointer argument is then written
+  * one byte from the buffer tail and fullCells of the current bufferVar are
+  * decremented by one. Position of the tail is updated and buffer empty state
+  * is obtained by the buffer_isEmpty function and returned.
 ********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION static CosmOS_BufferStateType
+__STATIC_FORCEINLINE CosmOS_BufferStateType
 buffer_pull( CosmOS_BufferVariableType * bufferVar, unsigned char * data )
 {
     BitWidthType bufferSize;
@@ -193,26 +194,21 @@ buffer_pull( CosmOS_BufferVariableType * bufferVar, unsigned char * data )
 
     return bufferState;
 }
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn buffer_push(CosmOS_BufferVariableType * bufferVar, unsigned char data)
   *
-  * @brief Push data to the buffer DEMO CODE.
-  *
-  * @param[in]  CosmOS_BufferVariableType * bufferVar
-  * @param[in]  unsigned char data
-  *
-  * @return CosmOS_BufferStateType
+  * @details The implementation contains obtaining of the buffer size by calling
+  * function buffer_getBufferSize and obtaining buffer array pointer by calling
+  * function buffer_getBuffer. To the buffer array in the head position is
+  * written the data byte argument and fullCells of the current bufferVar are
+  * incremented by one. Position of the head is updated and buffer full state
+  * is obtained by the buffer_isFull function and returned.
 ********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION static CosmOS_BufferStateType
+__STATIC_FORCEINLINE CosmOS_BufferStateType
 buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data )
 {
     BitWidthType bufferSize;
@@ -233,22 +229,45 @@ buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data )
 
     return bufferState;
 }
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn buffer_readArray(BitWidthType id, void * buffer, BitWidthType num)
+  * ****************************************************************************/
+/**
+  * @fn buffer_readArray(BitWidthType id, void * buffer, BitWidthType size)
   *
-  * @brief Reading array from the buffer DEMO CODE.
-  *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * buffer
-  * @param[in]  BitWidthType size
-  *
-  * @return CosmOS_BufferStateType
+  * @details The implementation contains obtaining of the operating system
+  * generated variable structure by os_getOsVar function that stores all system
+  * buffers in it. Then the generated core variable structure is obtained byt
+  * the function CILcore_getCoreVar and used in the
+  * memoryProtection_isMemoryRegionProtected function call to check if the
+  * memory where the data from the buffer will be written is protected.
+  * If yes the bufferState is returned with the value
+  * BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED. If not bufferVar is
+  * obtained by the function os_getOsBufferVar based on the id argument which
+  * is mapped with the routes to the proper entity, in this case one of the
+  * system buffers. From the buffer variable are then extracted read permissions
+  * by the function call buffer_getBufferReadPermission and passed to the
+  * function permission_tryAccess that checks if the current schedulable has
+  * read access to this system buffer and if not bufferState is returned with
+  * the value BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED. If yes the interrupts are
+  * disable before reading from the buffer by calling the function
+  * CILinterrupt_disableInterrupts. After this point the function has ensure the
+  * exclusive access to the bufferVar and therefore buffer_isBufferInterCore
+  * function is called to know if the buffer is inter-core. If yes spinlock id
+  * is obtained by the function buffer_getBufferSpinlockId and then the spinlock
+  * is tried by the non-blocking function spinlock_trySpinlock. If the spinlock
+  * cannot be obtained the interrupts are enabled again and the bufferState is
+  * returned with the value BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED. If
+  * the spinlock was obtained the function buffer_getFullCellsNum is called to
+  * get full cells number and check if the user required more bytes to read than
+  * available. If yes then the interrupts are enabled again the bufferState is
+  * returned with the value
+  * BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM. If there is enough
+  * bytes to read the buffer_pull function is called in the while loop till the
+  * required number of data is read out of the buffer and then the interrupts
+  * are enabled again the bufferState is returned with the last value returned
+  * from the buffer_pull function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -359,16 +378,42 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn buffer_writeArray(BitWidthType id, void * buffer, BitWidthType num)
+  * ****************************************************************************/
+/**
+  * @fn buffer_writeArray(BitWidthType id, void * buffer, BitWidthType size)
   *
-  * @brief Writing array into the buffer DEMO CODE.
-  *
-  * @param[in]  BitWidthType id
-  * @param[in]  void * buffer
-  * @param[in]  BitWidthType size
-  *
-  * @return CosmOS_BufferStateType
+  * @details The implementation contains obtaining of the operating system
+  * generated variable structure by os_getOsVar function that stores all system
+  * buffers in it. Then the generated core variable structure is obtained byt
+  * the function CILcore_getCoreVar and used in the
+  * memoryProtection_isMemoryRegionProtected function call to check if the
+  * memory where the data from the buffer will be read from is protected.
+  * If yes the bufferState is returned with the value
+  * BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED. If not bufferVar is
+  * obtained by the function os_getOsBufferVar based on the id argument which
+  * is mapped with the routes to the proper entity, in this case one of the
+  * system buffers. From the buffer variable are then extracted write
+  * permissions by the function call buffer_getBufferReadPermission and passed
+  * to the function permission_tryAccess that checks if the current schedulable
+  * has write access to this system buffer and if not bufferState is returned
+  * with the value BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED. If yes the interrupts
+  * are disable before writing to the buffer by calling the function
+  * CILinterrupt_disableInterrupts. After this point the function has ensure the
+  * exclusive access to the bufferVar and therefore buffer_isBufferInterCore
+  * function is called to know if the buffer is inter-core. If yes spinlock id
+  * is obtained by the function buffer_getBufferSpinlockId and then the spinlock
+  * is tried by the non-blocking function spinlock_trySpinlock. If the spinlock
+  * cannot be obtained the interrupts are enabled again and the bufferState is
+  * returned with the value BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED. If
+  * the spinlock was obtained the function buffer_getEmptyCellsNum is called to
+  * get empty cells number and check if the user required more bytes to write
+  * than empty cells available in the buffer. If yes then the interrupts are
+  * enabled again the bufferState is returned with the value
+  * BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM. If there is enough
+  * bytes to write the buffer_push function is called in the while loop till the
+  * required number of data is written to the buffer and then the interrupts
+  * are enabled again the bufferState is returned with the last value returned
+  * from the buffer_push function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

@@ -73,8 +73,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_os_h
+  * @} */
+/*  Macros_os_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +92,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_os_h
+  * @} */
+/*  Variables_os_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -116,10 +116,12 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsVar(void)
   *
-  * @brief Get osVar.
+  * @brief Get operating system configured variable type. This function can be
+  * called from the unprivileged context directly.
   *
   * @param[in]  none
   *
@@ -130,10 +132,12 @@ os_getOsVar( void );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_kernelPanic(void)
   *
-  * @brief OS kernel panic function DEMO.
+  * @brief OS kernel panic function. This is operating system internal funtion
+  * only and cannot be called from the unprivileged context directly. DEMO
   *
   * @param[in]  none
   *
@@ -144,8 +148,8 @@ os_kernelPanic( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_os_h
+  * @} */
+/*  Getters_os_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -157,8 +161,8 @@ os_kernelPanic( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_os_h
+  * @} */
+/*  Setters_os_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -169,12 +173,15 @@ os_kernelPanic( void );
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_start(BitWidthType entityId)
   *
-  * @brief Start operating system. DEMO / NO RETURN FUNC
+  * @brief Start of the operating system. This function is provided as a CosmOS
+  * API system call mapped with the routes and cannot be called from the
+  * unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType entityId
+  * @param[in]  entityId is used during the system call dispatching
   *
   * @return none
 ********************************************************************************/
@@ -183,14 +190,17 @@ os_start( BitWidthType entityId );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn os_write8(void)
+  * ****************************************************************************/
+/**
+  * @fn os_write8( BitWidthType entityId, uint8_t * address, uint8_t value )
   *
-  * @brief OS write to protected memory 8bit variable DEMO.
+  * @brief OS write to protected 8-bit memory space. This function is provided
+  * as a CosmOS API system call mapped with the routes and cannot be called from
+  * the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  uint8_t *address
-  * @param[in]  uint8_t value
+  * @param[in]  entityId is used during the system call dispatching
+  * @param[out]  address address of the memory
+  * @param[in]  value value which should be written to the address
   *
   * @return none
 ********************************************************************************/
@@ -199,14 +209,17 @@ os_write8( BitWidthType entityId, uint8_t * address, uint8_t value );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn os_write16(void)
+  * ****************************************************************************/
+/**
+  * @fn os_write16( BitWidthType entityId, uint16_t * address, uint16_t value )
   *
-  * @brief OS write to protected memory 16bit variable DEMO.
+  * @brief OS write to protected 16-bit memory space. This function is provided
+  * as a CosmOS API system call mapped with the routes and cannot be called from
+  * the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  uint16_t *address
-  * @param[in]  uint16_t value
+  * @param[in]  entityId is used during the system call dispatching
+  * @param[out]  address address of the memory
+  * @param[in]  value value which should be written to the address
   *
   * @return none
 ********************************************************************************/
@@ -215,14 +228,17 @@ os_write16( BitWidthType entityId, uint16_t * address, uint16_t value );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn os_write32(void)
+  * ****************************************************************************/
+/**
+  * @fn os_write32( BitWidthType entityId, uint32_t * address, uint32_t value )
   *
-  * @brief OS write to protected memory 32bit variable DEMO.
+  * @brief OS write to protected 32-bit memory space. This function is provided
+  * as a CosmOS API system call mapped with the routes and cannot be called from
+  * the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  uint32_t *address
-  * @param[in]  uint32_t value
+  * @param[in]  entityId is used during the system call dispatching
+  * @param[out]  address address of the memory
+  * @param[in]  value value which should be written to the address
   *
   * @return none
 ********************************************************************************/
@@ -231,8 +247,8 @@ os_write32( BitWidthType entityId, uint32_t * address, uint32_t value );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_os_h
+  * @} */
+/*  General_os_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -249,12 +265,13 @@ os_write32( BitWidthType entityId, uint32_t * address, uint32_t value );
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsCores(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os cores pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return CosmOS_CoreConfigurationType *
 ********************************************************************************/
@@ -266,12 +283,13 @@ os_getOsCores( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsNumberOfCores(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os numberOfCores.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -283,12 +301,13 @@ os_getOsNumberOfCores( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsBuffers(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os buffers pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return CosmOS_BufferConfigurationType *
 ********************************************************************************/
@@ -300,12 +319,13 @@ os_getOsBuffers( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsNumberOfBuffers(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os numberOfBuffers.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -317,12 +337,13 @@ os_getOsNumberOfBuffers( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsRoutes(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os route pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return CosmOS_RoutesConfigurationType *
 ********************************************************************************/
@@ -334,12 +355,13 @@ os_getOsRoutes( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsNumberOfSpinlocks(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os numberOfSpinlocks.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -351,12 +373,13 @@ os_getOsNumberOfSpinlocks( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsCoreVars(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os coreVars pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return CosmOS_CoreVariableType *
 ********************************************************************************/
@@ -368,13 +391,14 @@ os_getOsCoreVars( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getCoreVar(CosmOS_OsVariableType * osVar, BitWidthType coreId)
   *
   * @brief Get os core pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
-  * @param[in]  BitWidthType coreId
+  * @param[in]  osVar pointer
+  * @param[in]  coreId specifies the core from array of configured cores
   *
   * @return CosmOS_CoreVariableType *
 ********************************************************************************/
@@ -386,12 +410,13 @@ os_getCoreVar( CosmOS_OsVariableType * osVar, BitWidthType coreId )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsBufferVars(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os bufferVars pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
@@ -403,13 +428,14 @@ os_getOsBufferVars( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsBufferVar(CosmOS_OsVariableType * osVar,BitWidthType bufferId)
   *
   * @brief Get os buffer pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
-  * @param[in]  BitWidthType bufferId
+  * @param[in]  osVar pointer
+  * @param[in]  bufferId specifies the buffer from array of configured buffers
   *
   * @return CosmOS_BufferVariableType *
 ********************************************************************************/
@@ -421,12 +447,13 @@ os_getOsBufferVar( CosmOS_OsVariableType * osVar, BitWidthType bufferId )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsBufferDoubleVars(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os bufferDoubleVars pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return CosmOS_BufferDoubleVariableType *
 ********************************************************************************/
@@ -438,14 +465,16 @@ os_getOsBufferDoubleVars( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar,
   * BitWidthType bufferDoubleId)
   *
   * @brief Get os bufferDouble pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
-  * @param[in]  BitWidthType bufferId
+  * @param[in]  osVar pointer
+  * @param[in]  bufferDoubleId specifies the bufferDouble from array of
+  * configured buffersDouble
   *
   * @return CosmOS_BufferDoubleVariableType *
 ********************************************************************************/
@@ -459,12 +488,13 @@ os_getOsBufferDoubleVar(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsSpinlockVars(CosmOS_OsVariableType * osVar)
   *
   * @brief Get os spinlockVars pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  osVar pointer
   *
   * @return CosmOS_SpinlockVariableType *
 ********************************************************************************/
@@ -476,14 +506,16 @@ os_getOsSpinlockVars( CosmOS_OsVariableType * osVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn os_getOsSpinlockVar(CosmOS_OsVariableType * osVar,
   * BitWidthType spinlockId)
   *
   * @brief Get os spinlock pointer.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
-  * @param[in]  BitWidthType bufferId
+  * @param[in]  osVar pointer
+  * @param[in]  spinlockId specifies the spinlock from array of configured
+  * spinlocks
   *
   * @return CosmOS_SpinlockVariableType *
 ********************************************************************************/
@@ -495,8 +527,8 @@ os_getOsSpinlockVar( CosmOS_OsVariableType * osVar, BitWidthType spinlockId )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_os_h
+  * @} */
+/*  Getters_os_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -508,8 +540,8 @@ os_getOsSpinlockVar( CosmOS_OsVariableType * osVar, BitWidthType spinlockId )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_os_h
+  * @} */
+/*  Setters_os_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -521,8 +553,8 @@ os_getOsSpinlockVar( CosmOS_OsVariableType * osVar, BitWidthType spinlockId )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_os_h
+  * @} */
+/*  General_os_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

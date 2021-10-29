@@ -7,7 +7,7 @@
 *****************************************************************************//**
 ** @file permission.c
 *********************************************************************************
-<!--                  permission Unit Local Group Definition                 -->
+<!--                  permission Unit Local Group Definition                  -->
 *********************************************************************************
 ** @defgroup Local_permission Local
 ** @ingroup permission_unit
@@ -42,8 +42,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_permission
+  * @} */
+/*  Macros_permission
 ********************************************************************************/
 #define BITLOCK_MASK (BitWidthType)0x1
 /********************************************************************************
@@ -62,8 +62,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_permission
+  * @} */
+/*  Variables_permission
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -87,8 +87,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_permission_c
+  * @} */
+/*  Getters_permission_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -100,8 +100,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_permission_c
+  * @} */
+/*  Setters_permission_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -112,17 +112,49 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn permission_trySchedulableAccess(
   * CosmOS_PermissionsConfigurationType * permission,
   * CosmOS_SchedulableVariableType * schedulableVar)
   *
   * @brief Try if schedulable has access.
   *
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
+  * @param[in]  permission pointer to the permission configuration type
+  * @param[in]  schedulableVar pointer
   *
   * @return CosmOS_AccessStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_AccessStateType
+permission_trySchedulableAccess(
+    CosmOS_PermissionsConfigurationType * permission,
+    CosmOS_SchedulableVariableType * schedulableVar );
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  General_permission_c
+********************************************************************************/
+/********************************************************************************
+**                         Function Prototypes | Stop                          **
+********************************************************************************/
+/********************************************************************************
+**                        Function Definitions | Start                         **
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn permission_trySchedulableAccess(
+  * CosmOS_PermissionsConfigurationType * permission,
+  * CosmOS_SchedulableVariableType * schedulableVar)
+  *
+  * @details The implementation contains cosmosAssert call with the comparing of
+  * bitlock and bitlock inverted value.
+  * After this the bitlock element from bitlock array is extracted by the unique
+  * schedulable id and the specific bit shifted by the unique schedulable id.
+  * If the bit is 0 function returns ACCESS_STATE_ENUM__DENIED if 1
+  * ACCESS_STATE_ENUM__ALLOWED.
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_AccessStateType
 permission_trySchedulableAccess(
@@ -143,30 +175,19 @@ permission_trySchedulableAccess(
             ? ACCESS_STATE_ENUM__ALLOWED
             : ACCESS_STATE_ENUM__DENIED );
 }
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @}
-  * General_permission_c
-********************************************************************************/
-/********************************************************************************
-**                         Function Prototypes | Stop                          **
-********************************************************************************/
-/********************************************************************************
-**                        Function Definitions | Start                         **
-********************************************************************************/
+
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,
   * CosmOS_CoreVariableType * coreVar)
   *
-  * @brief Try access of current running instance DEMO CODE.
-  *
-  * @param[in]  CosmOS_PermissionsConfigurationType * permission
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  *
-  * @return CosmOS_AccessStateType
+  * @details The implementation contains obtaining the schedulable variable in
+  * execution by calling core_getCoreSchedulableInExecution function and then
+  * using the schedulable variable with the permission configuration structure
+  * in the permission_trySchedulableAccess function call that returns the
+  * accessState and is returned from the function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

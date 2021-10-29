@@ -35,17 +35,17 @@
 **                          Macro Definitions | Start                          **
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN START GROUP                                                          **
-* ***************************************************************************//**
-* @defgroup Macros_stdlibInt_c Macros
-* @ingroup Local_stdlibInt
-* @{
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @defgroup Macros_stdlibInt_c Macros
+  * @ingroup Local_stdlibInt
+  * @{
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN STOP GROUP                                                           **
-* ***************************************************************************//**
-* @}
-* Macros_stdlibInt_c
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Macros_stdlibInt_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -54,17 +54,17 @@
 **                              Variables | Start                              **
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN START GROUP                                                          **
-* ***************************************************************************//**
-* @defgroup Variables_stdlibInt_c Variables
-* @ingroup Local_stdlibInt
-* @{
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @defgroup Variables_stdlibInt_c Variables
+  * @ingroup Local_stdlibInt
+  * @{
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN STOP GROUP                                                           **
-* ***************************************************************************//**
-* @}
-* Variables_stdlibInt_c
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Variables_stdlibInt_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -73,47 +73,48 @@
 **                         Function Prototypes | Start                         **
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN DEF GROUP                                                            **
-* ***************************************************************************//**
-* @defgroup Apis_stdlibInt_c API's
-* @ingroup Local_stdlibInt
+  * DOXYGEN DEF GROUP                                                          **
+  * *************************************************************************//**
+  * @defgroup Apis_stdlibInt_c API's
+  * @ingroup Local_stdlibInt
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN START GROUP                                                          **
-* ***************************************************************************//**
-* @addtogroup Getters_stdlibInt_c Getters
-* @ingroup Apis_stdlibInt_c
-* @{
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Getters_stdlibInt_c Getters
+  * @ingroup Apis_stdlibInt_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN STOP GROUP                                                           **
-* ***************************************************************************//**
-* @}
-* Getters_stdlibInt_c
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Getters_stdlibInt_c
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN START GROUP                                                          **
-* ***************************************************************************//**
-* @addtogroup Setters_stdlibInt_c Setters
-* @ingroup Apis_stdlibInt_c
-* @{
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_stdlibInt_c Setters
+  * @ingroup Apis_stdlibInt_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN STOP GROUP                                                           **
-* ***************************************************************************//**
-* @}
-* Setters_stdlibInt_c
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Setters_stdlibInt_c
 ********************************************************************************/
 /********************************************************************************
-* DOXYGEN START GROUP                                                          **
-* ***************************************************************************//**
-* @addtogroup General_stdlibInt_c General
-* @ingroup Apis_stdlibInt_c
-* @{
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_stdlibInt_c General
+  * @ingroup Apis_stdlibInt_c
+  * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn malloc_varAlloc( AddressType nextAvailableAddress,
   * AddressType priorMallocAddress,
   * AddressType nextMallocAddress,
@@ -121,10 +122,10 @@
   *
   * @brief Malloc support function.
   *
-  * @param[in]  AddressType nextAvailableAddress
-  * @param[in]  AddressType priorMallocAddress
-  * @param[in]  AddressType nextMallocAddress
-  * @param[in]  BitWidthType size
+  * @param[in]  nextAvailableAddress
+  * @param[in]  priorMallocAddress
+  * @param[in]  nextMallocAddress
+  * @param[in]  size
   *
   * @return CosmOS_MallocVariableType *
 ********************************************************************************/
@@ -135,10 +136,10 @@ malloc_varAlloc(
     AddressType nextMallocAddress,
     BitWidthType size );
 /********************************************************************************
-* DOXYGEN STOP GROUP                                                           **
-* ***************************************************************************//**
-* @}
-* General_stdlibInt_c
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  General_stdlibInt_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -148,20 +149,18 @@ malloc_varAlloc(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn malloc_varAlloc(AddressType nextAvailableAddress,
   * AddressType priorMallocAddress,
   * AddressType nextMallocAddress,
   * BitWidthType size )
   *
-  * @brief Malloc support function for initializing malloc variable.
-  *
-  * @param[in]  AddressType nextAvailableAddress
-  * @param[in]  AddressType priorMallocAddress
-  * @param[in]  AddressType nextMallocAddress
-  * @param[in]  BitWidthType size
-  *
-  * @return CosmOS_MallocVariableType *
+  * @details The implementation contains creation of the new pointer of malloc
+  * variable type based on the next available address argument. The members of
+  * the malloc variable are then set based on the arguments and size is aligned
+  * to the BitWidthType (size contains aligned size of the malloc variable and
+  * then aligned size of the allocated memory)
 ********************************************************************************/
 static CosmOS_MallocVariableType *
 malloc_varAlloc(
@@ -185,14 +184,50 @@ malloc_varAlloc(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn malloc_internal( size_t size )
   *
-  * @brief Stdlib malloc function implementation redesigned for CosmOS DEMO.
-  *
-  * @param[in]  size_t size
-  *
-  * @return void *
+  * @details The implementation contains obtaining of the core variable by
+  * calling function core_getCoreVar. The return address is set to NULL in the
+  * case no suitable memory chunk will be found (to return NULL pointer).
+  * Schedulable in execution type is then checked in the implemented if
+  * condition if it is equal to the SCHEDULABLE_INSTANCE_ENUM__THREAD, if yes
+  * the program variable in execution is obtained by calling function
+  * core_getCoreProgramInExecution and used to get the heap configuration
+  * structure by calling program_getHeap function. Then the heap configuration
+  * structure is used in the functions heap_getHeapLowAddress and
+  * heap_getHeapHighAddress to get the heap low and high adresses. The
+  * pre-initialization before the do-while loop is needed therefore allocated
+  * boolean variable is preset to the False and currentMallocVar pointer is set
+  * to the heap low address. Because the heap allocation can be requested from
+  * multiple threads within one program the mutual exclusion is needed and
+  * mutex_getMutex function is called with the program specific mutex variable.
+  * After this point the do-while loop is implemented iterating over the linked
+  * list of the mutex variables till the currentMallocVar next member is not
+  * null pointer or till the allocated boolean is not true. Inside the do-while
+  * loop is if condition that checks if the currentMallocVar next member is not
+  * NULL - nextAvailableAddress is as the currentMallocVar plus its size member
+  * and checked in the nested if condition if the required size argument is
+  * smaller than currentMallocVar next member address minus the
+  * nextAvailableAddress variable. If no the currentMallocVar is set to the
+  * currentMallocVar next member. If yes the new malloc variable is allocated
+  * by calling malloc_varAlloc helper function and the result is then used to
+  * linked it between the currentMallocVar and the next malloc variable. Then
+  * to the returnAddress is stored the newly allocated address with the respect
+  * to the aligned malloc variable offset and allocated boolean variable is set
+  * to True.
+  * If the currentMallocVar next member is was NULL, it means that its the end
+  * of the linked list. The nextAvailableAddress is then calculated as the
+  * currentMallocVar plus its size member and checked in the nested if condition
+  * if the required size argument is smaller than heap high address minus the
+  * nextAvailableAddress variable. If yes the new malloc variable is allocated
+  * by calling malloc_varAlloc helper function and the result is then used to
+  * linked it to the currentMallocVar. Then to the returnAddress is stored the
+  * newly allocated address with the respect to the aligned malloc variable
+  * offset and allocated boolean variable is set to True.
+  * In the end the mutex for the specific program is released and the address
+  * returned.
 ********************************************************************************/
 void *
 malloc_internal( size_t size )
@@ -296,14 +331,22 @@ malloc_internal( size_t size )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn free_internal( void* ptr )
   *
-  * @brief Stdlib free function implementation redesigned for CosmOS DEMO.
-  *
-  * @param[in]  void * ptr
-  *
-  * @return none
+  * @details The implementation contains obtaining of the mallocVarToFree by
+  * subtracting the aligned size of the malloc variable type from the ptr
+  * argument. Then the core variable is obtained by calling function
+  * core_getCoreVar.
+  * Schedulable in execution type is then checked in the implemented if
+  * condition if it is equal to the SCHEDULABLE_INSTANCE_ENUM__THREAD, if yes
+  * the program variable in execution is obtained by calling function
+  * core_getCoreProgramInExecution. Because the heap allocation can be requested
+  * from multiple threads within one program the mutual exclusion is needed and
+  * mutex_getMutex function is called with the program specific mutex variable.
+  * Then the malloc variable to free is unlinked from the list and the mutex for
+  * the specific program is released.
 ********************************************************************************/
 void
 free_internal( void * ptr )

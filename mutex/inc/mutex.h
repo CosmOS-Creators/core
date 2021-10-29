@@ -7,13 +7,13 @@
 *****************************************************************************//**
 ** @file mutex.h
 *********************************************************************************
-<!--                     mutex Module Group Definition                     -->
+<!--                       mutex Module Group Definition                      -->
 *********************************************************************************
 ** @defgroup mutex_module mutex
 ** @brief mutex Module
 ** @details lorem
 *********************************************************************************
-<!--                      mutex Unit Group Definition                      -->
+<!--                        mutex Unit Group Definition                       -->
 *********************************************************************************
 ** @defgroup mutex_unit mutex Unit
 ** @ingroup mutex_module
@@ -31,7 +31,7 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                   mutex Unit Global Group Definition                  -->
+<!--                   mutex Unit Global Group Definition                     -->
 *********************************************************************************
 ** @defgroup Global_mutex Global
 ** @ingroup mutex_unit
@@ -73,8 +73,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_mutex_h
+  * @} */
+/*  Macros_mutex_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +92,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_mutex_h
+  * @} */
+/*  Variables_mutex_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -116,14 +116,16 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_getMutexInternal(BitWidthType entityId,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get mutex privileged DEMO CODE.
+  * @brief Get mutex internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  entityId is used during the system call dispatching
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
@@ -134,12 +136,13 @@ mutex_getMutexInternal(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_getMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get mutex DEMO CODE.
+  * @brief Get mutex. DEMO
   *
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
@@ -148,8 +151,8 @@ mutex_getMutex( CosmOS_MutexVariableType * mutexVar );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_mutex_h
+  * @} */
+/*  Getters_mutex_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -161,8 +164,8 @@ mutex_getMutex( CosmOS_MutexVariableType * mutexVar );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_mutex_h
+  * @} */
+/*  Setters_mutex_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -173,14 +176,16 @@ mutex_getMutex( CosmOS_MutexVariableType * mutexVar );
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_tryMutexInternal(BitWidthType entityId,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get mutex privileged DEMO CODE.
+  * @brief Try to get mutex internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  entityId is used during the system call dispatching
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
@@ -191,14 +196,16 @@ mutex_tryMutexInternal(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_releaseMutexInternal(BitWidthType entityId,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Release mutex privileged DEMO CODE.
+  * @brief Release mutex internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType entityId
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  entityId is used during the system call dispatching
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
@@ -209,12 +216,13 @@ mutex_releaseMutexInternal(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_tryMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Try to get mutex DEMO CODE.
+  * @brief Try to get mutex. DEMO
   *
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
@@ -223,12 +231,13 @@ mutex_tryMutex( CosmOS_MutexVariableType * mutexVar );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_releaseMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Release mutex DEMO CODE.
+  * @brief Release mutex. DEMO
   *
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_MutexStateType
 ********************************************************************************/
@@ -237,8 +246,8 @@ mutex_releaseMutex( CosmOS_MutexVariableType * mutexVar );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_mutex_h
+  * @} */
+/*  General_mutex_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -256,17 +265,18 @@ mutex_releaseMutex( CosmOS_MutexVariableType * mutexVar );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_mutex_h
+  * @} */
+/*  Getters_mutex_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_getMutexValue(CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Get mutex value.
   *
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -278,12 +288,13 @@ mutex_getMutexValue( CosmOS_MutexVariableType * mutexVar )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_getMutexSchedulableOwner(CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Get mutex schedulableOwner.
   *
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_SchedulableVariableType *
 ********************************************************************************/
@@ -301,13 +312,14 @@ mutex_getMutexSchedulableOwner( CosmOS_MutexVariableType * mutexVar )
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_setMutexValue(CosmOS_MutexVariableType * mutexVar,
   * BitWidthType mutexParam)
   *
   * @brief Set mutex value.
   *
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[out]  mutexVar pointer to the mutex variable
   * @param[in]  CosmOS_MutexStateType mutexParam
   *
   * @return none
@@ -322,13 +334,14 @@ mutex_setMutexValue(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_setMutexSchedulableOwner(CosmOS_MutexVariableType * mutex,
   * BitWidthType mutexParam)
   *
   * @brief Set mutex schedulableOwner.
   *
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[out]  mutexVar pointer to the mutex variable
   * @param[in]  CosmOS_SchedulableVariableType * schedulableOwnerParam
   *
   * @return none
@@ -343,8 +356,8 @@ mutex_setMutexSchedulableOwner(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_mutex_h
+  * @} */
+/*  Setters_mutex_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -355,14 +368,15 @@ mutex_setMutexSchedulableOwner(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_willCauseDeadlock(CosmOS_CoreVariableType * coreVar,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Check if the mutex will ends up in deadlock DEMO CODE.
+  * @brief Check if the mutex will ends up in deadlock. DEMO
   *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  coreVar pointer
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
@@ -380,14 +394,15 @@ mutex_willCauseDeadlock(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn mutex_ownsSchedulableMutex(CosmOS_CoreVariableType * coreVar,
   * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Check if the schedulable in execution owns the current mutex.
   *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  CosmOS_MutexVariableType * mutexVar
+  * @param[in]  coreVar pointer
+  * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
@@ -404,8 +419,8 @@ mutex_ownsSchedulableMutex(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_mutex_h
+  * @} */
+/*  General_mutex_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

@@ -73,8 +73,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_scheduler_h
+  * @} */
+/*  Macros_scheduler_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -92,8 +92,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_scheduler_h
+  * @} */
+/*  Variables_scheduler_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -117,8 +117,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_scheduler_h
+  * @} */
+/*  Getters_scheduler_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -130,8 +130,8 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_scheduler_h
+  * @} */
+/*  Setters_scheduler_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -142,14 +142,16 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn  scheduler_updateAlarms(CosmOS_CoreVariableType * coreVar,
   * BitWidthType priorTickStep)
   *
-  * @brief Update alarms DEMO.
+  * @brief Update alarms. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_CoreVariableType * coreVar
-  * @param[in]  BitWidthType priorTickStep
+  * @param[in]  coreVar pointer
+  * @param[in]  priorTickStep prior tick step of the scheduler
   *
   * @return none
 ********************************************************************************/
@@ -160,19 +162,21 @@ scheduler_updateAlarms(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn  scheduler_performanceScheduling(
   * CosmOS_SchedulerVariableType * schedulerVar,
   * CosmOS_SchedulableVariableType ** schedulableVar,
   * StackPointerType * stackPointerRetVal,
   * BitWidthType * timerTicks)
   *
-  * @brief Performance scheduling function. DEMO
+  * @brief Performance scheduling function. This function cannot
+  * be called from the unprivileged context directly. DEMO
   *
-  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
-  * @param[in]  StackPointerType * stackPointerRetVal
-  * @param[in]  BitWidthType * timerTicks
+  * @param[in]  scheduler variable pointerVar
+  * @param[in]  schedulableVar pointer
+  * @param[in]  stackPointerRetVal stack pointer of the current schedulable
+  * @param[in]  timerTicks timer ticks to set, usually preempt period
   *
   * @return none
 ********************************************************************************/
@@ -185,7 +189,8 @@ scheduler_performanceScheduling(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn  scheduler_classicScheduling(
   * CosmOS_SchedulerVariableType * schedulerVar,
   * CosmOS_SchedulableVariableType * schedulableVar,
@@ -194,14 +199,15 @@ scheduler_performanceScheduling(
   * BitWidthType startTick,
   * BitWidthType currentTick)
   *
-  * @brief Classic scheduling function. DEMO
+  * @brief Classic scheduling function. This function cannot
+  * be called from the unprivileged context directly. DEMO
   *
-  * @param[in]  CosmOS_SchedulerVariableType * schedulerVar
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableVar
-  * @param[in]  StackPointerType * stackPointerRetVal
-  * @param[in]  BitWidthType * timerTicks
-  * @param[in]  BitWidthType startTick
-  * @param[in]  BitWidthType currentTick
+  * @param[in]  scheduler variable pointerVar
+  * @param[in]  schedulableVar pointer
+  * @param[in]  stackPointerRetVal stack pointer of the current schedulable
+  * @param[in]  timerTicks timer ticks to set, in this case wcet of task
+  * @param[in]  startTick startTick of the next task
+  * @param[in]  currentTick current tick of the scheduler
   *
   * @return none
 ********************************************************************************/
@@ -216,12 +222,14 @@ scheduler_classicScheduling(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
   *
-  * @brief Algorithm for scheduling next schedulable DEMO CODE.
+  * @brief Algorithm for scheduling next schedulable.This function cannot
+  * be called from the unprivileged context directly. DEMO
   *
-  * @param[in]  StackPointerType stackPointer
+  * @param[in]  stackPointer stack pointer of the current schedulable
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -230,10 +238,12 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_start(void)
   *
-  * @brief Start of scheduler, pick the starting task and execute it DEMO CODE.
+  * @brief Start of scheduler. This function cannot
+  * be called from the unprivileged context directly. DEMO
   *
   * @param[in]  none
   *
@@ -244,8 +254,8 @@ scheduler_start( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_scheduler_h
+  * @} */
+/*  General_scheduler_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -262,13 +272,14 @@ scheduler_start( void );
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerScheduleTable(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler scheduleTable pointer.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return CosmOS_ScheduleTableConfigurationType *
 ********************************************************************************/
@@ -281,12 +292,13 @@ scheduler_getSchedulerScheduleTable( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerHyperTick(CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler hyperTick.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -298,13 +310,14 @@ scheduler_getSchedulerHyperTick( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerPreemptTick(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler preemptTick.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -316,13 +329,14 @@ scheduler_getSchedulerPreemptTick( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerScheduleTableElementsNum(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler scheduleTableElementsNum.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -335,13 +349,14 @@ scheduler_getSchedulerScheduleTableElementsNum(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerThreadListElementsNum(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler threadListElementsNum.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -354,13 +369,14 @@ scheduler_getSchedulerThreadListElementsNum(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerLastToFirstTaskTicks(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler lastToFirstTaskTicks.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -373,12 +389,13 @@ scheduler_getSchedulerLastToFirstTaskTicks(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerSyncTicks(CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler syncTicks.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -390,13 +407,14 @@ scheduler_getSchedulerSyncTicks( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerFirstSyncTaskStartTick(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler firstSyncTaskStartTick.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -409,13 +427,14 @@ scheduler_getSchedulerFirstSyncTaskStartTick(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerMaxTimerTick(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler maxTimerTick.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -427,13 +446,14 @@ scheduler_getSchedulerMaxTimerTick( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerTimerTickCount(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler timerTickCount.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -445,13 +465,14 @@ scheduler_getSchedulerTimerTickCount( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerIdleTaskVar(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler idleTaskVar.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return CosmOS_TaskVariableType *
 ********************************************************************************/
@@ -463,13 +484,14 @@ scheduler_getSchedulerIdleTaskVar( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerCurrentTick(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler currentTick.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -481,13 +503,14 @@ scheduler_getSchedulerCurrentTick( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerPriorTickStep(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler priorTickStep.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -499,13 +522,14 @@ scheduler_getSchedulerPriorTickStep( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerScheduleTableIterator(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler scheduleTableIterator.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -518,13 +542,14 @@ scheduler_getSchedulerScheduleTableIterator(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerThreadListIterator(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler threadListIterator.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -537,12 +562,13 @@ scheduler_getSchedulerThreadListIterator(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerState(CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler schedulerState.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return CosmOS_SchedulerStateType
 ********************************************************************************/
@@ -554,13 +580,14 @@ scheduler_getSchedulerState( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerNextSyncTick(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler nextSyncTick.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -572,13 +599,14 @@ scheduler_getSchedulerNextSyncTick( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerSyncInitState(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler syncInitState.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return CosmOS_BooleanType
 ********************************************************************************/
@@ -590,13 +618,14 @@ scheduler_getSchedulerSyncInitState( CosmOS_SchedulerVariableType * scheduler )
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerRescheduleTriggerState(
   * CosmOS_SchedulerVariableType * scheduler)
   *
   * @brief Get scheduler rescheduleTriggerState.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
+  * @param[in]  scheduler variable pointer
   *
   * @return CosmOS_RescheduleTriggerStateType
 ********************************************************************************/
@@ -609,15 +638,17 @@ scheduler_getSchedulerRescheduleTriggerState(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerScheduleTableStartTick(
   * CosmOS_SchedulerVariableType * scheduler,
   * BitWidthType scheduleTableIterator)
   *
   * @brief Get scheduler scheduleTable element startTick.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType scheduleTableIterator
+  * @param[in]  scheduler variable pointer
+  * @param[in]  scheduleTableIterator iterator pointing to specific task variable
+  * in the schedule table
   *
   * @return BitWidthType
 ********************************************************************************/
@@ -631,15 +662,17 @@ scheduler_getSchedulerScheduleTableStartTick(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerScheduleTableTaskVar(
   * CosmOS_SchedulerVariableType * scheduler,
   * BitWidthType scheduleTableIterator)
   *
   * @brief Get scheduler scheduleTable element taskVar.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType scheduleTableIterator
+  * @param[in]  scheduler variable pointer
+  * @param[in]  scheduleTableIterator iterator pointing to specific task variable
+  * in the schedule table
   *
   * @return CosmOS_TaskVariableType *
 ********************************************************************************/
@@ -656,15 +689,17 @@ scheduler_getSchedulerScheduleTableTaskVar(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerThreadListThreadVar(
   * CosmOS_SchedulerVariableType * scheduler,
   * BitWidthType threadListIterator)
   *
   * @brief Get scheduler threadList element threadVar.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType threadListIterator
+  * @param[in]  scheduler variable pointer
+  * @param[in]  threadListIterator iterator pointing to specific thread variable
+  * in the thread list
   *
   * @return CosmOS_ThreadVariableType *
 ********************************************************************************/
@@ -680,8 +715,8 @@ scheduler_getSchedulerThreadListThreadVar(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_scheduler_h
+  * @} */
+/*  Getters_scheduler_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -692,15 +727,17 @@ scheduler_getSchedulerThreadListThreadVar(
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_setSchedulerCurrentTick(
   * CosmOS_SchedulerVariableType * scheduler,
   * BitWidthType currentTickParam)
   *
-  * @brief Set scheduler currentTick.
+  * @brief Set scheduler currentTick. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType currentTickParam
+  * @param[out]  scheduler variable pointer
+  * @param[in]  currentTickParam current tick to be set
   *
   * @return none
 ********************************************************************************/
@@ -714,15 +751,17 @@ scheduler_setSchedulerCurrentTick(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_setSchedulerPriorTickStep(
   * CosmOS_SchedulerVariableType * scheduler,
   * BitWidthType priorTickStepParam)
   *
-  * @brief Set scheduler priorTickStep.
+  * @brief Set scheduler priorTickStep. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType priorTickStepParam
+  * @param[out]  scheduler variable pointer
+  * @param[in]  priorTickStepParam prior tick step to be set
   *
   * @return none
 ********************************************************************************/
@@ -736,15 +775,17 @@ scheduler_setSchedulerPriorTickStep(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_setSchedulerScheduleTableIterator(
   * CosmOS_SchedulerVariableType * scheduler,
   * BitWidthType scheduleTableIteratorParam)
   *
-  * @brief Set scheduler scheduleTableIterator.
+  * @brief Set scheduler scheduleTableIterator. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType scheduleTableIteratorParam
+  * @param[out]  scheduler variable pointer
+  * @param[in]  scheduleTableIteratorParam schedule table iterator to be set
   *
   * @return none
 ********************************************************************************/
@@ -758,15 +799,17 @@ scheduler_setSchedulerScheduleTableIterator(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_setSchedulerThreadListIterator(
   * CosmOS_SchedulerVariableType * scheduler,
   * BitWidthType scheduleTableIteratorParam)
   *
-  * @brief Set scheduler threadListIterator.
+  * @brief Set scheduler threadListIterator. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType threadListIteratorParam
+  * @param[out]  scheduler variable pointer
+  * @param[in]  threadListIteratorParam thread list iterator to be set
   *
   * @return none
 ********************************************************************************/
@@ -780,15 +823,17 @@ scheduler_setSchedulerThreadListIterator(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_setSchedulerState(
   * CosmOS_SchedulerVariableType * scheduler,
   * CosmOS_SchedulerStateType schedulerStateParam)
   *
-  * @brief Set scheduler schedulerState.
+  * @brief Set scheduler schedulerState. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  CosmOS_SchedulerStateType schedulerStateParam
+  * @param[out]  scheduler variable pointer
+  * @param[in]  schedulerStateParam state of the scheduler to be set
   *
   * @return none
 ********************************************************************************/
@@ -802,14 +847,16 @@ scheduler_setSchedulerState(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_setSchedulerNextSyncTick(
   * CosmOS_SchedulerVariableType * scheduler)
   *
-  * @brief Set scheduler nextSyncTick.
+  * @brief Set scheduler nextSyncTick. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  BitWidthType paramNextSyncTick
+  * @param[out]  scheduler variable pointer
+  * @param[in]  paramNextSyncTick next sync tick to be set
   *
   * @return none
 ********************************************************************************/
@@ -823,14 +870,16 @@ scheduler_setSchedulerNextSyncTick(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_setSchedulerSyncInitState(
   * CosmOS_SchedulerVariableType * scheduler)
   *
-  * @brief Set scheduler syncInitState.
+  * @brief Set scheduler syncInitState. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  CosmOS_BooleanType paramSyncInitState
+  * @param[out]  scheduler variable pointer
+  * @param[in]  paramSyncInitState sync init state to be set
   *
   * @return none
 ********************************************************************************/
@@ -844,14 +893,16 @@ scheduler_setSchedulerSyncInitState(
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn scheduler_setSchedulerRescheduleTriggerState(
   * CosmOS_SchedulerVariableType * scheduler)
   *
-  * @brief Set scheduler rescheduleTriggerState.
+  * @brief Set scheduler rescheduleTriggerState. This function cannot
+  * be called from the unprivileged context directly.
   *
-  * @param[in]  CosmOS_SchedulerVariableType * scheduler
-  * @param[in]  CosmOS_RescheduleTriggerStateType paramRescheduleTriggerState
+  * @param[out]  scheduler variable pointer
+  * @param[in]  paramRescheduleTriggerState reschedule trigger state to be set
   *
   * @return none
 ********************************************************************************/
@@ -865,8 +916,8 @@ scheduler_setSchedulerRescheduleTriggerState(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_scheduler_h
+  * @} */
+/*  Setters_scheduler_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -878,8 +929,8 @@ scheduler_setSchedulerRescheduleTriggerState(
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_scheduler_h
+  * @} */
+/*  General_scheduler_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
