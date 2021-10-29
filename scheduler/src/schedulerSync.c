@@ -129,14 +129,7 @@
   * BitWidthType currentTick,
   * BitWidthType hyperTick)
   *
-  * @brief Algorithm for synchronization during runtime DEMO CODE.
-  *
-  * @param[in] CosmOS_SchedulerVariableType * schedulerVar
-  * @param[in] CosmOS_CoreVariableType * coreVar
-  * @param[in] BitWidthType currentTick
-  * @param[in] BitWidthType hyperTick
-  *
-  * @return CosmOS_SchedulerSyncStateType
+  * @details Not working concept
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

@@ -132,12 +132,17 @@
 /**
   * @fn new(size_t size)
   *
-  * @brief NewLib new operator function implementation redesigned for
-  * CosmOS DEMO.
-  *
-  * @param[in]  size_t size
-  *
-  * @return void *
+  * @details The implementation contains if condition that checks if the size
+  * argument is zero value and if it is the size is incremented by 1. Then
+  * core id is obtained by calling cosmosApi_CILcore_getCoreId function as macro
+  * and operating system variable by calling os_getOsVar which are then used in
+  * function os_getCoreVar to get core variable. The function
+  * core_getCoreOsState called afterwards returns the state of operating system
+  * on the current core. The if condition then checks if the operating system
+  * state is equal to OS_STATE_ENUM__STARTED, if yes the malloc_internal
+  * function is called to allocate memory and the result is then returned as ptr
+  * from the function. Otherwise the standard library function malloc is called
+  * and the result is then returned as ptr from the function.
 ********************************************************************************/
 void *
 operator new( size_t size ) noexcept
@@ -179,12 +184,16 @@ operator new( size_t size ) noexcept
 /**
   * @fn delete(void* ptr)
   *
-  * @brief NewLib delete operator function implementation redesigned for
-  * CosmOS DEMO.
-  *
-  * @param[in]  void * ptr
-  *
-  * @return none
+  * @details The implementation contains calling cosmosApi_CILcore_getCoreId
+  * function as macro and operating system variable by calling os_getOsVar
+  * which are then used in function os_getCoreVar to get core variable.
+  * The function core_getCoreOsState called afterwards returns the state of
+  * operating system on the current core.
+  * The if condition then checks if the operating system state is equal to
+  * OS_STATE_ENUM__STARTED, if yes the free_internal function is called to
+  * allocate memory and the result is then returned as ptr from the function.
+  * Otherwise the standard library function free is called and the result is
+  * then returned as ptr from the function.
 ********************************************************************************/
 void
 operator delete( void * ptr ) noexcept
@@ -217,13 +226,16 @@ operator delete( void * ptr ) noexcept
 /**
   * @fn delete(void* ptr)
   *
-  * @brief NewLib delete operator function implementation redesigned for
-  * CosmOS DEMO.
-  *
-  * @param[in]  void * ptr
-  * @param[in]  size_t size
-  *
-  * @return none
+  * @details The implementation contains calling cosmosApi_CILcore_getCoreId
+  * function as macro and operating system variable by calling os_getOsVar
+  * which are then used in function os_getCoreVar to get core variable.
+  * The function core_getCoreOsState called afterwards returns the state of
+  * operating system on the current core.
+  * The if condition then checks if the operating system state is equal to
+  * OS_STATE_ENUM__STARTED, if yes the free_internal function is called to
+  * allocate memory and the result is then returned as ptr from the function.
+  * Otherwise the standard library function free is called and the result is
+  * then returned as ptr from the function.
 ********************************************************************************/
 void
 operator delete( void * ptr, size_t size ) noexcept
