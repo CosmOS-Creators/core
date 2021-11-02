@@ -321,7 +321,7 @@ scheduler_performanceScheduling(
     CosmOS_SchedulableStateType schedulableState;
 
     CosmOS_ThreadVariableType * threadVar;
-    CosmOS_SchedulableVariableType * currentSchedulableVar;
+    CosmOS_SchedulableVariableType * currentSchedulableVar = NULL;
 
     threadListElementsNum =
         scheduler_getSchedulerThreadListElementsNum( schedulerVar );

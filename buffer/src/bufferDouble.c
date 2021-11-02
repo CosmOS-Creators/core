@@ -137,9 +137,10 @@
   * either BUFFER_DOUBLE_ACCESS_ENUM__USER or BUFFER_DOUBLE_ACCESS_ENUM__KERNEL.
   * with functions bufferDouble_getBufferDoubleUserBuffer or
   * bufferDouble_getBufferDoubleKernelBuffer. In the case of wrong access type
-  * the os_kernelPanic function is called. From the buffer variable the
-  * buffer id is extracted by calling buffer_getBufferId function and then the
-  * function buffer_readArray to read specific number of bytes from the buffer.
+  * the BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED is returned as bufferState.
+  * From the buffer variable the buffer id is extracted by calling
+  * buffer_getBufferId function and then the function buffer_readArray to read
+  * specific number of bytes from the buffer.
   * Finally the bufferState is returned.
 ********************************************************************************/
 /* @cond S */
@@ -170,6 +171,8 @@ bufferDouble_readArray(
         {
             bufferVar =
                 bufferDouble_getBufferDoubleUserBuffer( bufferDoubleVar );
+            bufferId = buffer_getBufferId( bufferVar );
+            bufferState = buffer_readArray( bufferId, buffer, size );
             break;
         }
 
@@ -177,18 +180,17 @@ bufferDouble_readArray(
         {
             bufferVar =
                 bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleVar );
+            bufferId = buffer_getBufferId( bufferVar );
+            bufferState = buffer_readArray( bufferId, buffer, size );
             break;
         }
 
         default:
         {
-            os_kernelPanic();
+            bufferState = BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED;
             break;
         }
     }
-
-    bufferId = buffer_getBufferId( bufferVar );
-    bufferState = buffer_readArray( bufferId, buffer, size );
 
     return bufferState;
 }
@@ -213,9 +215,10 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * either BUFFER_DOUBLE_ACCESS_ENUM__USER or BUFFER_DOUBLE_ACCESS_ENUM__KERNEL.
   * with functions bufferDouble_getBufferDoubleUserBuffer or
   * bufferDouble_getBufferDoubleKernelBuffer. In the case of wrong access type
-  * the os_kernelPanic function is called. From the buffer variable the
-  * buffer id is extracted by calling buffer_getBufferId function and then the
-  * function buffer_writeArray to read specific number of bytes from the buffer.
+  * the BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED is returned as bufferState.
+  * From the buffer variable the buffer id is extracted by calling
+  * buffer_getBufferId function and then the function buffer_writeArray to write
+  * specific number of bytes to the buffer.
   * Finally the bufferState is returned.
 ********************************************************************************/
 /* @cond S */
@@ -246,6 +249,8 @@ bufferDouble_writeArray(
         {
             bufferVar =
                 bufferDouble_getBufferDoubleUserBuffer( bufferDoubleVar );
+            bufferId = buffer_getBufferId( bufferVar );
+            bufferState = buffer_writeArray( bufferId, buffer, size );
             break;
         }
 
@@ -253,18 +258,17 @@ bufferDouble_writeArray(
         {
             bufferVar =
                 bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleVar );
+            bufferId = buffer_getBufferId( bufferVar );
+            bufferState = buffer_writeArray( bufferId, buffer, size );
             break;
         }
 
         default:
         {
-            os_kernelPanic();
+            bufferState = BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED;
             break;
         }
     }
-
-    bufferId = buffer_getBufferId( bufferVar );
-    bufferState = buffer_writeArray( bufferId, buffer, size );
 
     return bufferState;
 }
