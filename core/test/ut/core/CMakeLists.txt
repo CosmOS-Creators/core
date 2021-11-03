@@ -1,34 +1,34 @@
 cmake_minimum_required(VERSION 3.14)
 
-get_filename_component(unitName ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+get_filename_component(UNIT_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
-set(configurationPath "cfg")
-set(unitSourcePath "../../../src")
-set(executableName "${unitName}_ut_executable")
-set(testName "${unitName}_test")
+set(CONFIGURATION_PATH "cfg")
+set(UNIT_SOURCE_PATH "../../../src")
+set(EXECUTABLE_NAME "${UNIT_NAME}_ut_executable")
+set(TEST_NAME "${UNIT_NAME}_test")
 
-list(APPEND localMockSources ${mockSources})
-list(FILTER localMockSources EXCLUDE REGEX ".*test/mock/${unitName}")
+list(APPEND LOCAL_MOCK_SOURCES ${MOCK_SOURCES})
+list(FILTER LOCAL_MOCK_SOURCES EXCLUDE REGEX ".*test/mock/${UNIT_NAME}")
 
-include_directories(${configurationPath})
-FILE(GLOB_RECURSE cfgSources  "${configurationPath}/*.c")
+include_directories(${CONFIGURATION_PATH})
+FILE(GLOB_RECURSE CFG_SOURCES_C  "${CONFIGURATION_PATH}/*.c")
 
-include_directories(${configurationPath})
-FILE(GLOB_RECURSE cfgSourcesCpp  "${configurationPath}/*.cpp")
+include_directories(${CONFIGURATION_PATH})
+FILE(GLOB_RECURSE CFG_SOURCES_CPP  "${CONFIGURATION_PATH}/*.cpp")
 
 set(SOURCES
-    "${unitSourcePath}/${unitName}.c"
-    ${unitTestSource}
-    ${localMockSources}
-	${cfgSources}
-	${cfgSourcesCpp}
+    "${UNIT_SOURCE_PATH}/${UNIT_NAME}.c"
+	${UNIT_TEST_SOURCE_WILDCARD}
+    ${LOCAL_MOCK_SOURCES}
+	${CFG_SOURCES_C}
+	${CFG_SOURCES_CPP}
     )
 
-add_executable(${executableName} ${SOURCES})
-target_link_libraries(${executableName} gtest_main gmock_main)
+add_executable(${EXECUTABLE_NAME} ${SOURCES})
+target_link_libraries(${EXECUTABLE_NAME} gtest_main gmock_main)
 
 include(GoogleTest)
 gtest_add_tests(
-	TARGET ${executableName}
-	EXTRA_ARGS --gtest_output=xml:${cosmos}/generated/build/tests/results/googletest_${executableName}.xml
+	TARGET ${EXECUTABLE_NAME}
+	EXTRA_ARGS --gtest_output=xml:${COSMOS}/generated/build/tests/results/googletest_${EXECUTABLE_NAME}.xml
 	)
