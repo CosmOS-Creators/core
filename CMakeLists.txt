@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.14)
 
-FILE(GLOB_RECURSE modulesDirs LIST_DIRECTORIES true ${CMAKE_CURRENT_SOURCE_DIR})
-list(FILTER modulesDirs INCLUDE REGEX "${CMAKE_CURRENT_SOURCE_DIR}/[^/]*$")
+FILE(GLOB_RECURSE MODULE_DIRECTORIES LIST_DIRECTORIES true ${CMAKE_CURRENT_SOURCE_DIR})
+list(FILTER MODULE_DIRECTORIES INCLUDE REGEX "${CMAKE_CURRENT_SOURCE_DIR}/[^/]*$")
 
-foreach(dir ${modulesDirs})
-    if(EXISTS "${dir}/CMakeLists.txt")
-        add_subdirectory(${dir})
+foreach(MODULE_DIRECTORY ${MODULE_DIRECTORIES})
+    if(EXISTS "${MODULE_DIRECTORY}/CMakeLists.txt")
+        add_subdirectory(${MODULE_DIRECTORY})
     endif()
-endforeach(dir)
+endforeach(MODULE_DIRECTORY)
