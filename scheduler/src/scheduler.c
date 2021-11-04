@@ -711,6 +711,7 @@ scheduler_start( void )
     scheduleTableElementsNum =
         scheduler_getSchedulerScheduleTableElementsNum( schedulerVar );
 
+    startTick = 0;
     if ( scheduleTableElementsNum )
     {
         cosmosAssert( scheduleTableIterator < scheduleTableElementsNum );
