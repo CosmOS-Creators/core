@@ -321,7 +321,7 @@ scheduler_performanceScheduling(
     CosmOS_SchedulableStateType schedulableState;
 
     CosmOS_ThreadVariableType * threadVar;
-    CosmOS_SchedulableVariableType * currentSchedulableVar;
+    CosmOS_SchedulableVariableType * currentSchedulableVar = NULL;
 
     threadListElementsNum =
         scheduler_getSchedulerThreadListElementsNum( schedulerVar );
@@ -711,6 +711,7 @@ scheduler_start( void )
     scheduleTableElementsNum =
         scheduler_getSchedulerScheduleTableElementsNum( schedulerVar );
 
+    startTick = 0;
     if ( scheduleTableElementsNum )
     {
         cosmosAssert( scheduleTableIterator < scheduleTableElementsNum );

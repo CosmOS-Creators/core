@@ -341,6 +341,7 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
                     userBuffer = buffer;
                     userBufferIndex = 0;
 
+                    bufferState = BUFFER_STATE_ENUM__OK;
                     while ( ( userBufferIndex < size ) )
                     {
                         bufferState = buffer_pull(
@@ -486,7 +487,7 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
 
                     userBuffer = buffer;
                     userBufferIndex = 0;
-
+                    bufferState = BUFFER_STATE_ENUM__OK;
                     while ( ( userBufferIndex < size ) )
                     {
                         bufferState = buffer_push(
