@@ -132,7 +132,8 @@
   * CosmOS_SchedulableVariableType ** schedulableVar,
   * StackPointerType * stackPointerRetVal,
   * BitWidthType * timerTicks,
-  * BitWidthType * scheduleTableIterator)
+  * BitWidthType * scheduleTableIterator,
+  * BitWidthType scheduleTableElementsNum )
   *
   * @brief Classic scheduling core function. DEMO
   *
@@ -174,7 +175,8 @@ scheduler_classicSchedulingCore(
   * CosmOS_SchedulableVariableType ** schedulableVar,
   * StackPointerType * stackPointerRetVal,
   * BitWidthType * timerTicks,
-  * BitWidthType * scheduleTableIterator)
+  * BitWidthType * scheduleTableIterator,
+  * BitWidthType scheduleTableElementsNum )
   *
   * @details The implementation contains obtaining task variable from the
   * schedule table based on the schedule table iterator argument. The task
