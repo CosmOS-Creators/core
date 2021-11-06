@@ -159,13 +159,14 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @details The implementation contains obtaining of the program id from the
   * schedulable variable by schedulable_getProgramId function. Then the program
   * variable is obtained from all configured programs under the current core
-  * by function core_getCoreProgramVar. For the check of the prior schedulable
-  * in execution state is the prior schedulable obtained by calling function
-  * core_getCoreSchedulableInExecution and then the state of it by calling
-  * schedulable_getState function. Then is the program from schedulable that
+  * by function core_getCoreProgramVar. Then is the program from schedulable that
   * has to be set into the current context set as program in execution by
   * calling function core_setCoreProgramInExecution and also the schedulable by
-  * calling function core_setCoreSchedulableInExecution. If the state of the
+  * calling function core_setCoreSchedulableInExecution.
+  * For the check of the prior schedulable in execution state is the prior
+  * schedulable obtained by calling function core_getCoreSchedulableInExecution
+  * and then the state of it by calling schedulable_getState function. If the
+  * prior schedulable is not NULL and if the state of the
   * priorSchedulableCfg is SCHEDULABLE_STATE_ENUM__RUNNING the prior schedulable
   * state is set to SCHEDULABLE_STATE_ENUM__READY. Then also state of the
   * schedulable that has to be set into the current context is set by function
@@ -188,18 +189,22 @@ core_setSchedulableIntoCurrentContext(
 
     programId = schedulable_getProgramId( schedulableCfg );
     programVar = core_getCoreProgramVar( coreVar, programId );
-    priorSchedulableCfg = core_getCoreSchedulableInExecution( coreVar );
-    priorschedulableState = schedulable_getState( priorSchedulableCfg );
 
     core_setCoreProgramInExecution( coreVar, programVar );
     core_setCoreSchedulableInExecution( coreVar, schedulableCfg );
-
-    if ( priorschedulableState IS_EQUAL_TO SCHEDULABLE_STATE_ENUM__RUNNING )
-    {
-        schedulable_setState(
-            priorSchedulableCfg, SCHEDULABLE_STATE_ENUM__READY );
-    }
     schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__RUNNING );
+
+    priorSchedulableCfg = core_getCoreSchedulableInExecution( coreVar );
+    if ( priorSchedulableCfg )
+    {
+        priorschedulableState = schedulable_getState( priorSchedulableCfg );
+
+        if ( priorschedulableState IS_EQUAL_TO SCHEDULABLE_STATE_ENUM__RUNNING )
+        {
+            schedulable_setState(
+                priorSchedulableCfg, SCHEDULABLE_STATE_ENUM__READY );
+        }
+    }
 }
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
