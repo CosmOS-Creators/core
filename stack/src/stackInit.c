@@ -127,7 +127,7 @@
   * ****************************************************************************/
 /**
   * @fn stackInit_schedulableStackInit(
-  * CosmOS_SchedulableVariableType * schedulable)
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @details The implementation contains obtaining of the stack configuration
   * structure by calling schedulable_getStack function and the handler of the
@@ -141,7 +141,7 @@
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION StackPointerType
-stackInit_schedulableStackInit( CosmOS_SchedulableVariableType * schedulable )
+stackInit_schedulableStackInit( CosmOS_SchedulableConfigurationType * schedulable )
 {
     AddressType stackLowAddress, stackHighAddress;
 

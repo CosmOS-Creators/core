@@ -412,62 +412,63 @@ os_getCoreVar( CosmOS_OsVariableType * osVar, BitWidthType coreId )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsBufferVars(CosmOS_OsVariableType * osVar)
+  * @fn os_getOsBufferCfgs(CosmOS_OsVariableType * osVar)
   *
-  * @brief Get os bufferVars pointer.
+  * @brief Get os bufferCfgs pointer.
   *
   * @param[in]  osVar pointer
   *
-  * @return CosmOS_BufferVariableType *
+  * @return CosmOS_BufferConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferVariableType *
-os_getOsBufferVars( CosmOS_OsVariableType * osVar )
+__STATIC_FORCEINLINE CosmOS_BufferConfigurationType *
+os_getOsBufferCfgs( CosmOS_OsVariableType * osVar )
 {
-    return ( osVar->bufferVars );
+    return (CosmOS_BufferConfigurationType *)( osVar->bufferCfgs );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsBufferVar(CosmOS_OsVariableType * osVar,BitWidthType bufferId)
+  * @fn os_getOsBufferCfg(CosmOS_OsVariableType * osVar,BitWidthType bufferId)
   *
   * @brief Get os buffer pointer.
   *
   * @param[in]  osVar pointer
   * @param[in]  bufferId specifies the buffer from array of configured buffers
   *
-  * @return CosmOS_BufferVariableType *
+  * @return CosmOS_BufferConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferVariableType *
-os_getOsBufferVar( CosmOS_OsVariableType * osVar, BitWidthType bufferId )
+__STATIC_FORCEINLINE CosmOS_BufferConfigurationType *
+os_getOsBufferCfg( CosmOS_OsVariableType * osVar, BitWidthType bufferId )
 {
-    return ( &( osVar->bufferVars[bufferId] ) );
+    return (
+        CosmOS_BufferConfigurationType *)( &( osVar->bufferCfgs[bufferId] ) );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsBufferDoubleVars(CosmOS_OsVariableType * osVar)
+  * @fn os_getOsbufferDoubleCfgs(CosmOS_OsVariableType * osVar)
   *
-  * @brief Get os bufferDoubleVars pointer.
+  * @brief Get os bufferDoubleCfgs pointer.
   *
   * @param[in]  osVar pointer
   *
-  * @return CosmOS_BufferDoubleVariableType *
+  * @return CosmOS_BufferDoubleConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType *
-os_getOsBufferDoubleVars( CosmOS_OsVariableType * osVar )
+__STATIC_FORCEINLINE CosmOS_BufferDoubleConfigurationType *
+os_getOsbufferDoubleCfgs( CosmOS_OsVariableType * osVar )
 {
-    return ( osVar->bufferDoubleVars );
+    return (CosmOS_BufferDoubleConfigurationType *)( osVar->bufferDoubleCfgs );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsBufferDoubleVar(CosmOS_OsVariableType * osVar,
+  * @fn os_getOsBufferDoubleCfg(CosmOS_OsVariableType * osVar,
   * BitWidthType bufferDoubleId)
   *
   * @brief Get os bufferDouble pointer.
@@ -476,14 +477,15 @@ os_getOsBufferDoubleVars( CosmOS_OsVariableType * osVar )
   * @param[in]  bufferDoubleId specifies the bufferDouble from array of
   * configured buffersDouble
   *
-  * @return CosmOS_BufferDoubleVariableType *
+  * @return CosmOS_BufferDoubleConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferDoubleVariableType *
-os_getOsBufferDoubleVar(
+__STATIC_FORCEINLINE CosmOS_BufferDoubleConfigurationType *
+os_getOsBufferDoubleCfg(
     CosmOS_OsVariableType * osVar,
     BitWidthType bufferDoubleId )
 {
-    return ( &( osVar->bufferDoubleVars[bufferDoubleId] ) );
+    return (CosmOS_BufferDoubleConfigurationType *)( &(
+        osVar->bufferDoubleCfgs[bufferDoubleId] ) );
 }
 
 /********************************************************************************

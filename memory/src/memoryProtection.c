@@ -138,17 +138,17 @@ memoryProtection_setProgramMemoryProtection(
   * ****************************************************************************/
 /**
   * @fn memoryProtection_setSchedulablePeripheralProtection(
-  * CosmOS_SchedulableVariableType * schedulable)
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Set schedulable peripheral protection.
   *
-  * @param[in]  schedulable pointer to the schedulable variable type
+  * @param[in]  schedulable configuration pointer
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 memoryProtection_setSchedulablePeripheralProtection(
-    CosmOS_SchedulableVariableType * schedulable );
+    CosmOS_SchedulableConfigurationType * schedulable );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -238,7 +238,7 @@ memoryProtection_setProgramMemoryProtection(
   * ****************************************************************************/
 /**
   * @fn memoryProtection_setSchedulablePeripheralProtection(
-  * CosmOS_SchedulableVariableType * schedulable)
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @details The implementation contains obtaining of the schedulable peripheral
   * access region size, low and high address for the current schedulable variable
@@ -252,7 +252,7 @@ memoryProtection_setProgramMemoryProtection(
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 memoryProtection_setSchedulablePeripheralProtection(
-    CosmOS_SchedulableVariableType * schedulable )
+    CosmOS_SchedulableConfigurationType * schedulable )
 {
     BitWidthType size;
 
@@ -311,7 +311,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * ****************************************************************************/
 /**
   * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,
-  * CosmOS_SchedulableVariableType  * schedulable)
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @details The implementation contains obtaining of the program id and program
   * variable by calling schedulable_getProgramId and core_getCoreProgramVar
@@ -328,7 +328,7 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 memoryProtection_setMemoryProtection(
     CosmOS_CoreVariableType * core,
-    CosmOS_SchedulableVariableType * schedulable )
+    CosmOS_SchedulableConfigurationType * schedulable )
 {
     BitWidthType programId;
 
@@ -389,7 +389,7 @@ memoryProtection_isMemoryRegionProtected(
 
     CosmOS_StackConfigurationType * stack;
     CosmOS_ProgramVariableType * programVar;
-    CosmOS_SchedulableVariableType * schedulable;
+    CosmOS_SchedulableConfigurationType * schedulable;
 
     regionLowAddress = (AddressType)regionLowAddressPointer;
 

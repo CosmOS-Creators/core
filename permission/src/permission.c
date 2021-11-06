@@ -116,19 +116,19 @@
 /**
   * @fn permission_trySchedulableAccess(
   * CosmOS_PermissionsConfigurationType * permission,
-  * CosmOS_SchedulableVariableType * schedulableVar)
+  * CosmOS_SchedulableConfigurationType * schedulableCfg)
   *
   * @brief Try if schedulable has access.
   *
   * @param[in]  permission pointer to the permission configuration type
-  * @param[in]  schedulableVar pointer
+  * @param[in]  schedulableCfg configuration pointer
   *
   * @return CosmOS_AccessStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_AccessStateType
 permission_trySchedulableAccess(
     CosmOS_PermissionsConfigurationType * permission,
-    CosmOS_SchedulableVariableType * schedulableVar );
+    CosmOS_SchedulableConfigurationType * schedulableCfg );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -147,7 +147,7 @@ permission_trySchedulableAccess(
 /**
   * @fn permission_trySchedulableAccess(
   * CosmOS_PermissionsConfigurationType * permission,
-  * CosmOS_SchedulableVariableType * schedulableVar)
+  * CosmOS_SchedulableConfigurationType * schedulableCfg)
   *
   * @details The implementation contains cosmosAssert call with the comparing of
   * bitlock and bitlock inverted value.
@@ -159,18 +159,17 @@ permission_trySchedulableAccess(
 __STATIC_FORCEINLINE CosmOS_AccessStateType
 permission_trySchedulableAccess(
     CosmOS_PermissionsConfigurationType * permission,
-    CosmOS_SchedulableVariableType * schedulableVar )
+    CosmOS_SchedulableConfigurationType * schedulableCfg )
 {
     cosmosAssert( IS_NOT(
-        permission
-            ->bitLocksTasks[SchedulableIdToBitLock[schedulableVar->cfg->id]] &
+        permission->bitLocksTasks[SchedulableIdToBitLock[schedulableCfg->id]] &
         permission->bitLocksTasksInverted
-            [SchedulableIdToBitLock[schedulableVar->cfg->id]] ) );
+            [SchedulableIdToBitLock[schedulableCfg->id]] ) );
 
     return (
-        ( ( permission->bitLocksTasks
-                [SchedulableIdToBitLock[schedulableVar->cfg->id]] >>
-            schedulableVar->cfg->id ) &
+        ( ( permission
+                ->bitLocksTasks[SchedulableIdToBitLock[schedulableCfg->id]] >>
+            schedulableCfg->id ) &
           BITLOCK_MASK )
             ? ACCESS_STATE_ENUM__ALLOWED
             : ACCESS_STATE_ENUM__DENIED );
@@ -199,10 +198,10 @@ permission_tryAccess(
 {
     CosmOS_AccessStateType accessState;
 
-    CosmOS_SchedulableVariableType * schedulableVar;
+    CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    schedulableVar = core_getCoreSchedulableInExecution( coreVar );
-    accessState = permission_trySchedulableAccess( permission, schedulableVar );
+    schedulableCfg = core_getCoreSchedulableInExecution( coreVar );
+    accessState = permission_trySchedulableAccess( permission, schedulableCfg );
 
     return accessState;
 }

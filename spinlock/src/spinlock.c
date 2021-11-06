@@ -177,7 +177,7 @@ spinlock_getSpinlock( BitWidthType id )
         spinlockState = CILspinlock_getSpinlock(
             &( spinlockVar->spinlock ),
             id,
-            coreVar->schedulableInExecution->cfg->id );
+            coreVar->schedulableInExecution->id );
         spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
     }
 
@@ -231,7 +231,7 @@ spinlock_trySpinlock( BitWidthType id )
     spinlockState = CILspinlock_trySpinlock(
         &( spinlockVar->spinlock ),
         id,
-        coreVar->schedulableInExecution->cfg->id );
+        coreVar->schedulableInExecution->id );
 
     if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
     {
@@ -303,7 +303,7 @@ spinlock_releaseSpinlock( BitWidthType id )
             spinlockState = CILspinlock_releaseSpinlock(
                 &( spinlockVar->spinlock ),
                 id,
-                coreVar->schedulableInExecution->cfg->id );
+                coreVar->schedulableInExecution->id );
         }
         else
         {

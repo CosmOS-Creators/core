@@ -246,7 +246,7 @@ malloc_internal( size_t size )
     coreVar = core_getCoreVar();
     returnAddress = (AddressType)NULL;
 
-    if ( coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO
+    if ( coreVar->schedulableInExecution->instanceType IS_EQUAL_TO
              SCHEDULABLE_INSTANCE_ENUM__THREAD )
     {
         programVar = core_getCoreProgramInExecution( coreVar );
@@ -360,7 +360,7 @@ free_internal( void * ptr )
         (CosmOS_MallocVariableType *)( (AddressType)ptr - ALIGN( sizeof( CosmOS_MallocVariableType ), sizeof( BitWidthType ) ) );
 
     coreVar = core_getCoreVar();
-    if ( coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO
+    if ( coreVar->schedulableInExecution->instanceType IS_EQUAL_TO
              SCHEDULABLE_INSTANCE_ENUM__THREAD )
     {
         //TODO: check if the pointer is one of the allocated heap variables

@@ -166,7 +166,7 @@ scheduler_updateAlarms(
 /**
   * @fn  scheduler_performanceScheduling(
   * CosmOS_SchedulerVariableType * schedulerVar,
-  * CosmOS_SchedulableVariableType ** schedulableVar,
+  * CosmOS_SchedulableConfigurationType ** schedulableCfg,
   * StackPointerType * stackPointerRetVal,
   * BitWidthType * timerTicks)
   *
@@ -174,7 +174,7 @@ scheduler_updateAlarms(
   * be called from the unprivileged context directly. DEMO
   *
   * @param[in]  scheduler variable pointerVar
-  * @param[in]  schedulableVar pointer
+  * @param[in]  schedulableCfg pointer
   * @param[in]  stackPointerRetVal stack pointer of the current schedulable
   * @param[in]  timerTicks timer ticks to set, usually preempt period
   *
@@ -183,7 +183,7 @@ scheduler_updateAlarms(
 __OS_FUNC_SECTION void
 scheduler_performanceScheduling(
     CosmOS_SchedulerVariableType * schedulerVar,
-    CosmOS_SchedulableVariableType ** schedulableVar,
+    CosmOS_SchedulableConfigurationType ** schedulableCfg,
     StackPointerType * stackPointerRetVal,
     BitWidthType * timerTicks );
 
@@ -193,7 +193,7 @@ scheduler_performanceScheduling(
 /**
   * @fn  scheduler_classicScheduling(
   * CosmOS_SchedulerVariableType * schedulerVar,
-  * CosmOS_SchedulableVariableType * schedulableVar,
+  * CosmOS_SchedulableConfigurationType * schedulableCfg,
   * StackPointerType * stackPointerRetVal,
   * BitWidthType * timerTicks,
   * BitWidthType startTick,
@@ -203,7 +203,7 @@ scheduler_performanceScheduling(
   * be called from the unprivileged context directly. DEMO
   *
   * @param[in]  scheduler variable pointerVar
-  * @param[in]  schedulableVar pointer
+  * @param[in]  schedulableCfg pointer
   * @param[in]  stackPointerRetVal stack pointer of the current schedulable
   * @param[in]  timerTicks timer ticks to set, in this case wcet of task
   * @param[in]  startTick startTick of the next task
@@ -214,7 +214,7 @@ scheduler_performanceScheduling(
 __OS_FUNC_SECTION void
 scheduler_classicScheduling(
     CosmOS_SchedulerVariableType * schedulerVar,
-    CosmOS_SchedulableVariableType ** schedulableVar,
+    CosmOS_SchedulableConfigurationType ** schedulableCfg,
     StackPointerType * stackPointerRetVal,
     BitWidthType * timerTicks,
     BitWidthType startTick,
@@ -474,12 +474,12 @@ scheduler_getSchedulerTimerTickCount( CosmOS_SchedulerVariableType * scheduler )
   *
   * @param[in]  scheduler variable pointer
   *
-  * @return CosmOS_TaskVariableType *
+  * @return CosmOS_TaskConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskVariableType *
+__STATIC_FORCEINLINE CosmOS_TaskConfigurationType *
 scheduler_getSchedulerIdleTaskVar( CosmOS_SchedulerVariableType * scheduler )
 {
-    return (CosmOS_TaskVariableType *)( scheduler->cfg->idleTaskVar );
+    return (CosmOS_TaskConfigurationType *)( scheduler->cfg->idleTaskVar );
 }
 
 /********************************************************************************
@@ -674,17 +674,17 @@ scheduler_getSchedulerScheduleTableStartTick(
   * @param[in]  scheduleTableIterator iterator pointing to specific task variable
   * in the schedule table
   *
-  * @return CosmOS_TaskVariableType *
+  * @return CosmOS_TaskConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskVariableType *
+__STATIC_FORCEINLINE CosmOS_TaskConfigurationType *
 scheduler_getSchedulerScheduleTableTaskVar(
     CosmOS_SchedulerVariableType * scheduler,
     BitWidthType scheduleTableIterator )
 {
     return (
-        CosmOS_TaskVariableType *)( scheduler->cfg
+        CosmOS_TaskConfigurationType *)( scheduler->cfg
                                         ->scheduleTable[scheduleTableIterator]
-                                        .taskVar );
+                                        .taskCfg );
 }
 
 /********************************************************************************
@@ -698,19 +698,20 @@ scheduler_getSchedulerScheduleTableTaskVar(
   * @brief Get scheduler threadList element threadVar.
   *
   * @param[in]  scheduler variable pointer
-  * @param[in]  threadListIterator iterator pointing to specific thread variable
-  * in the thread list
+  * @param[in]  threadListIterator iterator pointing to specific thread 
+  * configuration in the thread list
   *
-  * @return CosmOS_ThreadVariableType *
+  * @return CosmOS_ThreadConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ThreadVariableType *
+__STATIC_FORCEINLINE CosmOS_ThreadConfigurationType *
 scheduler_getSchedulerThreadListThreadVar(
     CosmOS_SchedulerVariableType * scheduler,
     BitWidthType threadListIterator )
 {
-    return (CosmOS_ThreadVariableType *)( scheduler->cfg
-                                              ->threadList[threadListIterator]
-                                              .threadVar );
+    return (
+        CosmOS_ThreadConfigurationType *)( scheduler->cfg
+                                               ->threadList[threadListIterator]
+                                               .threadCfg );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

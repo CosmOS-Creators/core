@@ -309,16 +309,16 @@ program_getProgramHeapMutex( CosmOS_ProgramVariableType * program )
 /**
   * @fn program_getProgramTasks(CosmOS_ProgramVariableType * program)
   *
-  * @brief Get program taskVars.
+  * @brief Get program taskCfgs.
   *
   * @param[in]  program pointer to the program variable
   *
-  * @return CosmOS_TaskVariableType *
+  * @return CosmOS_TaskConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskVariableType *
+__STATIC_FORCEINLINE CosmOS_TaskConfigurationType *
 program_getProgramTasks( CosmOS_ProgramVariableType * program )
 {
-    return ( program->taskVars );
+    return (CosmOS_TaskConfigurationType *)( program->taskCfgs );
 }
 
 /********************************************************************************
@@ -328,19 +328,19 @@ program_getProgramTasks( CosmOS_ProgramVariableType * program )
   * @fn program_getProgramTask(CosmOS_ProgramVariableType * program,
   * BitWidthType taskIterator)
   *
-  * @brief Get program taskVars element pointer.
+  * @brief Get program taskCfgs element pointer.
   *
   * @param[in]  program pointer to the program variable
   * @param[in]  BitWidthType taskIterator
   *
-  * @return CosmOS_TaskVariableType *
+  * @return CosmOS_TaskConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_TaskVariableType *
+__STATIC_FORCEINLINE CosmOS_TaskConfigurationType *
 program_getProgramTask(
     CosmOS_ProgramVariableType * program,
     BitWidthType taskIterator )
 {
-    return ( &( program->taskVars[taskIterator] ) );
+    return (CosmOS_TaskConfigurationType *)( &( program->taskCfgs[taskIterator] ) );
 }
 
 /********************************************************************************
@@ -349,16 +349,16 @@ program_getProgramTask(
 /**
   * @fn program_getProgramThreads(CosmOS_ProgramVariableType * program)
   *
-  * @brief Get program threadVars.
+  * @brief Get program threadCfgs.
   *
   * @param[in]  program pointer to the program variable
   *
-  * @return CosmOS_ThreadVariableType *
+  * @return CosmOS_ThreadConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ThreadVariableType *
+__STATIC_FORCEINLINE CosmOS_ThreadConfigurationType *
 program_getProgramThreads( CosmOS_ProgramVariableType * program )
 {
-    return ( program->threadVars );
+    return (CosmOS_ThreadConfigurationType *)( program->threadCfgs );
 }
 
 /********************************************************************************
@@ -368,19 +368,19 @@ program_getProgramThreads( CosmOS_ProgramVariableType * program )
   * @fn program_getProgramThread(CosmOS_ProgramVariableType * program,
   * BitWidthType threadIterator)
   *
-  * @brief Get program threadVars element pointer.
+  * @brief Get program threadCfgs element pointer.
   *
   * @param[in]  program pointer to the program variable
   * @param[in]  BitWidthType threadIterator
   *
-  * @return CosmOS_ThreadVariableType *
+  * @return CosmOS_ThreadConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ThreadVariableType *
+__STATIC_FORCEINLINE CosmOS_ThreadConfigurationType *
 program_getProgramThread(
     CosmOS_ProgramVariableType * program,
     BitWidthType threadIterator )
 {
-    return ( &( program->threadVars[threadIterator] ) );
+    return (CosmOS_ThreadConfigurationType *)( &( program->threadCfgs[threadIterator] ) );
 }
 
 /********************************************************************************

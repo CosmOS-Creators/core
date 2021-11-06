@@ -243,12 +243,13 @@ spinlock_getSpinlockValue( CosmOS_SpinlockVariableType * spinlockVar )
   *
   * @param[in]  spinlockVar pointer
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
 spinlock_getSpinlockSchedulableOwner( CosmOS_SpinlockVariableType * spinlockVar )
 {
-    return (CosmOS_SchedulableVariableType *)( spinlockVar->schedulableOwner );
+    return (
+        CosmOS_SchedulableConfigurationType *)( spinlockVar->schedulableOwner );
 }
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -286,7 +287,7 @@ spinlock_setSpinlockValue(
 /**
   * @fn spinlock_setSpinlockSchedulableOwner(
   * CosmOS_SpinlockVariableType * spinlock,
-  * BitWidthType spinlockParam)
+  * CosmOS_SchedulableConfigurationType * schedulableOwnerParam)
   *
   * @brief Set spinlock schedulableOwner. This function cannot
   * be called from the unprivileged context directly.
@@ -300,7 +301,7 @@ spinlock_setSpinlockValue(
 __STATIC_FORCEINLINE void
 spinlock_setSpinlockSchedulableOwner(
     CosmOS_SpinlockVariableType * spinlockVar,
-    CosmOS_SchedulableVariableType * schedulableOwnerParam )
+    CosmOS_SchedulableConfigurationType * schedulableOwnerParam )
 {
     spinlockVar->schedulableOwner = schedulableOwnerParam;
 }

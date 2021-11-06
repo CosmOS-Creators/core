@@ -131,7 +131,7 @@
   * generated variable structure by os_getOsVar function that stores all system
   * double buffers in it.
   * Then the double buffer variable is obtained by the function
-  * os_getOsBufferDoubleVar based on the id argument which is mapped with the
+  * os_getOsBufferDoubleCfg based on the id argument which is mapped with the
   * routes to the proper entity, in this case one of the system double buffers.
   * After this point the buffer variable is obtained based on the access type
   * either BUFFER_DOUBLE_ACCESS_ENUM__USER or BUFFER_DOUBLE_ACCESS_ENUM__KERNEL.
@@ -158,29 +158,29 @@ bufferDouble_readArray(
     CosmOS_BufferStateType bufferState;
 
     CosmOS_OsVariableType * osVar;
-    CosmOS_BufferVariableType * bufferVar;
-    CosmOS_BufferDoubleVariableType * bufferDoubleVar;
+    CosmOS_BufferConfigurationType * bufferCfg;
+    CosmOS_BufferDoubleConfigurationType * bufferDoubleCfg;
 
     osVar = os_getOsVar();
 
-    bufferDoubleVar = os_getOsBufferDoubleVar( osVar, id );
+    bufferDoubleCfg = os_getOsBufferDoubleCfg( osVar, id );
 
     switch ( access )
     {
         case BUFFER_DOUBLE_ACCESS_ENUM__USER:
         {
-            bufferVar =
-                bufferDouble_getBufferDoubleUserBuffer( bufferDoubleVar );
-            bufferId = buffer_getBufferId( bufferVar );
+            bufferCfg =
+                bufferDouble_getBufferDoubleUserBuffer( bufferDoubleCfg );
+            bufferId = buffer_getBufferId( bufferCfg );
             bufferState = buffer_readArray( bufferId, buffer, size );
             break;
         }
 
         case BUFFER_DOUBLE_ACCESS_ENUM__KERNEL:
         {
-            bufferVar =
-                bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleVar );
-            bufferId = buffer_getBufferId( bufferVar );
+            bufferCfg =
+                bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleCfg );
+            bufferId = buffer_getBufferId( bufferCfg );
             bufferState = buffer_readArray( bufferId, buffer, size );
             break;
         }
@@ -209,7 +209,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * generated variable structure by os_getOsVar function that stores all system
   * double buffers in it.
   * Then the double buffer variable is obtained by the function
-  * os_getOsBufferDoubleVar based on the id argument which is mapped with the
+  * os_getOsBufferDoubleCfg based on the id argument which is mapped with the
   * routes to the proper entity, in this case one of the system double buffers.
   * After this point the buffer variable is obtained based on the access type
   * either BUFFER_DOUBLE_ACCESS_ENUM__USER or BUFFER_DOUBLE_ACCESS_ENUM__KERNEL.
@@ -236,29 +236,29 @@ bufferDouble_writeArray(
     CosmOS_BufferStateType bufferState;
 
     CosmOS_OsVariableType * osVar;
-    CosmOS_BufferVariableType * bufferVar;
-    CosmOS_BufferDoubleVariableType * bufferDoubleVar;
+    CosmOS_BufferConfigurationType * bufferCfg;
+    CosmOS_BufferDoubleConfigurationType * bufferDoubleCfg;
 
     osVar = os_getOsVar();
 
-    bufferDoubleVar = os_getOsBufferDoubleVar( osVar, id );
+    bufferDoubleCfg = os_getOsBufferDoubleCfg( osVar, id );
 
     switch ( access )
     {
         case BUFFER_DOUBLE_ACCESS_ENUM__USER:
         {
-            bufferVar =
-                bufferDouble_getBufferDoubleUserBuffer( bufferDoubleVar );
-            bufferId = buffer_getBufferId( bufferVar );
+            bufferCfg =
+                bufferDouble_getBufferDoubleUserBuffer( bufferDoubleCfg );
+            bufferId = buffer_getBufferId( bufferCfg );
             bufferState = buffer_writeArray( bufferId, buffer, size );
             break;
         }
 
         case BUFFER_DOUBLE_ACCESS_ENUM__KERNEL:
         {
-            bufferVar =
-                bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleVar );
-            bufferId = buffer_getBufferId( bufferVar );
+            bufferCfg =
+                bufferDouble_getBufferDoubleKernelBuffer( bufferDoubleCfg );
+            bufferId = buffer_getBufferId( bufferCfg );
             bufferState = buffer_writeArray( bufferId, buffer, size );
             break;
         }

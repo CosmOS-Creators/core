@@ -186,12 +186,12 @@ alarm_expire( CosmOS_AlarmVariableType * alarmVar );
   *
   * @param[in]  alarm pointer
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
 alarm_getAlarmSchedulable( CosmOS_AlarmVariableType * alarm )
 {
-    return (CosmOS_SchedulableVariableType *)( alarm->cfg->schedulableVar );
+    return (CosmOS_SchedulableConfigurationType *)( alarm->cfg->schedulableCfg );
 }
 
 /********************************************************************************

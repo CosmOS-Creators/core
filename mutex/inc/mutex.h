@@ -296,12 +296,12 @@ mutex_getMutexValue( CosmOS_MutexVariableType * mutexVar )
   *
   * @param[in]  mutexVar pointer to the mutex variable
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
 mutex_getMutexSchedulableOwner( CosmOS_MutexVariableType * mutexVar )
 {
-    return (CosmOS_SchedulableVariableType *)( mutexVar->schedulableOwner );
+    return (CosmOS_SchedulableConfigurationType *)( mutexVar->schedulableOwner );
 }
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -342,14 +342,14 @@ mutex_setMutexValue(
   * @brief Set mutex schedulableOwner.
   *
   * @param[out]  mutexVar pointer to the mutex variable
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableOwnerParam
+  * @param[in]  CosmOS_SchedulableConfigurationType * schedulableOwnerParam
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 mutex_setMutexSchedulableOwner(
     CosmOS_MutexVariableType * mutexVar,
-    CosmOS_SchedulableVariableType * schedulableOwnerParam )
+    CosmOS_SchedulableConfigurationType * schedulableOwnerParam )
 {
     mutexVar->schedulableOwner = schedulableOwnerParam;
 }

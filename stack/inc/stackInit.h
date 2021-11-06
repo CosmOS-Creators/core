@@ -150,7 +150,8 @@ extern "C" {
   * @return StackPointerType
 ********************************************************************************/
 __OS_FUNC_SECTION StackPointerType
-stackInit_schedulableStackInit( CosmOS_SchedulableVariableType * schedulable );
+stackInit_schedulableStackInit(
+    CosmOS_SchedulableConfigurationType * schedulable );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -200,201 +200,201 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getBuffer(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_getBuffer(CosmOS_BufferConfigurationType * bufferCfg)
   *
   * @brief Get buffer pointer.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return unsigned char *
 ********************************************************************************/
 __STATIC_FORCEINLINE unsigned char *
-buffer_getBuffer( CosmOS_BufferVariableType * bufferVar )
+buffer_getBuffer( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return (unsigned char *)( bufferVar->cfg->buffer );
+    return (unsigned char *)( bufferCfg->buffer );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getBufferId(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_getBufferId(CosmOS_BufferConfigurationType * bufferCfg)
   *
   * @brief Get buffer id.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-buffer_getBufferId( CosmOS_BufferVariableType * bufferVar )
+buffer_getBufferId( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return ( bufferVar->cfg->id );
+    return ( bufferCfg->id );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getBufferSize(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_getBufferSize(CosmOS_BufferConfigurationType * bufferCfg)
   *
   * @brief Get buffer size.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-buffer_getBufferSize( CosmOS_BufferVariableType * bufferVar )
+buffer_getBufferSize( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return ( bufferVar->cfg->size );
+    return ( bufferCfg->size );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_isBufferInterCore(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_isBufferInterCore(CosmOS_BufferConfigurationType * bufferCfg)
   *
   * @brief Is buffer inter core.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return CosmOS_BooleanType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
-buffer_isBufferInterCore( CosmOS_BufferVariableType * bufferVar )
+buffer_isBufferInterCore( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return ( bufferVar->cfg->isInterCore );
+    return ( bufferCfg->isInterCore );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getBufferSpinlockId(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_getBufferSpinlockId(CosmOS_BufferConfigurationType * bufferCfg)
   *
   * @brief Get buffer spinlockId.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-buffer_getBufferSpinlockId( CosmOS_BufferVariableType * bufferVar )
+buffer_getBufferSpinlockId( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return ( bufferVar->cfg->spinlockId );
+    return ( bufferCfg->spinlockId );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getBufferReadPermission(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_getBufferReadPermission(CosmOS_BufferConfigurationType * 
+  * bufferCfg)
   *
   * @brief Get buffer readPermission.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return CosmOS_PermissionsConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType *
-buffer_getBufferReadPermission( CosmOS_BufferVariableType * bufferVar )
+buffer_getBufferReadPermission( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return (
-        CosmOS_PermissionsConfigurationType *)( bufferVar->cfg->readPermission );
+    return (CosmOS_PermissionsConfigurationType *)( bufferCfg->readPermission );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getBufferWritePermission(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_getBufferWritePermission(CosmOS_BufferConfigurationType *
+  * bufferCfg)
   *
   * @brief Get buffer writePermission.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return CosmOS_PermissionsConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType *
-buffer_getBufferWritePermission( CosmOS_BufferVariableType * bufferVar )
+buffer_getBufferWritePermission( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return (CosmOS_PermissionsConfigurationType *)( bufferVar->cfg
-                                                        ->writePermission );
+    return (CosmOS_PermissionsConfigurationType *)( bufferCfg->writePermission );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getBufferHead(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_getBufferHead(CosmOS_BufferConfigurationType * bufferCfg)
   *
   * @brief Get buffer head.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-buffer_getBufferHead( CosmOS_BufferVariableType * bufferVar )
+buffer_getBufferHead( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return ( bufferVar->head );
+    return ( bufferCfg->var->head );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getBufferTail(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_getBufferTail(CosmOS_BufferConfigurationType * bufferCfg)
   *
   * @brief Get buffer tail.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-buffer_getBufferTail( CosmOS_BufferVariableType * bufferVar )
+buffer_getBufferTail( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return ( bufferVar->tail );
+    return ( bufferCfg->var->tail );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getFullCellsNum(BitWidthType id, void * bufferVar,
+  * @fn buffer_getFullCellsNum(BitWidthType id, void * bufferCfg,
   * BitWidthType num)
   *
-  * @brief Get full bufferVar cells DEMO CODE.
+  * @brief Get full bufferCfg cells DEMO CODE.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-buffer_getFullCellsNum( CosmOS_BufferVariableType * bufferVar )
+buffer_getFullCellsNum( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return ( bufferVar->fullCells );
+    return ( bufferCfg->var->fullCells );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getEmptyCellsNum(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_getEmptyCellsNum(CosmOS_BufferConfigurationType * bufferCfg)
   *
-  * @brief Get empty bufferVar cells DEMO CODE.
+  * @brief Get empty bufferCfg cells DEMO CODE.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-buffer_getEmptyCellsNum( CosmOS_BufferVariableType * bufferVar )
+buffer_getEmptyCellsNum( CosmOS_BufferConfigurationType * bufferCfg )
 {
-    return ( ( bufferVar->cfg->size ) - ( bufferVar->fullCells ) );
+    return ( ( bufferCfg->size ) - ( bufferCfg->var->fullCells ) );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -413,69 +413,69 @@ buffer_getEmptyCellsNum( CosmOS_BufferVariableType * bufferVar )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_setBufferHead(CosmOS_BufferVariableType * bufferVar,
+  * @fn buffer_setBufferHead(CosmOS_BufferConfigurationType * bufferCfg,
   * BitWidthType tailParam)
   *
   * @brief Set buffer head. This function cannot be called
   * from the unprivileged context directly.
   *
-  * @param[out]  bufferVar pointer
+  * @param[out]  bufferCfg configuration pointer
   * @param[in]  headParam head of the buffer
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 buffer_setBufferHead(
-    CosmOS_BufferVariableType * bufferVar,
+    CosmOS_BufferConfigurationType * bufferCfg,
     BitWidthType headParam )
 {
-    bufferVar->head = headParam;
+    bufferCfg->var->head = headParam;
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_setBufferTail(CosmOS_BufferVariableType * bufferVar,
+  * @fn buffer_setBufferTail(CosmOS_BufferConfigurationType * bufferCfg,
   * BitWidthType tailParam)
   *
   * @brief Set buffer tail. This function cannot be called
   * from the unprivileged context directly.
   *
-  * @param[out]  bufferVar pointer
+  * @param[out]  bufferCfg configuration pointer
   * @param[in]  tailParam tail of the buffer
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 buffer_setBufferTail(
-    CosmOS_BufferVariableType * bufferVar,
+    CosmOS_BufferConfigurationType * bufferCfg,
     BitWidthType tailParam )
 {
-    bufferVar->tail = tailParam;
+    bufferCfg->var->tail = tailParam;
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_setBufferfullCells(CosmOS_BufferVariableType * bufferVar,
+  * @fn buffer_setBufferfullCells(CosmOS_BufferConfigurationType * bufferCfg,
   * BitWidthType fullCellsParam)
   *
   * @brief Set buffer fullCells. This function cannot be called
   * from the unprivileged context directly.
   *
-  * @param[out]  bufferVar pointer
+  * @param[out]  bufferCfg configuration pointer
   * @param[in]  fullCellsParam full cells
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 buffer_setBufferfullCells(
-    CosmOS_BufferVariableType * bufferVar,
+    CosmOS_BufferConfigurationType * bufferCfg,
     BitWidthType fullCellsParam )
 {
-    bufferVar->fullCells = fullCellsParam;
+    bufferCfg->var->fullCells = fullCellsParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -494,39 +494,39 @@ buffer_setBufferfullCells(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_isEmpty(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_isEmpty(CosmOS_BufferConfigurationType * bufferCfg)
   *
   * @brief Returning if the buffer is empty or ok.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferStateType
-buffer_isEmpty( CosmOS_BufferVariableType * bufferVar )
+buffer_isEmpty( CosmOS_BufferConfigurationType * bufferCfg )
 {
     return (
-        IS_NOT( bufferVar->fullCells ) ? BUFFER_STATE_ENUM__EMPTY
-                                       : BUFFER_STATE_ENUM__OK );
+        IS_NOT( bufferCfg->var->fullCells ) ? BUFFER_STATE_ENUM__EMPTY
+                                            : BUFFER_STATE_ENUM__OK );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_isFull(CosmOS_BufferVariableType * bufferVar)
+  * @fn buffer_isFull(CosmOS_BufferConfigurationType * bufferCfg)
   *
   * @brief Returning if the buffer is full or ok.
   *
-  * @param[in]  bufferVar pointer
+  * @param[in]  bufferCfg configuration pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferStateType
-buffer_isFull( CosmOS_BufferVariableType * bufferVar )
+buffer_isFull( CosmOS_BufferConfigurationType * bufferCfg )
 {
     return (
-        IS_NOT( ( bufferVar->cfg->size ) ^ ( bufferVar->fullCells ) )
+        IS_NOT( ( bufferCfg->size ) ^ ( bufferCfg->var->fullCells ) )
             ? BUFFER_STATE_ENUM__FULL
             : BUFFER_STATE_ENUM__OK );
 }

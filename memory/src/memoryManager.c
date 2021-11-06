@@ -152,7 +152,7 @@ memoryManager_stackInit( CosmOS_CoreVariableType * coreVar )
 {
     BitWidthType numberOfThreads, numberOfPrograms, stackPointerRetVal;
 
-    CosmOS_ThreadVariableType * threadVar;
+    CosmOS_ThreadConfigurationType * threadCfg;
     CosmOS_ProgramVariableType * programVar;
 
     numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
@@ -166,14 +166,14 @@ memoryManager_stackInit( CosmOS_CoreVariableType * coreVar )
         for ( BitWidthType threadIterator = 0; threadIterator < numberOfThreads;
               threadIterator++ )
         {
-            CosmOS_SchedulableVariableType * schedulableVar;
+            CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-            threadVar = program_getProgramThread( programVar, threadIterator );
-            schedulableVar = thread_getThreadSchedulable( threadVar );
+            threadCfg = program_getProgramThread( programVar, threadIterator );
+            schedulableCfg = thread_getThreadSchedulable( threadCfg );
 
             stackPointerRetVal =
-                stackInit_schedulableStackInit( schedulableVar );
-            schedulable_setStackPointer( schedulableVar, stackPointerRetVal );
+                stackInit_schedulableStackInit( schedulableCfg );
+            schedulable_setStackPointer( schedulableCfg, stackPointerRetVal );
         }
     }
 }

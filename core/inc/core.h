@@ -148,20 +148,20 @@ core_getCoreVar( void );
   * ****************************************************************************/
 /**
   * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar,
-  * CosmOS_TaskVariableType * taskVar)
+  * CosmOS_SchedulableConfigurationType * schedulableCfg)
   *
   * @brief Set program and schedulable into the current context. This function
   * cannot be called from the unprivileged context directly.
   *
   * @param[out]  core variable pointerVar
-  * @param[in]  schedulableVar variable pointer
+  * @param[in]  schedulableCfg configuration pointer
   *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 core_setSchedulableIntoCurrentContext(
     CosmOS_CoreVariableType * coreVar,
-    CosmOS_SchedulableVariableType * schedulableVar );
+    CosmOS_SchedulableConfigurationType * schedulableCfg );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -438,12 +438,12 @@ core_getCoreNumberOfAlarms( CosmOS_CoreVariableType * core )
   *
   * @param[in]  core variable pointer
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
 core_getCoreSchedulableInExecution( CosmOS_CoreVariableType * core )
 {
-    return ( core->schedulableInExecution );
+    return (CosmOS_SchedulableConfigurationType *)( core->schedulableInExecution );
 }
 
 /********************************************************************************
@@ -674,20 +674,20 @@ core_setCoreProgramInExecution(
   * ****************************************************************************/
 /**
   * @fn core_setCoreSchedulableInExecution(CosmOS_CoreVariableType * core,
-  * CosmOS_SchedulableVariableType * schedulableInExecutionParam)
+  * CosmOS_SchedulableConfigurationType * schedulableInExecutionParam)
   *
   * @brief Set core schedulableInExecution pointer. This function cannot be
   * called from the unprivileged context directly.
   *
   * @param[out]  core variable pointer
-  * @param[in]  schedulableInExecutionParam variable pointer
+  * @param[in]  schedulableInExecutionParam configuration pointer
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 core_setCoreSchedulableInExecution(
     CosmOS_CoreVariableType * core,
-    CosmOS_SchedulableVariableType * schedulableInExecutionParam )
+    CosmOS_SchedulableConfigurationType * schedulableInExecutionParam )
 {
     core->schedulableInExecution = schedulableInExecutionParam;
 }

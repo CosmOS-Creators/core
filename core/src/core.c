@@ -154,7 +154,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * ****************************************************************************/
 /**
   * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar,
-  * CosmOS_TaskVariableType * taskVar)
+  * CosmOS_SchedulableConfigurationType * schedulableCfg)
   *
   * @details The implementation contains obtaining of the program id from the
   * schedulable variable by schedulable_getProgramId function. Then the program
@@ -166,7 +166,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * has to be set into the current context set as program in execution by
   * calling function core_setCoreProgramInExecution and also the schedulable by
   * calling function core_setCoreSchedulableInExecution. If the state of the
-  * priorSchedulableVar is SCHEDULABLE_STATE_ENUM__RUNNING the prior schedulable
+  * priorSchedulableCfg is SCHEDULABLE_STATE_ENUM__RUNNING the prior schedulable
   * state is set to SCHEDULABLE_STATE_ENUM__READY. Then also state of the
   * schedulable that has to be set into the current context is set by function
   * schedulable_setState to the SCHEDULABLE_STATE_ENUM__RUNNING.
@@ -177,29 +177,29 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 core_setSchedulableIntoCurrentContext(
     CosmOS_CoreVariableType * coreVar,
-    CosmOS_SchedulableVariableType * schedulableVar )
+    CosmOS_SchedulableConfigurationType * schedulableCfg )
 {
     BitWidthType programId;
 
-    CosmOS_SchedulableStateType priorSchedulableVarState;
+    CosmOS_SchedulableStateType priorschedulableState;
 
     CosmOS_ProgramVariableType * programVar;
-    CosmOS_SchedulableVariableType * priorSchedulableVar;
+    CosmOS_SchedulableConfigurationType * priorSchedulableCfg;
 
-    programId = schedulable_getProgramId( schedulableVar );
+    programId = schedulable_getProgramId( schedulableCfg );
     programVar = core_getCoreProgramVar( coreVar, programId );
-    priorSchedulableVar = core_getCoreSchedulableInExecution( coreVar );
-    priorSchedulableVarState = schedulable_getState( priorSchedulableVar );
+    priorSchedulableCfg = core_getCoreSchedulableInExecution( coreVar );
+    priorschedulableState = schedulable_getState( priorSchedulableCfg );
 
     core_setCoreProgramInExecution( coreVar, programVar );
-    core_setCoreSchedulableInExecution( coreVar, schedulableVar );
+    core_setCoreSchedulableInExecution( coreVar, schedulableCfg );
 
-    if ( priorSchedulableVarState IS_EQUAL_TO SCHEDULABLE_STATE_ENUM__RUNNING )
+    if ( priorschedulableState IS_EQUAL_TO SCHEDULABLE_STATE_ENUM__RUNNING )
     {
         schedulable_setState(
-            priorSchedulableVar, SCHEDULABLE_STATE_ENUM__READY );
+            priorSchedulableCfg, SCHEDULABLE_STATE_ENUM__READY );
     }
-    schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__RUNNING );
+    schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__RUNNING );
 }
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )

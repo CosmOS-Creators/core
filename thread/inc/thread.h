@@ -214,54 +214,54 @@ thread_sleepMs( BitWidthType delayMs );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_getThreadPriority(CosmOS_ThreadVariableType *thread)
+  * @fn thread_getThreadPriority(CosmOS_ThreadConfigurationType *thread)
   *
   * @brief Get thread priority.
   *
-  * @param[in] thread pointer to the thread variable type
+  * @param[in] thread configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-thread_getThreadPriority( CosmOS_ThreadVariableType * thread )
+thread_getThreadPriority( CosmOS_ThreadConfigurationType * thread )
 {
-    return ( thread->cfg->priority );
+    return ( thread->priority );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_getThreadSchedulable(CosmOS_ThreadVariableType *thread)
+  * @fn thread_getThreadSchedulable(CosmOS_ThreadConfigurationType *thread)
   *
   * @brief Get thread schedulable.
   *
-  * @param[in] thread pointer to the thread variable type
+  * @param[in] thread configuration pointer
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
-thread_getThreadSchedulable( CosmOS_ThreadVariableType * thread )
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
+thread_getThreadSchedulable( CosmOS_ThreadConfigurationType * thread )
 {
-    return (CosmOS_SchedulableVariableType *)( thread->schedulable );
+    return (CosmOS_SchedulableConfigurationType *)( thread->schedulable );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_getThreadBlockingMutexVar(CosmOS_ThreadVariableType *thread)
+  * @fn thread_getThreadBlockingMutexVar(CosmOS_ThreadConfigurationType *thread)
   *
   * @brief Get thread blockingMutexVar.
   *
-  * @param[in] thread pointer to the thread variable type
+  * @param[in] thread configuration pointer
   *
   * @return CosmOS_MutexVariableType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_MutexVariableType *
-thread_getThreadBlockingMutexVar( CosmOS_ThreadVariableType * thread )
+thread_getThreadBlockingMutexVar( CosmOS_ThreadConfigurationType * thread )
 {
-    return (CosmOS_MutexVariableType *)( thread->blockingMutexVar );
+    return (CosmOS_MutexVariableType *)( thread->var->blockingMutexVar );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -280,22 +280,22 @@ thread_getThreadBlockingMutexVar( CosmOS_ThreadVariableType * thread )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_setThreadBlockingMutexVar(CosmOS_ThreadVariableType *thread)
+  * @fn thread_setThreadBlockingMutexVar(CosmOS_ThreadConfigurationType *thread)
   *
   * @brief Set thread blockingMutexVar. This function cannot
   * be called from the unprivileged context directly.
   *
-  * @param[in] thread pointer to the thread variable type
+  * @param[in] thread configuration pointer
   * @param[in]  mutexParam pointer to the mutex variable
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 thread_setThreadBlockingMutexVar(
-    CosmOS_ThreadVariableType * thread,
+    CosmOS_ThreadConfigurationType * thread,
     CosmOS_MutexVariableType * mutexParam )
 {
-    thread->blockingMutexVar = mutexParam;
+    thread->var->blockingMutexVar = mutexParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

@@ -158,7 +158,7 @@ mutex_getMutexInternal(
     CosmOS_MutexStateType mutexState;
 
     CosmOS_CoreVariableType * coreVar;
-    CosmOS_ThreadVariableType * threadVar;
+    CosmOS_ThreadConfigurationType * threadCfg;
 
     coreVar = CILcore_getCoreVar();
 
@@ -166,15 +166,16 @@ mutex_getMutexInternal(
     if ( mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED )
     {
         mutexVar->schedulableOwner = coreVar->schedulableInExecution;
-        __SUPRESS_UNUSED_VAR( threadVar );
+        __SUPRESS_UNUSED_VAR( threadCfg );
     }
     else
     {
-        threadVar = program_getProgramThread(
+        threadCfg = program_getProgramThread(
             coreVar->programInExecution,
-            coreVar->schedulableInExecution->cfg->instanceId );
-        threadVar->blockingMutexVar = mutexVar;
-        coreVar->schedulableInExecution->state = SCHEDULABLE_STATE_ENUM__BLOCKED;
+            coreVar->schedulableInExecution->instanceId );
+        threadCfg->var->blockingMutexVar = mutexVar;
+        coreVar->schedulableInExecution->var->state =
+            SCHEDULABLE_STATE_ENUM__BLOCKED;
         CILinterrupt_contextSwitchRoutineTrigger();
     }
 
@@ -260,7 +261,7 @@ mutex_releaseMutexInternal(
     CosmOS_MutexStateType mutexState;
 
     CosmOS_CoreVariableType * coreVar;
-    CosmOS_ThreadVariableType * threadVar;
+    CosmOS_ThreadConfigurationType * threadCfg;
 
     coreVar = CILcore_getCoreVar();
 
@@ -271,19 +272,19 @@ mutex_releaseMutexInternal(
           iterator < coreVar->programInExecution->cfg->numberOfThreads;
           iterator++ )
     {
-        if ( coreVar->programInExecution->threadVars[iterator]
-                 .blockingMutexVar IS_EQUAL_TO mutexVar )
+        if ( coreVar->programInExecution->threadCfgs[iterator]
+                 .var->blockingMutexVar IS_EQUAL_TO mutexVar )
         {
-            coreVar->programInExecution->threadVars[iterator]
-                .schedulable->state = SCHEDULABLE_STATE_ENUM__READY;
-            coreVar->programInExecution->threadVars[iterator].blockingMutexVar =
-                NULL;
+            coreVar->programInExecution->threadCfgs[iterator]
+                .schedulable->var->state = SCHEDULABLE_STATE_ENUM__READY;
+            coreVar->programInExecution->threadCfgs[iterator]
+                .var->blockingMutexVar = NULL;
 
-            threadVar = program_getProgramThread(
+            threadCfg = program_getProgramThread(
                 coreVar->programInExecution,
-                coreVar->schedulableInExecution->cfg->instanceId );
-            if ( coreVar->programInExecution->threadVars[iterator]
-                     .cfg->priority > threadVar->cfg->priority )
+                coreVar->schedulableInExecution->instanceId );
+            if ( coreVar->programInExecution->threadCfgs[iterator].priority >
+                 threadCfg->priority )
             {
                 higherPriorityThreadBlocked = True;
             }
@@ -344,7 +345,7 @@ mutex_getMutex( CosmOS_MutexVariableType * mutexVar )
 
     if ( IS_NOT( isMutexInProtectedMemory ) )
     {
-        if ( coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO
+        if ( coreVar->schedulableInExecution->instanceType IS_EQUAL_TO
                  SCHEDULABLE_INSTANCE_ENUM__THREAD )
         {
             willCauseDeadlock = mutex_willCauseDeadlock( coreVar, mutexVar );
@@ -415,7 +416,7 @@ mutex_tryMutex( CosmOS_MutexVariableType * mutexVar )
 
     if ( IS_NOT( isMutexInProtectedMemory ) )
     {
-        if ( coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO
+        if ( coreVar->schedulableInExecution->instanceType IS_EQUAL_TO
                  SCHEDULABLE_INSTANCE_ENUM__THREAD )
         {
             mutexState = cosmosApiInternal_mutex_tryMutexInternal( mutexVar );
@@ -480,7 +481,7 @@ mutex_releaseMutex( CosmOS_MutexVariableType * mutexVar )
 
     if ( IS_NOT( isMutexInProtectedMemory ) )
     {
-        if ( coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO
+        if ( coreVar->schedulableInExecution->instanceType IS_EQUAL_TO
                  SCHEDULABLE_INSTANCE_ENUM__THREAD )
         {
             ownsSchedulableMutex =

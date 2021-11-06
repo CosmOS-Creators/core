@@ -149,14 +149,14 @@ thread_sleepMsInternal(
     CosmOS_SleepStateType sleepStateReturn;
 
     CosmOS_AlarmVariableType * alarmVar;
-    CosmOS_SchedulableVariableType * schedulableVar;
+    CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    schedulableVar = core_getCoreSchedulableInExecution( coreVar );
+    schedulableCfg = core_getCoreSchedulableInExecution( coreVar );
 
-    alarmId = schedulable_getAlarmId( schedulableVar );
+    alarmId = schedulable_getAlarmId( schedulableCfg );
     alarmVar = core_getAlarmVar( coreVar, alarmId );
 
-    schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__SLEEP );
+    schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__SLEEP );
     alarm_setAlarmTickCount( alarmVar, tickCount );
     alarm_setAlarmState( alarmVar, ALARM_STATE_ENUM__ACTIVATED );
 
@@ -209,7 +209,7 @@ thread_sleepMs( BitWidthType delayMs )
     CosmOS_SchedulableInstanceType schedulableInstanceType;
 
     CosmOS_CoreVariableType * coreVar;
-    CosmOS_SchedulableVariableType * schedulableVar;
+    CosmOS_SchedulableConfigurationType * schedulableCfg;
 
     if ( delayMs )
     {
@@ -217,8 +217,8 @@ thread_sleepMs( BitWidthType delayMs )
 
         msToTicks = core_getMsToTicks( coreVar );
 
-        schedulableVar = core_getCoreSchedulableInExecution( coreVar );
-        schedulableInstanceType = schedulable_getInstanceType( schedulableVar );
+        schedulableCfg = core_getCoreSchedulableInExecution( coreVar );
+        schedulableInstanceType = schedulable_getInstanceType( schedulableCfg );
 
         if ( schedulableInstanceType IS_EQUAL_TO
                  SCHEDULABLE_INSTANCE_ENUM__THREAD )

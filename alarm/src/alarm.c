@@ -125,11 +125,11 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 alarm_expire( CosmOS_AlarmVariableType * alarmVar )
 {
-    CosmOS_SchedulableVariableType * schedulableVar;
+    CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    schedulableVar = alarm_getAlarmSchedulable( alarmVar );
+    schedulableCfg = alarm_getAlarmSchedulable( alarmVar );
 
-    schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__READY );
+    schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__READY );
     alarm_setAlarmState( alarmVar, ALARM_STATE_ENUM__DISABLED );
     alarm_setAlarmTickCount( alarmVar, 0 );
 };
