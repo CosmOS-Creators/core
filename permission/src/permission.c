@@ -180,7 +180,7 @@ permission_trySchedulableAccess(
   * ****************************************************************************/
 /**
   * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,
-  * CosmOS_CoreVariableType * coreVar)
+  * CosmOS_CoreConfigurationType * core)
   *
   * @details The implementation contains obtaining the schedulable variable in
   * execution by calling core_getCoreSchedulableInExecution function and then
@@ -194,13 +194,13 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION CosmOS_AccessStateType
 permission_tryAccess(
     CosmOS_PermissionsConfigurationType * permission,
-    CosmOS_CoreVariableType * coreVar )
+    CosmOS_CoreConfigurationType * core )
 {
     CosmOS_AccessStateType accessState;
 
     CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    schedulableCfg = core_getCoreSchedulableInExecution( coreVar );
+    schedulableCfg = core_getCoreSchedulableInExecution( core );
     accessState = permission_trySchedulableAccess( permission, schedulableCfg );
 
     return accessState;

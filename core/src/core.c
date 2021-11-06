@@ -136,14 +136,14 @@
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_CoreVariableType *
+__OS_FUNC_SECTION CosmOS_CoreConfigurationType *
 core_getCoreVar( void )
 {
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_CoreConfigurationType * core;
 
-    coreVar = CILcore_getCoreVar();
+    core = CILcore_getCoreVar();
 
-    return coreVar;
+    return core;
 }
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
@@ -153,13 +153,14 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn core_setSchedulableIntoCurrentContext(CosmOS_CoreVariableType * coreVar,
+  * @fn core_setSchedulableIntoCurrentContext(
+  * CosmOS_CoreConfigurationType * core,
   * CosmOS_SchedulableConfigurationType * schedulableCfg)
   *
   * @details The implementation contains obtaining of the program id from the
   * schedulable variable by schedulable_getProgramId function. Then the program
   * variable is obtained from all configured programs under the current core
-  * by function core_getCoreProgramVar. Then is the program from schedulable that
+  * by function core_getCoreProgramCfg. Then is the program from schedulable that
   * has to be set into the current context set as program in execution by
   * calling function core_setCoreProgramInExecution and also the schedulable by
   * calling function core_setCoreSchedulableInExecution.
@@ -177,24 +178,24 @@ __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
 core_setSchedulableIntoCurrentContext(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_SchedulableConfigurationType * schedulableCfg )
 {
     BitWidthType programId;
 
     CosmOS_SchedulableStateType priorschedulableState;
 
-    CosmOS_ProgramVariableType * programVar;
+    CosmOS_ProgramConfigurationType * programCfg;
     CosmOS_SchedulableConfigurationType * priorSchedulableCfg;
 
     programId = schedulable_getProgramId( schedulableCfg );
-    programVar = core_getCoreProgramVar( coreVar, programId );
+    programCfg = core_getCoreProgramCfg( core, programId );
 
-    core_setCoreProgramInExecution( coreVar, programVar );
-    core_setCoreSchedulableInExecution( coreVar, schedulableCfg );
+    core_setCoreProgramInExecution( core, programCfg );
+    core_setCoreSchedulableInExecution( core, schedulableCfg );
     schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__RUNNING );
 
-    priorSchedulableCfg = core_getCoreSchedulableInExecution( coreVar );
+    priorSchedulableCfg = core_getCoreSchedulableInExecution( core );
     if ( priorSchedulableCfg )
     {
         priorschedulableState = schedulable_getState( priorSchedulableCfg );

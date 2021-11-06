@@ -163,160 +163,160 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramCoreId(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramCoreId(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program coreId.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-program_getProgramCoreId( CosmOS_ProgramVariableType * program )
+program_getProgramCoreId( CosmOS_ProgramConfigurationType * program )
 {
-    return ( program->cfg->coreId );
+    return ( program->coreId );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramNumberOfTasks(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramNumberOfTasks(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program numberOfTasks.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-program_getProgramNumberOfTasks( CosmOS_ProgramVariableType * program )
+program_getProgramNumberOfTasks( CosmOS_ProgramConfigurationType * program )
 {
-    return ( program->cfg->numberOfTasks );
+    return ( program->numberOfTasks );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramNumberOfThreads(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramNumberOfThreads(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program numberOfThreads.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-program_getProgramNumberOfThreads( CosmOS_ProgramVariableType * program )
+program_getProgramNumberOfThreads( CosmOS_ProgramConfigurationType * program )
 {
-    return ( program->cfg->numberOfThreads );
+    return ( program->numberOfThreads );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramMemorySize(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramMemorySize(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program programMemorySize.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-program_getProgramMemorySize( CosmOS_ProgramVariableType * program )
+program_getProgramMemorySize( CosmOS_ProgramConfigurationType * program )
 {
-    return ( program->cfg->programMemorySize );
+    return ( program->programMemorySize );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramMemoryLowAddress(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramMemoryLowAddress(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program programMemoryLowAddress.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-program_getProgramMemoryLowAddress( CosmOS_ProgramVariableType * program )
+program_getProgramMemoryLowAddress( CosmOS_ProgramConfigurationType * program )
 {
-    return ( program->cfg->programMemoryLowAddress );
+    return ( program->programMemoryLowAddress );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramMemoryHighAddress(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramMemoryHighAddress(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program programMemoryHighAddress.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-program_getProgramMemoryHighAddress( CosmOS_ProgramVariableType * program )
+program_getProgramMemoryHighAddress( CosmOS_ProgramConfigurationType * program )
 {
-    return ( program->cfg->programMemoryHighAddress );
+    return ( program->programMemoryHighAddress );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getHeap(CosmOS_ProgramVariableType * program)
+  * @fn program_getHeap(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program heap pointer.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return CosmOS_HeapConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_HeapConfigurationType *
-program_getHeap( CosmOS_ProgramVariableType * program )
+program_getHeap( CosmOS_ProgramConfigurationType * program )
 {
-    return (CosmOS_HeapConfigurationType *)( program->cfg->heap );
+    return (CosmOS_HeapConfigurationType *)( program->heap );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramHeapMutex(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramHeapMutex(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program programHeapMutex.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return CosmOS_MutexVariableType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_MutexVariableType *
-program_getProgramHeapMutex( CosmOS_ProgramVariableType * program )
+program_getProgramHeapMutex( CosmOS_ProgramConfigurationType * program )
 {
-    return (CosmOS_MutexVariableType *)( program->cfg->heapMutex );
+    return (CosmOS_MutexVariableType *)( program->heapMutex );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramTasks(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramTasks(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program taskCfgs.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return CosmOS_TaskConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_TaskConfigurationType *
-program_getProgramTasks( CosmOS_ProgramVariableType * program )
+program_getProgramTasks( CosmOS_ProgramConfigurationType * program )
 {
     return (CosmOS_TaskConfigurationType *)( program->taskCfgs );
 }
@@ -325,19 +325,19 @@ program_getProgramTasks( CosmOS_ProgramVariableType * program )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramTask(CosmOS_ProgramVariableType * program,
+  * @fn program_getProgramTask(CosmOS_ProgramConfigurationType * program,
   * BitWidthType taskIterator)
   *
   * @brief Get program taskCfgs element pointer.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   * @param[in]  BitWidthType taskIterator
   *
   * @return CosmOS_TaskConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_TaskConfigurationType *
 program_getProgramTask(
-    CosmOS_ProgramVariableType * program,
+    CosmOS_ProgramConfigurationType * program,
     BitWidthType taskIterator )
 {
     return (CosmOS_TaskConfigurationType *)( &( program->taskCfgs[taskIterator] ) );
@@ -347,16 +347,16 @@ program_getProgramTask(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramThreads(CosmOS_ProgramVariableType * program)
+  * @fn program_getProgramThreads(CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program threadCfgs.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return CosmOS_ThreadConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_ThreadConfigurationType *
-program_getProgramThreads( CosmOS_ProgramVariableType * program )
+program_getProgramThreads( CosmOS_ProgramConfigurationType * program )
 {
     return (CosmOS_ThreadConfigurationType *)( program->threadCfgs );
 }
@@ -365,19 +365,19 @@ program_getProgramThreads( CosmOS_ProgramVariableType * program )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn program_getProgramThread(CosmOS_ProgramVariableType * program,
+  * @fn program_getProgramThread(CosmOS_ProgramConfigurationType * program,
   * BitWidthType threadIterator)
   *
   * @brief Get program threadCfgs element pointer.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   * @param[in]  BitWidthType threadIterator
   *
   * @return CosmOS_ThreadConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_ThreadConfigurationType *
 program_getProgramThread(
-    CosmOS_ProgramVariableType * program,
+    CosmOS_ProgramConfigurationType * program,
     BitWidthType threadIterator )
 {
     return (CosmOS_ThreadConfigurationType *)( &( program->threadCfgs[threadIterator] ) );
@@ -388,18 +388,18 @@ program_getProgramThread(
   * ****************************************************************************/
 /**
   * @fn program_getProgramNumberOfMallocVars(
-  * CosmOS_ProgramVariableType * program)
+  * CosmOS_ProgramConfigurationType * program)
   *
   * @brief Get program numberOfMallocVars.
   *
-  * @param[in]  program pointer to the program variable
+  * @param[in]  program configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-program_getProgramNumberOfMallocVars( CosmOS_ProgramVariableType * program )
+program_getProgramNumberOfMallocVars( CosmOS_ProgramConfigurationType * program )
 {
-    return ( program->numberOfMallocVars );
+    return ( program->var->numberOfMallocVars );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -419,13 +419,13 @@ program_getProgramNumberOfMallocVars( CosmOS_ProgramVariableType * program )
   * ****************************************************************************/
 /**
   * @fn program_setProgramNumberOfMallocVars(
-  * CosmOS_ProgramVariableType * program,
+  * CosmOS_ProgramConfigurationType * program,
   * BitWidthType numberOfMallocVarsParam)
   *
   * @brief Set program numberOfMallocVars. This function cannot be called
   * from the unprivileged context directly.
   *
-  * @param[out]  program pointer to the program variable
+  * @param[out]  program configuration pointer
   * @param[in]  numberOfMallocVarsParam number of malloc variables to set
   * for current program
   *
@@ -433,10 +433,10 @@ program_getProgramNumberOfMallocVars( CosmOS_ProgramVariableType * program )
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 program_setProgramNumberOfMallocVars(
-    CosmOS_ProgramVariableType * program,
+    CosmOS_ProgramConfigurationType * program,
     BitWidthType numberOfMallocVarsParam )
 {
-    program->numberOfMallocVars = numberOfMallocVarsParam;
+    program->var->numberOfMallocVars = numberOfMallocVarsParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

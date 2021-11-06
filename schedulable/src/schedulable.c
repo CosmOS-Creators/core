@@ -134,12 +134,12 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 schedulable_setExecutionStateToFinished( BitWidthType entityId )
 {
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    coreVar = core_getCoreVar();
+    coreCfg = core_getCoreVar();
 
-    schedulableCfg = core_getCoreSchedulableInExecution( coreVar );
+    schedulableCfg = core_getCoreSchedulableInExecution( coreCfg );
 
     schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__EXECUTED );
 

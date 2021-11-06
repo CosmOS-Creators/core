@@ -127,12 +127,12 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn memoryManager_stackInit(CosmOS_CoreVariableType * coreVar)
+  * @fn memoryManager_stackInit(CosmOS_CoreConfigurationType * core)
   *
   * @details The implementation contains obtaining of the number of programs
   * by calling core_getCoreNumberOfPrograms function with current core variable.
   * Then the for loop is implemented to iterate over all configured programs.
-  * In the for loop is implemented the core_getCoreProgramVar call to get
+  * In the for loop is implemented the core_getCoreProgramCfg call to get
   * current program variable and subsequently call to the function
   * program_getProgramNumberOfThreads to get number of threads configured
   * under specific program. Then the nested for loop is implemented that
@@ -148,27 +148,27 @@
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
-memoryManager_stackInit( CosmOS_CoreVariableType * coreVar )
+memoryManager_stackInit( CosmOS_CoreConfigurationType * core )
 {
     BitWidthType numberOfThreads, numberOfPrograms, stackPointerRetVal;
 
     CosmOS_ThreadConfigurationType * threadCfg;
-    CosmOS_ProgramVariableType * programVar;
+    CosmOS_ProgramConfigurationType * programCfg;
 
-    numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
+    numberOfPrograms = core_getCoreNumberOfPrograms( core );
 
     for ( BitWidthType programIterator = 0; programIterator < numberOfPrograms;
           programIterator++ )
     {
-        programVar = core_getCoreProgramVar( coreVar, programIterator );
-        numberOfThreads = program_getProgramNumberOfThreads( programVar );
+        programCfg = core_getCoreProgramCfg( core, programIterator );
+        numberOfThreads = program_getProgramNumberOfThreads( programCfg );
 
         for ( BitWidthType threadIterator = 0; threadIterator < numberOfThreads;
               threadIterator++ )
         {
             CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-            threadCfg = program_getProgramThread( programVar, threadIterator );
+            threadCfg = program_getProgramThread( programCfg, threadIterator );
             schedulableCfg = thread_getThreadSchedulable( threadCfg );
 
             stackPointerRetVal =
@@ -185,10 +185,10 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn memoryManager_heapInit(CosmOS_CoreVariableType * coreVar)
+  * @fn memoryManager_heapInit(CosmOS_CoreConfigurationType * core)
   *
   * @details The implementation contains obtaining of the program variables by
-  * callling the core_getCoreProgramVars function and the number of programs
+  * callling the core_getCoreProgramCfgs function and the number of programs
   * by calling core_getCoreNumberOfPrograms function with current core variable.
   * Then the for loop is implemented to iterate over all configured programs.
   * In the for loop is implemented if condition to check if the heap size is
@@ -199,22 +199,22 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
-memoryManager_heapInit( CosmOS_CoreVariableType * coreVar )
+memoryManager_heapInit( CosmOS_CoreConfigurationType * core )
 {
     BitWidthType numberOfPrograms;
 
-    CosmOS_ProgramVariableType * programVars;
+    CosmOS_ProgramConfigurationType * programCfgs;
     CosmOS_MallocVariableType * currentMallocVar;
 
-    programVars = core_getCoreProgramVars( coreVar );
-    numberOfPrograms = core_getCoreNumberOfPrograms( coreVar );
+    programCfgs = core_getCoreProgramCfgs( core );
+    numberOfPrograms = core_getCoreNumberOfPrograms( core );
 
     for ( BitWidthType i = 0; i < numberOfPrograms; i++ )
     {
-        if ( programVars[i].cfg->heap->heapSize )
+        if ( programCfgs[i].heap->heapSize )
         {
-            currentMallocVar = (CosmOS_MallocVariableType *)programVars[i]
-                                   .cfg->heap->heapLowAddress;
+            currentMallocVar =
+                (CosmOS_MallocVariableType *)programCfgs[i].heap->heapLowAddress;
 
             currentMallocVar->prior = NULL;
             currentMallocVar->next = NULL;

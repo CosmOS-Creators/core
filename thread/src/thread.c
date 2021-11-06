@@ -117,14 +117,14 @@
   * ****************************************************************************/
 /**
   * @fn thread_sleepMsInternal(BitWidthType entityId,
-  * CosmOS_CoreVariableType * coreVar,
+  * CosmOS_CoreConfigurationType * core,
   * BitWidthType tickCount)
   *
   * @details The implementation contains obtaining of the schedulable variable
   * in execution is obtained by the core_getCoreSchedulableInExecution function.
   * From the schedulable variable is then extracted the alarm id by calling
   * schedulable_getAlarmId function, this id is then used to get alarm variable
-  * by calling function core_getAlarmVar. After this point is schedulable
+  * by calling function core_getAlarmCfg. After this point is schedulable
   * variable state set to the SCHEDULABLE_STATE_ENUM__SLEEP by calling function
   * schedulable_setState. Subsequently the alarm needs to be configured,
   * therefore the alarm_setAlarmTickCount function is called with tickCount
@@ -141,24 +141,24 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION CosmOS_SleepStateType
 thread_sleepMsInternal(
     BitWidthType entityId,
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     BitWidthType tickCount )
 {
     BitWidthType alarmId;
 
     CosmOS_SleepStateType sleepStateReturn;
 
-    CosmOS_AlarmVariableType * alarmVar;
+    CosmOS_AlarmConfigurationType * alarmCfg;
     CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    schedulableCfg = core_getCoreSchedulableInExecution( coreVar );
+    schedulableCfg = core_getCoreSchedulableInExecution( core );
 
     alarmId = schedulable_getAlarmId( schedulableCfg );
-    alarmVar = core_getAlarmVar( coreVar, alarmId );
+    alarmCfg = core_getAlarmCfg( core, alarmId );
 
     schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__SLEEP );
-    alarm_setAlarmTickCount( alarmVar, tickCount );
-    alarm_setAlarmState( alarmVar, ALARM_STATE_ENUM__ACTIVATED );
+    alarm_setAlarmTickCount( alarmCfg, tickCount );
+    alarm_setAlarmState( alarmCfg, ALARM_STATE_ENUM__ACTIVATED );
 
     sleepStateReturn = SLEEP_STATE_ENUM__OK;
 
@@ -208,16 +208,16 @@ thread_sleepMs( BitWidthType delayMs )
     CosmOS_SleepStateType sleepStateReturn;
     CosmOS_SchedulableInstanceType schedulableInstanceType;
 
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_CoreConfigurationType * core;
     CosmOS_SchedulableConfigurationType * schedulableCfg;
 
     if ( delayMs )
     {
-        coreVar = core_getCoreVar();
+        core = core_getCoreVar();
 
-        msToTicks = core_getMsToTicks( coreVar );
+        msToTicks = core_getMsToTicks( core );
 
-        schedulableCfg = core_getCoreSchedulableInExecution( coreVar );
+        schedulableCfg = core_getCoreSchedulableInExecution( core );
         schedulableInstanceType = schedulable_getInstanceType( schedulableCfg );
 
         if ( schedulableInstanceType IS_EQUAL_TO
@@ -229,7 +229,7 @@ thread_sleepMs( BitWidthType delayMs )
                          tickCount, (BitWidthType)1, &tickCount ) ) )
                 {
                     sleepStateReturn = cosmosApiInternal_thread_sleepMsInternal(
-                        coreVar, tickCount );
+                        core, tickCount );
                 }
                 else
                 {

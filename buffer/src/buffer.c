@@ -241,7 +241,7 @@ buffer_push( CosmOS_BufferConfigurationType * bufferCfg, unsigned char data )
   * @fn buffer_readArray(BitWidthType id, void * buffer, BitWidthType size)
   *
   * @details The implementation contains obtaining of the operating system
-  * generated variable structure by os_getOsVar function that stores all system
+  * generated variable structure by os_getOsCfg function that stores all system
   * buffers in it. Then the generated core variable structure is obtained byt
   * the function CILcore_getCoreVar and used in the
   * memoryProtection_isMemoryRegionProtected function call to check if the
@@ -282,14 +282,14 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
     CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
 
-    osVar = os_getOsVar();
-    coreVar = CILcore_getCoreVar();
+    osCfg = os_getOsCfg();
+    coreCfg = CILcore_getCoreVar();
 
     isMemoryRegionProtected =
-        memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
+        memoryProtection_isMemoryRegionProtected( coreCfg, buffer, size );
 
     if ( isMemoryRegionProtected )
     {
@@ -302,10 +302,10 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
         CosmOS_BufferConfigurationType * bufferCfg;
         CosmOS_PermissionsConfigurationType * readPermission;
 
-        bufferCfg = os_getOsBufferCfg( osVar, id );
+        bufferCfg = os_getOsBufferCfg( osCfg, id );
 
         readPermission = buffer_getBufferReadPermission( bufferCfg );
-        accessState = permission_tryAccess( readPermission, coreVar );
+        accessState = permission_tryAccess( readPermission, coreCfg );
 
         if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
         {
@@ -388,7 +388,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn buffer_writeArray(BitWidthType id, void * buffer, BitWidthType size)
   *
   * @details The implementation contains obtaining of the operating system
-  * generated variable structure by os_getOsVar function that stores all system
+  * generated variable structure by os_getOsCfg function that stores all system
   * buffers in it. Then the generated core variable structure is obtained byt
   * the function CILcore_getCoreVar and used in the
   * memoryProtection_isMemoryRegionProtected function call to check if the
@@ -429,14 +429,14 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
     CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
 
-    osVar = os_getOsVar();
-    coreVar = CILcore_getCoreVar();
+    osCfg = os_getOsCfg();
+    coreCfg = CILcore_getCoreVar();
 
     isMemoryRegionProtected =
-        memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
+        memoryProtection_isMemoryRegionProtected( coreCfg, buffer, size );
 
     if ( isMemoryRegionProtected )
     {
@@ -449,10 +449,10 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
         CosmOS_BufferConfigurationType * bufferCfg;
         CosmOS_PermissionsConfigurationType * writePermission;
 
-        bufferCfg = os_getOsBufferCfg( osVar, id );
+        bufferCfg = os_getOsBufferCfg( osCfg, id );
 
         writePermission = buffer_getBufferWritePermission( bufferCfg );
-        accessState = permission_tryAccess( writePermission, coreVar );
+        accessState = permission_tryAccess( writePermission, coreCfg );
 
         if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
         {

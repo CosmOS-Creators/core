@@ -133,7 +133,7 @@
 /**
   * @fn osInit_init(BitWidthType entityId)
   *
-  * @details The implementation contains os_getOsVar function call to get
+  * @details The implementation contains os_getOsCfg function call to get
   * generated configuration for the operating system, after this point
   * CILcore_setCoreVar is used to set core variable to the platform registers if
   * possible on the current CPU.
@@ -153,32 +153,32 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 osInit_init( BitWidthType entityId )
 {
-    CosmOS_CoreVariableType * coreVar;
-    CosmOS_OsVariableType * osVar;
+    CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_OsConfigurationType * osCfg;
     /*TODO: check if the os sections were booted and
     init and start was not called yet */
 
-    osVar = os_getOsVar();
+    osCfg = os_getOsCfg();
 
-    CILcore_setCoreVar( osVar );
+    CILcore_setCoreVar( osCfg );
 
-    coreVar = core_getCoreVar();
+    coreCfg = core_getCoreVar();
 
     switchMemoryProtection_init(
-        coreVar->cfg->codeMemoryHighAddress,
-        coreVar->cfg->codeMemoryLowAddress,
-        coreVar->cfg->stackMemoryHighAddress,
-        coreVar->cfg->stackMemoryLowAddress,
-        coreVar->cfg->unprotectedMemoryLowAddress,
-        coreVar->cfg->unprotectedMemoryHighAddress );
+        coreCfg->codeMemoryHighAddress,
+        coreCfg->codeMemoryLowAddress,
+        coreCfg->stackMemoryHighAddress,
+        coreCfg->stackMemoryLowAddress,
+        coreCfg->unprotectedMemoryLowAddress,
+        coreCfg->unprotectedMemoryHighAddress );
 
     osBoot_bootValidate();
 
-    memoryManager_stackInit( coreVar );
+    memoryManager_stackInit( coreCfg );
 
-    memoryManager_heapInit( coreVar );
+    memoryManager_heapInit( coreCfg );
 
-    //TODO: sync after init coreSync_getBarrier( coreVar, OS_INIT_ID );
+    //TODO: sync after init coreSync_getBarrier( coreCfg, OS_INIT_ID );
 
     __SUPRESS_UNUSED_VAR( entityId );
 };

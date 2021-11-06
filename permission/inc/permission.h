@@ -145,19 +145,19 @@ extern "C" {
   * ****************************************************************************/
 /**
   * @fn permission_tryAccess(CosmOS_PermissionsConfigurationType * permission,
-  * CosmOS_CoreVariableType * coreVar)
+  * CosmOS_CoreConfigurationType * core)
   *
   * @brief Try access of current running instance. DEMO
   *
   * @param[in]  permission configuration pointer
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   *
   * @return CosmOS_AccessStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_AccessStateType
 permission_tryAccess(
     CosmOS_PermissionsConfigurationType * permission,
-    CosmOS_CoreVariableType * coreVar );
+    CosmOS_CoreConfigurationType * core );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

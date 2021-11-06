@@ -322,23 +322,23 @@ spinlock_setSpinlockSchedulableOwner(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar,
+  * @fn spinlock_willCauseDeadlock(CosmOS_CoreConfigurationType * core,
   * CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Check if the spinlock will ends up in deadlock. DEMO
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  spinlockVar pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
 spinlock_willCauseDeadlock(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_SpinlockVariableType * spinlockVar )
 {
     return ( (spinlockVar->spinlock IS_EQUAL_TO SPINLOCK_STATE_ENUM__OCCUPIED)
-                 AND( coreVar->schedulableInExecution IS_EQUAL_TO
+                 AND( core->var->schedulableInExecution IS_EQUAL_TO
                           spinlockVar->schedulableOwner ) )
                ? True
                : False;
@@ -348,22 +348,22 @@ spinlock_willCauseDeadlock(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_ownsSchedulableSpinlock(CosmOS_CoreVariableType * coreVar,
+  * @fn spinlock_ownsSchedulableSpinlock(CosmOS_CoreConfigurationType * core,
   * CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Check if the schedulable in execution owns the current spinlock.
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  spinlockVar pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
 spinlock_ownsSchedulableSpinlock(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_SpinlockVariableType * spinlockVar )
 {
-    return ( coreVar->schedulableInExecution IS_EQUAL_TO
+    return ( core->var->schedulableInExecution IS_EQUAL_TO
                  spinlockVar->schedulableOwner )
                ? True
                : False;

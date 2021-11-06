@@ -145,14 +145,14 @@ extern "C" {
   * ****************************************************************************/
 /**
   * @fn thread_sleepMsInternal(BitWidthType entityId,
-  * CosmOS_CoreVariableType * coreVar,
+  * CosmOS_CoreConfigurationType * core,
   * BitWidthType tickCount)
   *
   * @brief Set thread to sleep internal for x milliseconds. This function cannot
   * be called from the unprivileged context directly. DEMO
   *
   * @param[in]  entityId is used during the system call dispatching
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  tickCount number of ticks to put thread into sleep for
   *
   * @return CosmOS_SleepStateType
@@ -160,7 +160,7 @@ extern "C" {
 __OS_FUNC_SECTION CosmOS_SleepStateType
 thread_sleepMsInternal(
     BitWidthType entityId,
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     BitWidthType tickCount );
 
 /********************************************************************************

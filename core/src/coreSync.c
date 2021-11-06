@@ -125,17 +125,17 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn coreSync_getBarrier(CosmOS_CoreVariableType * coreVar,
+  * @fn coreSync_getBarrier(CosmOS_CoreConfigurationType * core,
   * BitWidthType barrierId)
   *
   * @details The implementation contains obtaining barier variable based on the
   * barrier id argument by the core_getBarrierVar function. Then the state of
   * this barrier variable is set to the BARRIER_STATE_ENUM__REACHED by the
   * coreSync_setBarrierState function.
-  * Then we get operating system variable by calling os_getOsVar function which
+  * Then we get operating system variable by calling os_getOsCfg function which
   * is later used in os_getOsNumberOfCores function call to get number of cores.
   * Number of synchronized cores is then set to zero and used to obtain the
-  * first core variable by calling os_getCoreVar. Then the barrier variable
+  * first core variable by calling os_getCoreCfg. Then the barrier variable
   * is obtained by calling core_getBarrierVar. In the implemented while loop we
   * iterate over the all cores and their barriers with specified barrier id.
   * The loop ends if there is only one core configured in the system or if
@@ -145,27 +145,29 @@
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
-coreSync_getBarrier( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId )
+coreSync_getBarrier(
+    CosmOS_CoreConfigurationType * core,
+    BitWidthType barrierId )
 {
     BitWidthType numberOfCores, numberOfSynchronizedCores;
 
-    CosmOS_OsVariableType * osVar;
+    CosmOS_OsConfigurationType * osCfg;
     CosmOS_BarrierVariableType * barrierVar;
 
     volatile CosmOS_BarrierStateType barrierState;
 
-    barrierVar = core_getBarrierVar( coreVar, barrierId );
+    barrierVar = core_getBarrierVar( core, barrierId );
     coreSync_setBarrierState( barrierVar, BARRIER_STATE_ENUM__REACHED );
 
     /* MEMORY BARRIER HAS TO BE IMPLEMENTED */
 
-    osVar = os_getOsVar();
-    numberOfCores = os_getOsNumberOfCores( osVar );
+    osCfg = os_getOsCfg();
+    numberOfCores = os_getOsNumberOfCores( osCfg );
 
     numberOfSynchronizedCores = 0;
 
-    coreVar = os_getCoreVar( osVar, numberOfSynchronizedCores );
-    barrierVar = core_getBarrierVar( coreVar, barrierId );
+    core = os_getCoreCfg( osCfg, numberOfSynchronizedCores );
+    barrierVar = core_getBarrierVar( core, barrierId );
 
     while ( numberOfCores AND numberOfSynchronizedCores IS_NOT_EQUAL_TO
                 numberOfCores )
@@ -176,9 +178,9 @@ coreSync_getBarrier( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId )
         {
             numberOfSynchronizedCores++;
 
-            coreVar = os_getCoreVar(
-                osVar, ( numberOfSynchronizedCores % numberOfCores ) );
-            barrierVar = core_getBarrierVar( coreVar, barrierId );
+            core = os_getCoreCfg(
+                osCfg, ( numberOfSynchronizedCores % numberOfCores ) );
+            barrierVar = core_getBarrierVar( core, barrierId );
         }
     }
 }
@@ -189,7 +191,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn coreSync_reactivateBarrier(CosmOS_CoreVariableType * coreVar,
+  * @fn coreSync_reactivateBarrier(CosmOS_CoreConfigurationType * core,
   * BitWidthType barrierId)
   *
   * @details The implementation contains reactivation of the scheduler
@@ -205,14 +207,14 @@ __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
 coreSync_reactivateBarrier(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     BitWidthType barrierId )
 {
     CosmOS_BarrierVariableType * barrierVar;
 
     cosmosAssert( barrierId IS_EQUAL_TO SCHEDULERS_SYNC_ID );
 
-    barrierVar = core_getBarrierVar( coreVar, barrierId );
+    barrierVar = core_getBarrierVar( core, barrierId );
     coreSync_setBarrierState( barrierVar, BARRIER_STATE_ENUM__ACTIVATED );
 
     /* MEMORY BARRIER HAS TO BE IMPLEMENTED */

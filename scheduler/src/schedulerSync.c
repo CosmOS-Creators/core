@@ -124,8 +124,8 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar,
-  * CosmOS_CoreVariableType * coreVar,
+  * @fn schedulerSync_sync(CosmOS_SchedulerConfigurationType * schedulerVar,
+  * CosmOS_CoreConfigurationType * core,
   * BitWidthType currentTick,
   * BitWidthType hyperTick)
   *
@@ -136,8 +136,8 @@ __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_SchedulerSyncStateType
 schedulerSync_sync(
-    CosmOS_SchedulerVariableType * schedulerVar,
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_SchedulerConfigurationType * schedulerVar,
+    CosmOS_CoreConfigurationType * core,
     BitWidthType currentTick,
     BitWidthType hyperTick )
 {
@@ -190,8 +190,8 @@ schedulerSync_sync(
 
     if ( schedulerState IS_EQUAL_TO SCHEDULER_SYNC_STATE_ENUM__IN_SYNC )
     {
-        coreSync_getBarrier( coreVar, SCHEDULERS_SYNC_ID );
-        coreSync_reactivateBarrier( coreVar, SCHEDULERS_SYNC_ID );
+        coreSync_getBarrier( core, SCHEDULERS_SYNC_ID );
+        coreSync_reactivateBarrier( core, SCHEDULERS_SYNC_ID );
     }
 
     return schedulerState;

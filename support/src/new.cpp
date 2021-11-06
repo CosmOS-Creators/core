@@ -135,8 +135,8 @@
   * @details The implementation contains if condition that checks if the size
   * argument is zero value and if it is the size is incremented by 1. Then
   * core id is obtained by calling cosmosApi_CILcore_getCoreId function as macro
-  * and operating system variable by calling os_getOsVar which are then used in
-  * function os_getCoreVar to get core variable. The function
+  * and operating system variable by calling os_getOsCfg which are then used in
+  * function os_getCoreCfg to get core variable. The function
   * core_getCoreOsState called afterwards returns the state of operating system
   * on the current core. The if condition then checks if the operating system
   * state is equal to OS_STATE_ENUM__STARTED, if yes the malloc_internal
@@ -151,8 +151,8 @@ operator new( size_t size ) noexcept
 
     CosmOS_OsStateType osState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
 
     void * ptr;
 
@@ -162,9 +162,9 @@ operator new( size_t size ) noexcept
     }
 
     coreId = cosmosApi_CILcore_getCoreId();
-    osVar = os_getOsVar();
-    coreVar = os_getCoreVar( osVar, coreId );
-    osState = core_getCoreOsState( coreVar );
+    osCfg = os_getOsCfg();
+    coreCfg = os_getCoreCfg( osCfg, coreId );
+    osState = core_getCoreOsState( coreCfg );
 
     if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
     {
@@ -185,8 +185,8 @@ operator new( size_t size ) noexcept
   * @fn delete(void* ptr)
   *
   * @details The implementation contains calling cosmosApi_CILcore_getCoreId
-  * function as macro and operating system variable by calling os_getOsVar
-  * which are then used in function os_getCoreVar to get core variable.
+  * function as macro and operating system variable by calling os_getOsCfg
+  * which are then used in function os_getCoreCfg to get core variable.
   * The function core_getCoreOsState called afterwards returns the state of
   * operating system on the current core.
   * The if condition then checks if the operating system state is equal to
@@ -202,13 +202,13 @@ operator delete( void * ptr ) noexcept
 
     CosmOS_OsStateType osState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
 
     coreId = cosmosApi_CILcore_getCoreId();
-    osVar = os_getOsVar();
-    coreVar = os_getCoreVar( osVar, coreId );
-    osState = core_getCoreOsState( coreVar );
+    osCfg = os_getOsCfg();
+    coreCfg = os_getCoreCfg( osCfg, coreId );
+    osState = core_getCoreOsState( coreCfg );
 
     if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
     {
@@ -227,8 +227,8 @@ operator delete( void * ptr ) noexcept
   * @fn delete(void* ptr)
   *
   * @details The implementation contains calling cosmosApi_CILcore_getCoreId
-  * function as macro and operating system variable by calling os_getOsVar
-  * which are then used in function os_getCoreVar to get core variable.
+  * function as macro and operating system variable by calling os_getOsCfg
+  * which are then used in function os_getCoreCfg to get core variable.
   * The function core_getCoreOsState called afterwards returns the state of
   * operating system on the current core.
   * The if condition then checks if the operating system state is equal to
@@ -244,13 +244,13 @@ operator delete( void * ptr, size_t size ) noexcept
 
     CosmOS_OsStateType osState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
 
     coreId = cosmosApi_CILcore_getCoreId();
-    osVar = os_getOsVar();
-    coreVar = os_getCoreVar( osVar, coreId );
-    osState = core_getCoreOsState( coreVar );
+    osCfg = os_getOsCfg();
+    coreCfg = os_getCoreCfg( osCfg, coreId );
+    osState = core_getCoreOsState( coreCfg );
 
     if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
     {

@@ -138,32 +138,32 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn memoryManager_stackInit(CosmOS_CoreVariableType * coreVar)
+  * @fn memoryManager_stackInit(CosmOS_CoreConfigurationType * core)
   *
   * @brief Stack initialization for all thread type schedulables. This function
   * cannot be called from the unprivileged context directly.
   *
-  * @param[in] coreVar pointer
+  * @param[in] core configuration pointer
   *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
-memoryManager_stackInit( CosmOS_CoreVariableType * coreVar );
+memoryManager_stackInit( CosmOS_CoreConfigurationType * core );
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn memoryManager_heapInit(CosmOS_CoreVariableType * coreVar)
+  * @fn memoryManager_heapInit(CosmOS_CoreConfigurationType * core)
   *
   * @brief Heap initialization function for all programs. This function
   * cannot be called from the unprivileged context directly.
   *
-  * @param[in] coreVar pointer
+  * @param[in] core configuration pointer
   *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
-memoryManager_heapInit( CosmOS_CoreVariableType * coreVar );
+memoryManager_heapInit( CosmOS_CoreConfigurationType * core );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

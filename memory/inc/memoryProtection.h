@@ -155,21 +155,21 @@ memoryProtection_init(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,
+  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreConfigurationType * core,
   * CosmOS_SchedulableConfigurationType  * schedulable)
   *
   * @brief Set memory protection for current execution context that means for
   * the schedulable stack, peripheral access and program memory. This function
   * cannot be called from the unprivileged context directly.
   *
-  * @param[in]  core variable pointer
+  * @param[in]  core configuration pointer
   * @param[in]  schedulable configuration pointer
   *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 memoryProtection_setMemoryProtection(
-    CosmOS_CoreVariableType * core,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_SchedulableConfigurationType * schedulable);
 
 /********************************************************************************
@@ -177,7 +177,7 @@ memoryProtection_setMemoryProtection(
   * ****************************************************************************/
 /**
   * @fn memoryProtection_isMemoryRegionProtected(
-  * CosmOS_CoreVariableType * core,
+  * CosmOS_CoreConfigurationType * core,
   * void  * regionLowAddressPointer,
   * BitWidthType size)
   *
@@ -185,7 +185,7 @@ memoryProtection_setMemoryProtection(
   * for the current execution context. This function cannot be called from
   * the unprivileged context directly. DEMO
   *
-  * @param[in]  core variable pointer
+  * @param[in]  core configuration pointer
   * @param[in]  regionLowAddressPointer pointer to the region
   * @param[in]  size of the region
   *
@@ -193,7 +193,7 @@ memoryProtection_setMemoryProtection(
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_BooleanType
 memoryProtection_isMemoryRegionProtected(
-    CosmOS_CoreVariableType * core,
+    CosmOS_CoreConfigurationType * core,
     AddressType * regionLowAddressPointer,
     BitWidthType size );
 /********************************************************************************

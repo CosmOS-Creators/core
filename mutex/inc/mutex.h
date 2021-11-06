@@ -370,23 +370,23 @@ mutex_setMutexSchedulableOwner(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn mutex_willCauseDeadlock(CosmOS_CoreVariableType * coreVar,
+  * @fn mutex_willCauseDeadlock(CosmOS_CoreConfigurationType * core,
   * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Check if the mutex will ends up in deadlock. DEMO
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
 mutex_willCauseDeadlock(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_MutexVariableType * mutexVar )
 {
     return ( (mutexVar->mutex IS_EQUAL_TO MUTEX_STATE_ENUM__OCCUPIED)AND(
-               coreVar->schedulableInExecution IS_EQUAL_TO
+               core->var->schedulableInExecution IS_EQUAL_TO
                    mutexVar->schedulableOwner ) )
                ? True
                : False;
@@ -396,22 +396,22 @@ mutex_willCauseDeadlock(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn mutex_ownsSchedulableMutex(CosmOS_CoreVariableType * coreVar,
+  * @fn mutex_ownsSchedulableMutex(CosmOS_CoreConfigurationType * core,
   * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Check if the schedulable in execution owns the current mutex.
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
 mutex_ownsSchedulableMutex(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_MutexVariableType * mutexVar )
 {
-    return ( coreVar->schedulableInExecution IS_EQUAL_TO
+    return ( core->var->schedulableInExecution IS_EQUAL_TO
                  mutexVar->schedulableOwner )
                ? True
                : False;

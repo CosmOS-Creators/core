@@ -128,7 +128,7 @@
   * BitWidthType size, CosmOS_BufferDoubleAccessType access)
   *
   * @details The implementation contains obtaining of the operating system
-  * generated variable structure by os_getOsVar function that stores all system
+  * generated variable structure by os_getOsCfg function that stores all system
   * double buffers in it.
   * Then the double buffer variable is obtained by the function
   * os_getOsBufferDoubleCfg based on the id argument which is mapped with the
@@ -157,13 +157,13 @@ bufferDouble_readArray(
 
     CosmOS_BufferStateType bufferState;
 
-    CosmOS_OsVariableType * osVar;
+    CosmOS_OsConfigurationType * osCfg;
     CosmOS_BufferConfigurationType * bufferCfg;
     CosmOS_BufferDoubleConfigurationType * bufferDoubleCfg;
 
-    osVar = os_getOsVar();
+    osCfg = os_getOsCfg();
 
-    bufferDoubleCfg = os_getOsBufferDoubleCfg( osVar, id );
+    bufferDoubleCfg = os_getOsBufferDoubleCfg( osCfg, id );
 
     switch ( access )
     {
@@ -206,7 +206,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * BitWidthType size, CosmOS_BufferDoubleAccessType access)
   *
   * @details The implementation contains obtaining of the operating system
-  * generated variable structure by os_getOsVar function that stores all system
+  * generated variable structure by os_getOsCfg function that stores all system
   * double buffers in it.
   * Then the double buffer variable is obtained by the function
   * os_getOsBufferDoubleCfg based on the id argument which is mapped with the
@@ -235,13 +235,13 @@ bufferDouble_writeArray(
 
     CosmOS_BufferStateType bufferState;
 
-    CosmOS_OsVariableType * osVar;
+    CosmOS_OsConfigurationType * osCfg;
     CosmOS_BufferConfigurationType * bufferCfg;
     CosmOS_BufferDoubleConfigurationType * bufferDoubleCfg;
 
-    osVar = os_getOsVar();
+    osCfg = os_getOsCfg();
 
-    bufferDoubleCfg = os_getOsBufferDoubleCfg( osVar, id );
+    bufferDoubleCfg = os_getOsBufferDoubleCfg( osCfg, id );
 
     switch ( access )
     {
