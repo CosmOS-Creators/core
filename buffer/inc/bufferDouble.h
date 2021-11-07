@@ -142,11 +142,9 @@ extern "C" {
   * BitWidthType size,
   * CosmOS_BufferDoubleAccessType access)
   *
-  * @brief Reading array from the bufferDouble. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
+  * @brief Reading array from the bufferDouble. DEMO
   *
-  * @param[in]  id is used during the system call dispatching
+  * @param[in]  id doubleBuffer identifier
   * @param[in]  buffer pointer to the user buffer array
   * @param[in]  size of the bytes to read
   * @param[in]  access type of the access
@@ -168,11 +166,9 @@ bufferDouble_readArray(
   * BitWidthType size,
   * CosmOS_BufferDoubleAccessType access)
   *
-  * @brief Writing array into the bufferDouble. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
+  * @brief Writing array into the bufferDouble. DEMO
   *
-  * @param[in]  id is used during the system call dispatching
+  * @param[in]  id doubleBuffer identifier
   * @param[in]  buffer pointer to the user buffer array
   * @param[in]  size of the bytes to read
   * @param[in]  access type of the access
