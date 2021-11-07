@@ -250,7 +250,10 @@ buffer_push( CosmOS_BufferConfigurationType * bufferCfg, unsigned char data )
   * incremented by one. Position of the head is updated and buffer full state
   * is obtained by the buffer_isFull function and returned.
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferStateType
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_BufferStateType
 buffer_readArrayInternal(
     BitWidthType id,
     void * buffer,
@@ -269,10 +272,15 @@ buffer_readArrayInternal(
     while ( ( userBufferIndex < size ) )
     {
         bufferState =
-            buffer_pull( systemBufferCfg, *( userBuffer + userBufferIndex ) );
+            buffer_pull( systemBufferCfg, ( userBuffer + userBufferIndex ) );
         userBufferIndex++;
     }
+
+    return bufferState;
 }
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -288,7 +296,10 @@ buffer_readArrayInternal(
   * incremented by one. Position of the head is updated and buffer full state
   * is obtained by the buffer_isFull function and returned.
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferStateType
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_BufferStateType
 buffer_writeArrayInternal(
     BitWidthType id,
     void * buffer,
@@ -310,7 +321,12 @@ buffer_writeArrayInternal(
             buffer_push( systemBufferCfg, *( userBuffer + userBufferIndex ) );
         userBufferIndex++;
     }
+
+    return bufferState;
 }
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -415,7 +431,7 @@ buffer_readArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                             {
                                 bufferState =
                                     cosmosApiInternal_buffer_readArrayInternal(
-                                        *( userBuffer + userBufferIndex ),
+                                        ( userBuffer + userBufferIndex ),
                                         bufferCfg,
                                         SYCALL_BYTES_CHUNK );
                                 userBufferIndex += SYCALL_BYTES_CHUNK;
@@ -566,7 +582,7 @@ buffer_writeArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                             {
                                 bufferState =
                                     cosmosApiInternal_buffer_writeArrayInternal(
-                                        *( userBuffer + userBufferIndex ),
+                                        ( userBuffer + userBufferIndex ),
                                         bufferCfg,
                                         SYCALL_BYTES_CHUNK );
                                 userBufferIndex += SYCALL_BYTES_CHUNK;
