@@ -23,6 +23,7 @@
 /* CORE interfaces */
 #include "buffer.h"
 #include "core.h"
+#include "cosmosApiInternal.h"
 #include "memoryProtection.h"
 #include "os.h"
 #include "permission.h"
@@ -45,6 +46,7 @@
   * @ingroup Local_buffer
   * @{
 ********************************************************************************/
+#define SYCALL_BYTES_CHUNK 8
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -238,6 +240,82 @@ buffer_push( CosmOS_BufferConfigurationType * bufferCfg, unsigned char data )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg,
+  * unsigned char data)
+  *
+  * @details The implementation contains obtaining of the buffer size by calling
+  * function buffer_getBufferSize and obtaining buffer array pointer by calling
+  * function buffer_getBuffer. To the buffer array in the head position is
+  * written the data byte argument and fullCells of the current bufferCfg are
+  * incremented by one. Position of the head is updated and buffer full state
+  * is obtained by the buffer_isFull function and returned.
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BufferStateType
+buffer_readArrayInternal(
+    BitWidthType id,
+    void * buffer,
+    CosmOS_BufferConfigurationType * systemBufferCfg,
+    BitWidthType size )
+{
+    CosmOS_BufferStateType bufferState;
+
+    BitWidthType userBufferIndex;
+
+    unsigned char * userBuffer;
+
+    userBuffer = buffer;
+    userBufferIndex = 0;
+    bufferState = BUFFER_STATE_ENUM__OK;
+    while ( ( userBufferIndex < size ) )
+    {
+        bufferState =
+            buffer_pull( systemBufferCfg, *( userBuffer + userBufferIndex ) );
+        userBufferIndex++;
+    }
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg,
+  * unsigned char data)
+  *
+  * @details The implementation contains obtaining of the buffer size by calling
+  * function buffer_getBufferSize and obtaining buffer array pointer by calling
+  * function buffer_getBuffer. To the buffer array in the head position is
+  * written the data byte argument and fullCells of the current bufferCfg are
+  * incremented by one. Position of the head is updated and buffer full state
+  * is obtained by the buffer_isFull function and returned.
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BufferStateType
+buffer_writeArrayInternal(
+    BitWidthType id,
+    void * buffer,
+    CosmOS_BufferConfigurationType * systemBufferCfg,
+    BitWidthType size )
+{
+    CosmOS_BufferStateType bufferState;
+
+    BitWidthType userBufferIndex;
+
+    unsigned char * userBuffer;
+
+    userBuffer = buffer;
+    userBufferIndex = 0;
+    bufferState = BUFFER_STATE_ENUM__OK;
+    while ( ( userBufferIndex < size ) )
+    {
+        bufferState =
+            buffer_push( systemBufferCfg, *( userBuffer + userBufferIndex ) );
+        userBufferIndex++;
+    }
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn buffer_readArray(BitWidthType id, void * buffer, BitWidthType size)
   *
   * @details The implementation contains obtaining of the operating system
@@ -277,8 +355,9 @@ buffer_push( CosmOS_BufferConfigurationType * bufferCfg, unsigned char data )
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_BufferStateType
-buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
+buffer_readArray( BitWidthType bufferId, void * buffer, BitWidthType size )
 {
+    BitWidthType numberOfBuffers;
     CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
@@ -288,91 +367,95 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
     osCfg = os_getOsCfg();
     coreCfg = CILcore_getCoreVar();
 
-    isMemoryRegionProtected =
-        memoryProtection_isMemoryRegionProtected( coreCfg, buffer, size );
+    numberOfBuffers = os_getOsNumberOfBuffers( osCfg );
 
-    if ( isMemoryRegionProtected )
+    if ( bufferId < numberOfBuffers )
     {
-        bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED;
-    }
-    else
-    {
-        CosmOS_AccessStateType accessState;
+        isMemoryRegionProtected =
+            memoryProtection_isMemoryRegionProtected( coreCfg, buffer, size );
 
-        CosmOS_BufferConfigurationType * bufferCfg;
-        CosmOS_PermissionsConfigurationType * readPermission;
-
-        bufferCfg = os_getOsBufferCfg( osCfg, id );
-
-        readPermission = buffer_getBufferReadPermission( bufferCfg );
-        accessState = permission_tryAccess( readPermission, coreCfg );
-
-        if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
+        if ( IS_NOT( isMemoryRegionProtected ) )
         {
-            bufferState = BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED;
-        }
-        else
-        {
-            BitWidthType spinlockId, fullCellsNum;
-            CosmOS_AccessStateType isBufferInterCore;
-            CosmOS_SpinlockStateType spinlockState;
+            CosmOS_AccessStateType accessState;
 
-            //CILinterrupt_disableInterrupts();
+            CosmOS_BufferConfigurationType * bufferCfg;
+            CosmOS_PermissionsConfigurationType * readPermission;
 
-            // isBufferInterCore = buffer_isBufferInterCore( bufferCfg );
+            bufferCfg = os_getOsBufferCfg( osCfg, bufferId );
 
-            // if ( isBufferInterCore )
-            // {
-            //     spinlockId = buffer_getBufferSpinlockId( bufferCfg );
-            //     spinlockState = spinlock_trySpinlock( spinlockId );
-            // }
-            // else
-            // {
-            //     spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
-            // }
+            readPermission = buffer_getBufferReadPermission( bufferCfg );
+            accessState = permission_tryAccess( readPermission, coreCfg );
 
-            if ( 1 )
+            if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__ALLOWED )
             {
-                fullCellsNum = buffer_getFullCellsNum( bufferCfg );
+                BitWidthType spinlockId, fullCellsNum;
+                CosmOS_SpinlockStateType spinlockState;
 
-                if ( fullCellsNum >= size )
+                spinlockId = buffer_getBufferSpinlockId( bufferCfg );
+                spinlockState = spinlock_trySpinlock( spinlockId );
+
+                if ( spinlockState IS_EQUAL_TO
+                         SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
                 {
-                    BitWidthType userBufferIndex;
+                    fullCellsNum = buffer_getFullCellsNum( bufferCfg );
 
-                    unsigned char * userBuffer;
-
-                    userBuffer = buffer;
-                    userBufferIndex = 0;
-
-                    bufferState = BUFFER_STATE_ENUM__OK;
-                    while ( ( userBufferIndex < size ) )
+                    if ( fullCellsNum >= size )
                     {
-                        bufferState = buffer_pull(
-                            bufferCfg, ( userBuffer + userBufferIndex ) );
-                        userBufferIndex++;
+                        BitWidthType userBufferIndex;
+
+                        unsigned char * userBuffer;
+
+                        userBuffer = buffer;
+                        userBufferIndex = 0;
+
+                        bufferState = BUFFER_STATE_ENUM__OK;
+                        while ( size )
+                        {
+                            if ( size >= SYCALL_BYTES_CHUNK )
+                            {
+                                bufferState =
+                                    cosmosApiInternal_buffer_readArrayInternal(
+                                        *( userBuffer + userBufferIndex ),
+                                        bufferCfg,
+                                        SYCALL_BYTES_CHUNK );
+                                userBufferIndex += SYCALL_BYTES_CHUNK;
+                                size -= SYCALL_BYTES_CHUNK;
+                            }
+                            else
+                            {
+                                bufferState =
+                                    cosmosApiInternal_buffer_readArrayInternal(
+                                        buffer, bufferCfg, size );
+                                size -= size;
+                            }
+                        }
                     }
+                    else
+                    {
+                        bufferState =
+                            BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM;
+                    }
+                    spinlockState = spinlock_releaseSpinlock( spinlockId );
                 }
                 else
                 {
-                    bufferState =
-                        BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM;
-                }
-
-                if ( isBufferInterCore )
-                {
-                    //spinlockState = spinlock_releaseSpinlock( spinlockId );
+                    bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
                 }
             }
             else
             {
-                bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
+                bufferState = BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED;
             }
-
-            //CILinterrupt_enableInterrupts();
+        }
+        else
+        {
+            bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED;
         }
     }
-
-    /* MEMORY BARRIER HAS TO BE IMPLEMENTED */
+    else
+    {
+        bufferState = BUFFER_STATE_ENUM__ERROR_INVALID_ID;
+    }
 
     return bufferState;
 }
@@ -384,7 +467,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_writeArray(BitWidthType id, void * buffer, BitWidthType size)
+  * @fn buffer_writeArray(BitWidthType bufferId, void * buffer, BitWidthType size)
   *
   * @details The implementation contains obtaining of the operating system
   * generated variable structure by os_getOsCfg function that stores all system
@@ -423,8 +506,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_BufferStateType
-buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
+buffer_writeArray( BitWidthType bufferId, void * buffer, BitWidthType size )
 {
+    BitWidthType numberOfBuffers;
     CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
@@ -434,90 +518,95 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
     osCfg = os_getOsCfg();
     coreCfg = CILcore_getCoreVar();
 
-    isMemoryRegionProtected =
-        memoryProtection_isMemoryRegionProtected( coreCfg, buffer, size );
+    numberOfBuffers = os_getOsNumberOfBuffers( osCfg );
 
-    if ( isMemoryRegionProtected )
+    if ( bufferId < numberOfBuffers )
     {
-        bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED;
-    }
-    else
-    {
-        CosmOS_AccessStateType accessState;
+        isMemoryRegionProtected =
+            memoryProtection_isMemoryRegionProtected( coreCfg, buffer, size );
 
-        CosmOS_BufferConfigurationType * bufferCfg;
-        CosmOS_PermissionsConfigurationType * writePermission;
-
-        bufferCfg = os_getOsBufferCfg( osCfg, id );
-
-        writePermission = buffer_getBufferWritePermission( bufferCfg );
-        accessState = permission_tryAccess( writePermission, coreCfg );
-
-        if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
+        if ( IS_NOT( isMemoryRegionProtected ) )
         {
-            bufferState = BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED;
-        }
-        else
-        {
-            BitWidthType spinlockId, emptyCellsNum;
-            CosmOS_AccessStateType isBufferInterCore;
-            CosmOS_SpinlockStateType spinlockState;
+            CosmOS_AccessStateType accessState;
 
-            //CILinterrupt_disableInterrupts();
+            CosmOS_BufferConfigurationType * bufferCfg;
+            CosmOS_PermissionsConfigurationType * writePermission;
 
-            isBufferInterCore = buffer_isBufferInterCore( bufferCfg );
+            bufferCfg = os_getOsBufferCfg( osCfg, bufferId );
 
-            // if ( isBufferInterCore )
-            // {
-            //     spinlockId = buffer_getBufferSpinlockId( bufferCfg );
-            //     spinlockState = spinlock_trySpinlock( spinlockId );
-            // }
-            // else
-            // {
-            //     spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
-            // }
+            writePermission = buffer_getBufferWritePermission( bufferCfg );
+            accessState = permission_tryAccess( writePermission, coreCfg );
 
-            if ( 1 )
+            if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__ALLOWED )
             {
-                emptyCellsNum = buffer_getEmptyCellsNum( bufferCfg );
+                BitWidthType spinlockId, emptyCellsNum;
+                CosmOS_SpinlockStateType spinlockState;
 
-                if ( emptyCellsNum >= size )
+                spinlockId = buffer_getBufferSpinlockId( bufferCfg );
+                spinlockState = spinlock_trySpinlock( spinlockId );
+
+                if ( spinlockState IS_EQUAL_TO
+                         SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
                 {
-                    BitWidthType userBufferIndex;
+                    emptyCellsNum = buffer_getEmptyCellsNum( bufferCfg );
 
-                    unsigned char * userBuffer;
-
-                    userBuffer = buffer;
-                    userBufferIndex = 0;
-                    bufferState = BUFFER_STATE_ENUM__OK;
-                    while ( ( userBufferIndex < size ) )
+                    if ( emptyCellsNum >= size )
                     {
-                        bufferState = buffer_push(
-                            bufferCfg, *( userBuffer + userBufferIndex ) );
-                        userBufferIndex++;
+                        BitWidthType userBufferIndex;
+
+                        unsigned char * userBuffer;
+
+                        userBuffer = buffer;
+                        userBufferIndex = 0;
+
+                        bufferState = BUFFER_STATE_ENUM__OK;
+                        while ( size )
+                        {
+                            if ( size >= SYCALL_BYTES_CHUNK )
+                            {
+                                bufferState =
+                                    cosmosApiInternal_buffer_writeArrayInternal(
+                                        *( userBuffer + userBufferIndex ),
+                                        bufferCfg,
+                                        SYCALL_BYTES_CHUNK );
+                                userBufferIndex += SYCALL_BYTES_CHUNK;
+                                size -= SYCALL_BYTES_CHUNK;
+                            }
+                            else
+                            {
+                                bufferState =
+                                    cosmosApiInternal_buffer_writeArrayInternal(
+                                        buffer, bufferCfg, size );
+                                size -= size;
+                            }
+                        }
                     }
+                    else
+                    {
+                        bufferState =
+                            BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS;
+                    }
+                    spinlockState = spinlock_releaseSpinlock( spinlockId );
                 }
                 else
                 {
-                    bufferState =
-                        BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS;
-                }
-
-                if ( isBufferInterCore )
-                {
-                    //spinlockState = spinlock_releaseSpinlock( spinlockId );
+                    bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
                 }
             }
             else
             {
-                bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
+                bufferState = BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED;
             }
-
-            //CILinterrupt_enableInterrupts();
+        }
+        else
+        {
+            bufferState = BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED;
         }
     }
-
-    /* MEMORY BARRIER HAS TO BE IMPLEMENTED */
+    else
+    {
+        bufferState = BUFFER_STATE_ENUM__ERROR_INVALID_ID;
+    }
 
     return bufferState;
 }

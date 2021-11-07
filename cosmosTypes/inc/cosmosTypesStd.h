@@ -142,6 +142,21 @@ typedef BitWidthType ( *CosmOS_Generic_bitWidthType_voidPtr_ret_bitWidthType )(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief
+  * CosmOS_Generic_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType
+  * type
+********************************************************************************/
+typedef BitWidthType (
+    *CosmOS_Generic_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType )(
+    BitWidthType,
+    void *,
+    void *,
+    BitWidthType );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_BooleanType enum
 ********************************************************************************/
 typedef enum
@@ -176,6 +191,7 @@ typedef enum
     BUFFER_STATE_ENUM__OK,
     BUFFER_STATE_ENUM__EMPTY,
     BUFFER_STATE_ENUM__FULL,
+    BUFFER_STATE_ENUM__ERROR_INVALID_ID,
     BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED,
     BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED,
     BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED,
