@@ -119,7 +119,7 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_pull(CosmOS_BufferConfigurationType * bufferCfg, 
+  * @fn buffer_pull(CosmOS_BufferConfigurationType * bufferCfg,
   * unsigned char * data)
   *
   * @brief Pull data from the buffer. This function cannot be called from the
@@ -137,7 +137,7 @@ buffer_pull( CosmOS_BufferConfigurationType * bufferCfg, unsigned char * data );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg, 
+  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg,
   * unsigned char data)
   *
   * @brief Push data to the buffer. This function cannot be called from the
@@ -166,7 +166,7 @@ buffer_push( CosmOS_BufferConfigurationType * bufferCfg, unsigned char data );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_pull(CosmOS_BufferConfigurationType * bufferCfg, 
+  * @fn buffer_pull(CosmOS_BufferConfigurationType * bufferCfg,
   * unsigned char * data)
   *
   * @details The implementation contains obtaining of the buffer size by calling
@@ -202,7 +202,7 @@ buffer_pull( CosmOS_BufferConfigurationType * bufferCfg, unsigned char * data )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg, 
+  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg,
   * unsigned char data)
   *
   * @details The implementation contains obtaining of the buffer size by calling
@@ -317,22 +317,21 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
             CosmOS_AccessStateType isBufferInterCore;
             CosmOS_SpinlockStateType spinlockState;
 
-            CILinterrupt_disableInterrupts();
+            //CILinterrupt_disableInterrupts();
 
-            isBufferInterCore = buffer_isBufferInterCore( bufferCfg );
+            // isBufferInterCore = buffer_isBufferInterCore( bufferCfg );
 
-            if ( isBufferInterCore )
-            {
-                spinlockId = buffer_getBufferSpinlockId( bufferCfg );
-                spinlockState = spinlock_trySpinlock( spinlockId );
-            }
-            else
-            {
-                spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
-            }
+            // if ( isBufferInterCore )
+            // {
+            //     spinlockId = buffer_getBufferSpinlockId( bufferCfg );
+            //     spinlockState = spinlock_trySpinlock( spinlockId );
+            // }
+            // else
+            // {
+            //     spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
+            // }
 
-            if ( spinlockState IS_EQUAL_TO
-                     SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
+            if ( 1 )
             {
                 fullCellsNum = buffer_getFullCellsNum( bufferCfg );
 
@@ -361,7 +360,7 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
 
                 if ( isBufferInterCore )
                 {
-                    spinlockState = spinlock_releaseSpinlock( spinlockId );
+                    //spinlockState = spinlock_releaseSpinlock( spinlockId );
                 }
             }
             else
@@ -369,7 +368,7 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
                 bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
             }
 
-            CILinterrupt_enableInterrupts();
+            //CILinterrupt_enableInterrupts();
         }
     }
 
@@ -464,22 +463,21 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
             CosmOS_AccessStateType isBufferInterCore;
             CosmOS_SpinlockStateType spinlockState;
 
-            CILinterrupt_disableInterrupts();
+            //CILinterrupt_disableInterrupts();
 
             isBufferInterCore = buffer_isBufferInterCore( bufferCfg );
 
-            if ( isBufferInterCore )
-            {
-                spinlockId = buffer_getBufferSpinlockId( bufferCfg );
-                spinlockState = spinlock_trySpinlock( spinlockId );
-            }
-            else
-            {
-                spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
-            }
+            // if ( isBufferInterCore )
+            // {
+            //     spinlockId = buffer_getBufferSpinlockId( bufferCfg );
+            //     spinlockState = spinlock_trySpinlock( spinlockId );
+            // }
+            // else
+            // {
+            //     spinlockState = SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED;
+            // }
 
-            if ( spinlockState IS_EQUAL_TO
-                     SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
+            if ( 1 )
             {
                 emptyCellsNum = buffer_getEmptyCellsNum( bufferCfg );
 
@@ -507,7 +505,7 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
 
                 if ( isBufferInterCore )
                 {
-                    spinlockState = spinlock_releaseSpinlock( spinlockId );
+                    //spinlockState = spinlock_releaseSpinlock( spinlockId );
                 }
             }
             else
@@ -515,7 +513,7 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
                 bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
             }
 
-            CILinterrupt_enableInterrupts();
+            //CILinterrupt_enableInterrupts();
         }
     }
 
