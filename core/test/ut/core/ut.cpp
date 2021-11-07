@@ -104,7 +104,7 @@ TEST_CORE_GETCOREVAR_EXECUTIONFLOW()
 
     CILcore_TestFixture CILcoreMock;
 
-    EXPECT_CALL( *CILcoreMock._CILcoreMock, CILcore_getCoreVar() )
+    EXPECT_CALL( *CILcoreMock._CILcoreMock, CILcore_getCoreCfg() )
         .Times( 1 )
         .WillOnce( Return( &CoresVar[0] ) );
     ;
@@ -129,7 +129,7 @@ TEST_CORE_GETCOREVAR_RETURNVALUE()
 
     CILcore_TestFixture CILcoreMock;
 
-    EXPECT_CALL( *CILcoreMock._CILcoreMock, CILcore_getCoreVar() )
+    EXPECT_CALL( *CILcoreMock._CILcoreMock, CILcore_getCoreCfg() )
         .Times( 1 )
         .WillOnce( Return( &CoresVar[0] ) );
     ;

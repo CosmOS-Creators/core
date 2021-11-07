@@ -140,7 +140,8 @@ mutex_getMutexInternal(
 /**
   * @fn mutex_getMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Get mutex. DEMO
+  * @brief Get mutex. Function can be used within the scope of the
+  * program but only for threads. DEMO
   *
   * @param[in]  mutexVar pointer to the mutex variable
   *
@@ -220,7 +221,8 @@ mutex_releaseMutexInternal(
 /**
   * @fn mutex_tryMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Try to get mutex. DEMO
+  * @brief Try to get mutex. Function can be used within the scope of the
+  * program but only for threads. DEMO
   *
   * @param[in]  mutexVar pointer to the mutex variable
   *
@@ -235,7 +237,8 @@ mutex_tryMutex( CosmOS_MutexVariableType * mutexVar );
 /**
   * @fn mutex_releaseMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @brief Release mutex. DEMO
+  * @brief Release mutex. Function can be used within the scope of the
+  * program but only for threads. DEMO
   *
   * @param[in]  mutexVar pointer to the mutex variable
   *

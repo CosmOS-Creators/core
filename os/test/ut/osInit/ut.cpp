@@ -117,7 +117,7 @@ TEST_OSINIT_INIT_EXECUTIONFLOW()
         .WillOnce( Return( (CosmOS_OsVariableType *)NULL ) );
     EXPECT_CALL(
         *CILcoreMock._CILcoreMock,
-        CILcore_setCoreVar( (CosmOS_OsVariableType *)NULL ) )
+        CILcore_setCoreCfg( (CosmOS_OsVariableType *)NULL ) )
         .Times( 1 );
     EXPECT_CALL( *coreMock._CoreMock, core_getCoreVar() )
         .Times( 1 )

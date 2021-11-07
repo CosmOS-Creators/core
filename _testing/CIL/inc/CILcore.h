@@ -41,14 +41,14 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
 
 /* CIL interfaces */
 #include "CILstdTypes.h"
@@ -120,7 +120,8 @@
   *
   * @return BitWidthType
 ********************************************************************************/
-__OS_FUNC_SECTION BitWidthType CILcore_getCoreId(void);
+__OS_FUNC_SECTION BitWidthType
+CILcore_getCoreId( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -137,7 +138,7 @@ __OS_FUNC_SECTION BitWidthType CILcore_getCoreId(void);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn CILcore_setCoreVar(CosmOS_OsConfigurationType * os)
+  * @fn CILcore_setCoreCfg(CosmOS_OsConfigurationType * os)
   *
   * @brief Set core variable to the R9 platform register.
   *
@@ -145,7 +146,8 @@ __OS_FUNC_SECTION BitWidthType CILcore_getCoreId(void);
   *
   * @return void
 ********************************************************************************/
-__OS_FUNC_SECTION void CILcore_setCoreVar(CosmOS_OsConfigurationType * os);
+__OS_FUNC_SECTION void
+CILcore_setCoreCfg( CosmOS_OsConfigurationType * os );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -181,7 +183,7 @@ __OS_FUNC_SECTION void CILcore_setCoreVar(CosmOS_OsConfigurationType * os);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn CILcore_getCoreVar(void)
+  * @fn CILcore_getCoreCfg(void)
   *
   * @brief Get coreVar DEMO CODE.
   *
@@ -189,7 +191,8 @@ __OS_FUNC_SECTION void CILcore_setCoreVar(CosmOS_OsConfigurationType * os);
   *
   * @return CosmOS_CoreConfigurationType *
 ********************************************************************************/
-CosmOS_CoreConfigurationType *CILcore_getCoreVar(void);
+CosmOS_CoreConfigurationType *
+CILcore_getCoreCfg( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

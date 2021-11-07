@@ -337,7 +337,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @details The implementation contains obtaining of the operating system
   * generated variable structure by os_getOsCfg function that stores all system
   * buffers in it. Then the generated core variable structure is obtained byt
-  * the function CILcore_getCoreVar and used in the
+  * the function CILcore_getCoreCfg and used in the
   * memoryProtection_isMemoryRegionProtected function call to check if the
   * memory where the data from the buffer will be written is protected.
   * If yes the bufferState is returned with the value
@@ -381,7 +381,7 @@ buffer_readArray( BitWidthType bufferId, void * buffer, BitWidthType size )
     CosmOS_CoreConfigurationType * coreCfg;
 
     osCfg = os_getOsCfg();
-    coreCfg = CILcore_getCoreVar();
+    coreCfg = CILcore_getCoreCfg();
 
     numberOfBuffers = os_getOsNumberOfBuffers( osCfg );
 
@@ -490,7 +490,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @details The implementation contains obtaining of the operating system
   * generated variable structure by os_getOsCfg function that stores all system
   * buffers in it. Then the generated core variable structure is obtained byt
-  * the function CILcore_getCoreVar and used in the
+  * the function CILcore_getCoreCfg and used in the
   * memoryProtection_isMemoryRegionProtected function call to check if the
   * memory where the data from the buffer will be read from is protected.
   * If yes the bufferState is returned with the value
@@ -534,7 +534,7 @@ buffer_writeArray( BitWidthType bufferId, void * buffer, BitWidthType size )
     CosmOS_CoreConfigurationType * coreCfg;
 
     osCfg = os_getOsCfg();
-    coreCfg = CILcore_getCoreVar();
+    coreCfg = CILcore_getCoreCfg();
 
     numberOfBuffers = os_getOsNumberOfBuffers( osCfg );
 

@@ -159,7 +159,7 @@ spinlock_getSpinlockInternal(
 
     CosmOS_CoreConfigurationType * coreCfg;
 
-    coreCfg = CILcore_getCoreVar();
+    coreCfg = CILcore_getCoreCfg();
 
     spinlockState = CILspinlock_getSpinlock(
         &( spinlockVar->spinlock ),
@@ -211,7 +211,7 @@ spinlock_trySpinlockInternal(
 
     CosmOS_CoreConfigurationType * coreCfg;
 
-    coreCfg = CILcore_getCoreVar();
+    coreCfg = CILcore_getCoreCfg();
 
     spinlockState = CILspinlock_trySpinlock(
         &( spinlockVar->spinlock ),
@@ -272,7 +272,7 @@ spinlock_releaseSpinlockInternal(
 
     CosmOS_CoreConfigurationType * coreCfg;
 
-    coreCfg = CILcore_getCoreVar();
+    coreCfg = CILcore_getCoreCfg();
 
     spinlockState = CILspinlock_releaseSpinlock(
         &( spinlockVar->spinlock ),
@@ -322,7 +322,7 @@ spinlock_getSpinlock( BitWidthType spinlockId )
     CosmOS_SpinlockVariableType * spinlockVar;
 
     osCfg = os_getOsCfg();
-    coreCfg = CILcore_getCoreVar();
+    coreCfg = CILcore_getCoreCfg();
 
     numberOfSpinlocks = os_getOsNumberOfSpinlocks( osCfg );
 
@@ -449,7 +449,7 @@ spinlock_releaseSpinlock( BitWidthType spinlockId )
     CosmOS_SpinlockVariableType * spinlockVar;
 
     osCfg = os_getOsCfg();
-    coreCfg = CILcore_getCoreVar();
+    coreCfg = CILcore_getCoreCfg();
 
     numberOfSpinlocks = os_getOsNumberOfSpinlocks( osCfg );
 

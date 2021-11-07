@@ -135,7 +135,7 @@
   *
   * @details The implementation contains os_getOsCfg function call to get
   * generated configuration for the operating system, after this point
-  * CILcore_setCoreVar is used to set core variable to the platform registers if
+  * CILcore_setCoreCfg is used to set core variable to the platform registers if
   * possible on the current CPU.
   * Then core variable is obtained by core_getCoreVar and used in
   * the switchMemoryProtection_init function that is not stubbed only if user
@@ -160,7 +160,7 @@ osInit_init( BitWidthType entityId )
 
     osCfg = os_getOsCfg();
 
-    CILcore_setCoreVar( osCfg );
+    CILcore_setCoreCfg( osCfg );
 
     coreCfg = core_getCoreVar();
 

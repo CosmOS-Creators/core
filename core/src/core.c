@@ -128,7 +128,7 @@
   * @fn core_getCoreVar( void )
   *
   * @details The implementation contains obtaining of the core variable by
-  * calling the CILcore_getCoreVar function and returning the result.
+  * calling the CILcore_getCoreCfg function and returning the result.
   *
   * @see TEST_CORE_GETCOREVAR_EXECUTIONFLOW
   * @see TEST_CORE_GETCOREVAR_RETURNVALUE
@@ -141,7 +141,7 @@ core_getCoreVar( void )
 {
     CosmOS_CoreConfigurationType * core;
 
-    core = CILcore_getCoreVar();
+    core = CILcore_getCoreCfg();
 
     return core;
 }
