@@ -123,10 +123,10 @@
   * ****************************************************************************/
 /**
   * @details The implementation contains obtaining of the core variable by
-  * calling the CILcore_getCoreVar function. Then the schedulable variable in
-  * execution is obtained by the core_getCoreSchedulableInExecution function.
-  * The schedulable variable is used in schedulable_setState function call that
-  * sets the schedulable state to the SCHEDULABLE_STATE_ENUM__EXECUTED.
+  * calling the CILcore_getCoreVar function. Then the schedulable configuration 
+  * in execution is obtained by the core_getCoreSchedulableInExecution function.
+  * The schedulable configuration is used in schedulable_setState function call 
+  * that sets the schedulable state to the SCHEDULABLE_STATE_ENUM__EXECUTED.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -134,14 +134,14 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 schedulable_setExecutionStateToFinished( BitWidthType entityId )
 {
-    CosmOS_CoreVariableType * coreVar;
-    CosmOS_SchedulableVariableType * schedulableVar;
+    CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    coreVar = core_getCoreVar();
+    coreCfg = core_getCoreVar();
 
-    schedulableVar = core_getCoreSchedulableInExecution( coreVar );
+    schedulableCfg = core_getCoreSchedulableInExecution( coreCfg );
 
-    schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__EXECUTED );
+    schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__EXECUTED );
 
     __SUPRESS_UNUSED_VAR( entityId );
 };

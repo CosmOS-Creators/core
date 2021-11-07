@@ -296,12 +296,12 @@ mutex_getMutexValue( CosmOS_MutexVariableType * mutexVar )
   *
   * @param[in]  mutexVar pointer to the mutex variable
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
 mutex_getMutexSchedulableOwner( CosmOS_MutexVariableType * mutexVar )
 {
-    return (CosmOS_SchedulableVariableType *)( mutexVar->schedulableOwner );
+    return (CosmOS_SchedulableConfigurationType *)( mutexVar->schedulableOwner );
 }
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -342,14 +342,14 @@ mutex_setMutexValue(
   * @brief Set mutex schedulableOwner.
   *
   * @param[out]  mutexVar pointer to the mutex variable
-  * @param[in]  CosmOS_SchedulableVariableType * schedulableOwnerParam
+  * @param[in]  CosmOS_SchedulableConfigurationType * schedulableOwnerParam
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 mutex_setMutexSchedulableOwner(
     CosmOS_MutexVariableType * mutexVar,
-    CosmOS_SchedulableVariableType * schedulableOwnerParam )
+    CosmOS_SchedulableConfigurationType * schedulableOwnerParam )
 {
     mutexVar->schedulableOwner = schedulableOwnerParam;
 }
@@ -370,23 +370,23 @@ mutex_setMutexSchedulableOwner(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn mutex_willCauseDeadlock(CosmOS_CoreVariableType * coreVar,
+  * @fn mutex_willCauseDeadlock(CosmOS_CoreConfigurationType * core,
   * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Check if the mutex will ends up in deadlock. DEMO
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
 mutex_willCauseDeadlock(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_MutexVariableType * mutexVar )
 {
     return ( (mutexVar->mutex IS_EQUAL_TO MUTEX_STATE_ENUM__OCCUPIED)AND(
-               coreVar->schedulableInExecution IS_EQUAL_TO
+               core->var->schedulableInExecution IS_EQUAL_TO
                    mutexVar->schedulableOwner ) )
                ? True
                : False;
@@ -396,22 +396,22 @@ mutex_willCauseDeadlock(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn mutex_ownsSchedulableMutex(CosmOS_CoreVariableType * coreVar,
+  * @fn mutex_ownsSchedulableMutex(CosmOS_CoreConfigurationType * core,
   * CosmOS_MutexVariableType * mutexVar)
   *
   * @brief Check if the schedulable in execution owns the current mutex.
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  mutexVar pointer to the mutex variable
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
 mutex_ownsSchedulableMutex(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_MutexVariableType * mutexVar )
 {
-    return ( coreVar->schedulableInExecution IS_EQUAL_TO
+    return ( core->var->schedulableInExecution IS_EQUAL_TO
                  mutexVar->schedulableOwner )
                ? True
                : False;

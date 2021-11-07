@@ -131,7 +131,7 @@
   * @fn spinlock_getSpinlock(BitWidthType id)
   *
   * @details The implementation contains obtaining of the operating system and
-  * core variable by calling functions os_getOsVar and core_getCoreVar.
+  * core variable by calling functions os_getOsCfg and core_getCoreVar.
   * Then the operating system variable in function os_getOsNumberOfSpinlocks
   * to get number of spinlocks. The input element id argument is then checked
   * againts the number of spinlock in assertion function cosmosAssert. Spinlock
@@ -154,19 +154,19 @@ spinlock_getSpinlock( BitWidthType id )
     CosmOS_BooleanType willCauseDeadlock;
     CosmOS_SpinlockStateType spinlockState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_SpinlockVariableType * spinlockVar;
 
-    osVar = os_getOsVar();
-    coreVar = CILcore_getCoreVar();
+    osCfg = os_getOsCfg();
+    coreCfg = CILcore_getCoreVar();
 
-    numberOfSpinlocks = os_getOsNumberOfSpinlocks( osVar );
+    numberOfSpinlocks = os_getOsNumberOfSpinlocks( osCfg );
 
     cosmosAssert( id < numberOfSpinlocks );
-    spinlockVar = os_getOsSpinlockVar( osVar, id );
+    spinlockVar = os_getOsSpinlockVar( osCfg, id );
 
-    willCauseDeadlock = spinlock_willCauseDeadlock( coreVar, spinlockVar );
+    willCauseDeadlock = spinlock_willCauseDeadlock( coreCfg, spinlockVar );
 
     if ( willCauseDeadlock )
     {
@@ -177,8 +177,10 @@ spinlock_getSpinlock( BitWidthType id )
         spinlockState = CILspinlock_getSpinlock(
             &( spinlockVar->spinlock ),
             id,
-            coreVar->schedulableInExecution->cfg->id );
-        spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
+            ( (CosmOS_SchedulableConfigurationType *)
+                  coreCfg->var->schedulableInExecution )
+                ->id );
+        spinlockVar->schedulableOwner = coreCfg->var->schedulableInExecution;
     }
 
     return spinlockState;
@@ -194,7 +196,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn spinlock_trySpinlock(BitWidthType id)
   *
   * @details The implementation contains obtaining of the operating system and
-  * core variable by calling functions os_getOsVar and core_getCoreVar.
+  * core variable by calling functions os_getOsCfg and core_getCoreVar.
   * Then the operating system variable in function os_getOsNumberOfSpinlocks
   * to get number of spinlocks. The input element id argument is then checked
   * againts the number of spinlock in assertion function cosmosAssert. Spinlock
@@ -216,26 +218,28 @@ spinlock_trySpinlock( BitWidthType id )
 
     CosmOS_SpinlockStateType spinlockState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_SpinlockVariableType * spinlockVar;
 
-    osVar = os_getOsVar();
-    coreVar = CILcore_getCoreVar();
+    osCfg = os_getOsCfg();
+    coreCfg = CILcore_getCoreVar();
 
-    numberOfSpinlocks = os_getOsNumberOfSpinlocks( osVar );
+    numberOfSpinlocks = os_getOsNumberOfSpinlocks( osCfg );
 
     cosmosAssert( id < numberOfSpinlocks );
-    spinlockVar = os_getOsSpinlockVar( osVar, id );
+    spinlockVar = os_getOsSpinlockVar( osCfg, id );
 
     spinlockState = CILspinlock_trySpinlock(
         &( spinlockVar->spinlock ),
         id,
-        coreVar->schedulableInExecution->cfg->id );
+        ( (CosmOS_SchedulableConfigurationType *)
+              coreCfg->var->schedulableInExecution )
+            ->id );
 
     if ( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
     {
-        spinlockVar->schedulableOwner = coreVar->schedulableInExecution;
+        spinlockVar->schedulableOwner = coreCfg->var->schedulableInExecution;
     }
 
     return spinlockState;
@@ -251,7 +255,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn spinlock_releaseSpinlock(BitWidthType id)
   *
   * @details The implementation contains obtaining of the operating system and
-  * core variable by calling functions os_getOsVar and core_getCoreVar.
+  * core variable by calling functions os_getOsCfg and core_getCoreVar.
   * Then the operating system variable in function os_getOsNumberOfSpinlocks
   * to get number of spinlocks. The input element id argument is then checked
   * againts the number of spinlock in assertion function cosmosAssert. Spinlock
@@ -281,20 +285,20 @@ spinlock_releaseSpinlock( BitWidthType id )
 
     CosmOS_SpinlockStateType spinlockState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_SpinlockVariableType * spinlockVar;
 
-    osVar = os_getOsVar();
-    coreVar = CILcore_getCoreVar();
+    osCfg = os_getOsCfg();
+    coreCfg = CILcore_getCoreVar();
 
-    numberOfSpinlocks = os_getOsNumberOfSpinlocks( osVar );
+    numberOfSpinlocks = os_getOsNumberOfSpinlocks( osCfg );
 
     cosmosAssert( id < numberOfSpinlocks );
-    spinlockVar = os_getOsSpinlockVar( osVar, id );
+    spinlockVar = os_getOsSpinlockVar( osCfg, id );
 
     ownsSchedulableSpinlock =
-        spinlock_ownsSchedulableSpinlock( coreVar, spinlockVar );
+        spinlock_ownsSchedulableSpinlock( coreCfg, spinlockVar );
 
     if ( spinlockVar->spinlock IS_EQUAL_TO SPINLOCK_STATE_ENUM__OCCUPIED )
     {
@@ -303,7 +307,9 @@ spinlock_releaseSpinlock( BitWidthType id )
             spinlockState = CILspinlock_releaseSpinlock(
                 &( spinlockVar->spinlock ),
                 id,
-                coreVar->schedulableInExecution->cfg->id );
+                ( (CosmOS_SchedulableConfigurationType *)
+                      coreCfg->var->schedulableInExecution )
+                    ->id );
         }
         else
         {

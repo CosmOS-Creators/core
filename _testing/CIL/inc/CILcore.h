@@ -137,15 +137,15 @@ __OS_FUNC_SECTION BitWidthType CILcore_getCoreId(void);
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @fn CILcore_setCoreVar(CosmOS_OsVariableType * osVar)
+  * @fn CILcore_setCoreVar(CosmOS_OsConfigurationType * os)
   *
   * @brief Set core variable to the R9 platform register.
   *
-  * @param[in]  CosmOS_OsVariableType * osVar
+  * @param[in]  CosmOS_OsConfigurationType * os
   *
   * @return void
 ********************************************************************************/
-__OS_FUNC_SECTION void CILcore_setCoreVar(CosmOS_OsVariableType * osVar);
+__OS_FUNC_SECTION void CILcore_setCoreVar(CosmOS_OsConfigurationType * os);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -187,9 +187,9 @@ __OS_FUNC_SECTION void CILcore_setCoreVar(CosmOS_OsVariableType * osVar);
   *
   * @param[in]  none
   *
-  * @return CosmOS_CoreVariableType *
+  * @return CosmOS_CoreConfigurationType *
 ********************************************************************************/
-CosmOS_CoreVariableType *CILcore_getCoreVar(void);
+CosmOS_CoreConfigurationType *CILcore_getCoreVar(void);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

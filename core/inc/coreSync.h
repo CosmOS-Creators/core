@@ -112,19 +112,21 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn coreSync_getBarrier(CosmOS_CoreVariableType * coreVar,
+  * @fn coreSync_getBarrier(CosmOS_CoreConfigurationType * core,
   * BitWidthType barrierId)
   *
-  * @brief Set barrier with specific id for coreVar. This function cannot be
+  * @brief Set barrier with specific id for core. This function cannot be
   * called from the unprivileged context directly.
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core pointer
   * @param[in]  barrierId required barrier id
   *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
-coreSync_getBarrier( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId );
+coreSync_getBarrier(
+    CosmOS_CoreConfigurationType * core,
+    BitWidthType barrierId );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -155,20 +157,20 @@ coreSync_getBarrier( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn coreSync_reactivateBarrier(CosmOS_CoreVariableType * coreVar,
+  * @fn coreSync_reactivateBarrier(CosmOS_CoreConfigurationType * core,
   * BitWidthType barrierId)
   *
-  * @brief Reactivate barrier with specific barrierId for coreVar. This function
+  * @brief Reactivate barrier with specific barrierId for core. This function
   * cannot be called from the unprivileged context directly.
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core pointer
   * @param[in]  barrierId required barrier id
   *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 coreSync_reactivateBarrier(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     BitWidthType barrierId );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -193,7 +195,7 @@ coreSync_reactivateBarrier(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn coreSync_getBarrierState(CosmOS_CoreVariableType * core)
+  * @fn coreSync_getBarrierState(CosmOS_CoreConfigurationType * core)
   *
   * @brief Get barrierState.
   *

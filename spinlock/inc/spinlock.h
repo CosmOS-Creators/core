@@ -243,12 +243,13 @@ spinlock_getSpinlockValue( CosmOS_SpinlockVariableType * spinlockVar )
   *
   * @param[in]  spinlockVar pointer
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
 spinlock_getSpinlockSchedulableOwner( CosmOS_SpinlockVariableType * spinlockVar )
 {
-    return (CosmOS_SchedulableVariableType *)( spinlockVar->schedulableOwner );
+    return (
+        CosmOS_SchedulableConfigurationType *)( spinlockVar->schedulableOwner );
 }
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -286,7 +287,7 @@ spinlock_setSpinlockValue(
 /**
   * @fn spinlock_setSpinlockSchedulableOwner(
   * CosmOS_SpinlockVariableType * spinlock,
-  * BitWidthType spinlockParam)
+  * CosmOS_SchedulableConfigurationType * schedulableOwnerParam)
   *
   * @brief Set spinlock schedulableOwner. This function cannot
   * be called from the unprivileged context directly.
@@ -300,7 +301,7 @@ spinlock_setSpinlockValue(
 __STATIC_FORCEINLINE void
 spinlock_setSpinlockSchedulableOwner(
     CosmOS_SpinlockVariableType * spinlockVar,
-    CosmOS_SchedulableVariableType * schedulableOwnerParam )
+    CosmOS_SchedulableConfigurationType * schedulableOwnerParam )
 {
     spinlockVar->schedulableOwner = schedulableOwnerParam;
 }
@@ -321,23 +322,23 @@ spinlock_setSpinlockSchedulableOwner(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_willCauseDeadlock(CosmOS_CoreVariableType * coreVar,
+  * @fn spinlock_willCauseDeadlock(CosmOS_CoreConfigurationType * core,
   * CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Check if the spinlock will ends up in deadlock. DEMO
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  spinlockVar pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
 spinlock_willCauseDeadlock(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_SpinlockVariableType * spinlockVar )
 {
     return ( (spinlockVar->spinlock IS_EQUAL_TO SPINLOCK_STATE_ENUM__OCCUPIED)
-                 AND( coreVar->schedulableInExecution IS_EQUAL_TO
+                 AND( core->var->schedulableInExecution IS_EQUAL_TO
                           spinlockVar->schedulableOwner ) )
                ? True
                : False;
@@ -347,22 +348,22 @@ spinlock_willCauseDeadlock(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_ownsSchedulableSpinlock(CosmOS_CoreVariableType * coreVar,
+  * @fn spinlock_ownsSchedulableSpinlock(CosmOS_CoreConfigurationType * core,
   * CosmOS_SpinlockVariableType * spinlockVar)
   *
   * @brief Check if the schedulable in execution owns the current spinlock.
   *
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  spinlockVar pointer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
 spinlock_ownsSchedulableSpinlock(
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_CoreConfigurationType * core,
     CosmOS_SpinlockVariableType * spinlockVar )
 {
-    return ( coreVar->schedulableInExecution IS_EQUAL_TO
+    return ( core->var->schedulableInExecution IS_EQUAL_TO
                  spinlockVar->schedulableOwner )
                ? True
                : False;

@@ -156,16 +156,16 @@ sysJobs_dispatcher( BitWidthType entityId )
 {
     BitWidthType sysJobsCurrentTick, hyperTick, numOfGroups;
 
-    CosmOS_CoreVariableType * coreVar;
-    CosmOS_SysJobsVariableType * sysJobsVar;
+    CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_SysJobsConfigurationType * sysJobsCfg;
 
-    coreVar = core_getCoreVar();
-    sysJobsVar = core_getCoreSysJobs( coreVar );
+    coreCfg = core_getCoreVar();
+    sysJobsCfg = core_getCoreSysJobs( coreCfg );
 
-    sysJobsCurrentTick = sysJobs_getSysJobsCurrentTick( sysJobsVar );
+    sysJobsCurrentTick = sysJobs_getSysJobsCurrentTick( sysJobsCfg );
     sysJobsCurrentTick++;
 
-    numOfGroups = sysJobs_getSysJobsNumOfGroups( sysJobsVar );
+    numOfGroups = sysJobs_getSysJobsNumOfGroups( sysJobsCfg );
 
     for ( BitWidthType groupIterator = 0; groupIterator < numOfGroups;
           groupIterator++ )
@@ -173,7 +173,7 @@ sysJobs_dispatcher( BitWidthType entityId )
         BitWidthType groupTickMultiplicator;
 
         groupTickMultiplicator = sysJobs_getSysJobsGroupTickMultiplicator(
-            sysJobsVar, groupIterator );
+            sysJobsCfg, groupIterator );
 
         if ( IS_NOT( sysJobsCurrentTick % groupTickMultiplicator ) )
         {
@@ -181,9 +181,9 @@ sysJobs_dispatcher( BitWidthType entityId )
             CosmOS_GenericVoidType * handlers;
 
             handlers =
-                sysJobs_getSysJobsGroupHandlers( sysJobsVar, groupIterator );
+                sysJobs_getSysJobsGroupHandlers( sysJobsCfg, groupIterator );
             numOfHandlers = sysJobs_getSysJobsGroupNumOfHandlers(
-                sysJobsVar, groupIterator );
+                sysJobsCfg, groupIterator );
 
             for ( BitWidthType handlerIterator = 0;
                   handlerIterator < numOfHandlers;
@@ -194,10 +194,10 @@ sysJobs_dispatcher( BitWidthType entityId )
         }
     }
 
-    hyperTick = sysJobs_getSysJobsHyperTick( sysJobsVar );
+    hyperTick = sysJobs_getSysJobsHyperTick( sysJobsCfg );
 
     sysJobsCurrentTick = ( sysJobsCurrentTick % hyperTick );
-    sysJobs_setSysJobsCurrentTick( sysJobsVar, sysJobsCurrentTick );
+    sysJobs_setSysJobsCurrentTick( sysJobsCfg, sysJobsCurrentTick );
 
     __SUPRESS_UNUSED_VAR( entityId );
 };

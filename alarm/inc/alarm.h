@@ -145,18 +145,18 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn alarm_expire(CosmOS_AlarmVariableType *alarmVar)
+  * @fn alarm_expire(CosmOS_AlarmConfigurationType * alarm)
   *
   * @brief Alarm expire function needs to be called when the internal timer
   * expire. This function cannot be called from the unprivileged context
   * directly. DEMO
   *
-  * @param[in]  alarmVar pointer
+  * @param[in]  alarm configuration pointer
   *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
-alarm_expire( CosmOS_AlarmVariableType * alarmVar );
+alarm_expire( CosmOS_AlarmConfigurationType * alarm );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -180,54 +180,54 @@ alarm_expire( CosmOS_AlarmVariableType * alarmVar );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn alarm_getAlarmSchedulable(CosmOS_AlarmVariableType * alarm)
+  * @fn alarm_getAlarmSchedulable(CosmOS_AlarmConfigurationType * alarm)
   *
   * @brief Get alarm schedulable pointer.
   *
-  * @param[in]  alarm pointer
+  * @param[in]  alarm configuration pointer
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
-alarm_getAlarmSchedulable( CosmOS_AlarmVariableType * alarm )
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
+alarm_getAlarmSchedulable( CosmOS_AlarmConfigurationType * alarm )
 {
-    return (CosmOS_SchedulableVariableType *)( alarm->cfg->schedulableVar );
+    return (CosmOS_SchedulableConfigurationType *)( alarm->schedulableCfg );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn alarm_getAlarmState(CosmOS_AlarmVariableType * alarm)
+  * @fn alarm_getAlarmState(CosmOS_AlarmConfigurationType * alarm)
   *
   * @brief Get alarm state.
   *
-  * @param[in]  alarm pointer
+  * @param[in]  alarm configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-alarm_getAlarmState( CosmOS_AlarmVariableType * alarm )
+alarm_getAlarmState( CosmOS_AlarmConfigurationType * alarm )
 {
-    return ( alarm->state );
+    return ( alarm->var->state );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn alarm_getAlarmTickCount(CosmOS_AlarmVariableType * alarm)
+  * @fn alarm_getAlarmTickCount(CosmOS_AlarmConfigurationType * alarm)
   *
   * @brief Get alarm tickCount.
   *
-  * @param[in]  alarm pointer
+  * @param[in]  alarm configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-alarm_getAlarmTickCount( CosmOS_AlarmVariableType * alarm )
+alarm_getAlarmTickCount( CosmOS_AlarmConfigurationType * alarm )
 {
-    return ( alarm->tickCount );
+    return ( alarm->var->tickCount );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -246,46 +246,46 @@ alarm_getAlarmTickCount( CosmOS_AlarmVariableType * alarm )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn alarm_setAlarmState(CosmOS_AlarmVariableType * alarm,
+  * @fn alarm_setAlarmState(CosmOS_AlarmConfigurationType * alarm,
   * CosmOS_AlarmStateType stateParam)
   *
   * @brief Set alarm state. This function cannot be called
   * from the unprivileged context directly.
   *
-  * @param[out]  alarm pointer
+  * @param[out]  alarm configuration pointer
   * @param[in]  stateParam state of the alarm
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 alarm_setAlarmState(
-    CosmOS_AlarmVariableType * alarm,
+    CosmOS_AlarmConfigurationType * alarm,
     CosmOS_AlarmStateType stateParam )
 {
-    alarm->state = stateParam;
+    alarm->var->state = stateParam;
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn alarm_setAlarmTickCount(CosmOS_AlarmVariableType * alarm,
+  * @fn alarm_setAlarmTickCount(CosmOS_AlarmConfigurationType * alarm,
   * BitWidthType tickCountParam)
   *
   * @brief Set alarm tickCount. This function cannot be called
   * from the unprivileged context directly.
   *
-  * @param[out]  alarm
+  * @param[out]  alarm configuration pointer
   * @param[in]  tickCountParam number of ticks to load internal timer
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 alarm_setAlarmTickCount(
-    CosmOS_AlarmVariableType * alarm,
+    CosmOS_AlarmConfigurationType * alarm,
     BitWidthType tickCountParam )
 {
-    alarm->tickCount = tickCountParam;
+    alarm->var->tickCount = tickCountParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

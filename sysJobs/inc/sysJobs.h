@@ -178,84 +178,85 @@ sysJobs_dispatcher( BitWidthType entityId );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn sysJobs_getSysJobsGroups(CosmOS_SysJobsVariableType * sysJobs)
+  * @fn sysJobs_getSysJobsGroups(CosmOS_SysJobsConfigurationType * sysJobs)
   *
   * @brief Get sysJobs groups.
   *
-  * @param[in]  sysJobs pointer to the sysJobs variable type
+  * @param[in]  sysJobs configuration pointer
   *
   * @return CosmOS_SysJobsGroupConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_SysJobsGroupConfigurationType *
-sysJobs_getSysJobsGroups( CosmOS_SysJobsVariableType * sysJobs )
+sysJobs_getSysJobsGroups( CosmOS_SysJobsConfigurationType * sysJobs )
 {
-    return (CosmOS_SysJobsGroupConfigurationType *)( sysJobs->cfg->groups );
+    return (CosmOS_SysJobsGroupConfigurationType *)( sysJobs->groups );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn sysJobs_getSysJobsNumOfGroups(CosmOS_SysJobsVariableType * sysJobs)
+  * @fn sysJobs_getSysJobsNumOfGroups(CosmOS_SysJobsConfigurationType * sysJobs)
   *
   * @brief Get sysJobs numOfGroups.
   *
-  * @param[in]  sysJobs pointer to the sysJobs variable type
+  * @param[in]  sysJobs configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-sysJobs_getSysJobsNumOfGroups( CosmOS_SysJobsVariableType * sysJobs )
+sysJobs_getSysJobsNumOfGroups( CosmOS_SysJobsConfigurationType * sysJobs )
 {
-    return ( sysJobs->cfg->numOfGroups );
+    return ( sysJobs->numOfGroups );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn sysJobs_getSysJobsHyperTick(CosmOS_SysJobsVariableType * sysJobs)
+  * @fn sysJobs_getSysJobsHyperTick(CosmOS_SysJobsConfigurationType * sysJobs)
   *
   * @brief Get sysJobs hyperTick.
   *
-  * @param[in]  sysJobs pointer to the sysJobs variable type
+  * @param[in]  sysJobs configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-sysJobs_getSysJobsHyperTick( CosmOS_SysJobsVariableType * sysJobs )
+sysJobs_getSysJobsHyperTick( CosmOS_SysJobsConfigurationType * sysJobs )
 {
-    return ( sysJobs->cfg->hyperTick );
+    return ( sysJobs->hyperTick );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn sysJobs_getSysJobsCurrentTick(CosmOS_SysJobsVariableType * sysJobs)
+  * @fn sysJobs_getSysJobsCurrentTick(CosmOS_SysJobsConfigurationType * sysJobs)
   *
   * @brief Get sysJobs currentTick.
   *
-  * @param[in]  sysJobs pointer to the sysJobs variable type
+  * @param[in]  sysJobs configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-sysJobs_getSysJobsCurrentTick( CosmOS_SysJobsVariableType * sysJobs )
+sysJobs_getSysJobsCurrentTick( CosmOS_SysJobsConfigurationType * sysJobs )
 {
-    return ( sysJobs->currentTick );
+    return ( sysJobs->var->currentTick );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn sysJobs_getSysJobsGroupHandlers(CosmOS_SysJobsVariableType * sysJobs,
+  * @fn sysJobs_getSysJobsGroupHandlers(
+  * CosmOS_SysJobsConfigurationType * sysJobs,
   * BitWidthType groupId)
   *
   * @brief Get sysJobs group handlers.
   *
-  * @param[in]  sysJobs pointer to the sysJobs variable type
+  * @param[in]  sysJobs configuration pointer
   * @param[in]  groupId specific group id that can be found in configured array
   * of sysJob groups
   *
@@ -263,10 +264,10 @@ sysJobs_getSysJobsCurrentTick( CosmOS_SysJobsVariableType * sysJobs )
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_GenericVoidType *
 sysJobs_getSysJobsGroupHandlers(
-    CosmOS_SysJobsVariableType * sysJobs,
+    CosmOS_SysJobsConfigurationType * sysJobs,
     BitWidthType groupId )
 {
-    return (CosmOS_GenericVoidType *)( sysJobs->cfg->groups[groupId].handlers );
+    return (CosmOS_GenericVoidType *)( sysJobs->groups[groupId].handlers );
 }
 
 /********************************************************************************
@@ -274,12 +275,12 @@ sysJobs_getSysJobsGroupHandlers(
   * ****************************************************************************/
 /**
   * @fn sysJobs_getSysJobsGroupNumOfHandlers(
-  * CosmOS_SysJobsVariableType * sysJobs,
+  * CosmOS_SysJobsConfigurationType * sysJobs,
   * BitWidthType groupId)
   *
   * @brief Get sysJobs group numOfHandlers.
   *
-  * @param[in]  sysJobs pointer to the sysJobs variable type
+  * @param[in]  sysJobs configuration pointer
   * @param[in]  groupId specific group id that can be found in configured array
   * of sysJob groups
   *
@@ -287,10 +288,10 @@ sysJobs_getSysJobsGroupHandlers(
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
 sysJobs_getSysJobsGroupNumOfHandlers(
-    CosmOS_SysJobsVariableType * sysJobs,
+    CosmOS_SysJobsConfigurationType * sysJobs,
     BitWidthType groupId )
 {
-    return ( sysJobs->cfg->groups[groupId].numOfHandlers );
+    return ( sysJobs->groups[groupId].numOfHandlers );
 }
 
 /********************************************************************************
@@ -298,12 +299,12 @@ sysJobs_getSysJobsGroupNumOfHandlers(
   * ****************************************************************************/
 /**
   * @fn sysJobs_getSysJobsGroupTickMultiplicator(
-  * CosmOS_SysJobsVariableType * sysJobs,
+  * CosmOS_SysJobsConfigurationType * sysJobs,
   * BitWidthType groupId)
   *
   * @brief Get sysJobs group tickMultiplicator.
   *
-  * @param[in]  sysJobs pointer to the sysJobs variable type
+  * @param[in]  sysJobs configuration pointer
   * @param[in]  groupId specific group id that can be found in configured array
   * of sysJob groups
   *
@@ -311,10 +312,10 @@ sysJobs_getSysJobsGroupNumOfHandlers(
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
 sysJobs_getSysJobsGroupTickMultiplicator(
-    CosmOS_SysJobsVariableType * sysJobs,
+    CosmOS_SysJobsConfigurationType * sysJobs,
     BitWidthType groupId )
 {
-    return ( sysJobs->cfg->groups[groupId].tickMultiplicator );
+    return ( sysJobs->groups[groupId].tickMultiplicator );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -334,23 +335,23 @@ sysJobs_getSysJobsGroupTickMultiplicator(
   * ****************************************************************************/
 /**
   * @fn sysJobs_setSysJobsCurrentTick(
-  * CosmOS_SysJobsVariableType * sysJobs,
+  * CosmOS_SysJobsConfigurationType * sysJobs,
   * BitWidthType currentTickParam)
   *
   * @brief Set sysJobs currentTick. This function cannot
   * be called from the unprivileged context directly.
   *
-  * @param[out]  sysJobs pointer to the sysJobs variable type
+  * @param[out]  sysJobs configuration pointer
   * @param[in]  currentTickParam tick to be set
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 sysJobs_setSysJobsCurrentTick(
-    CosmOS_SysJobsVariableType * sysJobs,
+    CosmOS_SysJobsConfigurationType * sysJobs,
     BitWidthType currentTickParam )
 {
-    sysJobs->currentTick = currentTickParam;
+    sysJobs->var->currentTick = currentTickParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

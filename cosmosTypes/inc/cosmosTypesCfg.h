@@ -47,7 +47,7 @@ extern "C" {
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "cosmosTypesStd.h"
+#include "cosmosTypesVar.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -72,6 +72,12 @@ extern "C" {
 ********************************************************************************/
 /********************************************************************************
 **                              Typedefs | Start                               **
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  CosmOS_BufferVariableType struct type
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -142,6 +148,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_BufferVariableType * const var;
     unsigned char * const buffer;
     const BitWidthType id;
     const BitWidthType size;
@@ -160,7 +167,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    void * const buffer;
+    const CosmOS_BufferConfigurationType * const buffer;
 
 } CosmOS_BufferDoublePairConfigurationType;
 
@@ -172,6 +179,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_BufferDoubleVariableType * const var;
     const CosmOS_BufferDoublePairConfigurationType * const bufferPair;
 
 } CosmOS_BufferDoubleConfigurationType;
@@ -212,6 +220,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_SchedulableVariableType * const var;
     const CosmOS_StackConfigurationType * const stack;
     const CosmOS_SchedulableInstanceType instanceType;
     const CosmOS_GenericVoidType handler;
@@ -235,6 +244,8 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_TaskVariableType * const var;
+    const CosmOS_SchedulableConfigurationType * const schedulable;
     const BitWidthType wcet;
 
 } CosmOS_TaskConfigurationType;
@@ -247,6 +258,8 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_ThreadVariableType * const var;
+    const CosmOS_SchedulableConfigurationType * const schedulable;
     const BitWidthType priority;
 
 } CosmOS_ThreadConfigurationType;
@@ -259,6 +272,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_ProgramVariableType * const var;
     const BitWidthType coreId;
     const BitWidthType numberOfTasks;
     const BitWidthType numberOfThreads;
@@ -266,7 +280,9 @@ typedef struct
     const AddressType programMemoryLowAddress;
     const AddressType programMemoryHighAddress;
     const CosmOS_HeapConfigurationType * const heap;
-    void * const heapMutex;
+    const CosmOS_TaskConfigurationType * const taskCfgs;
+    const CosmOS_ThreadConfigurationType * const threadCfgs;
+    CosmOS_MutexVariableType * const heapMutex;
 
 } CosmOS_ProgramConfigurationType;
 
@@ -279,7 +295,7 @@ typedef struct
 typedef struct
 {
     const BitWidthType startTick;
-    void * const taskVar;
+    const CosmOS_TaskConfigurationType * const taskCfg;
 
 } CosmOS_ScheduleTableConfigurationType;
 
@@ -291,7 +307,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    void * const threadVar;
+    const CosmOS_ThreadConfigurationType * const threadCfg;
 
 } CosmOS_ThreadListConfigurationType;
 
@@ -303,6 +319,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_SchedulerVariableType * const var;
     const CosmOS_ScheduleTableConfigurationType * const scheduleTable;
     const CosmOS_ThreadListConfigurationType * const threadList;
     const BitWidthType hyperTick;
@@ -314,7 +331,7 @@ typedef struct
     const BitWidthType firstSyncTaskStartTick;
     const BitWidthType maxTimerTick;
     const BitWidthType timerTickCount;
-    void * const idleTaskVar;
+    const CosmOS_TaskConfigurationType * const idleTask;
 
 } CosmOS_SchedulerConfigurationType;
 
@@ -340,7 +357,8 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    void * const schedulableVar;
+    CosmOS_AlarmVariableType * const var;
+    const CosmOS_SchedulableConfigurationType * const schedulableCfg;
 
 } CosmOS_AlarmConfigurationType;
 
@@ -352,6 +370,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_SysJobsVariableType * const var;
     const CosmOS_SysJobsGroupConfigurationType * const groups;
     const BitWidthType numOfGroups;
     const BitWidthType hyperTick;
@@ -366,6 +385,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_CoreVariableType * const var;
     const CosmOS_ProgramConfigurationType * const programs;
     const BitWidthType numberOfPrograms;
     const CosmOS_SchedulerConfigurationType * const scheduler;
@@ -379,6 +399,11 @@ typedef struct
     const AddressType unprotectedMemoryHighAddress;
     const BitWidthType msToTicks;
     const BitWidthType numberOfAlarms;
+    const CosmOS_ProgramConfigurationType * const programCfgs;
+    const CosmOS_SchedulerConfigurationType * const schedulerCfg;
+    CosmOS_BarrierVariableType * const barrierVars;
+    const CosmOS_SysJobsConfigurationType * const sysJobsCfg;
+    const CosmOS_AlarmConfigurationType * const alarmCfgs;
 
 } CosmOS_CoreConfigurationType;
 
@@ -390,12 +415,17 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_OsVariableType * const var;
     const CosmOS_CoreConfigurationType * const cores;
     const BitWidthType numberOfCores;
     const CosmOS_BufferConfigurationType * const buffers;
     const BitWidthType numberOfBuffers;
     const CosmOS_RoutesConfigurationType * const route;
     const BitWidthType numberOfSpinlocks;
+    const CosmOS_CoreConfigurationType * const coreCfgs;
+    const CosmOS_BufferConfigurationType * const bufferCfgs;
+    const CosmOS_BufferDoubleConfigurationType * const bufferDoubleCfgs;
+    CosmOS_SpinlockVariableType * const spinlockVars;
 
 } CosmOS_OsConfigurationType;
 /********************************************************************************

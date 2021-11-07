@@ -109,7 +109,7 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn alarm_expire(CosmOS_AlarmVariableType *alarmVar)
+  * @fn alarm_expire(CosmOS_AlarmConfigurationType *alarm)
   *
   * @details The implementation contains call to alarm_getAlarmSchedulable to get
   * alarm linked thread and set it again with calling schedulable_setState
@@ -123,15 +123,15 @@
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
-alarm_expire( CosmOS_AlarmVariableType * alarmVar )
+alarm_expire( CosmOS_AlarmConfigurationType * alarm )
 {
-    CosmOS_SchedulableVariableType * schedulableVar;
+    CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    schedulableVar = alarm_getAlarmSchedulable( alarmVar );
+    schedulableCfg = alarm_getAlarmSchedulable( alarm );
 
-    schedulable_setState( schedulableVar, SCHEDULABLE_STATE_ENUM__READY );
-    alarm_setAlarmState( alarmVar, ALARM_STATE_ENUM__DISABLED );
-    alarm_setAlarmTickCount( alarmVar, 0 );
+    schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__READY );
+    alarm_setAlarmState( alarm, ALARM_STATE_ENUM__DISABLED );
+    alarm_setAlarmTickCount( alarm, 0 );
 };
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )

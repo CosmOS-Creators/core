@@ -119,35 +119,37 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_pull(CosmOS_BufferVariableType * bufferVar, unsigned char * data)
+  * @fn buffer_pull(CosmOS_BufferConfigurationType * bufferCfg, 
+  * unsigned char * data)
   *
   * @brief Pull data from the buffer. This function cannot be called from the
   * unprivileged context directly. DEMO
   *
-  * @param[in]  bufferVar buffer variable structure pointer
+  * @param[in]  bufferCfg buffer configuration structure pointer
   * @param[out]  data data to pull from the buffer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferStateType
-buffer_pull( CosmOS_BufferVariableType * buffer, unsigned char * data );
+buffer_pull( CosmOS_BufferConfigurationType * bufferCfg, unsigned char * data );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_push(CosmOS_BufferVariableType * bufferVar, unsigned char data)
+  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg, 
+  * unsigned char data)
   *
   * @brief Push data to the buffer. This function cannot be called from the
   * unprivileged context directly. DEMO
   *
-  * @param[in]  bufferVar buffer variable structure pointer
+  * @param[in]  bufferCfg buffer configuration structure pointer
   * @param[in]  data data to push to the buffer
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferStateType
-buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data );
+buffer_push( CosmOS_BufferConfigurationType * bufferCfg, unsigned char data );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -164,17 +166,18 @@ buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_pull(CosmOS_BufferVariableType * bufferVar, unsigned char * data)
+  * @fn buffer_pull(CosmOS_BufferConfigurationType * bufferCfg, 
+  * unsigned char * data)
   *
   * @details The implementation contains obtaining of the buffer size by calling
   * function buffer_getBufferSize and obtaining buffer array pointer by calling
   * function buffer_getBuffer. To the data pointer argument is then written
-  * one byte from the buffer tail and fullCells of the current bufferVar are
+  * one byte from the buffer tail and fullCells of the current bufferCfg are
   * decremented by one. Position of the tail is updated and buffer empty state
   * is obtained by the buffer_isEmpty function and returned.
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferStateType
-buffer_pull( CosmOS_BufferVariableType * bufferVar, unsigned char * data )
+buffer_pull( CosmOS_BufferConfigurationType * bufferCfg, unsigned char * data )
 {
     BitWidthType bufferSize;
 
@@ -182,15 +185,15 @@ buffer_pull( CosmOS_BufferVariableType * bufferVar, unsigned char * data )
 
     unsigned char * osBuffer;
 
-    bufferSize = buffer_getBufferSize( bufferVar );
-    osBuffer = buffer_getBuffer( bufferVar );
+    bufferSize = buffer_getBufferSize( bufferCfg );
+    osBuffer = buffer_getBuffer( bufferCfg );
 
-    *data = *( osBuffer + bufferVar->tail );
+    *data = *( osBuffer + bufferCfg->var->tail );
 
-    bufferVar->fullCells--;
-    bufferVar->tail = ( ( bufferVar->tail + 1 ) % bufferSize );
+    bufferCfg->var->fullCells--;
+    bufferCfg->var->tail = ( ( bufferCfg->var->tail + 1 ) % bufferSize );
 
-    bufferState = buffer_isEmpty( bufferVar );
+    bufferState = buffer_isEmpty( bufferCfg );
 
     return bufferState;
 }
@@ -199,17 +202,18 @@ buffer_pull( CosmOS_BufferVariableType * bufferVar, unsigned char * data )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_push(CosmOS_BufferVariableType * bufferVar, unsigned char data)
+  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg, 
+  * unsigned char data)
   *
   * @details The implementation contains obtaining of the buffer size by calling
   * function buffer_getBufferSize and obtaining buffer array pointer by calling
   * function buffer_getBuffer. To the buffer array in the head position is
-  * written the data byte argument and fullCells of the current bufferVar are
+  * written the data byte argument and fullCells of the current bufferCfg are
   * incremented by one. Position of the head is updated and buffer full state
   * is obtained by the buffer_isFull function and returned.
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BufferStateType
-buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data )
+buffer_push( CosmOS_BufferConfigurationType * bufferCfg, unsigned char data )
 {
     BitWidthType bufferSize;
 
@@ -217,15 +221,15 @@ buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data )
 
     unsigned char * osBuffer;
 
-    bufferSize = buffer_getBufferSize( bufferVar );
-    osBuffer = buffer_getBuffer( bufferVar );
+    bufferSize = buffer_getBufferSize( bufferCfg );
+    osBuffer = buffer_getBuffer( bufferCfg );
 
-    *( osBuffer + bufferVar->head ) = data;
+    *( osBuffer + bufferCfg->var->head ) = data;
 
-    bufferVar->fullCells++;
-    bufferVar->head = ( ( bufferVar->head + 1 ) % bufferSize );
+    bufferCfg->var->fullCells++;
+    bufferCfg->var->head = ( ( bufferCfg->var->head + 1 ) % bufferSize );
 
-    bufferState = buffer_isFull( bufferVar );
+    bufferState = buffer_isFull( bufferCfg );
 
     return bufferState;
 }
@@ -237,14 +241,14 @@ buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data )
   * @fn buffer_readArray(BitWidthType id, void * buffer, BitWidthType size)
   *
   * @details The implementation contains obtaining of the operating system
-  * generated variable structure by os_getOsVar function that stores all system
+  * generated variable structure by os_getOsCfg function that stores all system
   * buffers in it. Then the generated core variable structure is obtained byt
   * the function CILcore_getCoreVar and used in the
   * memoryProtection_isMemoryRegionProtected function call to check if the
   * memory where the data from the buffer will be written is protected.
   * If yes the bufferState is returned with the value
-  * BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED. If not bufferVar is
-  * obtained by the function os_getOsBufferVar based on the id argument which
+  * BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED. If not bufferCfg is
+  * obtained by the function os_getOsBufferCfg based on the id argument which
   * is mapped with the routes to the proper entity, in this case one of the
   * system buffers. From the buffer variable are then extracted read permissions
   * by the function call buffer_getBufferReadPermission and passed to the
@@ -253,7 +257,7 @@ buffer_push( CosmOS_BufferVariableType * bufferVar, unsigned char data )
   * the value BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED. If yes the interrupts are
   * disable before reading from the buffer by calling the function
   * CILinterrupt_disableInterrupts. After this point the function has ensure the
-  * exclusive access to the bufferVar and therefore buffer_isBufferInterCore
+  * exclusive access to the bufferCfg and therefore buffer_isBufferInterCore
   * function is called to know if the buffer is inter-core. If yes spinlock id
   * is obtained by the function buffer_getBufferSpinlockId and then the spinlock
   * is tried by the non-blocking function spinlock_trySpinlock. If the spinlock
@@ -278,14 +282,14 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
     CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
 
-    osVar = os_getOsVar();
-    coreVar = CILcore_getCoreVar();
+    osCfg = os_getOsCfg();
+    coreCfg = CILcore_getCoreVar();
 
     isMemoryRegionProtected =
-        memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
+        memoryProtection_isMemoryRegionProtected( coreCfg, buffer, size );
 
     if ( isMemoryRegionProtected )
     {
@@ -295,13 +299,13 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
     {
         CosmOS_AccessStateType accessState;
 
-        CosmOS_BufferVariableType * bufferVar;
+        CosmOS_BufferConfigurationType * bufferCfg;
         CosmOS_PermissionsConfigurationType * readPermission;
 
-        bufferVar = os_getOsBufferVar( osVar, id );
+        bufferCfg = os_getOsBufferCfg( osCfg, id );
 
-        readPermission = buffer_getBufferReadPermission( bufferVar );
-        accessState = permission_tryAccess( readPermission, coreVar );
+        readPermission = buffer_getBufferReadPermission( bufferCfg );
+        accessState = permission_tryAccess( readPermission, coreCfg );
 
         if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
         {
@@ -315,11 +319,11 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
 
             CILinterrupt_disableInterrupts();
 
-            isBufferInterCore = buffer_isBufferInterCore( bufferVar );
+            isBufferInterCore = buffer_isBufferInterCore( bufferCfg );
 
             if ( isBufferInterCore )
             {
-                spinlockId = buffer_getBufferSpinlockId( bufferVar );
+                spinlockId = buffer_getBufferSpinlockId( bufferCfg );
                 spinlockState = spinlock_trySpinlock( spinlockId );
             }
             else
@@ -330,7 +334,7 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
             if ( spinlockState IS_EQUAL_TO
                      SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
             {
-                fullCellsNum = buffer_getFullCellsNum( bufferVar );
+                fullCellsNum = buffer_getFullCellsNum( bufferCfg );
 
                 if ( fullCellsNum >= size )
                 {
@@ -345,7 +349,7 @@ buffer_readArray( BitWidthType id, void * buffer, BitWidthType size )
                     while ( ( userBufferIndex < size ) )
                     {
                         bufferState = buffer_pull(
-                            bufferVar, ( userBuffer + userBufferIndex ) );
+                            bufferCfg, ( userBuffer + userBufferIndex ) );
                         userBufferIndex++;
                     }
                 }
@@ -384,14 +388,14 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn buffer_writeArray(BitWidthType id, void * buffer, BitWidthType size)
   *
   * @details The implementation contains obtaining of the operating system
-  * generated variable structure by os_getOsVar function that stores all system
+  * generated variable structure by os_getOsCfg function that stores all system
   * buffers in it. Then the generated core variable structure is obtained byt
   * the function CILcore_getCoreVar and used in the
   * memoryProtection_isMemoryRegionProtected function call to check if the
   * memory where the data from the buffer will be read from is protected.
   * If yes the bufferState is returned with the value
-  * BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED. If not bufferVar is
-  * obtained by the function os_getOsBufferVar based on the id argument which
+  * BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED. If not bufferCfg is
+  * obtained by the function os_getOsBufferCfg based on the id argument which
   * is mapped with the routes to the proper entity, in this case one of the
   * system buffers. From the buffer variable are then extracted write
   * permissions by the function call buffer_getBufferReadPermission and passed
@@ -400,7 +404,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * with the value BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED. If yes the interrupts
   * are disable before writing to the buffer by calling the function
   * CILinterrupt_disableInterrupts. After this point the function has ensure the
-  * exclusive access to the bufferVar and therefore buffer_isBufferInterCore
+  * exclusive access to the bufferCfg and therefore buffer_isBufferInterCore
   * function is called to know if the buffer is inter-core. If yes spinlock id
   * is obtained by the function buffer_getBufferSpinlockId and then the spinlock
   * is tried by the non-blocking function spinlock_trySpinlock. If the spinlock
@@ -425,14 +429,14 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
     CosmOS_BooleanType isMemoryRegionProtected;
     CosmOS_BufferStateType bufferState;
 
-    CosmOS_OsVariableType * osVar;
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
 
-    osVar = os_getOsVar();
-    coreVar = CILcore_getCoreVar();
+    osCfg = os_getOsCfg();
+    coreCfg = CILcore_getCoreVar();
 
     isMemoryRegionProtected =
-        memoryProtection_isMemoryRegionProtected( coreVar, buffer, size );
+        memoryProtection_isMemoryRegionProtected( coreCfg, buffer, size );
 
     if ( isMemoryRegionProtected )
     {
@@ -442,13 +446,13 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
     {
         CosmOS_AccessStateType accessState;
 
-        CosmOS_BufferVariableType * bufferVar;
+        CosmOS_BufferConfigurationType * bufferCfg;
         CosmOS_PermissionsConfigurationType * writePermission;
 
-        bufferVar = os_getOsBufferVar( osVar, id );
+        bufferCfg = os_getOsBufferCfg( osCfg, id );
 
-        writePermission = buffer_getBufferWritePermission( bufferVar );
-        accessState = permission_tryAccess( writePermission, coreVar );
+        writePermission = buffer_getBufferWritePermission( bufferCfg );
+        accessState = permission_tryAccess( writePermission, coreCfg );
 
         if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__DENIED )
         {
@@ -462,11 +466,11 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
 
             CILinterrupt_disableInterrupts();
 
-            isBufferInterCore = buffer_isBufferInterCore( bufferVar );
+            isBufferInterCore = buffer_isBufferInterCore( bufferCfg );
 
             if ( isBufferInterCore )
             {
-                spinlockId = buffer_getBufferSpinlockId( bufferVar );
+                spinlockId = buffer_getBufferSpinlockId( bufferCfg );
                 spinlockState = spinlock_trySpinlock( spinlockId );
             }
             else
@@ -477,7 +481,7 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
             if ( spinlockState IS_EQUAL_TO
                      SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
             {
-                emptyCellsNum = buffer_getEmptyCellsNum( bufferVar );
+                emptyCellsNum = buffer_getEmptyCellsNum( bufferCfg );
 
                 if ( emptyCellsNum >= size )
                 {
@@ -491,7 +495,7 @@ buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size )
                     while ( ( userBufferIndex < size ) )
                     {
                         bufferState = buffer_push(
-                            bufferVar, *( userBuffer + userBufferIndex ) );
+                            bufferCfg, *( userBuffer + userBufferIndex ) );
                         userBufferIndex++;
                     }
                 }

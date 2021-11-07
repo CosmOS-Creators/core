@@ -238,20 +238,21 @@ malloc_internal( size_t size )
 
     CosmOS_MutexStateType mutexState;
 
-    CosmOS_CoreVariableType * coreVar;
-    CosmOS_ProgramVariableType * programVar;
+    CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_ProgramConfigurationType * programCfg;
     CosmOS_HeapConfigurationType * heapCfg;
     CosmOS_MallocVariableType *currentMallocVar, *newMallocVar;
 
-    coreVar = core_getCoreVar();
+    coreCfg = core_getCoreVar();
     returnAddress = (AddressType)NULL;
 
-    if ( coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO
-             SCHEDULABLE_INSTANCE_ENUM__THREAD )
+    if ( ( (CosmOS_SchedulableConfigurationType *)
+               coreCfg->var->schedulableInExecution )
+             ->instanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD )
     {
-        programVar = core_getCoreProgramInExecution( coreVar );
+        programCfg = core_getCoreProgramInExecution( coreCfg );
 
-        heapCfg = program_getHeap( programVar );
+        heapCfg = program_getHeap( programCfg );
 
         heapLowAddress = heap_getHeapLowAddress( heapCfg );
         heapHighAddress = heap_getHeapHighAddress( heapCfg );
@@ -259,7 +260,7 @@ malloc_internal( size_t size )
         allocated = False;
         currentMallocVar = (CosmOS_MallocVariableType *)heapLowAddress;
 
-        mutexState = mutex_getMutex( programVar->cfg->heapMutex );
+        mutexState = mutex_getMutex( programCfg->heapMutex );
 
         /*TODO: this assertion cannot be here cause it will in the
         future disable ISRs - so only os can call it in privileged context */
@@ -319,7 +320,7 @@ malloc_internal( size_t size )
             }
         } while ( currentMallocVar->next AND IS_NOT( allocated ) );
 
-        mutexState = mutex_releaseMutex( programVar->cfg->heapMutex );
+        mutexState = mutex_releaseMutex( programCfg->heapMutex );
 
         /*TODO: this assertion cannot be here cause it will in the
         future disable ISRs - so only os can call it in privileged context */
@@ -353,20 +354,21 @@ free_internal( void * ptr )
 {
     CosmOS_MutexStateType mutexState;
 
-    CosmOS_CoreVariableType * coreVar;
-    CosmOS_ProgramVariableType * programVar;
+    CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_ProgramConfigurationType * programCfg;
 
     CosmOS_MallocVariableType * mallocVarToFree =
         (CosmOS_MallocVariableType *)( (AddressType)ptr - ALIGN( sizeof( CosmOS_MallocVariableType ), sizeof( BitWidthType ) ) );
 
-    coreVar = core_getCoreVar();
-    if ( coreVar->schedulableInExecution->cfg->instanceType IS_EQUAL_TO
-             SCHEDULABLE_INSTANCE_ENUM__THREAD )
+    coreCfg = core_getCoreVar();
+    if ( ( (CosmOS_SchedulableConfigurationType *)
+               coreCfg->var->schedulableInExecution )
+             ->instanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD )
     {
         //TODO: check if the pointer is one of the allocated heap variables
-        programVar = core_getCoreProgramInExecution( coreVar );
+        programCfg = core_getCoreProgramInExecution( coreCfg );
 
-        mutexState = mutex_getMutex( programVar->cfg->heapMutex );
+        mutexState = mutex_getMutex( programCfg->heapMutex );
 
         /*TODO: this assertion cannot be here cause it will in the
         future disable ISRs - so only os can call it in privileged context */
@@ -385,7 +387,7 @@ free_internal( void * ptr )
                 mallocVarToFree->prior ? mallocVarToFree->prior : NULL;
         }
 
-        mutexState = mutex_releaseMutex( programVar->cfg->heapMutex );
+        mutexState = mutex_releaseMutex( programCfg->heapMutex );
 
         /*TODO: this assertion cannot be here cause it will in the
         future disable ISRs - so only os can call it in privileged context */

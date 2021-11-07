@@ -178,162 +178,165 @@ schedulable_setExecutionStateToFinished( BitWidthType entityId );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getStack(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getStack(CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable stack pointer.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return CosmOS_StackConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_StackConfigurationType *
-schedulable_getStack( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getStack( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return (CosmOS_StackConfigurationType *)( schedulable->cfg->stack );
+    return (CosmOS_StackConfigurationType *)( schedulable->stack );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getInstanceType(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getInstanceType(
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable instanceType.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return CosmOS_SchedulableInstanceType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_SchedulableInstanceType
-schedulable_getInstanceType( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getInstanceType( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->instanceType );
+    return ( schedulable->instanceType );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getHandler(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getHandler(CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable handler.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return CosmOS_GenericVoidType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_GenericVoidType
-schedulable_getHandler( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getHandler( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->handler );
+    return ( schedulable->handler );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getFp(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getFp(CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable fb.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return CosmOS_BooleanType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_BooleanType
-schedulable_getFp( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getFp( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->fp );
+    return ( schedulable->fp );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getId(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getId(CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable id.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-schedulable_getId( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getId( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->id );
+    return ( schedulable->id );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getInstanceId(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getInstanceId(
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable instanceId.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-schedulable_getInstanceId( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getInstanceId( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->instanceId );
+    return ( schedulable->instanceId );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getProgramId(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getProgramId(
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable programId.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-schedulable_getProgramId( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getProgramId( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->programId );
+    return ( schedulable->programId );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getCoreId(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getCoreId(CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable coreId.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-schedulable_getCoreId( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getCoreId( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->coreId );
+    return ( schedulable->coreId );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getAlarmId(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getAlarmId(CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable alarmId.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-schedulable_getAlarmId( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getAlarmId( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->alarmId );
+    return ( schedulable->alarmId );
 }
 
 /********************************************************************************
@@ -341,19 +344,19 @@ schedulable_getAlarmId( CosmOS_SchedulableVariableType * schedulable )
   * ****************************************************************************/
 /**
   * @fn schedulable_getPeripheralAccessLowAddress(
-  * CosmOS_SchedulableVariableType * schedulable)
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable peripheralAccessLowAddress.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return AddressType
 ********************************************************************************/
 __STATIC_FORCEINLINE AddressType
 schedulable_getPeripheralAccessLowAddress(
-    CosmOS_SchedulableVariableType * schedulable )
+    CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->peripheralAccessLowAddress );
+    return ( schedulable->peripheralAccessLowAddress );
 }
 
 /********************************************************************************
@@ -361,19 +364,19 @@ schedulable_getPeripheralAccessLowAddress(
   * ****************************************************************************/
 /**
   * @fn schedulable_getPeripheralAccessHighAddress(
-  * CosmOS_SchedulableVariableType * schedulable)
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable peripheralAccessHighAddress.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return AddressType
 ********************************************************************************/
 __STATIC_FORCEINLINE AddressType
 schedulable_getPeripheralAccessHighAddress(
-    CosmOS_SchedulableVariableType * schedulable )
+    CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->peripheralAccessHighAddress );
+    return ( schedulable->peripheralAccessHighAddress );
 }
 
 /********************************************************************************
@@ -381,55 +384,56 @@ schedulable_getPeripheralAccessHighAddress(
   * ****************************************************************************/
 /**
   * @fn schedulable_getPeripheralAccessSize(
-  * CosmOS_SchedulableVariableType * schedulable)
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable peripheralAccessSize.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return AddressType
 ********************************************************************************/
 __STATIC_FORCEINLINE AddressType
 schedulable_getPeripheralAccessSize(
-    CosmOS_SchedulableVariableType * schedulable )
+    CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->cfg->peripheralAccessSize );
+    return ( schedulable->peripheralAccessSize );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getState(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getState(CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable state.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return CosmOS_SchedulableStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_SchedulableStateType
-schedulable_getState( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getState( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->state );
+    return ( schedulable->var->state );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_getStackPointer(CosmOS_SchedulableVariableType * schedulable)
+  * @fn schedulable_getStackPointer(
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Get schedulable stackPointer.
   *
-  * @param[in] schedulable variable pointer
+  * @param[in] schedulable configuration pointer
   *
   * @return StackPointerType
 ********************************************************************************/
 __STATIC_FORCEINLINE StackPointerType
-schedulable_getStackPointer( CosmOS_SchedulableVariableType * schedulable )
+schedulable_getStackPointer( CosmOS_SchedulableConfigurationType * schedulable )
 {
-    return ( schedulable->stackPointer );
+    return ( schedulable->var->stackPointer );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -448,23 +452,23 @@ schedulable_getStackPointer( CosmOS_SchedulableVariableType * schedulable )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulable_setState(CosmOS_SchedulableVariableType * schedulable,
+  * @fn schedulable_setState(CosmOS_SchedulableConfigurationType * schedulable,
   * CosmOS_SchedulableStateType stateParam)
   *
   * @brief Set schedulable state. This function cannot
   * be called from the unprivileged context directly.
   *
-  * @param[out] schedulable variable pointer
-  * @param[in]  stateParam state of the schedulable variable to be set
+  * @param[out] schedulable configuration pointer
+  * @param[in]  stateParam state of the schedulable configuration to be set
   *
   * @return CosmOS_SchedulableStateType
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 schedulable_setState(
-    CosmOS_SchedulableVariableType * schedulable,
+    CosmOS_SchedulableConfigurationType * schedulable,
     CosmOS_SchedulableStateType stateParam )
 {
-    schedulable->state = stateParam;
+    schedulable->var->state = stateParam;
 }
 
 /********************************************************************************
@@ -472,24 +476,24 @@ schedulable_setState(
   * ****************************************************************************/
 /**
   * @fn schedulable_setStackPointer(
-  * CosmOS_SchedulableVariableType * schedulable,
+  * CosmOS_SchedulableConfigurationType * schedulable,
   * StackPointerType stackPointerParam)
   *
   * @brief Set schedulable stackPointer. This function cannot
   * be called from the unprivileged context directly.
   *
-  * @param[out] schedulable variable pointer
-  * @param[in]  stackPointerParam stack pointer of the schedulable variable
+  * @param[out] schedulable configuration pointer
+  * @param[in]  stackPointerParam stack pointer of the schedulable configuration
   * to be set
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 schedulable_setStackPointer(
-    CosmOS_SchedulableVariableType * schedulable,
+    CosmOS_SchedulableConfigurationType * schedulable,
     StackPointerType stackPointerParam )
 {
-    schedulable->stackPointer = stackPointerParam;
+    schedulable->var->stackPointer = stackPointerParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

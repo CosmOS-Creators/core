@@ -138,8 +138,8 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn schedulerSync_sync(CosmOS_SchedulerVariableType * schedulerVar,
-  * CosmOS_CoreVariableType * coreVar,
+  * @fn schedulerSync_sync(CosmOS_SchedulerConfigurationType * schedulerVar,
+  * CosmOS_CoreConfigurationType * core,
   * BitWidthType currentTick,
   * BitWidthType hyperTick)
   *
@@ -147,7 +147,7 @@ extern "C" {
   * This function cannot be called from the unprivileged context directly. DEMO
   *
   * @param[in]  schedulerVar pointer
-  * @param[in]  coreVar pointer
+  * @param[in]  core configuration pointer
   * @param[in]  currentTick current scheduler tick
   * @param[in]  hyperTick hyper tick of the current scheduler
   *
@@ -155,8 +155,8 @@ extern "C" {
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_SchedulerSyncStateType
 schedulerSync_sync(
-    CosmOS_SchedulerVariableType * schedulerVar,
-    CosmOS_CoreVariableType * coreVar,
+    CosmOS_SchedulerConfigurationType * schedulerVar,
+    CosmOS_CoreConfigurationType * core,
     BitWidthType currentTick,
     BitWidthType hyperTick );
 /********************************************************************************

@@ -121,7 +121,7 @@ memoryProtection_setStackOverflowProtection(
   * ****************************************************************************/
 /**
   * @fn memoryProtection_setProgramMemoryProtection(
-  * CosmOS_ProgramVariableType * program)
+  * CosmOS_ProgramConfigurationType * program)
   *
   * @brief Set program memory protection.
   *
@@ -131,24 +131,24 @@ memoryProtection_setStackOverflowProtection(
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 memoryProtection_setProgramMemoryProtection(
-    CosmOS_ProgramVariableType * program );
+    CosmOS_ProgramConfigurationType * program );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
   * @fn memoryProtection_setSchedulablePeripheralProtection(
-  * CosmOS_SchedulableVariableType * schedulable)
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @brief Set schedulable peripheral protection.
   *
-  * @param[in]  schedulable pointer to the schedulable variable type
+  * @param[in]  schedulable configuration pointer
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 memoryProtection_setSchedulablePeripheralProtection(
-    CosmOS_SchedulableVariableType * schedulable );
+    CosmOS_SchedulableConfigurationType * schedulable );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -204,7 +204,7 @@ memoryProtection_setStackOverflowProtection(
   * ****************************************************************************/
 /**
   * @fn memoryProtection_setProgramMemoryProtection(
-  * CosmOS_ProgramVariableType * program)
+  * CosmOS_ProgramConfigurationType * program)
   *
   * @details The implementation contains obtaining of the program size, low and
   * high address for the current program variable argument by calling functions
@@ -216,7 +216,7 @@ memoryProtection_setStackOverflowProtection(
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 memoryProtection_setProgramMemoryProtection(
-    CosmOS_ProgramVariableType * program )
+    CosmOS_ProgramConfigurationType * program )
 {
     BitWidthType size;
 
@@ -238,7 +238,7 @@ memoryProtection_setProgramMemoryProtection(
   * ****************************************************************************/
 /**
   * @fn memoryProtection_setSchedulablePeripheralProtection(
-  * CosmOS_SchedulableVariableType * schedulable)
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @details The implementation contains obtaining of the schedulable peripheral
   * access region size, low and high address for the current schedulable variable
@@ -252,7 +252,7 @@ memoryProtection_setProgramMemoryProtection(
 ********************************************************************************/
 __STATIC_FORCEINLINE void
 memoryProtection_setSchedulablePeripheralProtection(
-    CosmOS_SchedulableVariableType * schedulable )
+    CosmOS_SchedulableConfigurationType * schedulable )
 {
     BitWidthType size;
 
@@ -310,11 +310,11 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreVariableType * core,
-  * CosmOS_SchedulableVariableType  * schedulable)
+  * @fn memoryProtection_setMemoryProtection(CosmOS_CoreConfigurationType * core,
+  * CosmOS_SchedulableConfigurationType * schedulable)
   *
   * @details The implementation contains obtaining of the program id and program
-  * variable by calling schedulable_getProgramId and core_getCoreProgramVar
+  * variable by calling schedulable_getProgramId and core_getCoreProgramCfg
   * functions. From the schedulable variable argument is also extracted its
   * stack configuration by calling schedulable_getStack. After this point
   * the memory protection is set for the stack, peripheral and program memory by
@@ -327,16 +327,16 @@ __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
 memoryProtection_setMemoryProtection(
-    CosmOS_CoreVariableType * core,
-    CosmOS_SchedulableVariableType * schedulable )
+    CosmOS_CoreConfigurationType * core,
+    CosmOS_SchedulableConfigurationType * schedulable )
 {
     BitWidthType programId;
 
     CosmOS_StackConfigurationType * stack;
-    CosmOS_ProgramVariableType * programVar;
+    CosmOS_ProgramConfigurationType * programVar;
 
     programId = schedulable_getProgramId( schedulable );
-    programVar = core_getCoreProgramVar( core, programId );
+    programVar = core_getCoreProgramCfg( core, programId );
 
     stack = schedulable_getStack( schedulable );
 
@@ -353,7 +353,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * ****************************************************************************/
 /**
   * @fn memoryProtection_isMemoryRegionProtected(
-  * CosmOS_CoreVariableType * core,
+  * CosmOS_CoreConfigurationType * core,
   * void  * regionLowAddressPointer,
   * BitWidthType size)
   *
@@ -377,7 +377,7 @@ __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_BooleanType
 memoryProtection_isMemoryRegionProtected(
-    CosmOS_CoreVariableType * core,
+    CosmOS_CoreConfigurationType * core,
     AddressType * regionLowAddressPointer,
     BitWidthType size )
 {
@@ -388,8 +388,8 @@ memoryProtection_isMemoryRegionProtected(
     CosmOS_BooleanType isMemoryRegionProtected = True;
 
     CosmOS_StackConfigurationType * stack;
-    CosmOS_ProgramVariableType * programVar;
-    CosmOS_SchedulableVariableType * schedulable;
+    CosmOS_ProgramConfigurationType * programVar;
+    CosmOS_SchedulableConfigurationType * schedulable;
 
     regionLowAddress = (AddressType)regionLowAddressPointer;
 

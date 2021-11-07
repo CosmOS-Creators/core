@@ -150,20 +150,20 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsVar(void)
+  * @fn os_getOsCfg(void)
   *
   * @details The implementation contains return of the generated operating
-  * system variable address.
+  * system configuration structure.
   *
   * @see TEST_OS_GETOSVAR_RETURNVALUE
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION CosmOS_OsVariableType *
-os_getOsVar( void )
+__OS_FUNC_SECTION CosmOS_OsConfigurationType *
+os_getOsCfg( void )
 {
-    return &OsVar;
+    return (CosmOS_OsConfigurationType *)&OsCfg;
 }
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
@@ -186,10 +186,10 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 os_kernelPanic( void )
 {
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_CoreConfigurationType * coreCfg;
 
-    coreVar = core_getCoreVar();
-    coreVar->cfg->kernelPanicHook();
+    coreCfg = core_getCoreVar();
+    coreCfg->kernelPanicHook();
 
     for ( ;; )
         ;

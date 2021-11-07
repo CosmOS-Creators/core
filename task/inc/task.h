@@ -163,36 +163,54 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn task_getTaskWcet(CosmOS_TaskVariableType *task)
+  * @fn task_getTaskWcet(CosmOS_TaskConfigurationType *task)
   *
   * @brief Get task wcet.
   *
-  * @param[in]  task pointer to the task variable type
+  * @param[in]  task configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-task_getTaskWcet( CosmOS_TaskVariableType * task )
+task_getTaskWcet( CosmOS_TaskConfigurationType * task )
 {
-    return ( task->cfg->wcet );
+    return ( task->wcet );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn task_getTaskSchedulable(CosmOS_TaskVariableType *task)
+  * @fn task_getTaskSchedulable(CosmOS_TaskConfigurationType *task)
   *
   * @brief Get task schedulable.
   *
-  * @param[in]  task pointer to the task variable type
+  * @param[in]  task configuration pointer
   *
-  * @return CosmOS_SchedulableVariableType *
+  * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SchedulableVariableType *
-task_getTaskSchedulable( CosmOS_TaskVariableType * task )
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
+task_getTaskSchedulable( CosmOS_TaskConfigurationType * task )
 {
-    return (CosmOS_SchedulableVariableType *)( task->schedulable );
+    return (CosmOS_SchedulableConfigurationType *)( task->schedulable );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn task_getTaskDummy(CosmOS_TaskConfigurationType *task)
+  *
+  * @brief Get task dummy.
+  *
+  * @param[in]  task configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+task_getTaskDummy( CosmOS_TaskConfigurationType * task )
+{
+    return ( task->var->dummy );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -207,6 +225,24 @@ task_getTaskSchedulable( CosmOS_TaskVariableType * task )
   * @ingroup Apis_task_h
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn task_setTaskDummy(CosmOS_TaskConfigurationType *task
+  * BitWidthType dummyParam)
+  *
+  * @brief Set task dummy.
+  *
+  * @param[in]  task configuration pointer
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+task_setTaskDummy( CosmOS_TaskConfigurationType * task, BitWidthType dummyParam )
+{
+    task->var->dummy = dummyParam;
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
