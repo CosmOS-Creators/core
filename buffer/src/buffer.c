@@ -441,7 +441,9 @@ buffer_readArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                             {
                                 bufferState =
                                     cosmosApiInternal_buffer_readArrayInternal(
-                                        buffer, bufferCfg, size );
+                                        ( userBuffer + userBufferIndex ),
+                                        bufferCfg,
+                                        size );
                                 size -= size;
                             }
                         }
@@ -592,7 +594,9 @@ buffer_writeArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                             {
                                 bufferState =
                                     cosmosApiInternal_buffer_writeArrayInternal(
-                                        buffer, bufferCfg, size );
+                                        ( userBuffer + userBufferIndex ),
+                                        bufferCfg,
+                                        size );
                                 size -= size;
                             }
                         }

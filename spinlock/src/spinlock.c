@@ -137,7 +137,7 @@
   * core variable by calling functions os_getOsCfg and core_getCoreVar.
   * Then the operating system variable in function os_getOsNumberOfSpinlocks
   * to get number of spinlocks. The input element spinlockId argument is then checked
-  * againts the number of spinlock in if condition. 
+  * againts the number of spinlock in if condition.
   * Spinlock variable is then obtained based on the id argument by the function
   * os_getOsSpinlockVar. The function spinlock_willCauseDeadlock is called to
   * check if the spinlock would cause eventually deadlock, if yes the spinlock
@@ -332,14 +332,14 @@ spinlock_getSpinlock( BitWidthType spinlockId )
 
         willCauseDeadlock = spinlock_willCauseDeadlock( coreCfg, spinlockVar );
 
-        if ( willCauseDeadlock )
-        {
-            spinlockState = SPINLOCK_STATE_ENUM__DEADLOCK_WARNING;
-        }
-        else
+        if ( IS_NOT( willCauseDeadlock ) )
         {
             spinlockState = cosmosApiInternal_spinlock_getSpinlockInternal(
                 spinlockVar, spinlockId );
+        }
+        else
+        {
+            spinlockState = SPINLOCK_STATE_ENUM__DEADLOCK_WARNING;
         }
     }
     else
