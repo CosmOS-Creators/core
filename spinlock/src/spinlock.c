@@ -133,18 +133,11 @@
   * CosmOS_SpinlockVariableType * spinlockVar,
   * BitWidthType spinlockId )
   *
-  * @details The implementation contains obtaining of the operating system and
-  * core variable by calling functions os_getOsCfg and core_getCoreVar.
-  * Then the operating system variable in function os_getOsNumberOfSpinlocks
-  * to get number of spinlocks. The input element spinlockId argument is then checked
-  * againts the number of spinlock in if condition.
-  * Spinlock variable is then obtained based on the id argument by the function
-  * os_getOsSpinlockVar. The function spinlock_willCauseDeadlock is called to
-  * check if the spinlock would cause eventually deadlock, if yes the spinlock
-  * state SPINLOCK_STATE_ENUM__DEADLOCK_WARNING is returned. Otherwise the
-  * function CILspinlock_getSpinlock is called to get spinlock and result is
-  * then returned as spinlock state. The schedulable owner member in spinlock
-  * variable is set to the schedulable in execution.
+  * @details The implementation contains obtaining of the core configuration by
+  * calling function CILcore_getCoreCfg.Then the function CILspinlock_getSpinlock
+  * is called to get spinlock and result is then returned as spinlock state. The
+  * schedulable owner member in spinlock variable is set to the schedulable in
+  * execution.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -185,18 +178,13 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * CosmOS_SpinlockVariableType * spinlockVar,
   * BitWidthType spinlockId )
   *
-  * @details The implementation contains obtaining of the operating system and
-  * core variable by calling functions os_getOsCfg and core_getCoreVar.
-  * Then the operating system variable in function os_getOsNumberOfSpinlocks
-  * to get number of spinlocks. The input element id argument is then checked
-  * againts the number of spinlock in assertion function cosmosAssert. Spinlock
-  * variable is then obtained based on the id argument by the function
-  * os_getOsSpinlockVar. Then the function CILspinlock_trySpinlock is called to
-  * try to get spinlock and result is then returned as spinlock state. The if
-  * condition is implemented to check if the result from CILspinlock_trySpinlock
-  * is equal to the SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED and if yes  the
-  * schedulable owner member in spinlock variable is set to the schedulable in
-  * execution.
+  * @details The implementation contains obtaining of the core configuration by
+  * calling function CILcore_getCoreCfg. Then the function
+  * CILspinlock_trySpinlock is called to try to get spinlock and result is then
+  * returned as spinlock state. The if condition is implemented to check if the
+  * result from CILspinlock_trySpinlock is equal to the
+  * SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED and if yes the schedulable owner
+  * member in spinlock variable is set to the schedulable in execution.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -241,23 +229,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * CosmOS_SpinlockVariableType * spinlockVar,
   * BitWidthType spinlockId )
   *
-  * @details The implementation contains obtaining of the operating system and
-  * core variable by calling functions os_getOsCfg and core_getCoreVar.
-  * Then the operating system variable in function os_getOsNumberOfSpinlocks
-  * to get number of spinlocks. The input element id argument is then checked
-  * againts the number of spinlock in assertion function cosmosAssert. Spinlock
-  * variable is then obtained based on the id argument by the function
-  * os_getOsSpinlockVar. The the boolean is obtained by calling function
-  * spinlock_ownsSchedulableSpinlock to know if the requesting schedulable owns
-  * the spinlock which means if the schedulable locked the spinlock before.
-  * The spinlock member of the spinlock variable structure is compared in the
-  * implemented if condition that checks if the spinlock is equal to the state
-  * SPINLOCK_STATE_ENUM__OCCUPIED otherwise the spinlock state is returned with
-  * the value SPINLOCK_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE. Another nested
-  * if condition is implemented to check the obtained boolean variable that
-  * stores value if the requesting schedulable owns the spinlock. If yes the
-  * CILspinlock_releaseSpinlock function is called and the result is returned
-  * as spinlock state.
+  * @details The implementation contains obtaining of the core configuration by
+  * calling function CILcore_getCoreCfg. Then CILspinlock_releaseSpinlock
+  * function is called and the result is returned as spinlock state.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -294,17 +268,18 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn spinlock_getSpinlock(BitWidthType spinlockId)
   *
   * @details The implementation contains obtaining of the operating system and
-  * core variable by calling functions os_getOsCfg and core_getCoreVar.
-  * Then the operating system variable in function os_getOsNumberOfSpinlocks
-  * to get number of spinlocks. The input element spinlockId argument is then checked
-  * againts the number of spinlock in assertion function cosmosAssert. Spinlock
-  * variable is then obtained based on the id argument by the function
+  * core configuration by calling functions os_getOsCfg and CILcore_getCoreCfg.
+  * Then the operating system configuration in function os_getOsNumberOfSpinlocks
+  * to get number of spinlocks. The input element id argument is then checked
+  * againts the number of spinlock, if it is greater than number of spinlocks
+  * SPINLOCK_STATE_ENUM__ERROR_INVALID_ID is returned.
+  * Spinlock variable is then obtained based on the id argument by the function
   * os_getOsSpinlockVar. The function spinlock_willCauseDeadlock is called to
   * check if the spinlock would cause eventually deadlock, if yes the spinlock
   * state SPINLOCK_STATE_ENUM__DEADLOCK_WARNING is returned. Otherwise the
-  * function CILspinlock_getSpinlock is called to get spinlock and result is
-  * then returned as spinlock state. The schedulable owner member in spinlock
-  * variable is set to the schedulable in execution.
+  * function cosmosApiInternal_spinlock_getSpinlockInternal is called to get
+  * spinlock and result is then returned as spinlock state. The schedulable
+  * owner member in spinlock variable is set to the schedulable in execution.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -360,17 +335,19 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn spinlock_trySpinlock(BitWidthType spinlockId)
   *
   * @details The implementation contains obtaining of the operating system and
-  * core variable by calling functions os_getOsCfg and core_getCoreVar.
-  * Then the operating system variable in function os_getOsNumberOfSpinlocks
+  * core configuration by calling functions os_getOsCfg and CILcore_getCoreCfg.
+  * Then the operating system configuration in function os_getOsNumberOfSpinlocks
   * to get number of spinlocks. The input element id argument is then checked
-  * againts the number of spinlock in assertion function cosmosAssert. Spinlock
+  * againts the number of spinlock, if it is greater than number of spinlocks
+  * SPINLOCK_STATE_ENUM__ERROR_INVALID_ID is returned. Spinlock
   * variable is then obtained based on the id argument by the function
-  * os_getOsSpinlockVar. Then the function CILspinlock_trySpinlock is called to
+  * os_getOsSpinlockVar.
+  * Then the function cosmosApiInternal_spinlock_trySpinlockInternal is called to
   * try to get spinlock and result is then returned as spinlock state. The if
-  * condition is implemented to check if the result from CILspinlock_trySpinlock
-  * is equal to the SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED and if yes  the
-  * schedulable owner member in spinlock variable is set to the schedulable in
-  * execution.
+  * condition is implemented to check if the result from
+  * cosmosApiInternal_spinlock_trySpinlockInternal is equal to the
+  * SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED and if yes  the schedulable owner
+  * member in spinlock variable is set to the schedulable in execution.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -414,10 +391,11 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn spinlock_releaseSpinlock(BitWidthType id)
   *
   * @details The implementation contains obtaining of the operating system and
-  * core variable by calling functions os_getOsCfg and core_getCoreVar.
-  * Then the operating system variable in function os_getOsNumberOfSpinlocks
+  * core configuration by calling functions os_getOsCfg and CILcore_getCoreCfg.
+  * Then the operating system configuration in function os_getOsNumberOfSpinlocks
   * to get number of spinlocks. The input element id argument is then checked
-  * againts the number of spinlock in assertion function cosmosAssert. Spinlock
+  * againts the number of spinlock, if it is greater than number of spinlocks
+  * SPINLOCK_STATE_ENUM__ERROR_INVALID_ID is returned. Spinlock
   * variable is then obtained based on the id argument by the function
   * os_getOsSpinlockVar. The the boolean is obtained by calling function
   * spinlock_ownsSchedulableSpinlock to know if the requesting schedulable owns
@@ -428,8 +406,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * the value SPINLOCK_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE. Another nested
   * if condition is implemented to check the obtained boolean variable that
   * stores value if the requesting schedulable owns the spinlock. If yes the
-  * CILspinlock_releaseSpinlock function is called and the result is returned
-  * as spinlock state. Otherwise the spinlock state is returned with the value
+  * cosmosApiInternal_spinlock_releaseSpinlockInternal function is called and
+  * the result is returned as spinlock state. Otherwise the spinlock state is
   * SPINLOCK_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER.
 ********************************************************************************/
 /* @cond S */

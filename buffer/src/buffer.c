@@ -240,15 +240,16 @@ buffer_push( CosmOS_BufferConfigurationType * bufferCfg, unsigned char data )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg,
-  * unsigned char data)
+  * @fn buffer_readArrayInternal(
+  * BitWidthType id,
+  * void * buffer,
+  * CosmOS_BufferConfigurationType * systemBufferCfg,
+  * BitWidthType size )
   *
-  * @details The implementation contains obtaining of the buffer size by calling
-  * function buffer_getBufferSize and obtaining buffer array pointer by calling
-  * function buffer_getBuffer. To the buffer array in the head position is
-  * written the data byte argument and fullCells of the current bufferCfg are
-  * incremented by one. Position of the head is updated and buffer full state
-  * is obtained by the buffer_isFull function and returned.
+  * @details The implementation contains while loop, that calls function
+  * buffer_pull and increments the userBufferIndex till its equal the required
+  * number of data is read from the buffer and then the bufferState is returned
+  * with the last value returned from the buffer_pull function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -286,15 +287,16 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_push(CosmOS_BufferConfigurationType * bufferCfg,
-  * unsigned char data)
+  * @fn buffer_writeArrayInternal(
+  * BitWidthType id,
+  * void * buffer,
+  * CosmOS_BufferConfigurationType * systemBufferCfg,
+  * BitWidthType size )
   *
-  * @details The implementation contains obtaining of the buffer size by calling
-  * function buffer_getBufferSize and obtaining buffer array pointer by calling
-  * function buffer_getBuffer. To the buffer array in the head position is
-  * written the data byte argument and fullCells of the current bufferCfg are
-  * incremented by one. Position of the head is updated and buffer full state
-  * is obtained by the buffer_isFull function and returned.
+  * @details The implementation contains while loop, that calls function
+  * buffer_push and increments the userBufferIndex till its equal the required
+  * number of data is written to the buffer and then the bufferState is returned
+  * with the last value returned from the buffer_push function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -336,8 +338,12 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   *
   * @details The implementation contains obtaining of the operating system
   * generated variable structure by os_getOsCfg function that stores all system
-  * buffers in it. Then the generated core variable structure is obtained byt
-  * the function CILcore_getCoreCfg and used in the
+  * buffers in it. Then the operating system configuration in function
+  * os_getOsNumberOfBuffers to get number of buffers. The input element id
+  * argument is then checked againts the number of buffers, if it is greater
+  * than number of buffers BUFFER_STATE_ENUM__ERROR_INVALID_ID is returned.
+  * Then the generated core configuration structure is obtained
+  * by the function CILcore_getCoreCfg and used in the
   * memoryProtection_isMemoryRegionProtected function call to check if the
   * memory where the data from the buffer will be written is protected.
   * If yes the bufferState is returned with the value
@@ -348,24 +354,25 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * by the function call buffer_getBufferReadPermission and passed to the
   * function permission_tryAccess that checks if the current schedulable has
   * read access to this system buffer and if not bufferState is returned with
-  * the value BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED. If yes the interrupts are
-  * disable before reading from the buffer by calling the function
-  * CILinterrupt_disableInterrupts. After this point the function has ensure the
-  * exclusive access to the bufferCfg and therefore buffer_isBufferInterCore
-  * function is called to know if the buffer is inter-core. If yes spinlock id
+  * the value BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED. If yes spinlock id
   * is obtained by the function buffer_getBufferSpinlockId and then the spinlock
   * is tried by the non-blocking function spinlock_trySpinlock. If the spinlock
-  * cannot be obtained the interrupts are enabled again and the bufferState is
-  * returned with the value BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED. If
-  * the spinlock was obtained the function buffer_getFullCellsNum is called to
-  * get full cells number and check if the user required more bytes to read than
-  * available. If yes then the interrupts are enabled again the bufferState is
-  * returned with the value
+  * cannot be obtained the bufferState is returned with the value
+  * BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED.
+  * If the spinlock was obtained the function buffer_getFullCellsNum is called
+  * to get full cells number and check if the user required more bytes to read
+  * than available. If yes then the bufferState is returned with the value
   * BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM. If there is enough
-  * bytes to read the buffer_pull function is called in the while loop till the
-  * required number of data is read out of the buffer and then the interrupts
-  * are enabled again the bufferState is returned with the last value returned
-  * from the buffer_pull function.
+  * bytes to read the while loop is implemented that reads bytes till the size is
+  * non-zero value. Inside this while loop is the if condition implemented to
+  * check if the size to read is bigger than SYCALL_BYTES_CHUNK, if yes only
+  * number of bytes defined by SYCALL_BYTES_CHUNK is read from the buffer to not
+  * block system by long too long system call that is called by function as macro
+  * cosmosApiInternal_buffer_readArrayInternal, the size to read is always
+  * decremented by SYCALL_BYTES_CHUNK till its not smaller than
+  * SYCALL_BYTES_CHUNK and then is the size set to zero and last bytes are read
+  * from the buffer. The bufferState is returned with the last value returned
+  * from the cosmosApiInternal_buffer_readArrayInternal function as macro.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -444,7 +451,7 @@ buffer_readArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                                         ( userBuffer + userBufferIndex ),
                                         bufferCfg,
                                         size );
-                                size -= size;
+                                size = 0;
                             }
                         }
                     }
@@ -489,8 +496,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   *
   * @details The implementation contains obtaining of the operating system
   * generated variable structure by os_getOsCfg function that stores all system
-  * buffers in it. Then the generated core variable structure is obtained byt
-  * the function CILcore_getCoreCfg and used in the
+  * buffers in it. Then the generated core configuration structure is obtained
+  * by the function CILcore_getCoreCfg and used in the
   * memoryProtection_isMemoryRegionProtected function call to check if the
   * memory where the data from the buffer will be read from is protected.
   * If yes the bufferState is returned with the value
@@ -501,24 +508,27 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * permissions by the function call buffer_getBufferReadPermission and passed
   * to the function permission_tryAccess that checks if the current schedulable
   * has write access to this system buffer and if not bufferState is returned
-  * with the value BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED. If yes the interrupts
-  * are disable before writing to the buffer by calling the function
-  * CILinterrupt_disableInterrupts. After this point the function has ensure the
-  * exclusive access to the bufferCfg and therefore buffer_isBufferInterCore
-  * function is called to know if the buffer is inter-core. If yes spinlock id
+  * with the value BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED. If yes spinlock id
   * is obtained by the function buffer_getBufferSpinlockId and then the spinlock
   * is tried by the non-blocking function spinlock_trySpinlock. If the spinlock
-  * cannot be obtained the interrupts are enabled again and the bufferState is
-  * returned with the value BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED. If
-  * the spinlock was obtained the function buffer_getEmptyCellsNum is called to
-  * get empty cells number and check if the user required more bytes to write
-  * than empty cells available in the buffer. If yes then the interrupts are
-  * enabled again the bufferState is returned with the value
-  * BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM. If there is enough
-  * bytes to write the buffer_push function is called in the while loop till the
-  * required number of data is written to the buffer and then the interrupts
-  * are enabled again the bufferState is returned with the last value returned
-  * from the buffer_push function.
+  * cannot be obtained the bufferState is returned with the value
+  * BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED.
+  * If the spinlock was obtained the function buffer_getEmptyCellsNum is called
+  * to get empty cells number and check if the user required more bytes to write
+  * than empty cells available in the buffer. If yes then the bufferState is
+  * returned with the value
+  * BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM.
+  * If there is enough bytes to write the while loop is implemented that writes
+  * bytes till the size is non-zero value. Inside this while loop is the if
+  * condition implemented to check if the size to write is bigger than
+  * SYCALL_BYTES_CHUNK, if yes only number of bytes defined by SYCALL_BYTES_CHUNK
+  * is write from the buffer to not block system by long too long system call
+  * that is called by function as macro
+  * cosmosApiInternal_buffer_writeArrayInternal, the size to write is always
+  * decremented by SYCALL_BYTES_CHUNK till its not smaller than
+  * SYCALL_BYTES_CHUNK and then is the size set to zero and last bytes are write
+  * from the buffer. The bufferState is returned with the last value returned
+  * from the cosmosApiInternal_buffer_writeArrayInternal function as macro.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -597,7 +607,7 @@ buffer_writeArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                                         ( userBuffer + userBufferIndex ),
                                         bufferCfg,
                                         size );
-                                size -= size;
+                                size = 0;
                             }
                         }
                     }

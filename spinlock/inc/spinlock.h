@@ -213,7 +213,7 @@ spinlock_trySpinlockInternal(
   * @param[in]  id is used during the system call dispatching
   * @param[in]  spinlockVar variable structure pointer
   * @param[in]  spinlockId spinlock identifier
-  * 
+  *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_SpinlockStateType

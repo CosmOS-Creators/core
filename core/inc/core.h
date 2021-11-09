@@ -131,9 +131,9 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn core_getCoreVar( void )
+  * @fn core_getCoreCfg( void )
   *
-  * @brief Get current core variable. This function can be called
+  * @brief Get current core configuration. This function can be called
   * from the unprivileged context directly.
   *
   * @param[in]  none
@@ -141,7 +141,7 @@ extern "C" {
   * @return CosmOS_CoreConfigurationType *
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_CoreConfigurationType *
-core_getCoreVar( void );
+core_getCoreCfg( void );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **

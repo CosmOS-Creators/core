@@ -140,7 +140,7 @@ CILcore_getCoreId( void );
   * *************************************************************************//**
   * @fn CILcore_setCoreCfg(CosmOS_OsConfigurationType * os)
   *
-  * @brief Set core variable to the R9 platform register.
+  * @brief Set core configuration to the R9 platform register.
   *
   * @param[in]  CosmOS_OsConfigurationType * os
   *

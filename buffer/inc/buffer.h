@@ -150,7 +150,8 @@ extern "C" {
   * CosmOS_BufferConfigurationType * systemBufferCfg,
   * BitWidthType size );
   *
-  * @brief Reading array from the buffer. DEMO
+  * @brief Reading array from the buffer. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
   * @param[in]  id buffer identifier
   * @param[in]  buffer pointer to the user buffer array
@@ -176,7 +177,8 @@ buffer_readArrayInternal(
   * CosmOS_BufferConfigurationType * systemBufferCfg,
   * BitWidthType size );
   *
-  * @brief Writing array from the buffer. DEMO
+  * @brief Writing array from the buffer. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
   * @param[in]  id buffer identifier
   * @param[in]  buffer pointer to the user buffer array

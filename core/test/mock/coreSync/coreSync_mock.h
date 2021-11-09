@@ -20,7 +20,7 @@ class CoreSync_MOCK
     MOCK_METHOD(
         void,
         coreSync_getBarrier,
-        ( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId ) );
+        ( CosmOS_CoreConfigurationType * coreCfg, BitWidthType barrierId ) );
 };
 
 class CoreSync_TestFixture : public ::testing::Test

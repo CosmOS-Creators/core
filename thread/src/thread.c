@@ -179,9 +179,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   *
   * @details The implementation contains if condition that checks if delayMs is
   * non-zero value otherwise it returns sleepStateReturn
-  * SLEEP_STATE_ENUM__ERROR_MIN. Then the core variable is obtained by calling
-  * core_getCoreVar function and then the msToTicks is obtained by calling
-  * core_getMsToTicks with core variable argument.
+  * SLEEP_STATE_ENUM__ERROR_MIN. Then the core configuration is obtained by
+  * calling core_getCoreCfg function and then the msToTicks is obtained by
+  * calling core_getMsToTicks with core configuration argument.
   * After this point is necessary to know if the schedulable variable obtained
   * by core_getCoreSchedulableInExecution function is
   * SCHEDULABLE_INSTANCE_ENUM__THREAD therefore the schedulable type is obtained
@@ -213,7 +213,7 @@ thread_sleepMs( BitWidthType delayMs )
 
     if ( delayMs )
     {
-        core = core_getCoreVar();
+        core = core_getCoreCfg();
 
         msToTicks = core_getMsToTicks( core );
 

@@ -188,7 +188,7 @@ os_kernelPanic( void )
 {
     CosmOS_CoreConfigurationType * coreCfg;
 
-    coreCfg = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
     coreCfg->kernelPanicHook();
 
     for ( ;; )

@@ -413,8 +413,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
   *
-  * @details The implementation contains obtaining of the core variable by
-  * calling the core_getCoreVar function. Then the scheduler variable in
+  * @details The implementation contains obtaining of the core configuration by
+  * calling the core_getCoreCfg function. Then the scheduler variable in
   * is obtained by the core_getCoreScheduler and the prior schedulable and
   * reschedule trigger state are obtained by calling functions
   * core_getCoreSchedulableInExecution and
@@ -460,7 +460,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * function and the current tick by calling scheduler_setSchedulerCurrentTick.
   * The function as macro switchMemoryProtection_setMemoryProtection is called
   * based on the MEMORY_PROTECTION macro state. The operating system state for
-  * the current core variable is set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM
+  * the current core configuration is set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM
   * by calling core_setCoreOsState function. The scheduler  reschedule state is
   * set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
   * scheduler_setSchedulerRescheduleTriggerState. Then the system timer is set
@@ -505,7 +505,7 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer )
     CosmOS_SchedulableConfigurationType * schedulableCfg;
     CosmOS_SchedulableConfigurationType * priorSchedulableCfg;
 
-    coreCfg = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
     schedulerCfg = core_getCoreScheduler( coreCfg );
     priorSchedulableCfg = core_getCoreSchedulableInExecution( coreCfg );
     rescheduleTriggerState =
@@ -646,8 +646,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn scheduler_start(void)
   *
-  * @details The implementation contains obtaining of the core variable by
-  * calling the core_getCoreVar function. Then the scheduler variable in
+  * @details The implementation contains obtaining of the core configuration by
+  * calling the core_getCoreCfg function. Then the scheduler variable in
   * is obtained by the core_getCoreScheduler and the hyper tick, current tick
   * maximum timer tick, timer tick count, schedule table iterator and schedule
   * table elements number are obtained by calling functions
@@ -678,7 +678,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * function and the current tick by calling scheduler_setSchedulerCurrentTick.
   * The function as macro switchMemoryProtection_setMemoryProtection is called
   * based on the MEMORY_PROTECTION macro state. The operating system state for
-  * the current core variable is set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM
+  * the current core configuration is set to
+  * RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM
   * by calling core_setCoreOsState function. The scheduler reschedule state is
   * set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
   * scheduler_setSchedulerRescheduleTriggerState - this is done only in this
@@ -702,7 +703,7 @@ scheduler_start( void )
     CosmOS_SchedulerConfigurationType * schedulerCfg;
     CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    coreCfg = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
     schedulerCfg = core_getCoreScheduler( coreCfg );
     hyperTick = scheduler_getSchedulerHyperTick( schedulerCfg );
     currentTick = scheduler_getSchedulerCurrentTick( schedulerCfg );

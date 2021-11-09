@@ -43,11 +43,11 @@
 ********************************************************************************/
 #define TEST_DESCRIPTION( desc ) RecordProperty( "description", desc )
 
-#define TEST_CORE_GETCOREVAR_EXECUTIONFLOW() \
-    TEST( Test_core, core_getCoreVar_executionFlow )
+#define TEST_CORE_GETCORECFG_EXECUTIONFLOW() \
+    TEST( Test_core, core_getCoreCfg_executionFlow )
 
-#define TEST_CORE_GETCOREVAR_RETURNVALUE() \
-    TEST( Test_core, core_getCoreVar_returnValue )
+#define TEST_CORE_GETCORECFG_RETURNVALUE() \
+    TEST( Test_core, core_getCoreCfg_returnValue )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -90,17 +90,17 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @brief This test validates execution flow of the core_getCoreVar function.
+  * @brief This test validates execution flow of the core_getCoreCfg function.
   *
-  * @see core_getCoreVar
+  * @see core_getCoreCfg
   * @author https://github.com/PavolKostolansky
 ********************************************************************************/
-TEST_CORE_GETCOREVAR_EXECUTIONFLOW()
+TEST_CORE_GETCORECFG_EXECUTIONFLOW()
 {
     TEST_DESCRIPTION(
         "This test validates execution flow of the os_getOsVar function" );
 
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_CoreConfigurationType * coreCfg;
 
     CILcore_TestFixture CILcoreMock;
 
@@ -109,23 +109,23 @@ TEST_CORE_GETCOREVAR_EXECUTIONFLOW()
         .WillOnce( Return( &CoresVar[0] ) );
     ;
 
-    coreVar = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * *************************************************************************//**
-  * @brief This test validates return value of the core_getCoreVar function.
+  * @brief This test validates return value of the core_getCoreCfg function.
   *
-  * @see core_getCoreVar
+  * @see core_getCoreCfg
   * @author https://github.com/PavolKostolansky
 ********************************************************************************/
-TEST_CORE_GETCOREVAR_RETURNVALUE()
+TEST_CORE_GETCORECFG_RETURNVALUE()
 {
     TEST_DESCRIPTION(
-        "This test validates return value of the core_getCoreVar function" );
+        "This test validates return value of the core_getCoreCfg function" );
 
-    CosmOS_CoreVariableType * coreVar;
+    CosmOS_CoreConfigurationType * coreCfg;
 
     CILcore_TestFixture CILcoreMock;
 
@@ -134,9 +134,9 @@ TEST_CORE_GETCOREVAR_RETURNVALUE()
         .WillOnce( Return( &CoresVar[0] ) );
     ;
 
-    coreVar = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
 
-    ASSERT_EQ( coreVar, &CoresVar[0] );
+    ASSERT_EQ( coreCfg, &CoresVar[0] );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

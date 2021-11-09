@@ -135,7 +135,7 @@
   * @fn mutex_getMutexInternal(BitWidthType entityId,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @details The implementation contains obtaining of the core variable by
+  * @details The implementation contains obtaining of the core configuration by
   * calling the CILcore_getCoreCfg function. Then the function CILmutex_tryMutex
   * is called and the returned mutexState is used in the if condition where in
   * case of MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED the schedulableOwner in the
@@ -196,7 +196,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn mutex_tryMutexInternal(BitWidthType entityId,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @details The implementation contains obtaining of the core variable by
+  * @details The implementation contains obtaining of the core configuration by
   * calling the CILcore_getCoreCfg function. Then the function CILmutex_tryMutex
   * is called and the returned mutexState is used in the if condition where in
   * case of MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED the schedulableOwner in the
@@ -237,7 +237,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn mutex_releaseMutexInternal(BitWidthType entityId,
   * CosmOS_MutexVariableType * mutexVar)
   *
-  * @details The implementation contains obtaining of the core variable by
+  * @details The implementation contains obtaining of the core configuration by
   * calling the CILcore_getCoreCfg function. Then the function
   * CILmutex_releaseMutex is called. As the mutex is now released it is needed
   * to notice all threads that were waiting for this specific mutex. As the
@@ -325,7 +325,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn mutex_getMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @details The implementation contains obtaining of the core variable by
+  * @details The implementation contains obtaining of the core configuration by
   * calling the CILcore_getCoreCfg function. Then the mutex variable address is
   * checked if its not in the memory protected region by calling the function
   * memoryProtection_isMemoryRegionProtected. If the address of mutex variable
@@ -402,7 +402,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn mutex_tryMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @details The implementation contains obtaining of the core variable by
+  * @details The implementation contains obtaining of the core configuration by
   * calling the CILcore_getCoreCfg function. Then the mutex variable address is
   * checked if its not in the memory protected region by calling the function
   * memoryProtection_isMemoryRegionProtected. If the address of mutex variable
@@ -461,7 +461,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn mutex_releaseMutex(CosmOS_MutexVariableType * mutexVar)
   *
-  * @details The implementation contains obtaining of the core variable by
+  * @details The implementation contains obtaining of the core configuration by
   * calling the CILcore_getCoreCfg function. Then the mutex variable address is
   * checked if its not in the memory protected region by calling the function
   * memoryProtection_isMemoryRegionProtected. If the address of mutex variable

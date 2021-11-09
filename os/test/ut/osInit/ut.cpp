@@ -112,14 +112,14 @@ TEST_OSINIT_INIT_EXECUTIONFLOW()
     Os_TestFixture osMock;
     OsBoot_TestFixture osBootMock;
 
-    EXPECT_CALL( *osMock._OsMock, os_getOsVar() )
+    EXPECT_CALL( *osMock._OsMock, os_getOsCfg() )
         .Times( 1 )
-        .WillOnce( Return( (CosmOS_OsVariableType *)NULL ) );
+        .WillOnce( Return( (CosmOS_OsConfigurationType *)NULL ) );
     EXPECT_CALL(
         *CILcoreMock._CILcoreMock,
-        CILcore_setCoreCfg( (CosmOS_OsVariableType *)NULL ) )
+        CILcore_setCoreCfg( (CosmOS_OsConfigurationType *)NULL ) )
         .Times( 1 );
-    EXPECT_CALL( *coreMock._CoreMock, core_getCoreVar() )
+    EXPECT_CALL( *coreMock._CoreMock, core_getCoreCfg() )
         .Times( 1 )
         .WillOnce( Return( &CoresVar[0] ) );
     EXPECT_CALL(

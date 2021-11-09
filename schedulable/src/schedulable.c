@@ -122,7 +122,7 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @details The implementation contains obtaining of the core variable by
+  * @details The implementation contains obtaining of the core configuration by
   * calling the CILcore_getCoreCfg function. Then the schedulable configuration
   * in execution is obtained by the core_getCoreSchedulableInExecution function.
   * The schedulable configuration is used in schedulable_setState function call
@@ -137,7 +137,7 @@ schedulable_setExecutionStateToFinished( BitWidthType entityId )
     CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_SchedulableConfigurationType * schedulableCfg;
 
-    coreCfg = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
 
     schedulableCfg = core_getCoreSchedulableInExecution( coreCfg );
 
