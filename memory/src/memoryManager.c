@@ -130,7 +130,8 @@
   * @fn memoryManager_stackInit(CosmOS_CoreConfigurationType * core)
   *
   * @details The implementation contains obtaining of the number of programs
-  * by calling core_getCoreNumberOfPrograms function with current core variable.
+  * by calling core_getCoreNumberOfPrograms function with current core
+  * configuration.
   * Then the for loop is implemented to iterate over all configured programs.
   * In the for loop is implemented the core_getCoreProgramCfg call to get
   * current program variable and subsequently call to the function
@@ -189,7 +190,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   *
   * @details The implementation contains obtaining of the program variables by
   * callling the core_getCoreProgramCfgs function and the number of programs
-  * by calling core_getCoreNumberOfPrograms function with current core variable.
+  * by calling core_getCoreNumberOfPrograms function with current core
+  * configuration.
   * Then the for loop is implemented to iterate over all configured programs.
   * In the for loop is implemented if condition to check if the heap size is
   * non-zero value. Then the malloc variable is placed to the low address of the

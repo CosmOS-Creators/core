@@ -17,7 +17,7 @@ class Os_MOCK
     ~Os_MOCK()
     {}
 
-    MOCK_METHOD( CosmOS_OsVariableType *, os_getOsVar, () );
+    MOCK_METHOD( CosmOS_OsConfigurationType *, os_getOsCfg, () );
 };
 
 class Os_TestFixture : public ::testing::Test

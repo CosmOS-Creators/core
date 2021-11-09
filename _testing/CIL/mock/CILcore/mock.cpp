@@ -5,13 +5,13 @@
 std::unique_ptr<CILcore_MOCK> CILcore_TestFixture::_CILcoreMock;
 
 void
-CILcore_setCoreVar( CosmOS_OsVariableType * osVar )
+CILcore_setCoreCfg( CosmOS_OsConfigurationType * osCfg )
 {
-    CILcore_TestFixture::_CILcoreMock->CILcore_setCoreVar( osVar );
+    CILcore_TestFixture::_CILcoreMock->CILcore_setCoreCfg( osCfg );
 }
 
-CosmOS_CoreVariableType *
-CILcore_getCoreVar( void )
+CosmOS_CoreConfigurationType *
+CILcore_getCoreCfg( void )
 {
-    return CILcore_TestFixture::_CILcoreMock->CILcore_getCoreVar();
+    return CILcore_TestFixture::_CILcoreMock->CILcore_getCoreCfg();
 }

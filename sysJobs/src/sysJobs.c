@@ -125,15 +125,15 @@
 /**
   * @fn sysJobs_dispatcher(BitWidthType entityId)
   *
-  * @details The implementation contains obtaining of the core variable by
-  * calling core_getCoreVar function and using it in the function
+  * @details The implementation contains obtaining of the core configuration by
+  * calling core_getCoreCfg function and using it in the function
   * core_getCoreSysJobs to get system jobs variable for the current core.
   * As the system jobs have internal scheduling the function
   * sysJobs_getSysJobsCurrentTick is used to get its current internal tick.
   * The current tick is then incremented by 1. The number of system jobs groups
   * for the current core is obtained by calling sysJobs_getSysJobsNumOfGroups
   * function and for loop that iterates over all system jobs groups for current
-  * core variable implemented. For every system jobs group the group tick
+  * core configuration implemented. For every system jobs group the group tick
   * multiplicator is obtained by sysJobs_getSysJobsGroupTickMultiplicator
   * function and then the if condition is implemented to check if the current
   * system jobs tick modulo group tick multiplicator is zero, otherwise the
@@ -159,7 +159,7 @@ sysJobs_dispatcher( BitWidthType entityId )
     CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_SysJobsConfigurationType * sysJobsCfg;
 
-    coreCfg = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
     sysJobsCfg = core_getCoreSysJobs( coreCfg );
 
     sysJobsCurrentTick = sysJobs_getSysJobsCurrentTick( sysJobsCfg );

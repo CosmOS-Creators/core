@@ -155,7 +155,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @details The implementation contains return of the generated operating
   * system configuration structure.
   *
-  * @see TEST_OS_GETOSVAR_RETURNVALUE
+  * @see TEST_OS_GETOSCFG_RETURNVALUE
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -188,7 +188,7 @@ os_kernelPanic( void )
 {
     CosmOS_CoreConfigurationType * coreCfg;
 
-    coreCfg = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
     coreCfg->kernelPanicHook();
 
     for ( ;; )

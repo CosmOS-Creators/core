@@ -131,9 +131,9 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn core_getCoreVar( void )
+  * @fn core_getCoreCfg( void )
   *
-  * @brief Get current core variable. This function can be called
+  * @brief Get current core configuration. This function can be called
   * from the unprivileged context directly.
   *
   * @param[in]  none
@@ -141,7 +141,7 @@ extern "C" {
   * @return CosmOS_CoreConfigurationType *
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_CoreConfigurationType *
-core_getCoreVar( void );
+core_getCoreCfg( void );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -582,43 +582,6 @@ core_getCoreSysJobs( CosmOS_CoreConfigurationType * core )
     return (CosmOS_SysJobsConfigurationType *)( core->sysJobsCfg );
 }
 
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn core_getCoreAlarmCfgs(CosmOS_CoreConfigurationType * core)
-  *
-  * @brief Get core alarmCfgs.
-  *
-  * @param[in]  core configuration pointer
-  *
-  * @return CosmOS_AlarmConfigurationType
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_AlarmConfigurationType *
-core_getCoreAlarmCfgs( CosmOS_CoreConfigurationType * core )
-{
-    return (CosmOS_AlarmConfigurationType *)( core->alarmCfgs );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn core_getAlarmCfg(CosmOS_CoreConfigurationType * core,
-  * BitWidthType * barrierId)
-  *
-  * @brief Get alarmCfg element pointer.
-  *
-  * @param[in]  core configuration pointer
-  * @param[in]  alarmId required alarm id
-  *
-  * @return CosmOS_AlarmConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_AlarmConfigurationType *
-core_getAlarmCfg( CosmOS_CoreConfigurationType * core, BitWidthType alarmId )
-{
-    return (CosmOS_AlarmConfigurationType *)( &( core->alarmCfgs[alarmId] ) );
-}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

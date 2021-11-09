@@ -17,7 +17,7 @@ class Core_MOCK
     ~Core_MOCK()
     {}
 
-    MOCK_METHOD( (CosmOS_CoreVariableType *), core_getCoreVar, () );
+    MOCK_METHOD( (CosmOS_CoreConfigurationType *), core_getCoreCfg, () );
 };
 
 class Core_TestFixture : public ::testing::Test

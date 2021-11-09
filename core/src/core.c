@@ -125,23 +125,23 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn core_getCoreVar( void )
+  * @fn core_getCoreCfg( void )
   *
-  * @details The implementation contains obtaining of the core variable by
-  * calling the CILcore_getCoreVar function and returning the result.
+  * @details The implementation contains obtaining of the core configuration by
+  * calling the CILcore_getCoreCfg function and returning the result.
   *
-  * @see TEST_CORE_GETCOREVAR_EXECUTIONFLOW
-  * @see TEST_CORE_GETCOREVAR_RETURNVALUE
+  * @see TEST_CORE_GETCORECFG_EXECUTIONFLOW
+  * @see TEST_CORE_GETCORECFG_RETURNVALUE
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION CosmOS_CoreConfigurationType *
-core_getCoreVar( void )
+core_getCoreCfg( void )
 {
     CosmOS_CoreConfigurationType * core;
 
-    core = CILcore_getCoreVar();
+    core = CILcore_getCoreCfg();
 
     return core;
 }

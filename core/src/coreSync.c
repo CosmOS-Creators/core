@@ -135,7 +135,7 @@
   * Then we get operating system variable by calling os_getOsCfg function which
   * is later used in os_getOsNumberOfCores function call to get number of cores.
   * Number of synchronized cores is then set to zero and used to obtain the
-  * first core variable by calling os_getCoreCfg. Then the barrier variable
+  * first core configuration by calling os_getCoreCfg. Then the barrier variable
   * is obtained by calling core_getBarrierVar. In the implemented while loop we
   * iterate over the all cores and their barriers with specified barrier id.
   * The loop ends if there is only one core configured in the system or if

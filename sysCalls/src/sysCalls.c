@@ -260,6 +260,42 @@ sysCalls_bitWidthType_voidPtr_ret_bitWidthType( BitWidthType id, void * ptr )
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn sysCalls_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType(
+  * BitWidthType id,
+  * void * ptr,
+  * void * ptr1,
+  * BitWidthType arg)
+  *
+  * @details The implementation contains calling the CIL function
+  * CILsysCalls_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType
+  * and returning the result.
+********************************************************************************/
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION BitWidthType
+sysCalls_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType(
+    BitWidthType id,
+    void * ptr,
+    void * ptr1,
+    BitWidthType arg )
+{
+    BitWidthType returnValue;
+
+    returnValue =
+        CILsysCalls_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType(
+            id, ptr, ptr1, arg );
+
+    return returnValue;
+};
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

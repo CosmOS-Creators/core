@@ -6,15 +6,15 @@ std::unique_ptr<MemoryManager_MOCK>
     MemoryManager_TestFixture::_MemoryManagerMock;
 
 void
-memoryManager_heapInit( CosmOS_CoreVariableType * coreVar )
+memoryManager_heapInit( CosmOS_CoreConfigurationType * coreCfg )
 {
     MemoryManager_TestFixture::_MemoryManagerMock->memoryManager_heapInit(
-        coreVar );
+        coreCfg );
 }
 
 void
-memoryManager_stackInit( CosmOS_CoreVariableType * coreVar )
+memoryManager_stackInit( CosmOS_CoreConfigurationType * coreCfg )
 {
     MemoryManager_TestFixture::_MemoryManagerMock->memoryManager_stackInit(
-        coreVar );
+        coreCfg );
 }

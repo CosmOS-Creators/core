@@ -135,9 +135,9 @@
   *
   * @details The implementation contains os_getOsCfg function call to get
   * generated configuration for the operating system, after this point
-  * CILcore_setCoreVar is used to set core variable to the platform registers if
-  * possible on the current CPU.
-  * Then core variable is obtained by core_getCoreVar and used in
+  * CILcore_setCoreCfg is used to set core configuration to the platform
+  * registers if possible on the current CPU.
+  * Then core configuration is obtained by core_getCoreCfg and used in
   * the switchMemoryProtection_init function that is not stubbed only if user
   * turned on MPU in the CosmOS CustomBox configuration. After the MPU
   * activation the function osBoot_bootValidate is called to check if there is
@@ -160,9 +160,9 @@ osInit_init( BitWidthType entityId )
 
     osCfg = os_getOsCfg();
 
-    CILcore_setCoreVar( osCfg );
+    CILcore_setCoreCfg( osCfg );
 
-    coreCfg = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
 
     switchMemoryProtection_init(
         coreCfg->codeMemoryHighAddress,

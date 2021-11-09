@@ -4,8 +4,8 @@
 
 std::unique_ptr<Core_MOCK> Core_TestFixture::_CoreMock;
 
-CosmOS_CoreVariableType *
-core_getCoreVar()
+CosmOS_CoreConfigurationType *
+core_getCoreCfg()
 {
-    return Core_TestFixture::_CoreMock->core_getCoreVar();
+    return Core_TestFixture::_CoreMock->core_getCoreCfg();
 }

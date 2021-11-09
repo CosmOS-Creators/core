@@ -118,18 +118,38 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_getSpinlock(BitWidthType id)
+  * @fn spinlock_getSpinlockInternal(BitWidthType id,
+  * CosmOS_SpinlockVariableType * spinlockVar,
+  * BitWidthType spinlockId );
   *
-  * @brief Get spinlock. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
+  * @brief Get to get spinlock internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
   * @param[in]  id is used during the system call dispatching
+  * @param[in]  spinlockVar variable structure pointer
+  * @param[in]  spinlockId spinlock identifier
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_SpinlockStateType
-spinlock_getSpinlock( BitWidthType id );
+spinlock_getSpinlockInternal(
+    BitWidthType id,
+    CosmOS_SpinlockVariableType * spinlockVar,
+    BitWidthType spinlockId );
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn spinlock_getSpinlock(BitWidthType spinlockId)
+  *
+  * @brief Get spinlock. DEMO
+  *
+  * @param[in]  spinlockId spinlock identifier
+  *
+  * @return CosmOS_SpinlockStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+spinlock_getSpinlock( BitWidthType spinlockId );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -160,35 +180,77 @@ spinlock_getSpinlock( BitWidthType id );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_trySpinlock(BitWidthType id)
+  * @fn spinlock_trySpinlockInternal(BitWidthType id,
+  * CosmOS_SpinlockVariableType * spinlockVar,
+  * BitWidthType spinlockId );
   *
-  * @brief Try to get spinlock. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
+  * @brief Try to get spinlock internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
   * @param[in]  id is used during the system call dispatching
+  * @param[in]  spinlockVar variable structure pointer
+  * @param[in]  spinlockId spinlock identifier
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_SpinlockStateType
-spinlock_trySpinlock( BitWidthType id );
+spinlock_trySpinlockInternal(
+    BitWidthType id,
+    CosmOS_SpinlockVariableType * spinlockVar,
+    BitWidthType spinlockId );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_releaseSpinlock(BitWidthType id)
+  * @fn spinlock_releaseSpinlockInternal(BitWidthType id,
+  * CosmOS_SpinlockVariableType * spinlockVar,
+  * BitWidthType spinlockId );
   *
-  * @brief Release spinlock. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
+  * @brief Release to get spinlock internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
   * @param[in]  id is used during the system call dispatching
+  * @param[in]  spinlockVar variable structure pointer
+  * @param[in]  spinlockId spinlock identifier
   *
   * @return CosmOS_SpinlockStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_SpinlockStateType
-spinlock_releaseSpinlock( BitWidthType id );
+spinlock_releaseSpinlockInternal(
+    BitWidthType id,
+    CosmOS_SpinlockVariableType * spinlockVar,
+    BitWidthType spinlockId );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn spinlock_trySpinlock(BitWidthType spinlockId)
+  *
+  * @brief Try to get spinlock. DEMO
+  *
+  * @param[in]  spinlockId spinlock identifier
+  *
+  * @return CosmOS_SpinlockStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+spinlock_trySpinlock( BitWidthType spinlockId );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn spinlock_releaseSpinlock(BitWidthType spinlockId)
+  *
+  * @brief Release spinlock. DEMO
+  *
+  * @param[in]  spinlockId spinlock identifier
+  *
+  * @return CosmOS_SpinlockStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+spinlock_releaseSpinlock( BitWidthType spinlockId );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

@@ -144,39 +144,89 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_readArray(BitWidthType id, void * buffer, BitWidthType size)
+  * @fn buffer_readArrayInternal(
+  * BitWidthType id,
+  * void * buffer,
+  * CosmOS_BufferConfigurationType * systemBufferCfg,
+  * BitWidthType size );
   *
-  * @brief Reading array from the buffer. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
+  * @brief Reading array from the buffer. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
-  * @param[in]  id is used during the system call dispatching
+  * @param[in]  id buffer identifier
+  * @param[in]  buffer pointer to the user buffer array
+  * @param[out]  systemBufferCfg configuration pointer
+  * @param[in]  size of the bytes to read
+  *
+  * @return CosmOS_BufferStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_BufferStateType
+buffer_readArrayInternal(
+    BitWidthType id,
+    void * buffer,
+    CosmOS_BufferConfigurationType * systemBufferCfg,
+    BitWidthType size );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn buffer_writeArrayInternal(
+  * BitWidthType id,
+  * void * buffer,
+  * CosmOS_BufferConfigurationType * systemBufferCfg,
+  * BitWidthType size );
+  *
+  * @brief Writing array from the buffer. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id buffer identifier
+  * @param[in]  buffer pointer to the user buffer array
+  * @param[out]  systemBufferCfg configuration pointer
+  * @param[in]  size of the bytes to write
+  *
+  * @return CosmOS_BufferStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_BufferStateType
+buffer_writeArrayInternal(
+    BitWidthType id,
+    void * buffer,
+    CosmOS_BufferConfigurationType * systemBufferCfg,
+    BitWidthType size );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn buffer_readArray(BitWidthType bufferId, void * buffer, BitWidthType size)
+  *
+  * @brief Reading array from the buffer. DEMO
+  *
+  * @param[in]  bufferId buffer identifier
   * @param[out]  buffer pointer to the user buffer array
   * @param[in]  size of the bytes to read
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_BufferStateType
-buffer_readArray( BitWidthType id, void * buffer, BitWidthType size );
+buffer_readArray( BitWidthType bufferId, void * buffer, BitWidthType size );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_writeArray(BitWidthType id, void * buffer, BitWidthType size)
+  * @fn buffer_writeArray(BitWidthType bufferId, void * buffer, BitWidthType size)
   *
-  * @brief Writing array into the buffer. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
+  * @brief Writing array into the buffer. DEMO
   *
-  * @param[in]  id is used during the system call dispatching
+  * @param[in]  bufferId buffer identifier
   * @param[in]  buffer pointer to the user buffer array
   * @param[in]  size of the bytes to write
   *
   * @return CosmOS_BufferStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_BufferStateType
-buffer_writeArray( BitWidthType id, void * buffer, BitWidthType size );
+buffer_writeArray( BitWidthType bufferId, void * buffer, BitWidthType size );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -290,7 +340,7 @@ buffer_getBufferSpinlockId( CosmOS_BufferConfigurationType * bufferCfg )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn buffer_getBufferReadPermission(CosmOS_BufferConfigurationType * 
+  * @fn buffer_getBufferReadPermission(CosmOS_BufferConfigurationType *
   * bufferCfg)
   *
   * @brief Get buffer readPermission.

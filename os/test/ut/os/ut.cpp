@@ -46,7 +46,7 @@
 #define TEST_DESCRIPTION( desc ) RecordProperty( "description", desc )
 
 #define TEST_OS_START_EXECUTIONFLOW() TEST( Test_os, os_start_executionFlow )
-#define TEST_OS_GETOSVAR_RETURNVALUE() TEST( Test_os, os_getOsVar_returnValue )
+#define TEST_OS_GETOSCFG_RETURNVALUE() TEST( Test_os, os_getOsVar_returnValue )
 #define TEST_OS_KERNELPANIC_EXECUTIONFLOW() \
     TEST( Test_os, os_kernelPanic_executionFlow )
 
@@ -110,8 +110,6 @@
 /**
   * @brief This test validates execution flow of the os_start function.
   *
-  * @details <b>multiple words</b> <br>
-  *
   * @see os_start
   * @author https://github.com/PavolKostolansky
 ********************************************************************************/
@@ -131,22 +129,22 @@ TEST_OS_START_EXECUTIONFLOW()
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @brief This test validates return value of the os_getOsVar function.
+  * @brief This test validates return value of the os_getOsCfg function.
   *
-  * @see os_getOsVar
+  * @see os_getOsCfg
   * @authors https://github.com/florianL21
   *          https://github.com/PavolKostolansky
 ********************************************************************************/
-TEST_OS_GETOSVAR_RETURNVALUE()
+TEST_OS_GETOSCFG_RETURNVALUE()
 {
     TEST_DESCRIPTION(
-        "This test validates return value of the os_getOsVar function" );
+        "This test validates return value of the os_getOsCfg function" );
 
-    CosmOS_OsVariableType * osVarRet;
+    CosmOS_OsConfigurationType * osCfgRet;
 
-    osVarRet = os_getOsVar();
+    osCfgRet = os_getOsCfg();
 
-    ASSERT_EQ( osVarRet, &OsVar );
+    ASSERT_EQ( osCfgRet, &OsCfg );
 }
 
 /********************************************************************************
@@ -166,9 +164,9 @@ TEST_OS_KERNELPANIC_EXECUTIONFLOW()
     Core_TestFixture coreMock;
     UtCfg_TestFixture utCfgMock;
 
-    EXPECT_CALL( *coreMock._CoreMock, core_getCoreVar() )
+    EXPECT_CALL( *coreMock._CoreMock, core_getCoreCfg() )
         .Times( 1 )
-        .WillOnce( Return( &CoresVar[0] ) );
+        .WillOnce( Return( (CosmOS_CoreConfigurationType *)&CoresCfgConst[0] ) );
     EXPECT_CALL( *utCfgMock._UtCfgMock, dummyKernelPanic_core0() ).Times( 1 );
 
     TEST_TIMEOUT_BEGIN

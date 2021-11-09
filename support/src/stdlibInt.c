@@ -188,8 +188,8 @@ malloc_varAlloc(
 /**
   * @fn malloc_internal( size_t size )
   *
-  * @details The implementation contains obtaining of the core variable by
-  * calling function core_getCoreVar. The return address is set to NULL in the
+  * @details The implementation contains obtaining of the core configuration by
+  * calling function core_getCoreCfg. The return address is set to NULL in the
   * case no suitable memory chunk will be found (to return NULL pointer).
   * Schedulable in execution type is then checked in the implemented if
   * condition if it is equal to the SCHEDULABLE_INSTANCE_ENUM__THREAD, if yes
@@ -243,7 +243,7 @@ malloc_internal( size_t size )
     CosmOS_HeapConfigurationType * heapCfg;
     CosmOS_MallocVariableType *currentMallocVar, *newMallocVar;
 
-    coreCfg = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
     returnAddress = (AddressType)NULL;
 
     if ( ( (CosmOS_SchedulableConfigurationType *)
@@ -338,8 +338,8 @@ malloc_internal( size_t size )
   *
   * @details The implementation contains obtaining of the mallocVarToFree by
   * subtracting the aligned size of the malloc variable type from the ptr
-  * argument. Then the core variable is obtained by calling function
-  * core_getCoreVar.
+  * argument. Then the core configuration is obtained by calling function
+  * core_getCoreCfg.
   * Schedulable in execution type is then checked in the implemented if
   * condition if it is equal to the SCHEDULABLE_INSTANCE_ENUM__THREAD, if yes
   * the program variable in execution is obtained by calling function
@@ -360,7 +360,7 @@ free_internal( void * ptr )
     CosmOS_MallocVariableType * mallocVarToFree =
         (CosmOS_MallocVariableType *)( (AddressType)ptr - ALIGN( sizeof( CosmOS_MallocVariableType ), sizeof( BitWidthType ) ) );
 
-    coreCfg = core_getCoreVar();
+    coreCfg = core_getCoreCfg();
     if ( ( (CosmOS_SchedulableConfigurationType *)
                coreCfg->var->schedulableInExecution )
              ->instanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD )

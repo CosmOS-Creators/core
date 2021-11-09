@@ -46,8 +46,22 @@
   * @ingroup Test_core
   * @{
 ********************************************************************************/
-const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
+CosmOS_CoreVariableType CoresVar[CORE_NUM] IS_INITIALIZED_TO{
     {
+        (void *)NULL,
+        (void *)NULL,
+        OS_STATE_ENUM__NOT_INITIALIZED,
+    },
+    {
+        (void *)NULL,
+        (void *)NULL,
+        OS_STATE_ENUM__NOT_INITIALIZED,
+    },
+};
+
+CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
+    {
+        &CoresVar[CORE_0_ID],
         (CosmOS_ProgramConfigurationType *)NULL,
         2,
         (CosmOS_SchedulerConfigurationType *)NULL,
@@ -57,8 +71,17 @@ const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
         210,
         300,
         310,
+        300,
+        310,
+        0,
+        0,
+        (CosmOS_ProgramConfigurationType *)NULL,
+        (CosmOS_SchedulerConfigurationType *)NULL,
+        (CosmOS_BarrierVariableType *)NULL,
+        (CosmOS_SysJobsConfigurationType *)NULL,
     },
     {
+        &CoresVar[CORE_1_ID],
         (CosmOS_ProgramConfigurationType *)NULL,
         2,
         (CosmOS_SchedulerConfigurationType *)NULL,
@@ -68,29 +91,14 @@ const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
         210,
         300,
         310,
-    },
-};
-
-CosmOS_CoreVariableType CoresVar[CORE_NUM] IS_INITIALIZED_TO{
-    {
-        &CoresCfgConst[CORE_0_ID],
-        (CosmOS_SchedulableVariableType *)NULL,
-        (CosmOS_ProgramVariableType *)NULL,
-        (CosmOS_ProgramVariableType *)NULL,
-        (CosmOS_SchedulerVariableType *)NULL,
+        300,
+        310,
+        0,
+        0,
+        (CosmOS_ProgramConfigurationType *)NULL,
+        (CosmOS_SchedulerConfigurationType *)NULL,
         (CosmOS_BarrierVariableType *)NULL,
-        OS_STATE_ENUM__NOT_INITIALIZED,
-        (CosmOS_SysJobsVariableType *)NULL,
-    },
-    {
-        &CoresCfgConst[CORE_1_ID],
-        (CosmOS_SchedulableVariableType *)NULL,
-        (CosmOS_ProgramVariableType *)NULL,
-        (CosmOS_ProgramVariableType *)NULL,
-        (CosmOS_SchedulerVariableType *)NULL,
-        (CosmOS_BarrierVariableType *)NULL,
-        OS_STATE_ENUM__NOT_INITIALIZED,
-        (CosmOS_SysJobsVariableType *)NULL,
+        (CosmOS_SysJobsConfigurationType *)NULL,
     },
 };
 /********************************************************************************

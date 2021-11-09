@@ -121,8 +121,8 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    const BitWidthType * const bitLocksTasks;
-    const BitWidthType * const bitLocksTasksInverted;
+    const BitWidthType * const bitLocksSchedulables;
+    const BitWidthType * const bitLocksSchedulablesInverted;
 
 } CosmOS_PermissionsConfigurationType;
 
@@ -315,6 +315,19 @@ typedef struct
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_AlarmConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    CosmOS_AlarmVariableType * const var;
+    const CosmOS_SchedulableConfigurationType * const schedulableCfg;
+
+} CosmOS_AlarmConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_SchedulerConfigurationType struct type
 ********************************************************************************/
 typedef struct
@@ -332,6 +345,7 @@ typedef struct
     const BitWidthType maxTimerTick;
     const BitWidthType timerTickCount;
     const CosmOS_TaskConfigurationType * const idleTask;
+    const CosmOS_AlarmConfigurationType * const alarmCfgs;
 
 } CosmOS_SchedulerConfigurationType;
 
@@ -348,19 +362,6 @@ typedef struct
     const BitWidthType tickMultiplicator;
 
 } CosmOS_SysJobsGroupConfigurationType;
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @brief  CosmOS_AlarmConfigurationType struct type
-********************************************************************************/
-typedef struct
-{
-    CosmOS_AlarmVariableType * const var;
-    const CosmOS_SchedulableConfigurationType * const schedulableCfg;
-
-} CosmOS_AlarmConfigurationType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -403,7 +404,6 @@ typedef struct
     const CosmOS_SchedulerConfigurationType * const schedulerCfg;
     CosmOS_BarrierVariableType * const barrierVars;
     const CosmOS_SysJobsConfigurationType * const sysJobsCfg;
-    const CosmOS_AlarmConfigurationType * const alarmCfgs;
 
 } CosmOS_CoreConfigurationType;
 

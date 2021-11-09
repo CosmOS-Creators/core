@@ -5,8 +5,10 @@
 std::unique_ptr<CoreSync_MOCK> CoreSync_TestFixture::_CoreSyncMock;
 
 void
-coreSync_getBarrier( CosmOS_CoreVariableType * coreVar, BitWidthType barrierId )
+coreSync_getBarrier(
+    CosmOS_CoreConfigurationType * coreCfg,
+    BitWidthType barrierId )
 {
     CoreSync_TestFixture::_CoreSyncMock->coreSync_getBarrier(
-        coreVar, barrierId );
+        coreCfg, barrierId );
 }

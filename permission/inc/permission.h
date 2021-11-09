@@ -181,39 +181,40 @@ permission_tryAccess(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn permission_getBitLocksTasks(
+  * @fn permission_getbitLocksSchedulables(
   * CosmOS_PermissionsConfigurationType * permission)
   *
-  * @brief Get permission bitLocksTasks.
+  * @brief Get permission bitLocksSchedulables.
   *
   * @param[in]  permission configuration pointer
   *
   * @return BitWidthType *
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType *
-permission_getBitLocksTasks( CosmOS_PermissionsConfigurationType * permission )
+permission_getbitLocksSchedulables(
+    CosmOS_PermissionsConfigurationType * permission )
 {
-    return (BitWidthType *)( permission->bitLocksTasks );
+    return (BitWidthType *)( permission->bitLocksSchedulables );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn permission_getBitLocksTasksInverted(
+  * @fn permission_getbitLocksSchedulablesInverted(
   * CosmOS_PermissionsConfigurationType * permission)
   *
-  * @brief Get permission bitLocksTasksInverted.
+  * @brief Get permission bitLocksSchedulablesInverted.
   *
   * @param[in]  permission configuration pointer
   *
   * @return BitWidthType *
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType *
-permission_getBitLocksTasksInverted(
+permission_getbitLocksSchedulablesInverted(
     CosmOS_PermissionsConfigurationType * permission )
 {
-    return (BitWidthType *)( permission->bitLocksTasksInverted );
+    return (BitWidthType *)( permission->bitLocksSchedulablesInverted );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

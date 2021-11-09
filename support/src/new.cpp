@@ -136,7 +136,7 @@
   * argument is zero value and if it is the size is incremented by 1. Then
   * core id is obtained by calling cosmosApi_CILcore_getCoreId function as macro
   * and operating system variable by calling os_getOsCfg which are then used in
-  * function os_getCoreCfg to get core variable. The function
+  * function os_getCoreCfg to get core configuration. The function
   * core_getCoreOsState called afterwards returns the state of operating system
   * on the current core. The if condition then checks if the operating system
   * state is equal to OS_STATE_ENUM__STARTED, if yes the malloc_internal
@@ -186,7 +186,7 @@ operator new( size_t size ) noexcept
   *
   * @details The implementation contains calling cosmosApi_CILcore_getCoreId
   * function as macro and operating system variable by calling os_getOsCfg
-  * which are then used in function os_getCoreCfg to get core variable.
+  * which are then used in function os_getCoreCfg to get core configuration.
   * The function core_getCoreOsState called afterwards returns the state of
   * operating system on the current core.
   * The if condition then checks if the operating system state is equal to
@@ -228,7 +228,7 @@ operator delete( void * ptr ) noexcept
   *
   * @details The implementation contains calling cosmosApi_CILcore_getCoreId
   * function as macro and operating system variable by calling os_getOsCfg
-  * which are then used in function os_getCoreCfg to get core variable.
+  * which are then used in function os_getCoreCfg to get core configuration.
   * The function core_getCoreOsState called afterwards returns the state of
   * operating system on the current core.
   * The if condition then checks if the operating system state is equal to

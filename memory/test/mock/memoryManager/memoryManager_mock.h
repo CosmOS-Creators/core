@@ -6,7 +6,6 @@
 #include <memory>
 #include "memoryManager.h"
 
-
 using namespace ::testing;
 using ::testing::Return;
 
@@ -21,11 +20,11 @@ class MemoryManager_MOCK
     MOCK_METHOD(
         void,
         memoryManager_heapInit,
-        ( CosmOS_CoreVariableType * coreVar ) );
+        ( CosmOS_CoreConfigurationType * coreCfg ) );
     MOCK_METHOD(
         void,
         memoryManager_stackInit,
-        ( CosmOS_CoreVariableType * coreVar ) );
+        ( CosmOS_CoreConfigurationType * coreCfg ) );
 };
 
 class MemoryManager_TestFixture : public ::testing::Test

@@ -491,6 +491,44 @@ scheduler_getSchedulerIdleTask( CosmOS_SchedulerConfigurationType * scheduler )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @fn scheduler_getAlarmCfgs(CosmOS_SchedulerConfigurationType * scheduler)
+  *
+  * @brief Get scheduler alarmCfgs.
+  *
+  * @param[in]  scheduler configuration pointer
+  *
+  * @return CosmOS_AlarmConfigurationType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_AlarmConfigurationType *
+scheduler_getAlarmCfgs( CosmOS_SchedulerConfigurationType * scheduler )
+{
+    return (CosmOS_AlarmConfigurationType *)( scheduler->alarmCfgs );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn scheduler_getAlarmCfg(CosmOS_SchedulerConfigurationType * scheduler,
+  * BitWidthType * barrierId)
+  *
+  * @brief Get alarmCfg element pointer.
+  *
+  * @param[in]  scheduler configuration pointer
+  * @param[in]  alarmId required alarm id
+  *
+  * @return CosmOS_AlarmConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_AlarmConfigurationType *
+scheduler_getAlarmCfg( CosmOS_SchedulerConfigurationType * scheduler, BitWidthType alarmId )
+{
+    return (CosmOS_AlarmConfigurationType *)( &( scheduler->alarmCfgs[alarmId] ) );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn scheduler_getSchedulerCurrentTick(
   * CosmOS_SchedulerConfigurationType * scheduler)
   *
@@ -707,7 +745,7 @@ scheduler_getSchedulerScheduleTableTaskVar(
   * @brief Get scheduler threadList element threadVar.
   *
   * @param[in]  scheduler configuration pointer
-  * @param[in]  threadListIterator iterator pointing to specific thread 
+  * @param[in]  threadListIterator iterator pointing to specific thread
   * configuration in the thread list
   *
   * @return CosmOS_ThreadConfigurationType *
