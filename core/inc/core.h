@@ -583,43 +583,6 @@ core_getCoreSysJobs( CosmOS_CoreConfigurationType * core )
 }
 
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn core_getCoreAlarmCfgs(CosmOS_CoreConfigurationType * core)
-  *
-  * @brief Get core alarmCfgs.
-  *
-  * @param[in]  core configuration pointer
-  *
-  * @return CosmOS_AlarmConfigurationType
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_AlarmConfigurationType *
-core_getCoreAlarmCfgs( CosmOS_CoreConfigurationType * core )
-{
-    return (CosmOS_AlarmConfigurationType *)( core->alarmCfgs );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn core_getAlarmCfg(CosmOS_CoreConfigurationType * core,
-  * BitWidthType * barrierId)
-  *
-  * @brief Get alarmCfg element pointer.
-  *
-  * @param[in]  core configuration pointer
-  * @param[in]  alarmId required alarm id
-  *
-  * @return CosmOS_AlarmConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_AlarmConfigurationType *
-core_getAlarmCfg( CosmOS_CoreConfigurationType * core, BitWidthType alarmId )
-{
-    return (CosmOS_AlarmConfigurationType *)( &( core->alarmCfgs[alarmId] ) );
-}
-/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */

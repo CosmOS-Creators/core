@@ -58,10 +58,10 @@ using ::testing::Return;
   * @ingroup Test_os
   * @{
 ********************************************************************************/
-extern const CosmOS_OsConfigurationType OsCfg;
+extern CosmOS_OsConfigurationType OsCfg;
 extern CosmOS_OsVariableType OsVar;
 
-extern const CosmOS_CoreConfigurationType CoresCfgConst[2];
+extern CosmOS_CoreConfigurationType CoresCfgConst[2];
 extern CosmOS_CoreVariableType CoresVar[2];
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

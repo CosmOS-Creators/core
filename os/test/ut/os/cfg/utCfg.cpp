@@ -61,7 +61,7 @@ CosmOS_CoreVariableType CoresVar[CORE_NUM] IS_INITIALIZED_TO{
     },
 };
 
-const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
+CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
     {
         &CoresVar[CORE_0_ID],
         (CosmOS_ProgramConfigurationType *)NULL,
@@ -81,7 +81,6 @@ const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
         (CosmOS_SchedulerConfigurationType *)NULL,
         (CosmOS_BarrierVariableType *)NULL,
         (CosmOS_SysJobsConfigurationType *)NULL,
-        (CosmOS_AlarmConfigurationType *)NULL,
     },
     {
         &CoresVar[CORE_1_ID],
@@ -102,7 +101,6 @@ const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
         (CosmOS_SchedulerConfigurationType *)NULL,
         (CosmOS_BarrierVariableType *)NULL,
         (CosmOS_SysJobsConfigurationType *)NULL,
-        (CosmOS_AlarmConfigurationType *)NULL,
     },
 };
 
@@ -110,7 +108,7 @@ CosmOS_OsVariableType OsVar IS_INITIALIZED_TO{
     0,
 };
 
-const CosmOS_OsConfigurationType OsCfg IS_INITIALIZED_TO{
+CosmOS_OsConfigurationType OsCfg IS_INITIALIZED_TO{
     &OsVar,
     (CosmOS_CoreConfigurationType *)NULL,
     2,
@@ -118,12 +116,11 @@ const CosmOS_OsConfigurationType OsCfg IS_INITIALIZED_TO{
     2,
     (CosmOS_RoutesConfigurationType *)NULL,
     2,
-    (CosmOS_CoreVariableType *)NULL,
-    (CosmOS_BufferVariableType *)NULL,
-    (CosmOS_BufferDoubleVariableType *)NULL,
+    (CosmOS_CoreConfigurationType *)NULL,
+    (CosmOS_BufferConfigurationType *)NULL,
+    (CosmOS_BufferDoubleConfigurationType *)NULL,
     (CosmOS_SpinlockVariableType *)NULL,
 };
-
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

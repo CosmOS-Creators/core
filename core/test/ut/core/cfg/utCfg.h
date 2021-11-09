@@ -51,7 +51,7 @@
   * @ingroup Test_core
   * @{
 ********************************************************************************/
-extern const CosmOS_CoreConfigurationType CoresCfgConst[2];
+extern CosmOS_CoreConfigurationType CoresCfgConst[2];
 extern CosmOS_CoreVariableType CoresVar[2];
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

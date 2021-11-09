@@ -228,7 +228,7 @@ scheduler_classicSchedulingCore(
   *
   * @details The implementation contains obtaining of the alarms number used
   * inside the for loop that iterates over all alarm possible identifiers and
-  * get based on them alarm variable by calling core_getAlarmCfg function. Then
+  * get based on them alarm variable by calling scheduler_getAlarmCfg function. Then
   * the alarm variable is used in the alarm_getAlarmState function to get alarm
   * state. The alarm state is used in the if condition that checks if the alarm
   * state is ALARM_STATE_ENUM__ACTIVATED which means the alarm internal timer
@@ -258,7 +258,8 @@ scheduler_updateAlarms(
     numberOfAlarms = core_getCoreNumberOfAlarms( core );
     for ( BitWidthType iterator = 0; iterator < numberOfAlarms; iterator++ )
     {
-        alarmCfg = core_getAlarmCfg( core, iterator );
+        alarmCfg = scheduler_getAlarmCfg(
+            (CosmOS_SchedulerConfigurationType *)core->scheduler, iterator );
         alarmState = alarm_getAlarmState( alarmCfg );
 
         if ( alarmState IS_EQUAL_TO ALARM_STATE_ENUM__ACTIVATED )

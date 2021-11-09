@@ -17,8 +17,8 @@ class CILcore_MOCK
     ~CILcore_MOCK()
     {}
 
-    MOCK_METHOD( void, CILcore_setCoreCfg, ( CosmOS_OsVariableType * osVar ) );
-    MOCK_METHOD( (CosmOS_CoreVariableType *), CILcore_getCoreCfg, () );
+    MOCK_METHOD( void, CILcore_setCoreCfg, ( CosmOS_OsConfigurationType * osCfg ) );
+    MOCK_METHOD( (CosmOS_CoreConfigurationType *), CILcore_getCoreCfg, () );
 };
 
 class CILcore_TestFixture : public ::testing::Test

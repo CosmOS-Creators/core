@@ -162,13 +162,14 @@ permission_trySchedulableAccess(
     CosmOS_SchedulableConfigurationType * schedulableCfg )
 {
     cosmosAssert( IS_NOT(
-        permission->bitLocksTasks[SchedulableIdToBitLock[schedulableCfg->id]] &
-        permission->bitLocksTasksInverted
+        permission
+            ->bitLocksSchedulables[SchedulableIdToBitLock[schedulableCfg->id]] &
+        permission->bitLocksSchedulablesInverted
             [SchedulableIdToBitLock[schedulableCfg->id]] ) );
 
     return (
-        ( ( permission
-                ->bitLocksTasks[SchedulableIdToBitLock[schedulableCfg->id]] >>
+        ( ( permission->bitLocksSchedulables
+                [SchedulableIdToBitLock[schedulableCfg->id]] >>
             schedulableCfg->id ) &
           BITLOCK_MASK )
             ? ACCESS_STATE_ENUM__ALLOWED

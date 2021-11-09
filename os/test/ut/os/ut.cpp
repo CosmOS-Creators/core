@@ -166,7 +166,7 @@ TEST_OS_KERNELPANIC_EXECUTIONFLOW()
 
     EXPECT_CALL( *coreMock._CoreMock, core_getCoreCfg() )
         .Times( 1 )
-        .WillOnce( Return( &CoresVar[0] ) );
+        .WillOnce( Return( (CosmOS_CoreConfigurationType *)&CoresCfgConst[0] ) );
     EXPECT_CALL( *utCfgMock._UtCfgMock, dummyKernelPanic_core0() ).Times( 1 );
 
     TEST_TIMEOUT_BEGIN

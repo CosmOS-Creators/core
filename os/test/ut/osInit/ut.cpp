@@ -121,7 +121,7 @@ TEST_OSINIT_INIT_EXECUTIONFLOW()
         .Times( 1 );
     EXPECT_CALL( *coreMock._CoreMock, core_getCoreCfg() )
         .Times( 1 )
-        .WillOnce( Return( &CoresVar[0] ) );
+        .WillOnce( Return( &CoresCfgConst[0] ) );
     EXPECT_CALL(
         *memoryProtectionMock._MemoryProtectionMock,
         memoryProtection_init( 310, 300, 210, 200, 400, 500 ) )
@@ -129,14 +129,14 @@ TEST_OSINIT_INIT_EXECUTIONFLOW()
     EXPECT_CALL( *osBootMock._OsBootMock, osBoot_bootValidate() ).Times( 1 );
     EXPECT_CALL(
         *memoryManagerMock._MemoryManagerMock,
-        memoryManager_stackInit( &CoresVar[0] ) )
+        memoryManager_stackInit( &CoresCfgConst[0] ) )
         .Times( 1 );
     EXPECT_CALL(
         *memoryManagerMock._MemoryManagerMock,
-        memoryManager_heapInit( &CoresVar[0] ) )
+        memoryManager_heapInit( &CoresCfgConst[0] ) )
         .Times( 1 );
     /* EXPECT_CALL(*coreSyncMock._CoreSyncMock,
-    coreSync_getBarrier(&CoresVar[0], OS_INIT_ID)).Times(1); */
+    coreSync_getBarrier(&CoresCfgConst[0], OS_INIT_ID)).Times(1); */
 
     osInit_init( 0 );
 }

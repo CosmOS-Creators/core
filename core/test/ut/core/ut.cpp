@@ -106,7 +106,7 @@ TEST_CORE_GETCORECFG_EXECUTIONFLOW()
 
     EXPECT_CALL( *CILcoreMock._CILcoreMock, CILcore_getCoreCfg() )
         .Times( 1 )
-        .WillOnce( Return( &CoresVar[0] ) );
+        .WillOnce( Return( &CoresCfgConst[0] ) );
     ;
 
     coreCfg = core_getCoreCfg();
@@ -131,12 +131,12 @@ TEST_CORE_GETCORECFG_RETURNVALUE()
 
     EXPECT_CALL( *CILcoreMock._CILcoreMock, CILcore_getCoreCfg() )
         .Times( 1 )
-        .WillOnce( Return( &CoresVar[0] ) );
+        .WillOnce( Return( &CoresCfgConst[0] ) );
     ;
 
     coreCfg = core_getCoreCfg();
 
-    ASSERT_EQ( coreCfg, &CoresVar[0] );
+    ASSERT_EQ( coreCfg, &CoresCfgConst[0] );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

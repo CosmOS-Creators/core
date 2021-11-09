@@ -26,6 +26,7 @@
 #include "core.h"
 #include "cosmosApiInternal.h"
 #include "schedulable.h"
+#include "scheduler.h"
 
 /* CIL interfaces */
 #include "CILinterrupt.h"
@@ -124,7 +125,7 @@
   * in execution is obtained by the core_getCoreSchedulableInExecution function.
   * From the schedulable variable is then extracted the alarm id by calling
   * schedulable_getAlarmId function, this id is then used to get alarm variable
-  * by calling function core_getAlarmCfg. After this point is schedulable
+  * by calling function scheduler_getAlarmCfg. After this point is schedulable
   * variable state set to the SCHEDULABLE_STATE_ENUM__SLEEP by calling function
   * schedulable_setState. Subsequently the alarm needs to be configured,
   * therefore the alarm_setAlarmTickCount function is called with tickCount
@@ -154,7 +155,8 @@ thread_sleepMsInternal(
     schedulableCfg = core_getCoreSchedulableInExecution( core );
 
     alarmId = schedulable_getAlarmId( schedulableCfg );
-    alarmCfg = core_getAlarmCfg( core, alarmId );
+    alarmCfg = scheduler_getAlarmCfg(
+        (CosmOS_SchedulerConfigurationType *)core->scheduler, alarmId );
 
     schedulable_setState( schedulableCfg, SCHEDULABLE_STATE_ENUM__SLEEP );
     alarm_setAlarmTickCount( alarmCfg, tickCount );

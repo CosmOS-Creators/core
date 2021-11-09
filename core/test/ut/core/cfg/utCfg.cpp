@@ -59,7 +59,7 @@ CosmOS_CoreVariableType CoresVar[CORE_NUM] IS_INITIALIZED_TO{
     },
 };
 
-const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
+CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
     {
         &CoresVar[CORE_0_ID],
         (CosmOS_ProgramConfigurationType *)NULL,
@@ -79,7 +79,6 @@ const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
         (CosmOS_SchedulerConfigurationType *)NULL,
         (CosmOS_BarrierVariableType *)NULL,
         (CosmOS_SysJobsConfigurationType *)NULL,
-        (CosmOS_AlarmConfigurationType *)NULL,
     },
     {
         &CoresVar[CORE_1_ID],
@@ -100,10 +99,8 @@ const CosmOS_CoreConfigurationType CoresCfgConst[CORE_NUM] IS_INITIALIZED_TO{
         (CosmOS_SchedulerConfigurationType *)NULL,
         (CosmOS_BarrierVariableType *)NULL,
         (CosmOS_SysJobsConfigurationType *)NULL,
-        (CosmOS_AlarmConfigurationType *)NULL,
     },
 };
-
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
