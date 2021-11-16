@@ -10,7 +10,7 @@
 <!--                     CILinterrupt Unit Group Definition                   -->
 *********************************************************************************
 ** @defgroup CILinterrupt_unit CILinterrupt Unit
-** @ingroup CILmodule
+** @ingroup CIL_module
 ** @brief CILinterrupt Unit
 ** @details lorem
 *********************************************************************************
@@ -41,17 +41,20 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
 
 /* CIL interfaces */
 #include "CILstdTypes.h"
+
+/* HAL interfaces */
+#include "stm32h7xx_hal.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -68,8 +71,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_CILinterrupt_h
+  * @} */
+/*  Macros_CILinterrupt_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -87,8 +90,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_CILinterrupt_h
+  * @} */
+/*  Variables_CILinterrupt_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -112,8 +115,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_CILinterrupt_h
+  * @} */
+/*  Getters_CILinterrupt_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -125,8 +128,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_CILinterrupt_h
+  * @} */
+/*  Setters_CILinterrupt_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -138,8 +141,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_CILinterrupt_h
+  * @} */
+/*  General_CILinterrupt_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -157,8 +160,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_CILinterrupt_h
+  * @} */
+/*  Getters_CILinterrupt_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -170,8 +173,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_CILinterrupt_h
+  * @} */
+/*  Setters_CILinterrupt_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -181,10 +184,104 @@
   * @{
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILinterrupt_enableInterrupts(void)
+  *
+  * @brief Enable interrupts for the current core. This function cannot
+  * be called from the unprivileged context directly.
+  *
+  * @param[in] none
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+CILinterrupt_enableInterrupts( void )
+{
+    __enable_irq();
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILinterrupt_enableInterrupt(BitWidthType ISR)
+  *
+  * @brief Enable specific interrupt for the current core. This function cannot
+  * be called from the unprivileged context directly.
+  *
+  * @param[in]  ISR id of the interrupt
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+CILinterrupt_enableInterrupt( BitWidthType ISR )
+{
+    __NVIC_EnableIRQ( ISR );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILinterrupt_disableInterrupts(void)
+  *
+  * @brief Disable interrupts for the current core. This function cannot
+  * be called from the unprivileged context directly.
+  *
+  * @param[in]  none
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+CILinterrupt_disableInterrupts( void )
+{
+    __disable_irq();
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILinterrupt_disableInterrupt(BitWidthType ISR)
+  *
+  * @brief Disable specific interrupt for the current core. This function cannot
+  * be called from the unprivileged context directly.
+  *
+  * @param[in]  ISR id of the interrupt
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+CILinterrupt_disableInterrupt( BitWidthType ISR )
+{
+    __NVIC_DisableIRQ( ISR );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILinterrupt_contextSwitchRoutineTrigger(void)
+  *
+  * @brief Context switch routine trigger. This function cannot
+  * be called from the unprivileged context directly.
+  *
+  * @param[in] none
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+CILinterrupt_contextSwitchRoutineTrigger( void )
+{
+    SCB->ICSR |= SCB_ICSR_PENDSVSET_Msk;
+}
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_CILinterrupt_h
+  * @} */
+/*  General_CILinterrupt_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

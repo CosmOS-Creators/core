@@ -50,13 +50,13 @@ std::unique_ptr<UtCfg_MOCK> UtCfg_TestFixture::_UtCfgMock;
 
 CosmOS_CoreVariableType CoresVar[CORE_NUM] IS_INITIALIZED_TO{
     {
-        (void *)NULL,
-        (void *)NULL,
+        (CosmOS_SchedulableConfigurationType *)NULL,
+        (CosmOS_ProgramConfigurationType *)NULL,
         OS_STATE_ENUM__NOT_INITIALIZED,
     },
     {
-        (void *)NULL,
-        (void *)NULL,
+        (CosmOS_SchedulableConfigurationType *)NULL,
+        (CosmOS_ProgramConfigurationType *)NULL,
         OS_STATE_ENUM__NOT_INITIALIZED,
     },
 };

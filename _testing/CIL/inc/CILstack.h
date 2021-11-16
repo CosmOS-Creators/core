@@ -10,7 +10,7 @@
 <!--                       CILstack Unit Group Definition                     -->
 *********************************************************************************
 ** @defgroup CILstack_unit CILstack Unit
-** @ingroup CILmodule
+** @ingroup CIL_module
 ** @brief CILstack Unit
 ** @details lorem
 *********************************************************************************
@@ -41,14 +41,15 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
+
 
 /* CIL interfaces */
 #include "CILstdTypes.h"
@@ -68,8 +69,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_CILstack_h
+  * @} */
+/*  Macros_CILstack_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -87,8 +88,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_CILstack_h
+  * @} */
+/*  Variables_CILstack_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -112,8 +113,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_CILstack_h
+  * @} */
+/*  Getters_CILstack_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -125,8 +126,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_CILstack_h
+  * @} */
+/*  Setters_CILstack_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -137,23 +138,30 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn CILstack_stackInit(AddressType stackLowAddress, AddressType stackHighAddress, AddressType handlerAddress)
+  * ****************************************************************************/
+/**
+  * @fn CILstack_stackInit(AddressType stackLowAddress,
+  * AddressType stackHighAddress,
+  * AddressType handlerAddress)
   *
   * @brief Task stack initialization.
   *
-  * @param[in]  AddressType stackLowAddress
-  * @param[in]  AddressType stackHighAddress
-  * @param[in]  AddressType handlerAddress
+  * @param[in]  stackLowAddress
+  * @param[in]  stackHighAddress
+  * @param[in]  handlerAddress
   *
   * @return StackPointerType
 ********************************************************************************/
-__OS_FUNC_SECTION StackPointerType CILstack_stackInit(AddressType stackLowAddress, AddressType stackHighAddress, AddressType handlerAddress);
+__OS_FUNC_SECTION StackPointerType
+CILstack_stackInit(
+    AddressType stackLowAddress,
+    AddressType stackHighAddress,
+    AddressType handlerAddress );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_CILstack_h
+  * @} */
+/*  General_CILstack_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -171,8 +179,8 @@ __OS_FUNC_SECTION StackPointerType CILstack_stackInit(AddressType stackLowAddres
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_CILstack_h
+  * @} */
+/*  Getters_CILstack_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -183,7 +191,8 @@ __OS_FUNC_SECTION StackPointerType CILstack_stackInit(AddressType stackLowAddres
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
+  * ****************************************************************************/
+/**
   * @fn CILstack_setStackPointer(AddressType address)
   *
   * @brief Set stack pointer DEMO CODE.
@@ -192,12 +201,13 @@ __OS_FUNC_SECTION StackPointerType CILstack_stackInit(AddressType stackLowAddres
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION __NAKED void CILstack_setStackPointer(AddressType address);
+__OS_FUNC_SECTION __NAKED void
+CILstack_setStackPointer( AddressType address );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_CILstack_h
+  * @} */
+/*  Setters_CILstack_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -209,8 +219,8 @@ __OS_FUNC_SECTION __NAKED void CILstack_setStackPointer(AddressType address);
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_CILstack_h
+  * @} */
+/*  General_CILstack_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

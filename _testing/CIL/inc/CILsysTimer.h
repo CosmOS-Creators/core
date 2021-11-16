@@ -10,7 +10,7 @@
 <!--                     CILsysTimer Unit Group Definition                    -->
 *********************************************************************************
 ** @defgroup CILsysTimer_unit CILsysTimer Unit
-** @ingroup CILmodule
+** @ingroup CIL_module
 ** @brief CILsysTimer Unit
 ** @details lorem
 *********************************************************************************
@@ -41,14 +41,14 @@
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
 
 /* CIL interfaces */
 #include "CILstdTypes.h"
@@ -68,8 +68,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_CILsysTimer_h
+  * @} */
+/*  Macros_CILsysTimer_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -87,8 +87,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_CILsysTimer_h
+  * @} */
+/*  Variables_CILsysTimer_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -112,8 +112,8 @@
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_CILsysTimer_h
+  * @} */
+/*  Getters_CILsysTimer_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -124,22 +124,43 @@
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn CILsysTimer_setTicks(BitWidthType ticks, CosmOS_SchedulerSyncStateType schedulersSyncState)
+  * ****************************************************************************/
+/**
+  * @fn CILsysTimer_startTimer(BitWidthType ticks, BitWidthType timerTickCount)
   *
-  * @brief Disable system timer DEMO CODE.
+  * @brief Start system timer. This function cannot
+  * be called from the unprivileged context directly. DEMO
   *
-  * @param[in]  BitWidthType ticks
-  * @param[in]  CosmOS_SchedulerSyncStateType schedulersSyncState
+  * @param[in]  ticks number of ticks to be set
+  * @param[in]  timerTickCount how many system timer ticks represent the
+  * one scheduler tick
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void CILsysTimer_setTicks(BitWidthType ticks, CosmOS_SchedulerSyncStateType schedulersSyncState);
+__OS_FUNC_SECTION void
+CILsysTimer_startTimer( BitWidthType ticks, BitWidthType timerTickCount );
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILsysTimer_setTicks(BitWidthType ticks, BitWidthType timerTickCount)
+  *
+  * @brief Set ticks on system timer. This function cannot
+  * be called from the unprivileged context directly. DEMO
+  *
+  * @param[in]  ticks number of ticks to be set
+  * @param[in]  timerTickCount how many system timer ticks represent the
+  * one scheduler tick
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void
+CILsysTimer_setTicks( BitWidthType ticks, BitWidthType timerTickCount );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_CILsysTimer_h
+  * @} */
+/*  Setters_CILsysTimer_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -151,8 +172,8 @@ __OS_FUNC_SECTION void CILsysTimer_setTicks(BitWidthType ticks, CosmOS_Scheduler
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_CILsysTimer_h
+  * @} */
+/*  General_CILsysTimer_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -170,8 +191,8 @@ __OS_FUNC_SECTION void CILsysTimer_setTicks(BitWidthType ticks, CosmOS_Scheduler
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_CILsysTimer_h
+  * @} */
+/*  Getters_CILsysTimer_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -183,8 +204,8 @@ __OS_FUNC_SECTION void CILsysTimer_setTicks(BitWidthType ticks, CosmOS_Scheduler
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_CILsysTimer_h
+  * @} */
+/*  Setters_CILsysTimer_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
@@ -196,8 +217,8 @@ __OS_FUNC_SECTION void CILsysTimer_setTicks(BitWidthType ticks, CosmOS_Scheduler
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_CILsysTimer_h
+  * @} */
+/*  General_CILsysTimer_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

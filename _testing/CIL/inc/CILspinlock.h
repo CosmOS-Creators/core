@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file CILuart.h
+** @file CILspinlock.h
 *********************************************************************************
-<!--                       CILuart Unit Group Definition                      -->
+<!--                     CILspinlock Unit Group Definition                    -->
 *********************************************************************************
-** @defgroup CILuart_unit CILuart Unit
-** @ingroup CILmodule
-** @brief CILuart Unit
+** @defgroup CILspinlock_unit CILspinlock Unit
+** @ingroup CIL_module
+** @brief CILspinlock Unit
 ** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
@@ -25,30 +25,30 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                  CILuart Unit Global Group Definition                    -->
+<!--                 CILspinlock Unit Global Group Definition                 -->
 *********************************************************************************
-** @defgroup Global_CILuart Global
-** @ingroup CILuart_unit
-** @brief CILuart globals
+** @defgroup Global_CILspinlock Global
+** @ingroup CILspinlock_unit
+** @brief CILspinlock globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __CILUARTSTACK_H__
-#define __CILUARTSTACK_H__
+#ifndef __CILSPINLOCK_H__
+#define __CILSPINLOCK_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "sysDefs.h"
 #include "memoryMapping.h"
+#include "sysDefs.h"
 
 /* CIL interfaces */
 #include "CILstdTypes.h"
@@ -61,15 +61,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_CILuart_h Macros
-  * @ingroup Global_CILuart
+  * @defgroup Macros_CILspinlock_h Macros
+  * @ingroup Global_CILspinlock
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Macros_CILuart_h
+  * @} */
+/*  Macros_CILspinlock_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -80,15 +80,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_CILuart_h Variables
-  * @ingroup Global_CILuart
+  * @defgroup Variables_CILspinlock_h Variables
+  * @ingroup Global_CILspinlock
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Variables_CILuart_h
+  * @} */
+/*  Variables_CILspinlock_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -99,59 +99,117 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_CILuart_h API's
-  * @ingroup Global_CILuart
+  * @defgroup Apis_CILspinlock_h API's
+  * @ingroup Global_CILspinlock
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_CILuart_h Getters
-  * @ingroup Apis_CILuart_h
+  * @addtogroup Getters_CILspinlock_h Getters
+  * @ingroup Apis_CILspinlock_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * *************************************************************************//**
-  * @fn CILuart_togglePin(void *uartStackx, BitWidthType uartStack_Pin)
+  * ****************************************************************************/
+/**
+  * @fn CILspinlock_getSpinlock(AddressType * spinlockPointer,
+  * BitWidthType spinlockId,
+  * BitWidthType schedulableId )
   *
-  * @brief uartStack toggle pin DEMO CODE.
+  * @brief Get spinlock. This function cannot
+  * be called from the unprivileged context directly. DEMO
   *
-  * @param[in]  none
+  * @param[in]  spinlockPointer pointer to the spinlock variable that stores
+  * spinlock value
+  * @param[in]  spinlockId
+  * @param[in]  schedulableId
   *
-  * @return none
+  * @return CosmOS_SpinlockStateType
 ********************************************************************************/
-__OS_FUNC_SECTION void CILuart_sysJob();
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+CILspinlock_getSpinlock(
+    AddressType * spinlockPointer,
+    BitWidthType spinlockId,
+    BitWidthType schedulableId );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_CILuart_h
+  * @} */
+/*  Getters_CILspinlock_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_CILuart_h Setters
-  * @ingroup Apis_CILuart_h
+  * @addtogroup Setters_CILspinlock_h Setters
+  * @ingroup Apis_CILspinlock_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_CILuart_h
+  * @} */
+/*  Setters_CILspinlock_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_CILuart_h General
-  * @ingroup Apis_CILuart_h
+  * @addtogroup General_CILspinlock_h General
+  * @ingroup Apis_CILspinlock_h
   * @{
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILspinlock_trySpinlock(AddressType * spinlockPointer,
+  * BitWidthType spinlockId,
+  * BitWidthType schedulableId )
+  *
+  * @brief Try to get spinlock. This function cannot
+  * be called from the unprivileged context directly. DEMO
+  *
+  * @param[in]  spinlockPointer pointer to the spinlock variable that stores
+  * spinlock value
+  * @param[in]  spinlockId
+  * @param[in]  schedulableId
+  *
+  * @return CosmOS_SpinlockStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+CILspinlock_trySpinlock(
+    AddressType * spinlockPointer,
+    BitWidthType spinlockId,
+    BitWidthType schedulableId );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILspinlock_releaseSpinlock(AddressType * spinlockPointer,
+  * BitWidthType spinlockId,
+  * BitWidthType schedulableId )
+  *
+  * @brief Release spinlock. This function cannot
+  * be called from the unprivileged context directly. DEMO
+  *
+  * @param[in]  spinlockPointer pointer to the spinlock variable that stores
+  * spinlock value
+  * @param[in]  spinlockId
+  * @param[in]  schedulableId
+  *
+  * @return CosmOS_SpinlockStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SpinlockStateType
+CILspinlock_releaseSpinlock(
+    AddressType * spinlockPointer,
+    BitWidthType spinlockId,
+    BitWidthType schedulableId );
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_CILuart_h
+  * @} */
+/*  General_CILspinlock_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -162,41 +220,41 @@ __OS_FUNC_SECTION void CILuart_sysJob();
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_CILuart_h Getters
-  * @ingroup Apis_CILuart_h
+  * @addtogroup Getters_CILspinlock_h Getters
+  * @ingroup Apis_CILspinlock_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Getters_CILuart_h
+  * @} */
+/*  Getters_CILspinlock_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_CILuart_h Setters
-  * @ingroup Apis_CILuart_h
+  * @addtogroup Setters_CILspinlock_h Setters
+  * @ingroup Apis_CILspinlock_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * Setters_CILuart_h
+  * @} */
+/*  Setters_CILspinlock_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_CILuart_h General
-  * @ingroup Apis_CILuart_h
+  * @addtogroup General_CILspinlock_h General
+  * @ingroup Apis_CILspinlock_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
-  * @}
-  * General_CILuart_h
+  * @} */
+/*  General_CILspinlock_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
