@@ -103,7 +103,7 @@ typedef struct
 typedef struct
 {
     BitWidthType mutex;
-    const void * schedulableOwner; /* CosmOS_SchedulableConfigurationType */
+    const CosmOS_SchedulableConfigurationType * schedulableOwner;
 
 } CosmOS_MutexVariableType;
 
@@ -248,7 +248,7 @@ typedef struct
 typedef struct
 {
     BitWidthType spinlock;
-    const void * schedulableOwner; /*CosmOS_SchedulableConfigurationType */
+    const CosmOS_SchedulableConfigurationType * schedulableOwner;
 
 } CosmOS_SpinlockVariableType;
 
@@ -260,8 +260,8 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    const void * schedulableInExecution; /* CosmOS_SchedulableConfigurationType */
-    const void * programInExecution; /* CosmOS_ProgramConfigurationType */
+    const CosmOS_SchedulableConfigurationType * schedulableInExecution;
+    const CosmOS_ProgramConfigurationType * programInExecution;
     CosmOS_OsStateType osState;
 
 } CosmOS_CoreVariableType;

@@ -92,13 +92,12 @@ extern "C" {
 /**
   * @brief  CosmOS_ProgramSectionConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_ProgramSectionConfigurationType
 {
     unsigned char * const startAddress;
     unsigned char * const endAddress;
     unsigned char * const flashAddress;
-
-} CosmOS_ProgramSectionConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -106,12 +105,11 @@ typedef struct
 /**
   * @brief  CosmOS_BootSectionConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_BootSectionConfigurationType
 {
     const CosmOS_ProgramSectionConfigurationType * const programSections;
     const BitWidthType programSectionsNumber;
-
-} CosmOS_BootSectionConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -119,12 +117,11 @@ typedef struct
 /**
   * @brief  CosmOS_PermissionsConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_PermissionsConfigurationType
 {
     const BitWidthType * const bitLocksSchedulables;
     const BitWidthType * const bitLocksSchedulablesInverted;
-
-} CosmOS_PermissionsConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -132,13 +129,12 @@ typedef struct
 /**
   * @brief  CosmOS_BufferConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_RoutesConfigurationType
 {
     const CosmOS_GenericVoidType * const routeFunc;
     const BitWidthType * const routeIdToFunc;
     const BitWidthType * const routeIdToEntity;
-
-} CosmOS_RoutesConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -146,7 +142,7 @@ typedef struct
 /**
   * @brief  CosmOS_BufferConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_BufferConfigurationType
 {
     CosmOS_BufferVariableType * const var;
     unsigned char * const buffer;
@@ -156,8 +152,7 @@ typedef struct
     const CosmOS_PermissionsConfigurationType * const writePermission;
     const CosmOS_BooleanType isInterCore;
     const BitWidthType spinlockId;
-
-} CosmOS_BufferConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -165,11 +160,10 @@ typedef struct
 /**
   * @brief  CosmOS_BufferDoublePairConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_BufferDoublePairConfigurationType
 {
     const CosmOS_BufferConfigurationType * const buffer;
-
-} CosmOS_BufferDoublePairConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -177,12 +171,11 @@ typedef struct
 /**
   * @brief  CosmOS_BufferDoubleConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_BufferDoubleConfigurationType
 {
     CosmOS_BufferDoubleVariableType * const var;
     const CosmOS_BufferDoublePairConfigurationType * const bufferPair;
-
-} CosmOS_BufferDoubleConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -190,13 +183,12 @@ typedef struct
 /**
   * @brief  CosmOS_StackConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_StackConfigurationType
 {
     const BitWidthType stackSize;
     const AddressType stackLowAddress;
     const AddressType stackHighAddress;
-
-} CosmOS_StackConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -204,13 +196,12 @@ typedef struct
 /**
   * @brief  CosmOS_HeapConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_HeapConfigurationType
 {
     const BitWidthType heapSize;
     const AddressType heapLowAddress;
     const AddressType heapHighAddress;
-
-} CosmOS_HeapConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -218,7 +209,7 @@ typedef struct
 /**
   * @brief  CosmOS_SchedulableConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_SchedulableConfigurationType
 {
     CosmOS_SchedulableVariableType * const var;
     const CosmOS_StackConfigurationType * const stack;
@@ -233,8 +224,7 @@ typedef struct
     const AddressType peripheralAccessLowAddress;
     const AddressType peripheralAccessHighAddress;
     const BitWidthType peripheralAccessSize;
-
-} CosmOS_SchedulableConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -242,13 +232,12 @@ typedef struct
 /**
   * @brief  CosmOS_TaskConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_TaskConfigurationType
 {
     CosmOS_TaskVariableType * const var;
     const CosmOS_SchedulableConfigurationType * const schedulable;
     const BitWidthType wcet;
-
-} CosmOS_TaskConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -256,13 +245,12 @@ typedef struct
 /**
   * @brief  CosmOS_ThreadConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_ThreadConfigurationType
 {
     CosmOS_ThreadVariableType * const var;
     const CosmOS_SchedulableConfigurationType * const schedulable;
     const BitWidthType priority;
-
-} CosmOS_ThreadConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -270,7 +258,7 @@ typedef struct
 /**
   * @brief  CosmOS_ProgramConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_ProgramConfigurationType
 {
     CosmOS_ProgramVariableType * const var;
     const BitWidthType coreId;
@@ -283,8 +271,7 @@ typedef struct
     const CosmOS_TaskConfigurationType * const taskCfgs;
     const CosmOS_ThreadConfigurationType * const threadCfgs;
     CosmOS_MutexVariableType * const heapMutex;
-
-} CosmOS_ProgramConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -292,12 +279,11 @@ typedef struct
 /**
   * @brief  CosmOS_ScheduleTableConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_ScheduleTableConfigurationType
 {
     const BitWidthType startTick;
     const CosmOS_TaskConfigurationType * const taskCfg;
-
-} CosmOS_ScheduleTableConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -305,11 +291,10 @@ typedef struct
 /**
   * @brief  CosmOS_ThreadListConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_ThreadListConfigurationType
 {
     const CosmOS_ThreadConfigurationType * const threadCfg;
-
-} CosmOS_ThreadListConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -317,12 +302,11 @@ typedef struct
 /**
   * @brief  CosmOS_AlarmConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_AlarmConfigurationType
 {
     CosmOS_AlarmVariableType * const var;
     const CosmOS_SchedulableConfigurationType * const schedulableCfg;
-
-} CosmOS_AlarmConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -330,7 +314,7 @@ typedef struct
 /**
   * @brief  CosmOS_SchedulerConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_SchedulerConfigurationType
 {
     CosmOS_SchedulerVariableType * const var;
     const CosmOS_ScheduleTableConfigurationType * const scheduleTable;
@@ -346,8 +330,7 @@ typedef struct
     const BitWidthType timerTickCount;
     const CosmOS_TaskConfigurationType * const idleTask;
     const CosmOS_AlarmConfigurationType * const alarmCfgs;
-
-} CosmOS_SchedulerConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -369,14 +352,13 @@ typedef struct
 /**
   * @brief  CosmOS_SysJobsGroupConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_SysJobsConfigurationType
 {
     CosmOS_SysJobsVariableType * const var;
     const CosmOS_SysJobsGroupConfigurationType * const groups;
     const BitWidthType numOfGroups;
     const BitWidthType hyperTick;
-
-} CosmOS_SysJobsConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -384,7 +366,7 @@ typedef struct
 /**
   * @brief  CosmOS_CoreConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_CoreConfigurationType
 {
     CosmOS_CoreVariableType * const var;
     const CosmOS_ProgramConfigurationType * const programs;
@@ -404,8 +386,7 @@ typedef struct
     const CosmOS_SchedulerConfigurationType * const schedulerCfg;
     CosmOS_BarrierVariableType * const barrierVars;
     const CosmOS_SysJobsConfigurationType * const sysJobsCfg;
-
-} CosmOS_CoreConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -413,7 +394,7 @@ typedef struct
 /**
   * @brief  CosmOS_OsConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_OsConfigurationType
 {
     CosmOS_OsVariableType * const var;
     const CosmOS_CoreConfigurationType * const cores;
@@ -426,8 +407,7 @@ typedef struct
     const CosmOS_BufferConfigurationType * const bufferCfgs;
     const CosmOS_BufferDoubleConfigurationType * const bufferDoubleCfgs;
     CosmOS_SpinlockVariableType * const spinlockVars;
-
-} CosmOS_OsConfigurationType;
+};
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

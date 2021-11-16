@@ -80,6 +80,35 @@ extern "C" {
   * @ingroup Global_cosmosTypesStd
   * @{
 ********************************************************************************/
+typedef struct CosmOS_ProgramSectionConfigurationType
+    CosmOS_ProgramSectionConfigurationType;
+typedef struct CosmOS_BootSectionConfigurationType
+    CosmOS_BootSectionConfigurationType;
+typedef struct CosmOS_PermissionsConfigurationType
+    CosmOS_PermissionsConfigurationType;
+typedef struct CosmOS_RoutesConfigurationType CosmOS_RoutesConfigurationType;
+typedef struct CosmOS_BufferConfigurationType CosmOS_BufferConfigurationType;
+typedef struct CosmOS_BufferDoublePairConfigurationType
+    CosmOS_BufferDoublePairConfigurationType;
+typedef struct CosmOS_BufferDoubleConfigurationType
+    CosmOS_BufferDoubleConfigurationType;
+typedef struct CosmOS_StackConfigurationType CosmOS_StackConfigurationType;
+typedef struct CosmOS_HeapConfigurationType CosmOS_HeapConfigurationType;
+typedef struct CosmOS_SchedulableConfigurationType
+    CosmOS_SchedulableConfigurationType;
+typedef struct CosmOS_TaskConfigurationType CosmOS_TaskConfigurationType;
+typedef struct CosmOS_ThreadConfigurationType CosmOS_ThreadConfigurationType;
+typedef struct CosmOS_ProgramConfigurationType CosmOS_ProgramConfigurationType;
+typedef struct CosmOS_ScheduleTableConfigurationType
+    CosmOS_ScheduleTableConfigurationType;
+typedef struct CosmOS_ThreadListConfigurationType
+    CosmOS_ThreadListConfigurationType;
+typedef struct CosmOS_AlarmConfigurationType CosmOS_AlarmConfigurationType;
+typedef struct CosmOS_SchedulerConfigurationType
+    CosmOS_SchedulerConfigurationType;
+typedef struct CosmOS_SysJobsConfigurationType CosmOS_SysJobsConfigurationType;
+typedef struct CosmOS_CoreConfigurationType CosmOS_CoreConfigurationType;
+typedef struct CosmOS_OsConfigurationType CosmOS_OsConfigurationType;
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
