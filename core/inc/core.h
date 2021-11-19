@@ -154,7 +154,7 @@ core_getCoreCfg( void );
   * @brief Set program and schedulable into the current context. This function
   * cannot be called from the unprivileged context directly.
   *
-  * @param[out]  core configuration pointerVar
+  * @param[out]  core configuration pointer
   * @param[in]  schedulableCfg configuration pointer
   *
   * @return none

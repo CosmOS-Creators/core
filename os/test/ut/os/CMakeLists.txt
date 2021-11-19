@@ -30,5 +30,5 @@ target_link_libraries(${EXECUTABLE_NAME} gtest_main gmock_main)
 include(GoogleTest)
 gtest_add_tests(
 	TARGET ${EXECUTABLE_NAME}
-	EXTRA_ARGS --gtest_output=xml:${COSMOS}/generated/build/tests/results/googletest_${EXECUTABLE_NAME}.xml
+	EXTRA_ARGS --gtest_output=xml:${TEST_RESULTS_DIRECTORY}/googletest_${EXECUTABLE_NAME}.xml --gtest_filter=*
 	)
