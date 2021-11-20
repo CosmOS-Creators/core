@@ -224,17 +224,17 @@ scheduler_classicScheduling(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
+  * @fn scheduler_timerISRCallback(void)
   *
-  * @brief Algorithm for scheduling next schedulable.This function cannot
+  * @brief System timer callback function. This function cannot
   * be called from the unprivileged context directly. DEMO
   *
-  * @param[in]  stackPointer stack pointer of the current schedulable
+  * @param[in]  none
   *
-  * @return BitWidthType
+  * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION StackPointerType
-scheduler_scheduleNextInstance( StackPointerType stackPointer );
+__OS_FUNC_SECTION void
+scheduler_timerISRCallback( void );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -251,6 +251,22 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer );
 ********************************************************************************/
 __OS_FUNC_SECTION void
 scheduler_start( void );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
+  *
+  * @brief Algorithm for scheduling next schedulable.This function cannot
+  * be called from the unprivileged context directly. DEMO
+  *
+  * @param[in]  stackPointer stack pointer of the current schedulable
+  *
+  * @return BitWidthType
+********************************************************************************/
+__OS_FUNC_SECTION StackPointerType
+scheduler_scheduleNextInstance( StackPointerType stackPointer );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

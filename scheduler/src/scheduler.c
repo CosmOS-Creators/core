@@ -38,6 +38,7 @@
 
 /* CIL interfaces */
 #include "CILcore.h"
+#include "CILinterrupt.h"
 #include "CILstack.h"
 #include "CILsysTimer.h"
 /********************************************************************************
@@ -228,9 +229,10 @@ scheduler_classicSchedulingCore(
   *
   * @details The implementation contains obtaining of the alarms number used
   * inside the for loop that iterates over all alarm possible identifiers and
-  * get based on them alarm variable by calling scheduler_getAlarmCfg function. Then
-  * the alarm variable is used in the alarm_getAlarmState function to get alarm
-  * state. The alarm state is used in the if condition that checks if the alarm
+  * get based on them alarm variable by calling scheduler_getAlarmCfg function.
+  * Then the alarm variable is used in the alarm_getAlarmState function to get
+  * alarm state.
+  * The alarm state is used in the if condition that checks if the alarm
   * state is ALARM_STATE_ENUM__ACTIVATED which means the alarm internal timer
   * needs to be updated, otherwise the alarm is ignored. The alarm is updated in
   * the sequence where its tick count is obtained by function
@@ -412,231 +414,68 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
+  * @fn  scheduler_timerISRCallback( void )
   *
   * @details The implementation contains obtaining of the core configuration by
-  * calling the core_getCoreCfg function. Then the scheduler variable in
-  * is obtained by the core_getCoreScheduler and the prior schedulable and
-  * reschedule trigger state are obtained by calling functions
-  * core_getCoreSchedulableInExecution and
-  * scheduler_getSchedulerRescheduleTriggerState. Then the switch statement
-  * is implemented and contains two states RESCHEDULE_TRIGGER_STATE_ENUM__TIMER
-  * and RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM. The timer reschedule state means
-  * that the trigger for the scheduler algorithm execution was timer interrupt.
-  * In this case the hyper tick, scheduler state, current tick
-  * maximum timer tick, prior tick step, timer tick count, prior schedulable
-  * instance type, schedule table iterator, schedule
-  * table elements number and start tick are obtained by calling functions
-  * scheduler_getSchedulerHyperTick, scheduler_getSchedulerCurrentTick,
-  * scheduler_getSchedulerMaxTimerTick, scheduler_getSchedulerTimerTickCount,
-  * scheduler_getSchedulerScheduleTableIterator,
-  * scheduler_getSchedulerScheduleTableElementsNum and
-  * scheduler_getSchedulerScheduleTableStartTick. Then the if condition is
-  * implemented to check if the prior schedulable instance type is
-  * SCHEDULABLE_INSTANCE_ENUM__THREAD and if yes the stack pointer is stored
-  * by calling switchScheduler_schedulable_setStackPointer function based on
-  * the SCHEDULER_PERFORMANCE_SCHEDULING macro state. This is needed just for
-  * the threads, because the tasks stack is always reused. Next the function as
-  * macro switchScheduler_updateAlarms is called based also on the
-  * SCHEDULER_PERFORMANCE_SCHEDULING macro state to update all alarms - only
-  * if there is performance scheduling active otherwise there are no alarms.
-  * Subsequent if condition checks if the schedule table elements number is
-  * non-zero value and if the starttick is equal to the current tick, in this
-  * case zero. If condition is true the scheduler_classicSchedulingCore function
-  * is called and scheduler state is set to the
-  * SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK.
-  * If no the functions as macros switchScheduler_performanceScheduling and
-  * switchScheduler_classicScheduling are called depends on the
-  * SCHEDULER_PERFORMANCE_SCHEDULING macro state (configured via switches).
-  * and scheduler state is set to SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME.
-  * The schedulable stack pointer is then set by calling function
-  * schedulable_setStackPointer and also schedulable variable is set to the
-  * current context by calling function core_setSchedulableIntoCurrentContext
-  * and also scheduler state is set by calling scheduler_setSchedulerState
-  * function. If condition is implemented to check if the timer ticks that need
-  * to be set are more than maximum timer ticks, and if yes than the timer ticks
-  * are reduced to the maximum timer ticks. Current tick is then incremented by
-  * the timer ticks value modulo hyper tick to not exceed the hyper tick. THe
-  * prior tick step is then set by calling scheduler_setSchedulerPriorTickStep
-  * function and the current tick by calling scheduler_setSchedulerCurrentTick.
-  * The function as macro switchMemoryProtection_setMemoryProtection is called
-  * based on the MEMORY_PROTECTION macro state. The operating system state for
-  * the current core configuration is set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM
-  * by calling core_setCoreOsState function. The scheduler  reschedule state is
-  * set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
-  * scheduler_setSchedulerRescheduleTriggerState. Then the system timer is set
-  * by calling CILsysTimer_setTicks.
-  * The system reschedule state means that the trigger for the scheduler
-  * algorithm execution was system even such as mutex or putting thread to the
-  * sleep state. In this case there is no need to check the start time for
-  * another critical task as the system timer has not yet occurred and therefore
-  * the prior schedulable instance type has to be in this case
-  * SCHEDULABLE_INSTANCE_ENUM__THREAD. Then the stack pointer must be stored by
-  * calling schedulable_setStackPointer function. After this point the function
-  * scheduler_performanceScheduling is called to schedule next thread for the
-  * execution that is then set as schedulable in current context by calling
-  * core_setSchedulableIntoCurrentContext function. The function as macro
-  * switchMemoryProtection_setMemoryProtection is called based on the
-  * MEMORY_PROTECTION macro state.
-  * In the end the scheduler reschedule state is set to
-  * RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
-  * scheduler_setSchedulerRescheduleTriggerState - this is done only in this
-  * place to force system timer overwrite this state when occurs.
-  * Finally the stackPointerRetVal is returned from the function, that contains
-  * the next schedulable stack pointer.
+  * calling function core_getCoreCfg. The core configuration is then used to get
+  * the scheduler variable for the current core. After this point the reschedule
+  * state of the scheduler is checked in the if condition. If the reschedule
+  * trigger is equal to the RESCHEDULE_TRIGGER_STATE_ENUM__TIMER the scheduling
+  * algorithm was not finished in the required time (preempt tick) and an error
+  * reaction is triggered. Otherwise the scheduler state is checked in the
+  * if condition. If the scheduler state is equal to the
+  * SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK, the schedulableState is
+  * obtained from the schedulable in execution for the current core
+  * configuration and check if it is equal to SCHEDULABLE_STATE_ENUM__EXECUTED.
+  * If not an error reaction is triggered. Otherwise the reschedule trigger
+  * state is set to RESCHEDULE_TRIGGER_STATE_ENUM__TIMER, timer is set to the
+  * preempt period and CILinterrupt_contextSwitchRoutineTrigger function called.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION StackPointerType
-scheduler_scheduleNextInstance( StackPointerType stackPointer )
+__OS_FUNC_SECTION void
+scheduler_timerISRCallback( void )
 {
-    BitWidthType currentTick, hyperTick, startTick, timerTicks, maxTimerTick,
-        priorTickStep, timerTickCount, scheduleTableIterator,
-        scheduleTableElementsNum;
-
-    StackPointerType stackPointerRetVal;
-
-    CosmOS_SchedulerStateType schedulerState;
-    CosmOS_RescheduleTriggerStateType rescheduleTriggerState;
-    CosmOS_SchedulableInstanceType priorSchedulableInstanceType;
-
     CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_SchedulerConfigurationType * schedulerCfg;
-    CosmOS_SchedulableConfigurationType * schedulableCfg;
-    CosmOS_SchedulableConfigurationType * priorSchedulableCfg;
 
     coreCfg = core_getCoreCfg();
     schedulerCfg = core_getCoreScheduler( coreCfg );
-    priorSchedulableCfg = core_getCoreSchedulableInExecution( coreCfg );
-    rescheduleTriggerState =
-        scheduler_getSchedulerRescheduleTriggerState( schedulerCfg );
 
-    switch ( rescheduleTriggerState )
+    if ( schedulerCfg->var->rescheduleTriggerState IS_NOT_EQUAL_TO
+             RESCHEDULE_TRIGGER_STATE_ENUM__TIMER )
     {
-        case RESCHEDULE_TRIGGER_STATE_ENUM__TIMER:
+        if ( schedulerCfg->var->schedulerState IS_EQUAL_TO
+                 SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK )
         {
-            hyperTick = scheduler_getSchedulerHyperTick( schedulerCfg );
-            schedulerState = scheduler_getSchedulerState( schedulerCfg );
-            currentTick = scheduler_getSchedulerCurrentTick( schedulerCfg );
-            maxTimerTick = scheduler_getSchedulerMaxTimerTick( schedulerCfg );
-            priorTickStep = scheduler_getSchedulerPriorTickStep( schedulerCfg );
-            timerTickCount =
-                scheduler_getSchedulerTimerTickCount( schedulerCfg );
-            priorSchedulableInstanceType =
-                schedulable_getInstanceType( priorSchedulableCfg );
-            scheduleTableIterator =
-                scheduler_getSchedulerScheduleTableIterator( schedulerCfg );
-            scheduleTableElementsNum =
-                scheduler_getSchedulerScheduleTableElementsNum( schedulerCfg );
-            startTick = scheduler_getSchedulerScheduleTableStartTick(
-                schedulerCfg, scheduleTableIterator );
+            CosmOS_SchedulableStateType schedulableState;
 
-            /*TODO: this should be moved to the sysTick interrupt
-            with higher priority to have faster response - without else,
-             that should stay here */
-            if ( schedulerState IS_EQUAL_TO
-                     SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK )
+            schedulableState =
+                schedulable_getState( (CosmOS_SchedulableConfigurationType *)
+                                          coreCfg->var->schedulableInExecution );
+
+            if ( schedulableState IS_NOT_EQUAL_TO
+                     SCHEDULABLE_STATE_ENUM__EXECUTED )
             {
-                CosmOS_SchedulableStateType schedulableState;
-
-                schedulableState = schedulable_getState( priorSchedulableCfg );
-
-                if ( schedulableState IS_NOT_EQUAL_TO
-                         SCHEDULABLE_STATE_ENUM__EXECUTED )
-                {
-                    /* reaction */
-                }
+                /* TODO: ERROR REACTION EXCEEDING WCET */
             }
-
-            if ( priorSchedulableInstanceType IS_EQUAL_TO
-                     SCHEDULABLE_INSTANCE_ENUM__THREAD )
-            {
-                /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
-                switchScheduler_schedulable_setStackPointer(
-                    priorSchedulableCfg, stackPointer );
-            }
-
-            /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
-            switchScheduler_updateAlarms( coreCfg, priorTickStep );
-
-            if ( scheduleTableElementsNum AND startTick IS_EQUAL_TO currentTick )
-            {
-                scheduler_classicSchedulingCore(
-                    schedulerCfg,
-                    &schedulableCfg,
-                    &stackPointerRetVal,
-                    &timerTicks,
-                    &scheduleTableIterator,
-                    scheduleTableElementsNum );
-
-                schedulerState =
-                    SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK;
-            }
-            else
-            {
-                /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
-                switchScheduler_performanceScheduling(
-                    schedulerCfg,
-                    &schedulableCfg,
-                    &stackPointerRetVal,
-                    &timerTicks );
-                /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO OFF */
-                switchScheduler_classicScheduling(
-                    schedulerCfg,
-                    &schedulableCfg,
-                    &stackPointerRetVal,
-                    &timerTicks,
-                    startTick,
-                    currentTick );
-
-                schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
-            }
-
-            schedulable_setStackPointer( schedulableCfg, stackPointerRetVal );
-            core_setSchedulableIntoCurrentContext( coreCfg, schedulableCfg );
-
-            scheduler_setSchedulerState( schedulerCfg, schedulerState );
-
-            if ( maxTimerTick < timerTicks )
-            {
-                timerTicks = maxTimerTick;
-            }
-
-            currentTick = ( ( currentTick + timerTicks ) % hyperTick );
-            scheduler_setSchedulerPriorTickStep( schedulerCfg, timerTicks );
-            scheduler_setSchedulerCurrentTick( schedulerCfg, currentTick );
-
-            switchMemoryProtection_setMemoryProtection(
-                coreCfg, schedulableCfg );
-
-            CILsysTimer_setTicks( timerTicks, timerTickCount );
-            break;
         }
-        case RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM:
-        {
-            schedulable_setStackPointer( priorSchedulableCfg, stackPointer );
 
-            scheduler_performanceScheduling(
-                schedulerCfg,
-                &schedulableCfg,
-                &stackPointerRetVal,
-                &timerTicks );
+        schedulerCfg->var->rescheduleTriggerState =
+            RESCHEDULE_TRIGGER_STATE_ENUM__TIMER;
 
-            schedulable_setStackPointer( schedulableCfg, stackPointerRetVal );
-            core_setSchedulableIntoCurrentContext( coreCfg, schedulableCfg );
+        /* Give scheduling algorithm preempt tick to finish the reschedule */
+        CILsysTimer_startTimer(
+            schedulerCfg->preemptTick, schedulerCfg->timerTickCount );
 
-            switchMemoryProtection_setMemoryProtection(
-                coreCfg, schedulableCfg );
-
-            break;
-        }
+        CILinterrupt_contextSwitchRoutineTrigger();
     }
-
-    scheduler_setSchedulerRescheduleTriggerState(
-        schedulerCfg, RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM );
-    return stackPointerRetVal;
-};
+    else
+    {
+        /* TODO: ERROR REACTION RESCHEDULE WAS NOT FINISHED IN PREEMPT TICK */
+    }
+}
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @endcond*/
@@ -777,6 +616,222 @@ scheduler_start( void )
     CILsysTimer_startTimer( timerTicks, timerTickCount );
 
     CILstack_setStackPointer( stackPointerRetVal );
+};
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn scheduler_scheduleNextInstance(StackPointerType stackPointer)
+  *
+  * @details The implementation contains obtaining of the core configuration by
+  * calling the core_getCoreCfg function. Then the scheduler variable in
+  * is obtained by the core_getCoreScheduler and the prior schedulable and
+  * reschedule trigger state are obtained by calling functions
+  * core_getCoreSchedulableInExecution and
+  * scheduler_getSchedulerRescheduleTriggerState. Then the switch statement
+  * is implemented and contains two states RESCHEDULE_TRIGGER_STATE_ENUM__TIMER
+  * and RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM. The timer reschedule state means
+  * that the trigger for the scheduler algorithm execution was timer interrupt.
+  * In this case the hyper tick, scheduler state, current tick
+  * maximum timer tick, prior tick step, timer tick count, prior schedulable
+  * instance type, schedule table iterator, schedule
+  * table elements number and start tick are obtained by calling functions
+  * scheduler_getSchedulerHyperTick, scheduler_getSchedulerCurrentTick,
+  * scheduler_getSchedulerMaxTimerTick, scheduler_getSchedulerTimerTickCount,
+  * scheduler_getSchedulerScheduleTableIterator,
+  * scheduler_getSchedulerScheduleTableElementsNum and
+  * scheduler_getSchedulerScheduleTableStartTick. Then the if condition is
+  * implemented to check if the prior schedulable instance type is
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD and if yes the stack pointer is stored
+  * by calling switchScheduler_schedulable_setStackPointer function based on
+  * the SCHEDULER_PERFORMANCE_SCHEDULING macro state. This is needed just for
+  * the threads, because the tasks stack is always reused. Next the function as
+  * macro switchScheduler_updateAlarms is called based also on the
+  * SCHEDULER_PERFORMANCE_SCHEDULING macro state to update all alarms - only
+  * if there is performance scheduling active otherwise there are no alarms.
+  * Subsequent if condition checks if the schedule table elements number is
+  * non-zero value and if the starttick is equal to the current tick, in this
+  * case zero. If condition is true the scheduler_classicSchedulingCore function
+  * is called and scheduler state is set to the
+  * SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK.
+  * If no the functions as macros switchScheduler_performanceScheduling and
+  * switchScheduler_classicScheduling are called depends on the
+  * SCHEDULER_PERFORMANCE_SCHEDULING macro state (configured via switches).
+  * and scheduler state is set to SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME.
+  * The schedulable stack pointer is then set by calling function
+  * schedulable_setStackPointer and also schedulable variable is set to the
+  * current context by calling function core_setSchedulableIntoCurrentContext
+  * and also scheduler state is set by calling scheduler_setSchedulerState
+  * function. If condition is implemented to check if the timer ticks that need
+  * to be set are more than maximum timer ticks, and if yes than the timer ticks
+  * are reduced to the maximum timer ticks. Current tick is then incremented by
+  * the timer ticks value modulo hyper tick to not exceed the hyper tick. THe
+  * prior tick step is then set by calling scheduler_setSchedulerPriorTickStep
+  * function and the current tick by calling scheduler_setSchedulerCurrentTick.
+  * The function as macro switchMemoryProtection_setMemoryProtection is called
+  * based on the MEMORY_PROTECTION macro state. The operating system state for
+  * the current core configuration is set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM
+  * by calling core_setCoreOsState function. The scheduler  reschedule state is
+  * set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
+  * scheduler_setSchedulerRescheduleTriggerState. Then the system timer is set
+  * by calling CILsysTimer_setTicks.
+  * The system reschedule state means that the trigger for the scheduler
+  * algorithm execution was system even such as mutex or putting thread to the
+  * sleep state. In this case there is no need to check the start time for
+  * another critical task as the system timer has not yet occurred and therefore
+  * the prior schedulable instance type has to be in this case
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD. Then the stack pointer must be stored by
+  * calling schedulable_setStackPointer function. After this point the function
+  * scheduler_performanceScheduling is called to schedule next thread for the
+  * execution that is then set as schedulable in current context by calling
+  * core_setSchedulableIntoCurrentContext function. The function as macro
+  * switchMemoryProtection_setMemoryProtection is called based on the
+  * MEMORY_PROTECTION macro state.
+  * In the end the scheduler reschedule state is set to
+  * RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
+  * scheduler_setSchedulerRescheduleTriggerState - this is done only in this
+  * place to force system timer overwrite this state when occurs.
+  * Finally the stackPointerRetVal is returned from the function, that contains
+  * the next schedulable stack pointer.
+********************************************************************************/
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION StackPointerType
+scheduler_scheduleNextInstance( StackPointerType stackPointer )
+{
+    BitWidthType currentTick, hyperTick, startTick, timerTicks, maxTimerTick,
+        priorTickStep, timerTickCount, scheduleTableIterator,
+        scheduleTableElementsNum;
+
+    StackPointerType stackPointerRetVal;
+
+    CosmOS_SchedulerStateType schedulerState;
+    CosmOS_RescheduleTriggerStateType rescheduleTriggerState;
+    CosmOS_SchedulableInstanceType priorSchedulableInstanceType;
+
+    CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_SchedulerConfigurationType * schedulerCfg;
+    CosmOS_SchedulableConfigurationType * schedulableCfg;
+    CosmOS_SchedulableConfigurationType * priorSchedulableCfg;
+
+    coreCfg = core_getCoreCfg();
+    schedulerCfg = core_getCoreScheduler( coreCfg );
+    priorSchedulableCfg = core_getCoreSchedulableInExecution( coreCfg );
+    rescheduleTriggerState =
+        scheduler_getSchedulerRescheduleTriggerState( schedulerCfg );
+
+    switch ( rescheduleTriggerState )
+    {
+        case RESCHEDULE_TRIGGER_STATE_ENUM__TIMER:
+        {
+            hyperTick = scheduler_getSchedulerHyperTick( schedulerCfg );
+            schedulerState = scheduler_getSchedulerState( schedulerCfg );
+            currentTick = scheduler_getSchedulerCurrentTick( schedulerCfg );
+            maxTimerTick = scheduler_getSchedulerMaxTimerTick( schedulerCfg );
+            priorTickStep = scheduler_getSchedulerPriorTickStep( schedulerCfg );
+            timerTickCount =
+                scheduler_getSchedulerTimerTickCount( schedulerCfg );
+            priorSchedulableInstanceType =
+                schedulable_getInstanceType( priorSchedulableCfg );
+            scheduleTableIterator =
+                scheduler_getSchedulerScheduleTableIterator( schedulerCfg );
+            scheduleTableElementsNum =
+                scheduler_getSchedulerScheduleTableElementsNum( schedulerCfg );
+            startTick = scheduler_getSchedulerScheduleTableStartTick(
+                schedulerCfg, scheduleTableIterator );
+
+            if ( priorSchedulableInstanceType IS_EQUAL_TO
+                     SCHEDULABLE_INSTANCE_ENUM__THREAD )
+            {
+                /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+                switchScheduler_schedulable_setStackPointer(
+                    priorSchedulableCfg, stackPointer );
+            }
+
+            /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+            switchScheduler_updateAlarms( coreCfg, priorTickStep );
+
+            if ( scheduleTableElementsNum AND startTick IS_EQUAL_TO currentTick )
+            {
+                scheduler_classicSchedulingCore(
+                    schedulerCfg,
+                    &schedulableCfg,
+                    &stackPointerRetVal,
+                    &timerTicks,
+                    &scheduleTableIterator,
+                    scheduleTableElementsNum );
+
+                schedulerState =
+                    SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK;
+            }
+            else
+            {
+                /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO ON */
+                switchScheduler_performanceScheduling(
+                    schedulerCfg,
+                    &schedulableCfg,
+                    &stackPointerRetVal,
+                    &timerTicks );
+                /* SCHEDULER_PERFORMANCE_SCHEDULING IS_EQUAL_TO OFF */
+                switchScheduler_classicScheduling(
+                    schedulerCfg,
+                    &schedulableCfg,
+                    &stackPointerRetVal,
+                    &timerTicks,
+                    startTick,
+                    currentTick );
+
+                schedulerState = SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
+            }
+
+            schedulable_setStackPointer( schedulableCfg, stackPointerRetVal );
+            core_setSchedulableIntoCurrentContext( coreCfg, schedulableCfg );
+
+            scheduler_setSchedulerState( schedulerCfg, schedulerState );
+
+            if ( maxTimerTick < timerTicks )
+            {
+                timerTicks = maxTimerTick;
+            }
+
+            currentTick = ( ( currentTick + timerTicks ) % hyperTick );
+            scheduler_setSchedulerPriorTickStep( schedulerCfg, timerTicks );
+            scheduler_setSchedulerCurrentTick( schedulerCfg, currentTick );
+
+            switchMemoryProtection_setMemoryProtection(
+                coreCfg, schedulableCfg );
+
+            CILsysTimer_setTicks( timerTicks, timerTickCount );
+            break;
+        }
+        case RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM:
+        {
+            schedulable_setStackPointer( priorSchedulableCfg, stackPointer );
+
+            scheduler_performanceScheduling(
+                schedulerCfg,
+                &schedulableCfg,
+                &stackPointerRetVal,
+                &timerTicks );
+
+            schedulable_setStackPointer( schedulableCfg, stackPointerRetVal );
+            core_setSchedulableIntoCurrentContext( coreCfg, schedulableCfg );
+
+            switchMemoryProtection_setMemoryProtection(
+                coreCfg, schedulableCfg );
+
+            break;
+        }
+    }
+
+    scheduler_setSchedulerRescheduleTriggerState(
+        schedulerCfg, RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM );
+    return stackPointerRetVal;
 };
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )

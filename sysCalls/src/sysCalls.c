@@ -127,6 +127,95 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @fn sysCalls_dispatcher(
+  * BitWidthType sysCallId,
+  * BitWidthType entityId,
+  * CosmOS_GenericVoidType sysCall,
+  * AddressType * argsArr )
+  *
+  * @details The implementation contains switch statement implementation
+  * that dispatch the system call based on the sysCallId to the generic function
+  * types based on the system call type. After the function is called and result
+  * obtained the returnValue is returned from the function.
+********************************************************************************/
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION BitWidthType
+sysCalls_dispatcher(
+    BitWidthType sysCallId,
+    BitWidthType entityId,
+    CosmOS_GenericVoidType sysCall,
+    AddressType * argsArr )
+{
+    BitWidthType returnValue;
+
+    returnValue = 0;
+    switch ( sysCallId )
+    {
+        case 0:
+        {
+            ( (CosmOS_Generic_bitWidthType_ret_void)sysCall )( entityId );
+            break;
+        }
+
+        case 1:
+        {
+            returnValue =
+                ( (CosmOS_Generic_bitWidthType_ret_bitWidthType)sysCall )(
+                    entityId );
+            break;
+        }
+
+        case 2:
+        {
+            returnValue =
+                ( (CosmOS_Generic_bitWidthType_bitWidthType_ret_bitWidthType)
+                      sysCall )( entityId, (BitWidthType)argsArr[1] );
+            break;
+        }
+
+        case 3:
+        {
+            returnValue = ( (
+                CosmOS_Generic_bitWidthType_voidPtr_bitWidthType_ret_bitWidthType)
+                                sysCall )(
+                entityId, (void *)argsArr[1], argsArr[2] );
+            break;
+        }
+        case 4:
+        {
+            returnValue = ( (
+                CosmOS_Generic_bitWidthType_voidPtr_ret_bitWidthType)sysCall )(
+                entityId, (void *)argsArr[1] );
+            break;
+        }
+        case 5:
+        {
+            returnValue = ( (
+                CosmOS_Generic_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType)
+                                sysCall )(
+                entityId, (void *)argsArr[1], (void *)argsArr[2], argsArr[3] );
+            break;
+        }
+
+        default:
+        {
+            /* PANIC */
+            break;
+        }
+    }
+
+    return returnValue;
+}
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn sysCalls_bitWidthType_ret_void(BitWidthType id)
   *
   * @details The implementation contains calling the CIL function
