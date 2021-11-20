@@ -429,7 +429,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * configuration and check if it is equal to SCHEDULABLE_STATE_ENUM__EXECUTED.
   * If not an error reaction is triggered. Otherwise the reschedule trigger
   * state is set to RESCHEDULE_TRIGGER_STATE_ENUM__TIMER, timer is set to the
-  * preempt period and CILinterrupt_contextSwitchRoutineTrigger function called.
+  * preempt period and timer offset is saved to by calling function
+  * CILsysTimer_setTicksSaveOffset. After this point the scheduling algorithm is
+  * triggered by calling CILinterrupt_contextSwitchRoutineTrigger function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -466,13 +468,16 @@ scheduler_timerISRCallback( void )
             RESCHEDULE_TRIGGER_STATE_ENUM__TIMER;
 
         /* Give scheduling algorithm preempt tick to finish the reschedule */
-        CILsysTimer_startTimer(
-            schedulerCfg->preemptTick, schedulerCfg->timerTickCount );
+        CILsysTimer_setTicksSaveOffset(
+            schedulerCfg->preemptTick,
+            schedulerCfg->timerTickCount,
+            &schedulerCfg->var->timerOffset );
 
         CILinterrupt_contextSwitchRoutineTrigger();
     }
     else
     {
+        coreCfg->var->osState = OS_STATE_ENUM__INITIALIZED;
         /* TODO: ERROR REACTION RESCHEDULE WAS NOT FINISHED IN PREEMPT TICK */
     }
 }
@@ -706,7 +711,7 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer )
 {
     BitWidthType currentTick, hyperTick, startTick, timerTicks, maxTimerTick,
         priorTickStep, timerTickCount, scheduleTableIterator,
-        scheduleTableElementsNum;
+        scheduleTableElementsNum, timerOffset;
 
     StackPointerType stackPointerRetVal;
 
@@ -744,6 +749,7 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer )
                 scheduler_getSchedulerScheduleTableElementsNum( schedulerCfg );
             startTick = scheduler_getSchedulerScheduleTableStartTick(
                 schedulerCfg, scheduleTableIterator );
+            timerOffset = scheduler_getSchedulerTimerOffset( schedulerCfg );
 
             if ( priorSchedulableInstanceType IS_EQUAL_TO
                      SCHEDULABLE_INSTANCE_ENUM__THREAD )
@@ -806,7 +812,7 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer )
             switchMemoryProtection_setMemoryProtection(
                 coreCfg, schedulableCfg );
 
-            CILsysTimer_setTicks( timerTicks, timerTickCount );
+            CILsysTimer_setTicks( timerTicks, timerTickCount, timerOffset );
             break;
         }
         case RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM:

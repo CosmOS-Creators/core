@@ -536,9 +536,12 @@ scheduler_getAlarmCfgs( CosmOS_SchedulerConfigurationType * scheduler )
   * @return CosmOS_AlarmConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_AlarmConfigurationType *
-scheduler_getAlarmCfg( CosmOS_SchedulerConfigurationType * scheduler, BitWidthType alarmId )
+scheduler_getAlarmCfg(
+    CosmOS_SchedulerConfigurationType * scheduler,
+    BitWidthType alarmId )
 {
-    return (CosmOS_AlarmConfigurationType *)( &( scheduler->alarmCfgs[alarmId] ) );
+    return (
+        CosmOS_AlarmConfigurationType *)( &( scheduler->alarmCfgs[alarmId] ) );
 }
 
 /********************************************************************************
@@ -697,6 +700,26 @@ scheduler_getSchedulerRescheduleTriggerState(
     CosmOS_SchedulerConfigurationType * scheduler )
 {
     return ( scheduler->var->rescheduleTriggerState );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn scheduler_getSchedulerTimerOffset(
+  * CosmOS_SchedulerConfigurationType * scheduler)
+  *
+  * @brief Get scheduler timerOffset.
+  *
+  * @param[in]  scheduler configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+scheduler_getSchedulerTimerOffset(
+    CosmOS_SchedulerConfigurationType * scheduler )
+{
+    return ( scheduler->var->timerOffset );
 }
 
 /********************************************************************************
@@ -976,6 +999,28 @@ scheduler_setSchedulerRescheduleTriggerState(
     CosmOS_RescheduleTriggerStateType paramRescheduleTriggerState )
 {
     scheduler->var->rescheduleTriggerState = paramRescheduleTriggerState;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn scheduler_setSchedulerTimerOffset(
+  * CosmOS_SchedulerConfigurationType * scheduler)
+  *
+  * @brief Set scheduler timerOffset.
+  *
+  * @param[in]  scheduler configuration pointer
+  * @param[in]  paramTimerOffset timer offset
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+scheduler_setSchedulerTimerOffset(
+    CosmOS_SchedulerConfigurationType * scheduler,
+    BitWidthType paramTimerOffset )
+{
+    scheduler->var->timerOffset = paramTimerOffset;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
