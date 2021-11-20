@@ -148,6 +148,28 @@ extern "C" {
   *
   * @brief System call for bitWidthType args and return none.
   *
+  * @param[in]  sysCallId is used during the system call dispatching
+  * @param[in]  entityId is used as argument for the system call, if mapped to
+  * @param[in]  sysCall is pointer to the function that will be called
+  * @param[in]  argsArr array of arguments for the system call
+  *
+  * @return BitWidthType
+********************************************************************************/
+__OS_FUNC_SECTION BitWidthType
+sysCalls_dispatcher(
+    BitWidthType sysCallId,
+    BitWidthType entityId,
+    CosmOS_GenericVoidType sysCall,
+    AddressType * argsArr );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn sysCalls_bitWidthType_ret_voidStart(void)
+  *
+  * @brief System call for bitWidthType args and return none.
+  *
   * @param[in]  id is used during the system call dispatching
   *
   * @return none

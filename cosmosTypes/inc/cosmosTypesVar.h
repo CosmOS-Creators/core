@@ -211,6 +211,7 @@ typedef struct
     BitWidthType nextSyncTick;
     CosmOS_BooleanType syncInitState;
     CosmOS_RescheduleTriggerStateType rescheduleTriggerState;
+    BitWidthType timerOffset;
 
 } CosmOS_SchedulerVariableType;
 
