@@ -1,5 +1,5 @@
-#ifndef __OSBOOT_MOCK_H__
-#define __OSBOOT_MOCK_H__
+#ifndef __OSBOOTMOCK_H__
+#define __OSBOOTMOCK_H__
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

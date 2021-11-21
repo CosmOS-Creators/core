@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 #include "memoryProtection.h"
-#include "memoryProtection_mock.h"
+#include "memoryProtectionMock.h"
 
 std::unique_ptr<MemoryProtection_MOCK>
     MemoryProtection_TestFixture::_MemoryProtectionMock;

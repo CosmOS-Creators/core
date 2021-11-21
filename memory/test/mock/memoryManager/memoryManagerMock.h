@@ -1,5 +1,5 @@
-#ifndef __MEMORYMANAGER_MOCK_H__
-#define __MEMORYMANAGER_MOCK_H__
+#ifndef __MEMORYMANAGERMOCK_H__
+#define __MEMORYMANAGERMOCK_H__
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

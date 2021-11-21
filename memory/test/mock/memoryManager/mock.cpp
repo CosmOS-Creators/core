@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 #include "memoryManager.h"
-#include "memoryManager_mock.h"
+#include "memoryManagerMock.h"
 
 std::unique_ptr<MemoryManager_MOCK>
     MemoryManager_TestFixture::_MemoryManagerMock;

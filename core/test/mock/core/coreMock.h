@@ -1,5 +1,5 @@
-#ifndef __CORE_MOCK_H__
-#define __CORE_MOCK_H__
+#ifndef __COREMOCK_H__
+#define __COREMOCK_H__
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

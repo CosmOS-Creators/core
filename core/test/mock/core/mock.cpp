@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 #include "core.h"
-#include "core_mock.h"
+#include "coreMock.h"
 
 std::unique_ptr<Core_MOCK> Core_TestFixture::_CoreMock;
 

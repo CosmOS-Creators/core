@@ -24,7 +24,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 #include <gtest/gtest.h>
-#include "CILcore_mock.h"
+#include "CILcoreMock.h"
 #include "core.h"
 #include "utCfg.h"
 

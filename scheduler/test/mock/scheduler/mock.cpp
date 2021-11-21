@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 #include "scheduler.h"
-#include "scheduler_mock.h"
+#include "schedulerMock.h"
 
 std::unique_ptr<Scheduler_MOCK> Scheduler_TestFixture::_SchedulerMock;
 

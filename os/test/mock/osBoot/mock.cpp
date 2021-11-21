@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 #include "osBoot.h"
-#include "osBoot_mock.h"
+#include "osBootMock.h"
 
 std::unique_ptr<OsBoot_MOCK> OsBoot_TestFixture::_OsBootMock;
 

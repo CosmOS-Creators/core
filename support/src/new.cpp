@@ -24,7 +24,7 @@
 #include "core.h"
 #include "cosmosApi.h"
 #include "os.h"
-#include "stdlibInt.h"
+#include "supportStdlib.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -168,7 +168,7 @@ operator new( size_t size ) noexcept
 
     if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
     {
-        ptr = malloc_internal( size );
+        ptr = supportStdlib_malloc( size );
     }
     else
     {
@@ -212,7 +212,7 @@ operator delete( void * ptr ) noexcept
 
     if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
     {
-        free_internal( ptr );
+        supportStdlib_free( ptr );
     }
     else
     {
@@ -254,7 +254,7 @@ operator delete( void * ptr, size_t size ) noexcept
 
     if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
     {
-        free_internal( ptr );
+        supportStdlib_free( ptr );
     }
     else
     {

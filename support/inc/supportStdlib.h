@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file stdlibInt.h
+** @file supportStdlib.h
 *********************************************************************************
-<!--                      stdlibInt Unit Group Definition                     -->
+<!--                    supportStdlib Unit Group Definition                   -->
 *********************************************************************************
-** @defgroup stdlibInt_unit stdlibInt Unit
+** @defgroup supportStdlib_unit supportStdlib Unit
 ** @ingroup support_module
-** @brief stdlibInt Unit
+** @brief supportStdlib Unit
 ** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
@@ -25,18 +25,18 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                 stdlibInt Unit Global Group Definition                   -->
+<!--                supportStdlib Unit Global Group Definition                -->
 *********************************************************************************
-** @defgroup Global_stdlibInt Global
-** @ingroup stdlibInt_unit
-** @brief stdlibInt globals
+** @defgroup Global_supportStdlib Global
+** @ingroup supportStdlib_unit
+** @brief supportStdlib globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __STDLIBINT_H__
-#define __STDLIBINT_H__
+#ifndef __SUPPORTSTDLIB_H__
+#define __SUPPORTSTDLIB_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -51,7 +51,6 @@ extern "C" {
 #include "memoryMapping.h"
 #include "sysDefs.h"
 
-
 /* LIB interfaces */
 #include <stddef.h>
 /********************************************************************************
@@ -63,15 +62,15 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_stdlibInt_h Macros
-  * @ingroup Global_stdlibInt
+  * @defgroup Macros_supportStdlib_h Macros
+  * @ingroup Global_supportStdlib
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Macros_stdlibInt_h
+/*  Macros_supportStdlib_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -82,15 +81,15 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_stdlibInt_h Variables
-  * @ingroup Global_stdlibInt
+  * @defgroup Variables_supportStdlib_h Variables
+  * @ingroup Global_supportStdlib
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Variables_stdlibInt_h
+/*  Variables_supportStdlib_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -101,27 +100,27 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_stdlibInt_h API's
-  * @ingroup Global_stdlibInt
+  * @defgroup Apis_supportStdlib_h API's
+  * @ingroup Global_supportStdlib
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_stdlibInt_h Getters
-  * @ingroup Apis_stdlibInt_h
+  * @addtogroup Getters_supportStdlib_h Getters
+  * @ingroup Apis_supportStdlib_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_stdlibInt_h
+/*  Getters_supportStdlib_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_stdlibInt_h Setters
-  * @ingroup Apis_stdlibInt_h
+  * @addtogroup Setters_supportStdlib_h Setters
+  * @ingroup Apis_supportStdlib_h
   * @{
 ********************************************************************************/
 
@@ -129,20 +128,20 @@ extern "C" {
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_stdlibInt_h
+/*  Setters_supportStdlib_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_stdlibInt_h General
-  * @ingroup Apis_stdlibInt_h
+  * @addtogroup General_supportStdlib_h General
+  * @ingroup Apis_supportStdlib_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn malloc_internal( size_t size )
+  * @fn supportStdlib_malloc( size_t size )
   *
   * @brief Stdlib malloc function implementation redesigned for CosmOS DEMO.
   *
@@ -151,13 +150,13 @@ extern "C" {
   * @return void *
 ********************************************************************************/
 void *
-malloc_internal( size_t size );
+supportStdlib_malloc( size_t size );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn free( void* ptr )
+  * @fn supportStdlib_free( void* ptr )
   *
   * @brief Stdlib free function implementation redesigned for CosmOS DEMO.
   *
@@ -166,13 +165,13 @@ malloc_internal( size_t size );
   * @return none
 ********************************************************************************/
 void
-free_internal( void * ptr );
+supportStdlib_free( void * ptr );
 
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_stdlibInt_h
+/*  General_supportStdlib_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -183,41 +182,41 @@ free_internal( void * ptr );
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_stdlibInt_h Getters
-  * @ingroup Apis_stdlibInt_h
+  * @addtogroup Getters_supportStdlib_h Getters
+  * @ingroup Apis_supportStdlib_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_stdlibInt_h
+/*  Getters_supportStdlib_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_stdlibInt_h Setters
-  * @ingroup Apis_stdlibInt_h
+  * @addtogroup Setters_supportStdlib_h Setters
+  * @ingroup Apis_supportStdlib_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_stdlibInt_h
+/*  Setters_supportStdlib_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_stdlibInt_h General
-  * @ingroup Apis_stdlibInt_h
+  * @addtogroup General_supportStdlib_h General
+  * @ingroup Apis_supportStdlib_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_stdlibInt_h
+/*  General_supportStdlib_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

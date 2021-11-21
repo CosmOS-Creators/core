@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 #include "CILcore.h"
-#include "CILcore_mock.h"
+#include "CILcoreMock.h"
 
 std::unique_ptr<CILcore_MOCK> CILcore_TestFixture::_CILcoreMock;
 

@@ -477,7 +477,7 @@ scheduler_timerISRCallback( void )
     }
     else
     {
-        coreCfg->var->osState = OS_STATE_ENUM__INITIALIZED;
+        coreCfg->var->osState = coreCfg->var->osState; /* TODO: BREAKPOINT */
         /* TODO: ERROR REACTION RESCHEDULE WAS NOT FINISHED IN PREEMPT TICK */
     }
 }
