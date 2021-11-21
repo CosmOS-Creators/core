@@ -1,5 +1,5 @@
-#ifndef __CORESYNC_MOCK_H__
-#define __CORESYNC_MOCK_H__
+#ifndef __CORESYNCMOCK_H__
+#define __CORESYNCMOCK_H__
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

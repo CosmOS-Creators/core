@@ -1,5 +1,5 @@
-#ifndef __SCHEDULER_MOCK_H__
-#define __SCHEDULER_MOCK_H__
+#ifndef __SCHEDULERMOCK_H__
+#define __SCHEDULERMOCK_H__
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

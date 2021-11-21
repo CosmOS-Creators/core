@@ -252,7 +252,7 @@ typedef enum
 typedef enum
 {
 
-    SCHEDULABLE_INSTANCE_ENUM__TASK,
+    SCHEDULABLE_INSTANCE_ENUM__TASK = 0,
     SCHEDULABLE_INSTANCE_ENUM__THREAD = FORCE_ENUM,
 
 } CosmOS_SchedulableInstanceType;

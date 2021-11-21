@@ -25,9 +25,9 @@
 ********************************************************************************/
 #include <gtest/gtest.h>
 #include <future>
-#include "core_mock.h"
+#include "coreMock.h"
 #include "os.h"
-#include "scheduler_mock.h"
+#include "schedulerMock.h"
 #include "utCfg.h"
 
 /********************************************************************************

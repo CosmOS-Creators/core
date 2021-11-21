@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file stdlibInt.c
+** @file supportStdlib.c
 *********************************************************************************
-<!--                  stdlibInt Unit Local Group Definition                   -->
+<!--                 supportStdlib Unit Local Group Definition                -->
 *********************************************************************************
-** @defgroup Local_stdlibInt Local
-** @ingroup stdlibInt_unit
-** @brief stdlibInt locals
+** @defgroup Local_supportStdlib Local
+** @ingroup supportStdlib_unit
+** @brief supportStdlib locals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
@@ -21,7 +21,7 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "stdlibInt.h"
+#include "supportStdlib.h"
 #include "core.h"
 #include "cosmosAssert.h"
 #include "heap.h"
@@ -37,15 +37,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_stdlibInt_c Macros
-  * @ingroup Local_stdlibInt
+  * @defgroup Macros_supportStdlib_c Macros
+  * @ingroup Local_supportStdlib
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Macros_stdlibInt_c
+/*  Macros_supportStdlib_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -56,15 +56,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_stdlibInt_c Variables
-  * @ingroup Local_stdlibInt
+  * @defgroup Variables_supportStdlib_c Variables
+  * @ingroup Local_supportStdlib
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Variables_stdlibInt_c
+/*  Variables_supportStdlib_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -75,47 +75,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_stdlibInt_c API's
-  * @ingroup Local_stdlibInt
+  * @defgroup Apis_supportStdlib_c API's
+  * @ingroup Local_supportStdlib
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_stdlibInt_c Getters
-  * @ingroup Apis_stdlibInt_c
+  * @addtogroup Getters_supportStdlib_c Getters
+  * @ingroup Apis_supportStdlib_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_stdlibInt_c
+/*  Getters_supportStdlib_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_stdlibInt_c Setters
-  * @ingroup Apis_stdlibInt_c
+  * @addtogroup Setters_supportStdlib_c Setters
+  * @ingroup Apis_supportStdlib_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_stdlibInt_c
+/*  Setters_supportStdlib_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_stdlibInt_c General
-  * @ingroup Apis_stdlibInt_c
+  * @addtogroup General_supportStdlib_c General
+  * @ingroup Apis_supportStdlib_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn malloc_varAlloc( AddressType nextAvailableAddress,
+  * @fn supportStdlib_mallocVar( AddressType nextAvailableAddress,
   * AddressType priorMallocAddress,
   * AddressType nextMallocAddress,
   * BitWidthType size )
@@ -130,7 +130,7 @@
   * @return CosmOS_MallocVariableType *
 ********************************************************************************/
 static CosmOS_MallocVariableType *
-malloc_varAlloc(
+supportStdlib_mallocVar(
     AddressType nextAvailableAddress,
     AddressType priorMallocAddress,
     AddressType nextMallocAddress,
@@ -139,7 +139,7 @@ malloc_varAlloc(
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_stdlibInt_c
+/*  General_supportStdlib_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -151,7 +151,7 @@ malloc_varAlloc(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn malloc_varAlloc(AddressType nextAvailableAddress,
+  * @fn supportStdlib_mallocVar(AddressType nextAvailableAddress,
   * AddressType priorMallocAddress,
   * AddressType nextMallocAddress,
   * BitWidthType size )
@@ -163,7 +163,7 @@ malloc_varAlloc(
   * then aligned size of the allocated memory)
 ********************************************************************************/
 static CosmOS_MallocVariableType *
-malloc_varAlloc(
+supportStdlib_mallocVar(
     AddressType nextAvailableAddress,
     AddressType priorMallocAddress,
     AddressType nextMallocAddress,
@@ -186,7 +186,7 @@ malloc_varAlloc(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn malloc_internal( size_t size )
+  * @fn supportStdlib_malloc( size_t size )
   *
   * @details The implementation contains obtaining of the core configuration by
   * calling function core_getCoreCfg. The return address is set to NULL in the
@@ -212,7 +212,7 @@ malloc_varAlloc(
   * smaller than currentMallocVar next member address minus the
   * nextAvailableAddress variable. If no the currentMallocVar is set to the
   * currentMallocVar next member. If yes the new malloc variable is allocated
-  * by calling malloc_varAlloc helper function and the result is then used to
+  * by calling supportStdlib_mallocVar helper function and the result is then used to
   * linked it between the currentMallocVar and the next malloc variable. Then
   * to the returnAddress is stored the newly allocated address with the respect
   * to the aligned malloc variable offset and allocated boolean variable is set
@@ -222,7 +222,7 @@ malloc_varAlloc(
   * currentMallocVar plus its size member and checked in the nested if condition
   * if the required size argument is smaller than heap high address minus the
   * nextAvailableAddress variable. If yes the new malloc variable is allocated
-  * by calling malloc_varAlloc helper function and the result is then used to
+  * by calling supportStdlib_mallocVar helper function and the result is then used to
   * linked it to the currentMallocVar. Then to the returnAddress is stored the
   * newly allocated address with the respect to the aligned malloc variable
   * offset and allocated boolean variable is set to True.
@@ -230,7 +230,7 @@ malloc_varAlloc(
   * returned.
 ********************************************************************************/
 void *
-malloc_internal( size_t size )
+supportStdlib_malloc( size_t size )
 {
     AddressType heapLowAddress, heapHighAddress, nextAvailableAddress,
         returnAddress;
@@ -276,7 +276,7 @@ malloc_internal( size_t size )
                 if ( size < ( (AddressType)currentMallocVar->next -
                               nextAvailableAddress ) )
                 {
-                    newMallocVar = malloc_varAlloc(
+                    newMallocVar = supportStdlib_mallocVar(
                         nextAvailableAddress,
                         (AddressType)currentMallocVar,
                         (AddressType)currentMallocVar->next,
@@ -303,7 +303,7 @@ malloc_internal( size_t size )
                                        (AddressType)currentMallocVar->size;
                 if ( size < ( heapHighAddress - nextAvailableAddress ) )
                 {
-                    newMallocVar = malloc_varAlloc(
+                    newMallocVar = supportStdlib_mallocVar(
                         nextAvailableAddress,
                         (AddressType)currentMallocVar,
                         (AddressType)NULL,
@@ -334,7 +334,7 @@ malloc_internal( size_t size )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn free_internal( void* ptr )
+  * @fn supportStdlib_free( void* ptr )
   *
   * @details The implementation contains obtaining of the mallocVarToFree by
   * subtracting the aligned size of the malloc variable type from the ptr
@@ -350,7 +350,7 @@ malloc_internal( size_t size )
   * the specific program is released.
 ********************************************************************************/
 void
-free_internal( void * ptr )
+supportStdlib_free( void * ptr )
 {
     CosmOS_MutexStateType mutexState;
 

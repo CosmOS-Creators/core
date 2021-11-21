@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 #include "coreSync.h"
-#include "coreSync_mock.h"
+#include "coreSyncMock.h"
 
 std::unique_ptr<CoreSync_MOCK> CoreSync_TestFixture::_CoreSyncMock;
 

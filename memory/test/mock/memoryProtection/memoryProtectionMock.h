@@ -1,5 +1,5 @@
-#ifndef __MEMORYPROTECTION_MOCK_H__
-#define __MEMORYPROTECTION_MOCK_H__
+#ifndef __MEMORYPROTECTIONMOCK_H__
+#define __MEMORYPROTECTIONMOCK_H__
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

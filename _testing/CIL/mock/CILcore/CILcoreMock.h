@@ -1,5 +1,5 @@
-#ifndef __CILCORE_MOCK_H__
-#define __CILCORE_MOCK_H__
+#ifndef __CILCOREMOCK_H__
+#define __CILCOREMOCK_H__
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

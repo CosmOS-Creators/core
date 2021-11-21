@@ -24,14 +24,14 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 #include <gtest/gtest.h>
-#include "CILcore_mock.h"
-#include "coreSync_mock.h"
-#include "core_mock.h"
-#include "memoryManager_mock.h"
-#include "memoryProtection_mock.h"
-#include "osBoot_mock.h"
+#include "CILcoreMock.h"
+#include "coreSyncMock.h"
+#include "coreMock.h"
+#include "memoryManagerMock.h"
+#include "memoryProtectionMock.h"
+#include "osBootMock.h"
 #include "osInit.h"
-#include "os_mock.h"
+#include "osMock.h"
 #include "utCfg.h"
 
 /********************************************************************************
