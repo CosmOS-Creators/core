@@ -696,10 +696,6 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * core_setSchedulableIntoCurrentContext function. The function as macro
   * switchMemoryProtection_setMemoryProtection is called based on the
   * MEMORY_PROTECTION macro state.
-  * In the end the scheduler reschedule state is set to
-  * RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
-  * scheduler_setSchedulerRescheduleTriggerState - this is done only in this
-  * place to force system timer overwrite this state when occurs.
   * Finally the stackPointerRetVal is returned from the function, that contains
   * the next schedulable stack pointer.
 ********************************************************************************/
@@ -835,8 +831,6 @@ scheduler_scheduleNextInstance( StackPointerType stackPointer )
         }
     }
 
-    scheduler_setSchedulerRescheduleTriggerState(
-        schedulerCfg, RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM );
     return stackPointerRetVal;
 };
 /* @cond S */
