@@ -203,6 +203,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
+    CosmOS_RescheduleTriggerStateType rescheduleTriggerState;
     BitWidthType currentTick;
     BitWidthType priorTickStep;
     BitWidthType scheduleTableIterator;
@@ -210,7 +211,6 @@ typedef struct
     CosmOS_SchedulerStateType schedulerState;
     BitWidthType nextSyncTick;
     CosmOS_BooleanType syncInitState;
-    CosmOS_RescheduleTriggerStateType rescheduleTriggerState;
     BitWidthType timerOffset;
 
 } CosmOS_SchedulerVariableType;
