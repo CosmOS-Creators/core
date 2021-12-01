@@ -316,6 +316,60 @@ extern "C" {
 #else
 #error "Your compiler is currently not supported by CosmOS!"
 #endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __NAKED
+********************************************************************************/
+#if defined( __GNUC__ )
+#ifndef __NAKED
+#define __NAKED __attribute__( ( naked ) )
+#endif
+#elif defined( __CC_ARM )
+#ifndef __NAKED
+#define __NAKED __attribute__( ( naked ) )
+#endif
+#else
+#error "Your compiler is currently not supported by CosmOS!"
+#endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __NAKED
+********************************************************************************/
+#if defined( __GNUC__ )
+#ifndef __FILENAME
+#define __FILENAME __FILE__
+#endif
+#elif defined( __CC_ARM )
+#ifndef __FILENAME
+#define __FILENAME __FILE__
+#endif
+#else
+#error "Your compiler is currently not supported by CosmOS!"
+#endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __NAKED
+********************************************************************************/
+#if defined( __GNUC__ )
+#ifndef __LINENUMBER
+#define __LINENUMBER __LINE__
+#endif
+#elif defined( __CC_ARM )
+#ifndef __LINE__
+#define __LINENUMBER __LINE__
+#endif
+#else
+#error "Your compiler is currently not supported by CosmOS!"
+#endif
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

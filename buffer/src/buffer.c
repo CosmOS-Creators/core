@@ -363,16 +363,22 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * to get full cells number and check if the user required more bytes to read
   * than available. If yes then the bufferState is returned with the value
   * BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM. If there is enough
-  * bytes to read the while loop is implemented that reads bytes till the size is
-  * non-zero value. Inside this while loop is the if condition implemented to
-  * check if the size to read is bigger than SYCALL_BYTES_CHUNK, if yes only
-  * number of bytes defined by SYCALL_BYTES_CHUNK is read from the buffer to not
-  * block system by long too long system call that is called by function as macro
-  * cosmosApiInternal_buffer_readArrayInternal, the size to read is always
-  * decremented by SYCALL_BYTES_CHUNK till its not smaller than
-  * SYCALL_BYTES_CHUNK and then is the size set to zero and last bytes are read
-  * from the buffer. The bufferState is returned with the last value returned
-  * from the cosmosApiInternal_buffer_readArrayInternal function as macro.
+  * bytes to read we check the core mode.
+  * If the core is in the privileged mode the while loop is implemented, that
+  * calls function buffer_pull and increments the userBufferIndex till its equal
+  * the required number of data is read from the buffer and then the bufferState
+  * is returned with the last value returned from the buffer_pull function.
+  * If the core is not in the privileged mode the while loop is implemented that
+  * reads bytes till the size is non-zero value. Inside this while loop is the if
+  * condition implemented to check if the size to read is bigger than
+  * SYCALL_BYTES_CHUNK, if yes only number of bytes defined by SYCALL_BYTES_CHUNK
+  * is read from the buffer to not block system by long too long system call that
+  * is called by function as macro cosmosApiInternal_buffer_readArrayInternal,
+  * the size to read is always decremented by SYCALL_BYTES_CHUNK till its not
+  * smaller than SYCALL_BYTES_CHUNK and then is the size set to zero and last
+  * bytes are read from the buffer. The bufferState is returned with the last
+  * value returned from the cosmosApiInternal_buffer_readArrayInternal function
+  * as macro.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -425,6 +431,7 @@ buffer_readArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                     if ( fullCellsNum >= size )
                     {
                         BitWidthType userBufferIndex;
+                        CosmOS_BooleanType coreInPrivilegedMode;
 
                         unsigned char * userBuffer;
 
@@ -432,26 +439,42 @@ buffer_readArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                         userBufferIndex = 0;
 
                         bufferState = BUFFER_STATE_ENUM__OK;
-                        while ( size )
+
+                        coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+
+                        if ( coreInPrivilegedMode )
                         {
-                            if ( size >= SYCALL_BYTES_CHUNK )
+                            while ( ( userBufferIndex < size ) )
                             {
-                                bufferState =
-                                    cosmosApiInternal_buffer_readArrayInternal(
-                                        ( userBuffer + userBufferIndex ),
-                                        bufferCfg,
-                                        SYCALL_BYTES_CHUNK );
-                                userBufferIndex += SYCALL_BYTES_CHUNK;
-                                size -= SYCALL_BYTES_CHUNK;
+                                bufferState = buffer_pull(
+                                    bufferCfg,
+                                    ( userBuffer + userBufferIndex ) );
+                                userBufferIndex++;
                             }
-                            else
+                        }
+                        else
+                        {
+                            while ( size )
                             {
-                                bufferState =
-                                    cosmosApiInternal_buffer_readArrayInternal(
-                                        ( userBuffer + userBufferIndex ),
-                                        bufferCfg,
-                                        size );
-                                size = 0;
+                                if ( size >= SYCALL_BYTES_CHUNK )
+                                {
+                                    bufferState =
+                                        cosmosApiInternal_buffer_readArrayInternal(
+                                            ( userBuffer + userBufferIndex ),
+                                            bufferCfg,
+                                            SYCALL_BYTES_CHUNK );
+                                    userBufferIndex += SYCALL_BYTES_CHUNK;
+                                    size -= SYCALL_BYTES_CHUNK;
+                                }
+                                else
+                                {
+                                    bufferState =
+                                        cosmosApiInternal_buffer_readArrayInternal(
+                                            ( userBuffer + userBufferIndex ),
+                                            bufferCfg,
+                                            size );
+                                    size = 0;
+                                }
                             }
                         }
                     }
@@ -518,9 +541,14 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * than empty cells available in the buffer. If yes then the bufferState is
   * returned with the value
   * BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM.
-  * If there is enough bytes to write the while loop is implemented that writes
-  * bytes till the size is non-zero value. Inside this while loop is the if
-  * condition implemented to check if the size to write is bigger than
+  * If there is enough bytes to write we check the core mode.
+  * If the core is in the privileged mode the while loop is implemented, that
+  * calls buffer_push function and increments the userBufferIndex till its equal
+  * the required number of data is written to the buffer and then the bufferState
+  * is returned with the last value returned from the buffer_push function.
+  * If the core is not in the privileged mode the while loop is implemented that
+  * writes bytes till the size is non-zero value. Inside this while loop is the
+  * if condition implemented to check if the size to write is bigger than
   * SYCALL_BYTES_CHUNK, if yes only number of bytes defined by SYCALL_BYTES_CHUNK
   * is write from the buffer to not block system by long too long system call
   * that is called by function as macro
@@ -581,6 +609,7 @@ buffer_writeArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                     if ( emptyCellsNum >= size )
                     {
                         BitWidthType userBufferIndex;
+                        CosmOS_BooleanType coreInPrivilegedMode;
 
                         unsigned char * userBuffer;
 
@@ -588,26 +617,42 @@ buffer_writeArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                         userBufferIndex = 0;
 
                         bufferState = BUFFER_STATE_ENUM__OK;
-                        while ( size )
+
+                        coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+
+                        if ( coreInPrivilegedMode )
                         {
-                            if ( size >= SYCALL_BYTES_CHUNK )
+                            while ( ( userBufferIndex < size ) )
                             {
-                                bufferState =
-                                    cosmosApiInternal_buffer_writeArrayInternal(
-                                        ( userBuffer + userBufferIndex ),
-                                        bufferCfg,
-                                        SYCALL_BYTES_CHUNK );
-                                userBufferIndex += SYCALL_BYTES_CHUNK;
-                                size -= SYCALL_BYTES_CHUNK;
+                                bufferState = buffer_push(
+                                    bufferCfg,
+                                    *( userBuffer + userBufferIndex ) );
+                                userBufferIndex++;
                             }
-                            else
+                        }
+                        else
+                        {
+                            while ( size )
                             {
-                                bufferState =
-                                    cosmosApiInternal_buffer_writeArrayInternal(
-                                        ( userBuffer + userBufferIndex ),
-                                        bufferCfg,
-                                        size );
-                                size = 0;
+                                if ( size >= SYCALL_BYTES_CHUNK )
+                                {
+                                    bufferState =
+                                        cosmosApiInternal_buffer_writeArrayInternal(
+                                            ( userBuffer + userBufferIndex ),
+                                            bufferCfg,
+                                            SYCALL_BYTES_CHUNK );
+                                    userBufferIndex += SYCALL_BYTES_CHUNK;
+                                    size -= SYCALL_BYTES_CHUNK;
+                                }
+                                else
+                                {
+                                    bufferState =
+                                        cosmosApiInternal_buffer_writeArrayInternal(
+                                            ( userBuffer + userBufferIndex ),
+                                            bufferCfg,
+                                            size );
+                                    size = 0;
+                                }
                             }
                         }
                     }

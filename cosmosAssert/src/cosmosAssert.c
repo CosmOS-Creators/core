@@ -20,6 +20,9 @@
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
+/* CORE interfaces */
+#include "cosmosAssert.h"
+#include "os.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -115,6 +118,27 @@
 /********************************************************************************
 **                        Function Definitions | Start                         **
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn cosmosAssert_catch( unsigned char * file, BitWidthType line )
+  *
+  * @details The implementation contains creation of the new pointer of malloc
+  * variable type based on the next available address argument. The members of
+  * the malloc variable are then set based on the arguments and size is aligned
+  * to the BitWidthType (size contains aligned size of the malloc variable and
+  * then aligned size of the allocated memory)
+********************************************************************************/
+void
+cosmosAssert_catch( unsigned char * file, BitWidthType line )
+{
+    /* TODO: save file and line inside error handler structure variable (core
+    specific) to make further debugging possible*/
+
+    //check if core is in privileged mode
+    os_kernelPanic();
+}
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

@@ -55,7 +55,7 @@ extern "C" {
 /* CORE interfaces */
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
-#include "os.h"
+#include "sysDefs.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -69,6 +69,19 @@ extern "C" {
   * @ingroup Global_cosmosAssert
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief CosmOS assertion.
+  * @param[in]  result
+  *
+  * @return none
+********************************************************************************/
+#define cosmosAssert( result ) \
+    ( ( result )               \
+          ? (BitWidthType)0U   \
+          : cosmosAssert_catch( (unsigned char *)__FILENAME, __LINENUMBER ) )
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -189,23 +202,17 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn cosmosAssert(BitWidthType result)
+  * @fn cosmosAssert_catch( unsigned char * file, BitWidthType line )
   *
-  * @brief CosmOS assertion function. This function cannot be called from the
-  * unprivileged context directly.
+  * @brief CosmOS catch failed assertion function.
   *
-  * @param[in]  result
+  * @param[in]  file name
+  * @param[in]  line in the code, where assertion was caught
   *
   * @return none
 ********************************************************************************/
-__STATIC_FORCEINLINE void
-cosmosAssert( BitWidthType result )
-{
-    if ( IS_NOT( result ) )
-    {
-        os_kernelPanic();
-    }
-}
+void
+cosmosAssert_catch( unsigned char * file, BitWidthType line );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
