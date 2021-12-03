@@ -618,6 +618,8 @@ scheduler_start( void )
     scheduler_setSchedulerRescheduleTriggerState(
         schedulerCfg, RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM );
 
+    coreSync_getBarrier( coreCfg, OS_START_ID );
+
     CILsysTimer_startTimer( timerTicks, timerTickCount );
 
     CILstack_setStackPointer( stackPointerRetVal );

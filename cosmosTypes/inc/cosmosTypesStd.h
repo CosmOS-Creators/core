@@ -415,6 +415,19 @@ typedef enum
     MUTEX_STATE_ENUM__DEADLOCK_WARNING = FORCE_ENUM,
 
 } CosmOS_MutexStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  CosmOS_OsEventStateType enum
+********************************************************************************/
+typedef enum
+{
+
+    OS_EVENT_STATE_ENUM__TEST_EVENT,
+
+} CosmOS_OsEventStateType;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

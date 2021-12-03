@@ -5,13 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file new.cpp
+** @file osEvent.c
 *********************************************************************************
-<!--                      new Unit Local Group Definition                     -->
+<!--                    osEvent Unit Local Group Definition                   -->
 *********************************************************************************
-** @defgroup Local_new Local
-** @ingroup new_unit
-** @brief new locals
+** @defgroup Local_osEvent Local
+** @ingroup osEvent_unit
+** @brief osEvent locals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
@@ -21,16 +21,15 @@
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
+#include "osEvent.h"
 #include "core.h"
 #include "cosmosApiInternal.h"
+#include "cosmosAssert.h"
 #include "os.h"
-#include "supportStdlib.h"
+#include "spinlock.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
-
-/* LIB interfaces */
-#include <stdlib.h>
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -40,15 +39,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_new_c Macros
-  * @ingroup Local_new
+  * @defgroup Macros_osEvent_c Macros
+  * @ingroup Local_osEvent
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Macros_new_c
+/*  Macros_osEvent_c
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -59,15 +58,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_new_c Variables
-  * @ingroup Local_new
+  * @defgroup Variables_osEvent_c Variables
+  * @ingroup Local_osEvent
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Variables_new_c
+/*  Variables_osEvent_c
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -78,47 +77,47 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_new_c API's
-  * @ingroup Local_new
+  * @defgroup Apis_osEvent_c API's
+  * @ingroup Local_osEvent
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_new_c Getters
-  * @ingroup Apis_new_c
+  * @addtogroup Getters_osEvent_c Getters
+  * @ingroup Apis_osEvent_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_new_c
+/*  Getters_osEvent_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_new_c Setters
-  * @ingroup Apis_new_c
+  * @addtogroup Setters_osEvent_c Setters
+  * @ingroup Apis_osEvent_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_new_c
+/*  Setters_osEvent_c
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_new_c General
-  * @ingroup Apis_new_c
+  * @addtogroup General_osEvent_c General
+  * @ingroup Apis_osEvent_c
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_new_c
+/*  General_osEvent_c
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -130,177 +129,187 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn new(size_t size)
+  * @fn osEvent_triggerEventInternal(
+  * BitWidthType id,
+  * CosmOS_BooleanType * handleCores,
+  * AddressType * data,
+  * CosmOS_OsEventStateType event )
   *
-  * @details The implementation contains if condition that checks if the size
-  * argument is zero value and if it is the size is incremented by 1. Then
-  * core id is obtained by calling cosmosApiInternal_CILcore_getCoreId function
-  * as macro and operating system variable by calling os_getOsCfg which are then
-  * used in function os_getCoreCfg to get core configuration. The function
-  * core_getCoreOsState called afterwards returns the state of operating system
-  * on the current core. The if condition then checks if the operating system
-  * state is equal to OS_STATE_ENUM__STARTED, if yes the malloc_internal
-  * function is called to allocate memory and the result is then returned as ptr
-  * from the function. Otherwise the standard library function malloc is called
-  * and the result is then returned as ptr from the function.
+  * @details The implementation contains
 ********************************************************************************/
-void *
-operator new( size_t size ) noexcept
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION void
+osEvent_triggerEventInternal(
+    BitWidthType id,
+    CosmOS_BooleanType * handleCores,
+    AddressType * data,
+    CosmOS_OsEventStateType event )
 {
-    BitWidthType coreId;
-
-    CosmOS_OsStateType osState;
-
-    CosmOS_BooleanType coreInPrivilegedMode;
+    BitWidthType numberOfCores, currentCoreId;
 
     CosmOS_OsConfigurationType * osCfg;
-    CosmOS_CoreConfigurationType * coreCfg;
-
-    void * ptr;
-
-    if ( IS_NOT( size ) )
-    {
-        ++size;
-    }
-
-    coreInPrivilegedMode = CILcore_isInPrivilegedMode();
-
-    if ( coreInPrivilegedMode )
-    {
-        coreId = CILcore_getCoreId();
-    }
-    else
-    {
-        coreId = cosmosApiInternal_CILcore_getCoreId();
-    }
+    CosmOS_OsEventConfigurationType * eventCfg;
 
     osCfg = os_getOsCfg();
-    coreCfg = os_getCoreCfg( osCfg, coreId );
-    osState = core_getCoreOsState( coreCfg );
 
-    if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
+    numberOfCores = os_getOsNumberOfCores( osCfg );
+    eventCfg = os_getOsEventCfg( osCfg );
+
+    currentCoreId = CILcore_getCoreId();
+
+    osEvent_setOsEvent( eventCfg, event );
+
+    osEvent_setOsEventData( eventCfg, data );
+
+    for ( BitWidthType coreId = 0; coreId < numberOfCores; coreId++ )
     {
-        ptr = supportStdlib_malloc( size );
-    }
-    else
-    {
-        ptr = malloc( size );
+        if ( currentCoreId IS_EQUAL_TO coreId )
+        {
+            osEvent_setOsEventHandleCore( eventCfg, coreId, False );
+        }
+        else
+        {
+            osEvent_setOsEventHandleCore(
+                eventCfg, coreId, handleCores[coreId] );
+        }
     }
 
-    return ptr;
-}
+    CILcore_triggerEvent();
+};
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn delete(void* ptr)
+  * @fn osEvent_triggerEvent(
+  * CosmOS_OsEventStateType event,
+  * CosmOS_BooleanType * handleCores,
+  * AddressType * data )
   *
-  * @details The implementation contains calling
-  * cosmosApiInternal_CILcore_getCoreId function as macro and operating system
-  * variable by calling os_getOsCfg which are then used in function os_getCoreCfg
-  * to get core configuration.
-  * The function core_getCoreOsState called afterwards returns the state of
-  * operating system on the current core.
-  * The if condition then checks if the operating system state is equal to
-  * OS_STATE_ENUM__STARTED, if yes the free_internal function is called to
-  * allocate memory and the result is then returned as ptr from the function.
-  * Otherwise the standard library function free is called and the result is
-  * then returned as ptr from the function.
+  * @details The implementation contains
 ********************************************************************************/
-void
-operator delete( void * ptr ) noexcept
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION void
+osEvent_triggerEvent(
+    CosmOS_OsEventStateType event,
+    CosmOS_BooleanType * handleCores,
+    AddressType * data )
 {
-    BitWidthType coreId;
+    BitWidthType spinlockId, coreId, numberOfCores;
 
-    CosmOS_OsStateType osState;
+    CosmOS_BooleanType coreInPrivilegedMode, eventNotHandled;
+    CosmOS_SpinlockStateType spinlockState;
 
     CosmOS_OsConfigurationType * osCfg;
-    CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_OsEventConfigurationType * eventCfg;
 
-    CosmOS_BooleanType coreInPrivilegedMode;
+    osCfg = os_getOsCfg();
+
+    numberOfCores = os_getOsNumberOfCores( osCfg );
+    eventCfg = os_getOsEventCfg( osCfg );
+
+    spinlockId = osEvent_getOsEventSpinlockId( eventCfg );
+
+    do
+    {
+        coreId = 0;
+        do
+        {
+            eventNotHandled = osEvent_getOsEventHandleCore( eventCfg, coreId );
+            if ( IS_NOT( eventNotHandled ) )
+            {
+                coreId++;
+            }
+        } while ( coreId < numberOfCores );
+
+        spinlockState = spinlock_trySpinlock( spinlockId );
+
+    } while (
+        spinlockState IS_NOT_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
 
     coreInPrivilegedMode = CILcore_isInPrivilegedMode();
 
     if ( coreInPrivilegedMode )
     {
-        coreId = CILcore_getCoreId();
+        osEvent_triggerEventInternal( 0, handleCores, data, event );
     }
     else
     {
-        coreId = cosmosApiInternal_CILcore_getCoreId();
+        cosmosApiInternal_osEvent_triggerEventInternal(
+            handleCores, data, event );
     }
 
-    osCfg = os_getOsCfg();
-    coreCfg = os_getCoreCfg( osCfg, coreId );
-    osState = core_getCoreOsState( coreCfg );
+    spinlockState = spinlock_releaseSpinlock( spinlockId );
 
-    if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
-    {
-        supportStdlib_free( ptr );
-    }
-    else
-    {
-        free( ptr );
-    }
-}
+    cosmosAssert( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__RELEASED );
+};
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn delete( void * ptr, size_t size )
+  * @fn osEvent_dispatchEvent( void )
   *
-  * @details The implementation contains calling
-  * cosmosApiInternal_CILcore_getCoreId function as macro and operating system
-  * variable by calling os_getOsCfg which are then used in function os_getCoreCfg
-  * to get core configuration.
-  * The function core_getCoreOsState called afterwards returns the state of
-  * operating system on the current core.
-  * The if condition then checks if the operating system state is equal to
-  * OS_STATE_ENUM__STARTED, if yes the free_internal function is called to
-  * allocate memory and the result is then returned as ptr from the function.
-  * Otherwise the standard library function free is called and the result is
-  * then returned as ptr from the function.
+  * @details The implementation contains
 ********************************************************************************/
-void
-operator delete( void * ptr, size_t size ) noexcept
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION void
+osEvent_dispatchEvent( void )
 {
     BitWidthType coreId;
 
-    CosmOS_OsStateType osState;
+    CosmOS_OsEventStateType event;
+
+    CosmOS_BooleanType handleEvent;
 
     CosmOS_OsConfigurationType * osCfg;
     CosmOS_CoreConfigurationType * coreCfg;
-
-    CosmOS_BooleanType coreInPrivilegedMode;
-
-    coreInPrivilegedMode = CILcore_isInPrivilegedMode();
-
-    if ( coreInPrivilegedMode )
-    {
-        coreId = CILcore_getCoreId();
-    }
-    else
-    {
-        coreId = cosmosApiInternal_CILcore_getCoreId();
-    }
+    CosmOS_OsEventConfigurationType * eventCfg;
 
     osCfg = os_getOsCfg();
-    coreCfg = os_getCoreCfg( osCfg, coreId );
-    osState = core_getCoreOsState( coreCfg );
+    coreCfg = core_getCoreCfg();
 
-    if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
-    {
-        supportStdlib_free( ptr );
-    }
-    else
-    {
-        free( ptr );
-    }
+    eventCfg = os_getOsEventCfg( osCfg );
 
-    __SUPRESS_UNUSED_VAR( size );
-}
+    coreId = core_getCoreId( coreCfg );
+
+    handleEvent = osEvent_getOsEventHandleCore( eventCfg, coreId );
+
+    if ( handleEvent )
+    {
+        event = osEvent_getOsEvent( eventCfg );
+
+        switch ( event )
+        {
+            case OS_EVENT_STATE_ENUM__TEST_EVENT:
+            {
+                coreId = coreId;
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+
+        osEvent_setOsEventHandleCore( eventCfg, coreId, False );
+    }
+};
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

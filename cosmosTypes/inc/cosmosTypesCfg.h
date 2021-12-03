@@ -392,6 +392,20 @@ struct CosmOS_CoreConfigurationType
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_OsEventConfigurationType struct type
+********************************************************************************/
+typedef struct
+{
+    CosmOS_OsEventVariableType * const var;
+    CosmOS_BooleanType * const handleCores;
+    const BitWidthType spinlockId;
+
+} CosmOS_OsEventConfigurationType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_OsConfigurationType struct type
 ********************************************************************************/
 struct CosmOS_OsConfigurationType
@@ -407,6 +421,7 @@ struct CosmOS_OsConfigurationType
     const CosmOS_BufferConfigurationType * const bufferCfgs;
     const CosmOS_BufferDoubleConfigurationType * const bufferDoubleCfgs;
     CosmOS_SpinlockVariableType * const spinlockVars;
+    const CosmOS_OsEventConfigurationType * const osEventCfg;
 };
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

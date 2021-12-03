@@ -271,6 +271,19 @@ typedef struct
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_OsEventVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    CosmOS_OsEventStateType event;
+    AddressType * data;
+
+} CosmOS_OsEventVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_OsVariableType struct type
 ********************************************************************************/
 typedef struct

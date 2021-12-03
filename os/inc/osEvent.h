@@ -5,19 +5,13 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file os.h
+** @file osEvent.h
 *********************************************************************************
-<!--                        os Module Group Definition                        -->
+<!--                       osEvent Unit Group Definition                      -->
 *********************************************************************************
-** @defgroup os_module os
-** @brief os Module
-** @details lorem
-*********************************************************************************
-<!--                         os Unit Group Definition                         -->
-*********************************************************************************
-** @defgroup os_unit os Unit
+** @defgroup osEvent_unit osEvent Unit
 ** @ingroup os_module
-** @brief os Unit
+** @brief osEvent Unit
 ** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
@@ -31,18 +25,18 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                      os Unit Global Group Definition                     -->
+<!--                   osEvent Unit Global Group Definition                   -->
 *********************************************************************************
-** @defgroup Global_os Global
-** @ingroup os_unit
-** @brief os globals
+** @defgroup Global_osEvent Global
+** @ingroup osEvent_unit
+** @brief osEvent globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __OS_H__
-#define __OS_H__
+#ifndef __OSEVENT_H__
+#define __OSEVENT_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -66,15 +60,15 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_os_h Macros
-  * @ingroup Global_os
+  * @defgroup Macros_osEvent_h Macros
+  * @ingroup Global_osEvent
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Macros_os_h
+/*  Macros_osEvent_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -85,15 +79,15 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_os_h Variables
-  * @ingroup Global_os
+  * @defgroup Variables_osEvent_h Variables
+  * @ingroup Global_osEvent
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Variables_os_h
+/*  Variables_osEvent_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -104,109 +98,111 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_os_h API's
-  * @ingroup Global_os
+  * @defgroup Apis_osEvent_h API's
+  * @ingroup Global_osEvent
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_os_h Getters
-  * @ingroup Apis_os_h
+  * @addtogroup Getters_osEvent_h Getters
+  * @ingroup Apis_osEvent_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Getters_osEvent_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_osEvent_h Setters
+  * @ingroup Apis_osEvent_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Setters_osEvent_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_osEvent_h General
+  * @ingroup Apis_osEvent_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsCfg(void)
+  * @fn osEvent_triggerEventInternal(
+  * BitWidthType id,
+  * CosmOS_BooleanType * handleCores,
+  * AddressType * data,
+  * CosmOS_OsEventStateType event )
   *
-  * @brief Get operating system configuration type. This function can be
-  * called from the unprivileged context directly.
+  * @brief OS trigger event internal function. This function cannot be called
+  * from the unprivileged context directly.
   *
-  * @param[in]  none
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  event required event to trigger
+  * @param[in]  handleCores pointer to the array with all handleCores booleans
+  * @param[in]  data pointer to the data passed to the event
   *
-  * @return CosmOS_OsConfigurationType *
+  * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_OsConfigurationType *
-os_getOsCfg( void );
+__OS_FUNC_SECTION void
+osEvent_triggerEventInternal(
+    BitWidthType id,
+    CosmOS_BooleanType * handleCores,
+    AddressType * data,
+    CosmOS_OsEventStateType event );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_kernelPanicInternal( BitWidthType id )
+  * @fn osEvent_triggerEvent(
+  * CosmOS_OsEventStateType event,
+  * CosmOS_BooleanType * handleCores,
+  * AddressType * data )
   *
-  * @brief OS kernel panic function. This is operating system internal funtion
-  * only and cannot be called from the unprivileged context directly. DEMO
+  * @brief OS event trigger function.
   *
-  * @param[in]  BitWidthType id
+  * @param[in]  event required event to trigger
+  * @param[in]  handleCores pointer to the array with all handleCores booleans
+  * @param[in]  data pointer to the data passed to the event
   *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
-os_kernelPanicInternal( BitWidthType id );
+osEvent_triggerEvent(
+    CosmOS_OsEventStateType event,
+    CosmOS_BooleanType * handleCores,
+    AddressType * data );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_kernelPanic(void)
+  * @fn osEvent_dispatchEvent( void )
   *
-  * @brief OS kernel panic function. DEMO
+  * @brief OS dispatch event function.
   *
   * @param[in]  none
   *
   * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
-os_kernelPanic( void );
+osEvent_dispatchEvent( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_os_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_os_h Setters
-  * @ingroup Apis_os_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @} */
-/*  Setters_os_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_os_h General
-  * @ingroup Apis_os_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_start(BitWidthType entityId)
-  *
-  * @brief Start of the operating system. This function is provided as a CosmOS
-  * API system call mapped with the routes and cannot be called from the
-  * unprivileged context directly. DEMO
-  *
-  * @param[in]  entityId is used during the system call dispatching
-  *
-  * @return none
-********************************************************************************/
-__OS_FUNC_SECTION void
-os_start( BitWidthType entityId );
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @} */
-/*  General_os_h
+/*  General_osEvent_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -217,357 +213,199 @@ os_start( BitWidthType entityId );
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_os_h Getters
-  * @ingroup Apis_os_h
+  * @addtogroup Getters_osEvent_h Getters
+  * @ingroup Apis_osEvent_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsCores(CosmOS_OsConfigurationType * os)
+  * @fn osEvent_getOsEventHandleCores(CosmOS_OsEventConfigurationType * osEvent)
   *
-  * @brief Get os cores pointer.
+  * @brief Get handleCores pointer.
   *
-  * @param[in]  os configuration pointer
+  * @param[in]  osEvent configuration pointer
   *
-  * @return CosmOS_CoreConfigurationType *
+  * @return CosmOS_BooleanType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
-os_getOsCores( CosmOS_OsConfigurationType * os )
+__STATIC_FORCEINLINE CosmOS_BooleanType *
+osEvent_getOsEventHandleCores( CosmOS_OsEventConfigurationType * osEvent )
 {
-    return (CosmOS_CoreConfigurationType *)( os->cores );
+    return (CosmOS_BooleanType *)( osEvent->handleCores );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsNumberOfCores(CosmOS_OsConfigurationType * os)
+  * @fn osEvent_getOsEventHandleCore(CosmOS_OsEventConfigurationType * osEvent
+  * BitWidthType coreId)
   *
-  * @brief Get os numberOfCores.
+  * @brief Get handleCore boolean.
   *
-  * @param[in]  os configuration pointer
+  * @param[in]  osEvent configuration pointer
+  * @param[in]  coreId id of the core
+  *
+  * @return CosmOS_BooleanType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BooleanType
+osEvent_getOsEventHandleCore(
+    CosmOS_OsEventConfigurationType * osEvent,
+    BitWidthType coreId )
+{
+    return ( CosmOS_BooleanType )( osEvent->handleCores[coreId] );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_getHandleCores(CosmOS_OsEventConfigurationType * osEvent)
+  *
+  * @brief Get spinlockId.
+  *
+  * @param[in]  osEvent configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-os_getOsNumberOfCores( CosmOS_OsConfigurationType * os )
+osEvent_getOsEventSpinlockId( CosmOS_OsEventConfigurationType * osEvent )
 {
-    return ( os->numberOfCores );
+    return ( BitWidthType )( osEvent->spinlockId );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsBuffers(CosmOS_OsConfigurationType * os)
+  * @fn osEvent_getOsEvent(CosmOS_OsEventConfigurationType * osEvent)
   *
-  * @brief Get os buffers pointer.
+  * @brief Get event.
   *
-  * @param[in]  os configuration pointer
+  * @param[in]  osEvent configuration pointer
   *
-  * @return CosmOS_BufferConfigurationType *
+  * @return CosmOS_OsEventStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferConfigurationType *
-os_getOsBuffers( CosmOS_OsConfigurationType * os )
+__STATIC_FORCEINLINE CosmOS_OsEventStateType
+osEvent_getOsEvent( CosmOS_OsEventConfigurationType * osEvent )
 {
-    return (CosmOS_BufferConfigurationType *)( os->buffers );
+    return ( CosmOS_OsEventStateType )( osEvent->var->event );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsNumberOfBuffers(CosmOS_OsConfigurationType * os)
+  * @fn osEvent_getOsEventData(CosmOS_OsEventConfigurationType * osEvent)
   *
-  * @brief Get os numberOfBuffers.
+  * @brief Get data pointer.
   *
-  * @param[in]  os configuration pointer
+  * @param[in]  osEvent configuration pointer
   *
-  * @return BitWidthType
+  * @return AddressType *
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType
-os_getOsNumberOfBuffers( CosmOS_OsConfigurationType * os )
+__STATIC_FORCEINLINE AddressType *
+osEvent_getOsEventData( CosmOS_OsEventConfigurationType * osEvent )
 {
-    return ( os->numberOfBuffers );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsRoutes(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os route pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_RoutesConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_RoutesConfigurationType *
-os_getOsRoutes( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_RoutesConfigurationType *)( os->route );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsNumberOfSpinlocks(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os numberOfSpinlocks.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return BitWidthType
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType
-os_getOsNumberOfSpinlocks( CosmOS_OsConfigurationType * os )
-{
-    return ( os->numberOfSpinlocks );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsCoreCfgs(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os coreCfgs pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_CoreConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
-os_getOsCoreCfgs( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_CoreConfigurationType *)( os->coreCfgs );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getCoreCfg(CosmOS_OsConfigurationType * os, BitWidthType coreId)
-  *
-  * @brief Get os core pointer.
-  *
-  * @param[in]  os configuration pointer
-  * @param[in]  coreId specifies the core from array of configured cores
-  *
-  * @return CosmOS_CoreConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
-os_getCoreCfg( CosmOS_OsConfigurationType * os, BitWidthType coreId )
-{
-    return (CosmOS_CoreConfigurationType *)( &( os->coreCfgs[coreId] ) );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsBufferCfgs(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os bufferCfgs pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_BufferConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferConfigurationType *
-os_getOsBufferCfgs( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_BufferConfigurationType *)( os->bufferCfgs );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsBufferCfg(CosmOS_OsConfigurationType * os,BitWidthType bufferId)
-  *
-  * @brief Get os buffer pointer.
-  *
-  * @param[in]  os configuration pointer
-  * @param[in]  bufferId specifies the buffer from array of configured buffers
-  *
-  * @return CosmOS_BufferConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferConfigurationType *
-os_getOsBufferCfg( CosmOS_OsConfigurationType * os, BitWidthType bufferId )
-{
-    return (CosmOS_BufferConfigurationType *)( &( os->bufferCfgs[bufferId] ) );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsbufferDoubleCfgs(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os bufferDoubleCfgs pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_BufferDoubleConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferDoubleConfigurationType *
-os_getOsbufferDoubleCfgs( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_BufferDoubleConfigurationType *)( os->bufferDoubleCfgs );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsBufferDoubleCfg(CosmOS_OsConfigurationType * os,
-  * BitWidthType bufferDoubleId)
-  *
-  * @brief Get os bufferDouble pointer.
-  *
-  * @param[in]  os configuration pointer
-  * @param[in]  bufferDoubleId specifies the bufferDouble from array of
-  * configured buffersDouble
-  *
-  * @return CosmOS_BufferDoubleConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferDoubleConfigurationType *
-os_getOsBufferDoubleCfg(
-    CosmOS_OsConfigurationType * os,
-    BitWidthType bufferDoubleId )
-{
-    return (CosmOS_BufferDoubleConfigurationType *)( &(
-        os->bufferDoubleCfgs[bufferDoubleId] ) );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsSpinlockVars(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os spinlockVars pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_SpinlockVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SpinlockVariableType *
-os_getOsSpinlockVars( CosmOS_OsConfigurationType * os )
-{
-    return ( os->spinlockVars );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsSpinlockVar(CosmOS_OsConfigurationType * os,
-  * BitWidthType spinlockId)
-  *
-  * @brief Get os spinlock pointer.
-  *
-  * @param[in]  os configuration pointer
-  * @param[in]  spinlockId specifies the spinlock from array of configured
-  * spinlocks
-  *
-  * @return CosmOS_SpinlockVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SpinlockVariableType *
-os_getOsSpinlockVar( CosmOS_OsConfigurationType * os, BitWidthType spinlockId )
-{
-    return ( &( os->spinlockVars[spinlockId] ) );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsEventCfg(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os osEventCfg pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_OsEventConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_OsEventConfigurationType *
-os_getOsEventCfg( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_OsEventConfigurationType *)( os->osEventCfg );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsDummy(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os dummy.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return BitWidthType
-********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType
-os_getOsDummy( CosmOS_OsConfigurationType * os )
-{
-    return ( os->var->dummy );
+    return (AddressType *)( osEvent->var->data );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_os_h
+/*  Getters_osEvent_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_os_h Setters
-  * @ingroup Apis_os_h
+  * @addtogroup Setters_osEvent_h Setters
+  * @ingroup Apis_osEvent_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_setOsDummy( CosmOS_OsConfigurationType * os,
-  * BitWidthType dummyParam )
+  * @fn osEvent_setOsEventHandleCore(CosmOS_OsEventConfigurationType * osEvent
+  * BitWidthType coreId)
   *
-  * @brief Set os dummy.
+  * @brief Set handleCore boolean.
   *
-  * @param[in]  os configuration pointer
+  * @param[in]  osEvent configuration pointer
+  * @param[in]  coreId id of the core
+  * @param[in]  paramHandleCore core should handle event boolean
   *
-  * @return BitWidthType
+  * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
-os_setOsDummy( CosmOS_OsConfigurationType * os, BitWidthType dummyParam )
+osEvent_setOsEventHandleCore(
+    CosmOS_OsEventConfigurationType * osEvent,
+    BitWidthType coreId,
+    CosmOS_BooleanType paramHandleCore )
 {
-    os->var->dummy = dummyParam;
+    osEvent->handleCores[coreId] = paramHandleCore;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_setOsEvent(CosmOS_OsEventConfigurationType * osEvent)
+  *
+  * @brief Set event.
+  *
+  * @param[out]  osEvent configuration pointer
+  * @param[in]  paramEvent event
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+osEvent_setOsEvent(
+    CosmOS_OsEventConfigurationType * osEvent,
+    CosmOS_OsEventStateType paramEvent )
+{
+    osEvent->var->event = paramEvent;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_setOsEventData(CosmOS_OsEventConfigurationType * osEvent)
+  *
+  * @brief Set data pointer.
+  *
+  * @param[out]  osEvent configuration pointer
+  * @param[in]  paramData pointer
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+osEvent_setOsEventData(
+    CosmOS_OsEventConfigurationType * osEvent,
+    AddressType * paramData )
+{
+    osEvent->var->data = paramData;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_os_h
+/*  Setters_osEvent_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_os_h General
-  * @ingroup Apis_os_h
+  * @addtogroup General_osEvent_h General
+  * @ingroup Apis_osEvent_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_os_h
+/*  General_osEvent_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
