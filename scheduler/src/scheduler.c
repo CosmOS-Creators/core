@@ -473,6 +473,10 @@ scheduler_timerISRCallback( void )
             schedulerCfg->timerTickCount,
             &schedulerCfg->var->timerOffset );
 
+        /* Set to unblock reschedule */
+        schedulerCfg->var->schedulerState =
+            SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
+
         CILinterrupt_contextSwitchRoutineTrigger();
     }
     else
