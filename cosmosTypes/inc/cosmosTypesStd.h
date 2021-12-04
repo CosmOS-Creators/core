@@ -80,6 +80,8 @@ extern "C" {
   * @ingroup Global_cosmosTypesStd
   * @{
 ********************************************************************************/
+typedef struct CosmOS_SysJobsGroupConfigurationType
+    CosmOS_SysJobsGroupConfigurationType;
 typedef struct CosmOS_ProgramSectionConfigurationType
     CosmOS_ProgramSectionConfigurationType;
 typedef struct CosmOS_BootSectionConfigurationType
@@ -108,6 +110,7 @@ typedef struct CosmOS_SchedulerConfigurationType
     CosmOS_SchedulerConfigurationType;
 typedef struct CosmOS_SysJobsConfigurationType CosmOS_SysJobsConfigurationType;
 typedef struct CosmOS_CoreConfigurationType CosmOS_CoreConfigurationType;
+typedef struct CosmOS_OsEventConfigurationType CosmOS_OsEventConfigurationType;
 typedef struct CosmOS_OsConfigurationType CosmOS_OsConfigurationType;
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -424,8 +427,8 @@ typedef enum
 ********************************************************************************/
 typedef enum
 {
-
-    OS_EVENT_STATE_ENUM__TEST_EVENT,
+    OS_EVENT_STATE_ENUM__OK = 0,
+    OS_EVENT_STATE_ENUM__ERROR_INVALID_EVENT,
 
 } CosmOS_OsEventStateType;
 /********************************************************************************

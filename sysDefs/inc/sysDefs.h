@@ -60,6 +60,7 @@ extern "C" {
 #include "sysDefsCores.h"
 #include "sysDefsHeaps.h"
 #include "sysDefsOsBoot.h"
+#include "sysDefsOsEvents.h"
 #include "sysDefsPermissions.h"
 #include "sysDefsPrograms.h"
 #include "sysDefsRoutes.h"

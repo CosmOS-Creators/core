@@ -275,7 +275,7 @@ typedef struct
 ********************************************************************************/
 typedef struct
 {
-    CosmOS_OsEventStateType event;
+    BitWidthType event;
     AddressType * data;
 
 } CosmOS_OsEventVariableType;

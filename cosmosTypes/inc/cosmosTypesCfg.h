@@ -338,13 +338,12 @@ struct CosmOS_SchedulerConfigurationType
 /**
   * @brief  CosmOS_SysJobsGroupConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_SysJobsGroupConfigurationType
 {
     const CosmOS_GenericVoidType * const handlers;
     const BitWidthType numOfHandlers;
     const BitWidthType tickMultiplicator;
-
-} CosmOS_SysJobsGroupConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -394,13 +393,14 @@ struct CosmOS_CoreConfigurationType
 /**
   * @brief  CosmOS_OsEventConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_OsEventConfigurationType
 {
     CosmOS_OsEventVariableType * const var;
     CosmOS_BooleanType * const handleCores;
     const BitWidthType spinlockId;
-
-} CosmOS_OsEventConfigurationType;
+    const CosmOS_GenericVoidType * const eventFuncs;
+    const BitWidthType numberOfEventFuncs;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **

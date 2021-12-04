@@ -133,7 +133,7 @@
   * BitWidthType id,
   * CosmOS_BooleanType * handleCores,
   * AddressType * data,
-  * CosmOS_OsEventStateType event )
+  * BitWidthType event )
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -145,9 +145,11 @@ osEvent_triggerEventInternal(
     BitWidthType id,
     CosmOS_BooleanType * handleCores,
     AddressType * data,
-    CosmOS_OsEventStateType event )
+    BitWidthType event )
 {
     BitWidthType numberOfCores, currentCoreId;
+
+    CosmOS_BooleanType handleAtleastOneCore;
 
     CosmOS_OsConfigurationType * osCfg;
     CosmOS_OsEventConfigurationType * eventCfg;
@@ -163,6 +165,7 @@ osEvent_triggerEventInternal(
 
     osEvent_setOsEventData( eventCfg, data );
 
+    handleAtleastOneCore = False;
     for ( BitWidthType coreId = 0; coreId < numberOfCores; coreId++ )
     {
         if ( currentCoreId IS_EQUAL_TO coreId )
@@ -173,10 +176,17 @@ osEvent_triggerEventInternal(
         {
             osEvent_setOsEventHandleCore(
                 eventCfg, coreId, handleCores[coreId] );
+            if ( handleCores[coreId] )
+            {
+                handleAtleastOneCore = True;
+            }
         }
     }
 
-    CILcore_triggerEvent();
+    if ( handleAtleastOneCore )
+    {
+        CILcore_triggerEvent();
+    }
 };
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
@@ -187,7 +197,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * ****************************************************************************/
 /**
   * @fn osEvent_triggerEvent(
-  * CosmOS_OsEventStateType event,
+  * BitWidthType event,
   * CosmOS_BooleanType * handleCores,
   * AddressType * data )
   *
@@ -196,16 +206,18 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
-__OS_FUNC_SECTION void
+__OS_FUNC_SECTION CosmOS_OsEventStateType
 osEvent_triggerEvent(
-    CosmOS_OsEventStateType event,
+    BitWidthType event,
     CosmOS_BooleanType * handleCores,
     AddressType * data )
 {
-    BitWidthType spinlockId, coreId, numberOfCores;
+    BitWidthType spinlockId, coreId, numberOfCores, numberOfEventFuncs;
 
     CosmOS_BooleanType coreInPrivilegedMode, eventNotHandled;
     CosmOS_SpinlockStateType spinlockState;
+
+    CosmOS_OsEventStateType returnValue;
 
     CosmOS_OsConfigurationType * osCfg;
     CosmOS_OsEventConfigurationType * eventCfg;
@@ -215,10 +227,14 @@ osEvent_triggerEvent(
     numberOfCores = os_getOsNumberOfCores( osCfg );
     eventCfg = os_getOsEventCfg( osCfg );
 
-    spinlockId = osEvent_getOsEventSpinlockId( eventCfg );
+    numberOfEventFuncs = osEvent_getOsEventNumberOfEventFuncs( eventCfg );
 
-    do
+    if ( event < numberOfEventFuncs )
     {
+        spinlockId = osEvent_getOsEventSpinlockId( eventCfg );
+
+        (void)spinlock_getSpinlock( spinlockId );
+
         coreId = 0;
         do
         {
@@ -229,26 +245,30 @@ osEvent_triggerEvent(
             }
         } while ( coreId < numberOfCores );
 
-        spinlockState = spinlock_trySpinlock( spinlockId );
+        coreInPrivilegedMode = CILcore_isInPrivilegedMode();
 
-    } while (
-        spinlockState IS_NOT_EQUAL_TO SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
+        if ( coreInPrivilegedMode )
+        {
+            osEvent_triggerEventInternal( 0, handleCores, data, event );
+        }
+        else
+        {
+            cosmosApiInternal_osEvent_triggerEventInternal(
+                handleCores, data, event );
+        }
 
-    coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+        spinlockState = spinlock_releaseSpinlock( spinlockId );
 
-    if ( coreInPrivilegedMode )
-    {
-        osEvent_triggerEventInternal( 0, handleCores, data, event );
+        cosmosAssert( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__RELEASED );
+
+        returnValue = OS_EVENT_STATE_ENUM__OK;
     }
     else
     {
-        cosmosApiInternal_osEvent_triggerEventInternal(
-            handleCores, data, event );
+        returnValue = OS_EVENT_STATE_ENUM__ERROR_INVALID_EVENT;
     }
 
-    spinlockState = spinlock_releaseSpinlock( spinlockId );
-
-    cosmosAssert( spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__RELEASED );
+    return returnValue;
 };
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
@@ -268,15 +288,15 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 osEvent_dispatchEvent( void )
 {
-    BitWidthType coreId;
-
-    CosmOS_OsEventStateType event;
+    BitWidthType event, coreId, numberOfEventFuncs;
 
     CosmOS_BooleanType handleEvent;
 
     CosmOS_OsConfigurationType * osCfg;
     CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_OsEventConfigurationType * eventCfg;
+
+    CosmOS_GenericVoidType eventHandler;
 
     osCfg = os_getOsCfg();
     coreCfg = core_getCoreCfg();
@@ -291,19 +311,13 @@ osEvent_dispatchEvent( void )
     {
         event = osEvent_getOsEvent( eventCfg );
 
-        switch ( event )
-        {
-            case OS_EVENT_STATE_ENUM__TEST_EVENT:
-            {
-                coreId = coreId;
-                break;
-            }
-            default:
-            {
-                break;
-            }
-        }
+        numberOfEventFuncs = osEvent_getOsEventNumberOfEventFuncs( eventCfg );
+        cosmosAssert( event < numberOfEventFuncs );
 
+        eventHandler = osEvent_getOsEventFunc( eventCfg, event );
+        cosmosAssert( eventHandler );
+
+        eventHandler();
         osEvent_setOsEventHandleCore( eventCfg, coreId, False );
     }
 };

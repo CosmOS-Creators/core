@@ -142,7 +142,7 @@ extern "C" {
   * BitWidthType id,
   * CosmOS_BooleanType * handleCores,
   * AddressType * data,
-  * CosmOS_OsEventStateType event )
+  * BitWidthType event )
   *
   * @brief OS trigger event internal function. This function cannot be called
   * from the unprivileged context directly.
@@ -159,14 +159,14 @@ osEvent_triggerEventInternal(
     BitWidthType id,
     CosmOS_BooleanType * handleCores,
     AddressType * data,
-    CosmOS_OsEventStateType event );
+    BitWidthType event );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
   * @fn osEvent_triggerEvent(
-  * CosmOS_OsEventStateType event,
+  * BitWidthType event,
   * CosmOS_BooleanType * handleCores,
   * AddressType * data )
   *
@@ -178,9 +178,9 @@ osEvent_triggerEventInternal(
   *
   * @return none
 ********************************************************************************/
-__OS_FUNC_SECTION void
+__OS_FUNC_SECTION CosmOS_OsEventStateType
 osEvent_triggerEvent(
-    CosmOS_OsEventStateType event,
+    BitWidthType event,
     CosmOS_BooleanType * handleCores,
     AddressType * data );
 
@@ -261,7 +261,7 @@ osEvent_getOsEventHandleCore(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_getHandleCores(CosmOS_OsEventConfigurationType * osEvent)
+  * @fn osEvent_getOsEventSpinlockId(CosmOS_OsEventConfigurationType * osEvent)
   *
   * @brief Get spinlockId.
   *
@@ -279,18 +279,76 @@ osEvent_getOsEventSpinlockId( CosmOS_OsEventConfigurationType * osEvent )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @fn osEvent_getOsEventFuncs(CosmOS_OsEventConfigurationType * osEvent)
+  *
+  * @brief Get eventFuncs.
+  *
+  * @param[in]  osEvent configuration pointer
+  *
+  * @return CosmOS_GenericVoidType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_GenericVoidType *
+osEvent_getOsEventFuncs( CosmOS_OsEventConfigurationType * osEvent )
+{
+    return (CosmOS_GenericVoidType *)( osEvent->eventFuncs );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_getOsEventFunc(CosmOS_OsEventConfigurationType * osEvent)
+  *
+  * @brief Get eventFunc based on event.
+  *
+  * @param[in]  osEvent configuration pointer
+  * @param[in]  event identifier of the event pointing to the correct function
+  *
+  * @return CosmOS_GenericVoidType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_GenericVoidType
+osEvent_getOsEventFunc(
+    CosmOS_OsEventConfigurationType * osEvent,
+    BitWidthType event )
+{
+    return ( CosmOS_GenericVoidType )( osEvent->eventFuncs[event] );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_getOsEventNumberOfEventFuncs(CosmOS_OsEventConfigurationType *
+  * osEvent)
+  *
+  * @brief Get numberOfEventFuncs.
+  *
+  * @param[in]  osEvent configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+osEvent_getOsEventNumberOfEventFuncs( CosmOS_OsEventConfigurationType * osEvent )
+{
+    return ( BitWidthType )( osEvent->numberOfEventFuncs );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn osEvent_getOsEvent(CosmOS_OsEventConfigurationType * osEvent)
   *
   * @brief Get event.
   *
   * @param[in]  osEvent configuration pointer
   *
-  * @return CosmOS_OsEventStateType
+  * @return BitWidthType
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_OsEventStateType
+__STATIC_FORCEINLINE BitWidthType
 osEvent_getOsEvent( CosmOS_OsEventConfigurationType * osEvent )
 {
-    return ( CosmOS_OsEventStateType )( osEvent->var->event );
+    return ( BitWidthType )( osEvent->var->event );
 }
 
 /********************************************************************************
@@ -363,7 +421,7 @@ osEvent_setOsEventHandleCore(
 __STATIC_FORCEINLINE void
 osEvent_setOsEvent(
     CosmOS_OsEventConfigurationType * osEvent,
-    CosmOS_OsEventStateType paramEvent )
+    BitWidthType paramEvent )
 {
     osEvent->var->event = paramEvent;
 }
