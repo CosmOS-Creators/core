@@ -430,8 +430,10 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * If not an error reaction is triggered. Otherwise the reschedule trigger
   * state is set to RESCHEDULE_TRIGGER_STATE_ENUM__TIMER, timer is set to the
   * preempt period and timer offset is saved to by calling function
-  * CILsysTimer_setTicksSaveOffset. After this point the scheduling algorithm is
-  * triggered by calling CILinterrupt_contextSwitchRoutineTrigger function.
+  * CILsysTimer_setTicksSaveOffset and scheduler state is set to the
+  * SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME. After this point the scheduling
+  * algorithm is triggered by calling CILinterrupt_contextSwitchRoutineTrigger
+  * function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -467,15 +469,15 @@ scheduler_timerISRCallback( void )
         schedulerCfg->var->rescheduleTriggerState =
             RESCHEDULE_TRIGGER_STATE_ENUM__TIMER;
 
+        /* Set to unblock reschedule */
+        schedulerCfg->var->schedulerState =
+            SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
+
         /* Give scheduling algorithm preempt tick to finish the reschedule */
         CILsysTimer_setTicksSaveOffset(
             schedulerCfg->preemptTick,
             schedulerCfg->timerTickCount,
             &schedulerCfg->var->timerOffset );
-
-        /* Set to unblock reschedule */
-        schedulerCfg->var->schedulerState =
-            SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
 
         CILinterrupt_contextSwitchRoutineTrigger();
     }
@@ -532,7 +534,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * by calling core_setCoreOsState function. The scheduler reschedule state is
   * set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
   * scheduler_setSchedulerRescheduleTriggerState - this is done only in this
-  * place to force system timer overwrite this state when occurs.
+  * place to force system timer overwrite this state when occurs. Then the
+  * synchronization barrier function coreSync_getBarrier is called to get in sync
+  * with all cores.
   * In the end the system timer is started CILsysTimer_startTimer and the
   * CILstack_setStackPointer called to switch to the schedulable stack.
 ********************************************************************************/
