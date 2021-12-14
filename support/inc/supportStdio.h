@@ -5,32 +5,55 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file new.cpp
+** @file supportStdio.h
 *********************************************************************************
-<!--                      new Unit Local Group Definition                     -->
+<!--                     supportStdio Unit Group Definition                   -->
 *********************************************************************************
-** @defgroup Local_new Local
-** @ingroup new_unit
-** @brief new locals
+** @defgroup supportStdio_unit supportStdio Unit
+** @ingroup support_module
+** @brief supportStdio Unit
+** @details lorem
+*********************************************************************************
+<!--                           Version Information                            -->
+*********************************************************************************
+** @version 1.0.0
+** @date 07.09.2021
+** @author https://github.com/PavolKostolansky
+*********************************************************************************
+<!--                          Warnings and License                            -->
+*********************************************************************************
+** @warning Modifying code can lead to unexpected behaviour of the whole system
+** @copyright MIT License
+*********************************************************************************
+<!--                 supportStdio Unit Global Group Definition                -->
+*********************************************************************************
+** @defgroup Global_supportStdio Global
+** @ingroup supportStdio_unit
+** @brief supportStdio globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
-**                           START OF THE SOURCE FILE                          **
+**                           START OF THE HEADER FILE                          **
 ********************************************************************************/
+#ifndef __SUPPORTSTDIO_H__
+#define __SUPPORTSTDIO_H__
+/********************************************************************************
+**                         START OF C++ SUPPORT SECTION                        **
+********************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif
 /********************************************************************************
 **                            Include Files | Start                            **
 ********************************************************************************/
 /* CORE interfaces */
-#include "core.h"
-#include "cosmosApiInternal.h"
-#include "os.h"
-#include "supportStdlib.h"
-
-/* CIL interfaces */
-#include "CILcore.h"
+#include "cosmosTypes.h"
+#include "memoryMapping.h"
+#include "sysDefs.h"
 
 /* LIB interfaces */
-#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -40,15 +63,18 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_new_c Macros
-  * @ingroup Local_new
+  * @defgroup Macros_supportStdio_h Macros
+  * @ingroup Global_supportStdio
   * @{
 ********************************************************************************/
+#define supportStdio_memcpy(dest, src, len) memcpy(dest, src, len)
+#define supportStdio_memcmp(str1, str2, len) memcmp(str1, str2, len)
+#define supportStdio_memset(dest, val, len) memset(dest, val, len)
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Macros_new_c
+/*  Macros_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -59,15 +85,15 @@
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_new_c Variables
-  * @ingroup Local_new
+  * @defgroup Variables_supportStdio_h Variables
+  * @ingroup Global_supportStdio
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Variables_new_c
+/*  Variables_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -78,47 +104,49 @@
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_new_c API's
-  * @ingroup Local_new
+  * @defgroup Apis_supportStdio_h API's
+  * @ingroup Global_supportStdio
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_new_c Getters
-  * @ingroup Apis_new_c
+  * @addtogroup Getters_supportStdio_h Getters
+  * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_new_c
+/*  Getters_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_new_c Setters
-  * @ingroup Apis_new_c
+  * @addtogroup Setters_supportStdio_h Setters
+  * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
+
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_new_c
+/*  Setters_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_new_c General
-  * @ingroup Apis_new_c
+  * @addtogroup General_supportStdio_h General
+  * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
+
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_new_c
+/*  General_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -127,183 +155,54 @@
 **                        Function Definitions | Start                         **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn new(size_t size)
-  *
-  * @details The implementation contains if condition that checks if the size
-  * argument is zero value and if it is the size is incremented by 1. Then
-  * core id is obtained by calling cosmosApiInternal_CILcore_getCoreId function
-  * as macro and operating system variable by calling os_getOsCfg which are then
-  * used in function os_getCore to get core configuration. The function
-  * core_getCoreOsState called afterwards returns the state of operating system
-  * on the current core. The if condition then checks if the operating system
-  * state is equal to OS_STATE_ENUM__STARTED, if yes the malloc_internal
-  * function is called to allocate memory and the result is then returned as ptr
-  * from the function. Otherwise the standard library function malloc is called
-  * and the result is then returned as ptr from the function.
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Getters_supportStdio_h Getters
+  * @ingroup Apis_supportStdio_h
+  * @{
 ********************************************************************************/
-void *
-operator new( size_t size ) noexcept
-{
-    BitWidthType coreId;
-
-    CosmOS_OsStateType osState;
-
-    CosmOS_BooleanType coreInPrivilegedMode;
-
-    CosmOS_OsConfigurationType * osCfg;
-    CosmOS_CoreConfigurationType * coreCfg;
-
-    void * ptr;
-
-    if ( IS_NOT( size ) )
-    {
-        ++size;
-    }
-
-    coreInPrivilegedMode = CILcore_isInPrivilegedMode();
-
-    if ( coreInPrivilegedMode )
-    {
-        coreId = CILcore_getCoreId();
-    }
-    else
-    {
-        coreId = cosmosApiInternal_CILcore_getCoreId();
-    }
-
-    osCfg = os_getOsCfg();
-    coreCfg = os_getCore( osCfg, coreId );
-    osState = core_getCoreOsState( coreCfg );
-
-    if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
-    {
-        ptr = supportStdlib_malloc( size );
-    }
-    else
-    {
-        ptr = malloc( size );
-    }
-
-    return ptr;
-}
-
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn delete(void* ptr)
-  *
-  * @details The implementation contains calling
-  * cosmosApiInternal_CILcore_getCoreId function as macro and operating system
-  * variable by calling os_getOsCfg which are then used in function os_getCore
-  * to get core configuration.
-  * The function core_getCoreOsState called afterwards returns the state of
-  * operating system on the current core.
-  * The if condition then checks if the operating system state is equal to
-  * OS_STATE_ENUM__STARTED, if yes the free_internal function is called to
-  * allocate memory and the result is then returned as ptr from the function.
-  * Otherwise the standard library function free is called and the result is
-  * then returned as ptr from the function.
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Getters_supportStdio_h
 ********************************************************************************/
-void
-operator delete( void * ptr ) noexcept
-{
-    BitWidthType coreId;
-
-    CosmOS_OsStateType osState;
-
-    CosmOS_OsConfigurationType * osCfg;
-    CosmOS_CoreConfigurationType * coreCfg;
-
-    CosmOS_BooleanType coreInPrivilegedMode;
-
-    coreInPrivilegedMode = CILcore_isInPrivilegedMode();
-
-    if ( coreInPrivilegedMode )
-    {
-        coreId = CILcore_getCoreId();
-    }
-    else
-    {
-        coreId = cosmosApiInternal_CILcore_getCoreId();
-    }
-
-    osCfg = os_getOsCfg();
-    coreCfg = os_getCore( osCfg, coreId );
-    osState = core_getCoreOsState( coreCfg );
-
-    if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
-    {
-        supportStdlib_free( ptr );
-    }
-    else
-    {
-        free( ptr );
-    }
-}
-
 /********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn delete( void * ptr, size_t size )
-  *
-  * @details The implementation contains calling
-  * cosmosApiInternal_CILcore_getCoreId function as macro and operating system
-  * variable by calling os_getOsCfg which are then used in function os_getCore
-  * to get core configuration.
-  * The function core_getCoreOsState called afterwards returns the state of
-  * operating system on the current core.
-  * The if condition then checks if the operating system state is equal to
-  * OS_STATE_ENUM__STARTED, if yes the free_internal function is called to
-  * allocate memory and the result is then returned as ptr from the function.
-  * Otherwise the standard library function free is called and the result is
-  * then returned as ptr from the function.
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_supportStdio_h Setters
+  * @ingroup Apis_supportStdio_h
+  * @{
 ********************************************************************************/
-void
-operator delete( void * ptr, size_t size ) noexcept
-{
-    BitWidthType coreId;
-
-    CosmOS_OsStateType osState;
-
-    CosmOS_OsConfigurationType * osCfg;
-    CosmOS_CoreConfigurationType * coreCfg;
-
-    CosmOS_BooleanType coreInPrivilegedMode;
-
-    coreInPrivilegedMode = CILcore_isInPrivilegedMode();
-
-    if ( coreInPrivilegedMode )
-    {
-        coreId = CILcore_getCoreId();
-    }
-    else
-    {
-        coreId = cosmosApiInternal_CILcore_getCoreId();
-    }
-
-    osCfg = os_getOsCfg();
-    coreCfg = os_getCore( osCfg, coreId );
-    osState = core_getCoreOsState( coreCfg );
-
-    if ( osState IS_EQUAL_TO OS_STATE_ENUM__STARTED )
-    {
-        supportStdlib_free( ptr );
-    }
-    else
-    {
-        free( ptr );
-    }
-
-    __SUPRESS_UNUSED_VAR( size );
-}
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Setters_supportStdio_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_supportStdio_h General
+  * @ingroup Apis_supportStdio_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  General_supportStdio_h
+********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/
+#ifdef __cplusplus
+}
+#endif
 /********************************************************************************
-**                           END OF THE SOURCE FILE                            **
+**                         END OF C++ SUPPORT SECTION                          **
+********************************************************************************/
+#endif
+/********************************************************************************
+**                           END OF THE HEADER FILE                            **
 ********************************************************************************/

@@ -80,6 +80,7 @@ extern "C" {
   * @ingroup Global_cosmosTypesStd
   * @{
 ********************************************************************************/
+typedef struct CosmOS_ChannelConfigurationType CosmOS_ChannelConfigurationType;
 typedef struct CosmOS_SysJobsGroupConfigurationType
     CosmOS_SysJobsGroupConfigurationType;
 typedef struct CosmOS_ProgramSectionConfigurationType
@@ -201,6 +202,18 @@ typedef enum
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_OsVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    BitWidthType channelId;
+
+} CosmOS_ChannelEventType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_AccessStateType enum
 ********************************************************************************/
 typedef enum
@@ -250,6 +263,41 @@ typedef enum
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_ChannelPoolStateType enum
+********************************************************************************/
+typedef enum
+{
+
+    CHANNEL_POOL_STATE_ENUM__READY,
+    CHANNEL_POOL_STATE_ENUM__OCCUPIED,
+
+} CosmOS_ChannelPoolStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  CosmOS_ChannelStateType enum
+********************************************************************************/
+typedef enum
+{
+
+    CHANNEL_STATE_ENUM__REPLIED,
+    CHANNEL_STATE_ENUM__NOT_REPLIED,
+    CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID,
+    CHANNEL_STATE_ENUM__ERROR_ACCESS_DENIED,
+    CHANNEL_STATE_ENUM__ERROR_CHANNEL_NOT_INITIALIZED,
+    CHANNEL_STATE_ENUM__ERROR_DATA_TO_SEND_BIGGER_THAN_POOL,
+    CHANNEL_STATE_ENUM__ERROR_DATA_TO_RECEIVE_BIGGER_THAN_POOL,
+    CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL,
+    CHANNEL_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED,
+
+} CosmOS_ChannelStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_SchedulableInstanceType enum
 ********************************************************************************/
 typedef enum
@@ -273,6 +321,8 @@ typedef enum
     SCHEDULABLE_STATE_ENUM__EXECUTED,
     SCHEDULABLE_STATE_ENUM__BLOCKED,
     SCHEDULABLE_STATE_ENUM__SLEEP,
+    SCHEDULABLE_STATE_ENUM__LISTENING,
+    SCHEDULABLE_STATE_ENUM__WAITING_FOR_REPLY,
     SCHEDULABLE_STATE_ENUM__READY = FORCE_ENUM,
 
 } CosmOS_SchedulableStateType;
@@ -430,6 +480,7 @@ typedef enum
     OS_EVENT_STATE_ENUM__OK = 0,
     OS_EVENT_STATE_ENUM__ERROR_ATLEAST_ONE_CORE_MUST_HANDLE_EVENT,
     OS_EVENT_STATE_ENUM__ERROR_INVALID_EVENT,
+    OS_EVENT_STATE_ENUM__ERROR_DATA_BIGGER_THAN_DATA_POOL_SIZE,
 
 } CosmOS_OsEventStateType;
 /********************************************************************************

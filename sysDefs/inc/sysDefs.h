@@ -57,6 +57,7 @@ extern "C" {
 #include "sysDefsBarriers.h"
 #include "sysDefsBuffers.h"
 #include "sysDefsBuffersDouble.h"
+#include "sysDefsChannels.h"
 #include "sysDefsCores.h"
 #include "sysDefsHeaps.h"
 #include "sysDefsOsBoot.h"

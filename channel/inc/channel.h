@@ -5,44 +5,44 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file os.h
+** @file channel.h
 *********************************************************************************
-<!--                        os Module Group Definition                        -->
+<!--                      channel Module Group Definition                    -->
 *********************************************************************************
-** @defgroup os_module os
-** @brief os Module
+** @defgroup channel_module channel
+** @brief channel Module
 ** @details lorem
 *********************************************************************************
-<!--                         os Unit Group Definition                         -->
+<!--                      channel Unit Group Definition                     -->
 *********************************************************************************
-** @defgroup os_unit os Unit
-** @ingroup os_module
-** @brief os Unit
+** @defgroup channel_unit channel Unit
+** @ingroup channel_module
+** @brief channel Unit
 ** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
-** @date 1.8.2020
-** @author https://github.com/PavolKostolansky
+** @date 18.08.2021
+** @author https://github.com/pavolkostolansky
 *********************************************************************************
 <!--                          Warnings and License                            -->
 *********************************************************************************
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                      os Unit Global Group Definition                     -->
+<!--                  channel Unit Global Group Definition                    -->
 *********************************************************************************
-** @defgroup Global_os Global
-** @ingroup os_unit
-** @brief os globals
+** @defgroup Global_channel Global
+** @ingroup channel_unit
+** @brief channel globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __OS_H__
-#define __OS_H__
+#ifndef __CHANNEL_H__
+#define __CHANNEL_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -66,15 +66,15 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_os_h Macros
-  * @ingroup Global_os
+  * @defgroup Macros_channel_h Macros
+  * @ingroup Global_channel
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Macros_os_h
+/* Macros_channel_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -85,15 +85,15 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_os_h Variables
-  * @ingroup Global_os
+  * @defgroup Variables_channel_h Variables
+  * @ingroup Global_channel
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Variables_os_h
+/* Variables_channel_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -102,111 +102,161 @@ extern "C" {
 **                         Function Prototypes | Start                         **
 ********************************************************************************/
 /********************************************************************************
-  * DOXYGEN DEF GROUP                                                          **
-  * *************************************************************************//**
-  * @defgroup Apis_os_h API's
-  * @ingroup Global_os
+* DOXYGEN DEF GROUP                                                            **
+* ***************************************************************************//**
+* @defgroup Apis_channel_h API's
+* @ingroup Global_channel
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_os_h Getters
-  * @ingroup Apis_os_h
+  * @addtogroup Getters_channel_h Getters
+  * @ingroup Apis_channel_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/* Getters_channel_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_channel_h Setters
+  * @ingroup Apis_channel_h
+  * @{
+********************************************************************************/
+
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/* Setters_channel_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_channel_h General
+  * @ingroup Apis_channel_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsCfg(void)
+  * @fn osEvent_triggerEvent(
+  * BitWidthType event,
+  * CosmOS_BooleanType * handleCores,
+  * AddressType * data,
+  * BitWidthType size )
   *
-  * @brief Get operating system configuration type. This function can be
-  * called from the unprivileged context directly.
-  *
-  * @param[in]  none
-  *
-  * @return CosmOS_OsConfigurationType *
+  * @details The implementation contains
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_OsConfigurationType *
-os_getOsCfg( void );
+__OS_FUNC_SECTION CosmOS_ChannelStateType
+channel_send(
+    BitWidthType channelId,
+    AddressType * userSendDataPool,
+    BitWidthType userSendPoolSize,
+    AddressType * userReplyDataPool,
+    BitWidthType userReplyPoolSize );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_kernelPanicInternal( BitWidthType id )
+  * @fn channel_dataPoolCopyInternal(
+  * BitWidthType id,
+  * AddressType * data,
+  * AddressType * dataPool,
+  * BitWidthType size )
   *
-  * @brief OS kernel panic function. This is operating system internal funtion
-  * only and cannot be called from the unprivileged context directly. DEMO
-  *
-  * @param[in]  BitWidthType id
-  *
-  * @return none
+  * @details The implementation contains
 ********************************************************************************/
 __OS_FUNC_SECTION void
-os_kernelPanicInternal( BitWidthType id );
+channel_dataPoolCopyInternal(
+    BitWidthType id,
+    AddressType * data,
+    AddressType * dataPool,
+    BitWidthType size );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_kernelPanic(void)
+  * @fn osEvent_triggerEventInternal(
+  * BitWidthType id,
+  * CosmOS_BooleanType * handleCores,
+  * BitWidthType event )
   *
-  * @brief OS kernel panic function. DEMO
-  *
-  * @param[in]  none
-  *
-  * @return none
+  * @details The implementation contains
 ********************************************************************************/
 __OS_FUNC_SECTION void
-os_kernelPanic( void );
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @} */
-/*  Getters_os_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_os_h Setters
-  * @ingroup Apis_os_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @} */
-/*  Setters_os_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_os_h General
-  * @ingroup Apis_os_h
-  * @{
-********************************************************************************/
+channel_sendReplyObtainedInternal(
+    BitWidthType id,
+    CosmOS_ChannelConfigurationType * channelCfg );
+
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_start(BitWidthType entityId)
+  * @fn osEvent_triggerEventInternal(
+  * BitWidthType id,
+  * CosmOS_BooleanType * handleCores,
+  * BitWidthType event )
   *
-  * @brief Start of the operating system. This function is provided as a CosmOS
-  * API system call mapped with the routes and cannot be called from the
-  * unprivileged context directly. DEMO
-  *
-  * @param[in]  entityId is used during the system call dispatching
-  *
-  * @return none
+  * @details The implementation contains
 ********************************************************************************/
 __OS_FUNC_SECTION void
-os_start( BitWidthType entityId );
+channel_sendConfigureChannelInternal(
+    BitWidthType id,
+    CosmOS_ChannelConfigurationType * channelCfg,
+    AddressType * userReplyDataPool,
+    BitWidthType userReplyPoolSize );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_dispatchEvent( void )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION void
+channel_signalizeClient( void );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_setChannelSendPoolPayloadLengthInternal(
+  * BitWidthType id,
+  * CosmOS_ChannelConfigurationType * channelCfg,
+  * BitWidthType length )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION void
+channel_setChannelSendPoolPayloadLengthInternal(
+    BitWidthType id,
+    CosmOS_ChannelConfigurationType * channelCfg,
+    BitWidthType length );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_dispatchEvent( void )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION void
+channel_signalizeServer( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_os_h
+/* General_channel_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -217,396 +267,508 @@ os_start( BitWidthType entityId );
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_os_h Getters
-  * @ingroup Apis_os_h
+  * @addtogroup Getters_channel_h Getters
+  * @ingroup Apis_channel_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsCores(CosmOS_OsConfigurationType * os)
+  * @fn channel_getChannelId(CosmOS_ChannelConfigurationType * channel)
   *
-  * @brief Get os cores pointer.
+  * @brief Get channel id.
   *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_CoreConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
-os_getOsCores( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_CoreConfigurationType *)( os->cores );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getCore(CosmOS_OsConfigurationType * os, BitWidthType coreId)
-  *
-  * @brief Get os core pointer.
-  *
-  * @param[in]  os configuration pointer
-  * @param[in]  coreId specifies the core from array of configured cores
-  *
-  * @return CosmOS_CoreConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
-os_getCore( CosmOS_OsConfigurationType * os, BitWidthType coreId )
-{
-    return (CosmOS_CoreConfigurationType *)( &( os->cores[coreId] ) );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsNumberOfCores(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os numberOfCores.
-  *
-  * @param[in]  os configuration pointer
+  * @param[in]  channel configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-os_getOsNumberOfCores( CosmOS_OsConfigurationType * os )
+channel_getChannelId( CosmOS_ChannelConfigurationType * channel )
 {
-    return ( os->numberOfCores );
+    return ( BitWidthType )( channel->id );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsBuffers(CosmOS_OsConfigurationType * os)
+  * @fn channel_getChannelSendPool(CosmOS_ChannelConfigurationType * channel)
   *
-  * @brief Get os buffers pointer.
+  * @brief Get sendPool pointer.
   *
-  * @param[in]  os configuration pointer
+  * @param[in]  channel configuration pointer
   *
-  * @return CosmOS_BufferConfigurationType *
+  * @return unsigned char *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferConfigurationType *
-os_getOsBuffers( CosmOS_OsConfigurationType * os )
+__STATIC_FORCEINLINE unsigned char *
+channel_getChannelSendPool( CosmOS_ChannelConfigurationType * channel )
 {
-    return (CosmOS_BufferConfigurationType *)( os->buffers );
+    return (unsigned char *)( channel->sendPool );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsNumberOfBuffers(CosmOS_OsConfigurationType * os)
+  * @fn channel_getChannelReplyPool(CosmOS_ChannelConfigurationType * channel)
   *
-  * @brief Get os numberOfBuffers.
+  * @brief Get replyPool pointer.
   *
-  * @param[in]  os configuration pointer
+  * @param[in]  channel configuration pointer
+  *
+  * @return unsigned char *
+********************************************************************************/
+__STATIC_FORCEINLINE unsigned char *
+channel_getChannelReplyPool( CosmOS_ChannelConfigurationType * channel )
+{
+    return (unsigned char *)( channel->replyPool );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_getChannelSendPoolSize(CosmOS_ChannelConfigurationType * channel)
+  *
+  * @brief Get channel sendPoolSize.
+  *
+  * @param[in]  channel configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-os_getOsNumberOfBuffers( CosmOS_OsConfigurationType * os )
+channel_getChannelSendPoolSize( CosmOS_ChannelConfigurationType * channel )
 {
-    return ( os->numberOfBuffers );
+    return ( BitWidthType )( channel->sendPoolSize );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsRoutes(CosmOS_OsConfigurationType * os)
+  * @fn channel_getChannelReplyPoolSize(CosmOS_ChannelConfigurationType * channel)
   *
-  * @brief Get os route pointer.
+  * @brief Get channel replyPoolSize.
   *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_RoutesConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_RoutesConfigurationType *
-os_getOsRoutes( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_RoutesConfigurationType *)( os->route );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsNumberOfSpinlocks(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os numberOfSpinlocks.
-  *
-  * @param[in]  os configuration pointer
+  * @param[in]  channel configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-os_getOsNumberOfSpinlocks( CosmOS_OsConfigurationType * os )
+channel_getChannelReplyPoolSize( CosmOS_ChannelConfigurationType * channel )
 {
-    return ( os->numberOfSpinlocks );
+    return ( BitWidthType )( channel->replyPoolSize );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsBufferCfgs(CosmOS_OsConfigurationType * os)
+  * @fn channel_getChannelSendPermission(CosmOS_ChannelConfigurationType *
+  * channel)
   *
-  * @brief Get os bufferCfgs pointer.
+  * @brief Get sendPermission pointer.
   *
-  * @param[in]  os configuration pointer
+  * @param[in]  channel configuration pointer
   *
-  * @return CosmOS_BufferConfigurationType *
+  * @return CosmOS_PermissionsConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferConfigurationType *
-os_getOsBufferCfgs( CosmOS_OsConfigurationType * os )
+__STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType *
+channel_getChannelSendPermission( CosmOS_ChannelConfigurationType * channel )
 {
-    return (CosmOS_BufferConfigurationType *)( os->bufferCfgs );
+    return (CosmOS_PermissionsConfigurationType *)( channel->sendPermission );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsBufferCfg(CosmOS_OsConfigurationType * os,BitWidthType bufferId)
+  * @fn channel_getChannelReplyPermission(CosmOS_ChannelConfigurationType *
+  * channel)
   *
-  * @brief Get os buffer pointer.
+  * @brief Get replyPermission pointer.
   *
-  * @param[in]  os configuration pointer
-  * @param[in]  bufferId specifies the buffer from array of configured buffers
+  * @param[in]  channel configuration pointer
   *
-  * @return CosmOS_BufferConfigurationType *
+  * @return CosmOS_PermissionsConfigurationType *
 ********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferConfigurationType *
-os_getOsBufferCfg( CosmOS_OsConfigurationType * os, BitWidthType bufferId )
+__STATIC_FORCEINLINE CosmOS_PermissionsConfigurationType *
+channel_getChannelReplyPermission( CosmOS_ChannelConfigurationType * channel )
 {
-    return (CosmOS_BufferConfigurationType *)( &( os->bufferCfgs[bufferId] ) );
+    return (CosmOS_PermissionsConfigurationType *)( channel->replyPermission );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsbufferDoubleCfgs(CosmOS_OsConfigurationType * os)
+  * @fn channel_getChannelSpinlockId(CosmOS_ChannelConfigurationType * channel)
   *
-  * @brief Get os bufferDoubleCfgs pointer.
+  * @brief Get channel spinlockId.
   *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_BufferDoubleConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferDoubleConfigurationType *
-os_getOsbufferDoubleCfgs( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_BufferDoubleConfigurationType *)( os->bufferDoubleCfgs );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsBufferDoubleCfg(CosmOS_OsConfigurationType * os,
-  * BitWidthType bufferDoubleId)
-  *
-  * @brief Get os bufferDouble pointer.
-  *
-  * @param[in]  os configuration pointer
-  * @param[in]  bufferDoubleId specifies the bufferDouble from array of
-  * configured buffersDouble
-  *
-  * @return CosmOS_BufferDoubleConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_BufferDoubleConfigurationType *
-os_getOsBufferDoubleCfg(
-    CosmOS_OsConfigurationType * os,
-    BitWidthType bufferDoubleId )
-{
-    return (CosmOS_BufferDoubleConfigurationType *)( &(
-        os->bufferDoubleCfgs[bufferDoubleId] ) );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsSpinlockVars(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os spinlockVars pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_SpinlockVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SpinlockVariableType *
-os_getOsSpinlockVars( CosmOS_OsConfigurationType * os )
-{
-    return ( os->spinlockVars );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsSpinlockVar(CosmOS_OsConfigurationType * os,
-  * BitWidthType spinlockId)
-  *
-  * @brief Get os spinlock pointer.
-  *
-  * @param[in]  os configuration pointer
-  * @param[in]  spinlockId specifies the spinlock from array of configured
-  * spinlocks
-  *
-  * @return CosmOS_SpinlockVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SpinlockVariableType *
-os_getOsSpinlockVar( CosmOS_OsConfigurationType * os, BitWidthType spinlockId )
-{
-    return ( &( os->spinlockVars[spinlockId] ) );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsEventCfg(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os osEventCfg pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_OsEventConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_OsEventConfigurationType *
-os_getOsEventCfg( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_OsEventConfigurationType *)( os->osEventCfg );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsChannelsCfg(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get channels pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_ChannelConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ChannelConfigurationType *
-os_getOsChannelsCfg( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_ChannelConfigurationType *)( os->channels );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsChannelCfg( CosmOS_OsConfigurationType * os,
-  * BitWidthType channelId )
-  *
-  * @brief Get channel pointer.
-  *
-  * @param[in]  os configuration pointer
-  * @param[in]  channelId specifies the channel from array of configured
-  * channels
-  *
-  * @return CosmOS_ChannelConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_ChannelConfigurationType *
-os_getOsChannelCfg( CosmOS_OsConfigurationType * os, BitWidthType channelId )
-{
-    return (CosmOS_ChannelConfigurationType *)( &( os->channels[channelId] ) );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsNumberOfChannels(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get numberOfChannels.
-  *
-  * @param[in]  os configuration pointer
+  * @param[in]  channel configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-os_getOsNumberOfChannels( CosmOS_OsConfigurationType * os )
+channel_getChannelSpinlockId( CosmOS_ChannelConfigurationType * channel )
 {
-    return ( BitWidthType )( os->numberOfChannels );
+    return ( BitWidthType )( channel->spinlockId );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_getOsDummy(CosmOS_OsConfigurationType * os)
+  * @fn channel_getChannelReplyPoolSchedulableOwner(
+  * CosmOS_ChannelConfigurationType * channel)
   *
-  * @brief Get os dummy.
+  * @brief Get channel replyPoolSchedulableOwner.
   *
-  * @param[in]  os configuration pointer
+  * @param[in]  channel configuration pointer
+  *
+  * @return CosmOS_SchedulableConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
+channel_getChannelReplyPoolSchedulableOwner(
+    CosmOS_ChannelConfigurationType * channel )
+{
+    return (
+        CosmOS_SchedulableConfigurationType *)( channel
+                                                    ->replyPoolSchedulableOwner );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_getChannelInitialized(CosmOS_ChannelConfigurationType *
+  * channel)
+  *
+  * @brief Get channel initialized.
+  *
+  * @param[in]  channel configuration pointer
+  *
+  * @return CosmOS_BooleanType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BooleanType
+channel_getChannelInitialized( CosmOS_ChannelConfigurationType * channel )
+{
+    return ( CosmOS_BooleanType )( channel->var->initialized );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_getChannelSendPoolState(CosmOS_ChannelConfigurationType *
+  * channel)
+  *
+  * @brief Get channel sendPoolState.
+  *
+  * @param[in]  channel configuration pointer
+  *
+  * @return CosmOS_ChannelPoolStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_ChannelPoolStateType
+channel_getChannelSendPoolState( CosmOS_ChannelConfigurationType * channel )
+{
+    return ( CosmOS_ChannelPoolStateType )( channel->var->sendPoolState );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_getChannelSendPoolPayloadLength(CosmOS_ChannelConfigurationType
+  * * channel)
+  *
+  * @brief Get channel sendPoolPayloadLength.
+  *
+  * @param[in]  channel configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-os_getOsDummy( CosmOS_OsConfigurationType * os )
+channel_getChannelSendPoolPayloadLength(
+    CosmOS_ChannelConfigurationType * channel )
 {
-    return ( os->var->dummy );
+    return ( BitWidthType )( channel->var->sendPoolPayloadLength );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_getChannelSendPoolSchedulableOwner(
+  * CosmOS_ChannelConfigurationType * channel)
+  *
+  * @brief Get channel sendPoolSchedulableOwner.
+  *
+  * @param[in]  channel configuration pointer
+  *
+  * @return CosmOS_SchedulableConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
+channel_getChannelSendPoolSchedulableOwner(
+    CosmOS_ChannelConfigurationType * channel )
+{
+    return (
+        CosmOS_SchedulableConfigurationType *)( channel->var
+                                                    ->sendPoolSchedulableOwner );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_getChannelSenderWaitingForResponse(
+  * CosmOS_ChannelConfigurationType * channel)
+  *
+  * @brief Get channel senderWaitingForResponse.
+  *
+  * @param[in]  channel configuration pointer
+  *
+  * @return CosmOS_BooleanType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BooleanType
+channel_getChannelSenderWaitingForResponse(
+    CosmOS_ChannelConfigurationType * channel )
+{
+    return ( CosmOS_BooleanType )( channel->var->senderWaitingForResponse );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_getChannelReplyPoolState(CosmOS_ChannelConfigurationType *
+  * channel)
+  *
+  * @brief Get channel replyPoolState.
+  *
+  * @param[in]  channel configuration pointer
+  *
+  * @return CosmOS_ChannelPoolStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_ChannelPoolStateType
+channel_getChannelReplyPoolState( CosmOS_ChannelConfigurationType * channel )
+{
+    return ( CosmOS_ChannelPoolStateType )( channel->var->replyPoolState );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_getChannelReplyPoolPayloadLength(CosmOS_ChannelConfigurationType
+  * * channel)
+  *
+  * @brief Get channel replyPoolPayloadLength.
+  *
+  * @param[in]  channel configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+channel_getChannelReplyPoolPayloadLength(
+    CosmOS_ChannelConfigurationType * channel )
+{
+    return ( BitWidthType )( channel->var->replyPoolPayloadLength );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_os_h
+/* Getters_channel_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_os_h Setters
-  * @ingroup Apis_os_h
+  * @addtogroup Setters_channel_h Setters
+  * @ingroup Apis_channel_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_setOsDummy( CosmOS_OsConfigurationType * os,
-  * BitWidthType dummyParam )
+  * @fn channel_setChannelSendPoolState(
+  * CosmOS_ChannelConfigurationType * channel,
+  * CosmOS_BooleanType initializedParam )
   *
-  * @brief Set os dummy.
+  * @brief Set channel initialized.
   *
-  * @param[in]  os configuration pointer
+  * @param[out]  channel configuration pointer
+  * @param[in]  initializedParam initialized value
   *
-  * @return BitWidthType
+  * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
-os_setOsDummy( CosmOS_OsConfigurationType * os, BitWidthType dummyParam )
+channel_setChannelInitialized(
+    CosmOS_ChannelConfigurationType * channel,
+    CosmOS_BooleanType initializedParam )
 {
-    os->var->dummy = dummyParam;
+    channel->var->initialized = initializedParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_setChannelSendPoolState(
+  * CosmOS_ChannelConfigurationType * channel,
+  * CosmOS_ChannelPoolStateType sendPoolStateParam )
+  *
+  * @brief Set channel sendPoolState.
+  *
+  * @param[out]  channel configuration pointer
+  * @param[in]  sendPoolStateParam send pool state
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+channel_setChannelSendPoolState(
+    CosmOS_ChannelConfigurationType * channel,
+    CosmOS_ChannelPoolStateType sendPoolStateParam )
+{
+    channel->var->sendPoolState = sendPoolStateParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_setChannelSendPoolPayloadLength(
+  * CosmOS_ChannelConfigurationType * channel,
+  * BitWidthType sendPoolPayloadLengthParam  )
+  *
+  * @brief Set channel sendPoolPayloadLength.
+  *
+  * @param[out]  channel configuration pointer
+  * @param[in]  sendPoolPayloadLengthParam send pool payload len
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+channel_setChannelSendPoolPayloadLength(
+    CosmOS_ChannelConfigurationType * channel,
+    BitWidthType sendPoolPayloadLengthParam )
+{
+    channel->var->sendPoolPayloadLength = sendPoolPayloadLengthParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_setChannelSendPoolSchedulableOwner(
+  * CosmOS_ChannelConfigurationType * channel,
+  * CosmOS_SchedulableConfigurationType * sendPoolSchedulableOwnerParam )
+  *
+  * @brief Set channel sendPoolSchedulableOwner.
+  *
+  * @param[out]  channel configuration pointer
+  * @param[in]  sendPoolSchedulableOwnerParam send pool owner
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+channel_setChannelSendPoolSchedulableOwner(
+    CosmOS_ChannelConfigurationType * channel,
+    CosmOS_SchedulableConfigurationType * sendPoolSchedulableOwnerParam )
+{
+    channel->var->sendPoolSchedulableOwner = sendPoolSchedulableOwnerParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_setChannelSenderWaitingForResponse(
+  * CosmOS_ChannelConfigurationType * channel,
+  * CosmOS_BooleanType senderWaitingForResponseParam )
+  *
+  * @brief Set channel senderWaitingForResponse.
+  *
+  * @param[out]  channel configuration pointer
+  * @param[in]  senderWaitingForResponseParam is sender waiting for the response
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+channel_setChannelSenderWaitingForResponse(
+    CosmOS_ChannelConfigurationType * channel,
+    CosmOS_BooleanType senderWaitingForResponseParam )
+{
+    channel->var->senderWaitingForResponse = senderWaitingForResponseParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_setChannelReplyPoolState(
+  * CosmOS_ChannelConfigurationType * channel,
+  * CosmOS_ChannelPoolStateType replyPoolStateParam )
+  *
+  * @brief Set channel replyPoolState.
+  *
+  * @param[out]  channel configuration pointer
+  * @param[in]  replyPoolStateParam reply pool state
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+channel_setChannelReplyPoolState(
+    CosmOS_ChannelConfigurationType * channel,
+    CosmOS_ChannelPoolStateType replyPoolStateParam )
+{
+    channel->var->replyPoolState = replyPoolStateParam;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_setChannelReplyPoolPayloadLength(
+  * CosmOS_ChannelConfigurationType * channel,
+  * BitWidthType replyPoolPayloadLengthParam  )
+  *
+  * @brief Set channel replyPoolPayloadLength.
+  *
+  * @param[out]  channel configuration pointer
+  * @param[in]  replyPoolPayloadLengthParam reply pool payload len
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+channel_setChannelReplyPoolPayloadLength(
+    CosmOS_ChannelConfigurationType * channel,
+    BitWidthType replyPoolPayloadLengthParam )
+{
+    channel->var->replyPoolPayloadLength = replyPoolPayloadLengthParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_os_h
+/* Setters_channel_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_os_h General
-  * @ingroup Apis_os_h
+  * @addtogroup General_channel_h General
+  * @ingroup Apis_channel_h
   * @{
 ********************************************************************************/
+
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_os_h
+/* General_channel_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

@@ -27,6 +27,7 @@
 #include "cosmosAssert.h"
 #include "os.h"
 #include "spinlock.h"
+#include "supportStdio.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -132,7 +133,6 @@
   * @fn osEvent_triggerEventInternal(
   * BitWidthType id,
   * CosmOS_BooleanType * handleCores,
-  * AddressType * data,
   * BitWidthType event )
   *
   * @details The implementation contains obtaining of operating system
@@ -153,7 +153,6 @@ __OS_FUNC_SECTION void
 osEvent_triggerEventInternal(
     BitWidthType id,
     CosmOS_BooleanType * handleCores,
-    AddressType * data,
     BitWidthType event )
 {
     BitWidthType numberOfCores, currentCoreId;
@@ -169,8 +168,6 @@ osEvent_triggerEventInternal(
     currentCoreId = CILcore_getCoreId();
 
     osEvent_setOsEvent( eventCfg, event );
-
-    osEvent_setOsEventData( eventCfg, data );
 
     for ( BitWidthType coreIt = 0; coreIt < numberOfCores; coreIt++ )
     {
@@ -195,10 +192,47 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @fn osEvent_triggerEventDataPoolCopyInternal(
+  * BitWidthType id,
+  * AddressType * data,
+  * BitWidthType size )
+  *
+  * @details The implementation contains obtaining of operating system
+  * configuration structure used to get number of cores and event configuration
+  * structure by calling functions os_getOsNumberOfCores and os_getOsEventCfg.
+  * CILcore_getCoreId call returns then id of the current core. Then os event
+  * and the data pointer are set in the event variable by calling functions
+  * osEvent_setOsEvent and osEvent_setOsEventData. After this point the for
+  * loop is implemented that iterates over all cores, to set cores which handle
+  * this event except the current core - it remains False, by calling function
+  * osEvent_setOsEventHandleCore. In the end other cores are signalized by
+  * calling CILcore_triggerEvent function.
+********************************************************************************/
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION void
+osEvent_triggerEventDataPoolCopyInternal(
+    BitWidthType id,
+    AddressType * data,
+    AddressType * dataPool,
+    BitWidthType size )
+{
+    supportStdio_memcpy( dataPool, data, size );
+};
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn osEvent_triggerEvent(
   * BitWidthType event,
   * CosmOS_BooleanType * handleCores,
-  * AddressType * data )
+  * AddressType * data,
+  * BitWidthType size )
   *
   * @details The implementation contains obtaining of operating system
   * configuration structure used to get number of cores and event configuration
@@ -233,10 +267,13 @@ __OS_FUNC_SECTION CosmOS_OsEventStateType
 osEvent_triggerEvent(
     BitWidthType event,
     CosmOS_BooleanType * handleCores,
-    AddressType * data )
+    AddressType * data,
+    BitWidthType size )
 {
     BitWidthType spinlockId, coreId, numberOfCores, numberOfEventFuncs,
-        currentCoreId;
+        currentCoreId, dataPoolSize;
+
+    AddressType * dataPool;
 
     CosmOS_BooleanType coreInPrivilegedMode, eventNotHandled,
         handleAtleastOneCore;
@@ -262,61 +299,95 @@ osEvent_triggerEvent(
 
     if ( event < numberOfEventFuncs )
     {
-        handleAtleastOneCore = False;
-        for ( BitWidthType coreIt = 0; coreIt < numberOfCores; coreIt++ )
+        dataPoolSize = osEvent_getOsEventDataPoolSize( eventCfg );
+
+        if ( size < dataPoolSize )
         {
-            if ( currentCoreId IS_NOT_EQUAL_TO coreIt )
+            dataPool = osEvent_getOsEventDataPool( eventCfg );
+
+            handleAtleastOneCore = False;
+            for ( BitWidthType coreIt = 0; coreIt < numberOfCores; coreIt++ )
             {
-                if ( handleCores[coreIt] )
+                if ( currentCoreId IS_NOT_EQUAL_TO coreIt )
                 {
-                    handleAtleastOneCore = True;
+                    if ( handleCores[coreIt] )
+                    {
+                        handleAtleastOneCore = True;
+                    }
                 }
             }
-        }
 
-        if ( handleAtleastOneCore )
-        {
-            spinlockId = osEvent_getOsEventSpinlockId( eventCfg );
-
-            spinlockState = spinlock_getSpinlock( spinlockId );
-
-            cosmosAssert( spinlockState IS_EQUAL_TO
-                              SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
-
-            coreId = 0;
-            do
+            if ( handleAtleastOneCore )
             {
-                eventNotHandled =
-                    osEvent_getOsEventHandleCore( eventCfg, coreId );
-                if ( IS_NOT( eventNotHandled ) )
+                spinlockId = osEvent_getOsEventSpinlockId( eventCfg );
+
+                spinlockState = spinlock_getSpinlock( spinlockId );
+
+                cosmosAssert( spinlockState IS_EQUAL_TO
+                                  SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
+
+                coreId = 0;
+                do
                 {
-                    coreId++;
+                    eventNotHandled =
+                        osEvent_getOsEventHandleCore( eventCfg, coreId );
+                    if ( IS_NOT( eventNotHandled ) )
+                    {
+                        coreId++;
+                    }
+                } while ( coreId < numberOfCores );
+
+                coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+
+                if ( coreInPrivilegedMode )
+                {
+                    supportStdio_memcpy( dataPool, data, size );
+                    osEvent_triggerEventInternal( 0, handleCores, event );
                 }
-            } while ( coreId < numberOfCores );
+                else
+                {
+                    BitWidthType dataIndex = 0;
 
-            coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+                    while ( size )
+                    {
+                        if ( size >= SYCALL_BYTES_CHUNK )
+                        {
+                            cosmosApiInternal_osEvent_triggerEventDataPoolCopyInternal(
+                                ( data + dataIndex ),
+                                dataPool,
+                                SYCALL_BYTES_CHUNK );
+                            dataIndex += SYCALL_BYTES_CHUNK;
+                            size -= SYCALL_BYTES_CHUNK;
+                        }
+                        else
+                        {
+                            cosmosApiInternal_osEvent_triggerEventDataPoolCopyInternal(
+                                ( data + dataIndex ), dataPool, size );
+                            size = 0;
+                        }
+                    }
 
-            if ( coreInPrivilegedMode )
-            {
-                osEvent_triggerEventInternal( 0, handleCores, data, event );
+                    cosmosApiInternal_osEvent_triggerEventInternal(
+                        handleCores, event );
+                }
+
+                spinlockState = spinlock_releaseSpinlock( spinlockId );
+
+                cosmosAssert(
+                    spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__RELEASED );
+
+                returnValue = OS_EVENT_STATE_ENUM__OK;
             }
             else
             {
-                cosmosApiInternal_osEvent_triggerEventInternal(
-                    handleCores, data, event );
+                returnValue =
+                    OS_EVENT_STATE_ENUM__ERROR_ATLEAST_ONE_CORE_MUST_HANDLE_EVENT;
             }
-
-            spinlockState = spinlock_releaseSpinlock( spinlockId );
-
-            cosmosAssert(
-                spinlockState IS_EQUAL_TO SPINLOCK_STATE_ENUM__RELEASED );
-
-            returnValue = OS_EVENT_STATE_ENUM__OK;
         }
         else
         {
             returnValue =
-                OS_EVENT_STATE_ENUM__ERROR_ATLEAST_ONE_CORE_MUST_HANDLE_EVENT;
+                OS_EVENT_STATE_ENUM__ERROR_DATA_BIGGER_THAN_DATA_POOL_SIZE;
         }
     }
     else

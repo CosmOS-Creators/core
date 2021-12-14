@@ -141,16 +141,14 @@ extern "C" {
   * @fn osEvent_triggerEventInternal(
   * BitWidthType id,
   * CosmOS_BooleanType * handleCores,
-  * AddressType * data,
   * BitWidthType event )
   *
   * @brief OS trigger event internal function. This function cannot be called
   * from the unprivileged context directly.
   *
   * @param[in]  id is used during the system call dispatching
-  * @param[in]  event required event to trigger
   * @param[in]  handleCores pointer to the array with all handleCores booleans
-  * @param[in]  data pointer to the data passed to the event
+  * @param[in]  event required event to trigger
   *
   * @return none
 ********************************************************************************/
@@ -158,8 +156,34 @@ __OS_FUNC_SECTION void
 osEvent_triggerEventInternal(
     BitWidthType id,
     CosmOS_BooleanType * handleCores,
-    AddressType * data,
     BitWidthType event );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_triggerEventDataPoolCopyInternal(
+  * BitWidthType id,
+  * AddressType * data,
+  * AddressType * dataPool,
+  * BitWidthType size )
+  *
+  * @brief OS trigger event internal function. This function cannot be called
+  * from the unprivileged context directly.
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  data pointer to data to copy to the pool
+  * @param[in]  dataPool pointer to dataPool
+  * @param[in]  size of the data to copy
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void
+osEvent_triggerEventDataPoolCopyInternal(
+    BitWidthType id,
+    AddressType * data,
+    AddressType * dataPool,
+    BitWidthType size );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -168,13 +192,15 @@ osEvent_triggerEventInternal(
   * @fn osEvent_triggerEvent(
   * BitWidthType event,
   * CosmOS_BooleanType * handleCores,
-  * AddressType * data )
+  * AddressType * data,
+  * BitWidthType size )
   *
   * @brief OS event trigger function.
   *
   * @param[in]  event required event to trigger
   * @param[in]  handleCores pointer to the array with all handleCores booleans
   * @param[in]  data pointer to the data passed to the event
+  * @param[in]  size of the data to copy
   *
   * @return none
 ********************************************************************************/
@@ -182,7 +208,8 @@ __OS_FUNC_SECTION CosmOS_OsEventStateType
 osEvent_triggerEvent(
     BitWidthType event,
     CosmOS_BooleanType * handleCores,
-    AddressType * data );
+    AddressType * data,
+    BitWidthType size );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -355,18 +382,36 @@ osEvent_getOsEvent( CosmOS_OsEventConfigurationType * osEvent )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_getOsEventData(CosmOS_OsEventConfigurationType * osEvent)
+  * @fn osEvent_getOsEventDataPool(CosmOS_OsEventConfigurationType * osEvent)
   *
-  * @brief Get data pointer.
+  * @brief Get dataPool pointer.
   *
   * @param[in]  osEvent configuration pointer
   *
   * @return AddressType *
 ********************************************************************************/
 __STATIC_FORCEINLINE AddressType *
-osEvent_getOsEventData( CosmOS_OsEventConfigurationType * osEvent )
+osEvent_getOsEventDataPool( CosmOS_OsEventConfigurationType * osEvent )
 {
-    return (AddressType *)( osEvent->var->data );
+    return (AddressType *)( osEvent->dataPool );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_getOsEventDataPoolSize(CosmOS_OsEventConfigurationType * osEvent)
+  *
+  * @brief Get dataPoolSize.
+  *
+  * @param[in]  osEvent configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+osEvent_getOsEventDataPoolSize( CosmOS_OsEventConfigurationType * osEvent )
+{
+    return ( BitWidthType )( osEvent->dataPoolSize );
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
@@ -426,26 +471,6 @@ osEvent_setOsEvent(
     osEvent->var->event = paramEvent;
 }
 
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn osEvent_setOsEventData(CosmOS_OsEventConfigurationType * osEvent)
-  *
-  * @brief Set data pointer.
-  *
-  * @param[out]  osEvent configuration pointer
-  * @param[in]  paramData pointer
-  *
-  * @return none
-********************************************************************************/
-__STATIC_FORCEINLINE void
-osEvent_setOsEventData(
-    CosmOS_OsEventConfigurationType * osEvent,
-    AddressType * paramData )
-{
-    osEvent->var->data = paramData;
-}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
