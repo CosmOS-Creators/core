@@ -127,7 +127,22 @@ extern "C" {
   * @ingroup Apis_channel_h
   * @{
 ********************************************************************************/
-
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_setChannelSendPoolPayloadLengthInternal(
+  * BitWidthType id,
+  * CosmOS_ChannelConfigurationType * channelCfg,
+  * BitWidthType length )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION void
+channel_setChannelReplyPoolPayloadLengthInternal(
+    BitWidthType id,
+    CosmOS_ChannelConfigurationType * channelCfg,
+    BitWidthType length );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -141,6 +156,23 @@ extern "C" {
   * @ingroup Apis_channel_h
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_setChannelSendPoolPayloadLengthInternal(
+  * BitWidthType id,
+  * CosmOS_ChannelConfigurationType * channelCfg,
+  * BitWidthType length )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION void
+channel_setChannelSendPoolPayloadLengthInternal(
+    BitWidthType id,
+    CosmOS_ChannelConfigurationType * channelCfg,
+    BitWidthType length );
+
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
@@ -160,6 +192,60 @@ channel_send(
     BitWidthType userSendPoolSize,
     AddressType * userReplyDataPool,
     BitWidthType userReplyPoolSize );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_triggerEvent(
+  * BitWidthType event,
+  * CosmOS_BooleanType * handleCores,
+  * AddressType * data,
+  * BitWidthType size )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_ChannelStateType
+channel_receive(
+    BitWidthType channelId,
+    AddressType * userReceiveDataPool,
+    BitWidthType userReceiveDataPoolSize );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_dispatchEvent( void )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_ChannelStateType
+channel_reply(
+    BitWidthType channelId,
+    AddressType * userReplyDataPool,
+    BitWidthType userReplyDataPoolSize );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_dispatchEvent( void )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION void
+channel_signalizeServer( void );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_dispatchEvent( void )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION void
+channel_signalizeClient( void );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -218,12 +304,33 @@ channel_sendConfigureChannelInternal(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn osEvent_triggerEventInternal(
+  * BitWidthType id,
+  * CosmOS_BooleanType * handleCores,
+  * BitWidthType event )
   *
   * @details The implementation contains
 ********************************************************************************/
 __OS_FUNC_SECTION void
-channel_signalizeClient( void );
+channel_receiveInternal(
+    BitWidthType id,
+    CosmOS_ChannelConfigurationType * channelCfg );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_triggerEventInternal(
+  * BitWidthType id,
+  * CosmOS_BooleanType * handleCores,
+  * BitWidthType event )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION void
+channel_replyConfigureChannelInternal(
+    BitWidthType id,
+    CosmOS_ChannelConfigurationType * channelCfg );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -237,21 +344,10 @@ channel_signalizeClient( void );
   * @details The implementation contains
 ********************************************************************************/
 __OS_FUNC_SECTION void
-channel_setChannelSendPoolPayloadLengthInternal(
+channel_setChannelReplyPoolPayloadLengthInternal(
     BitWidthType id,
     CosmOS_ChannelConfigurationType * channelCfg,
     BitWidthType length );
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn osEvent_dispatchEvent( void )
-  *
-  * @details The implementation contains
-********************************************************************************/
-__OS_FUNC_SECTION void
-channel_signalizeServer( void );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

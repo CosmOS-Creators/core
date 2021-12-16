@@ -357,7 +357,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * is obtained by the function buffer_getBufferSpinlockId and then the spinlock
   * is tried by the non-blocking function spinlock_trySpinlock. If the spinlock
   * cannot be obtained the bufferState is returned with the value
-  * BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED.
+  * BUFFER_STATE_ENUM__ERROR_BUFFER_OCCUPIED.
   * If the spinlock was obtained the function buffer_getFullCellsNum is called
   * to get full cells number and check if the user required more bytes to read
   * than available. If yes then the bufferState is returned with the value
@@ -486,7 +486,7 @@ buffer_readArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                 }
                 else
                 {
-                    bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
+                    bufferState = BUFFER_STATE_ENUM__ERROR_BUFFER_OCCUPIED;
                 }
             }
             else
@@ -534,7 +534,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * is obtained by the function buffer_getBufferSpinlockId and then the spinlock
   * is tried by the non-blocking function spinlock_trySpinlock. If the spinlock
   * cannot be obtained the bufferState is returned with the value
-  * BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED.
+  * BUFFER_STATE_ENUM__ERROR_BUFFER_OCCUPIED.
   * If the spinlock was obtained the function buffer_getEmptyCellsNum is called
   * to get empty cells number and check if the user required more bytes to write
   * than empty cells available in the buffer. If yes then the bufferState is
@@ -664,7 +664,7 @@ buffer_writeArray( BitWidthType bufferId, void * buffer, BitWidthType size )
                 }
                 else
                 {
-                    bufferState = BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED;
+                    bufferState = BUFFER_STATE_ENUM__ERROR_BUFFER_OCCUPIED;
                 }
             }
             else
