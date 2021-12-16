@@ -648,10 +648,11 @@ channel_receive(
             if ( isChannelInitialized )
             {
                 CosmOS_AccessStateType accessState;
-                CosmOS_PermissionsConfigurationType * sendPermission;
+                CosmOS_PermissionsConfigurationType * replyPermission;
 
-                sendPermission = channel_getChannelSendPermission( channelCfg );
-                accessState = permission_tryAccess( sendPermission, coreCfg );
+                replyPermission =
+                    channel_getChannelReplyPermission( channelCfg );
+                accessState = permission_tryAccess( replyPermission, coreCfg );
 
                 if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__ALLOWED )
                 {
@@ -663,18 +664,15 @@ channel_receive(
 
                         CosmOS_ChannelPoolStateType sendPoolState;
 
-                        sendPoolState =
-                            channel_getChannelSendPoolState( channelCfg );
-
-                        while (
-                            sendPoolState IS_NOT_EQUAL_TO
-                                CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED )
+                        do
                         {
                             cosmosApiInternal_channel_receiveInternal(
                                 channelCfg );
                             sendPoolState =
                                 channel_getChannelSendPoolState( channelCfg );
-                        }
+                        } while (
+                            sendPoolState IS_NOT_EQUAL_TO
+                                CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED );
 
                         sendDataPool = (AddressType *)channel_getChannelSendPool(
                             channelCfg );
