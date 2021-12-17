@@ -118,7 +118,33 @@
 /********************************************************************************
 **                        Function Definitions | Start                         **
 ********************************************************************************/
-
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_dataPoolCopyInternal(
+  * BitWidthType id,
+  * AddressType * data,
+  * AddressType * dataPool,
+  * BitWidthType size )
+  *
+  * @details The implementation contains
+********************************************************************************/
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION void
+supportStdio_memcpyInternal(
+    BitWidthType id,
+    AddressType * src,
+    AddressType * dest,
+    BitWidthType size )
+{
+    supportStdio_memcpy( dest, src, size );
+}
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
 /********************************************************************************
 **                        Function Definitions | Stop                          **
 ********************************************************************************/

@@ -192,42 +192,6 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventDataPoolCopyInternal(
-  * BitWidthType id,
-  * AddressType * data,
-  * BitWidthType size )
-  *
-  * @details The implementation contains obtaining of operating system
-  * configuration structure used to get number of cores and event configuration
-  * structure by calling functions os_getOsNumberOfCores and os_getOsEventCfg.
-  * CILcore_getCoreId call returns then id of the current core. Then os event
-  * and the data pointer are set in the event variable by calling functions
-  * osEvent_setOsEvent and osEvent_setOsEventData. After this point the for
-  * loop is implemented that iterates over all cores, to set cores which handle
-  * this event except the current core - it remains False, by calling function
-  * osEvent_setOsEventHandleCore. In the end other cores are signalized by
-  * calling CILcore_triggerEvent function.
-********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION void
-osEvent_triggerEventDataPoolCopyInternal(
-    BitWidthType id,
-    AddressType * data,
-    AddressType * dataPool,
-    BitWidthType size )
-{
-    supportStdio_memcpy( dataPool, data, size );
-};
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
   * @fn osEvent_triggerEvent(
   * BitWidthType event,
   * CosmOS_BooleanType * handleCores,
@@ -270,8 +234,8 @@ osEvent_triggerEvent(
     AddressType * data,
     BitWidthType size )
 {
-    BitWidthType spinlockId, coreId, numberOfCores, numberOfEventFuncs,
-        currentCoreId, dataPoolSize;
+    BitWidthType coreId, numberOfCores, numberOfEventFuncs, currentCoreId,
+        dataPoolSize;
 
     AddressType * dataPool;
 
@@ -319,57 +283,63 @@ osEvent_triggerEvent(
 
             if ( handleAtleastOneCore )
             {
+                BitWidthType spinlockId;
                 spinlockId = osEvent_getOsEventSpinlockId( eventCfg );
-
-                spinlockState = spinlock_getSpinlock( spinlockId );
-
-                cosmosAssert( spinlockState IS_EQUAL_TO
-                                  SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
-
-                coreId = 0;
                 do
                 {
-                    eventNotHandled =
-                        osEvent_getOsEventHandleCore( eventCfg, coreId );
-                    if ( IS_NOT( eventNotHandled ) )
+                    spinlockState = spinlock_trySpinlock( spinlockId );
+
+                    if ( spinlockState IS_EQUAL_TO
+                             SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
                     {
-                        coreId++;
-                    }
-                } while ( coreId < numberOfCores );
-
-                coreInPrivilegedMode = CILcore_isInPrivilegedMode();
-
-                if ( coreInPrivilegedMode )
-                {
-                    supportStdio_memcpy( dataPool, data, size );
-                    osEvent_triggerEventInternal( 0, handleCores, event );
-                }
-                else
-                {
-                    BitWidthType dataIndex = 0;
-
-                    while ( size )
-                    {
-                        if ( size >= SYCALL_BYTES_CHUNK )
+                        coreId = 0;
+                        do
                         {
-                            cosmosApiInternal_osEvent_triggerEventDataPoolCopyInternal(
-                                ( data + dataIndex ),
-                                dataPool,
-                                SYCALL_BYTES_CHUNK );
-                            dataIndex += SYCALL_BYTES_CHUNK;
-                            size -= SYCALL_BYTES_CHUNK;
+                            eventNotHandled =
+                                osEvent_getOsEventHandleCore( eventCfg, coreId );
+                            if ( IS_NOT( eventNotHandled ) )
+                            {
+                                coreId++;
+                            }
+                        } while ( coreId < numberOfCores );
+
+                        coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+
+                        if ( coreInPrivilegedMode )
+                        {
+                            supportStdio_memcpy( dataPool, data, size );
+                            osEvent_triggerEventInternal(
+                                0, handleCores, event );
                         }
                         else
                         {
-                            cosmosApiInternal_osEvent_triggerEventDataPoolCopyInternal(
-                                ( data + dataIndex ), dataPool, size );
-                            size = 0;
+                            BitWidthType dataIndex = 0;
+
+                            while ( size )
+                            {
+                                if ( size >= SYCALL_BYTES_CHUNK )
+                                {
+                                    cosmosApiInternal_supportStdio_memcpyInternal(
+                                        ( data + dataIndex ),
+                                        dataPool,
+                                        SYCALL_BYTES_CHUNK );
+                                    dataIndex += SYCALL_BYTES_CHUNK;
+                                    size -= SYCALL_BYTES_CHUNK;
+                                }
+                                else
+                                {
+                                    cosmosApiInternal_supportStdio_memcpyInternal(
+                                        ( data + dataIndex ), dataPool, size );
+                                    size = 0;
+                                }
+                            }
+
+                            cosmosApiInternal_osEvent_triggerEventInternal(
+                                handleCores, event );
                         }
                     }
-
-                    cosmosApiInternal_osEvent_triggerEventInternal(
-                        handleCores, event );
-                }
+                } while ( spinlockState IS_NOT_EQUAL_TO
+                              SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
 
                 spinlockState = spinlock_releaseSpinlock( spinlockId );
 

@@ -142,8 +142,105 @@
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
-channel_initialize( BitWidthType channelId ){
+channel_initializeInternal(
+    BitWidthType id,
+    CosmOS_ChannelConfigurationType * channelCfg )
+{
+    channel_setChannelInitialized( channelCfg, True );
+};
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
 
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn osEvent_dispatchEvent( void )
+  *
+  * @details The implementation contains
+********************************************************************************/
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION CosmOS_ChannelStateType
+channel_initialize( BitWidthType channelId )
+{
+    BitWidthType numberOfChannels;
+
+    CosmOS_BooleanType coreInPrivilegedMode;
+
+    CosmOS_ChannelStateType returnValue;
+
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
+
+    osCfg = os_getOsCfg();
+
+    coreCfg = CILcore_getCoreCfg();
+
+    numberOfChannels = os_getOsNumberOfChannels( osCfg );
+
+    if ( ( (CosmOS_SchedulableConfigurationType *)
+               coreCfg->var->schedulableInExecution )
+             ->instanceType IS_EQUAL_TO SCHEDULABLE_INSTANCE_ENUM__THREAD )
+    {
+        if ( channelId < numberOfChannels )
+        {
+            CosmOS_ChannelConfigurationType * channelCfg;
+            channelCfg = os_getOsChannelCfg( osCfg, channelId );
+
+            CosmOS_BooleanType isChannelInitialized;
+
+            isChannelInitialized = channel_getChannelInitialized( channelCfg );
+
+            if ( IS_NOT( isChannelInitialized ) )
+            {
+                CosmOS_AccessStateType accessState;
+                CosmOS_PermissionsConfigurationType * replyPermission;
+
+                replyPermission =
+                    channel_getChannelReplyPermission( channelCfg );
+                accessState = permission_tryAccess( replyPermission, coreCfg );
+
+                if ( accessState IS_EQUAL_TO ACCESS_STATE_ENUM__ALLOWED )
+                {
+                    coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+
+                    if ( IS_NOT( coreInPrivilegedMode ) )
+                    {
+                        cosmosApiInternal_channel_initializeInternal(
+                            channelCfg );
+                        returnValue = CHANNEL_STATE_ENUM__INITIALIZED;
+                    }
+                    else
+                    {
+                        returnValue =
+                            CHANNEL_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED;
+                    }
+                }
+                else
+                {
+                    returnValue = CHANNEL_STATE_ENUM__ERROR_ACCESS_DENIED;
+                }
+            }
+            else
+            {
+                returnValue =
+                    CHANNEL_STATE_ENUM__ERROR_CHANNEL_ALREADY_INITIALIZED;
+            }
+        }
+        else
+        {
+            returnValue = CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID;
+        }
+    }
+    else
+    {
+        returnValue = CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL;
+    }
+
+    return returnValue;
 };
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
@@ -164,16 +261,18 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
-channel_sendConfigureChannelInternal(
+channel_sendInternal(
     BitWidthType id,
     CosmOS_ChannelConfigurationType * channelCfg,
-    AddressType * userReplyDataPool,
+    BitWidthType sendPoolPayloadLength,
     BitWidthType userReplyDataPoolSize )
 {
     CosmOS_SchedulableConfigurationType * replyPoolOwner;
     CosmOS_CoreConfigurationType * coreCfg;
 
     coreCfg = CILcore_getCoreCfg();
+
+    channel_setChannelSendPoolPayloadLength( channelCfg, sendPoolPayloadLength );
 
     if ( userReplyDataPoolSize )
     {
@@ -222,7 +321,7 @@ channel_sendConfigureChannelInternal(
         channelEvent.channelId = channelCfg->id;
 
         osEventState = osEvent_triggerEvent(
-            OS_EVENT_CHANNEL_SIGNALIZESERVER,
+            OS_EVENT_CHANNEL_SIGNALIZESEND,
             osEventHandleCore,
             (AddressType *)&channelEvent,
             sizeof( channelEvent ) );
@@ -271,60 +370,6 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn channel_setChannelSendPoolPayloadLengthInternal(
-  * BitWidthType id,
-  * CosmOS_ChannelConfigurationType * channelCfg,
-  * BitWidthType length )
-  *
-  * @details The implementation contains
-********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION void
-channel_setChannelSendPoolPayloadLengthInternal(
-    BitWidthType id,
-    CosmOS_ChannelConfigurationType * channelCfg,
-    BitWidthType length )
-{
-    channel_setChannelSendPoolPayloadLength( channelCfg, length );
-};
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn channel_dataPoolCopyInternal(
-  * BitWidthType id,
-  * AddressType * data,
-  * AddressType * dataPool,
-  * BitWidthType size )
-  *
-  * @details The implementation contains
-********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION void
-channel_dataPoolCopyInternal(
-    BitWidthType id,
-    AddressType * data,
-    AddressType * dataPool,
-    BitWidthType size )
-{
-    supportStdio_memcpy( dataPool, data, size );
-};
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
   * @fn osEvent_triggerEvent(
   * BitWidthType event,
   * CosmOS_BooleanType * handleCores,
@@ -353,7 +398,6 @@ channel_send(
 
     osCfg = os_getOsCfg();
 
-    osCfg = os_getOsCfg();
     coreCfg = CILcore_getCoreCfg();
 
     numberOfChannels = os_getOsNumberOfChannels( osCfg );
@@ -418,6 +462,8 @@ channel_send(
                                             spinlockState IS_EQUAL_TO
                                                 SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
                                 {
+                                    const BitWidthType sendPoolPayloadLength =
+                                        userSendDataPoolSize;
                                     AddressType * sendDataPool;
 
                                     channelConnected = True;
@@ -429,15 +475,12 @@ channel_send(
                                         isChannelWatingForResponse;
                                     BitWidthType dataIndex = 0;
 
-                                    cosmosApiInternal_channel_setChannelSendPoolPayloadLengthInternal(
-                                        channelCfg, userSendDataPoolSize );
-
                                     while ( userSendDataPoolSize )
                                     {
                                         if ( userSendDataPoolSize >=
                                              SYCALL_BYTES_CHUNK )
                                         {
-                                            cosmosApiInternal_channel_dataPoolCopyInternal(
+                                            cosmosApiInternal_supportStdio_memcpyInternal(
                                                 ( userSendDataPool + dataIndex ),
                                                 sendDataPool,
                                                 SYCALL_BYTES_CHUNK );
@@ -447,7 +490,7 @@ channel_send(
                                         }
                                         else
                                         {
-                                            cosmosApiInternal_channel_dataPoolCopyInternal(
+                                            cosmosApiInternal_supportStdio_memcpyInternal(
                                                 ( userSendDataPool + dataIndex ),
                                                 sendDataPool,
                                                 userSendDataPoolSize );
@@ -455,9 +498,9 @@ channel_send(
                                         }
                                     }
 
-                                    cosmosApiInternal_channel_sendConfigureChannelInternal(
+                                    cosmosApiInternal_channel_sendInternal(
                                         channelCfg,
-                                        userReplyDataPool,
+                                        sendPoolPayloadLength,
                                         userReplyDataPoolSize );
 
                                     spinlockState = spinlock_releaseSpinlock(
@@ -628,7 +671,6 @@ channel_receive(
 
     osCfg = os_getOsCfg();
 
-    osCfg = os_getOsCfg();
     coreCfg = CILcore_getCoreCfg();
 
     numberOfChannels = os_getOsNumberOfChannels( osCfg );
@@ -743,18 +785,23 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
-channel_replyConfigureChannelInternal(
+channel_replyInternal(
     BitWidthType id,
-    CosmOS_ChannelConfigurationType * channelCfg )
+    CosmOS_ChannelConfigurationType * channelCfg,
+    BitWidthType replyPoolPayloadLength )
 {
     CosmOS_BooleanType isSenderWaitingPrioHigher;
 
+    CosmOS_ProgramConfigurationType * sendThreadProgram;
     CosmOS_SchedulableConfigurationType * sendPoolOwner;
     CosmOS_ThreadConfigurationType * replyThreadCfg;
     CosmOS_ThreadConfigurationType * sendThreadCfg;
     CosmOS_CoreConfigurationType * coreCfg;
 
     coreCfg = CILcore_getCoreCfg();
+
+    channel_setChannelReplyPoolPayloadLength(
+        channelCfg, replyPoolPayloadLength );
 
     channel_setChannelReplyPoolState(
         channelCfg, CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED );
@@ -764,6 +811,9 @@ channel_replyConfigureChannelInternal(
     {
         sendPoolOwner->var->state = SCHEDULABLE_STATE_ENUM__READY;
 
+        sendThreadProgram =
+            core_getCoreProgramCfg( coreCfg, sendPoolOwner->programId );
+
         replyThreadCfg = program_getProgramThread(
             (CosmOS_ProgramConfigurationType *)coreCfg->var->programInExecution,
             ( (CosmOS_SchedulableConfigurationType *)
@@ -771,8 +821,7 @@ channel_replyConfigureChannelInternal(
                 ->instanceId );
 
         sendThreadCfg = program_getProgramThread(
-            (CosmOS_ProgramConfigurationType *)coreCfg->var->programInExecution,
-            sendPoolOwner->instanceId );
+            sendThreadProgram, sendPoolOwner->instanceId );
 
         if ( replyThreadCfg->priority < sendThreadCfg->priority )
         {
@@ -801,7 +850,7 @@ channel_replyConfigureChannelInternal(
         channelEvent.channelId = channelCfg->id;
 
         osEventState = osEvent_triggerEvent(
-            OS_EVENT_CHANNEL_SIGNALIZECLIENT,
+            OS_EVENT_CHANNEL_SIGNALIZEREPLY,
             osEventHandleCore,
             (AddressType *)&channelEvent,
             sizeof( channelEvent ) );
@@ -813,32 +862,6 @@ channel_replyConfigureChannelInternal(
     {
         CILinterrupt_contextSwitchRoutineTrigger();
     }
-};
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn channel_setChannelSendPoolPayloadLengthInternal(
-  * BitWidthType id,
-  * CosmOS_ChannelConfigurationType * channelCfg,
-  * BitWidthType length )
-  *
-  * @details The implementation contains
-********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION void
-channel_setChannelReplyPoolPayloadLengthInternal(
-    BitWidthType id,
-    CosmOS_ChannelConfigurationType * channelCfg,
-    BitWidthType length )
-{
-    channel_setChannelReplyPoolPayloadLength( channelCfg, length );
 };
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
@@ -872,7 +895,6 @@ channel_reply(
 
     osCfg = os_getOsCfg();
 
-    osCfg = os_getOsCfg();
     coreCfg = CILcore_getCoreCfg();
 
     numberOfChannels = os_getOsNumberOfChannels( osCfg );
@@ -925,6 +947,8 @@ channel_reply(
                             if ( userReplyDataPoolSize < replyPoolSize )
                             {
                                 CosmOS_ChannelPoolStateType replyPoolState;
+                                const BitWidthType replyPoolPayloadLength =
+                                    userReplyDataPoolSize;
 
                                 replyPoolState =
                                     channel_getChannelReplyPoolState(
@@ -942,16 +966,13 @@ channel_reply(
                                     (AddressType *)channel_getChannelReplyPool(
                                         channelCfg );
 
-                                cosmosApiInternal_channel_setChannelReplyPoolPayloadLengthInternal(
-                                    channelCfg, userReplyDataPoolSize );
-
                                 dataIndex = 0;
                                 while ( userReplyDataPoolSize )
                                 {
                                     if ( userReplyDataPoolSize >=
                                          SYCALL_BYTES_CHUNK )
                                     {
-                                        cosmosApiInternal_channel_dataPoolCopyInternal(
+                                        cosmosApiInternal_supportStdio_memcpyInternal(
                                             ( userReplyDataPool + dataIndex ),
                                             replyDataPool,
                                             SYCALL_BYTES_CHUNK );
@@ -961,7 +982,7 @@ channel_reply(
                                     }
                                     else
                                     {
-                                        cosmosApiInternal_channel_dataPoolCopyInternal(
+                                        cosmosApiInternal_supportStdio_memcpyInternal(
                                             ( userReplyDataPool + dataIndex ),
                                             replyDataPool,
                                             userReplyDataPoolSize );
@@ -969,8 +990,8 @@ channel_reply(
                                     }
                                 }
 
-                                cosmosApiInternal_channel_replyConfigureChannelInternal(
-                                    channelCfg );
+                                cosmosApiInternal_channel_replyInternal(
+                                    channelCfg, replyPoolPayloadLength );
                             }
                             else
                             {
@@ -1028,8 +1049,63 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
-channel_signalizeServer( void ){
+channel_signalizeReply( void )
+{
+    BitWidthType numberOfChannels;
 
+    CosmOS_BooleanType isSendThreadPrioHigher;
+
+    CosmOS_ProgramConfigurationType * sendThreadProgram;
+    CosmOS_SchedulableConfigurationType * sendPoolOwner;
+    CosmOS_ThreadConfigurationType * sendThreadCfg;
+    CosmOS_ThreadConfigurationType * currentThreadCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_OsEventConfigurationType * eventCfg;
+
+    osCfg = os_getOsCfg();
+    coreCfg = CILcore_getCoreCfg();
+
+    eventCfg = os_getOsEventCfg( osCfg );
+
+    CosmOS_ChannelConfigurationType * channelCfg;
+
+    CosmOS_ChannelEventType * channelEvent =
+        (CosmOS_ChannelEventType *)osEvent_getOsEventDataPool( eventCfg );
+
+    numberOfChannels = os_getOsNumberOfChannels( osCfg );
+
+    cosmosAssert( channelEvent->channelId < numberOfChannels );
+
+    channelCfg = os_getOsChannelCfg( osCfg, channelEvent->channelId );
+
+    sendPoolOwner = channel_getChannelSendPoolSchedulableOwner( channelCfg );
+
+    cosmosAssert( sendPoolOwner->coreId IS_EQUAL_TO coreCfg->coreId );
+
+    sendPoolOwner->var->state = SCHEDULABLE_STATE_ENUM__READY;
+
+    sendThreadProgram =
+        core_getCoreProgramCfg( coreCfg, sendPoolOwner->programId );
+
+    sendThreadCfg =
+        program_getProgramThread( sendThreadProgram, sendPoolOwner->instanceId );
+
+    currentThreadCfg = program_getProgramThread(
+        (CosmOS_ProgramConfigurationType *)coreCfg->var->programInExecution,
+        ( (CosmOS_SchedulableConfigurationType *)
+              coreCfg->var->schedulableInExecution )
+            ->instanceId );
+
+    if ( sendThreadCfg->priority > currentThreadCfg->priority )
+    {
+        isSendThreadPrioHigher = True;
+    }
+
+    if ( isSendThreadPrioHigher )
+    {
+        CILinterrupt_contextSwitchRoutineTrigger();
+    }
 };
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
@@ -1047,8 +1123,63 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 __SEC_START( __OS_FUNC_SECTION_START )
 /* @endcond*/
 __OS_FUNC_SECTION void
-channel_signalizeClient( void ){
+channel_signalizeSend( void )
+{
+    BitWidthType numberOfChannels;
 
+    CosmOS_BooleanType isReplyThreadPrioHigher;
+
+    CosmOS_ProgramConfigurationType * replyThreadProgram;
+    CosmOS_SchedulableConfigurationType * replyPoolOwner;
+    CosmOS_ThreadConfigurationType * replyThreadCfg;
+    CosmOS_ThreadConfigurationType * currentThreadCfg;
+    CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_OsConfigurationType * osCfg;
+    CosmOS_OsEventConfigurationType * eventCfg;
+
+    osCfg = os_getOsCfg();
+    coreCfg = CILcore_getCoreCfg();
+
+    eventCfg = os_getOsEventCfg( osCfg );
+
+    CosmOS_ChannelConfigurationType * channelCfg;
+
+    CosmOS_ChannelEventType * channelEvent =
+        (CosmOS_ChannelEventType *)osEvent_getOsEventDataPool( eventCfg );
+
+    numberOfChannels = os_getOsNumberOfChannels( osCfg );
+
+    cosmosAssert( channelEvent->channelId < numberOfChannels );
+
+    channelCfg = os_getOsChannelCfg( osCfg, channelEvent->channelId );
+
+    replyPoolOwner = channel_getChannelReplyPoolSchedulableOwner( channelCfg );
+
+    cosmosAssert( replyPoolOwner->coreId IS_EQUAL_TO coreCfg->coreId );
+
+    replyPoolOwner->var->state = SCHEDULABLE_STATE_ENUM__READY;
+
+    replyThreadProgram =
+        core_getCoreProgramCfg( coreCfg, replyPoolOwner->programId );
+
+    replyThreadCfg = program_getProgramThread(
+        replyThreadProgram, replyPoolOwner->instanceId );
+
+    currentThreadCfg = program_getProgramThread(
+        (CosmOS_ProgramConfigurationType *)coreCfg->var->programInExecution,
+        ( (CosmOS_SchedulableConfigurationType *)
+              coreCfg->var->schedulableInExecution )
+            ->instanceId );
+
+    if ( replyThreadCfg->priority > currentThreadCfg->priority )
+    {
+        isReplyThreadPrioHigher = True;
+    }
+
+    if ( isReplyThreadPrioHigher )
+    {
+        CILinterrupt_contextSwitchRoutineTrigger();
+    }
 };
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )

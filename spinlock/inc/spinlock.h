@@ -118,28 +118,6 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_getSpinlockInternal(BitWidthType id,
-  * CosmOS_SpinlockVariableType * spinlockVar,
-  * BitWidthType spinlockId );
-  *
-  * @brief Get to get spinlock internal. This function cannot be called
-  * from the unprivileged context directly. DEMO
-  *
-  * @param[in]  id is used during the system call dispatching
-  * @param[in]  spinlockVar variable structure pointer
-  * @param[in]  spinlockId spinlock identifier
-  *
-  * @return CosmOS_SpinlockStateType
-********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SpinlockStateType
-spinlock_getSpinlockInternal(
-    BitWidthType id,
-    CosmOS_SpinlockVariableType * spinlockVar,
-    BitWidthType spinlockId );
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
   * @fn spinlock_getSpinlock(BitWidthType spinlockId)
   *
   * @brief Get spinlock. DEMO

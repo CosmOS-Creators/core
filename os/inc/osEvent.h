@@ -162,33 +162,6 @@ osEvent_triggerEventInternal(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventDataPoolCopyInternal(
-  * BitWidthType id,
-  * AddressType * data,
-  * AddressType * dataPool,
-  * BitWidthType size )
-  *
-  * @brief OS trigger event internal function. This function cannot be called
-  * from the unprivileged context directly.
-  *
-  * @param[in]  id is used during the system call dispatching
-  * @param[in]  data pointer to data to copy to the pool
-  * @param[in]  dataPool pointer to dataPool
-  * @param[in]  size of the data to copy
-  *
-  * @return none
-********************************************************************************/
-__OS_FUNC_SECTION void
-osEvent_triggerEventDataPoolCopyInternal(
-    BitWidthType id,
-    AddressType * data,
-    AddressType * dataPool,
-    BitWidthType size );
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
   * @fn osEvent_triggerEvent(
   * BitWidthType event,
   * CosmOS_BooleanType * handleCores,

@@ -141,7 +141,24 @@ extern "C" {
   * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
-
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn channel_dataPoolCopyInternal(
+  * BitWidthType id,
+  * AddressType * data,
+  * AddressType * dataPool,
+  * BitWidthType size )
+  *
+  * @details The implementation contains
+********************************************************************************/
+__OS_FUNC_SECTION void
+supportStdio_memcpyInternal(
+    BitWidthType id,
+    AddressType * src,
+    AddressType * dest,
+    BitWidthType size );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

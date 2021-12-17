@@ -190,6 +190,21 @@ typedef BitWidthType (
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief
+  * CosmOS_Generic_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType
+  * type
+********************************************************************************/
+typedef BitWidthType (
+    *CosmOS_Generic_bitWidthType_voidPtr_bitWidthType_bitWidthType_ret_bitWidthType )(
+    BitWidthType,
+    void *,
+    BitWidthType,
+    BitWidthType );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_BooleanType enum
 ********************************************************************************/
 typedef enum
@@ -281,7 +296,7 @@ typedef enum
 ********************************************************************************/
 typedef enum
 {
-
+    CHANNEL_STATE_ENUM__INITIALIZED,
     CHANNEL_STATE_ENUM__RECEIVED,
     CHANNEL_STATE_ENUM__NOT_RECEIVED,
     CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID,
@@ -293,6 +308,7 @@ typedef enum
     CHANNEL_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED,
     CHANNEL_STATE_ENUM__ERROR_CHANNEL_OCCUPIED,
     CHANNEL_STATE_ENUM__ERROR_NO_REPLY_EXPECTED,
+    CHANNEL_STATE_ENUM__ERROR_CHANNEL_ALREADY_INITIALIZED,
 
 } CosmOS_ChannelStateType;
 

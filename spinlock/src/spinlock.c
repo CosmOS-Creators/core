@@ -128,51 +128,6 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_getSpinlockInternal(
-  * BitWidthType id,
-  * CosmOS_SpinlockVariableType * spinlockVar,
-  * BitWidthType spinlockId )
-  *
-  * @details The implementation contains obtaining of the core configuration by
-  * calling function CILcore_getCoreCfg.Then the function CILspinlock_getSpinlock
-  * is called to get spinlock and result is then returned as spinlock state. The
-  * schedulable owner member in spinlock variable is set to the schedulable in
-  * execution.
-********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION CosmOS_SpinlockStateType
-spinlock_getSpinlockInternal(
-    BitWidthType id,
-    CosmOS_SpinlockVariableType * spinlockVar,
-    BitWidthType spinlockId )
-{
-    CosmOS_SpinlockStateType spinlockState;
-
-    CosmOS_CoreConfigurationType * coreCfg;
-
-    coreCfg = CILcore_getCoreCfg();
-
-    spinlockState = CILspinlock_getSpinlock(
-        &( spinlockVar->spinlock ),
-        spinlockId,
-        ( (CosmOS_SchedulableConfigurationType *)
-              coreCfg->var->schedulableInExecution )
-            ->id );
-    spinlockVar->schedulableOwner = coreCfg->var->schedulableInExecution;
-
-    __SUPRESS_UNUSED_VAR( id );
-    return spinlockState;
-}
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
   * @fn spinlock_trySpinlockInternal(
   * BitWidthType id,
   * CosmOS_SpinlockVariableType * spinlockVar,
@@ -314,13 +269,22 @@ spinlock_getSpinlock( BitWidthType spinlockId )
 
             if ( coreInPrivilegedMode )
             {
-                spinlockState =
-                    spinlock_getSpinlockInternal( 0, spinlockVar, spinlockId );
+                do
+                {
+                    spinlockState = spinlock_trySpinlockInternal(
+                        0, spinlockVar, spinlockId );
+                } while ( spinlockState IS_NOT_EQUAL_TO
+                              SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
             }
             else
             {
-                spinlockState = cosmosApiInternal_spinlock_getSpinlockInternal(
-                    spinlockVar, spinlockId );
+                do
+                {
+                    spinlockState =
+                        cosmosApiInternal_spinlock_trySpinlockInternal(
+                            spinlockVar, spinlockId );
+                } while ( spinlockState IS_NOT_EQUAL_TO
+                              SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
             }
         }
         else
