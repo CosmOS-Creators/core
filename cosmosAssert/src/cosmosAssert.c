@@ -124,11 +124,8 @@
 /**
   * @fn cosmosAssert_catch( unsigned char * file, BitWidthType line )
   *
-  * @details The implementation contains creation of the new pointer of malloc
-  * variable type based on the next available address argument. The members of
-  * the malloc variable are then set based on the arguments and size is aligned
-  * to the BitWidthType (size contains aligned size of the malloc variable and
-  * then aligned size of the allocated memory)
+  * @details The implementation contains os_kernelPanic function call if the
+  * cosmosAssertion fails.
 ********************************************************************************/
 void
 cosmosAssert_catch( unsigned char * file, BitWidthType line )

@@ -231,7 +231,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * Spinlock variable is then obtained based on the id argument by the function
   * os_getOsSpinlockVar. The function spinlock_willCauseDeadlock is called to
   * check if the spinlock would cause eventually deadlock, if yes the spinlock
-  * state SPINLOCK_STATE_ENUM__DEADLOCK_WARNING is returned. Otherwise the
+  * state SPINLOCK_STATE_ENUM__ERROR_DEADLOCK is returned. Otherwise the
   * function cosmosApiInternal_spinlock_getSpinlockInternal is called if the core
   * is in the privileged mode or spinlock_getSpinlockInternal is called to get
   * spinlock and result is then returned as spinlock state. The schedulable
@@ -289,7 +289,7 @@ spinlock_getSpinlock( BitWidthType spinlockId )
         }
         else
         {
-            spinlockState = SPINLOCK_STATE_ENUM__DEADLOCK_WARNING;
+            spinlockState = SPINLOCK_STATE_ENUM__ERROR_DEADLOCK;
         }
     }
     else

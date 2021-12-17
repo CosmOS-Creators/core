@@ -338,7 +338,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * After this point another condition is needed to check if the schedulable in
   * execution will not cause the deadlock by calling mutex_willCauseDeadlock
   * function. If yes the mutexState is returned with the value
-  * MUTEX_STATE_ENUM__DEADLOCK_WARNING. If not the do while loop is implemented
+  * MUTEX_STATE_ENUM__ERROR_DEADLOCK. If not the do while loop is implemented
   * with calling the cosmosApiInternal_mutex_getMutexInternal till the returned
   * value is not MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED.
 ********************************************************************************/
@@ -368,7 +368,7 @@ mutex_getMutex( CosmOS_MutexVariableType * mutexVar )
             willCauseDeadlock = mutex_willCauseDeadlock( coreCfg, mutexVar );
             if ( willCauseDeadlock )
             {
-                mutexState = MUTEX_STATE_ENUM__DEADLOCK_WARNING;
+                mutexState = MUTEX_STATE_ENUM__ERROR_DEADLOCK;
             }
             else
             {
