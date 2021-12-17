@@ -138,12 +138,12 @@
   *
   * @brief Classic scheduling core function. DEMO
   *
-  * @param[in]  CosmOS_SchedulerConfigurationType * schedulerCfg
-  * @param[in]  CosmOS_SchedulableConfigurationType * schedulableCfg
-  * @param[in]  StackPointerType * stackPointerRetVal
-  * @param[in]  BitWidthType * timerTicks
-  * @param[in]  BitWidthType * scheduleTableIterator
-  * @param[in]  BitWidthType scheduleTableElementsNum
+  * @param[in]  schedulerCfg scheduler configuration pointer
+  * @param[in]  schedulableCfg schedulable configuration pointer
+  * @param[in]  stackPointerRetVal stack pointer address
+  * @param[in]  timerTicks timer ticks
+  * @param[in]  scheduleTableIterator schedule table iterator value
+  * @param[in]  scheduleTableElementsNum schedule table elements number
   *
   * @return none
 ********************************************************************************/

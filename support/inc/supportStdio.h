@@ -145,13 +145,21 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn channel_dataPoolCopyInternal(
+  * @fn supportStdio_memcpyInternal(
   * BitWidthType id,
   * AddressType * data,
   * AddressType * dataPool,
   * BitWidthType size )
   *
-  * @details The implementation contains
+  * @brief Memcpy operation. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  src source address pointer
+  * @param[in]  dest destination address pointer
+  * @param[in]  size number of bytes to copy
+  *
+  * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 supportStdio_memcpyInternal(

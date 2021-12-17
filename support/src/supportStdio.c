@@ -122,13 +122,13 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn channel_dataPoolCopyInternal(
+  * @fn supportStdio_memcpyInternal(
   * BitWidthType id,
   * AddressType * data,
   * AddressType * dataPool,
   * BitWidthType size )
   *
-  * @details The implementation contains
+  * @details The implementation contains supportStdio_memcpy function call.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

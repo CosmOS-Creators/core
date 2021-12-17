@@ -144,9 +144,15 @@ extern "C" {
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn channel_initialize( BitWidthType channelId )
   *
-  * @details The implementation contains
+  * @brief Channel initialize function is used to initialize channel based on
+  * the channel id. This initialization must be done with the reply (server)
+  * thread. The channel can be used only after initialization.
+  *
+  * @param[in]  channelId channel id
+  *
+  * @return CosmOS_ChannelStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_ChannelStateType
 channel_initialize( BitWidthType channelId );
@@ -155,13 +161,24 @@ channel_initialize( BitWidthType channelId );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEvent(
-  * BitWidthType event,
-  * CosmOS_BooleanType * handleCores,
-  * AddressType * data,
-  * BitWidthType size )
+  * @fn channel_send(
+  * BitWidthType channelId,
+  * AddressType * userSendDataPool,
+  * BitWidthType userSendPoolSize,
+  * AddressType * userReplyDataPool,
+  * BitWidthType userReplyPoolSize )
   *
-  * @details The implementation contains
+  * @brief Channel send function is used to send data to the specific
+  * schedulable that can process it or reply with specific data back to the
+  * sender
+  *
+  * @param[in]  channelId channel id
+  * @param[in]  userSendDataPool pointer to the address with the payload to send
+  * @param[in]  userSendPoolSize payload to send length
+  * @param[in]  userReplyDataPool pointer to the address of local user pool
+  * @param[in]  userReplyPoolSize local user pool length
+  *
+  * @return CosmOS_ChannelStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_ChannelStateType
 channel_send(
@@ -175,13 +192,19 @@ channel_send(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEvent(
-  * BitWidthType event,
-  * CosmOS_BooleanType * handleCores,
-  * AddressType * data,
-  * BitWidthType size )
+  * @fn channel_receive(
+  * BitWidthType channelId,
+  * AddressType * userReceiveDataPool,
+  * BitWidthType userReceiveDataPoolSize )
   *
-  * @details The implementation contains
+  * @brief Channel receive function is used to receive data from the sender to
+  * the local user data pool.
+  *
+  * @param[in]  channelId channel id
+  * @param[out]  userReceiveDataPool pointer to the address of local user pool
+  * @param[out]  userReceiveDataPoolSize local user pool length
+  *
+  * @return CosmOS_ChannelStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_ChannelStateType
 channel_receive(
@@ -193,9 +216,19 @@ channel_receive(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn channel_reply(
+  * BitWidthType channelId,
+  * AddressType * userReplyDataPool,
+  * BitWidthType userReplyDataPoolSize )
   *
-  * @details The implementation contains
+  * @brief Channel reply function is used to response to the received data from
+  * the sender
+  *
+  * @param[in]  channelId channel id
+  * @param[in]  userReplyDataPool pointer to the address with the reply payload
+  * @param[in]  userReplyDataPoolSize payload length
+  *
+  * @return CosmOS_ChannelStateType
 ********************************************************************************/
 __OS_FUNC_SECTION CosmOS_ChannelStateType
 channel_reply(
@@ -207,9 +240,13 @@ channel_reply(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn channel_signalizeReply(void)
   *
-  * @details The implementation contains
+  * @brief Channel signalize reply internal. This function cannot be called
+  * from the unprivileged context directly. This function is called as a os event
+  * callback function for specific signalize reply os event. DEMO
+  *
+  * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 channel_signalizeReply( void );
@@ -218,9 +255,13 @@ channel_signalizeReply( void );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn channel_signalizeSend(void)
   *
-  * @details The implementation contains
+  * @brief Channel signalize send internal. This function cannot be called
+  * from the unprivileged context directly. This function is called as a os event
+  * callback function for specific signalize send os event. DEMO
+  *
+  * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 channel_signalizeSend( void );
@@ -229,12 +270,17 @@ channel_signalizeSend( void );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventInternal(
+  * @fn channel_initializeInternal(
   * BitWidthType id,
-  * CosmOS_BooleanType * handleCores,
-  * BitWidthType event )
+  * CosmOS_ChannelConfigurationType * channelCfg)
   *
-  * @details The implementation contains
+  * @brief Channel initialize internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  channelCfg channel configuration pointer
+  *
+  * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 channel_initializeInternal(
@@ -245,12 +291,21 @@ channel_initializeInternal(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventInternal(
+  * @fn channel_sendInternal(
   * BitWidthType id,
-  * CosmOS_BooleanType * handleCores,
-  * BitWidthType event )
+  * CosmOS_ChannelConfigurationType * channelCfg,
+  * BitWidthType sendPoolPayloadLength,
+  * BitWidthType userReplyDataPoolSize )
   *
-  * @details The implementation contains
+  * @brief Channel send internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  channelCfg channel configuration pointer
+  * @param[in]  sendPoolPayloadLength send payload length
+  * @param[in]  userReplyDataPoolSize user local data pool size
+  *
+  * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 channel_sendInternal(
@@ -263,12 +318,17 @@ channel_sendInternal(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventInternal(
+  * @fn channel_sendReplyObtainedInternal(
   * BitWidthType id,
-  * CosmOS_BooleanType * handleCores,
-  * BitWidthType event )
+  * CosmOS_ChannelConfigurationType * channelCfg)
   *
-  * @details The implementation contains
+  * @brief Channel send - reply obtained internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  channelCfg channel configuration pointer
+  *
+  * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 channel_sendReplyObtainedInternal(
@@ -279,12 +339,17 @@ channel_sendReplyObtainedInternal(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventInternal(
+  * @fn channel_receiveInternal(
   * BitWidthType id,
-  * CosmOS_BooleanType * handleCores,
-  * BitWidthType event )
+  * CosmOS_ChannelConfigurationType * channelCfg)
   *
-  * @details The implementation contains
+  * @brief Channel receive internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  channelCfg channel configuration pointer
+  *
+  * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 channel_receiveInternal(
@@ -295,12 +360,19 @@ channel_receiveInternal(
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventInternal(
+  * @fn channel_replyInternal(
   * BitWidthType id,
-  * CosmOS_BooleanType * handleCores,
-  * BitWidthType event )
+  * CosmOS_ChannelConfigurationType * channelCfg,
+  * BitWidthType replyPoolPayloadLength )
   *
-  * @details The implementation contains
+  * @brief Channel reply internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  channelCfg channel configuration pointer
+  * @param[in]  replyPoolPayloadLength reply payload length
+  *
+  * @return none
 ********************************************************************************/
 __OS_FUNC_SECTION void
 channel_replyInternal(

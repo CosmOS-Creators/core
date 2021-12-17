@@ -211,18 +211,18 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * OS_EVENT_STATE_ENUM__ERROR_ATLEAST_ONE_CORE_MUST_HANDLE_EVENT.
   * If there is atleast one core except the current one that should handle this
   * event the function osEvent_getOsEventSpinlockId gets the spinlockId of the
-  * event spinlock used in the function spinlock_getSpinlock. Assertion is then
-  * implemented to check if the spinlock was obtained correctly as the function
-  * cannot work properly without it. Then a do-while loop is implemented to check
-  * if there is any unhandled event, if yes we wait in this loop till the event
-  * will be handled and proceed afterwards. Next the CILcore_isInPrivilegedMode
-  * function is called to check if the core is in privileged mode, and call
-  * osEvent_triggerEventInternal internal function which sets system internal
-  * event variable as systemCall or a normal function call. After this point the
-  * spinlock can be again unlocked by calling function spinlock_releaseSpinlock
-  * and assertion is implemented to check if the spinlock was released. In the
-  * end the return value is set to OS_EVENT_STATE_ENUM__OK and returned from the
-  * function.
+  * event spinlock used in the function spinlock_trySpinlock. Do-while loop is
+  * implemented to try to get spinlock. Then a do-while loop is implemented to
+  * check if there is any unhandled event, if yes we wait in this loop till the
+  * event will be handled and proceed afterwards.
+  * Next the CILcore_isInPrivilegedMode function is called to check if the core
+  * is in privileged mode, and call osEvent_triggerEventInternal internal
+  * function which sets system internal event variable as systemCall or a normal
+  * function call.
+  * After this point the spinlock can be again unlocked by calling function
+  * spinlock_releaseSpinlock and assertion is implemented to check if the
+  * spinlock was released. In the end the return value is set to
+  * OS_EVENT_STATE_ENUM__OK and returned from the function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )

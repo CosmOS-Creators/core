@@ -134,7 +134,9 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn channel_initializeInternal(
+  * BitWidthType id,
+  * CosmOS_ChannelConfigurationType * channelCfg)
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -250,10 +252,11 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventInternal(
+  * @fn channel_sendInternal(
   * BitWidthType id,
-  * CosmOS_BooleanType * handleCores,
-  * BitWidthType event )
+  * CosmOS_ChannelConfigurationType * channelCfg,
+  * BitWidthType sendPoolPayloadLength,
+  * BitWidthType userReplyDataPoolSize )
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -269,6 +272,9 @@ channel_sendInternal(
 {
     CosmOS_SchedulableConfigurationType * replyPoolOwner;
     CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_OsConfigurationType * osCfg;
+
+    osCfg = os_getOsCfg();
 
     coreCfg = CILcore_getCoreCfg();
 
@@ -304,9 +310,9 @@ channel_sendInternal(
         CosmOS_ChannelEventType channelEvent;
         CosmOS_OsEventStateType osEventState;
 
-        CosmOS_BooleanType osEventHandleCore[CORE_NUM];
+        CosmOS_BooleanType osEventHandleCore[osCfg->numberOfCores];
 
-        for ( BitWidthType coreIt = 0; coreIt < CORE_NUM; coreIt++ )
+        for ( BitWidthType coreIt = 0; coreIt < osCfg->numberOfCores; coreIt++ )
         {
             if ( replyPoolOwner->coreId IS_EQUAL_TO coreIt )
             {
@@ -344,10 +350,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventInternal(
+  * @fn channel_sendReplyObtainedInternal(
   * BitWidthType id,
-  * CosmOS_BooleanType * handleCores,
-  * BitWidthType event )
+  * CosmOS_ChannelConfigurationType * channelCfg)
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -370,11 +375,12 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEvent(
-  * BitWidthType event,
-  * CosmOS_BooleanType * handleCores,
-  * AddressType * data,
-  * BitWidthType size )
+  * @fn channel_send(
+  * BitWidthType channelId,
+  * AddressType * userSendDataPool,
+  * BitWidthType userSendPoolSize,
+  * AddressType * userReplyDataPool,
+  * BitWidthType userReplyPoolSize )
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -609,10 +615,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventInternal(
+  * @fn channel_receiveInternal(
   * BitWidthType id,
-  * CosmOS_BooleanType * handleCores,
-  * BitWidthType event )
+  * CosmOS_ChannelConfigurationType * channelCfg)
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -643,11 +648,10 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEvent(
-  * BitWidthType event,
-  * CosmOS_BooleanType * handleCores,
-  * AddressType * data,
-  * BitWidthType size )
+  * @fn channel_receive(
+  * BitWidthType channelId,
+  * AddressType * userReceiveDataPool,
+  * BitWidthType userReceiveDataPoolSize )
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -774,10 +778,10 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_triggerEventInternal(
+  * @fn channel_replyInternal(
   * BitWidthType id,
-  * CosmOS_BooleanType * handleCores,
-  * BitWidthType event )
+  * CosmOS_ChannelConfigurationType * channelCfg,
+  * BitWidthType replyPoolPayloadLength )
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -797,6 +801,9 @@ channel_replyInternal(
     CosmOS_ThreadConfigurationType * replyThreadCfg;
     CosmOS_ThreadConfigurationType * sendThreadCfg;
     CosmOS_CoreConfigurationType * coreCfg;
+    CosmOS_OsConfigurationType * osCfg;
+
+    osCfg = os_getOsCfg();
 
     coreCfg = CILcore_getCoreCfg();
 
@@ -833,9 +840,9 @@ channel_replyInternal(
         CosmOS_ChannelEventType channelEvent;
         CosmOS_OsEventStateType osEventState;
 
-        CosmOS_BooleanType osEventHandleCore[CORE_NUM];
+        CosmOS_BooleanType osEventHandleCore[osCfg->numberOfCores];
 
-        for ( BitWidthType coreIt = 0; coreIt < CORE_NUM; coreIt++ )
+        for ( BitWidthType coreIt = 0; coreIt < osCfg->numberOfCores; coreIt++ )
         {
             if ( sendPoolOwner->coreId IS_EQUAL_TO coreIt )
             {
@@ -871,7 +878,10 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn channel_reply(
+  * BitWidthType channelId,
+  * AddressType * userReplyDataPool,
+  * BitWidthType userReplyDataPoolSize )
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -1041,7 +1051,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn channel_signalizeReply(void)
   *
   * @details The implementation contains
 ********************************************************************************/
@@ -1115,7 +1125,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn channel_signalizeSend(void)
   *
   * @details The implementation contains
 ********************************************************************************/
