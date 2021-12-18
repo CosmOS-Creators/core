@@ -7,13 +7,13 @@
 *****************************************************************************//**
 ** @file channel.h
 *********************************************************************************
-<!--                      channel Module Group Definition                    -->
+<!--                      channel Module Group Definition                     -->
 *********************************************************************************
 ** @defgroup channel_module channel
 ** @brief channel Module
 ** @details lorem
 *********************************************************************************
-<!--                      channel Unit Group Definition                     -->
+<!--                      channel Unit Group Definition                       -->
 *********************************************************************************
 ** @defgroup channel_unit channel Unit
 ** @ingroup channel_module

@@ -153,24 +153,17 @@ extern "C" {
 /**
   * @brief  ISNEG macro
 ********************************************************************************/
-#define ISNEG(X) (!((X) > 0) && ((X) != 0))
+#define ISNEG( X ) ( !( ( X ) > 0 ) && ( ( X ) != 0 ) )
 
+#if defined( __GNUC__ )
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
   * @brief  __STATIC_FORCEINLINE
 ********************************************************************************/
-#if defined( __GNUC__ )
 #ifndef __STATIC_FORCEINLINE
 #define __STATIC_FORCEINLINE __attribute__( ( always_inline ) ) static inline
-#endif
-#elif defined( __CC_ARM )
-#ifndef __STATIC_FORCEINLINE
-#define __STATIC_FORCEINLINE __attribute__( ( always_inline ) ) static inline
-#endif
-#else
-#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -179,16 +172,8 @@ extern "C" {
 /**
   * @brief  __NAKED
 ********************************************************************************/
-#if defined( __GNUC__ )
 #ifndef __NAKED
 #define __NAKED __attribute__( ( naked ) )
-#endif
-#elif defined( __CC_ARM )
-#ifndef __NAKED
-#define __NAKED __attribute__( ( naked ) )
-#endif
-#else
-#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -197,16 +182,8 @@ extern "C" {
 /**
   * @brief  __FORCEINLINE
 ********************************************************************************/
-#if defined( __GNUC__ )
 #ifndef __FORCEINLINE
 #define __FORCEINLINE __attribute__( ( always_inline ) ) inline
-#endif
-#elif defined( __CC_ARM )
-#ifndef __FORCEINLINE
-#define __FORCEINLINE __attribute__( ( always_inline ) ) inline
-#endif
-#else
-#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -215,13 +192,7 @@ extern "C" {
 /**
   * @brief  __SUPRESS_UNUSED_VAR used to supress compiler warnings
 ********************************************************************************/
-#if defined( __GNUC__ )
 #define __SUPRESS_UNUSED_VAR( dummy ) (void)( dummy )
-#elif defined( __CC_ARM )
-#define __SUPRESS_UNUSED_VAR( dummy )
-#else
-#error "Your compiler is currently not supported by CosmOS!"
-#endif
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -229,16 +200,8 @@ extern "C" {
 /**
   * @brief  NULL pointer macro
 ********************************************************************************/
-#if defined( __GNUC__ )
 #ifndef NULL
 #define NULL ( (void *)0 )
-#endif
-#elif defined( __CC_ARM )
-#ifndef NULL
-#define NULL ( (void *)0 )
-#endif
-#else
-#error "Your compiler is currently not supported by CosmOS!"
 #endif
 
 /********************************************************************************
@@ -247,13 +210,7 @@ extern "C" {
 /**
   * @brief  __COSMOS_LIKELY pointer macro
 ********************************************************************************/
-#if defined( __GNUC__ )
 #define __COSMOS_LIKELY( expr ) __builtin_expect( !!( expr ), 1 )
-#elif defined( __CC_ARM )
-#define __COSMOS_LIKELY( expr ) ( expr )
-#else
-#error "Your compiler is currently not supported by CosmOS!"
-#endif
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -261,13 +218,7 @@ extern "C" {
 /**
   * @brief  __COSMOS_UNLIKELY pointer macro
 ********************************************************************************/
-#if defined( __GNUC__ )
 #define __COSMOS_UNLIKELY( expr ) __builtin_expect( !!( expr ), 0 )
-#elif defined( __CC_ARM )
-#define __COSMOS_UNLIKELY( expr ) ( expr )
-#else
-#error "Your compiler is currently not supported by CosmOS!"
-#endif
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -275,13 +226,7 @@ extern "C" {
 /**
   * @brief  __SEC_START
 ********************************************************************************/
-#if defined( __GNUC__ )
 #define __SEC_START( attr ) attr
-#elif defined( __CC_ARM )
-#define __SEC_START( attr ) pragma attr
-#else
-#error "Your compiler is currently not supported by CosmOS!"
-#endif
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -289,13 +234,7 @@ extern "C" {
 /**
   * @brief  __SEC_STOP
 ********************************************************************************/
-#if defined( __GNUC__ )
 #define __SEC_STOP( attr ) attr
-#elif defined( __CC_ARM )
-#define __SEC_STOP( attr ) pragma attr
-#else
-#error "Your compiler is currently not supported by CosmOS!"
-#endif
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -303,13 +242,7 @@ extern "C" {
 /**
   * @brief  __MUL_OVERFLOW
 ********************************************************************************/
-#if defined( __GNUC__ )
 #define __MUL_OVERFLOW( a, b, result ) __builtin_mul_overflow( a, b, result )
-#elif defined( __CC_ARM )
-#define __MUL_OVERFLOW( a, b, result )
-#else
-#error "Your compiler is currently not supported by CosmOS!"
-#endif
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -317,64 +250,145 @@ extern "C" {
 /**
   * @brief  __SEC_STOP
 ********************************************************************************/
-#if defined( __GNUC__ )
 #define __ADD_OVERFLOW( a, b, result ) __builtin_add_overflow( a, b, result )
-#elif defined( __CC_ARM )
-#define __ADD_OVERFLOW( a, b, result )
-#else
-#error "Your compiler is currently not supported by CosmOS!"
-#endif
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @brief  __NAKED
+  * @brief  __FILENAME
 ********************************************************************************/
-#if defined( __GNUC__ )
-#ifndef __NAKED
-#define __NAKED __attribute__( ( naked ) )
-#endif
-#elif defined( __CC_ARM )
-#ifndef __NAKED
-#define __NAKED __attribute__( ( naked ) )
-#endif
-#else
-#error "Your compiler is currently not supported by CosmOS!"
-#endif
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @brief  __NAKED
-********************************************************************************/
-#if defined( __GNUC__ )
 #ifndef __FILENAME
 #define __FILENAME __FILE__
 #endif
-#elif defined( __CC_ARM )
-#ifndef __FILENAME
-#define __FILENAME __FILE__
-#endif
-#else
-#error "Your compiler is currently not supported by CosmOS!"
-#endif
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @brief  __NAKED
+  * @brief  __LINENUMBER
 ********************************************************************************/
-#if defined( __GNUC__ )
 #ifndef __LINENUMBER
 #define __LINENUMBER __LINE__
 #endif
+
 #elif defined( __CC_ARM )
-#ifndef __LINE__
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __STATIC_FORCEINLINE
+********************************************************************************/
+#ifndef __STATIC_FORCEINLINE
+#define __STATIC_FORCEINLINE __attribute__( ( always_inline ) ) static inline
+#endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __NAKED
+********************************************************************************/
+#ifndef __NAKED
+#define __NAKED __attribute__( ( naked ) )
+#endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __FORCEINLINE
+********************************************************************************/
+#ifndef __FORCEINLINE
+#define __FORCEINLINE __attribute__( ( always_inline ) ) inline
+#endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __SUPRESS_UNUSED_VAR used to supress compiler warnings
+********************************************************************************/
+#define __SUPRESS_UNUSED_VAR( dummy ) (void)( dummy )
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  NULL pointer macro
+********************************************************************************/
+#ifndef NULL
+#define NULL ( (void *)0 )
+#endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __COSMOS_LIKELY pointer macro
+********************************************************************************/
+#define __COSMOS_LIKELY( expr ) __builtin_expect( !!( expr ), 1 )
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __COSMOS_UNLIKELY pointer macro
+********************************************************************************/
+#define __COSMOS_UNLIKELY( expr ) __builtin_expect( !!( expr ), 0 )
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __SEC_START
+********************************************************************************/
+#define __SEC_START( attr ) pragma attr
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __SEC_STOP
+********************************************************************************/
+#define __SEC_STOP( attr ) pragma attr
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __MUL_OVERFLOW
+********************************************************************************/
+#define __MUL_OVERFLOW( a, b, result ) __builtin_mul_overflow( a, b, result )
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __SEC_STOP
+********************************************************************************/
+#define __ADD_OVERFLOW( a, b, result ) __builtin_add_overflow( a, b, result )
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __FILENAME
+********************************************************************************/
+#ifndef __FILENAME
+#define __FILENAME __FILE__
+#endif
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  __LINENUMBER
+********************************************************************************/
+#ifndef __LINENUMBER
 #define __LINENUMBER __LINE__
 #endif
+
 #else
 #error "Your compiler is currently not supported by CosmOS!"
 #endif

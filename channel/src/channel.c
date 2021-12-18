@@ -138,7 +138,8 @@
   * BitWidthType id,
   * CosmOS_ChannelConfigurationType * channelCfg)
   *
-  * @details The implementation contains
+  * @details The implementation contains calling channel_setChannelInitialized
+  * function to set current channel configuration state to initialized.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -158,9 +159,39 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn osEvent_dispatchEvent( void )
+  * @fn channel_initialize( BitWidthType channelId )
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. Operating system configuration
+  * structure is then used to get number of the channels by calling function
+  * os_getOsNumberOfChannels. Currently the channels support only threads and
+  * therefore in the if condition is checked if the running schedulable is
+  * thread type, otherwise CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL
+  * is returned from the function. The next point is check of the channelId
+  * function argument, if the channelId is less than numberOfChannels it means
+  * that user tries to initialize channel in the range of configurated channels,
+  * otherwise CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID is returned from the
+  * function. Then the channel configuration structure is obtained by calling
+  * os_getOsChannelCfg function and used to get isChannelInitialized state by
+  * calling function channel_getChannelInitialized. If the channel is not
+  * initialized we continue with initialization, otherwise function returns
+  * CHANNEL_STATE_ENUM__ERROR_CHANNEL_ALREADY_INITIALIZED state. As the next step
+  * the replyPermission are obtained by calling function
+  * channel_getChannelReplyPermission because the channel is always initialized
+  * by reply (server) thread. The reply permissions are then used to get the
+  * access state by calling function permission_tryAccess. If the accessState is
+  * equal to the ACCESS_STATE_ENUM__ALLOWED it means that the running thread is
+  * the reply (server) thread of the current channel, otherwise the function
+  * returns CHANNEL_STATE_ENUM__ERROR_ACCESS_DENIED. As the channels support
+  * currently only threads running in the user space, the coreInPrivilegedMode
+  * is obtained by calling function CILcore_isInPrivilegedMode. If the core
+  * is not in privileged mode we can continue with the initialization, otherwise
+  * the function returns
+  * CHANNEL_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED. After this
+  * point we can finally call internal function mapped to the system call by
+  * function as macro cosmosApiInternal_channel_initializeInternal and function
+  * returns in this case CHANNEL_STATE_ENUM__INITIALIZED.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -258,7 +289,37 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * BitWidthType sendPoolPayloadLength,
   * BitWidthType userReplyDataPoolSize )
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. The sendPoolPayloadLength
+  * function argument is then used to set the length of the send pool payload by
+  * calling function channel_setChannelSendPoolPayloadLength. If the argument
+  * userReplyDataPoolSize is non-zero value it means that sender waits also for
+  * the reply. In that case we set the sender waiting for response value to true
+  * by calling function channel_setChannelSenderWaitingForResponse and the
+  * running schedulable as the send pool owner by calling function
+  * channel_setChannelSendPoolSchedulableOwner. Then the state of the running
+  * schedulable is set to the SCHEDULABLE_STATE_ENUM__WAITING_FOR_REPLY. If the
+  * send thread is not waiting for the reply we set the sender waiting for
+  * response value to false by calling function
+  * channel_setChannelSenderWaitingForResponse. After this point the reply pool
+  * owner is obtained by calling function
+  * channel_getChannelReplyPoolSchedulableOwner. In the subsequent if condition
+  * we check if the reply owner is running on the same core as the send thread,
+  * if yes we can set its state to the SCHEDULABLE_STATE_ENUM__READY and we dont
+  * have to call os event to signalize other core that the schedulable is again
+  * ready to run and process the data sent by the send thread. Otherwise we have
+  * to send os event. First of all we have to configure the array of event
+  * handling cores, in our case we just set true the element in that array that
+  * belongs to the core where the reply thread is running and leave all other
+  * elements set to false. The data transferred by the os event contains just
+  * CosmOS_ChannelEventType structure with the channel id set to the current
+  * channel id. After this point the osEvent_triggerEvent is called with the
+  * OS_EVENT_CHANNEL_SIGNALIZESEND parameter and assertion is called to check if
+  * the os event state is OS_EVENT_STATE_ENUM__OK. In the end the if condition is
+  * implemented that checks if the running thread is waiting for the reply and if
+  * yes the reschedule is triggered by calling function
+  * CILinterrupt_contextSwitchRoutineTrigger.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -354,7 +415,11 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * BitWidthType id,
   * CosmOS_ChannelConfigurationType * channelCfg)
   *
-  * @details The implementation contains
+  * @details The implementation contains calling channel_setChannelReplyPoolState
+  * function to set current channel configuration reply pool state to
+  * CHANNEL_POOL_STATE_ENUM__EMPTY. This signalize the channel reply thread that
+  * the reply pool can be used again and the sender successfully read all the
+  * data.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -382,7 +447,91 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * AddressType * userReplyDataPool,
   * BitWidthType userReplyPoolSize )
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. Operating system configuration
+  * structure is then used to get number of the channels by calling function
+  * os_getOsNumberOfChannels. Currently the channels support only threads and
+  * therefore in the if condition is checked if the running schedulable is
+  * thread type, otherwise CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL
+  * is returned from the function. The next point is check of the channelId
+  * function argument, if the channelId is less than numberOfChannels it means
+  * that user tries to use channel in the range of configurated channels,
+  * otherwise CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID is returned from the
+  * function. Then the channel configuration structure is obtained by calling
+  * os_getOsChannelCfg function and used to get isChannelInitialized state by
+  * calling function channel_getChannelInitialized. If the channel is
+  * initialized we continue in the send operation, otherwise function returns
+  * CHANNEL_STATE_ENUM__ERROR_CHANNEL_NOT_INITIALIZED state. As the next step
+  * the sendPermission are obtained by calling function
+  * channel_getChannelSendPermission because the channel send function can be
+  * called only by the configurated send threads. The send permissions are then
+  * used to get the access state by calling function permission_tryAccess.
+  * If the accessState is equal to the ACCESS_STATE_ENUM__ALLOWED it means that
+  * the running thread is the send (server) thread of the current channel,
+  * otherwise the function returns CHANNEL_STATE_ENUM__ERROR_ACCESS_DENIED.
+  * As the channels support currently only threads running in the user space,
+  * the coreInPrivilegedMode is obtained by calling function
+  * CILcore_isInPrivilegedMode. If the core is not in privileged mode we can
+  * continue with the send operation, otherwise the function returns
+  * CHANNEL_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED. The next step
+  * now is to get send pool size by calling channel_getChannelSendPoolSize
+  * function. If the send pool size is more than userSendDataPoolSize function
+  * argument we can continue in the send operation, otherwise the function
+  * returns CHANNEL_STATE_ENUM__ERROR_DATA_TO_SEND_BIGGER_THAN_POOL. After this
+  * point the channel spinlock id is obtained by calling function
+  * channel_getChannelSpinlockId. Here is one improvement TODO: currently only
+  * synchronization primitive how to synchronize schedulables between multiple
+  * cores are spinlocks, in the future semaphores will be implemented and the
+  * spinlock can be removed to increase the performance of the system by
+  * non-blocking synchronization. Of course if there will be blocking and
+  * non-blocking implementation of channels in the future the spinlock will be
+  * used for the send critical tasks as they cant be preempted (END OF TODO).
+  * As the next point the local variable channelConnected is set to the False and
+  * do-while loop is implemented where are the functions spinlock_trySpinlock
+  * and channel_getChannelSendPoolState called to try to obtain spinlock for
+  * exclusive access to the send pool, but the sendPoolState must be also equals
+  * to the CHANNEL_POOL_STATE_ENUM__EMPTY to signalize that reply (server) thread
+  * successfully read all the data and its ready to receive data again. If the
+  * spinlockState is equal to the SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED the
+  * send thread was successfully connected to the channel and can now send the
+  * data and set the local variable channelConnected to the connected that
+  * terminates the do-while loop. Next we have to get the sendPool address by
+  * calling function channel_getChannelSendPool. As the core is not in the
+  * privileged mode the while loop is implemented that writes bytes till the
+  * userSendDataPoolSize is non-zero value. Inside this while loop is the if
+  * condition implemented to check if the size to write is more than
+  * SYCALL_BYTES_CHUNK, if yes only number of bytes defined by SYCALL_BYTES_CHUNK
+  * is written to the send data pool to not block system by long too long system
+  * call that is called by function as macro
+  * cosmosApiInternal_supportStdio_memcpyInternal, the size to write is always
+  * decremented by SYCALL_BYTES_CHUNK till its not smaller than
+  * SYCALL_BYTES_CHUNK and then is the size set to zero and last bytes are
+  * written to the send data pool. After all data are copied from the user space
+  * to the channel send data pool in the operating system memory we can then call
+  * the function as macro cosmosApiInternal_channel_sendInternal to configure
+  * channel and signalize the reply thread that we sent a data. After
+  * configurating the channel we can release the spinlock as we leave the
+  * critical section by calling function spinlock_releaseSpinlock. The assertion
+  * is then  called to check if the spinlock was successfully released.
+  * The function channel_getChannelSenderWaitingForResponse is called to check
+  * if the send thread is waiting for the response, if not the
+  * CHANNEL_STATE_ENUM__NOT_RECEIVED state is returned by this function,
+  * otherwise the do-while loop is implemented to wait till replyPoolState is
+  * equal to the  CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED even though
+  * the schedulable was in waiting state (blocked) and signalized, there can be
+  * still delay till the reply pool contains the correct data and therefore we
+  * wait in this do-while loop.
+  * After this point the replyDataPool address and replyPoolPayloadSize are
+  * obtained by calling the channel_getChannelReplyPool and
+  * channel_getChannelReplyPoolPayloadLength functions. Then is checked if the
+  * replyPoolPayloadSize is less or equal userReplyDataPoolSize, if yes we can
+  * read the data from the replyDataPool by calling function supportStdio_memcpy,
+  * then signalize the reply thread that we read all data from reply pool by
+  * calling the function as macro
+  * cosmosApiInternal_channel_sendReplyObtainedInternal and in the end return
+  * CHANNEL_STATE_ENUM__RECEIVED state, otherwise function returns
+  * the CHANNEL_STATE_ENUM__ERROR_DATA_TO_RECEIVE_BIGGER_THAN_POOL state.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -441,7 +590,7 @@ channel_send(
                         sendPoolSize =
                             channel_getChannelSendPoolSize( channelCfg );
 
-                        if ( userSendDataPoolSize < sendPoolSize )
+                        if ( userSendDataPoolSize <= sendPoolSize )
                         {
                             BitWidthType channelSpinlockId;
 
@@ -619,7 +768,15 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * BitWidthType id,
   * CosmOS_ChannelConfigurationType * channelCfg)
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the reply pool owner by
+  * calling channel_getChannelReplyPoolSchedulableOwner function, after this
+  * point the replyPoolOwner state is set to SCHEDULABLE_STATE_ENUM__LISTENING
+  * and channel send pool state to the CHANNEL_POOL_STATE_ENUM__EMPTY by
+  * calling function channel_setChannelSendPoolState. This signalize eventual
+  * send (client) threads that the reply (server) thread is able to process
+  * data again. After this point the reschedule is triggered by calling
+  * CILinterrupt_contextSwitchRoutineTrigger function as the thread is now
+  * blocked till some data will be sent through the channel.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -653,7 +810,50 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * AddressType * userReceiveDataPool,
   * BitWidthType userReceiveDataPoolSize )
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. Operating system configuration
+  * structure is then used to get number of the channels by calling function
+  * os_getOsNumberOfChannels. Currently the channels support only threads and
+  * therefore in the if condition is checked if the running schedulable is
+  * thread type, otherwise CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL
+  * is returned from the function. The next point is check of the channelId
+  * function argument, if the channelId is less than numberOfChannels it means
+  * that user tries to use channel in the range of configurated channels,
+  * otherwise CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID is returned from the
+  * function. Then the channel configuration structure is obtained by calling
+  * os_getOsChannelCfg function and used to get isChannelInitialized state by
+  * calling function channel_getChannelInitialized. If the channel is
+  * initialized we continue in the reply operation, otherwise function returns
+  * CHANNEL_STATE_ENUM__ERROR_CHANNEL_NOT_INITIALIZED state. As the next step
+  * the replyPermission are obtained by calling function
+  * channel_getChannelReplyPermission because the channel reply function can be
+  * called only by the configurated reply thread. The reply permissions are then
+  * used to get the access state by calling function permission_tryAccess.
+  * If the accessState is equal to the ACCESS_STATE_ENUM__ALLOWED it means that
+  * the running thread is the reply (server) thread of the current channel,
+  * otherwise the function returns CHANNEL_STATE_ENUM__ERROR_ACCESS_DENIED.
+  * As the channels support currently only threads running in the user space,
+  * the coreInPrivilegedMode is obtained by calling function
+  * CILcore_isInPrivilegedMode. If the core is not in privileged mode we can
+  * continue with the receive operation, otherwise the function returns
+  * CHANNEL_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED. After this
+  * point the function as macro cosmosApiInternal_channel_receiveInternal is
+  * called that configure the channel in such a way that send (client) threads
+  * know they can send data again and put the running reply (server) thread's
+  * schedulable that called this function in the
+  * SCHEDULABLE_STATE_ENUM__LISTENING state (watiting state and schedulable is
+  * blocked) till the sender thread will signalize that there is data to process
+  * again. After unblocking calling thread we get the sendPoolState by calling
+  * channel_getChannelSendPoolState function and check if the state is equal to
+  * CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED in the assertion.
+  * After this point the sendDataPool address and sendPoolPayloadLength are
+  * obtained by calling the channel_getChannelSendPool and
+  * channel_getChannelSendPoolPayloadLength functions. Then is checked if the
+  * sendPoolPayloadLength is less or equal userReceiveDataPoolSize, if yes we can
+  * read the data from the sendDataPool by calling function supportStdio_memcpy
+  * and in the end return CHANNEL_STATE_ENUM__RECEIVED state, otherwise function
+  * returns the CHANNEL_STATE_ENUM__ERROR_DATA_TO_RECEIVE_BIGGER_THAN_POOL state.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -710,14 +910,13 @@ channel_receive(
 
                         CosmOS_ChannelPoolStateType sendPoolState;
 
-                        do
-                        {
-                            cosmosApiInternal_channel_receiveInternal(
-                                channelCfg );
-                            sendPoolState =
-                                channel_getChannelSendPoolState( channelCfg );
-                        } while (
-                            sendPoolState IS_NOT_EQUAL_TO
+                        cosmosApiInternal_channel_receiveInternal( channelCfg );
+
+                        sendPoolState =
+                            channel_getChannelSendPoolState( channelCfg );
+
+                        cosmosAssert(
+                            sendPoolState IS_EQUAL_TO
                                 CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED );
 
                         sendDataPool = (AddressType *)channel_getChannelSendPool(
@@ -783,7 +982,35 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * CosmOS_ChannelConfigurationType * channelCfg,
   * BitWidthType replyPoolPayloadLength )
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. Then the reply pool payload
+  * length is set by calling the channel_setChannelReplyPoolPayloadLength and
+  * channel reply pool state to CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED
+  * by calling function channel_setChannelReplyPoolState. In the subsequent if
+  * condition we check if the send pool owner is running on the same core as the
+  * reply thread, if yes we can set its state to the
+  * SCHEDULABLE_STATE_ENUM__READY and we dont
+  * have to call os event to signalize other core that the schedulable is again
+  * ready to run and process the data sent by the reply thread. Instead of using
+  * os event we get the send pool owner program by calling the function
+  * core_getCoreProgramCfg that is used afterwards to get the send pool thread
+  * configuration structure by calling the function program_getProgramThread. If
+  * the priority of reply (currently running) thread is less than priority of the
+  * send (client) thread the isSenderWaitingPrioHigher local variable is set to
+  * True, else it is set to the False. If the send pool owner is notrunning on
+  * the same core as the currently running reply thread we have to use reply
+  * os event. First of all we have to configure the array of event
+  * handling cores, in our case we just set true the element in that array that
+  * belongs to the core where the send thread is running and leave all other
+  * elements set to false. The data transferred by the os event contains just
+  * CosmOS_ChannelEventType structure with the channel id set to the current
+  * channel id. After this point the osEvent_triggerEvent is called with the
+  * OS_EVENT_CHANNEL_SIGNALIZEREPLY parameter and assertion is called to check if
+  * the os event state is OS_EVENT_STATE_ENUM__OK. In the end the if condition is
+  * implemented that checks if isSenderWaitingPrioHigher is True, if yes the
+  * reschedule is triggered by calling function
+  * CILinterrupt_contextSwitchRoutineTrigger.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -834,6 +1061,10 @@ channel_replyInternal(
         {
             isSenderWaitingPrioHigher = True;
         }
+        else
+        {
+            isSenderWaitingPrioHigher = False;
+        }
     }
     else
     {
@@ -883,7 +1114,60 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * AddressType * userReplyDataPool,
   * BitWidthType userReplyDataPoolSize )
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. Operating system configuration
+  * structure is then used to get number of the channels by calling function
+  * os_getOsNumberOfChannels. Currently the channels support only threads and
+  * therefore in the if condition is checked if the running schedulable is
+  * thread type, otherwise CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL
+  * is returned from the function. The next point is check of the channelId
+  * function argument, if the channelId is less than numberOfChannels it means
+  * that user tries to use channel in the range of configurated channels,
+  * otherwise CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID is returned from the
+  * function. Then the channel configuration structure is obtained by calling
+  * os_getOsChannelCfg function and used to get isChannelInitialized state by
+  * calling function channel_getChannelInitialized. If the channel is
+  * initialized we continue in the reply operation, otherwise function returns
+  * CHANNEL_STATE_ENUM__ERROR_CHANNEL_NOT_INITIALIZED state. As the next step
+  * the replyPermission are obtained by calling function
+  * channel_getChannelReplyPermission because the channel reply function can be
+  * called only by the configurated reply thread. The reply permissions are then
+  * used to get the access state by calling function permission_tryAccess.
+  * If the accessState is equal to the ACCESS_STATE_ENUM__ALLOWED it means that
+  * the running thread is the reply (server) thread of the current channel,
+  * otherwise the function returns CHANNEL_STATE_ENUM__ERROR_ACCESS_DENIED.
+  * As the channels support currently only threads running in the user space,
+  * the coreInPrivilegedMode is obtained by calling function
+  * CILcore_isInPrivilegedMode. If the core is not in privileged mode we can
+  * continue with the reply operation, otherwise the function returns
+  * CHANNEL_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED. The next step
+  * now is to get reply pool size by calling channel_getChannelReplyPoolSize
+  * function. If the reply pool size is more than userReplyDataPoolSize function
+  * argument we can continue in the reply operation, otherwise the function
+  * returns CHANNEL_STATE_ENUM__ERROR_DATA_TO_SEND_BIGGER_THAN_POOL. After this
+  * point a do-while loop is implemented to check the replyPoolState by
+  * calling function channel_getChannelReplyPoolState, till the reply pool state
+  * is CHANNEL_POOL_STATE_ENUM__EMPTY. TODO: this should be in the future solved
+  * by the semaphores and the do-while loop can be removed to increase the
+  * performance of the system. Of course if there will be blocking and
+  * non-blocking implementation of channels in the future the do-while will be
+  * used for the send critical tasks as they cant be preempted (END OF TODO).
+  * As the core is not in the
+  * privileged mode the while loop is implemented that writes bytes till the
+  * userReplyDataPoolSize is non-zero value. Inside this while loop is the if
+  * condition implemented to check if the size to write is more than
+  * SYCALL_BYTES_CHUNK, if yes only number of bytes defined by SYCALL_BYTES_CHUNK
+  * is written to the reply data pool to not block system by long too long system
+  * call that is called by function as macro
+  * cosmosApiInternal_supportStdio_memcpyInternal, the size to write is always
+  * decremented by SYCALL_BYTES_CHUNK till its not smaller than
+  * SYCALL_BYTES_CHUNK and then is the size set to zero and last bytes are
+  * written to the reply data pool. After all data are copied from the user space
+  * to the channel reply data pool in the operating system memory we can then
+  * call the function as macro cosmosApiInternal_channel_replyInternal to
+  * configure channel and signalize the send thread that we replied and in the
+  * end the CHANNEL_STATE_ENUM__REPLIED is returned by this function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -954,23 +1238,20 @@ channel_reply(
                             replyPoolSize =
                                 channel_getChannelReplyPoolSize( channelCfg );
 
-                            if ( userReplyDataPoolSize < replyPoolSize )
+                            if ( userReplyDataPoolSize <= replyPoolSize )
                             {
                                 CosmOS_ChannelPoolStateType replyPoolState;
                                 const BitWidthType replyPoolPayloadLength =
                                     userReplyDataPoolSize;
 
-                                replyPoolState =
-                                    channel_getChannelReplyPoolState(
-                                        channelCfg );
-
-                                while ( replyPoolState IS_NOT_EQUAL_TO
-                                            CHANNEL_POOL_STATE_ENUM__EMPTY )
+                                do
                                 {
                                     replyPoolState =
                                         channel_getChannelReplyPoolState(
                                             channelCfg );
-                                }
+
+                                } while ( replyPoolState IS_NOT_EQUAL_TO
+                                              CHANNEL_POOL_STATE_ENUM__EMPTY );
 
                                 replyDataPool =
                                     (AddressType *)channel_getChannelReplyPool(
@@ -1002,6 +1283,8 @@ channel_reply(
 
                                 cosmosApiInternal_channel_replyInternal(
                                     channelCfg, replyPoolPayloadLength );
+
+                                returnValue = CHANNEL_STATE_ENUM__REPLIED;
                             }
                             else
                             {
@@ -1053,7 +1336,28 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn channel_signalizeReply(void)
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. Operating system configuration
+  * structure is then used to get event configuration by calling function
+  * os_getOsEventCfg. Os event configuration structure is used to get the event
+  * data pool by calling function osEvent_getOsEventDataPool. The channel event
+  * is then extracted from the os event data pool. To check if the channel id
+  * stored in the os event data pool is correct we get the number of channels
+  * by calling the os_getOsNumberOfChannels function and check it in the
+  * assertion. Then the channel configuration is obtained by calling the function
+  * os_getOsChannelCfg and used to get the send pool owner by calling the
+  * channel_getChannelSendPoolSchedulableOwner function. Then the send pool owner
+  * core id is checked in assertion (it has to be exactly the same as the current
+  * core id). Send pool owner state is subsequently set to
+  * SCHEDULABLE_STATE_ENUM__READY. After this point we have to obtain the send
+  * pool owner program by calling the core_getCoreProgramCfg function that is
+  * then used to get the send pool owner thread by calling function
+  * program_getProgramThread. We need also the current running thread on the
+  * core obtained by calling the function program_getProgramThread. If condition
+  * is implemented to check if the running thread priority is less than the send
+  * (client) thread priority, if yes the reschedule algorithm is triggered by
+  * calling function CILinterrupt_contextSwitchRoutineTrigger.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -1063,8 +1367,6 @@ channel_signalizeReply( void )
 {
     BitWidthType numberOfChannels;
 
-    CosmOS_BooleanType isSendThreadPrioHigher;
-
     CosmOS_ProgramConfigurationType * sendThreadProgram;
     CosmOS_SchedulableConfigurationType * sendPoolOwner;
     CosmOS_ThreadConfigurationType * sendThreadCfg;
@@ -1072,13 +1374,12 @@ channel_signalizeReply( void )
     CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_OsConfigurationType * osCfg;
     CosmOS_OsEventConfigurationType * eventCfg;
+    CosmOS_ChannelConfigurationType * channelCfg;
 
     osCfg = os_getOsCfg();
     coreCfg = CILcore_getCoreCfg();
 
     eventCfg = os_getOsEventCfg( osCfg );
-
-    CosmOS_ChannelConfigurationType * channelCfg;
 
     CosmOS_ChannelEventType * channelEvent =
         (CosmOS_ChannelEventType *)osEvent_getOsEventDataPool( eventCfg );
@@ -1109,11 +1410,6 @@ channel_signalizeReply( void )
 
     if ( sendThreadCfg->priority > currentThreadCfg->priority )
     {
-        isSendThreadPrioHigher = True;
-    }
-
-    if ( isSendThreadPrioHigher )
-    {
         CILinterrupt_contextSwitchRoutineTrigger();
     }
 };
@@ -1127,7 +1423,28 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
 /**
   * @fn channel_signalizeSend(void)
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. Operating system configuration
+  * structure is then used to get event configuration by calling function
+  * os_getOsEventCfg. Os event configuration structure is used to get the event
+  * data pool by calling function osEvent_getOsEventDataPool. The channel event
+  * is then extracted from the os event data pool. To check if the channel id
+  * stored in the os event data pool is correct we get the number of channels
+  * by calling the os_getOsNumberOfChannels function and check it in the
+  * assertion. Then the channel configuration is obtained by calling the function
+  * os_getOsChannelCfg and used to get the reply pool owner by calling the
+  * channel_getChannelSendPoolSchedulableOwner function. Then the reply pool
+  * owner core id is checked in assertion (it has to be exactly the same as the
+  * current core id). Send pool owner state is subsequently set to
+  * SCHEDULABLE_STATE_ENUM__READY. After this point we have to obtain the reply
+  * pool owner program by calling the core_getCoreProgramCfg function that is
+  * then used to get the reply pool owner thread by calling function
+  * program_getProgramThread. We need also the current running thread on the
+  * core obtained by calling the function program_getProgramThread. If condition
+  * is implemented to check if the running thread priority is less than the reply
+  * (server) thread priority, if yes the reschedule algorithm is triggered by
+  * calling function CILinterrupt_contextSwitchRoutineTrigger.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -1137,8 +1454,6 @@ channel_signalizeSend( void )
 {
     BitWidthType numberOfChannels;
 
-    CosmOS_BooleanType isReplyThreadPrioHigher;
-
     CosmOS_ProgramConfigurationType * replyThreadProgram;
     CosmOS_SchedulableConfigurationType * replyPoolOwner;
     CosmOS_ThreadConfigurationType * replyThreadCfg;
@@ -1146,13 +1461,12 @@ channel_signalizeSend( void )
     CosmOS_CoreConfigurationType * coreCfg;
     CosmOS_OsConfigurationType * osCfg;
     CosmOS_OsEventConfigurationType * eventCfg;
+    CosmOS_ChannelConfigurationType * channelCfg;
 
     osCfg = os_getOsCfg();
     coreCfg = CILcore_getCoreCfg();
 
     eventCfg = os_getOsEventCfg( osCfg );
-
-    CosmOS_ChannelConfigurationType * channelCfg;
 
     CosmOS_ChannelEventType * channelEvent =
         (CosmOS_ChannelEventType *)osEvent_getOsEventDataPool( eventCfg );
@@ -1182,11 +1496,6 @@ channel_signalizeSend( void )
             ->instanceId );
 
     if ( replyThreadCfg->priority > currentThreadCfg->priority )
-    {
-        isReplyThreadPrioHigher = True;
-    }
-
-    if ( isReplyThreadPrioHigher )
     {
         CILinterrupt_contextSwitchRoutineTrigger();
     }
