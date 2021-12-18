@@ -158,7 +158,7 @@ spinlock_trySpinlockInternal(
 
     spinlockState = CILspinlock_trySpinlock(
         &( spinlockVar->spinlock ),
-        id,
+        spinlockId,
         ( (CosmOS_SchedulableConfigurationType *)
               coreCfg->var->schedulableInExecution )
             ->id );
