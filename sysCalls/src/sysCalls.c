@@ -198,6 +198,14 @@ sysCalls_dispatcher(
                 entityId, (void *)argsArr[1], (void *)argsArr[2], argsArr[3] );
             break;
         }
+        case 6:
+        {
+            returnValue = ( (
+                CosmOS_Generic_bitWidthType_voidPtr_bitWidthType_bitWidthType_ret_bitWidthType)
+                                sysCall )(
+                entityId, (void *)argsArr[1], argsArr[2], argsArr[3] );
+            break;
+        }
 
         default:
         {
@@ -379,6 +387,42 @@ sysCalls_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType(
     returnValue =
         CILsysCalls_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType(
             id, ptr, ptr1, arg );
+
+    return returnValue;
+};
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn sysCalls_bitWidthType_voidPtr_bitWidthType_bitWidthType_ret_bitWidthType(
+  * BitWidthType id,
+  * void * ptr,
+  * BitWidthType arg,
+  * BitWidthType arg1)
+  *
+  * @details The implementation contains calling the CIL function
+  * CILsysCalls_bitWidthType_voidPtr_bitWidthType_bitWidthType_ret_bitWidthType
+  * and returning the result.
+********************************************************************************/
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION BitWidthType
+sysCalls_bitWidthType_voidPtr_bitWidthType_bitWidthType_ret_bitWidthType(
+    BitWidthType id,
+    void * ptr,
+    BitWidthType arg,
+    BitWidthType arg1 )
+{
+    BitWidthType returnValue;
+
+    returnValue =
+        CILsysCalls_bitWidthType_voidPtr_bitWidthType_bitWidthType_ret_bitWidthType(
+            id, ptr, arg, arg1 );
 
     return returnValue;
 };

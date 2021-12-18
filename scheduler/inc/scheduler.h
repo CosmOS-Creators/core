@@ -636,7 +636,7 @@ scheduler_getSchedulerThreadListIterator(
   *
   * @return CosmOS_SchedulerStateType
 ********************************************************************************/
-__STATIC_FORCEINLINE BitWidthType
+__STATIC_FORCEINLINE CosmOS_SchedulerStateType
 scheduler_getSchedulerState( CosmOS_SchedulerConfigurationType * scheduler )
 {
     return ( scheduler->var->schedulerState );

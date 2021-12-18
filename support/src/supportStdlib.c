@@ -204,26 +204,27 @@ supportStdlib_mallocVar(
   * multiple threads within one program the mutual exclusion is needed and
   * mutex_getMutex function is called with the program specific mutex variable.
   * After this point the do-while loop is implemented iterating over the linked
-  * list of the mutex variables till the currentMallocVar next member is not
+  * list of the mutex variables till the currentMallocVar is not
   * null pointer or till the allocated boolean is not true. Inside the do-while
-  * loop is if condition that checks if the currentMallocVar next member is not
+  * loop is if condition that checks if the currentMallocVar is not
   * NULL - nextAvailableAddress is as the currentMallocVar plus its size member
   * and checked in the nested if condition if the required size argument is
   * smaller than currentMallocVar next member address minus the
   * nextAvailableAddress variable. If no the currentMallocVar is set to the
   * currentMallocVar next member. If yes the new malloc variable is allocated
-  * by calling supportStdlib_mallocVar helper function and the result is then used to
-  * linked it between the currentMallocVar and the next malloc variable. Then
-  * to the returnAddress is stored the newly allocated address with the respect
-  * to the aligned malloc variable offset and allocated boolean variable is set
-  * to True.
-  * If the currentMallocVar next member is was NULL, it means that its the end
+  * by calling supportStdlib_mallocVar helper function and the result is then
+  * used to linked it between the currentMallocVar and the next malloc variable.
+  * Then to the returnAddress is stored the newly allocated address with the
+  * respect to the aligned malloc variable offset and allocated boolean variable
+  * is set to True.
+  * If the currentMallocVar is was NULL, it means that its the end
   * of the linked list. The nextAvailableAddress is then calculated as the
   * currentMallocVar plus its size member and checked in the nested if condition
   * if the required size argument is smaller than heap high address minus the
   * nextAvailableAddress variable. If yes the new malloc variable is allocated
-  * by calling supportStdlib_mallocVar helper function and the result is then used to
-  * linked it to the currentMallocVar. Then to the returnAddress is stored the
+  * by calling supportStdlib_mallocVar helper function and the result is then
+  * used to linked it to the currentMallocVar.
+  * Then to the returnAddress is stored the
   * newly allocated address with the respect to the aligned malloc variable
   * offset and allocated boolean variable is set to True.
   * In the end the mutex for the specific program is released and the address
@@ -262,8 +263,6 @@ supportStdlib_malloc( size_t size )
 
         mutexState = mutex_getMutex( programCfg->heapMutex );
 
-        /*TODO: this assertion cannot be here cause it will in the
-        future disable ISRs - so only os can call it in privileged context */
         cosmosAssert(
             mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED );
 
@@ -317,13 +316,15 @@ supportStdlib_malloc( size_t size )
                                         sizeof( BitWidthType ) );
                     allocated = True;
                 }
+                else
+                {
+                    currentMallocVar = currentMallocVar->next;
+                }
             }
-        } while ( currentMallocVar->next AND IS_NOT( allocated ) );
+        } while ( currentMallocVar AND IS_NOT( allocated ) );
 
         mutexState = mutex_releaseMutex( programCfg->heapMutex );
 
-        /*TODO: this assertion cannot be here cause it will in the
-        future disable ISRs - so only os can call it in privileged context */
         cosmosAssert( mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED );
     }
 
@@ -370,8 +371,6 @@ supportStdlib_free( void * ptr )
 
         mutexState = mutex_getMutex( programCfg->heapMutex );
 
-        /*TODO: this assertion cannot be here cause it will in the
-        future disable ISRs - so only os can call it in privileged context */
         cosmosAssert(
             mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED );
 
@@ -389,8 +388,6 @@ supportStdlib_free( void * ptr )
 
         mutexState = mutex_releaseMutex( programCfg->heapMutex );
 
-        /*TODO: this assertion cannot be here cause it will in the
-        future disable ISRs - so only os can call it in privileged context */
         cosmosAssert( mutexState IS_EQUAL_TO MUTEX_STATE_ENUM__RELEASED );
     }
 }

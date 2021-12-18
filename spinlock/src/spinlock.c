@@ -128,51 +128,6 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn spinlock_getSpinlockInternal(
-  * BitWidthType id,
-  * CosmOS_SpinlockVariableType * spinlockVar,
-  * BitWidthType spinlockId )
-  *
-  * @details The implementation contains obtaining of the core configuration by
-  * calling function CILcore_getCoreCfg.Then the function CILspinlock_getSpinlock
-  * is called to get spinlock and result is then returned as spinlock state. The
-  * schedulable owner member in spinlock variable is set to the schedulable in
-  * execution.
-********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION CosmOS_SpinlockStateType
-spinlock_getSpinlockInternal(
-    BitWidthType id,
-    CosmOS_SpinlockVariableType * spinlockVar,
-    BitWidthType spinlockId )
-{
-    CosmOS_SpinlockStateType spinlockState;
-
-    CosmOS_CoreConfigurationType * coreCfg;
-
-    coreCfg = CILcore_getCoreCfg();
-
-    spinlockState = CILspinlock_getSpinlock(
-        &( spinlockVar->spinlock ),
-        spinlockId,
-        ( (CosmOS_SchedulableConfigurationType *)
-              coreCfg->var->schedulableInExecution )
-            ->id );
-    spinlockVar->schedulableOwner = coreCfg->var->schedulableInExecution;
-
-    __SUPRESS_UNUSED_VAR( id );
-    return spinlockState;
-}
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
   * @fn spinlock_trySpinlockInternal(
   * BitWidthType id,
   * CosmOS_SpinlockVariableType * spinlockVar,
@@ -276,8 +231,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * Spinlock variable is then obtained based on the id argument by the function
   * os_getOsSpinlockVar. The function spinlock_willCauseDeadlock is called to
   * check if the spinlock would cause eventually deadlock, if yes the spinlock
-  * state SPINLOCK_STATE_ENUM__DEADLOCK_WARNING is returned. Otherwise the
-  * function cosmosApiInternal_spinlock_getSpinlockInternal is called to get
+  * state SPINLOCK_STATE_ENUM__ERROR_DEADLOCK is returned. Otherwise the
+  * function cosmosApiInternal_spinlock_getSpinlockInternal is called if the core
+  * is in the privileged mode or spinlock_getSpinlockInternal is called to get
   * spinlock and result is then returned as spinlock state. The schedulable
   * owner member in spinlock variable is set to the schedulable in execution.
 ********************************************************************************/
@@ -289,7 +245,7 @@ spinlock_getSpinlock( BitWidthType spinlockId )
 {
     BitWidthType numberOfSpinlocks;
 
-    CosmOS_BooleanType willCauseDeadlock;
+    CosmOS_BooleanType willCauseDeadlock, coreInPrivilegedMode;
     CosmOS_SpinlockStateType spinlockState;
 
     CosmOS_OsConfigurationType * osCfg;
@@ -309,12 +265,31 @@ spinlock_getSpinlock( BitWidthType spinlockId )
 
         if ( IS_NOT( willCauseDeadlock ) )
         {
-            spinlockState = cosmosApiInternal_spinlock_getSpinlockInternal(
-                spinlockVar, spinlockId );
+            coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+
+            if ( coreInPrivilegedMode )
+            {
+                do
+                {
+                    spinlockState = spinlock_trySpinlockInternal(
+                        0, spinlockVar, spinlockId );
+                } while ( spinlockState IS_NOT_EQUAL_TO
+                              SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
+            }
+            else
+            {
+                do
+                {
+                    spinlockState =
+                        cosmosApiInternal_spinlock_trySpinlockInternal(
+                            spinlockVar, spinlockId );
+                } while ( spinlockState IS_NOT_EQUAL_TO
+                              SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED );
+            }
         }
         else
         {
-            spinlockState = SPINLOCK_STATE_ENUM__DEADLOCK_WARNING;
+            spinlockState = SPINLOCK_STATE_ENUM__ERROR_DEADLOCK;
         }
     }
     else
@@ -342,7 +317,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * SPINLOCK_STATE_ENUM__ERROR_INVALID_ID is returned. Spinlock
   * variable is then obtained based on the id argument by the function
   * os_getOsSpinlockVar.
-  * Then the function cosmosApiInternal_spinlock_trySpinlockInternal is called to
+  * Then the function cosmosApiInternal_spinlock_trySpinlockInternal is called if
+  * the core is in the privileged mode or spinlock_trySpinlockInternal is called
   * try to get spinlock and result is then returned as spinlock state. The if
   * condition is implemented to check if the result from
   * cosmosApiInternal_spinlock_trySpinlockInternal is equal to the
@@ -357,6 +333,8 @@ spinlock_trySpinlock( BitWidthType spinlockId )
 {
     BitWidthType numberOfSpinlocks;
 
+    CosmOS_BooleanType coreInPrivilegedMode;
+
     CosmOS_SpinlockStateType spinlockState;
 
     CosmOS_OsConfigurationType * osCfg;
@@ -370,8 +348,18 @@ spinlock_trySpinlock( BitWidthType spinlockId )
     {
         spinlockVar = os_getOsSpinlockVar( osCfg, spinlockId );
 
-        spinlockState = cosmosApiInternal_spinlock_trySpinlockInternal(
-            spinlockVar, spinlockId );
+        coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+
+        if ( coreInPrivilegedMode )
+        {
+            spinlockState =
+                spinlock_trySpinlockInternal( 0, spinlockVar, spinlockId );
+        }
+        else
+        {
+            spinlockState = cosmosApiInternal_spinlock_trySpinlockInternal(
+                spinlockVar, spinlockId );
+        }
     }
     else
     {
@@ -406,9 +394,10 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * the value SPINLOCK_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE. Another nested
   * if condition is implemented to check the obtained boolean variable that
   * stores value if the requesting schedulable owns the spinlock. If yes the
-  * cosmosApiInternal_spinlock_releaseSpinlockInternal function is called and
-  * the result is returned as spinlock state. Otherwise the spinlock state is
-  * SPINLOCK_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER.
+  * cosmosApiInternal_spinlock_releaseSpinlockInternal function is called if
+  * the core is in the privileged mode or spinlock_releaseSpinlockInternal is
+  * called and the result is returned as spinlock state. Otherwise the spinlock
+  * state is SPINLOCK_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -418,7 +407,7 @@ spinlock_releaseSpinlock( BitWidthType spinlockId )
 {
     BitWidthType numberOfSpinlocks;
 
-    CosmOS_BooleanType ownsSchedulableSpinlock;
+    CosmOS_BooleanType ownsSchedulableSpinlock, coreInPrivilegedMode;
 
     CosmOS_SpinlockStateType spinlockState;
 
@@ -442,9 +431,19 @@ spinlock_releaseSpinlock( BitWidthType spinlockId )
         {
             if ( ownsSchedulableSpinlock )
             {
-                spinlockState =
-                    cosmosApiInternal_spinlock_releaseSpinlockInternal(
-                        spinlockVar, spinlockId );
+                coreInPrivilegedMode = CILcore_isInPrivilegedMode();
+
+                if ( coreInPrivilegedMode )
+                {
+                    spinlockState = spinlock_releaseSpinlockInternal(
+                        0, spinlockVar, spinlockId );
+                }
+                else
+                {
+                    spinlockState =
+                        cosmosApiInternal_spinlock_releaseSpinlockInternal(
+                            spinlockVar, spinlockId );
+                }
             }
             else
             {

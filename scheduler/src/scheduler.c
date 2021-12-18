@@ -138,12 +138,12 @@
   *
   * @brief Classic scheduling core function. DEMO
   *
-  * @param[in]  CosmOS_SchedulerConfigurationType * schedulerCfg
-  * @param[in]  CosmOS_SchedulableConfigurationType * schedulableCfg
-  * @param[in]  StackPointerType * stackPointerRetVal
-  * @param[in]  BitWidthType * timerTicks
-  * @param[in]  BitWidthType * scheduleTableIterator
-  * @param[in]  BitWidthType scheduleTableElementsNum
+  * @param[in]  schedulerCfg scheduler configuration pointer
+  * @param[in]  schedulableCfg schedulable configuration pointer
+  * @param[in]  stackPointerRetVal stack pointer address
+  * @param[in]  timerTicks timer ticks
+  * @param[in]  scheduleTableIterator schedule table iterator value
+  * @param[in]  scheduleTableElementsNum schedule table elements number
   *
   * @return none
 ********************************************************************************/
@@ -430,8 +430,10 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * If not an error reaction is triggered. Otherwise the reschedule trigger
   * state is set to RESCHEDULE_TRIGGER_STATE_ENUM__TIMER, timer is set to the
   * preempt period and timer offset is saved to by calling function
-  * CILsysTimer_setTicksSaveOffset. After this point the scheduling algorithm is
-  * triggered by calling CILinterrupt_contextSwitchRoutineTrigger function.
+  * CILsysTimer_setTicksSaveOffset and scheduler state is set to the
+  * SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME. After this point the scheduling
+  * algorithm is triggered by calling CILinterrupt_contextSwitchRoutineTrigger
+  * function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -466,6 +468,10 @@ scheduler_timerISRCallback( void )
 
         schedulerCfg->var->rescheduleTriggerState =
             RESCHEDULE_TRIGGER_STATE_ENUM__TIMER;
+
+        /* Set to unblock reschedule */
+        schedulerCfg->var->schedulerState =
+            SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME;
 
         /* Give scheduling algorithm preempt tick to finish the reschedule */
         CILsysTimer_setTicksSaveOffset(
@@ -528,7 +534,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * by calling core_setCoreOsState function. The scheduler reschedule state is
   * set to RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM by calling function
   * scheduler_setSchedulerRescheduleTriggerState - this is done only in this
-  * place to force system timer overwrite this state when occurs.
+  * place to force system timer overwrite this state when occurs. Then the
+  * synchronization barrier function coreSync_getBarrier is called to get in sync
+  * with all cores.
   * In the end the system timer is started CILsysTimer_startTimer and the
   * CILstack_setStackPointer called to switch to the schedulable stack.
 ********************************************************************************/
@@ -617,6 +625,8 @@ scheduler_start( void )
 
     scheduler_setSchedulerRescheduleTriggerState(
         schedulerCfg, RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM );
+
+    coreSync_getBarrier( coreCfg, OS_START_ID );
 
     CILsysTimer_startTimer( timerTicks, timerTickCount );
 

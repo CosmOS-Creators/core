@@ -144,6 +144,7 @@ extern "C" {
   * @fn supportStdlib_malloc( size_t size )
   *
   * @brief Stdlib malloc function implementation redesigned for CosmOS DEMO.
+  * Thread safe.
   *
   * @param[in]  size number of bytes that should be allocated
   *
@@ -159,6 +160,7 @@ supportStdlib_malloc( size_t size );
   * @fn supportStdlib_free( void* ptr )
   *
   * @brief Stdlib free function implementation redesigned for CosmOS DEMO.
+  * Thread safe.
   *
   * @param[in]  ptr pointer to free
   *

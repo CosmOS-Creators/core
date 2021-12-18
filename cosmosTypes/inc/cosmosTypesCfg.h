@@ -338,13 +338,12 @@ struct CosmOS_SchedulerConfigurationType
 /**
   * @brief  CosmOS_SysJobsGroupConfigurationType struct type
 ********************************************************************************/
-typedef struct
+struct CosmOS_SysJobsGroupConfigurationType
 {
     const CosmOS_GenericVoidType * const handlers;
     const BitWidthType numOfHandlers;
     const BitWidthType tickMultiplicator;
-
-} CosmOS_SysJobsGroupConfigurationType;
+};
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -392,6 +391,43 @@ struct CosmOS_CoreConfigurationType
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_OsEventConfigurationType struct type
+********************************************************************************/
+struct CosmOS_OsEventConfigurationType
+{
+    CosmOS_OsEventVariableType * const var;
+    CosmOS_BooleanType * const handleCores;
+    const BitWidthType spinlockId;
+    const CosmOS_GenericVoidType * const eventFuncs;
+    const BitWidthType numberOfEventFuncs;
+    unsigned char * const dataPool;
+    const BitWidthType dataPoolSize;
+};
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  CosmOS_ChannelConfigurationType struct type
+********************************************************************************/
+struct CosmOS_ChannelConfigurationType
+{
+    CosmOS_ChannelVariableType * const var;
+    const BitWidthType id;
+    unsigned char * const sendPool;
+    unsigned char * const replyPool;
+    const BitWidthType sendPoolSize;
+    const BitWidthType replyPoolSize;
+    const CosmOS_PermissionsConfigurationType * const sendPermission;
+    const CosmOS_PermissionsConfigurationType * const replyPermission;
+    const BitWidthType spinlockId;
+    const CosmOS_SchedulableConfigurationType * const replyPoolSchedulableOwner;
+};
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_OsConfigurationType struct type
 ********************************************************************************/
 struct CosmOS_OsConfigurationType
@@ -403,10 +439,12 @@ struct CosmOS_OsConfigurationType
     const BitWidthType numberOfBuffers;
     const CosmOS_RoutesConfigurationType * const route;
     const BitWidthType numberOfSpinlocks;
-    const CosmOS_CoreConfigurationType * const coreCfgs;
     const CosmOS_BufferConfigurationType * const bufferCfgs;
     const CosmOS_BufferDoubleConfigurationType * const bufferDoubleCfgs;
     CosmOS_SpinlockVariableType * const spinlockVars;
+    const CosmOS_OsEventConfigurationType * const osEventCfg;
+    const CosmOS_ChannelConfigurationType * const channels;
+    const BitWidthType numberOfChannels;
 };
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

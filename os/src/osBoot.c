@@ -24,6 +24,7 @@
 #include "osBoot.h"
 #include "cosmosAssert.h"
 #include "osBootCfg.h"
+#include "supportStdio.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -195,14 +196,12 @@ osBoot_validateSection(
 __STATIC_FORCEINLINE void
 osBoot_clearSection( unsigned char * sectionStart, unsigned char * sectionEnd )
 {
-    BitWidthType size = ( BitWidthType )( sectionEnd - sectionStart );
+    BitWidthType size = ( BitWidthType )(
+        ( sectionEnd - sectionStart ) * sizeof( unsigned char ) );
 
     unsigned char * pDst = sectionStart;
 
-    for ( BitWidthType i = 0; i < ( size * sizeof( unsigned char ) ); i++ )
-    {
-        *pDst++ = 0;
-    }
+    supportStdio_memset( pDst, 0, size );
 }
 
 /********************************************************************************
@@ -222,15 +221,13 @@ osBoot_bootSection(
     unsigned char * sectionEnd,
     unsigned char * sectionStartInFlash )
 {
-    BitWidthType size = ( BitWidthType )( sectionEnd - sectionStart );
+    BitWidthType size = ( BitWidthType )(
+        ( sectionEnd - sectionStart ) * sizeof( unsigned char ) );
 
     unsigned char * pDst = sectionStart;
     unsigned char * pSrc = sectionStartInFlash;
 
-    for ( BitWidthType i = 0; i < ( size * sizeof( unsigned char ) ); i++ )
-    {
-        *pDst++ = *pSrc++;
-    }
+    supportStdio_memcpy( pDst, pSrc, size );
 }
 
 /********************************************************************************
@@ -251,15 +248,13 @@ osBoot_validateSection(
     unsigned char * sectionEnd,
     unsigned char * sectionStartInFlash )
 {
-    BitWidthType size = ( BitWidthType )( sectionEnd - sectionStart );
+    BitWidthType size = ( BitWidthType )(
+        ( sectionEnd - sectionStart ) * sizeof( unsigned char ) );
 
     unsigned char * pDst = sectionStart;
     unsigned char * pSrc = sectionStartInFlash;
 
-    for ( BitWidthType i = 0; i < ( size * sizeof( unsigned char ) ); i++ )
-    {
-        cosmosAssert( (*pDst++)IS_EQUAL_TO( *pSrc++ ) );
-    }
+    cosmosAssert( IS_NOT( supportStdio_memcmp( pDst, pSrc, size ) ) );
 }
 
 /********************************************************************************

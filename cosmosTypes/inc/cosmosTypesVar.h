@@ -271,6 +271,36 @@ typedef struct
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_OsEventVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    BitWidthType event;
+
+} CosmOS_OsEventVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  CosmOS_ChannelVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    CosmOS_BooleanType initialized;
+    CosmOS_ChannelPoolStateType sendPoolState;
+    BitWidthType sendPoolPayloadLength;
+    const CosmOS_SchedulableConfigurationType * sendPoolSchedulableOwner;
+    CosmOS_BooleanType senderWaitingForResponse;
+    CosmOS_ChannelPoolStateType replyPoolState;
+    BitWidthType replyPoolPayloadLength;
+
+} CosmOS_ChannelVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_OsVariableType struct type
 ********************************************************************************/
 typedef struct

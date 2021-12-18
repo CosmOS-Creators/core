@@ -5,25 +5,19 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file cosmosAssert.h
+** @file supportStdio.h
 *********************************************************************************
-<!--                   cosmosAssert Module Group Definition                   -->
+<!--                     supportStdio Unit Group Definition                   -->
 *********************************************************************************
-** @defgroup cosmosAssert_module cosmosAssert
-** @brief cosmosAssert Module
-** @details lorem
-*********************************************************************************
-<!--                      cosmosAssert Unit Group Definition                  -->
-*********************************************************************************
-** @defgroup cosmosAssert_unit cosmosAssert Unit
-** @ingroup cosmosAssert_module
-** @brief cosmosAssert Unit
+** @defgroup supportStdio_unit supportStdio Unit
+** @ingroup support_module
+** @brief supportStdio Unit
 ** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
 *********************************************************************************
 ** @version 1.0.0
-** @date 1.8.2020
+** @date 07.09.2021
 ** @author https://github.com/PavolKostolansky
 *********************************************************************************
 <!--                          Warnings and License                            -->
@@ -31,18 +25,18 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                 cosmosAssert Unit Global Group Definition                -->
+<!--                 supportStdio Unit Global Group Definition                -->
 *********************************************************************************
-** @defgroup Global_cosmosAssert Global
-** @ingroup cosmosAssert_unit
-** @brief cosmosAssert globals
+** @defgroup Global_supportStdio Global
+** @ingroup supportStdio_unit
+** @brief supportStdio globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __COSMOSASSERT_H__
-#define __COSMOSASSERT_H__
+#ifndef __SUPPORTSTDIO_H__
+#define __SUPPORTSTDIO_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -56,6 +50,10 @@ extern "C" {
 #include "cosmosTypes.h"
 #include "memoryMapping.h"
 #include "sysDefs.h"
+
+/* LIB interfaces */
+#include <stdio.h>
+#include <string.h>
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -65,28 +63,18 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_cosmosAssert_h Macros
-  * @ingroup Global_cosmosAssert
+  * @defgroup Macros_supportStdio_h Macros
+  * @ingroup Global_supportStdio
   * @{
 ********************************************************************************/
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @brief CosmOS assertion.
-  * @param[in]  result
-  *
-  * @return none
-********************************************************************************/
-#define cosmosAssert( result ) \
-    ( ( result )               \
-          ? (BitWidthType)0U   \
-          : cosmosAssert_catch( (unsigned char *)__FILENAME, __LINENUMBER ) )
+#define supportStdio_memcpy(dest, src, len) memcpy(dest, src, len)
+#define supportStdio_memcmp(str1, str2, len) memcmp(str1, str2, len)
+#define supportStdio_memset(dest, val, len) memset(dest, val, len)
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Macros_cosmosAssert_h
+/*  Macros_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -97,16 +85,15 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_cosmosAssert_h Variables
-  * @ingroup Global_cosmosAssert
+  * @defgroup Variables_supportStdio_h Variables
+  * @ingroup Global_supportStdio
   * @{
 ********************************************************************************/
-
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Variables_cosmosAssert_h
+/*  Variables_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -117,47 +104,74 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_cosmosAssert_h API's
-  * @ingroup Global_cosmosAssert
+  * @defgroup Apis_supportStdio_h API's
+  * @ingroup Global_supportStdio
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_cosmosAssert_h Getters
-  * @ingroup Apis_cosmosAssert_h
+  * @addtogroup Getters_supportStdio_h Getters
+  * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_cosmosAssert_h
+/*  Getters_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_cosmosAssert_h Setters
-  * @ingroup Apis_cosmosAssert_h
+  * @addtogroup Setters_supportStdio_h Setters
+  * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
+
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_cosmosAssert_h
+/*  Setters_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_cosmosAssert_h General
-  * @ingroup Apis_cosmosAssert_h
+  * @addtogroup General_supportStdio_h General
+  * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn supportStdio_memcpyInternal(
+  * BitWidthType id,
+  * AddressType * data,
+  * AddressType * dataPool,
+  * BitWidthType size )
+  *
+  * @brief Memcpy operation. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  src source address pointer
+  * @param[in]  dest destination address pointer
+  * @param[in]  size number of bytes to copy
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void
+supportStdio_memcpyInternal(
+    BitWidthType id,
+    AddressType * src,
+    AddressType * dest,
+    BitWidthType size );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_cosmosAssert_h
+/*  General_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -168,56 +182,41 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_cosmosAssert_h Getters
-  * @ingroup Apis_cosmosAssert_h
+  * @addtogroup Getters_supportStdio_h Getters
+  * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Getters_cosmosAssert_h
+/*  Getters_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_cosmosAssert_h Setters
-  * @ingroup Apis_cosmosAssert_h
+  * @addtogroup Setters_supportStdio_h Setters
+  * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_cosmosAssert_h
+/*  Setters_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_cosmosAssert_h General
-  * @ingroup Apis_cosmosAssert_h
+  * @addtogroup General_supportStdio_h General
+  * @ingroup Apis_supportStdio_h
   * @{
 ********************************************************************************/
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn cosmosAssert_catch( unsigned char * file, BitWidthType line )
-  *
-  * @brief CosmOS catch failed assertion function.
-  *
-  * @param[in]  file name
-  * @param[in]  line in the code, where assertion was caught
-  *
-  * @return none
-********************************************************************************/
-void
-cosmosAssert_catch( unsigned char * file, BitWidthType line );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_cosmosAssert_h
+/*  General_supportStdio_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

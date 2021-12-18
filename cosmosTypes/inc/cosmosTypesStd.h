@@ -80,6 +80,9 @@ extern "C" {
   * @ingroup Global_cosmosTypesStd
   * @{
 ********************************************************************************/
+typedef struct CosmOS_ChannelConfigurationType CosmOS_ChannelConfigurationType;
+typedef struct CosmOS_SysJobsGroupConfigurationType
+    CosmOS_SysJobsGroupConfigurationType;
 typedef struct CosmOS_ProgramSectionConfigurationType
     CosmOS_ProgramSectionConfigurationType;
 typedef struct CosmOS_BootSectionConfigurationType
@@ -108,6 +111,7 @@ typedef struct CosmOS_SchedulerConfigurationType
     CosmOS_SchedulerConfigurationType;
 typedef struct CosmOS_SysJobsConfigurationType CosmOS_SysJobsConfigurationType;
 typedef struct CosmOS_CoreConfigurationType CosmOS_CoreConfigurationType;
+typedef struct CosmOS_OsEventConfigurationType CosmOS_OsEventConfigurationType;
 typedef struct CosmOS_OsConfigurationType CosmOS_OsConfigurationType;
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -186,6 +190,21 @@ typedef BitWidthType (
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief
+  * CosmOS_Generic_bitWidthType_voidPtr_voidPtr_bitWidthType_ret_bitWidthType
+  * type
+********************************************************************************/
+typedef BitWidthType (
+    *CosmOS_Generic_bitWidthType_voidPtr_bitWidthType_bitWidthType_ret_bitWidthType )(
+    BitWidthType,
+    void *,
+    BitWidthType,
+    BitWidthType );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_BooleanType enum
 ********************************************************************************/
 typedef enum
@@ -198,13 +217,25 @@ typedef enum
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_OsVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    BitWidthType channelId;
+
+} CosmOS_ChannelEventType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_AccessStateType enum
 ********************************************************************************/
 typedef enum
 {
 
     ACCESS_STATE_ENUM__ALLOWED,
-    ACCESS_STATE_ENUM__DENIED = FORCE_ENUM,
+    ACCESS_STATE_ENUM__DENIED,
 
 } CosmOS_AccessStateType;
 
@@ -217,15 +248,15 @@ typedef enum
 typedef enum
 {
 
-    BUFFER_STATE_ENUM__OK,
-    BUFFER_STATE_ENUM__EMPTY,
-    BUFFER_STATE_ENUM__FULL,
-    BUFFER_STATE_ENUM__ERROR_INVALID_ID,
-    BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED,
-    BUFFER_STATE_ENUM__ERROR_SPINLOCK_NOT_OBTAINED,
-    BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED,
-    BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS,
-    BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM,
+    BUFFER_STATE_ENUM__OK = 0,
+    BUFFER_STATE_ENUM__EMPTY = 1,
+    BUFFER_STATE_ENUM__FULL = 2,
+    BUFFER_STATE_ENUM__ERROR_INVALID_ID = -1,
+    BUFFER_STATE_ENUM__ERROR_ACCESS_DENIED = -2,
+    BUFFER_STATE_ENUM__ERROR_BUFFER_OCCUPIED = -3,
+    BUFFER_STATE_ENUM__ERROR_INPUT_ARRAY_IS_PROTECTED = -4,
+    BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_EMPTY_CELLS = -5,
+    BUFFER_STATE_ENUM__ERROR_SIZE_BIGGER_THAN_FULL_CELLS_NUM = -6,
 
 } CosmOS_BufferStateType;
 
@@ -247,13 +278,52 @@ typedef enum
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_ChannelPoolStateType enum
+********************************************************************************/
+typedef enum
+{
+
+    CHANNEL_POOL_STATE_ENUM__EMPTY,
+    CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED,
+
+} CosmOS_ChannelPoolStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  CosmOS_ChannelStateType enum
+********************************************************************************/
+typedef enum
+{
+    CHANNEL_STATE_ENUM__INITIALIZED = 0,
+    CHANNEL_STATE_ENUM__RECEIVED = 1,
+    CHANNEL_STATE_ENUM__NOT_RECEIVED = 2,
+    CHANNEL_STATE_ENUM__REPLIED = 3,
+    CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID = -1,
+    CHANNEL_STATE_ENUM__ERROR_ACCESS_DENIED = -2,
+    CHANNEL_STATE_ENUM__ERROR_CHANNEL_NOT_INITIALIZED = -3,
+    CHANNEL_STATE_ENUM__ERROR_DATA_TO_SEND_BIGGER_THAN_POOL = -4,
+    CHANNEL_STATE_ENUM__ERROR_DATA_TO_RECEIVE_BIGGER_THAN_POOL = -5,
+    CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL = -6,
+    CHANNEL_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED = -7,
+    CHANNEL_STATE_ENUM__ERROR_CHANNEL_OCCUPIED = -8,
+    CHANNEL_STATE_ENUM__ERROR_NO_REPLY_EXPECTED = -9,
+    CHANNEL_STATE_ENUM__ERROR_CHANNEL_ALREADY_INITIALIZED = -10,
+
+} CosmOS_ChannelStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_SchedulableInstanceType enum
 ********************************************************************************/
 typedef enum
 {
 
-    SCHEDULABLE_INSTANCE_ENUM__TASK = 0,
-    SCHEDULABLE_INSTANCE_ENUM__THREAD = FORCE_ENUM,
+    SCHEDULABLE_INSTANCE_ENUM__TASK,
+    SCHEDULABLE_INSTANCE_ENUM__THREAD,
 
 } CosmOS_SchedulableInstanceType;
 
@@ -270,7 +340,9 @@ typedef enum
     SCHEDULABLE_STATE_ENUM__EXECUTED,
     SCHEDULABLE_STATE_ENUM__BLOCKED,
     SCHEDULABLE_STATE_ENUM__SLEEP,
-    SCHEDULABLE_STATE_ENUM__READY = FORCE_ENUM,
+    SCHEDULABLE_STATE_ENUM__LISTENING,
+    SCHEDULABLE_STATE_ENUM__WAITING_FOR_REPLY,
+    SCHEDULABLE_STATE_ENUM__READY,
 
 } CosmOS_SchedulableStateType;
 
@@ -283,10 +355,10 @@ typedef enum
 typedef enum
 {
 
-    SLEEP_STATE_ENUM__ERROR_ONLY_THREADS_CAN_SLEEP,
-    SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX,
-    SLEEP_STATE_ENUM__ERROR_MIN,
-    SLEEP_STATE_ENUM__OK,
+    SLEEP_STATE_ENUM__OK = 0,
+    SLEEP_STATE_ENUM__ERROR_ONLY_THREADS_CAN_SLEEP = -1,
+    SLEEP_STATE_ENUM__ERROR_EXCEEDING_MAX = -2,
+    SLEEP_STATE_ENUM__ERROR_MIN = -3,
 
 } CosmOS_SleepStateType;
 
@@ -300,7 +372,7 @@ typedef enum
 {
 
     SCHEDULER_SYNC_STATE_ENUM__NOT_IN_SYNC,
-    SCHEDULER_SYNC_STATE_ENUM__IN_SYNC = FORCE_ENUM,
+    SCHEDULER_SYNC_STATE_ENUM__IN_SYNC,
 
 } CosmOS_SchedulerSyncStateType;
 
@@ -314,7 +386,7 @@ typedef enum
 {
 
     BARRIER_STATE_ENUM__ACTIVATED,
-    BARRIER_STATE_ENUM__REACHED = FORCE_ENUM,
+    BARRIER_STATE_ENUM__REACHED,
 
 } CosmOS_BarrierStateType;
 
@@ -328,7 +400,7 @@ typedef enum
 {
 
     ALARM_STATE_ENUM__DISABLED,
-    ALARM_STATE_ENUM__ACTIVATED = FORCE_ENUM,
+    ALARM_STATE_ENUM__ACTIVATED,
 
 } CosmOS_AlarmStateType;
 
@@ -359,7 +431,7 @@ typedef enum
 
     SCHEDULER_STATE_ENUM__TASK_EXECUTED_IN_WCET_CHECK,
     SCHEDULER_STATE_ENUM__WAITING_FOR_START_TIME,
-    SCHEDULER_STATE_ENUM__NOT_STARTED = FORCE_ENUM,
+    SCHEDULER_STATE_ENUM__NOT_STARTED,
 
 } CosmOS_SchedulerStateType;
 
@@ -373,7 +445,7 @@ typedef enum
 {
 
     RESCHEDULE_TRIGGER_STATE_ENUM__SYSTEM,
-    RESCHEDULE_TRIGGER_STATE_ENUM__TIMER = FORCE_ENUM,
+    RESCHEDULE_TRIGGER_STATE_ENUM__TIMER,
 
 } CosmOS_RescheduleTriggerStateType;
 
@@ -386,13 +458,15 @@ typedef enum
 typedef enum
 {
 
-    SPINLOCK_STATE_ENUM__RELEASED = 0x00,
-    SPINLOCK_STATE_ENUM__OCCUPIED = 0x01,
-    SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED = 0x02,
-    SPINLOCK_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER = 0x03,
-    SPINLOCK_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE = 0x04,
-    SPINLOCK_STATE_ENUM__ERROR_INVALID_ID = 0x05,
-    SPINLOCK_STATE_ENUM__DEADLOCK_WARNING = FORCE_ENUM,
+    SPINLOCK_STATE_ENUM__RELEASED = 0,
+    SPINLOCK_STATE_ENUM__OCCUPIED = 1,
+    SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED = 2,
+    SPINLOCK_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER = -3,
+    SPINLOCK_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE = -4,
+    SPINLOCK_STATE_ENUM__ERROR_INVALID_ID = -5,
+    SPINLOCK_STATE_ENUM__ERROR_DEADLOCK = -6,
+
+    SPINLOCK_STATE_ENUM__MAKE_ENUM_BITWIDTH_SIZE = FORCE_ENUM,
 
 } CosmOS_SpinlockStateType;
 
@@ -405,16 +479,46 @@ typedef enum
 typedef enum
 {
 
-    MUTEX_STATE_ENUM__RELEASED = 0x00,
-    MUTEX_STATE_ENUM__OCCUPIED = 0x01,
-    MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED = 0x02,
-    MUTEX_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER = 0x03,
-    MUTEX_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE = 0x04,
-    MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX = 0x05,
-    MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS = 0x06,
-    MUTEX_STATE_ENUM__DEADLOCK_WARNING = FORCE_ENUM,
+    MUTEX_STATE_ENUM__RELEASED = 0,
+    MUTEX_STATE_ENUM__OCCUPIED = 1,
+    MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED = 2,
+    MUTEX_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER = -1,
+    MUTEX_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE = -2,
+    MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX = -3,
+    MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS = -4,
+    MUTEX_STATE_ENUM__ERROR_DEADLOCK = -5,
+
+    MUTEX_STATE_ENUM__MAKE_ENUM_BITWIDTH_SIZE = FORCE_ENUM,
 
 } CosmOS_MutexStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  CosmOS_OsEventStateType enum
+********************************************************************************/
+typedef enum
+{
+    OS_EVENT_STATE_ENUM__OK = 0,
+    OS_EVENT_STATE_ENUM__ERROR_ATLEAST_ONE_CORE_MUST_HANDLE_EVENT = -1,
+    OS_EVENT_STATE_ENUM__ERROR_INVALID_EVENT = -2,
+    OS_EVENT_STATE_ENUM__ERROR_DATA_BIGGER_THAN_DATA_POOL_SIZE = -3,
+
+} CosmOS_OsEventStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  ForceEnums enum
+********************************************************************************/
+typedef enum
+{
+    MUTEX_FORCE = MUTEX_STATE_ENUM__MAKE_ENUM_BITWIDTH_SIZE,
+    SPINLOCK_FORCE = SPINLOCK_STATE_ENUM__MAKE_ENUM_BITWIDTH_SIZE,
+
+} ForceEnums;
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

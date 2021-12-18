@@ -134,10 +134,25 @@ os_getOsCfg( void );
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn os_kernelPanic(void)
+  * @fn os_kernelPanicInternal( BitWidthType id )
   *
   * @brief OS kernel panic function. This is operating system internal funtion
   * only and cannot be called from the unprivileged context directly. DEMO
+  *
+  * @param[in]  BitWidthType id
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void
+os_kernelPanicInternal( BitWidthType id );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_kernelPanic(void)
+  *
+  * @brief OS kernel panic function. DEMO
   *
   * @param[in]  none
   *
@@ -187,63 +202,6 @@ os_kernelPanic( void );
 ********************************************************************************/
 __OS_FUNC_SECTION void
 os_start( BitWidthType entityId );
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_write8( BitWidthType entityId, uint8_t * address, uint8_t value )
-  *
-  * @brief OS write to protected 8-bit memory space. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
-  *
-  * @param[in]  entityId is used during the system call dispatching
-  * @param[out]  address address of the memory
-  * @param[in]  value value which should be written to the address
-  *
-  * @return none
-********************************************************************************/
-__OS_FUNC_SECTION void
-os_write8( BitWidthType entityId, uint8_t * address, uint8_t value );
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_write16( BitWidthType entityId, uint16_t * address, uint16_t value )
-  *
-  * @brief OS write to protected 16-bit memory space. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
-  *
-  * @param[in]  entityId is used during the system call dispatching
-  * @param[out]  address address of the memory
-  * @param[in]  value value which should be written to the address
-  *
-  * @return none
-********************************************************************************/
-__OS_FUNC_SECTION void
-os_write16( BitWidthType entityId, uint16_t * address, uint16_t value );
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_write32( BitWidthType entityId, uint32_t * address, uint32_t value )
-  *
-  * @brief OS write to protected 32-bit memory space. This function is provided
-  * as a CosmOS API system call mapped with the routes and cannot be called from
-  * the unprivileged context directly. DEMO
-  *
-  * @param[in]  entityId is used during the system call dispatching
-  * @param[out]  address address of the memory
-  * @param[in]  value value which should be written to the address
-  *
-  * @return none
-********************************************************************************/
-__OS_FUNC_SECTION void
-os_write32( BitWidthType entityId, uint32_t * address, uint32_t value );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
@@ -279,6 +237,25 @@ __STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
 os_getOsCores( CosmOS_OsConfigurationType * os )
 {
     return (CosmOS_CoreConfigurationType *)( os->cores );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_getCore(CosmOS_OsConfigurationType * os, BitWidthType coreId)
+  *
+  * @brief Get os core pointer.
+  *
+  * @param[in]  os configuration pointer
+  * @param[in]  coreId specifies the core from array of configured cores
+  *
+  * @return CosmOS_CoreConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
+os_getCore( CosmOS_OsConfigurationType * os, BitWidthType coreId )
+{
+    return (CosmOS_CoreConfigurationType *)( &( os->cores[coreId] ) );
 }
 
 /********************************************************************************
@@ -369,43 +346,6 @@ __STATIC_FORCEINLINE BitWidthType
 os_getOsNumberOfSpinlocks( CosmOS_OsConfigurationType * os )
 {
     return ( os->numberOfSpinlocks );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getOsCoreCfgs(CosmOS_OsConfigurationType * os)
-  *
-  * @brief Get os coreCfgs pointer.
-  *
-  * @param[in]  os configuration pointer
-  *
-  * @return CosmOS_CoreConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
-os_getOsCoreCfgs( CosmOS_OsConfigurationType * os )
-{
-    return (CosmOS_CoreConfigurationType *)( os->coreCfgs );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_getCoreCfg(CosmOS_OsConfigurationType * os, BitWidthType coreId)
-  *
-  * @brief Get os core pointer.
-  *
-  * @param[in]  os configuration pointer
-  * @param[in]  coreId specifies the core from array of configured cores
-  *
-  * @return CosmOS_CoreConfigurationType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_CoreConfigurationType *
-os_getCoreCfg( CosmOS_OsConfigurationType * os, BitWidthType coreId )
-{
-    return (CosmOS_CoreConfigurationType *)( &( os->coreCfgs[coreId] ) );
 }
 
 /********************************************************************************
@@ -524,6 +464,81 @@ __STATIC_FORCEINLINE CosmOS_SpinlockVariableType *
 os_getOsSpinlockVar( CosmOS_OsConfigurationType * os, BitWidthType spinlockId )
 {
     return ( &( os->spinlockVars[spinlockId] ) );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_getOsEventCfg(CosmOS_OsConfigurationType * os)
+  *
+  * @brief Get os osEventCfg pointer.
+  *
+  * @param[in]  os configuration pointer
+  *
+  * @return CosmOS_OsEventConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_OsEventConfigurationType *
+os_getOsEventCfg( CosmOS_OsConfigurationType * os )
+{
+    return (CosmOS_OsEventConfigurationType *)( os->osEventCfg );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_getOsChannelsCfg(CosmOS_OsConfigurationType * os)
+  *
+  * @brief Get channels pointer.
+  *
+  * @param[in]  os configuration pointer
+  *
+  * @return CosmOS_ChannelConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_ChannelConfigurationType *
+os_getOsChannelsCfg( CosmOS_OsConfigurationType * os )
+{
+    return (CosmOS_ChannelConfigurationType *)( os->channels );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_getOsChannelCfg( CosmOS_OsConfigurationType * os,
+  * BitWidthType channelId )
+  *
+  * @brief Get channel pointer.
+  *
+  * @param[in]  os configuration pointer
+  * @param[in]  channelId specifies the channel from array of configured
+  * channels
+  *
+  * @return CosmOS_ChannelConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_ChannelConfigurationType *
+os_getOsChannelCfg( CosmOS_OsConfigurationType * os, BitWidthType channelId )
+{
+    return (CosmOS_ChannelConfigurationType *)( &( os->channels[channelId] ) );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_getOsNumberOfChannels(CosmOS_OsConfigurationType * os)
+  *
+  * @brief Get numberOfChannels.
+  *
+  * @param[in]  os configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+os_getOsNumberOfChannels( CosmOS_OsConfigurationType * os )
+{
+    return ( BitWidthType )( os->numberOfChannels );
 }
 
 /********************************************************************************

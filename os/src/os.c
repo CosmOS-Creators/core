@@ -23,9 +23,12 @@
 /* CORE interfaces */
 #include "os.h"
 #include "core.h"
+#include "cosmosApiInternal.h"
 #include "osCfg.h"
 #include "scheduler.h"
 
+/* CIL interfaces */
+#include "CILcore.h"
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -173,6 +176,30 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @fn os_kernelPanicInternal( BitWidthType id )
+  *
+  * @details The implementation contains system reset function call.
+  *
+  * @see TEST_OS_KERNELPANIC_EXECUTIONFLOW
+********************************************************************************/
+/* @cond S */
+__SEC_START( __OS_FUNC_SECTION_START )
+/* @endcond*/
+__OS_FUNC_SECTION void
+os_kernelPanicInternal( BitWidthType id )
+{
+    CILcore_systemReset();
+
+    __SUPRESS_UNUSED_VAR( id );
+}
+/* @cond S */
+__SEC_STOP( __OS_FUNC_SECTION_STOP )
+/* @endcond*/
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn os_kernelPanic(void)
   *
   * @details The implementation contains call to the kernel panic hook
@@ -186,85 +213,22 @@ __SEC_START( __OS_FUNC_SECTION_START )
 __OS_FUNC_SECTION void
 os_kernelPanic( void )
 {
+    CosmOS_BooleanType coreInPrivilegedMode;
     CosmOS_CoreConfigurationType * coreCfg;
 
     coreCfg = core_getCoreCfg();
     coreCfg->kernelPanicHook();
 
-    for ( ;; )
-        ;
-}
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
+    coreInPrivilegedMode = CILcore_isInPrivilegedMode();
 
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_write8( BitWidthType entityId, uint8_t * address, uint8_t value )
-  *
-  * @details The implementation contains write operation of the value to the
-  * specific address.
-********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION void
-os_write8( BitWidthType entityId, uint8_t * address, uint8_t value )
-{
-    /* TODO: some mechanism to check if the user has permission to write to
-    this specific memory, alignment check */
-    *address = value;
-    __SUPRESS_UNUSED_VAR( entityId );
-}
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_write16( BitWidthType entityId, uint16_t * address, uint16_t value )
-  *
-  * @details The implementation contains write operation of the value to the
-  * specific address.
-********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION void
-os_write16( BitWidthType entityId, uint16_t * address, uint16_t value )
-{
-    /* TODO: some mechanism to check if the user has permission to write to
-    this specific memory, alignment check */
-    *address = value;
-    __SUPRESS_UNUSED_VAR( entityId );
-}
-/* @cond S */
-__SEC_STOP( __OS_FUNC_SECTION_STOP )
-/* @endcond*/
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn os_write32( BitWidthType entityId, uint32_t * address, uint32_t value )
-  *
-  * @details The implementation contains write operation of the value to the
-  * specific address.
-********************************************************************************/
-/* @cond S */
-__SEC_START( __OS_FUNC_SECTION_START )
-/* @endcond*/
-__OS_FUNC_SECTION void
-os_write32( BitWidthType entityId, uint32_t * address, uint32_t value )
-{
-    /* TODO: some mechanism to check if the user has permission to write to
-    this specific memory, alignment check */
-    *address = value;
-    __SUPRESS_UNUSED_VAR( entityId );
+    if ( coreInPrivilegedMode )
+    {
+        os_kernelPanicInternal( 0 );
+    }
+    else
+    {
+        cosmosApiInternal_os_kernelPanicInternal();
+    }
 }
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )
