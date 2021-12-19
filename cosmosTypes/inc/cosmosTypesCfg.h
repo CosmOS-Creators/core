@@ -420,7 +420,7 @@ struct CosmOS_ChannelConfigurationType
     const BitWidthType replyPoolSize;
     const CosmOS_PermissionsConfigurationType * const sendPermission;
     const CosmOS_PermissionsConfigurationType * const replyPermission;
-    const BitWidthType spinlockId;
+    const BitWidthType semaphoreId;
     const CosmOS_SchedulableConfigurationType * const replyPoolSchedulableOwner;
 };
 
@@ -445,6 +445,8 @@ struct CosmOS_OsConfigurationType
     const CosmOS_OsEventConfigurationType * const osEventCfg;
     const CosmOS_ChannelConfigurationType * const channels;
     const BitWidthType numberOfChannels;
+    CosmOS_SemaphoreVariableType * const semaphoreVars;
+    const BitWidthType numberOfSemaphores;
 };
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

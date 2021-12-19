@@ -334,7 +334,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * Nested if condition then subsequently checks if the schedulable in execution
   * which means the mutex release requesting schedulable is a thread type
   * SCHEDULABLE_INSTANCE_ENUM__THREAD. If not the mutexState is returned with
-  * the value MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX.
+  * the value MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_MUTEX.
   * After this point another condition is needed to check if the schedulable in
   * execution will not cause the deadlock by calling mutex_willCauseDeadlock
   * function. If yes the mutexState is returned with the value
@@ -382,7 +382,7 @@ mutex_getMutex( CosmOS_MutexVariableType * mutexVar )
         }
         else
         {
-            mutexState = MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX;
+            mutexState = MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_MUTEX;
         }
     }
     else
@@ -411,7 +411,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * Nested if condition then subsequently checks if the schedulable in execution
   * which means the mutex release requesting schedulable is a thread type
   * SCHEDULABLE_INSTANCE_ENUM__THREAD. If not the mutexState is returned with
-  * the value MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX. If yes then is
+  * the value MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_MUTEX. If yes then is
   * possible to try to lock the mutex by calling CosmOS API function
   * cosmosApiInternal_mutex_tryMutexInternal.
 ********************************************************************************/
@@ -441,7 +441,7 @@ mutex_tryMutex( CosmOS_MutexVariableType * mutexVar )
         }
         else
         {
-            mutexState = MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX;
+            mutexState = MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_MUTEX;
         }
     }
     else
@@ -470,7 +470,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * Nested if condition then subsequently checks if the schedulable in execution
   * which means the mutex release requesting schedulable is a thread type
   * SCHEDULABLE_INSTANCE_ENUM__THREAD. If not the mutexState is returned with
-  * the value MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX.
+  * the value MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_MUTEX.
   * After this point another condition is needed to check if the schedulable in
   * execution owns the mutex variable by calling mutex_ownsSchedulableMutex
   * function. If not the mutexState is returned with
@@ -525,7 +525,7 @@ mutex_releaseMutex( CosmOS_MutexVariableType * mutexVar )
         }
         else
         {
-            mutexState = MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX;
+            mutexState = MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_MUTEX;
         }
     }
     else

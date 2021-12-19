@@ -474,7 +474,7 @@ typedef enum
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @brief  CosmOS_SpinlockStateType enum
+  * @brief  CosmOS_MutexStateType enum
 ********************************************************************************/
 typedef enum
 {
@@ -484,13 +484,35 @@ typedef enum
     MUTEX_STATE_ENUM__SUCCESSFULLY_LOCKED = 2,
     MUTEX_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER = -1,
     MUTEX_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE = -2,
-    MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_MUTEX = -3,
+    MUTEX_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_MUTEX = -3,
     MUTEX_STATE_ENUM__ERROR_INVALID_MUTEX_ADDRESS = -4,
     MUTEX_STATE_ENUM__ERROR_DEADLOCK = -5,
 
     MUTEX_STATE_ENUM__MAKE_ENUM_BITWIDTH_SIZE = FORCE_ENUM,
 
 } CosmOS_MutexStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief  CosmOS_SemaphoreStateType enum
+********************************************************************************/
+typedef enum
+{
+
+    SEMAPHORE_STATE_ENUM__RELEASED = 0,
+    SEMAPHORE_STATE_ENUM__OCCUPIED = 1,
+    SEMAPHORE_STATE_ENUM__SUCCESSFULLY_LOCKED = 2,
+    SEMAPHORE_STATE_ENUM__ERROR_SCHEDULABLE_IS_NOT_OWNER = -1,
+    SEMAPHORE_STATE_ENUM__ERROR_NOT_IN_OCCUPIED_STATE = -2,
+    SEMAPHORE_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_SEMAPHORE = -3,
+    SEMAPHORE_STATE_ENUM__ERROR_INVALID_ID = -4,
+    SEMAPHORE_STATE_ENUM__ERROR_DEADLOCK = -5,
+
+    SEMAPHORE_STATE_ENUM__MAKE_ENUM_BITWIDTH_SIZE = FORCE_ENUM,
+
+} CosmOS_SemaphoreStateType;
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -517,6 +539,7 @@ typedef enum
 {
     MUTEX_FORCE = MUTEX_STATE_ENUM__MAKE_ENUM_BITWIDTH_SIZE,
     SPINLOCK_FORCE = SPINLOCK_STATE_ENUM__MAKE_ENUM_BITWIDTH_SIZE,
+    SEMAPHORE_FORCE = SEMAPHORE_STATE_ENUM__MAKE_ENUM_BITWIDTH_SIZE,
 
 } ForceEnums;
 /********************************************************************************

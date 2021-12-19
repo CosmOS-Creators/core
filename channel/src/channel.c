@@ -29,7 +29,7 @@
 #include "osEvent.h"
 #include "permission.h"
 #include "program.h"
-#include "spinlock.h"
+#include "semaphore.h"
 #include "supportStdio.h"
 
 /* CIL interfaces */
@@ -479,21 +479,15 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * function. If the send pool size is more than userSendDataPoolSize function
   * argument we can continue in the send operation, otherwise the function
   * returns CHANNEL_STATE_ENUM__ERROR_DATA_TO_SEND_BIGGER_THAN_POOL. After this
-  * point the channel spinlock id is obtained by calling function
-  * channel_getChannelSpinlockId. Here is one improvement TODO: currently only
-  * synchronization primitive how to synchronize schedulables between multiple
-  * cores are spinlocks, in the future semaphores will be implemented and the
-  * spinlock can be removed to increase the performance of the system by
-  * non-blocking synchronization. Of course if there will be blocking and
-  * non-blocking implementation of channels in the future the spinlock will be
-  * used for the send critical tasks as they cant be preempted (END OF TODO).
+  * point the channel semaphore id is obtained by calling function
+  * channel_getChannelSemaphoreId. Here is one improvement
   * As the next point the local variable channelConnected is set to the False and
-  * do-while loop is implemented where are the functions spinlock_trySpinlock
-  * and channel_getChannelSendPoolState called to try to obtain spinlock for
+  * do-while loop is implemented where are the functions semaphore_getSemaphore
+  * and channel_getChannelSendPoolState called to try to obtain semaphore for
   * exclusive access to the send pool, but the sendPoolState must be also equals
   * to the CHANNEL_POOL_STATE_ENUM__EMPTY to signalize that reply (server) thread
   * successfully read all the data and its ready to receive data again. If the
-  * spinlockState is equal to the SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED the
+  * sendPoolState equals to the CHANNEL_POOL_STATE_ENUM__EMPTY the
   * send thread was successfully connected to the channel and can now send the
   * data and set the local variable channelConnected to the connected that
   * terminates the do-while loop. Next we have to get the sendPool address by
@@ -511,9 +505,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * to the channel send data pool in the operating system memory we can then call
   * the function as macro cosmosApiInternal_channel_sendInternal to configure
   * channel and signalize the reply thread that we sent a data. After
-  * configurating the channel we can release the spinlock as we leave the
-  * critical section by calling function spinlock_releaseSpinlock. The assertion
-  * is then  called to check if the spinlock was successfully released.
+  * configurating the channel we can release the semaphore as we leave the
+  * critical section by calling function semaphore_releaseSemaphore. The assertion
+  * is then  called to check if the semaphore was successfully released.
   * The function channel_getChannelSenderWaitingForResponse is called to check
   * if the send thread is waiting for the response, if not the
   * CHANNEL_STATE_ENUM__NOT_RECEIVED state is returned by this function,
@@ -592,30 +586,31 @@ channel_send(
 
                         if ( userSendDataPoolSize <= sendPoolSize )
                         {
-                            BitWidthType channelSpinlockId;
+                            BitWidthType channelSemaphoreId;
 
                             CosmOS_BooleanType channelConnected;
                             CosmOS_ChannelPoolStateType sendPoolState;
 
-                            CosmOS_SpinlockStateType spinlockState;
+                            CosmOS_SemaphoreStateType semaphoreState;
 
-                            channelSpinlockId =
-                                channel_getChannelSpinlockId( channelCfg );
+                            channelSemaphoreId =
+                                channel_getChannelSemaphoreId( channelCfg );
 
                             channelConnected = False;
                             do
                             {
-                                spinlockState =
-                                    spinlock_trySpinlock( channelSpinlockId );
+                                semaphoreState =
+                                    semaphore_getSemaphore( channelSemaphoreId );
+
+                                cosmosAssert(
+                                    semaphoreState IS_EQUAL_TO
+                                        SEMAPHORE_STATE_ENUM__SUCCESSFULLY_LOCKED );
 
                                 sendPoolState = channel_getChannelSendPoolState(
                                     channelCfg );
 
-                                if (
-                                    sendPoolState IS_EQUAL_TO
-                                        CHANNEL_POOL_STATE_ENUM__EMPTY AND
-                                            spinlockState IS_EQUAL_TO
-                                                SPINLOCK_STATE_ENUM__SUCCESSFULLY_LOCKED )
+                                if ( sendPoolState IS_EQUAL_TO
+                                         CHANNEL_POOL_STATE_ENUM__EMPTY )
                                 {
                                     const BitWidthType sendPoolPayloadLength =
                                         userSendDataPoolSize;
@@ -658,12 +653,12 @@ channel_send(
                                         sendPoolPayloadLength,
                                         userReplyDataPoolSize );
 
-                                    spinlockState = spinlock_releaseSpinlock(
-                                        channelSpinlockId );
+                                    semaphoreState = semaphore_releaseSemaphore(
+                                        channelSemaphoreId );
 
                                     cosmosAssert(
-                                        spinlockState IS_EQUAL_TO
-                                            SPINLOCK_STATE_ENUM__RELEASED );
+                                        semaphoreState IS_EQUAL_TO
+                                            SEMAPHORE_STATE_ENUM__RELEASED );
 
                                     isChannelWatingForResponse =
                                         channel_getChannelSenderWaitingForResponse(
@@ -1148,12 +1143,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * returns CHANNEL_STATE_ENUM__ERROR_DATA_TO_SEND_BIGGER_THAN_POOL. After this
   * point a do-while loop is implemented to check the replyPoolState by
   * calling function channel_getChannelReplyPoolState, till the reply pool state
-  * is CHANNEL_POOL_STATE_ENUM__EMPTY. TODO: this should be in the future solved
-  * by the semaphores and the do-while loop can be removed to increase the
-  * performance of the system. Of course if there will be blocking and
-  * non-blocking implementation of channels in the future the do-while will be
-  * used for the send critical tasks as they cant be preempted (END OF TODO).
-  * As the core is not in the
+  * is CHANNEL_POOL_STATE_ENUM__EMPTY. As the core is not in the
   * privileged mode the while loop is implemented that writes bytes till the
   * userReplyDataPoolSize is non-zero value. Inside this while loop is the if
   * condition implemented to check if the size to write is more than

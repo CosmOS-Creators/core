@@ -111,6 +111,19 @@ typedef struct
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_SemaphoreVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    BitWidthType semaphore;
+    const CosmOS_SchedulableConfigurationType * schedulableOwner;
+
+} CosmOS_SemaphoreVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_TaskVariableType struct type
 ********************************************************************************/
 typedef struct
@@ -180,6 +193,7 @@ typedef struct
 typedef struct
 {
     CosmOS_MutexVariableType * blockingMutexVar;
+    CosmOS_SemaphoreVariableType * blockingSemaphoreVar;
 
 } CosmOS_ThreadVariableType;
 
