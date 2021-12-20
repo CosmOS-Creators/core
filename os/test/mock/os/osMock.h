@@ -18,6 +18,7 @@ class Os_MOCK
     {}
 
     MOCK_METHOD( CosmOS_OsConfigurationType *, os_getOsCfg, () );
+    MOCK_METHOD( void, os_kernelPanicInternal, ( BitWidthType id ) );
 };
 
 class Os_TestFixture : public ::testing::Test

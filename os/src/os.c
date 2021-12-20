@@ -229,6 +229,9 @@ os_kernelPanic( void )
     {
         cosmosApiInternal_os_kernelPanicInternal();
     }
+
+    for ( ;; )
+        ;
 }
 /* @cond S */
 __SEC_STOP( __OS_FUNC_SECTION_STOP )

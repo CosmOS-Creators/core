@@ -25,11 +25,12 @@
 ********************************************************************************/
 #include <gtest/gtest.h>
 #include <future>
+#include "CILcoreMock.h"
 #include "coreMock.h"
 #include "os.h"
 #include "schedulerMock.h"
+#include "sysCallsMock.h"
 #include "utCfg.h"
-
 /********************************************************************************
 **                            Include Files | Stop                             **
 ********************************************************************************/
@@ -47,8 +48,10 @@
 
 #define TEST_OS_START_EXECUTIONFLOW() TEST( Test_os, os_start_executionFlow )
 #define TEST_OS_GETOSCFG_RETURNVALUE() TEST( Test_os, os_getOsVar_returnValue )
-#define TEST_OS_KERNELPANIC_EXECUTIONFLOW() \
-    TEST( Test_os, os_kernelPanic_executionFlow )
+#define TEST_OS_KERNELPANIC_EXECUTIONFLOW_PRIVILEGED_MODE() \
+    TEST( Test_os, os_kernelPanic_executionFlow_privileged_mode )
+#define TEST_OS_KERNELPANIC_EXECUTIONFLOW_UNPRIVILEGED_MODE() \
+    TEST( Test_os, os_kernelPanic_executionFlow_unprivileged_mode )
 
 #define TEST_TIMEOUT_BEGIN                             \
     std::promise<bool> promisedFinished;               \
@@ -151,23 +154,76 @@ TEST_OS_GETOSCFG_RETURNVALUE()
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @brief This test validates execution flow of the os_kernelPanic function.
+  * @brief This test validates execution flow of the os_kernelPanic
+  * function in unprivileged mode
   *
   * @see os_kernelPanic
   * @author https://github.com/PavolKostolansky
 ********************************************************************************/
-TEST_OS_KERNELPANIC_EXECUTIONFLOW()
+TEST_OS_KERNELPANIC_EXECUTIONFLOW_UNPRIVILEGED_MODE()
 {
-    TEST_DESCRIPTION(
-        "This test validates execution flow of the os_kernelPanic function" );
+    TEST_DESCRIPTION( "This test validates execution flow of the os_kernelPanic "
+                      "function in uprivileged mode" );
 
     Core_TestFixture coreMock;
+    SysCalls_TestFixture sysCallsMock;
+    CILcore_TestFixture CILcoreMock;
+    UtCfg_TestFixture utCfgMock;
+
+    //Not in privileged mode
+    EXPECT_CALL( *coreMock._CoreMock, core_getCoreCfg() )
+        .Times( 1 )
+        .WillOnce( Return( (CosmOS_CoreConfigurationType *)&CoresCfgConst[0] ) );
+
+    EXPECT_CALL( *utCfgMock._UtCfgMock, dummyKernelPanic_core0() ).Times( 1 );
+
+    EXPECT_CALL( *CILcoreMock._CILcoreMock, CILcore_isInPrivilegedMode() )
+        .Times( 1 )
+        .WillOnce( Return( False ) );
+
+    EXPECT_CALL(
+        *sysCallsMock._SysCallsMock,
+        sysCalls_bitWidthType_ret_void( SYSCALL_OS_KERNELPANICINTERNAL ) )
+        .Times( 1 );
+
+    TEST_TIMEOUT_BEGIN
+    os_kernelPanic();
+    TEST_TIMEOUT_SUCCESS_END( 1000 )
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @brief This test validates execution flow of the os_kernelPanic
+  * function in privileged mode
+  *
+  * @see os_kernelPanic
+  * @author https://github.com/PavolKostolansky
+********************************************************************************/
+TEST_OS_KERNELPANIC_EXECUTIONFLOW_PRIVILEGED_MODE()
+{
+    TEST_DESCRIPTION( "This test validates execution flow of the os_kernelPanic "
+                      "function in privileged mode" );
+
+    Core_TestFixture coreMock;
+    CILcore_TestFixture CILcoreMock;
     UtCfg_TestFixture utCfgMock;
 
     EXPECT_CALL( *coreMock._CoreMock, core_getCoreCfg() )
         .Times( 1 )
         .WillOnce( Return( (CosmOS_CoreConfigurationType *)&CoresCfgConst[0] ) );
+
     EXPECT_CALL( *utCfgMock._UtCfgMock, dummyKernelPanic_core0() ).Times( 1 );
+
+    EXPECT_CALL( *CILcoreMock._CILcoreMock, CILcore_isInPrivilegedMode() )
+        .Times( 1 )
+        .WillOnce( Return( True ) );
+
+    // EXPECT_CALL(
+    //     *osMock._OsMock,
+    //     os_kernelPanicInternal( SYSCALL_OS_KERNELPANICINTERNAL ) )
+    //     .Times( 1 );
 
     TEST_TIMEOUT_BEGIN
     os_kernelPanic();

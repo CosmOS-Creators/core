@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.14)
+
+FILE(GLOB_RECURSE UNIT_TEST_DIRECTORIES LIST_DIRECTORIES true ${UNIT_TEST_DIRECTORY_WILDCARD})
+list(FILTER UNIT_TEST_DIRECTORIES INCLUDE REGEX "^.*/ut/*.")
+
+if(BUILD_TESTS)
+    foreach(UNIT_TEST_DIRECTORY ${UNIT_TEST_DIRECTORIES})
+        if(EXISTS "${UNIT_TEST_DIRECTORY}/CMakeLists.txt")
+            add_subdirectory(${UNIT_TEST_DIRECTORY})
+        endif()
+    endforeach(UNIT_TEST_DIRECTORY)
+endif()

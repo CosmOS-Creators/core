@@ -116,10 +116,14 @@ CosmOS_OsConfigurationType OsCfg IS_INITIALIZED_TO{
     2,
     (CosmOS_RoutesConfigurationType *)NULL,
     2,
-    (CosmOS_CoreConfigurationType *)NULL,
     (CosmOS_BufferConfigurationType *)NULL,
     (CosmOS_BufferDoubleConfigurationType *)NULL,
     (CosmOS_SpinlockVariableType *)NULL,
+    (CosmOS_OsEventConfigurationType *)NULL,
+    (CosmOS_ChannelConfigurationType *)NULL,
+    0,
+    (CosmOS_SemaphoreVariableType *)NULL,
+    0,
 };
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
