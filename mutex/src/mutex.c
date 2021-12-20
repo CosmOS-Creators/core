@@ -244,7 +244,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * mutex can be used only for the threads within the one program the for loop
   * is implemented that iterates over all threads in the current program and if
   * the thread variable blockingMutexVar is equal to the mutexVar its
-  * schedulable state is set to the SCHEDULABLE_STATE_ENUM__READY and the
+  * schedulable state is set to the SCHEDULABLE_STATE_ENUM__READY, the thread
+  * blockingMutexVar is set to the NULL pointer and the
   * priority of the thread in current context is obtained by getting the thread
   * variable in the first place by function program_getProgramThread and then
   * comparing this to the thread variable that was blocked by the mutexVar. If

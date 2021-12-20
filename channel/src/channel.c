@@ -612,8 +612,11 @@ channel_send(
                                 if ( sendPoolState IS_EQUAL_TO
                                          CHANNEL_POOL_STATE_ENUM__EMPTY )
                                 {
+                                    BitWidthType dataIndex;
+
                                     const BitWidthType sendPoolPayloadLength =
                                         userSendDataPoolSize;
+
                                     AddressType * sendDataPool;
 
                                     channelConnected = True;
@@ -621,10 +624,7 @@ channel_send(
                                     sendDataPool = (AddressType *)
                                         channel_getChannelSendPool( channelCfg );
 
-                                    CosmOS_BooleanType
-                                        isChannelWatingForResponse;
-                                    BitWidthType dataIndex = 0;
-
+                                    dataIndex = 0;
                                     while ( userSendDataPoolSize )
                                     {
                                         if ( userSendDataPoolSize >=
@@ -652,69 +652,69 @@ channel_send(
                                         channelCfg,
                                         sendPoolPayloadLength,
                                         userReplyDataPoolSize );
-
-                                    semaphoreState = semaphore_releaseSemaphore(
-                                        channelSemaphoreId );
-
-                                    cosmosAssert(
-                                        semaphoreState IS_EQUAL_TO
-                                            SEMAPHORE_STATE_ENUM__RELEASED );
-
-                                    isChannelWatingForResponse =
-                                        channel_getChannelSenderWaitingForResponse(
-                                            channelCfg );
-
-                                    if ( isChannelWatingForResponse )
-                                    {
-                                        CosmOS_ChannelPoolStateType
-                                            replyPoolState;
-
-                                        AddressType * replyDataPool;
-                                        BitWidthType replyPoolPayloadSize;
-
-                                        do
-                                        {
-                                            replyPoolState =
-                                                channel_getChannelReplyPoolState(
-                                                    channelCfg );
-                                        } while (
-                                            replyPoolState IS_NOT_EQUAL_TO
-                                                CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED );
-
-                                        replyDataPool = (AddressType *)
-                                            channel_getChannelReplyPool(
-                                                channelCfg );
-
-                                        replyPoolPayloadSize =
-                                            channel_getChannelReplyPoolPayloadLength(
-                                                channelCfg );
-                                        if ( userReplyDataPoolSize >=
-                                             replyPoolPayloadSize )
-                                        {
-                                            supportStdio_memcpy(
-                                                userReplyDataPool,
-                                                replyDataPool,
-                                                replyPoolPayloadSize );
-
-                                            returnValue =
-                                                CHANNEL_STATE_ENUM__RECEIVED;
-                                        }
-                                        else
-                                        {
-                                            returnValue =
-                                                CHANNEL_STATE_ENUM__ERROR_DATA_TO_RECEIVE_BIGGER_THAN_POOL;
-                                        }
-
-                                        cosmosApiInternal_channel_sendReplyObtainedInternal(
-                                            channelCfg );
-                                    }
-                                    else
-                                    {
-                                        returnValue =
-                                            CHANNEL_STATE_ENUM__NOT_RECEIVED;
-                                    }
                                 }
+
+                                semaphoreState = semaphore_releaseSemaphore(
+                                    channelSemaphoreId );
+
+                                cosmosAssert(
+                                    semaphoreState IS_EQUAL_TO
+                                        SEMAPHORE_STATE_ENUM__RELEASED );
+
                             } while ( IS_NOT( channelConnected ) );
+
+                            CosmOS_BooleanType isChannelWatingForResponse;
+
+                            isChannelWatingForResponse =
+                                channel_getChannelSenderWaitingForResponse(
+                                    channelCfg );
+
+                            if ( isChannelWatingForResponse )
+                            {
+                                CosmOS_ChannelPoolStateType replyPoolState;
+
+                                AddressType * replyDataPool;
+                                BitWidthType replyPoolPayloadSize;
+
+                                do
+                                {
+                                    replyPoolState =
+                                        channel_getChannelReplyPoolState(
+                                            channelCfg );
+                                } while (
+                                    replyPoolState IS_NOT_EQUAL_TO
+                                        CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED );
+
+                                replyDataPool =
+                                    (AddressType *)channel_getChannelReplyPool(
+                                        channelCfg );
+
+                                replyPoolPayloadSize =
+                                    channel_getChannelReplyPoolPayloadLength(
+                                        channelCfg );
+                                if ( userReplyDataPoolSize >=
+                                     replyPoolPayloadSize )
+                                {
+                                    supportStdio_memcpy(
+                                        userReplyDataPool,
+                                        replyDataPool,
+                                        replyPoolPayloadSize );
+
+                                    returnValue = CHANNEL_STATE_ENUM__RECEIVED;
+                                }
+                                else
+                                {
+                                    returnValue =
+                                        CHANNEL_STATE_ENUM__ERROR_DATA_TO_RECEIVE_BIGGER_THAN_POOL;
+                                }
+
+                                cosmosApiInternal_channel_sendReplyObtainedInternal(
+                                    channelCfg );
+                            }
+                            else
+                            {
+                                returnValue = CHANNEL_STATE_ENUM__NOT_RECEIVED;
+                            }
                         }
                         else
                         {

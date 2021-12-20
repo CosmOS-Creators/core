@@ -28,6 +28,7 @@
 #include "os.h"
 #include "osEvent.h"
 #include "program.h"
+#include "supportStdio.h"
 
 /* CIL interfaces */
 #include "CILcore.h"
@@ -136,16 +137,19 @@
   * CosmOS_SemaphoreVariableType * semaphoreVar)
   *
   * @details The implementation contains obtaining of the core configuration by
-  * calling the CILcore_getCoreCfg function. Then the function CILsemaphore_trySemaphore
-  * is called and the returned semaphoreState is used in the if condition where in
-  * case of SEMAPHORE_STATE_ENUM__SUCCESSFULLY_LOCKED the schedulableOwner in the
-  * semaphore variable is set to the schedulable in execution obtained from the core
-  * variable. If the semaphore was not successfully locked the thread variable is
+  * calling the CILcore_getCoreCfg function. Then the function
+  * CILsemaphore_trySemaphore is called and the returned semaphoreState is used
+  * in the if condition where in case of
+  * SEMAPHORE_STATE_ENUM__SUCCESSFULLY_LOCKED the schedulableOwner in the
+  * semaphore variable is set to the schedulable in execution obtained from the
+  * core variable.
+  * If the semaphore was not successfully locked the thread variable is
   * obtained by calling the program_getProgramThread function and its
-  * blocking semaphore variable is set to the semaphoreVar. The state of the schedulable
-  * is set to the SCHEDULABLE_STATE_ENUM__BLOCKED and context switch routine is
-  * triggered by calling CILinterrupt_contextSwitchRoutineTrigger. In the end
-  * the semaphoreState is returned.
+  * blocking semaphore variable is set to the semaphoreVar.
+  * The state of the schedulable is set to the SCHEDULABLE_STATE_ENUM__BLOCKED
+  * and context switch routine is triggered by calling
+  * CILinterrupt_contextSwitchRoutineTrigger. In the end the semaphoreState is
+  * returned.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -207,9 +211,9 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   *
   * @details The implementation contains obtaining of the core configuration by
   * calling function CILcore_getCoreCfg. Then the function
-  * CILsemaphore_trySemaphore is called to try to get semaphore and result is then
-  * returned as semaphore state. The if condition is implemented to check if the
-  * result from CILsemaphore_trySemaphore is equal to the
+  * CILsemaphore_trySemaphore is called to try to get semaphore and result is
+  * then returned as semaphore state. The if condition is implemented to check
+  * if the result from CILsemaphore_trySemaphore is equal to the
   * SEMAPHORE_STATE_ENUM__SUCCESSFULLY_LOCKED and if yes the schedulable owner
   * member in semaphore variable is set to the schedulable in execution.
 ********************************************************************************/
@@ -257,8 +261,29 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * BitWidthType semaphoreId )
   *
   * @details The implementation contains obtaining of the core configuration by
-  * calling function CILcore_getCoreCfg. Then CILsemaphore_releaseSemaphore
-  * function is called and the result is returned as semaphore state.
+  * calling the CILcore_getCoreCfg function. Then the function
+  * CILsemaphore_releaseSemaphore is called. As the semaphore is now released it
+  * is needed to notice all threads that were waiting for this specific
+  * semaphore. As the semaphore can be used for synchronizing threads between
+  * the different programs (inter-program) the for loops are implemented which
+  * iterate over the all configurated cores in the system and threads in their
+  * programs and if the thread variable blockingSemaphoreVar is equal to the
+  * semaphoreVar its schedulable state is set to the
+  * SCHEDULABLE_STATE_ENUM__READY and thread blockingSemaphoreVar is set to the
+  * NULL pointer. If the core id of current core is equal to the core iterator
+  * for loop variable, we check if threads which were blocked do not have higher
+  * priority than the running thread that releases the semaphore, if yes the
+  * local boolean variable higherPriorityThreadBlocked is set to True and it is
+  * checked in the end if we have to trigger the reschedule on the current core.
+  * If the blocked threads are bound to the different core we set the event
+  * handle core variable with the coreId related to this core. After iterating
+  * over all threads in the system we call the function osEvent_triggerEvent
+  * if atleastOneCoreHandleEvent local variable is True with the
+  * OS_EVENT_RESCHEDULE event and core handle array we configured before.
+  * Then assertion is called to check if the os event state is
+  * OS_EVENT_STATE_ENUM__OK. In the end the if condition is implemented that
+  * checks if there is higherPriorityThreadBlocked on the current core and if
+  * yes the CILinterrupt_contextSwitchRoutineTrigger function is called.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -271,7 +296,7 @@ semaphore_releaseSemaphoreInternal(
 {
     BitWidthType coreId;
 
-    CosmOS_BooleanType higherPriorityThreadBlocked;
+    CosmOS_BooleanType higherPriorityThreadBlocked, atleastOneCoreHandleEvent;
 
     CosmOS_OsEventStateType osEventState;
     CosmOS_SemaphoreStateType semaphoreState;
@@ -293,11 +318,13 @@ semaphore_releaseSemaphoreInternal(
             ->id );
 
     higherPriorityThreadBlocked = False;
+    atleastOneCoreHandleEvent = False;
     CosmOS_BooleanType osEventHandleCore[osCfg->numberOfCores];
 
     for ( BitWidthType coreIterator = 0; coreIterator < osCfg->numberOfCores;
           coreIterator++ )
     {
+        osEventHandleCore[coreIterator] = False;
         coreCfg = os_getCore( osCfg, coreIterator );
 
         for ( BitWidthType programIterator = 0;
@@ -319,8 +346,7 @@ semaphore_releaseSemaphoreInternal(
                     programCfg->threadCfgs[threadIterator]
                         .var->blockingSemaphoreVar = NULL;
 
-                    if ( coreId IS_EQUAL_TO coreIterator AND coreCfg->var
-                             ->programInExecution IS_EQUAL_TO programCfg )
+                    if ( coreId IS_EQUAL_TO coreIterator )
                     {
                         threadCfg = program_getProgramThread(
                             (CosmOS_ProgramConfigurationType *)
@@ -334,20 +360,23 @@ semaphore_releaseSemaphoreInternal(
                         {
                             higherPriorityThreadBlocked = True;
                         }
-
-                        osEventHandleCore[coreIterator] = False;
                     }
                     else
                     {
                         osEventHandleCore[coreIterator] = True;
+                        atleastOneCoreHandleEvent = True;
                     }
                 }
         }
     }
-    osEventState =
-        osEvent_triggerEvent( OS_EVENT_RESCHEDULE, osEventHandleCore, NULL, 0 );
 
-    cosmosAssert( osEventState IS_EQUAL_TO OS_EVENT_STATE_ENUM__OK );
+    if ( atleastOneCoreHandleEvent )
+    {
+        osEventState = osEvent_triggerEvent(
+            OS_EVENT_RESCHEDULE, osEventHandleCore, NULL, 0 );
+
+        cosmosAssert( osEventState IS_EQUAL_TO OS_EVENT_STATE_ENUM__OK );
+    }
 
     if ( higherPriorityThreadBlocked )
     {
@@ -369,18 +398,25 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   *
   * @details The implementation contains obtaining of the operating system and
   * core configuration by calling functions os_getOsCfg and CILcore_getCoreCfg.
-  * Then the operating system configuration in function os_getOsNumberOfSemaphores
-  * to get number of semaphores. The input element id argument is then checked
+  * Then the operating system configuration in function
+  * os_getOsNumberOfSemaphores to get number of semaphores.
+  * The input element id argument is then checked
   * againts the number of semaphore, if it is greater than number of semaphores
   * SEMAPHORE_STATE_ENUM__ERROR_INVALID_ID is returned.
   * Semaphore variable is then obtained based on the id argument by the function
-  * os_getOsSemaphoreVar. The function semaphore_willCauseDeadlock is called to
+  * os_getOsSemaphoreVar.
+  * Nested if condition then subsequently checks if the schedulable in execution
+  * which means the semaphore release requesting schedulable is a thread type
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD. If not the semaphoreState is returned with
+  * the value SEMAPHORE_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_SEMAPHORE.
+  * The function semaphore_willCauseDeadlock is called to
   * check if the semaphore would cause eventually deadlock, if yes the semaphore
   * state SEMAPHORE_STATE_ENUM__ERROR_DEADLOCK is returned. Otherwise the
-  * function cosmosApiInternal_semaphore_getSemaphoreInternal is called if the core
-  * is in the privileged mode or semaphore_getSemaphoreInternal is called to get
-  * semaphore and result is then returned as semaphore state. The schedulable
-  * owner member in semaphore variable is set to the schedulable in execution.
+  * function cosmosApiInternal_semaphore_getSemaphoreInternal is called if the
+  * core is in the privileged mode or semaphore_getSemaphoreInternal is called
+  * to get semaphore and result is then returned as semaphore state.
+  * The schedulable owner member in semaphore variable is set to the schedulable
+  * in execution.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -390,7 +426,7 @@ semaphore_getSemaphore( BitWidthType semaphoreId )
 {
     BitWidthType numberOfSemaphores;
 
-    CosmOS_BooleanType willCauseDeadlock, coreInPrivilegedMode;
+    CosmOS_BooleanType willCauseDeadlock;
     CosmOS_SemaphoreStateType semaphoreState;
 
     CosmOS_OsConfigurationType * osCfg;
@@ -452,16 +488,21 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   *
   * @details The implementation contains obtaining of the operating system and
   * core configuration by calling functions os_getOsCfg and CILcore_getCoreCfg.
-  * Then the operating system configuration in function os_getOsNumberOfSemaphores
-  * to get number of semaphores. The input element id argument is then checked
+  * Then the operating system configuration in function
+  * os_getOsNumberOfSemaphores to get number of semaphores.
+  * The input element id argument is then checked
   * againts the number of semaphore, if it is greater than number of semaphores
   * SEMAPHORE_STATE_ENUM__ERROR_INVALID_ID is returned. Semaphore
   * variable is then obtained based on the id argument by the function
   * os_getOsSemaphoreVar.
-  * Then the function cosmosApiInternal_semaphore_trySemaphoreInternal is called if
-  * the core is in the privileged mode or semaphore_trySemaphoreInternal is called
-  * try to get semaphore and result is then returned as semaphore state. The if
-  * condition is implemented to check if the result from
+  * Next if condition then subsequently checks if the schedulable in execution
+  * which means the semaphore release requesting schedulable is a thread type
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD. If not the semaphoreState is returned with
+  * the value SEMAPHORE_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_SEMAPHORE.
+  * Then the function cosmosApiInternal_semaphore_trySemaphoreInternal is called
+  * if the core is in the privileged mode or semaphore_trySemaphoreInternal is
+  * called try to get semaphore and result is then returned as semaphore state.
+  * The if condition is implemented to check if the result from
   * cosmosApiInternal_semaphore_trySemaphoreInternal is equal to the
   * SEMAPHORE_STATE_ENUM__SUCCESSFULLY_LOCKED and if yes  the schedulable owner
   * member in semaphore variable is set to the schedulable in execution.
@@ -473,8 +514,6 @@ __OS_FUNC_SECTION CosmOS_SemaphoreStateType
 semaphore_trySemaphore( BitWidthType semaphoreId )
 {
     BitWidthType numberOfSemaphores;
-
-    CosmOS_BooleanType coreInPrivilegedMode;
 
     CosmOS_SemaphoreStateType semaphoreState;
 
@@ -523,12 +562,18 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   *
   * @details The implementation contains obtaining of the operating system and
   * core configuration by calling functions os_getOsCfg and CILcore_getCoreCfg.
-  * Then the operating system configuration in function os_getOsNumberOfSemaphores
-  * to get number of semaphores. The input element id argument is then checked
+  * Then the operating system configuration in function
+  * os_getOsNumberOfSemaphores to get number of semaphores.
+  * The input element id argument is then checked
   * againts the number of semaphore, if it is greater than number of semaphores
   * SEMAPHORE_STATE_ENUM__ERROR_INVALID_ID is returned. Semaphore
   * variable is then obtained based on the id argument by the function
-  * os_getOsSemaphoreVar. The the boolean is obtained by calling function
+  * os_getOsSemaphoreVar.
+  * Next if condition then subsequently checks if the schedulable in execution
+  * which means the semaphore release requesting schedulable is a thread type
+  * SCHEDULABLE_INSTANCE_ENUM__THREAD. If not the semaphoreState is returned with
+  * the value SEMAPHORE_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_SEMAPHORE.
+  * The the boolean is obtained by calling function
   * semaphore_ownsSchedulableSemaphore to know if the requesting schedulable owns
   * the semaphore which means if the schedulable locked the semaphore before.
   * The semaphore member of the semaphore variable structure is compared in the
@@ -550,7 +595,7 @@ semaphore_releaseSemaphore( BitWidthType semaphoreId )
 {
     BitWidthType numberOfSemaphores;
 
-    CosmOS_BooleanType ownsSchedulableSemaphore, coreInPrivilegedMode;
+    CosmOS_BooleanType ownsSchedulableSemaphore;
 
     CosmOS_SemaphoreStateType semaphoreState;
 
