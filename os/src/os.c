@@ -205,7 +205,8 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @details The implementation contains call to the kernel panic hook
   * configured by the user.
   *
-  * @see TEST_OS_KERNELPANIC_EXECUTIONFLOW
+  * @see TEST_OS_KERNELPANIC_EXECUTIONFLOW_PRIVILEGED_MODE
+  * @see TEST_OS_KERNELPANIC_EXECUTIONFLOW_UNPRIVILEGED_MODE
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
