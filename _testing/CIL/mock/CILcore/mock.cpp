@@ -15,3 +15,15 @@ CILcore_getCoreCfg( void )
 {
     return CILcore_TestFixture::_CILcoreMock->CILcore_getCoreCfg();
 }
+
+void
+CILcore_systemReset( void )
+{
+    CILcore_TestFixture::_CILcoreMock->CILcore_systemReset();
+}
+
+CosmOS_BooleanType
+CILcore_isInPrivilegedMode( void )
+{
+    return CILcore_TestFixture::_CILcoreMock->CILcore_isInPrivilegedMode();
+}

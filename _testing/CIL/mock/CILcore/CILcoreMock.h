@@ -1,10 +1,10 @@
-#ifndef __CILCOREMOCK_H__
-#define __CILCOREMOCK_H__
+#ifndef __SYSCALLSMOCK_H__
+#define __SYSCALLSMOCK_H__
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <memory>
-#include "CILcore.h"
+#include "sysCalls.h"
 
 using namespace ::testing;
 using ::testing::Return;
@@ -17,8 +17,13 @@ class CILcore_MOCK
     ~CILcore_MOCK()
     {}
 
-    MOCK_METHOD( void, CILcore_setCoreCfg, ( CosmOS_OsConfigurationType * osCfg ) );
+    MOCK_METHOD(
+        void,
+        CILcore_setCoreCfg,
+        ( CosmOS_OsConfigurationType * osCfg ) );
     MOCK_METHOD( (CosmOS_CoreConfigurationType *), CILcore_getCoreCfg, () );
+    MOCK_METHOD( void, CILcore_systemReset, () );
+    MOCK_METHOD( ( CosmOS_BooleanType ), CILcore_isInPrivilegedMode, () );
 };
 
 class CILcore_TestFixture : public ::testing::Test

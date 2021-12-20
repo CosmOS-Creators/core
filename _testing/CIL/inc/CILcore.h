@@ -226,6 +226,36 @@ CILcore_getCoreCfg( void );
   * @{
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILcore_isInPrivilegedMode(void)
+  *
+  * @brief Is core in privileged mode. DEMO
+  *
+  * @param[in]  none
+  *
+  * @return CosmOS_BooleanType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_BooleanType
+CILcore_isInPrivilegedMode( void );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn CILcore_reset(void)
+  *
+  * @brief This function causes system reset. DEMO
+  *
+  * @param[in]  none
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void
+CILcore_systemReset( void );
+
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */

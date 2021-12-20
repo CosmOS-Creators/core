@@ -11,3 +11,9 @@ os_getOsCfg()
 
     return ( NULL );
 }
+
+void
+os_kernelPanicInternal( BitWidthType id )
+{
+    Os_TestFixture::_OsMock->os_kernelPanicInternal( id );
+}
