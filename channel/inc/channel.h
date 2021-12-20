@@ -531,18 +531,18 @@ channel_getChannelReplyPermission( CosmOS_ChannelConfigurationType * channel )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn channel_getChannelSpinlockId(CosmOS_ChannelConfigurationType * channel)
+  * @fn channel_getChannelSemaphoreId(CosmOS_ChannelConfigurationType * channel)
   *
-  * @brief Get channel spinlockId.
+  * @brief Get channel semaphoreId.
   *
   * @param[in]  channel configuration pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-channel_getChannelSpinlockId( CosmOS_ChannelConfigurationType * channel )
+channel_getChannelSemaphoreId( CosmOS_ChannelConfigurationType * channel )
 {
-    return ( BitWidthType )( channel->spinlockId );
+    return ( BitWidthType )( channel->semaphoreId );
 }
 
 /********************************************************************************

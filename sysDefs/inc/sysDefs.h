@@ -70,6 +70,7 @@ extern "C" {
 #include "sysDefsSchedulerThreadLists.h"
 #include "sysDefsSchedulers.h"
 #include "sysDefsSpinlocks.h"
+#include "sysDefsSemaphores.h"
 #include "sysDefsStacks.h"
 #include "sysDefsSysJobs.h"
 #include "sysDefsTasks.h"

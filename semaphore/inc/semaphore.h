@@ -5,19 +5,19 @@
 *********************************************************************************
 **                       DOXYGEN DOCUMENTATION INFORMATION                     **
 *****************************************************************************//**
-** @file thread.h
+** @file semaphore.h
 *********************************************************************************
-<!--                      thread Module Group Definition                      -->
+<!--                    semaphore Module Group Definition                     -->
 *********************************************************************************
-** @defgroup thread_module thread
-** @brief thread Module
+** @defgroup semaphore_module semaphore
+** @brief semaphore Module
 ** @details lorem
 *********************************************************************************
-<!--                       thread Unit Group Definition                       -->
+<!--                     semaphore Unit Group Definition                      -->
 *********************************************************************************
-** @defgroup thread_unit thread Unit
-** @ingroup thread_module
-** @brief thread Unit
+** @defgroup semaphore_unit semaphore Unit
+** @ingroup semaphore_module
+** @brief semaphore Unit
 ** @details lorem
 *********************************************************************************
 <!--                           Version Information                            -->
@@ -31,18 +31,18 @@
 ** @warning Modifying code can lead to unexpected behaviour of the whole system
 ** @copyright MIT License
 *********************************************************************************
-<!--                    thread Unit Global Group Definition                   -->
+<!--                  semaphore Unit Global Group Definition                  -->
 *********************************************************************************
-** @defgroup Global_thread Global
-** @ingroup thread_unit
-** @brief thread globals
+** @defgroup Global_semaphore Global
+** @ingroup semaphore_unit
+** @brief semaphore globals
 ** @details lorem
 ********************************************************************************/
 /********************************************************************************
 **                           START OF THE HEADER FILE                          **
 ********************************************************************************/
-#ifndef __THREAD_H__
-#define __THREAD_H__
+#ifndef __SEMAPHORE_H__
+#define __SEMAPHORE_H__
 /********************************************************************************
 **                         START OF C++ SUPPORT SECTION                        **
 ********************************************************************************/
@@ -66,15 +66,15 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Macros_thread_h Macros
-  * @ingroup Global_thread
+  * @defgroup Macros_semaphore_h Macros
+  * @ingroup Global_semaphore
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Macros_thread_h
+/*  Macros_semaphore_h
 ********************************************************************************/
 /********************************************************************************
 **                          Macro Definitions | Stop                           **
@@ -85,15 +85,15 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @defgroup Variables_thread_h Variables
-  * @ingroup Global_thread
+  * @defgroup Variables_semaphore_h Variables
+  * @ingroup Global_semaphore
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Variables_thread_h
+/*  Variables_semaphore_h
 ********************************************************************************/
 /********************************************************************************
 **                              Variables | Stop                               **
@@ -104,98 +104,159 @@ extern "C" {
 /********************************************************************************
   * DOXYGEN DEF GROUP                                                          **
   * *************************************************************************//**
-  * @defgroup Apis_thread_h API's
-  * @ingroup Global_thread
+  * @defgroup Apis_semaphore_h API's
+  * @ingroup Global_semaphore
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_thread_h Getters
-  * @ingroup Apis_thread_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @} */
-/*  Getters_thread_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup Setters_thread_h Setters
-  * @ingroup Apis_thread_h
-  * @{
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @} */
-/*  Setters_thread_h
-********************************************************************************/
-/********************************************************************************
-  * DOXYGEN START GROUP                                                        **
-  * *************************************************************************//**
-  * @addtogroup General_thread_h General
-  * @ingroup Apis_thread_h
+  * @addtogroup Getters_semaphore_h Getters
+  * @ingroup Apis_semaphore_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_sleepMsInternal(BitWidthType entityId,
-  * CosmOS_CoreConfigurationType * core,
-  * BitWidthType tickCount)
+  * @fn semaphore_getSemaphore(BitWidthType semaphoreId)
   *
-  * @brief Set thread to sleep internal for x milliseconds. This function cannot
-  * be called from the unprivileged context directly. DEMO
+  * @brief Get semaphore. DEMO
   *
-  * @param[in]  entityId is used during the system call dispatching
-  * @param[in]  core configuration pointer
-  * @param[in]  tickCount number of ticks to put thread into sleep for
+  * @param[in]  semaphoreId semaphore identifier
   *
-  * @return CosmOS_SleepStateType
+  * @return CosmOS_SemaphoreStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SleepStateType
-thread_sleepMsInternal(
-    BitWidthType entityId,
-    CosmOS_CoreConfigurationType * core,
-    BitWidthType tickCount );
+__OS_FUNC_SECTION CosmOS_SemaphoreStateType
+semaphore_getSemaphore( BitWidthType semaphoreId );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_sleepMs(BitWidthType delayMs)
+  * @fn semaphore_getSemaphoreInternal(BitWidthType id,
+  * CosmOS_SemaphoreVariableType * semaphoreVar,
+  * BitWidthType semaphoreId );
   *
-  * @brief Set thread to sleep for x milliseconds. DEMO
+  * @brief Get to get semaphore internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
-  * @param[in]  delayMs number of milliseconds to put thread into sleep for
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  semaphoreVar variable structure pointer
+  * @param[in]  semaphoreId semaphore identifier
   *
-  * @return CosmOS_SleepStateType
+  * @return CosmOS_SemaphoreStateType
 ********************************************************************************/
-__OS_FUNC_SECTION CosmOS_SleepStateType
-thread_sleepMs( BitWidthType delayMs );
+__OS_FUNC_SECTION CosmOS_SemaphoreStateType
+semaphore_getSemaphoreInternal(
+    BitWidthType id,
+    CosmOS_SemaphoreVariableType * semaphoreVar,
+    BitWidthType semaphoreId );
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Getters_semaphore_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup Setters_semaphore_h Setters
+  * @ingroup Apis_semaphore_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Setters_semaphore_h
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN START GROUP                                                        **
+  * *************************************************************************//**
+  * @addtogroup General_semaphore_h General
+  * @ingroup Apis_semaphore_h
+  * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn semaphore_trySemaphoreInternal(BitWidthType id,
+  * CosmOS_SemaphoreVariableType * semaphoreVar,
+  * BitWidthType semaphoreId );
+  *
+  * @brief Try to get semaphore internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  semaphoreVar variable structure pointer
+  * @param[in]  semaphoreId semaphore identifier
+  *
+  * @return CosmOS_SemaphoreStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SemaphoreStateType
+semaphore_trySemaphoreInternal(
+    BitWidthType id,
+    CosmOS_SemaphoreVariableType * semaphoreVar,
+    BitWidthType semaphoreId );
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_sleep(BitWidthType delay)
+  * @fn semaphore_releaseSemaphoreInternal(BitWidthType id,
+  * CosmOS_SemaphoreVariableType * semaphoreVar,
+  * BitWidthType semaphoreId );
   *
-  * @brief Set thread to sleep for x seconds.
+  * @brief Release to get semaphore internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
   *
-  * @param[in]  delay number of seconds to put thread into sleep for
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  semaphoreVar variable structure pointer
+  * @param[in]  semaphoreId semaphore identifier
   *
-  * @return CosmOS_SleepStateType
+  * @return CosmOS_SemaphoreStateType
 ********************************************************************************/
-#define thread_sleep( delay ) thread_sleepMs( delay * 1000 )
+__OS_FUNC_SECTION CosmOS_SemaphoreStateType
+semaphore_releaseSemaphoreInternal(
+    BitWidthType id,
+    CosmOS_SemaphoreVariableType * semaphoreVar,
+    BitWidthType semaphoreId );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn semaphore_trySemaphore(BitWidthType semaphoreId)
+  *
+  * @brief Try to get semaphore. DEMO
+  *
+  * @param[in]  semaphoreId semaphore identifier
+  *
+  * @return CosmOS_SemaphoreStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SemaphoreStateType
+semaphore_trySemaphore( BitWidthType semaphoreId );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn semaphore_releaseSemaphore(BitWidthType semaphoreId)
+  *
+  * @brief Release semaphore. DEMO
+  *
+  * @param[in]  semaphoreId semaphore identifier
+  *
+  * @return CosmOS_SemaphoreStateType
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_SemaphoreStateType
+semaphore_releaseSemaphore( BitWidthType semaphoreId );
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_thread_h
+/*  General_semaphore_h
 ********************************************************************************/
 /********************************************************************************
 **                         Function Prototypes | Stop                          **
@@ -206,157 +267,176 @@ thread_sleepMs( BitWidthType delayMs );
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Getters_thread_h Getters
-  * @ingroup Apis_thread_h
+  * @addtogroup Getters_semaphore_h Getters
+  * @ingroup Apis_semaphore_h
   * @{
+********************************************************************************/
+/********************************************************************************
+  * DOXYGEN STOP GROUP                                                         **
+  * *************************************************************************//**
+  * @} */
+/*  Getters_semaphore_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_getThreadPriority(CosmOS_ThreadConfigurationType *thread)
+  * @fn semaphore_getSemaphoreValue(CosmOS_SemaphoreVariableType * semaphoreVar)
   *
-  * @brief Get thread priority.
+  * @brief Get semaphore value.
   *
-  * @param[in] thread configuration pointer
+  * @param[in]  semaphoreVar pointer
   *
   * @return BitWidthType
 ********************************************************************************/
 __STATIC_FORCEINLINE BitWidthType
-thread_getThreadPriority( CosmOS_ThreadConfigurationType * thread )
+semaphore_getSemaphoreValue( CosmOS_SemaphoreVariableType * semaphoreVar )
 {
-    return ( thread->priority );
+    return ( semaphoreVar->semaphore );
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_getThreadSchedulable(CosmOS_ThreadConfigurationType *thread)
+  * @fn semaphore_getSemaphoreSchedulableOwner(
+  * CosmOS_SemaphoreVariableType * semaphoreVar)
   *
-  * @brief Get thread schedulable.
+  * @brief Get semaphore schedulableOwner.
   *
-  * @param[in] thread configuration pointer
+  * @param[in]  semaphoreVar pointer
   *
   * @return CosmOS_SchedulableConfigurationType *
 ********************************************************************************/
 __STATIC_FORCEINLINE CosmOS_SchedulableConfigurationType *
-thread_getThreadSchedulable( CosmOS_ThreadConfigurationType * thread )
+semaphore_getSemaphoreSchedulableOwner(
+    CosmOS_SemaphoreVariableType * semaphoreVar )
 {
-    return (CosmOS_SchedulableConfigurationType *)( thread->schedulable );
+    return (
+        CosmOS_SchedulableConfigurationType *)( semaphoreVar->schedulableOwner );
 }
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn thread_getThreadBlockingMutexVar(CosmOS_ThreadConfigurationType *thread)
-  *
-  * @brief Get thread blockingMutexVar.
-  *
-  * @param[in] thread configuration pointer
-  *
-  * @return CosmOS_MutexVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_MutexVariableType *
-thread_getThreadBlockingMutexVar( CosmOS_ThreadConfigurationType * thread )
-{
-    return (CosmOS_MutexVariableType *)( thread->var->blockingMutexVar );
-}
-
-/********************************************************************************
-  * DOXYGEN DOCUMENTATION INFORMATION                                          **
-  * ****************************************************************************/
-/**
-  * @fn thread_getThreadBlockingSemaphoreVar(CosmOS_ThreadConfigurationType
-  * *thread)
-  *
-  * @brief Get thread blockingSemaphoreVar.
-  *
-  * @param[in] thread configuration pointer
-  *
-  * @return CosmOS_SemaphoreVariableType *
-********************************************************************************/
-__STATIC_FORCEINLINE CosmOS_SemaphoreVariableType *
-thread_getThreadBlockingSemaphoreVar( CosmOS_ThreadConfigurationType * thread )
-{
-    return (CosmOS_SemaphoreVariableType *)( thread->var->blockingSemaphoreVar );
-}
-/********************************************************************************
-  * DOXYGEN STOP GROUP                                                         **
-  * *************************************************************************//**
-  * @} */
-/*  Getters_thread_h
-********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup Setters_thread_h Setters
-  * @ingroup Apis_thread_h
+  * @addtogroup Setters_semaphore_h Setters
+  * @ingroup Apis_semaphore_h
   * @{
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_setThreadBlockingMutexVar(CosmOS_ThreadConfigurationType *thread)
+  * @fn semaphore_setSemaphoreValue(CosmOS_SemaphoreVariableType * semaphoreVar,
+  * BitWidthType semaphoreParam)
   *
-  * @brief Set thread blockingMutexVar. This function cannot
+  * @brief Set semaphore value. This function cannot
   * be called from the unprivileged context directly.
   *
-  * @param[in] thread configuration pointer
-  * @param[in]  mutexParam pointer to the mutex variable
+  * @param[out]  semaphoreVar pointer
+  * @param[in]  semaphoreParam value to be set to the semaphore variable
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
-thread_setThreadBlockingMutexVar(
-    CosmOS_ThreadConfigurationType * thread,
-    CosmOS_MutexVariableType * mutexParam )
+semaphore_setSemaphoreValue(
+    CosmOS_SemaphoreVariableType * semaphoreVar,
+    BitWidthType semaphoreParam )
 {
-    thread->var->blockingMutexVar = mutexParam;
+    semaphoreVar->semaphore = semaphoreParam;
 }
 
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn thread_setThreadBlockingSemaphoreVar(CosmOS_ThreadConfigurationType
-  * *thread)
+  * @fn semaphore_setSemaphoreSchedulableOwner(
+  * CosmOS_SemaphoreVariableType * semaphore,
+  * CosmOS_SchedulableConfigurationType * schedulableOwnerParam)
   *
-  * @brief Set thread blockingSemaphoreVar. This function cannot
+  * @brief Set semaphore schedulableOwner. This function cannot
   * be called from the unprivileged context directly.
   *
-  * @param[in] thread configuration pointer
-  * @param[in]  semaphoreParam pointer to the semaphore variable
+  * @param[out]  semaphoreVar pointer
+  * @param[in]  schedulableOwnerParam pointer to the schedulable that owns
+  * current semaphore
   *
   * @return none
 ********************************************************************************/
 __STATIC_FORCEINLINE void
-thread_setThreadBlockingSemaphoreVar(
-    CosmOS_ThreadConfigurationType * thread,
-    CosmOS_SemaphoreVariableType * semaphoreParam )
+semaphore_setSemaphoreSchedulableOwner(
+    CosmOS_SemaphoreVariableType * semaphoreVar,
+    CosmOS_SchedulableConfigurationType * schedulableOwnerParam )
 {
-    thread->var->blockingSemaphoreVar = semaphoreParam;
+    semaphoreVar->schedulableOwner = schedulableOwnerParam;
 }
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  Setters_thread_h
+/*  Setters_semaphore_h
 ********************************************************************************/
 /********************************************************************************
   * DOXYGEN START GROUP                                                        **
   * *************************************************************************//**
-  * @addtogroup General_thread_h General
-  * @ingroup Apis_thread_h
+  * @addtogroup General_semaphore_h General
+  * @ingroup Apis_semaphore_h
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn semaphore_willCauseDeadlock(CosmOS_CoreConfigurationType * core,
+  * CosmOS_SemaphoreVariableType * semaphoreVar)
+  *
+  * @brief Check if the semaphore will ends up in deadlock. DEMO
+  *
+  * @param[in]  core configuration pointer
+  * @param[in]  semaphoreVar pointer
+  *
+  * @return CosmOS_BufferStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BooleanType
+semaphore_willCauseDeadlock(
+    CosmOS_CoreConfigurationType * core,
+    CosmOS_SemaphoreVariableType * semaphoreVar )
+{
+    return ( (semaphoreVar->semaphore IS_EQUAL_TO SEMAPHORE_STATE_ENUM__OCCUPIED)
+                 AND( core->var->schedulableInExecution IS_EQUAL_TO
+                          semaphoreVar->schedulableOwner ) )
+               ? True
+               : False;
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn semaphore_ownsSchedulableSemaphore(CosmOS_CoreConfigurationType * core,
+  * CosmOS_SemaphoreVariableType * semaphoreVar)
+  *
+  * @brief Check if the schedulable in execution owns the current semaphore.
+  *
+  * @param[in]  core configuration pointer
+  * @param[in]  semaphoreVar pointer
+  *
+  * @return CosmOS_BufferStateType
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_BooleanType
+semaphore_ownsSchedulableSemaphore(
+    CosmOS_CoreConfigurationType * core,
+    CosmOS_SemaphoreVariableType * semaphoreVar )
+{
+    return ( core->var->schedulableInExecution IS_EQUAL_TO
+                 semaphoreVar->schedulableOwner )
+               ? True
+               : False;
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
-/*  General_thread_h
+/*  General_semaphore_h
 ********************************************************************************/
 /********************************************************************************
 **                        Function Definitions | Stop                          **

@@ -545,6 +545,63 @@ os_getOsNumberOfChannels( CosmOS_OsConfigurationType * os )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @fn os_getOsSemaphoreVars(CosmOS_OsConfigurationType * os)
+  *
+  * @brief Get os semaphoreVars pointer.
+  *
+  * @param[in]  os configuration pointer
+  *
+  * @return CosmOS_SemaphoreVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SemaphoreVariableType *
+os_getOsSemaphoreVars( CosmOS_OsConfigurationType * os )
+{
+    return ( os->semaphoreVars );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_getOsSemaphoreVar(CosmOS_OsConfigurationType * os,
+  * BitWidthType semaphoreId)
+  *
+  * @brief Get os semaphore pointer.
+  *
+  * @param[in]  os configuration pointer
+  * @param[in]  semaphoreId specifies the semaphore from array of configured
+  * semaphores
+  *
+  * @return CosmOS_SemaphoreVariableType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_SemaphoreVariableType *
+os_getOsSemaphoreVar( CosmOS_OsConfigurationType * os, BitWidthType semaphoreId )
+{
+    return ( &( os->semaphoreVars[semaphoreId] ) );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_getOsNumberOfSemaphores(CosmOS_OsConfigurationType * os)
+  *
+  * @brief Get os numberOfSemaphores.
+  *
+  * @param[in]  os configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+os_getOsNumberOfSemaphores( CosmOS_OsConfigurationType * os )
+{
+    return ( os->numberOfSemaphores );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn os_getOsDummy(CosmOS_OsConfigurationType * os)
   *
   * @brief Get os dummy.
