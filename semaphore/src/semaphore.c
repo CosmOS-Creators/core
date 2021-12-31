@@ -266,7 +266,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * is needed to notice all threads that were waiting for this specific
   * semaphore. As the semaphore can be used for synchronizing threads between
   * the different programs (inter-program) the for loops are implemented which
-  * iterate over the all configurated cores in the system and threads in their
+  * iterate over the all configured cores in the system and threads in their
   * programs and if the thread variable blockingSemaphoreVar is equal to the
   * semaphoreVar its schedulable state is set to the
   * SCHEDULABLE_STATE_ENUM__READY and thread blockingSemaphoreVar is set to the

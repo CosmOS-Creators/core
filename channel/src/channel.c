@@ -170,7 +170,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * thread type, otherwise CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL
   * is returned from the function. The next point is check of the channelId
   * function argument, if the channelId is less than numberOfChannels it means
-  * that user tries to initialize channel in the range of configurated channels,
+  * that user tries to initialize channel in the range of configured channels,
   * otherwise CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID is returned from the
   * function. Then the channel configuration structure is obtained by calling
   * os_getOsChannelCfg function and used to get isChannelInitialized state by
@@ -456,7 +456,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * thread type, otherwise CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL
   * is returned from the function. The next point is check of the channelId
   * function argument, if the channelId is less than numberOfChannels it means
-  * that user tries to use channel in the range of configurated channels,
+  * that user tries to use channel in the range of configured channels,
   * otherwise CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID is returned from the
   * function. Then the channel configuration structure is obtained by calling
   * os_getOsChannelCfg function and used to get isChannelInitialized state by
@@ -465,7 +465,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * CHANNEL_STATE_ENUM__ERROR_CHANNEL_NOT_INITIALIZED state. As the next step
   * the sendPermission are obtained by calling function
   * channel_getChannelSendPermission because the channel send function can be
-  * called only by the configurated send threads. The send permissions are then
+  * called only by the configured send threads. The send permissions are then
   * used to get the access state by calling function permission_tryAccess.
   * If the accessState is equal to the ACCESS_STATE_ENUM__ALLOWED it means that
   * the running thread is the send (server) thread of the current channel,
@@ -814,7 +814,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * thread type, otherwise CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL
   * is returned from the function. The next point is check of the channelId
   * function argument, if the channelId is less than numberOfChannels it means
-  * that user tries to use channel in the range of configurated channels,
+  * that user tries to use channel in the range of configured channels,
   * otherwise CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID is returned from the
   * function. Then the channel configuration structure is obtained by calling
   * os_getOsChannelCfg function and used to get isChannelInitialized state by
@@ -823,7 +823,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * CHANNEL_STATE_ENUM__ERROR_CHANNEL_NOT_INITIALIZED state. As the next step
   * the replyPermission are obtained by calling function
   * channel_getChannelReplyPermission because the channel reply function can be
-  * called only by the configurated reply thread. The reply permissions are then
+  * called only by the configured reply thread. The reply permissions are then
   * used to get the access state by calling function permission_tryAccess.
   * If the accessState is equal to the ACCESS_STATE_ENUM__ALLOWED it means that
   * the running thread is the reply (server) thread of the current channel,
@@ -1118,7 +1118,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * thread type, otherwise CHANNEL_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_CHANNEL
   * is returned from the function. The next point is check of the channelId
   * function argument, if the channelId is less than numberOfChannels it means
-  * that user tries to use channel in the range of configurated channels,
+  * that user tries to use channel in the range of configured channels,
   * otherwise CHANNEL_STATE_ENUM__ERROR_INVALID_CHANNEL_ID is returned from the
   * function. Then the channel configuration structure is obtained by calling
   * os_getOsChannelCfg function and used to get isChannelInitialized state by
@@ -1127,7 +1127,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * CHANNEL_STATE_ENUM__ERROR_CHANNEL_NOT_INITIALIZED state. As the next step
   * the replyPermission are obtained by calling function
   * channel_getChannelReplyPermission because the channel reply function can be
-  * called only by the configurated reply thread. The reply permissions are then
+  * called only by the configured reply thread. The reply permissions are then
   * used to get the access state by calling function permission_tryAccess.
   * If the accessState is equal to the ACCESS_STATE_ENUM__ALLOWED it means that
   * the running thread is the reply (server) thread of the current channel,
