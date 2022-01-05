@@ -112,6 +112,8 @@ typedef struct CosmOS_SchedulerConfigurationType
 typedef struct CosmOS_SysJobsConfigurationType CosmOS_SysJobsConfigurationType;
 typedef struct CosmOS_CoreConfigurationType CosmOS_CoreConfigurationType;
 typedef struct CosmOS_OsEventConfigurationType CosmOS_OsEventConfigurationType;
+typedef struct CosmOS_InterruptConfigurationType
+    CosmOS_InterruptConfigurationType;
 typedef struct CosmOS_OsConfigurationType CosmOS_OsConfigurationType;
 /********************************************************************************
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
@@ -229,6 +231,18 @@ typedef struct
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_OsVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    BitWidthType interruptId;
+
+} CosmOS_InterruptEventType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_AccessStateType enum
 ********************************************************************************/
 typedef enum
@@ -317,6 +331,22 @@ typedef enum
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_InterruptStateType enum
+********************************************************************************/
+typedef enum
+{
+    INTERRUPT_STATE_ENUM__OK = 0,
+    INTERRUPT_STATE_ENUM__ERROR_INVALID_INTERRUPT_ID = -1,
+    INTERRUPT_STATE_ENUM__ERROR_ACCESSED_BY_WRONG_THREAD = -2,
+    INTERRUPT_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_INTERRUPT = -3,
+    INTERRUPT_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED = -4,
+
+} CosmOS_InterruptStateType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_SchedulableInstanceType enum
 ********************************************************************************/
 typedef enum
@@ -342,6 +372,7 @@ typedef enum
     SCHEDULABLE_STATE_ENUM__SLEEP,
     SCHEDULABLE_STATE_ENUM__LISTENING,
     SCHEDULABLE_STATE_ENUM__WAITING_FOR_REPLY,
+    SCHEDULABLE_STATE_ENUM__WAITING_FOR_INTERRUPT,
     SCHEDULABLE_STATE_ENUM__READY,
 
 } CosmOS_SchedulableStateType;

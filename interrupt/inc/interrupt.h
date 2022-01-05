@@ -144,6 +144,73 @@ extern "C" {
   * @{
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn interrupt_signalizeThread( void )
+  *
+  * @brief Interrupt signalize thread event handler. This function cannot be
+  * called from the unprivileged context directly. DEMO
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void
+interrupt_signalizeThread( void );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn interrupt_handleInternal(
+  * BitWidthType id,
+  * CosmOS_InterruptConfigurationType * interruptCfg)
+  *
+  * @brief Interrupt handle internal. This function cannot be called
+  * from the unprivileged context directly. DEMO
+  *
+  * @param[in]  id is used during the system call dispatching
+  * @param[in]  interruptCfg interrupt configuration pointer
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void
+interrupt_handleInternal(
+    BitWidthType id,
+    CosmOS_InterruptConfigurationType * interruptCfg );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn interrupt_handle(BitWidthType interruptId)
+  *
+  * @brief Interrupt handle function. This function can be called from the
+  * thread configured as the interrupt handler thread. DEMO
+  *
+  * @param[in]  interruptId is identifier of interrupt to handle
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION CosmOS_InterruptStateType
+interrupt_handle( BitWidthType interruptId );
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn interrupt_trigger(BitWidthType interruptId)
+  *
+  * @brief Interrupt trigger function. This function cannot be called
+  * from the unprivileged context directly. This function is called from the
+  * ISR to signalize handler thread. DEMO
+  *
+  * @param[in]  interruptId is identifier of interrupt to handle
+  *
+  * @return none
+********************************************************************************/
+__OS_FUNC_SECTION void
+interrupt_trigger( BitWidthType interruptId );
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
@@ -163,6 +230,63 @@ extern "C" {
   * @{
 ********************************************************************************/
 /********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn interrupt_getInterruptId(CosmOS_InterruptConfigurationType * interrupt)
+  *
+  * @brief Get interrupt id.
+  *
+  * @param[in]  interrupt configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+interrupt_getInterruptId( CosmOS_InterruptConfigurationType * interrupt )
+{
+    return ( interrupt->interruptId );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn interrupt_getInterruptHandlerThread(CosmOS_InterruptConfigurationType
+  * * interrupt)
+  *
+  * @brief Get interrupt handlerThread.
+  *
+  * @param[in]  interrupt configuration pointer
+  *
+  * @return CosmOS_ThreadConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_ThreadConfigurationType *
+interrupt_getInterruptHandlerThread(
+    CosmOS_InterruptConfigurationType * interrupt )
+{
+    return (CosmOS_ThreadConfigurationType *)( interrupt->handlerThread );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn interrupt_getInterruptNumberOfRequests(CosmOS_InterruptConfigurationType
+  * * interrupt)
+  *
+  * @brief Get interrupt numberOfRequests.
+  *
+  * @param[in]  interrupt configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+interrupt_getInterruptNumberOfRequests(
+    CosmOS_InterruptConfigurationType * interrupt )
+{
+    return ( interrupt->var->numberOfRequests );
+}
+/********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**
   * @} */
@@ -175,6 +299,28 @@ extern "C" {
   * @ingroup Apis_interrupt_h
   * @{
 ********************************************************************************/
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn interrupt_setInterruptNumberOfRequests(CosmOS_InterruptConfigurationType
+  * * interrupt)
+  *
+  * @brief Set interrupt numberOfRequests.
+  *
+  * @param[in]  interrupt configuration pointer
+  * @param[in]  numberOfRequestsParam number of requests for current interrupt
+  * configuration
+  *
+  * @return none
+********************************************************************************/
+__STATIC_FORCEINLINE void
+interrupt_setInterruptNumberOfRequests(
+    CosmOS_InterruptConfigurationType * interrupt,
+    BitWidthType numberOfRequestsParam )
+{
+    interrupt->var->numberOfRequests = numberOfRequestsParam;
+}
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
   * *************************************************************************//**

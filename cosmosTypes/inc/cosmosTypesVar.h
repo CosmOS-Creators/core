@@ -297,6 +297,18 @@ typedef struct
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_InterruptVariableType struct type
+********************************************************************************/
+typedef struct
+{
+    BitWidthType numberOfRequests;
+
+} CosmOS_InterruptVariableType;
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_ChannelVariableType struct type
 ********************************************************************************/
 typedef struct

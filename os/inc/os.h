@@ -602,6 +602,64 @@ os_getOsNumberOfSemaphores( CosmOS_OsConfigurationType * os )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @fn os_getOsInterruptCfgs(CosmOS_OsConfigurationType * os)
+  *
+  * @brief Get os interrupts pointer.
+  *
+  * @param[in]  os configuration pointer
+  *
+  * @return CosmOS_InterruptConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_InterruptConfigurationType *
+os_getOsInterruptCfgs( CosmOS_OsConfigurationType * os )
+{
+    return (CosmOS_InterruptConfigurationType *)( os->interrupts );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_getOsInterruptCfg(CosmOS_OsConfigurationType * os,
+  * BitWidthType interruptId)
+  *
+  * @brief Get os semaphore pointer.
+  *
+  * @param[in]  os configuration pointer
+  * @param[in]  interruptId specifies the semaphore from array of configured
+  * semaphores
+  *
+  * @return CosmOS_InterruptConfigurationType *
+********************************************************************************/
+__STATIC_FORCEINLINE CosmOS_InterruptConfigurationType *
+os_getOsInterruptCfg( CosmOS_OsConfigurationType * os, BitWidthType interruptId )
+{
+    return (
+        CosmOS_InterruptConfigurationType *)( &( os->interrupts[interruptId] ) );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
+  * @fn os_getOsNumberOfInterrupts(CosmOS_OsConfigurationType * os)
+  *
+  * @brief Get os numberOfInterrupts.
+  *
+  * @param[in]  os configuration pointer
+  *
+  * @return BitWidthType
+********************************************************************************/
+__STATIC_FORCEINLINE BitWidthType
+os_getOsNumberOfInterrupts( CosmOS_OsConfigurationType * os )
+{
+    return ( os->numberOfInterrupts );
+}
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @fn os_getOsDummy(CosmOS_OsConfigurationType * os)
   *
   * @brief Get os dummy.
