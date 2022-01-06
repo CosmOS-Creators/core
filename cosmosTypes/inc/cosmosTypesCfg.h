@@ -408,6 +408,19 @@ struct CosmOS_OsEventConfigurationType
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
+  * @brief  CosmOS_InterruptConfigurationType struct type
+********************************************************************************/
+struct CosmOS_InterruptConfigurationType
+{
+    CosmOS_InterruptVariableType * const var;
+    const BitWidthType interruptId;
+    const CosmOS_ThreadConfigurationType * const handlerThread;
+};
+
+/********************************************************************************
+  * DOXYGEN DOCUMENTATION INFORMATION                                          **
+  * ****************************************************************************/
+/**
   * @brief  CosmOS_ChannelConfigurationType struct type
 ********************************************************************************/
 struct CosmOS_ChannelConfigurationType
@@ -447,6 +460,8 @@ struct CosmOS_OsConfigurationType
     const BitWidthType numberOfChannels;
     CosmOS_SemaphoreVariableType * const semaphoreVars;
     const BitWidthType numberOfSemaphores;
+    const CosmOS_InterruptConfigurationType * const interrupts;
+    const BitWidthType numberOfInterrupts;
 };
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **

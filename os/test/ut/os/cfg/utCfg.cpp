@@ -124,6 +124,8 @@ CosmOS_OsConfigurationType OsCfg IS_INITIALIZED_TO{
     0,
     (CosmOS_SemaphoreVariableType *)NULL,
     0,
+    (CosmOS_InterruptConfigurationType *)NULL,
+    0,
 };
 /********************************************************************************
   * DOXYGEN STOP GROUP                                                         **
