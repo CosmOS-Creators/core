@@ -135,7 +135,28 @@
   * BitWidthType id,
   * CosmOS_InterruptConfigurationType * interruptCfg )
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. Operating system configuration
+  * structure is then used to get event configuration by calling function
+  * os_getOsEventCfg. Os event configuration structure is used to get the event
+  * data pool by calling function osEvent_getOsEventDataPool. The interrupt event
+  * is then extracted from the os event data pool. To check if the interrupt id
+  * stored in the os event data pool is correct we get the number of interrupts
+  * by calling the os_getOsNumberOfInterrupts function and check it in the
+  * assertion. Then the interrupt configuration is obtained by calling the
+  * function os_getOsInterruptCfg and used to get the interrupt handler thread
+  * which is then set to SCHEDULABLE_STATE_ENUM__READY. Then we obtain the
+  * number of requests by calling function interrupt_getInterruptNumberOfRequests
+  * and check with assertion it is non-zero value, because atleast one request
+  * had to be created before this function is called. Then we decrement number
+  * of requests by one, as the one request will be handled and set it to the
+  * interrupt structure by calling interrupt_setInterruptNumberOfRequests
+  * function. We need to get also the current running thread on the
+  * core obtained by calling the function program_getProgramThread. If condition
+  * is implemented to check if the running thread priority is less than the
+  * interrupt handler thread priority, if yes the reschedule algorithm is
+  * triggered by calling function CILinterrupt_contextSwitchRoutineTrigger.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -205,7 +226,16 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * BitWidthType id,
   * CosmOS_InterruptConfigurationType * interruptCfg )
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining core configuration structure
+  * by calling function CILcore_getCoreCfg. The interruptCfg argument is used to
+  * get the handler thread and number of requests by calling functions
+  * interrupt_getInterruptHandlerThread, interrupt_getInterruptNumberOfRequests.
+  * If the number of reuests is non-zero value we decrement it by one and set it
+  * to the interrupt structure back by calling function
+  * interrupt_setInterruptNumberOfRequests. If there is no interrupt request to
+  * handle we set the handler thread to the waiting for interrupt state and
+  * trigger reschedule algorithm on the current core by calling function
+  * CILinterrupt_contextSwitchRoutineTrigger.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -253,7 +283,29 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * @fn interrupt_handle(
   * BitWidthType interruptId)
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg. Operating system configuration
+  * structure is then used to get number of the interrupts by calling function
+  * os_getOsNumberOfInterrupts. Currently the interrupts support only threads
+  * and therefore in the if condition is checked if the running schedulable is
+  * thread type, otherwise
+  * INTERRUPT_STATE_ENUM__ERROR_ONLY_THREADS_CAN_USE_INTERRUPT
+  * is returned from the function. The next point is check of the interruptId
+  * function argument, if the interruptId is less than numberOfInterrupts it
+  * means that user tries to use interrupt in the range of configured interrupts,
+  * otherwise INTERRUPT_STATE_ENUM__ERROR_INVALID_INTERRUPT_ID is returned from
+  * the function. Then the interrupt configuration structure is obtained by
+  * calling os_getOsInterruptCfg function and used to get handler thread which
+  * is used in the subsequent if condition to check if the currently running
+  * thread (caller of the function) is the same as the handler thread. If not
+  * the INTERRUPT_STATE_ENUM__ERROR_ACCESSED_BY_WRONG_THREAD is returned from
+  * the function. Otherwise we check if the core is in privileged mode by calling
+  * function CILcore_isInPrivilegedMode, if yes the
+  * INTERRUPT_STATE_ENUM__ERROR_CAN_BE_CALLED_ONLY_FROM_UNPRIVILEGED is returned
+  * from the function. Otherwise the cosmosApiInternal_interrupt_handleInternal
+  * function is called and the INTERRUPT_STATE_ENUM__OK is returned from the
+  * function.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
@@ -335,7 +387,34 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * BitWidthType id,
   * CosmOS_InterruptConfigurationType * interruptCfg )
   *
-  * @details The implementation contains
+  * @details The implementation contains obtaining of the operating system
+  * configuration structure and also core configuration structure by calling
+  * functions os_getOsCfg and CILcore_getCoreCfg.Operating system configuration
+  * structure is then used to get number of the interrupts by calling function
+  * os_getOsNumberOfInterrupts.  The next point is check of the interruptId
+  * function argument, if the interruptId is less than numberOfInterrupts it
+  * means that user tries to use interrupt in the range of configured interrupts.
+  * After this point we can obtain the interrupt configuration by calling the
+  * function os_getOsInterruptCfg with the interrupt identifier parameter.
+  * The interrupt configuration is then used to get handler thread and number
+  * of requests by calling functions interrupt_getInterruptNumberOfRequests and
+  * interrupt_getInterruptHandlerThread. Subsequently the assertion is
+  * implemented to check if we can increment number of request value or it will
+  * overflow. If we are able to increment it we then store the value back to
+  * the interrupt structure by calling interrupt_setInterruptNumberOfRequests
+  * function. In the next if condition we check if the handler thread is running
+  * on the current core, if yes we can decrement the number of request, set
+  * the handler thread to SCHEDULABLE_STATE_ENUM__READY and trigger the
+  * reschedule algorithm for the current core by calling the function
+  * CILinterrupt_contextSwitchRoutineTrigger. Otherwise we have
+  * to send os event. First of all we have to configure the array of event
+  * handling cores, in our case we just set true the element in that array that
+  * belongs to the core where the handler thread is running and leave all other
+  * elements set to false. The data transferred by the os event contains just
+  * CosmOS_InterruptEventType structure with the interrupt id set to the current
+  * interrupt id. After this point the osEvent_triggerEvent is called with the
+  * OS_EVENT_INTERRUPT_SIGNALIZETHREAD parameter and assertion is called to check
+  * if the os event state is OS_EVENT_STATE_ENUM__OK.
 ********************************************************************************/
 /* @cond S */
 __SEC_START( __OS_FUNC_SECTION_START )
