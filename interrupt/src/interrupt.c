@@ -131,9 +131,7 @@
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn interrupt_handleInternal(
-  * BitWidthType id,
-  * CosmOS_InterruptConfigurationType * interruptCfg )
+  * @fn interrupt_signalizeThread( void )
   *
   * @details The implementation contains obtaining of the operating system
   * configuration structure and also core configuration structure by calling
@@ -280,8 +278,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn interrupt_handle(
-  * BitWidthType interruptId)
+  * @fn interrupt_handle(BitWidthType interruptId)
   *
   * @details The implementation contains obtaining of the operating system
   * configuration structure and also core configuration structure by calling
@@ -383,9 +380,7 @@ __SEC_STOP( __OS_FUNC_SECTION_STOP )
   * DOXYGEN DOCUMENTATION INFORMATION                                          **
   * ****************************************************************************/
 /**
-  * @fn interrupt_handleInternal(
-  * BitWidthType id,
-  * CosmOS_InterruptConfigurationType * interruptCfg )
+  * @fn interrupt_trigger( BitWidthType interruptId )
   *
   * @details The implementation contains obtaining of the operating system
   * configuration structure and also core configuration structure by calling
