@@ -410,12 +410,12 @@ memoryProtection_isMemoryRegionProtected(
 
     regionHighAddress = regionLowAddress + (AddressType)size;
 
-    if ( ( ( regionHighAddress < stackHighAddress ) &&
-           ( regionLowAddress > stackLowAddress ) ) ||
-         ( ( regionHighAddress < peripheralHighAddress ) &&
-           ( regionLowAddress > peripheralLowAddress ) ) ||
-         ( ( regionHighAddress < programHighAddress ) &&
-           ( regionLowAddress > programLowAddress ) ) )
+    if ( ( ( regionHighAddress <= stackHighAddress ) &&
+           ( regionLowAddress >= stackLowAddress ) ) ||
+         ( ( regionHighAddress <= peripheralHighAddress ) &&
+           ( regionLowAddress >= peripheralLowAddress ) ) ||
+         ( ( regionHighAddress <= programHighAddress ) &&
+           ( regionLowAddress >= programLowAddress ) ) )
     {
         isMemoryRegionProtected = False;
     }
