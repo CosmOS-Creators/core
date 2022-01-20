@@ -1035,6 +1035,7 @@ channel_replyInternal(
     channel_setChannelReplyPoolState(
         channelCfg, CHANNEL_POOL_STATE_ENUM__WAITING_TO_BE_PROCESSED );
 
+    isSenderWaitingPrioHigher = False;
     sendPoolOwner = channel_getChannelSendPoolSchedulableOwner( channelCfg );
     if ( sendPoolOwner->coreId IS_EQUAL_TO coreCfg->coreId )
     {
